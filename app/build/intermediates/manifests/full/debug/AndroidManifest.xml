@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xiaomaoqiu.pet"
+    android:versionCode="201"
+    android:versionName="2.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="22" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- SDK1.5需要android.permission.GET_TASKS权限判断本程序是否为当前运行的应用? -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- 用于优化GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission
+        android:name="com.xiaomaoqiu.pet.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:name="com.xiaomaoqiu.pet.app.petApp"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+
+        <!-- 百度定位 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+        <!-- 百度鹰眼轨迹 -->
+        <service
+            android:name="com.baidu.trace.LBSTraceService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <!--
+            <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="gC2deHEVcqClI2bMWPtvEGt5" />
+        -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="40We8G3rHX0rg9r0gSY5KBwiGSLZUuok" />
+        <!--
+            <meta-data
+            android:name="com.baidu.android.lbs.API_KEY"
+            android:value="gC2deHEVcqClI2bMWPtvEGt5" />
+        -->
+        <meta-data
+            android:name="com.baidu.android.lbs.API_KEY"
+            android:value="40We8G3rHX0rg9r0gSY5KBwiGSLZUuok" />
+
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.login.LoginActivity"
+            android:theme="@style/NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/android:Theme.NoTitleBar" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.WhatsnewDoor"
+            android:theme="@style/Anim_style2" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.MainActivity"
+            android:theme="@style/Anim_style2" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.login.RegisterActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.Whatsnew"
+            android:theme="@style/Anim_style2" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.dialog.ExitDialog"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.dialog.ExitFromSettings"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.LoadingActivity"
+            android:theme="@style/MyDialogStyle" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.AboutActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageHealth.HealthIndex"
+            android:label="@string/title_activity_health_index"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.BindDevice"
+            android:label="@string/bind_device"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.ZXingActivity"
+            android:label="@string/zxing"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SleepIndex"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyWeightDialog"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyIntroDialog"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyNameDialog"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.SelectAvatarSourceDialog"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyVarietyDialog"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyVarietyDialog2"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.PetInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SportIndex"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.dialog.GoHomeConfirmDialog"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.dialog.GoOutConfirmDialog"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.MessageActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name="com.xiaomaoqiu.pet.ui.mainPages.pageMe.HardwareActivity" />
+        <activity
+            android:name="com.xiaomaoqiu.pet.ui.mainPages.pageLocate.FindPetActivity"
+            android:label="@string/pet_finding" />
+        <activity
+            android:name="com.uuzuche.lib_zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+    </application>
+
+</manifest>

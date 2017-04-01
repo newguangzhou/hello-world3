@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="picker_item_height">44dp</dimen>
+    <dimen name="actionBar_hight">44dp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="picker_wheel_height">220dp</dimen>
+    <dimen name="picker_indicator_height">44dp</dimen>
+    <dimen name="bottom_actionBar_hight">49dp</dimen>
+</resources>

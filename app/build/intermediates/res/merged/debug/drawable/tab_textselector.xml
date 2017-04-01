@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">3
+    <item android:color="@color/red" android:state_pressed="true"></item>
+    <item android:color="@color/red" android:state_selected="true"></item>
+    <item android:color="@color/red" android:state_checked="true"></item>
+    <!-- 点击后的字体颜色 -->4
+    <item android:color="@color/gray_text"></item>
+    <!-- 默认字体颜色 -->5
+</selector>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/long/Desktop/XMQ/client/android/trunk/AndroidCharts/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/long/Desktop/XMQ/client/android/trunk/AndroidCharts/src/release/shaders"/></dataSet></merger>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="290dp"
+    android:layout_height="350dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/shape_roundrect_red_top"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:padding="5dp"
+            android:text="请把折扣码拿给商家扫描"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="到店消费>商家扫码识别>获得折扣+积分"
+            android:textColor="@color/yellow"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_margin="25dp"
+            android:gravity="center"
+            android:background="@color/gray_bar_bg"
+            android:layout_width="240dp"
+            android:layout_height="240dp">
+        <ImageView
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:layout_margin="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/img_qrcode"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

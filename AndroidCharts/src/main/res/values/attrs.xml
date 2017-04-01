@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LineView">
+        <attr name="sideLength" format="dimension" />
+        <attr name="line1_color" format="color"/>
+        <attr name="line1_drawLine" format="boolean"/>
+        <attr name="line2_color" format="color"/>
+        <attr name="line2_drawLine" format="boolean"/>
+        <attr name="line3_color" format="color"/>
+        <attr name="line3_drawLine" format="boolean"/>
+        <attr name="bottom_interval" format="integer"/>
+        <attr name="bottom_padding" format="dimension|reference"/>
+        <attr name="bottom_text_size" format="dimension|reference"/>
+        <attr name="bottom_text_color" format="color|reference"/>
+        <attr name="bottom_second_text_size" format="dimension|reference"/>
+        <attr name="bottom_second_text_color" format="color|dimension"/>
+        <attr name="dot_mode1" format="integer"/>
+        <attr name="dot_mode2" format="integer"/>
+        <attr name="dot_mode3" format="integer"/>
+        <attr name="need_back_lines" format="boolean|reference"/>
+        <attr name="vertical_text_num" format="integer"/>
+        <attr name="horizonal_trans" format="dimension|reference"/>
+        <attr name="vertical_axis_unit" format="string|reference"/>
+        <attr name="if_pervertical_unit_show" format="boolean|reference"/>
+    </declare-styleable>
+</resources>

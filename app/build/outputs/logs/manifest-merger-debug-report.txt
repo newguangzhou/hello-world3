@@ -1,0 +1,410 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:2:1-174:12
+	package
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:3:5-33
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:5:5-32
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+	android:versionCode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:4:5-30
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:2:11-69
+uses-feature#android.hardware.camera
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:7:5-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:7:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:8:5-70
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:8:19-67
+uses-permission#android.permission.VIBRATE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:10:5-66
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:10:22-63
+uses-permission#android.permission.CALL_PHONE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:11:5-69
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:11:22-66
+uses-permission#android.permission.INTERNET
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:12:5-67
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:12:22-64
+uses-permission#android.permission.CAMERA
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:13:5-65
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:13:22-62
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:14:22-76
+uses-permission#com.android.launcher.permission.READ_SETTINGS
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:15:5-85
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:15:22-82
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:16:5-68
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:16:22-65
+uses-permission#android.permission.GET_TASKS
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:19:5-68
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:19:22-65
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:20:5-81
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:20:22-78
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:21:5-73
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:21:22-70
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:23:5-81
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:23:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:25:5-79
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:25:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:27:5-76
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:27:22-73
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:29:5-76
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:29:22-73
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:31:5-75
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:31:22-72
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:33:5-80
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:33:22-77
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:35:5-84
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:35:22-81
+uses-permission#android.permission.READ_LOGS
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:37:5-68
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:37:22-65
+uses-permission#android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:39:5-89
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:39:22-86
+uses-permission#com.xiaomaoqiu.pet.permission.MIPUSH_RECEIVE
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:40:5-42:47
+	android:protectionLevel
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:42:9-44
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:41:9-68
+application
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:44:5-172:19
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:cardview-v7:23.3.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [trunk:PullToRefresh:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/PullToRefresh/unspecified/AndroidManifest.xml:11:5-20
+MERGED from [trunk:AndroidCharts:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/AndroidCharts/unspecified/AndroidManifest.xml:11:5-20
+MERGED from [trunk:bottomcalender:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/AndroidManifest.xml:9:5-13:19
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:11:5-18:19
+MERGED from [com.android.support:appcompat-v7:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [trunk:chartviews:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/chartviews/unspecified/AndroidManifest.xml:9:5-13:19
+	android:label
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:47:9-41
+	android:supportsRtl
+		ADDED from [trunk:bottomcalender:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/AndroidManifest.xml:12:9-35
+	android:icon
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:46:9-38
+	android:allowBackup
+		ADDED from [trunk:bottomcalender:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/AndroidManifest.xml:10:9-35
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:48:9-40
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:45:9-35
+service#com.baidu.location.f
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:50:9-53:41
+	android:enabled
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:52:13-35
+	android:process
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:53:13-38
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:51:13-48
+service#com.baidu.trace.LBSTraceService
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:55:9-59:19
+	android:enabled
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:57:13-35
+	android:exported
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:58:13-36
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:56:13-59
+meta-data#com.baidu.lbsapi.API_KEY
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:64:9-66:64
+	android:value
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:66:13-61
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:65:13-52
+meta-data#com.baidu.android.lbs.API_KEY
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:70:9-72:64
+	android:value
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:72:13-61
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:71:13-57
+activity#com.xiaomaoqiu.pet.ui.login.LoginActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:74:9-82:20
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:76:13-46
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:75:13-51
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:77:13-81:29
+action#android.intent.action.MAIN
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:78:17-69
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:78:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:80:17-77
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:80:27-74
+activity#com.xiaomaoqiu.pet.ui.SplashActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:83:9-86:63
+	android:label
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:85:13-45
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:86:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:84:13-46
+activity#com.xiaomaoqiu.pet.ui.WhatsnewDoor
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:87:9-89:50
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:89:13-47
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:88:13-44
+activity#com.xiaomaoqiu.pet.ui.MainActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:90:9-92:50
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:92:13-47
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:91:13-44
+activity#com.xiaomaoqiu.pet.ui.login.RegisterActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:93:9-95:49
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:95:13-46
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:94:13-54
+activity#com.xiaomaoqiu.pet.ui.Whatsnew
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:96:9-98:50
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:98:13-47
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:97:13-40
+activity#com.xiaomaoqiu.pet.ui.dialog.ExitDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:99:9-101:58
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:101:13-55
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:100:13-49
+activity#com.xiaomaoqiu.pet.ui.dialog.ExitFromSettings
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:102:9-104:58
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:104:13-55
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:103:13-55
+activity#com.xiaomaoqiu.pet.ui.LoadingActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:105:9-107:52
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:107:13-49
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:106:13-47
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.AboutActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:108:9-110:49
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:110:13-46
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:109:13-62
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageHealth.HealthIndex
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:111:9-115:63
+	android:label
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:113:13-64
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:115:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:114:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:112:13-64
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.BindDevice
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:116:9-119:68
+	android:label
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:117:19-54
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:119:19-66
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:118:19-66
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:116:19-74
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.ZXingActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:120:9-123:68
+	android:label
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:121:19-48
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:123:19-66
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:122:19-66
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:120:19-77
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SleepIndex
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:124:9-127:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:127:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:126:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:125:13-63
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyWeightDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:128:9-131:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:131:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:130:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:129:13-67
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyIntroDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:132:9-135:58
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:135:13-55
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:134:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:133:13-66
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyNameDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:136:9-139:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:139:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:138:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:137:13-65
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.SelectAvatarSourceDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:140:9-142:58
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:142:13-55
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:141:13-73
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyVarietyDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:143:9-146:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:146:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:145:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:144:13-68
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.ModifyVarietyDialog2
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:147:9-150:70
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:150:13-67
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:149:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:148:13-69
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.PetInfoActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:151:9-154:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:154:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:153:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:152:13-64
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SportIndex
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:155:9-158:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:158:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:157:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:156:13-63
+activity#com.xiaomaoqiu.pet.ui.dialog.GoHomeConfirmDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:159:9-161:58
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:161:13-55
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:160:13-58
+activity#com.xiaomaoqiu.pet.ui.dialog.GoOutConfirmDialog
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:162:9-164:58
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:164:13-55
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:163:13-57
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.MessageActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:165:9-168:63
+	android:windowSoftInputMode
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:168:13-60
+	android:theme
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:167:13-60
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:166:13-64
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageMe.HardwareActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:169:9-74
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:169:19-71
+activity#com.xiaomaoqiu.pet.ui.mainPages.pageLocate.FindPetActivity
+ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:170:9-171:60
+	android:label
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:171:13-48
+	android:name
+		ADDED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml:170:19-74
+uses-sdk
+INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:recyclerview-v7:23.3.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:23.3.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [trunk:PullToRefresh:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/PullToRefresh/unspecified/AndroidManifest.xml:7:5-9:40
+MERGED from [trunk:AndroidCharts:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/AndroidCharts/unspecified/AndroidManifest.xml:7:5-9:40
+MERGED from [trunk:bottomcalender:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:recyclerview-v7:23.3.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [trunk:chartviews:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/chartviews/unspecified/AndroidManifest.xml:5:5-7:41
+MERGED from [io.reactivex:rxandroid:1.2.1] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/io.reactivex/rxandroid/1.2.1/AndroidManifest.xml:19:5-43
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.4.0] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/long/Desktop/XMQ/client/android/trunk/app/src/main/AndroidManifest.xml
+activity#com.uuzuche.lib_zxing.activity.CaptureActivity
+ADDED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:12:9-17:63
+	android:screenOrientation
+		ADDED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:15:13-49
+	android:windowSoftInputMode
+		ADDED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:17:13-60
+	android:configChanges
+		ADDED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:14:13-63
+	android:theme
+		ADDED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:16:13-63
+	android:name
+		ADDED from [trunk:lib-zxing:unspecified] /Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/AndroidManifest.xml:13:13-74

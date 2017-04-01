@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomCombineChart">
+        <!--x坐标系字体设置-->
+        <attr name="xAxis_textSize" format="dimension|reference"/>
+        <attr name="xAxis_textColor" format="color|reference"/>
+        <attr name="xAxis_sec_textSize" format="dimension|reference"/>
+        <attr name="xAxis_sec_textColor" format="color|reference"/>
+        <attr name="xAxis_inner_padding" format="dimension|reference"/>
+        <!--y坐标系设置-->
+        <attr name="yAxis_textSize" format="dimension|reference"/>
+        <attr name="yAxis_textColor" format="color|reference"/>
+        <attr name="yAxis_maxValue" format="float"/>
+        <attr name="yAxis_format" format="string"/>
+        <attr name="yAxis_format_only_top" format="boolean"/>
+        <attr name="yAxis_label_count" format="integer"/>
+        <attr name="yAxis_width" format="dimension"/>
+        <!--坐标线设置-->
+        <attr name="axisColor" format="color|reference"/>
+        <attr name="axis_width" format="dimension|reference"/>
+        <attr name="xAxis_show" format="boolean"/>
+        <attr name="yAxis_show" format="boolean"/>
+        <attr name="line_mode" >
+            <enum name="solid" value="0"/>
+            <enum name="dotted" value="1"/>
+        </attr>
+        <!--图表内边距-->
+        <attr name="innerPaddingLeftValue" format="float"/>
+        <attr name="innerPaddingRightValue" format="float"/>
+
+    </declare-styleable>
+    <declare-styleable name="CustomLineChart">
+        <attr name="isFill" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="CustomBarChart">
+        <attr name="hightlightWidth" format="dimension|reference"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+    <title>Health Index</title>
+</head>
+
+<body>
+<h1>健康指数</h1>
+<div id="div_sport_tip"></div>
+<input type="button" value="去运动" onclick="onGotoSport()">
+<div id="div_sleep_tip"></div>
+
+<h1>小毛球健康专家提示您</h1>
+<div id="div_summary_tip"></div>
+
+<div>
+如果宠物有什么不适，请联系<a href="javascript:onExpect()">小毛球健康专家</a>，或者适当<a href="javascript:onAdjustSport()">调整运动目标</a>。
+</div>
+
+<script>
+    
+    function onExpect()
+    {
+    myObj.callFromJs("WebCall:onExpect");
+    }
+
+    function onAdjustSport()
+    {
+    myObj.callFromJs("WebCall:onAdjustSport");
+    }
+
+    function onGotoSport()
+    {
+    myObj.callFromJs("WebCall:onGotoSport");
+    }
+
+    function setTips(sport_tip,sleep_tip,summary_tip){
+    	document.getElementById("div_sport_tip").innerHTML = sport_tip;
+    	document.getElementById("div_sleep_tip").innerHTML = sleep_tip;
+    	document.getElementById("div_summary_tip").innerHTML = summary_tip;
+    }
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white98">#FAffffff</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="standard_set_item_text_color">#141e41</color>
+    <color name="standard_divide_color">#dddddd</color>
+    <color name="f79100">#f5b4b4</color>
+    <color name="standard_set_line_color">#dddddd</color>
+    <color name="standard_color_text_58">#585858</color>
+</resources>

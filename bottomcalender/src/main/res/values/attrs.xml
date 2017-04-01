@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WheelRecyclerView">
+        <attr name="normal_text_color" format="color|reference" />
+        <attr name="current_text_color" format="color|reference" />
+        <attr name="normal_text_size" format="dimension" />
+        <attr name="current_text_size" format="dimension" />
+        <attr name="item_gravity" >
+            <flag name="center" value="0"/>
+            <flag name="left_center" value="1"/>
+            <flag name="right_center" value="2"/>
+        </attr>
+        <attr name="max_visible_item_count" format="integer" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/total_color_8"
+    tools:context="com.xiaomaoqiu.pet.ui.mainPages.pageMe.HardwareActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:text="设备信息"
+            android:paddingLeft="16dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/total_color_1"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:background="@color/total_color_8"/>
+        <View android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/total_color_4"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/hardware_text"
+                android:text="设备名称:"/>
+            <View android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/hardware_text"
+                android:id="@+id/tv_device_name"
+                android:text="小毛球1号"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/total_color_4"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/hardware_text"
+                android:text="IMEI码:"/>
+            <View android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/hardware_text"
+                android:id="@+id/tv_imei"
+                android:text="111111111"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="16dp"
+            android:background="@color/total_color_4"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/hardware_text"
+                android:text="固件版本:"/>
+            <View android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_hardware"
+                style="@style/hardware_text"
+                android:text="1.0.0.1"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/total_color_4"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="41.5dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/total_color_1"
+        android:text="设备内置SIM卡信息"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/sep_line"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        style="@style/hardware_text"
+        android:background="@color/white"
+        android:text="当前sim卡已经充值到2017.7.1"/>
+
+    <View android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/total_color_4"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="37.5dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center"
+        android:background="@drawable/hardware_unbind_back"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="解除绑定"
+        android:id="@+id/tv_unbind"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/hardware_charge_back"
+        android:text="我要充值SIM卡"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:id="@+id/tv_sim_recharge"
+        />
+</LinearLayout>

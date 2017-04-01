@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#f1f1f1"
+    tools:context="com.xiaomaoqiu.pet.ui.MainActivity">
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="44dp"
+			android:background="@color/total_color_1">
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:src="@drawable/home_text_xmq"/>
+
+
+			<com.xiaomaoqiu.pet.widgets.BatteryView
+				android:id="@+id/batteryView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="16dp"
+				android:src="@drawable/battery100"/>
+
+		</RelativeLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:id="@+id/fragment_container"/>
+		<!--<com.xiaomaoqiu.pet.widgets.ViewPagerEx
+			android:id="@+id/tabpager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>-->
+	</RelativeLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="49dp"
+		android:orientation="horizontal"
+		android:background="@color/total_color_1">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:id="@+id/tab_health"
+			android:layout_weight="1">
+			<ImageView
+				android:id="@+id/main_tab_health"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_margin="6dp"
+				android:src="@drawable/main_bottombg_home" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:id="@+id/tab_locate"
+			android:layout_weight="1">
+			<ImageView
+				android:id="@+id/main_tab_locate"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_margin="6dp"
+				android:scaleType="matrix"
+				android:src="@drawable/main_bottombg_pos" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:id="@+id/tab_me"
+			android:layout_weight="1">
+			<ImageView
+				android:id="@+id/main_tab_me"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_margin="6dp"
+				android:scaleType="matrix"
+				android:src="@drawable/main_bottombg_service" />
+
+		</LinearLayout>
+
+		
+	</LinearLayout>
+
+</LinearLayout>

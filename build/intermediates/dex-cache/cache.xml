@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/BaiduTraceSDK_v2_1_15.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3080175a04798e770bf5514891614e10c550f1a5">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/BaiduTraceSDK_v2_1_15_04300fbe424fd43ac39ed2862356c45e1eb2732b.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/io.reactivex/rxandroid/1.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/io.reactivex-rxandroid-1.2.1_46580b17217cdf6fc48f9285c56cdb80b505a85e.jar" />
+    </item>
+    <item
+        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.1.56.android/4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6/fastjson-1.1.56.android.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/fastjson-1.1.56.android_d257dd672ac744f5a8e176f20da4a3aeb0c5195e.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/chartviews/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5867faabcd63c2e7caba50deabbb8b95ae0e3137">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-chartviews-unspecified_5aafe65983a30d28bcdf3fc7d0765eb7647bc6c2.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/baidumapapi_v3_5_0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ba79500bb64218f10b5fd0d5ea54503b2bf6b3bb">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/baidumapapi_v3_5_0_75d640f5653afd08018d19e924f3229aafd4d8ed.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/locSDK_6.13.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/locSDK_6.13_7a04d9e785853b75be2d84c724fd88263db916c8.jar" />
+    </item>
+    <item
+        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.7/cd78109020f9ec803ef4e652c17ee4615b03e20a/android-async-http-1.4.7.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="cd78109020f9ec803ef4e652c17ee4615b03e20a">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.7_66da09305319c9db0ec9f29c252e345bf05a67c3.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/jars/libs/zxing.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a47a112b084e4b969a67db81c577a27b0b9a04a7">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/zxing_7c97005513181ebcc97a1d2c998a2b4e98cf80b2.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/httpmime-4.1.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d34b163e52a9727101aced60775d51c5085390a1">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/httpmime-4.1.1_0732b03674cd754a369626913533219a143ff247.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.3.0_0c2354039abfa5e2de51431904d4c06fa9b1a6ac.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.3.0_0cab2aedc036a998ff81654818d8dd3c404e7cbe.jar" />
+    </item>
+    <item
+        jar="/Users/long/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.6/2586312cd2b8a511e4c6236736f5a039fc0f2273/rxjava-1.1.6.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/rxjava-1.1.6_8a7f906723c7bd46977bf1bbbb813aeef4afef4b.jar" />
+    </item>
+    <item
+        jar="/Users/long/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_8b758f4c5926e19e77c0d65012fd34247714c4fd.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_7a5e2152592897464b61c2de15b3936b26862ce3.jar" />
+    </item>
+    <item
+        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.1/369f9aa48a629b4e92557b37326f42dc3de796e4/MPAndroidChart-v3.0.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="369f9aa48a629b4e92557b37326f42dc3de796e4">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/MPAndroidChart-v3.0.1_daa8edd07ea38af8fd2495cbc3e981d861d5964c.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d5e3add6a1b3961e382c994b24c8891d1aad21dd">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-lib-zxing-unspecified_2d568d054667291045c3649ca841dd48c68f4a67.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_15c20d739d0c65bdea3aeed3d37eef5ca7cbddcf.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_806eec159ed12bcb6289b1daa2d9ad498b584082.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/AndroidCharts/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="2afdfcc37255c4fbf4be18a90f59f63e241484e7">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-AndroidCharts-unspecified_91c97a2dad833684819ecd9b57ba6f8bd299f5d2.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_14f94c1c32a815c4d811cb7fbfe6ccb0c83c35f7.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/PullToRefresh/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="57e3e749fe8f8b183594708acaa3095e1e95bafd">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-PullToRefresh-unspecified_bd50fd456aaa015b34ff962c8793557ac9998ade.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="79e4df837d3ac4cf060121b956cf7f0b9029d88c">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-bottomcalender-unspecified_e823224301808101292b5bd891e92f24ca0242e8.jar" />
+    </item>
+    <item
+        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_88902b67a5b132768293c39d8cc5efd494096f3f.jar" />
+    </item>
+
+</items>

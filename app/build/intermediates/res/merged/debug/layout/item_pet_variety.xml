@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:padding="12dp"
+    android:id="@+id/ll_pet_variety">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pet_variety_item_img"
+        android:src="@drawable/pet_variety_29"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11.5sp"
+        android:textColor="@color/total_color_7"
+        android:layout_marginTop="10dp"
+        android:text="gougogugo"
+        android:id="@+id/pet_variety_item_name"/>
+
+
+
+</LinearLayout>

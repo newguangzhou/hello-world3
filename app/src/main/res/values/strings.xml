@@ -1,0 +1,123 @@
+<resources>
+
+    <string name="go_back">返回</string>
+    <string name="login">登陆</string>
+
+    <string name="app_name">小毛球</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">我的易打折</string>
+    <string name="tab_health">健康</string>
+    <string name="tab_locate">定位</string>
+    <string name="tab_me">我</string>
+    <string name="today_activity">今日活动</string>
+    <string name="health_index">健康指数</string>
+    <string name="sport_index">运动指数</string>
+    <string name="sleep_index">睡眠指数</string>
+    <string name="sleep">睡眠</string>
+    <string name="in_home">回家了</string>
+    <string name="pet_lost">宠物丢了</string>
+
+    <string name="title_discount">折扣</string>
+    <string name="title_package">折扣码</string>
+    <string name="title_me">小毛球</string>
+
+    <string name="me_btn_login">点击登陆</string>
+    <string name="my_wallet">我的钱包</string>
+    <string name="my_points">商城积分</string>
+    <string name="my_favorite">我的收藏</string>
+    <string name="my_history">消费记录</string>
+    <string name="my_message">我的消息</string>
+    <string name="merchant_list">收藏商家</string>
+    <string name="settings">个人设置</string>
+
+
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="register_user">用户注册</string>
+    <string name="register">注册</string>
+    <string name="phone_number">手机号</string>
+    <string name="input_phone_number">请输入您的手机号码</string>
+    <string name="input_verify_code">输入验证码</string>
+    <string name="password">密码</string>
+    <string name="fetch_verify_code">重新发送</string>
+
+    <string name="input_password_1">输入密码</string>
+    <string name="input_password_2">重复密码</string>
+    <string name="error_invalid_argument">无效输入</string>
+    <string name="error_invalid_verify_code">验证码错误</string>
+    <string name="error_user_already_register">手机已经注册</string>
+    <string name="error_password_length_too_low">密码长度太小</string>
+    <string name="error_password_confirm">两次密码不相同</string>
+    <string name="error_phone_invalid">手机号不是11位</string>
+    <string name="error_empty_verify_code">验证码为空</string>
+    <string name="error_fav_shop">服务器掉链子，收藏失败,请稍后再试</string>
+    <string name="error_data_not_ready">服务器掉链子，数据还没准备好</string>
+    <string name="login_failed">登陆失败,错误码:%d</string>
+    <string name="btn_ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="all">全部</string>
+
+    <string name="pet_info">宠物信息</string>
+    <string name="sex">性别</string>
+    <string name="birthday">生日</string>
+    <string name="weight">体重</string>
+    <string name="variety">品种</string>
+    <string name="intro">介绍</string>
+    <string name="title_activity_health_index">HealthIndex</string>
+    <string name="pet_sport_done">已消耗%d卡</string>
+    <string name="pet_sport_target">目标消耗%d卡</string>
+    <string name="go_out_title">小毛球温馨提示</string>
+    <string name="go_out_tip">带狗狗出门时按下此按钮，通知小毛球APP，可避免小毛球误判狗狗溜走哦，玩结束后回到家也请按下“回到家”告知小毛球</string>
+    <string name="go_out_confirm">嗯，出去玩</string>
+    <string name="go_out_cancel">暂不出门</string>
+    <string name="go_home_tip">亲爱的铲屎官，请确定狗狗已经安全到家</string>
+    <string name="go_home_confirm">是的，已安全到家</string>
+    <string name="go_home_cancel">还没有到家</string>
+    <string name="pet_playing">狗狗在外面玩耍，如果找不到狗狗，请按寻狗按钮</string>
+    <string name="get_loc_string_null">没有当前位置地址信息</string>
+    <string name="tel_service">4008001234</string>
+    <string name="pet_location">狗狗位置</string>
+    <string name="me_message">消息哔哔哔</string>
+    <string name="url_mall">"http://www.baidu.com"</string>
+    <string name="tip_battery_warn">电池电量即将用完，请立即充电</string>
+    <string name="tip_battery_empty">电池电量低，请及时充电</string>
+    <string name="tip_battery_null">为了您的宠物的安全，请注意及时充电。</string>
+    <string name="title_hardware">狗狗追踪器</string>
+    <string name="title_home_wifi">常住地WIFI</string>
+    <string name="title_message">最新信息</string>
+    <string name="title_contact">联系客服</string>
+    <string name="title_mall">小毛球商城</string>
+    <string name="title_about">关于此APP</string>
+    <string name="title_exit">退出登陆</string>
+    <string name="pet_finding">宠物追踪</string>
+    <string name="pet_locate_failed">获取宠物位置失败，您可以启用寻找宠物模式来定位</string>
+    <string name="exit_delay">再按一次返回键退出APP</string>
+    <string name="tip_phone_format">手机号码必须是11位</string>
+
+    <!--去运动-->
+    <string name="go_sport_backtext">亲爱的铲屎官，请确认昂狗狗跟你一块儿安全回到家了哦！</string>
+    <string name="go_sport_ggspeak_text">亲爱的铲屎官，你真的要带我出去玩吗？~^o^~</string>
+    <string name="go_sport_sport_btask_info">带狗狗出门时，按下此按钮通知小毛球APP，可避免小毛球误判狗狗溜走哦！</string>
+    <string name="go_sport_sport_btquit_info">玩结束后回到家也请按下“回到家”按钮告知小毛球哦。</string>
+
+    <!--健康指数-->
+    <string name="health_index_nitice">小毛球健康专家提醒您</string>
+    <string name="health_index_ask">如果狗狗个体情况特殊，可咨询您的宠物医生或者联系小毛球健康专家，适当调整运动目标</string>
+    <!--电量提醒-->
+    <string name="battery_notice_content">为了您的宠物的安全，请注意及时充电。</string>
+    <string name="battery_notice_timeformat">(电量测量时间%s)</string>
+    <string name="battery_notice_levelformat">电池剩余电量：%d</string>
+    <!--绑定设备-->
+    <string name="bind_device">绑定设备</string>
+    <string name="zxing">扫一扫</string>
+    <string name="bind_device_sweep">扫一扫包装盒上的IMEI条形码</string>
+    <string name="bind_device_sweep_code">点击扫一扫</string>
+    <string name="bind_device_input_text">请输入机器背面的15位IMEI码</string>
+    <string name="bind_device_input_hint">请输入15位IMEI码</string>
+
+    <!--地图-->
+    <string name="map_light_open">夜晚时段可开启小夜灯。开启小夜灯将导致追踪器耗电量增加，是否仍然开启灯光？</string>
+    <string name="map_is_findpet">紧急搜寻模式将启动所有定位模块，小毛球追踪器的功耗将被开至最大。\n省电提示：找到狗狗后记得关闭紧急搜寻模式哦！</string>
+    <string name="map_walkpet_notice">注意：当前在遛狗模式，若狗狗离开视线，请点击打开找狗模式定位狗狗精确位置。</string>
+</resources>

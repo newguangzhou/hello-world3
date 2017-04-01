@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--配置系统,系统首先从configPri中查询配置信息，查询失败再从configAlt中查询配置信息-->
+<root configPri="prior" configAlt="dev">
+    <!--生产环境配置集-->
+    <config name="release">
+        <tag></tag>
+    </config>
+
+    <!--测试环境配置集-->
+    <config name="dev">
+        <tag>[for dev]</tag>
+    </config>
+
+    <!--其它配置-->
+    <config name="prior">
+        <HttpApi>
+            <!--cache_mode:0:不使用缓存，1:使用内存缓存，2:使用文件缓存,
+            expire_time:缓存过期时间，单位为秒-->
+            <user.get_verify_code url="http://120.24.152.121:9100/user/get_verify_code?phone_num=%s&amp;type=%d" cache_mode="0"/>
+            <user.login url="http://120.24.152.121:9100/user/login?phone_num=%s&amp;code=%s&amp;device_type=%d&amp;device_token=%s" cache_mode="0"/>
+            <user.logout url="http://120.24.152.121:9100/user/logout?uid=%d&amp;token=%s" cache_mode="0"/>
+            <user.register url="http://120.24.152.121:9100/user/register?phone_num=%s&amp;passwd=%s&amp;code=%s" cache_mode="0"/>
+
+            <pet.health.summary url="http://120.24.152.121:9100/pet/healthy/summary?uid=%d&amp;token=%s&amp;pet_id=%s" cache_mode="0"/>
+
+            <pet.health.get_sleep_info url="http://120.24.152.121:9100/pet/healthy/get_sleep_info?uid=%d&amp;token=%s&amp;pet_id=%s&amp;start_date=%s&amp;end_date=%s" cache_mode="0"/>
+
+            <pet.health.get_sport_info url="http://120.24.152.121:9100/pet/healthy/get_activity_info?uid=%d&amp;token=%s&amp;pet_id=%s&amp;start_date=%s&amp;end_date=%s" cache_mode="0"/>
+
+            <pet.healthy.set_sport_info url="http://120.24.152.121:9100/pet/healthy/set_sport_info?uid=%d&amp;token=%s&amp;pet_id=%s&amp;target_step=%d"/>
+
+            <pet.get_pet_info url="http://120.24.152.121:9100/pet/get_pet_info?uid=%d&amp;token=%s" cache_mode="0"/>
+
+            <device.get_info url="http://120.24.152.121:9100/device/get_info?uid=%d&amp;token=%s&amp;pet_id=%s" cache_mode="0"/>
+
+            <device.swicth_light url="http://120.24.152.121:9100/device/swicth_light?uid=%d&amp;token=%s&amp;imei=%s&amp;light_status=%d" cache_mode="0"/>
+
+            <device.get_light_status url="http://120.24.152.121:9100/device/get_light_status?uid=%d&amp;token=%s&amp;imei=%s&amp;" cache_mode="0"/>
+
+            <device.add_device_info url="http://120.24.152.121:9100/device/add_device_info?uid=%d&amp;token=%s&amp;imei=%s&amp;device_name=%s" cache_mode="0"/>
+
+            <device.remove_device_info url="http://120.24.152.121:9100/device/remove_device_info?uid=%d&amp;token=%s&amp;imei=%s" cache_mode="0"/>
+
+            <device.set_sim_info url="http://120.24.152.121:9100/device/set_sim_info?uid=%d&amp;token=%s&amp;imei=%s&amp;iccid=%s" cache_mode="0"/>
+
+            <!-- 更新宠物信息 -->
+            <pet.update_pet_info url="http://120.24.152.121:9100/pet/update_pet_info?uid=%d&amp;token=%s&amp;pet_id=%d" cache_mode="0"/>
+            <!-- 上传头像 -->
+            <file.pet.upload_logo url="http://120.24.152.121:9700/file/pet/upload_logo?uid=%d&amp;token=%s" cache_mode="0"/>
+
+            <pet.location url="http://120.24.152.121:9100/pet/location?uid=%d&amp;token=%s&amp;pet_id=%s" cache_mode="0"/>
+
+            <!-- 找狗模式 -->
+            <pet.find url="http://120.24.152.121:9100/pet/find?uid=%d&amp;token=%s&amp;pet_id=%s&amp;find_status=%d" cache_mode="0"/>
+
+            <pet.activity url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s&amp;pet_id=%d&amp;activity_type=%d" cache_mode="0"/>
+
+            <msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
+
+        </HttpApi>
+        <Http>
+            <CacheDir>/data/data/com.xiaomaoqiu.pet/cache</CacheDir>
+        </Http>
+    </config>
+</root>

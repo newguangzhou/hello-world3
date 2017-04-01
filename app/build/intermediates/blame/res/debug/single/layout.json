@@ -1,0 +1,466 @@
+[
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_profile.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_profile.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats4.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats4.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/me_pet_info.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/me_pet_info.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_start_pet_finding.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_start_pet_finding.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/item_message.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/item_message.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_find_pet.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_find_pet.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/linechart.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/chartviews/unspecified/res/layout/linechart.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_toast_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_toast_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_sport_index.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_sport_index.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats3.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats3.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_toast_layout2.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_toast_layout2.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_pick_photo.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_pick_photo.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/main_menu.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/main_menu.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/umeng_update_dialog.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/umeng_update_dialog.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_message.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_message.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/main_tab_me.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/main_tab_me.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_health_sleep.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_health_sleep.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_contact_service_dialog.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_contact_service_dialog.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_battery_notice.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_battery_notice.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/exit_dialog_from_settings.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/exit_dialog_from_settings.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/health_go_sport_view.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/health_go_sport_view.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dlg_modify_birthday.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dlg_modify_birthday.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_go_home.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_go_home.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_zxing.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_zxing.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats5.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats5.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_bind_device.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_bind_device.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/item_loading.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/item_loading.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats_door.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats_door.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/layout_mid_space.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/layout_mid_space.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/item_phone.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/item_phone.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/indicator_splash.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/indicator_splash.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats2.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats2.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats6.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats6.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/main.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/main.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_capture.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_capture.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/PullToRefresh/unspecified/res/layout/pull_to_refresh_header_horizontal.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dlg_modify_variety2.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dlg_modify_variety2.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/tb_munion_adview.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/tb_munion_adview.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_go_out.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_go_out.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/barchart.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/chartviews/unspecified/res/layout/barchart.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/main_tab_locate.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/main_tab_locate.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_register.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_register.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dlg_modify_variety.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dlg_modify_variety.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_feedback.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_feedback.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/template_listview.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/template_listview.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_pick_sport_number.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_pick_sport_number.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/item_variety.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/item_variety.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/item_pet_variety.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/item_pet_variety.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whatsnew_viewpager.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whatsnew_viewpager.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/main_tab_health.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/main_tab_health.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_template_lines.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/asyn_dialog_go_out.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/asyn_dialog_go_out.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_exit.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_exit.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/sleep_title_view.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/sleep_title_view.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_template.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_template.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/layout_sub_title_base_line.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/layout_sub_title_base_line.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/camera.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/res/layout/camera.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_favorite.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_favorite.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_hardware.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_hardware.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/picker_item.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/res/layout/picker_item.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/loading.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/loading.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_qrcode.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_qrcode.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_login.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/main_top_right_dialog.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/main_top_right_dialog.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_input.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dialog_input.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dialog_date_picker.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/res/layout/dialog_date_picker.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/layout_view_splite.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/layout_view_splite.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_about.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_about.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/asyn_dialog_go_home.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/asyn_dialog_go_home.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/dlg_input.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/dlg_input.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_zxing_findview.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_zxing_findview.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/tb_munion_aditem.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/tb_munion_aditem.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/fragment_capture.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/res/layout/fragment_capture.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/PullToRefresh/unspecified/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/activity_health_index.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/activity_health_index.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/appstart.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/appstart.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/welcome.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/welcome.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/map_pet_locview.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/map_pet_locview.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/vp_splash.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/vp_splash.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/res/merged/debug/layout/whats1.xml",
+        "source": "/Users/long/Desktop/XMQ/client/android/trunk/app/src/main/res/layout/whats1.xml"
+    }
+]

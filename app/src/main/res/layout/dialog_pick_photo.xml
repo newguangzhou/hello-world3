@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/btn_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_change_avater_item_height"
+        android:orientation="horizontal"
+        android:background="@drawable/dialog_change_avater_topcorners_bg"
+        android:gravity="center"
+        android:layout_marginBottom="1.5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/change_avater_takephoto_icon"
+            android:layout_marginRight="11dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11.5sp"
+            android:textColor="@color/total_color_1"
+            android:text="拍一张     "/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_pick_from_library"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_change_avater_item_height"
+        android:orientation="horizontal"
+        android:background="@drawable/dialog_change_avater_bottomcorners_bg"
+        android:gravity="center"
+        android:layout_marginBottom="1.5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/change_avater_select_icon"
+            android:layout_marginRight="11dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11.5sp"
+            android:textColor="@color/total_color_1"
+            android:text="从相册选"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_change_avater_item_height"
+        android:background="@drawable/shape_dialog_background"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="42dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/change_avater_cancel"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:textSize="16sp"
+            android:textColor="@color/total_color_1"
+            android:text="取消"/>
+
+    </LinearLayout>
+
+</LinearLayout>
