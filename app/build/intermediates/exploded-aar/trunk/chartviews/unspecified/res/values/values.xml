@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="CustomBarChart"><attr format="dimension|reference" name="hightlightWidth"/></declare-styleable>
-    <declare-styleable name="CustomCombineChart"><attr format="dimension|reference" name="xAxis_textSize"/><attr format="color|reference" name="xAxis_textColor"/><attr format="dimension|reference" name="xAxis_sec_textSize"/><attr format="color|reference" name="xAxis_sec_textColor"/><attr format="dimension|reference" name="xAxis_inner_padding"/><attr format="dimension|reference" name="yAxis_textSize"/><attr format="color|reference" name="yAxis_textColor"/><attr format="float" name="yAxis_maxValue"/><attr format="string" name="yAxis_format"/><attr format="boolean" name="yAxis_format_only_top"/><attr format="integer" name="yAxis_label_count"/><attr format="dimension" name="yAxis_width"/><attr format="color|reference" name="axisColor"/><attr format="dimension|reference" name="axis_width"/><attr format="boolean" name="xAxis_show"/><attr format="boolean" name="yAxis_show"/><attr name="line_mode"><enum name="solid" value="0"/><enum name="dotted" value="1"/></attr><attr format="float" name="innerPaddingLeftValue"/><attr format="float" name="innerPaddingRightValue"/></declare-styleable>
-    <declare-styleable name="CustomLineChart"><attr format="boolean" name="isFill"/></declare-styleable>
-    <string name="app_name">ChartViews</string>
-</resources>
