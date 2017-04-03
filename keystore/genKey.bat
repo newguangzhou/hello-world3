@@ -1,2 +1,0 @@
-path = %java_home%\bin
-keytool -genkey -alias xiaomaoqiu -keysize 1024 -keypass xiaomaoqiu_android -keystore xiaomaoqiu.keystore -storepass xiaomaoqiu_android -validity 10950 -dname "CN=xiaomaoqiu, OU=xiaomaoqiu, O=xiaomaoqiu, L=shenzhen, ST=guangdong, C=cn"

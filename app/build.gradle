@@ -1,35 +1,51 @@
 apply plugin: 'com.android.application'
 
 android {
-    useLibrary 'org.apache.http.legacy'
+//    useLibrary 'org.apache.http.legacy'
+    signingConfigs {
+        release_sign_config {
+            keyAlias 'android.keystore'
+            keyPassword '123456'
+            storeFile file('android.keystore')
+            storePassword '123456'
+        }
+    }
 
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId 'com.xiaomaoqiu.pet'
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 23
+        versionCode 1
+        versionName '1'
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            proguardFile 'proguard.cfg'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            proguardFile 'proguard-rules.pro'
+            signingConfig signingConfigs.release_sign_config
         }
         debug {
-            proguardFile 'proguard.cfg'
+            minifyEnabled false
         }
     }
-    productFlavors {
+    lintOptions{
+//        checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation'
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.android.support:support-v4:23.0.0'
-    compile project(':PullToRefresh')
     compile 'com.loopj.android:android-async-http:1.4.7'
     compile project(':AndroidCharts')
     compile files('libs/httpmime-4.1.1.jar')
@@ -39,9 +55,14 @@ dependencies {
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/baidumapapi_v3_5_0.jar')
     compile files('libs/BaiduTraceSDK_v2_1_15.jar')
+    compile project(':PullToRefresh')
+
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'io.reactivex:rxandroid:1.2.1'
-// Because RxAndroid releases are few and far between, it is recommended you also
-// explicitly depend on RxJava's latest version for bug fixes and new features.
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //bugly
+    compile files('libs/org.apache.http.legacy.jar')
 }
