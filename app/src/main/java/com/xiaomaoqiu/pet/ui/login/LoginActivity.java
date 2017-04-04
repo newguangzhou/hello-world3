@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.xiaomaoqiu.pet.R;
 import com.xiaomaoqiu.pet.dataCenter.HttpCode;
 import com.xiaomaoqiu.pet.dataCenter.LoginMgr;
@@ -84,6 +85,7 @@ public class LoginActivity extends ActivityEx {
 
     public static void doLogin(final String strPhone, final String strVerifyCode, final Context ctx,  final LoginHandler handler)
     {
+        CrashReport.testJavaCrash();
 
         final int device_type=1;//android device
         String device_id = Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID);

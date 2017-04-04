@@ -1,8 +1,6 @@
 package com.xiaomaoqiu.pet.ui.mainPages.pageMe;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +11,8 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.pet.R;
-import com.xiaomaoqiu.pet.app.petApp;
 import com.xiaomaoqiu.pet.dataCenter.HttpCode;
 import com.xiaomaoqiu.pet.dataCenter.LoginMgr;
-import com.xiaomaoqiu.pet.notificationCenter.NotificationCenter;
 import com.xiaomaoqiu.pet.utils.HttpUtil;
 import com.xiaomaoqiu.pet.widgets.ActivityEx;
 

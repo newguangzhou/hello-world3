@@ -3,7 +3,7 @@ package com.xiaomaoqiu.pet.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.xiaomaoqiu.pet.app.petApp;
+import com.xiaomaoqiu.pet.PetAppLike;
 
 
 /**
@@ -14,7 +14,7 @@ public class SpUtil {
     public static String SP_FILE_NAME="xmq_pet_config";
 
     public static SharedPreferences getSP() {
-        SharedPreferences sp = petApp.app.getSharedPreferences(
+        SharedPreferences sp = PetAppLike.mcontext.getSharedPreferences(
                 SP_FILE_NAME, Context.MODE_PRIVATE);
         return sp;
     }

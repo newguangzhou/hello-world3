@@ -42,7 +42,7 @@
         android:protectionLevel="signature" />
 
     <application
-        android:name=".app.petApp"
+        android:name=".SampleApplication"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
