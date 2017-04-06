@@ -1,0 +1,112 @@
+package com.xiaomaoqiu.now;
+
+/**
+ * Created by long on 17/4/6.
+ */
+
+public class Constants {
+
+
+    public static class Url {
+        public static String Host = "http://120.24.152.121:9100/";
+
+
+        //用户相关
+        public static class User {
+            /**
+             * 获取验证码
+             */
+            public static final String get_verify_code = "user/get_verify_code";
+            /**
+             * 登录
+             */
+            public static final String login = "user/login";
+            /**
+             * 退出登录
+             */
+            public static final String logout = "user/logout";
+            /**
+             * 注册
+             */
+            public static final String register = "user/register";
+
+        }
+
+
+        //宠物相关
+        public static class Pet {
+            /**
+             * 健康摘要
+             */
+            public static final String summary = "pet/healthy/summary";
+            /**
+             * 睡眠信息
+             */
+            public static final String get_sleep_info = "pet/healthy/get_sleep_info";
+            /**
+             * 运动信息
+             */
+            public static final String get_sport_info = "pet/healthy/get_activity_info";
+            /**
+             * 设置运动信息
+             */
+            public static final String set_sport_info = "pet/healthy/set_sport_info";
+            /**
+             * 获取宠物信息
+             */
+            public static final String get_pet_info = "pet/get_pet_info";
+            /**
+             * 更新宠物信息
+             */
+            public static final String update_pet_info = "pet/update_pet_info";
+            /**
+             * 上传头像
+             */
+            public static final String upload_logo = "file/pet/upload_logo";
+            /**
+             * 位置
+             */
+            public static final String location = "pet/location";
+        }
+
+
+        //设备相关
+        public static class Device {
+            /**
+             * 获取设备信息
+             */
+            public static final String get_info = "device/get_info";
+            /**
+             * 开关灯
+             */
+            public static final String swicth_light = "device/swicth_light";
+            /**
+             * 获取灯的状态
+             */
+            public static final String get_light_status = "device/get_light_status";
+            /**
+             * 添加设备信息
+             */
+            public static final String add_device_info = "device/add_device_info";
+            /**
+             * 移除设备信息
+             */
+            public static final String remove_device_info = "device/remove_device_info";
+            /**
+             * 设置sim卡信息
+             */
+            public static final String set_sim_info = "device/set_sim_info";
+
+        }
+
+
+        //找狗模式
+        public static class FindDog{
+            public static final String find="pet/find";
+//         <pet.activity url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s&amp;pet_id=%d&amp;activity_type=%d" cache_mode="0"/>
+//
+//            <msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
+
+        }
+    }
+}
