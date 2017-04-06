@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.xiaomaoqiu.old.notificationCenter.NotificationCenter;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
@@ -27,10 +26,12 @@ public enum UserMgr {
                 Log.v("http", "pet.location:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    NotificationCenter.INSTANCE.getObserver(PetInfo.Callback_PetLocating.class).onLocateResult(true,response.optDouble("latitude"), response.optDouble("longitude"));
+                    //todo 执行方法
+//                    NotificationCenter.INSTANCE.getObserver(PetInfo.Callback_PetLocating.class).onLocateResult(true,response.optDouble("latitude"), response.optDouble("longitude"));
                 }else
                 {
-                    NotificationCenter.INSTANCE.getObserver(PetInfo.Callback_PetLocating.class).onLocateResult(false,0.0,0.0);
+                    //todo 执行方法
+//                    NotificationCenter.INSTANCE.getObserver(PetInfo.Callback_PetLocating.class).onLocateResult(false,0.0,0.0);
                 }
             }
 
@@ -68,7 +69,8 @@ public enum UserMgr {
     public void setPetAtHome(boolean bAtHome)
     {
         mPetInfo.setAtHome(bAtHome);
-        mPetInfo.notifyChanged(PetInfo.FieldMask_AtHome);
+        //todo 需要添加更新
+//        mPetInfo.notifyChanged(PetInfo.FieldMask_AtHome);
     }
 
     public void updatePetInfo(final PetInfo petInfo,final int fieldMask)
@@ -138,7 +140,8 @@ public enum UserMgr {
                         {
                             mPetInfo.setPetID(petInfo.getPetID());
                         }
-                        mPetInfo.notifyChanged(fieldMask);
+                        //todo 需要添加更新机制
+//                        mPetInfo.notifyChanged(fieldMask);
                     }
                 }
             }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),mPetInfo.getPetID());

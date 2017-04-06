@@ -1,6 +1,5 @@
 package com.xiaomaoqiu.old.dataCenter;
 
-import com.xiaomaoqiu.old.notificationCenter.NotificationCenter;
 
 import org.json.JSONObject;
 
@@ -11,14 +10,14 @@ import java.util.Scanner;
  */
 public class PetInfo {
 
-    public interface Callback_PetInfo{
-        void onPetInfoChanged(PetInfo petInfo,int nFieldMask);
-    }
+//    public interface Callback_PetInfo{
+//        void onPetInfoChanged(PetInfo petInfo,int nFieldMask);
+//    }
 
-    public interface Callback_PetLocating
-    {
-        void onLocateResult(boolean bFound, double latitude, double longitude);
-    }
+//    public interface Callback_PetLocating
+//    {
+//        void onLocateResult(boolean bFound, double latitude, double longitude);
+//    }
 
     static public class Date
     {
@@ -64,10 +63,10 @@ public class PetInfo {
     private  boolean petAtHome=true; //true - 宠物在家, false - 宠物活动中
     private DeviceInfo  devInfo = new DeviceInfo();
 
-    public void notifyChanged(int nFieldMask)
-    {
-        NotificationCenter.INSTANCE.getObserver(Callback_PetInfo.class).onPetInfoChanged(this,nFieldMask);
-    }
+//    public void notifyChanged(int nFieldMask)
+//    {
+//        NotificationCenter.INSTANCE.getObserver(Callback_PetInfo.class).onPetInfoChanged(this,nFieldMask);
+//    }
 
     public void initFromJson(JSONObject jsonPetInfo)
     {
@@ -87,7 +86,8 @@ public class PetInfo {
         desc = jsonPetInfo.optString("description");
         petTypeId = jsonPetInfo.optInt("pet_type_id", 1);
         petAtHome = true;
-        notifyChanged(FieldMask_All);
+        //需要添加更新机制
+//        notifyChanged(FieldMask_All);
     }
 
     public  String getDesc() {

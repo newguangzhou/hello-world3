@@ -37,7 +37,7 @@ import mbg.bottomcalender.BottomCalenderView;
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class PetInfoActivity extends ActivityEx implements PetInfo.Callback_PetInfo, AsyncImageTask.ImageCallback{
+public class PetInfoActivity extends ActivityEx implements  AsyncImageTask.ImageCallback{
     private final int REQ_CODE_BIRTHDAY = 1;
     private final int REQ_CODE_WEIGHT = 2;
     private final int REQ_CODE_INTRO = 3;
@@ -326,7 +326,7 @@ public class PetInfoActivity extends ActivityEx implements PetInfo.Callback_PetI
         }
     }
 
-    @Override
+    //todo 更新逻辑
     public void onPetInfoChanged(PetInfo petInfo,int nFieldMask) {
         initPetInfo(petInfo,nFieldMask);
     }

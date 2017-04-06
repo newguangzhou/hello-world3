@@ -37,7 +37,7 @@ import java.util.Date;
  */
 
 
-public class HealthFragment extends FragmentEx implements PetInfo.Callback_PetInfo, View.OnClickListener, AsyncImageTask.ImageCallback {
+public class HealthFragment extends FragmentEx implements  View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
 
@@ -113,7 +113,7 @@ public class HealthFragment extends FragmentEx implements PetInfo.Callback_PetIn
 
     }
 
-    @Override
+    //更新逻辑
     public void onPetInfoChanged(PetInfo petInfo, int nFieldMask) {
         if((nFieldMask & petInfo.FieldMask_AtHome) != 0 )
         {

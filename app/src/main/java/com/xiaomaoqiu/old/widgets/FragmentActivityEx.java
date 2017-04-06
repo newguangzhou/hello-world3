@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.notificationCenter.NotificationCenter;
 
 /**
  * Created by Administrator on 2015/6/17.
@@ -22,13 +21,13 @@ public class FragmentActivityEx extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        NotificationCenter.INSTANCE.addObserver(this);
+//        NotificationCenter.INSTANCE.addObserver(this);
     }
 
     @Override
     protected void onDestroy()
     {
-        NotificationCenter.INSTANCE.removeObserver(this);
+//        NotificationCenter.INSTANCE.removeObserver(this);
         super.onDestroy();
     }
 

@@ -17,7 +17,7 @@ import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.old.widgets.BatteryView;
 import com.xiaomaoqiu.old.widgets.FragmentActivityEx;
 
-public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callback_DeviceInfo, View.OnClickListener {
+public class MainActivity extends FragmentActivityEx implements View.OnClickListener {
     private static final String LTAG = MainActivity.class.getSimpleName();
 
 	public static MainActivity instance = null;
@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callb
 		return 0;
 	}
 
-	@Override
+	//todo 设备状态更新
 	public void onDeviceInfoChanged(DeviceInfo deviceInfo) {
 		if(!deviceInfo.getDeviceExist()){
 			BindDeviceActivity.skipTo(MainActivity.this);

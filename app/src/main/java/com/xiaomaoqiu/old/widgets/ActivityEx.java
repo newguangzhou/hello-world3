@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.notificationCenter.NotificationCenter;
 
 /**
  * Created by Administrator on 2015/6/17.
@@ -42,7 +41,7 @@ public class ActivityEx extends Activity {
     {
         super.onCreate(savedInstanceState);
 
-        NotificationCenter.INSTANCE.addObserver(this);
+//        NotificationCenter.INSTANCE.addObserver(this);
     }
 
     private View.OnClickListener onNextClickLisener;
@@ -64,7 +63,7 @@ public class ActivityEx extends Activity {
     @Override
     protected void onDestroy()
     {
-        NotificationCenter.INSTANCE.removeObserver(this);
+//        NotificationCenter.INSTANCE.removeObserver(this);
         super.onDestroy();
     }
     public ViewGroup getRightView(){ return (ViewGroup)m_titleView.findViewById(R.id.fl_right);}

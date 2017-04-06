@@ -38,7 +38,7 @@ import com.xiaomaoqiu.old.widgets.ActivityEx;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class FindPetActivity extends ActivityEx implements PetInfo.Callback_PetLocating,View.OnClickListener{
+public class FindPetActivity extends ActivityEx implements View.OnClickListener{
 //    // 地图相关
 //    MapView mMapView;
 //    BaiduMap mBaiduMap;
@@ -165,7 +165,7 @@ public class FindPetActivity extends ActivityEx implements PetInfo.Callback_PetL
         }
     };
 
-    @Override
+   //todo  回调逻辑
     public void onLocateResult(boolean bFound, double latitude, double longitude) {
         if(!bFound) return;
 

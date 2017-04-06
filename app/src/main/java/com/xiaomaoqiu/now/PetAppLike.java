@@ -16,7 +16,6 @@ import com.xiaomaoqiu.old.config.Config;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.notificationCenter.NotificationCenter;
 
 /**
  * Created by Administrator on 2015/6/17.
@@ -43,11 +42,9 @@ public class PetAppLike extends DefaultApplicationLike {
         // 初始化百度地图SDK
 //        SDKInitializer.initialize(mcontext);
 
-        NotificationCenter.INSTANCE.addCallbacks(LoginMgr.Callback_Login.class);
-        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetInfo.class);
-        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetLocating.class);
-        NotificationCenter.INSTANCE.addCallbacks(DeviceInfo.Callback_DeviceInfo.class);
-        NotificationCenter.INSTANCE.addCallbacks(LoginMgr.Callback_Settings.class);
+//        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetInfo.class);
+//        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetLocating.class);
+//        NotificationCenter.INSTANCE.addCallbacks(DeviceInfo.Callback_DeviceInfo.class);
 
         Log.w(PetAppLike.TAG, "app init success");
 

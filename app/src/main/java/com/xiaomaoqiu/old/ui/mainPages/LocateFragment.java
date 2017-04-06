@@ -27,8 +27,8 @@ import static com.xiaomaoqiu.old.R.id.tv_location;
  * Created by Administrator on 2017/1/14.
  */
 
-public class LocateFragment extends FragmentEx implements View.OnClickListener, PetInfo.Callback_PetInfo
-        , PetInfo.Callback_PetLocating,DeviceInfo.Callback_DeviceInfo,ILocateView, IMapCallBack {
+public class LocateFragment extends FragmentEx implements View.OnClickListener
+        , ILocateView, IMapCallBack {
 
     private ImageView mLightstatusView,mFindPetView,mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
@@ -116,7 +116,7 @@ public class LocateFragment extends FragmentEx implements View.OnClickListener, 
     }
 
 
-    @Override
+   //todo 更新逻辑
     public void onPetInfoChanged(PetInfo petInfo, int nFieldMask) {
         if((nFieldMask & petInfo.FieldMask_AtHome) != 0 )
         {
@@ -139,14 +139,14 @@ public class LocateFragment extends FragmentEx implements View.OnClickListener, 
         }
     }
 
-    @Override
+    //TODO 设备更新
     public void onDeviceInfoChanged(DeviceInfo deviceInfo) {
         if(null != mPresenter){
             mPresenter.queryLightStatus();
         }
     }
 
-    @Override
+   //todo 回调逻辑
     public void onLocateResult(boolean bFound, double latitude, double longitude) {
         if(!bFound){
             onFail(getContext().getResources().getString(R.string.pet_locate_failed));

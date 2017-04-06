@@ -21,7 +21,7 @@ import com.xiaomaoqiu.old.widgets.ActivityEx;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class HardwareActivity extends ActivityEx implements DeviceInfo.Callback_DeviceInfo {
+public class HardwareActivity extends ActivityEx {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class HardwareActivity extends ActivityEx implements DeviceInfo.Callback_
         setTitle(getString(R.string.title_hardware));
         setContentView(R.layout.activity_hardware);
 
+        //todo 设备状态更新
         onDeviceInfoChanged(UserMgr.INSTANCE.getPetInfo().getDevInfo());
         findViewById(R.id.tv_unbind).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +47,7 @@ public class HardwareActivity extends ActivityEx implements DeviceInfo.Callback_
         });
     }
 
-    @Override
+   //todo 设备状态更新
     public void onDeviceInfoChanged(DeviceInfo deviceInfo) {
         if(null == deviceInfo){
             return;

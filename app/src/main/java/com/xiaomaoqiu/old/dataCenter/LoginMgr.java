@@ -1,6 +1,5 @@
 package com.xiaomaoqiu.old.dataCenter;
 
-import com.xiaomaoqiu.old.notificationCenter.NotificationCenter;
 
 /**
  * Created by Administrator on 2015/6/17.
@@ -16,14 +15,9 @@ public enum LoginMgr {
     private long    m_uid=0;
 
 
-    public interface Callback_Login {
-        void onLogin();
-        void onLogout();
-    }
 
-    public interface Callback_Settings{
-        void onSettingsChanged();
-    }
+
+
 
     public boolean isLogin()
     {
@@ -37,8 +31,6 @@ public enum LoginMgr {
         m_strToken = strToken;
         m_strPhone = strPhone;
 
-        NotificationCenter.INSTANCE.getObserver(Callback_Login.class).onLogin();
-        NotificationCenter.INSTANCE.getObserver(Callback_Settings.class).onSettingsChanged();
     }
 
     public void logout()
@@ -46,7 +38,6 @@ public enum LoginMgr {
         m_bLogin=false;
         m_strNick ="";
         m_strPsw="";
-        NotificationCenter.INSTANCE.getObserver(Callback_Login.class).onLogout();
     }
 
     public long getUid()
