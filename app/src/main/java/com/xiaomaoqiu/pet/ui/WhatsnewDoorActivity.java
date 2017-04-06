@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.xiaomaoqiu.pet.R;
 
-public class WhatsnewDoor extends Activity {
+public class WhatsnewDoorActivity extends Activity {
 	
 	private ImageView mLeft;
 	private ImageView mRight;
@@ -60,9 +60,9 @@ public class WhatsnewDoor extends Activity {
 		new Handler().postDelayed(new Runnable(){
 			@Override
 			public void run(){
-				Intent intent = new Intent (WhatsnewDoor.this,MainActivity.class);
+				Intent intent = new Intent (WhatsnewDoorActivity.this,MainActivity.class);
 				startActivity(intent);			
-				WhatsnewDoor.this.finish();
+				WhatsnewDoorActivity.this.finish();
 			}
 		}, 2300);
     }

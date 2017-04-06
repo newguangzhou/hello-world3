@@ -29,7 +29,7 @@ import static com.xiaomaoqiu.pet.R.id.tv_location;
  * Created by Administrator on 2017/1/14.
  */
 
-public class PageLocate1 extends FragmentEx implements View.OnClickListener, PetInfo.Callback_PetInfo
+public class LocateFragment extends FragmentEx implements View.OnClickListener, PetInfo.Callback_PetInfo
         , PetInfo.Callback_PetLocating,DeviceInfo.Callback_DeviceInfo,ILocateView, IMapCallBack {
 
     private ImageView mLightstatusView,mFindPetView,mWalkPetView;

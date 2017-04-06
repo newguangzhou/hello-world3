@@ -14,7 +14,7 @@ import com.xiaomaoqiu.pet.R;
 
 import java.util.ArrayList;
 
-public class Whatsnew extends Activity {
+public class WhatsnewActivity extends Activity {
 	
 	private ViewPager mViewPager;	
 	private ImageView mPage0;
@@ -137,7 +137,7 @@ public class Whatsnew extends Activity {
 	}
     public void startbutton(View v) {  
       	Intent intent = new Intent();
-		intent.setClass(Whatsnew.this,WhatsnewDoor.class);
+		intent.setClass(WhatsnewActivity.this,WhatsnewDoorActivity.class);
 		startActivity(intent);
 		this.finish();
       }  

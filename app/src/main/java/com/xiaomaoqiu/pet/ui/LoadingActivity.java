@@ -21,7 +21,7 @@ public class LoadingActivity extends Activity{
 	new Handler().postDelayed(new Runnable(){
 		@Override
 		public void run(){
-			Intent intent = new Intent (LoadingActivity.this,Whatsnew.class);			
+			Intent intent = new Intent (LoadingActivity.this,WhatsnewActivity.class);
 			startActivity(intent);
 			LoadingActivity.this.finish();
 			Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();

@@ -11,18 +11,18 @@ import android.view.ViewGroup;
 import com.xiaomaoqiu.pet.R;
 import com.xiaomaoqiu.pet.dataCenter.UserMgr;
 import com.xiaomaoqiu.pet.ui.dialog.ContactServiceDialog;
-import com.xiaomaoqiu.pet.ui.dialog.ExitDialog;
+import com.xiaomaoqiu.pet.ui.dialog.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.pet.ui.mainPages.pageMe.AboutActivity;
 import com.xiaomaoqiu.pet.ui.mainPages.pageMe.HardwareActivity;
 import com.xiaomaoqiu.pet.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.pet.ui.mainPages.pageMe.PetInfoActivity;
-import com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.BindDevice;
+import com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.pet.widgets.FragmentEx;
 
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class PageMe extends FragmentEx {
+public class MeFrament extends FragmentEx {
 
     static int REQ_EXIT = 1;
 
@@ -52,7 +52,7 @@ public class PageMe extends FragmentEx {
         root.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ExitDialog.class);
+                Intent intent = new Intent(getActivity(),ExitDialog_RAW_Activity.class);
                 startActivityForResult(intent,REQ_EXIT);
             }
         });
@@ -76,7 +76,7 @@ public class PageMe extends FragmentEx {
         root.findViewById(R.id.btn_contact_service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContactServiceDialog dlg = new ContactServiceDialog(PageMe.this.getActivity());
+                ContactServiceDialog dlg = new ContactServiceDialog(MeFrament.this.getActivity());
                 dlg.show();
             }
         });
@@ -98,7 +98,7 @@ public class PageMe extends FragmentEx {
                     startActivity(intent);
                 }
                 else{
-                    BindDevice.skipTo(v.getContext());
+                    BindDeviceActivity.skipTo(v.getContext());
                 }
 
             }

@@ -23,7 +23,7 @@ import mbg.chartviews.onChartValueSelectListener;
 /**
  * Created by Administrator on 2016/4/12.
  */
-public class SportIndex extends ActivityEx implements IChartCallback {
+public class SportIndexActivity extends ActivityEx implements IChartCallback {
     private CustomLineChart monthChart;
     private CustomLineChart weekChart;
     private TextView todayTip,WeekTip,monthTip;

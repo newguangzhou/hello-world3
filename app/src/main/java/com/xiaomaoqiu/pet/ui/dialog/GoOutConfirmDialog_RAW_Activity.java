@@ -17,7 +17,7 @@ import com.xiaomaoqiu.pet.dataCenter.PetInfo;
 import com.xiaomaoqiu.pet.dataCenter.UserMgr;
 import com.xiaomaoqiu.pet.utils.AsyncImageTask;
 
-public class GoOutConfirmDialog extends Activity implements AsyncImageTask.ImageCallback {
+public class GoOutConfirmDialog_RAW_Activity extends Activity implements AsyncImageTask.ImageCallback {
 	//private MyDialog dialog;
 	private LinearLayout layout;
 	@Override

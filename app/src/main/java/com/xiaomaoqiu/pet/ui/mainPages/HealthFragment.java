@@ -17,9 +17,9 @@ import com.xiaomaoqiu.pet.dataCenter.LoginMgr;
 import com.xiaomaoqiu.pet.dataCenter.PetInfo;
 import com.xiaomaoqiu.pet.dataCenter.UserMgr;
 import com.xiaomaoqiu.pet.ui.dialog.DialogToast;
-import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.HealthIndex;
-import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SleepIndex;
-import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SportIndex;
+import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.HealthIndexActivity;
+import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SleepIndexActivity;
+import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.SportIndexActivity;
 import com.xiaomaoqiu.pet.ui.mainPages.pageHealth.health.HealthGoSportView;
 import com.xiaomaoqiu.pet.utils.AsyncImageTask;
 import com.xiaomaoqiu.pet.utils.HttpUtil;
@@ -37,11 +37,11 @@ import java.util.Date;
  */
 
 
-public class PageHealth extends FragmentEx implements PetInfo.Callback_PetInfo, View.OnClickListener, AsyncImageTask.ImageCallback {
+public class HealthFragment extends FragmentEx implements PetInfo.Callback_PetInfo, View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
 
-    public PageHealth()
+    public HealthFragment()
     {
         super();
     }
@@ -144,7 +144,7 @@ public class PageHealth extends FragmentEx implements PetInfo.Callback_PetInfo, 
         Intent intent=new Intent();
         switch (v.getId()){
             case R.id.btn_sport_index:
-                intent.setClass(getActivity(),SportIndex.class);
+                intent.setClass(getActivity(),SportIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
@@ -169,7 +169,7 @@ public class PageHealth extends FragmentEx implements PetInfo.Callback_PetInfo, 
                 });
                 break;
             case R.id.btn_health:
-                intent.setClass(getActivity(),HealthIndex.class);
+                intent.setClass(getActivity(),HealthIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_sport:
@@ -179,7 +179,7 @@ public class PageHealth extends FragmentEx implements PetInfo.Callback_PetInfo, 
                 mGoSportView.show(HealthGoSportView.STATUS_BACK);
                 break;
             case R.id.btn_sleep:
-                intent.setClass(getActivity(),SleepIndex.class);
+                intent.setClass(getActivity(),SleepIndexActivity.class);
                 startActivity(intent);
                 break;
         }

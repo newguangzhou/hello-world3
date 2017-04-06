@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * Created by Administrator on 2016/12/31.
  */
 
-public class BindDevice extends ActivityEx {
+public class BindDeviceActivity extends ActivityEx {
 
     public static final int REQUEST_SWEEP_CODE=0;
 
@@ -59,7 +59,7 @@ public class BindDevice extends ActivityEx {
         sweepBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ZXingActivity.skipToAsResult(BindDevice.this,REQUEST_SWEEP_CODE);
+                ZXingActivity.skipToAsResult(BindDeviceActivity.this,REQUEST_SWEEP_CODE);
             }
         });
     }
@@ -114,7 +114,7 @@ public class BindDevice extends ActivityEx {
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
                     UserMgr.INSTANCE.queryPetInfo();
-                    HardwareActivity.skip(BindDevice.this);
+                    HardwareActivity.skip(BindDeviceActivity.this);
                     finish();
                 }
                 else{
@@ -126,7 +126,7 @@ public class BindDevice extends ActivityEx {
 
 
     public static void skipTo(Context context){
-        Intent intent=new Intent(context,BindDevice.class);
+        Intent intent=new Intent(context,BindDeviceActivity.class);
         context.startActivity(intent);
     }
 }

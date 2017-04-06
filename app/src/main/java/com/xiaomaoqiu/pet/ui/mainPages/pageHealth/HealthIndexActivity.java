@@ -14,15 +14,15 @@ import com.xiaomaoqiu.pet.R;
 import com.xiaomaoqiu.pet.dataCenter.HttpCode;
 import com.xiaomaoqiu.pet.dataCenter.LoginMgr;
 import com.xiaomaoqiu.pet.dataCenter.UserMgr;
-import com.xiaomaoqiu.pet.ui.dialog.GoOutConfirmDialog;
-import com.xiaomaoqiu.pet.ui.dialog.PickSportNumberDialog;
+import com.xiaomaoqiu.pet.ui.dialog.GoOutConfirmDialog_RAW_Activity;
+import com.xiaomaoqiu.pet.ui.dialog.PickSportNumberDialog_RAW_Activity;
 import com.xiaomaoqiu.pet.utils.HttpUtil;
 import com.xiaomaoqiu.pet.widgets.ActivityEx;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class HealthIndex extends ActivityEx implements PickSportNumberDialog.OnPickNumberListener, View.OnClickListener {
+public class HealthIndexActivity extends ActivityEx implements PickSportNumberDialog_RAW_Activity.OnPickNumberListener, View.OnClickListener {
 
     static int REQ_CODE_GO_OUT = 1;
 
@@ -86,7 +86,7 @@ public class HealthIndex extends ActivityEx implements PickSportNumberDialog.OnP
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
                 {
-                    Toast.makeText(HealthIndex.this,"网络连接失败",Toast.LENGTH_LONG).show();
+                    Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
                 }
 
             },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
@@ -104,13 +104,13 @@ public class HealthIndex extends ActivityEx implements PickSportNumberDialog.OnP
                 Log.v("http", "pet.healthy.set_sport_info:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    Toast.makeText(HealthIndex.this,"设定运动量成功",Toast.LENGTH_LONG).show();
+                    Toast.makeText(HealthIndexActivity.this,"设定运动量成功",Toast.LENGTH_LONG).show();
                 }
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
             {
-                Toast.makeText(HealthIndex.this,"网络连接失败",Toast.LENGTH_LONG).show();
+                Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
             }
 
         },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),number );
@@ -123,7 +123,7 @@ public class HealthIndex extends ActivityEx implements PickSportNumberDialog.OnP
             case R.id.health_index_bt_sport:
                 if(UserMgr.INSTANCE.getPetInfo().getAtHome())
                 {
-                    Intent intent = new Intent(HealthIndex.this,GoOutConfirmDialog.class);
+                    Intent intent = new Intent(HealthIndexActivity.this,GoOutConfirmDialog_RAW_Activity.class);
                     startActivityForResult(intent,REQ_CODE_GO_OUT );
                 }else
                 {
@@ -133,8 +133,8 @@ public class HealthIndex extends ActivityEx implements PickSportNumberDialog.OnP
             case R.id.health_index_bt_expert:
                 break;
             case R.id.health_index_bt_change:
-                PickSportNumberDialog dialog = new PickSportNumberDialog(HealthIndex.this,R.style.MyDialogStyleBottom);
-                dialog.setOnPickNumberListener(HealthIndex.this);
+                PickSportNumberDialog_RAW_Activity dialog = new PickSportNumberDialog_RAW_Activity(HealthIndexActivity.this,R.style.MyDialogStyleBottom);
+                dialog.setOnPickNumberListener(HealthIndexActivity.this);
                 dialog.show();
                 break;
         }

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.xiaomaoqiu.pet.R;
 import com.xiaomaoqiu.pet.ui.MainActivity;
 
-public class ExitFromSettings extends Activity {
+public class ExitFromSettings_RAW_Activity extends Activity {
 	//private MyDialog dialog;
 	private LinearLayout layout;
 	@Override

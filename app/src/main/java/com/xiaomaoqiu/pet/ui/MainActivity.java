@@ -12,10 +12,10 @@ import com.baidu.mapapi.SDKInitializer;
 import com.xiaomaoqiu.pet.R;
 import com.xiaomaoqiu.pet.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.pet.dataCenter.UserMgr;
-import com.xiaomaoqiu.pet.ui.mainPages.PageHealth;
-import com.xiaomaoqiu.pet.ui.mainPages.PageLocate1;
-import com.xiaomaoqiu.pet.ui.mainPages.PageMe;
-import com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.BindDevice;
+import com.xiaomaoqiu.pet.ui.mainPages.HealthFragment;
+import com.xiaomaoqiu.pet.ui.mainPages.LocateFragment;
+import com.xiaomaoqiu.pet.ui.mainPages.MeFrament;
+import com.xiaomaoqiu.pet.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.pet.widgets.BatteryView;
 import com.xiaomaoqiu.pet.widgets.FragmentActivityEx;
 
@@ -33,9 +33,9 @@ public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callb
 
 	private View mTabs[] = {null,null,null};
 
-	private PageHealth mHealthFragment;
-	private PageLocate1 mLocateFragment;
-	private PageMe mMeFragment;
+	private HealthFragment mHealthFragment;
+	private LocateFragment mLocateFragment;
+	private MeFrament mMeFragment;
 
 	@Override
 	public int frameTemplate()
@@ -46,7 +46,7 @@ public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callb
 	@Override
 	public void onDeviceInfoChanged(DeviceInfo deviceInfo) {
 		if(!deviceInfo.getDeviceExist()){
-			BindDevice.skipTo(MainActivity.this);
+			BindDeviceActivity.skipTo(MainActivity.this);
 			return;
 		}
 		BatteryView batteryView = (BatteryView) findViewById(R.id.batteryView);
@@ -102,7 +102,7 @@ public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callb
 		switch (index){
 			case 0:
 				if(null == mHealthFragment){
-					mHealthFragment=new PageHealth();
+					mHealthFragment=new HealthFragment();
 					transaction.add(R.id.fragment_container,mHealthFragment);
 				}
 				mHealthTabIcon.setSelected(true);
@@ -110,7 +110,7 @@ public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callb
 				break;
 			case 1:
 				if(null == mLocateFragment){
-					mLocateFragment=new PageLocate1();
+					mLocateFragment=new LocateFragment();
 					transaction.add(R.id.fragment_container,mLocateFragment);
 				}
 				mLocateTabIcon.setSelected(true);
@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivityEx implements DeviceInfo.Callb
 				break;
 			case 2:
 				if(null == mMeFragment){
-					mMeFragment=new PageMe();
+					mMeFragment=new MeFrament();
 					transaction.add(R.id.fragment_container,mMeFragment);
 				}
 				mMeTabIcon.setSelected(true);

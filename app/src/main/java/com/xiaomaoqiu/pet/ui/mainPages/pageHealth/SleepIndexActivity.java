@@ -25,7 +25,7 @@ import mbg.chartviews.onChartValueSelectListener;
 /**
  * Created by Administrator on 2016/4/12.
  */
-public class SleepIndex extends ActivityEx implements IChartCallback {
+public class SleepIndexActivity extends ActivityEx implements IChartCallback {
 
     private CustomLineChart monthChartView;
     private CustomBarChart weekChartView;

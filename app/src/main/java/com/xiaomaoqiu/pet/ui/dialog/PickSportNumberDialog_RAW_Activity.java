@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by huangjx on 2016/7/24.
  */
-public class PickSportNumberDialog extends Dialog implements View.OnClickListener{
+public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.OnClickListener{
     WheelView mWvNumber;
     List<String> mItems = new ArrayList<String>();
 
@@ -25,7 +25,7 @@ public class PickSportNumberDialog extends Dialog implements View.OnClickListene
 
     OnPickNumberListener    mOnPickNumberListener;
 
-    public PickSportNumberDialog(Context context, int theme) {
+    public PickSportNumberDialog_RAW_Activity(Context context, int theme) {
         super(context, theme);
     }
 
