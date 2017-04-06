@@ -39,7 +39,7 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent">
 
-                    <com.xiaomaoqiu.pet.widgets.CircleProgressBar
+                    <com.xiaomaoqiu.old.widgets.CircleProgressBar
                         android:layout_width="141dp"
                         android:layout_height="141dp"
                         android:layout_centerInParent="true"
@@ -290,7 +290,7 @@
             
         </LinearLayout>
 
-    <com.xiaomaoqiu.pet.ui.mainPages.pageHealth.health.HealthGoSportView
+    <com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView
         android:id="@+id/tab_health_gosportview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

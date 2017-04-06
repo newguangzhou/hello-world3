@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xiaomaoqiu.pet.ui.mainPages.pageHealth.HealthIndexActivity"
+    tools:context="com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity"
     android:background="@color/total_color_8">
     <LinearLayout
         android:layout_width="match_parent"

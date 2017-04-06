@@ -171,7 +171,7 @@
     </LinearLayout>
 
     <!--头像-->
-    <com.xiaomaoqiu.pet.widgets.CircleImageView
+    <com.xiaomaoqiu.old.widgets.CircleImageView
         android:id="@+id/go_sport_head"
         android:layout_width="70dp"
         android:layout_height="70dp"

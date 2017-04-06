@@ -13,7 +13,7 @@
     android:paddingTop="23dp"
     android:gravity="center_horizontal"
     android:background="@drawable/shape_dialog_background">
-    <com.xiaomaoqiu.pet.widgets.CircleImageView
+    <com.xiaomaoqiu.old.widgets.CircleImageView
         android:id="@+id/asyn_dialog_imgview"
         android:layout_width="70dp"
         android:layout_height="70dp"

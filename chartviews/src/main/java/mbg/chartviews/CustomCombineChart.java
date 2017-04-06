@@ -326,8 +326,8 @@ public abstract class CustomCombineChart extends RelativeLayout {
         if(isLast){
             return;
         }
-        View view=new View(getContext());
-        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(0,0);
+        View view=now View(getContext());
+        LinearLayout.LayoutParams params=now LinearLayout.LayoutParams(0,0);
         params.weight=1;
         view.setLayoutParams(params);
         xAxisFristContainer.addView(view);*/

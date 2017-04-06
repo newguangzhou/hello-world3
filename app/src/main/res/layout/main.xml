@@ -7,7 +7,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#f1f1f1"
-    tools:context="com.xiaomaoqiu.pet.ui.MainActivity">
+    tools:context="com.xiaomaoqiu.old.ui.MainActivity">
 	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
@@ -23,7 +23,7 @@
 				android:src="@drawable/home_text_xmq"/>
 
 
-			<com.xiaomaoqiu.pet.widgets.BatteryView
+			<com.xiaomaoqiu.old.widgets.BatteryView
 				android:id="@+id/batteryView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

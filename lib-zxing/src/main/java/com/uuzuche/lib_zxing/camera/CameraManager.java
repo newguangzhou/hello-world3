@@ -274,9 +274,9 @@ public final class CameraManager {
   public Point[] convertResultPoints(ResultPoint[] points) {
     Rect frame = getFramingRectInPreview();
     int count = points.length;
-    Point[] output = new Point[count];
+    Point[] output = now Point[count];
     for (int x = 0; x < count; x++) {
-      output[x] = new Point();
+      output[x] = now Point();
       output[x].x = frame.left + (int) (points[x].getX() + 0.5f);
       output[x].y = frame.top + (int) (points[x].getY() + 0.5f);
     }

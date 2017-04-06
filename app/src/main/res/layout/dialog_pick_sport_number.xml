@@ -15,7 +15,7 @@
         android:textSize="20sp"
         android:layout_marginBottom="10dp"
         />
-    <com.xiaomaoqiu.pet.widgets.WheelView
+    <com.xiaomaoqiu.old.widgets.WheelView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/wv_number"/>
