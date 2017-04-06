@@ -74,18 +74,21 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:theme="@style/NoTitleBar">
+
+        </activity>
+        <activity
+            android:name=".ui.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/android:Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
-            android:name=".ui.SplashActivity"
-            android:label="@string/app_name"
-            android:theme="@style/android:Theme.NoTitleBar" />
-        <activity
-            android:name=".ui.WhatsnewDoor"
+            android:name=".ui.WhatsnewDoorActivity"
             android:theme="@style/Anim_style2" />
         <activity
             android:name=".ui.MainActivity"
@@ -94,13 +97,13 @@
             android:name=".ui.login.RegisterActivity"
             android:theme="@style/NoTitleBar" />
         <activity
-            android:name=".ui.Whatsnew"
+            android:name=".ui.WhatsnewActivity"
             android:theme="@style/Anim_style2" />
         <activity
-            android:name=".ui.dialog.ExitDialog"
+            android:name=".ui.dialog.ExitDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".ui.dialog.ExitFromSettings"
+            android:name=".ui.dialog.ExitFromSettings_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
             android:name=".ui.LoadingActivity"
@@ -109,11 +112,11 @@
             android:name=".ui.mainPages.pageMe.AboutActivity"
             android:theme="@style/NoTitleBar" />
         <activity
-            android:name=".ui.mainPages.pageHealth.HealthIndex"
+            android:name=".ui.mainPages.pageHealth.HealthIndexActivity"
             android:label="@string/title_activity_health_index"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.mainPages.pageMe.hardware.BindDevice"
+        <activity android:name=".ui.mainPages.pageMe.hardware.BindDeviceActivity"
                   android:label="@string/bind_device"
                   android:theme="@android:style/Theme.NoTitleBar"
                   android:windowSoftInputMode="stateAlwaysHidden"/>
@@ -122,7 +125,7 @@
                   android:theme="@android:style/Theme.NoTitleBar"
                   android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
-            android:name=".ui.mainPages.pageHealth.SleepIndex"
+            android:name=".ui.mainPages.pageHealth.SleepIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -153,14 +156,14 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ui.mainPages.pageHealth.SportIndex"
+            android:name=".ui.mainPages.pageHealth.SportIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ui.dialog.GoHomeConfirmDialog"
+            android:name=".ui.dialog.GoHomeConfirmDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".ui.dialog.GoOutConfirmDialog"
+            android:name=".ui.dialog.GoOutConfirmDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
             android:name=".ui.mainPages.pageMe.MessageActivity"
