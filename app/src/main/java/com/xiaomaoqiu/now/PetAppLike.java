@@ -8,7 +8,6 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
-//import com.baidu.mapapi.SDKInitializer;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;

@@ -24,7 +24,7 @@ import com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
-import com.xiaomaoqiu.old.widgets.FragmentEx;
+import com.xiaomaoqiu.now.base.BaseFragment;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -37,7 +37,7 @@ import java.util.Date;
  */
 
 
-public class HealthFragment extends FragmentEx implements  View.OnClickListener, AsyncImageTask.ImageCallback {
+public class HealthFragment extends BaseFragment implements  View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
 

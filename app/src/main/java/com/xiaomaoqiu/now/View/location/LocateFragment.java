@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages;
+package com.xiaomaoqiu.now.View.location;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -15,20 +15,18 @@ import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.IMapCallBack;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.LocatePresenter;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
-import com.xiaomaoqiu.old.widgets.FragmentEx;
+import com.xiaomaoqiu.now.base.BaseFragment;
 
-import static com.xiaomaoqiu.old.R.id.tv_location;
 
 /**
  * Created by Administrator on 2017/1/14.
  */
 
-public class LocateFragment extends FragmentEx implements View.OnClickListener
-        , ILocateView, IMapCallBack {
+public class LocateFragment extends BaseFragment implements View.OnClickListener
+        , ILocateView {
 
     private ImageView mLightstatusView,mFindPetView,mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
@@ -59,7 +57,7 @@ public class LocateFragment extends FragmentEx implements View.OnClickListener
         mLightstatusView=(ImageView)root.findViewById(R.id.btn_open_light);
         mLightstatusView.setOnClickListener(this);
         mLightstatusView.setEnabled(false);
-        petLocation=(TextView)root.findViewById(tv_location);
+        petLocation=(TextView)root.findViewById(R.id.tv_location);
         petLocation.setText("");
         petLocContainer=(LinearLayout)root.findViewById(R.id.locate_addr_conotainer);
         walkpetNoticeView=(TextView)root.findViewById(R.id.locate_walk_notice);
@@ -284,7 +282,7 @@ public class LocateFragment extends FragmentEx implements View.OnClickListener
 //        }
     }
 
-    @Override
+ //todo 没人调
     public void onTraceSuccess(boolean isStart) {
         if(null == mPresenter){
             return;
