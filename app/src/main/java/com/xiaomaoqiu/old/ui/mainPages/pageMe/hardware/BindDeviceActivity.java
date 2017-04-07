@@ -17,7 +17,7 @@ import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
+import com.xiaomaoqiu.now.base.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * Created by Administrator on 2016/12/31.
  */
 
-public class BindDeviceActivity extends ActivityEx {
+public class BindDeviceActivity extends BaseActivity {
 
     public static final int REQUEST_SWEEP_CODE=0;
 

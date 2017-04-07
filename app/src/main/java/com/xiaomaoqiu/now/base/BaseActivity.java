@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.widgets;
+package com.xiaomaoqiu.now.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,8 +13,9 @@ import com.xiaomaoqiu.old.R;
 /**
  * Created by Administrator on 2015/6/17.
  */
-public class ActivityEx extends Activity {
-    private static String TAG = "ActivityEx";
+//todo 类----待重构
+public class BaseActivity extends Activity {
+    private static String TAG = "BaseActivity";
     private ViewGroup m_titleView;
     private TextView mNextView;
 

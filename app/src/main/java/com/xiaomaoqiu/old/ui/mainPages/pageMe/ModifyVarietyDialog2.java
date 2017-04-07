@@ -12,8 +12,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
 import com.xiaomaoqiu.old.widgets.sortlistview.CharacterParser;
 import com.xiaomaoqiu.old.widgets.sortlistview.ClearEditText;
 import com.xiaomaoqiu.old.widgets.sortlistview.PinyinComparator;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ModifyVarietyDialog2 extends ActivityEx {
+public class ModifyVarietyDialog2 extends BaseActivity {
 
 	public static String TAG_PARAM1 = "variety";
 

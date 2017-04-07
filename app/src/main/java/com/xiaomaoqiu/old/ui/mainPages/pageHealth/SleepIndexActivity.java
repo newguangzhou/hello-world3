@@ -9,11 +9,11 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.ChartIndexPresenter;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.IChartCallback;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import mbg.chartviews.onChartValueSelectListener;
 /**
  * Created by Administrator on 2016/4/12.
  */
-public class SleepIndexActivity extends ActivityEx implements IChartCallback {
+public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
     private CustomLineChart monthChartView;
     private CustomBarChart weekChartView;

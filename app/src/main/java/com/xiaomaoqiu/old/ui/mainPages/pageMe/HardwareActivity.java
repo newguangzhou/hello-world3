@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.HttpCode;
@@ -16,12 +17,11 @@ import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class HardwareActivity extends ActivityEx {
+public class HardwareActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

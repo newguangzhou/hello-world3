@@ -63,7 +63,7 @@
             android:textColor="@color/white"
             android:id="@+id/btn_fetch_verify_code"
             android:text="@string/fetch_verify_code"
-            android:onClick="onFetchVerifyCodeClick"/>
+            android:onClick="get_verify_code"/>
     </LinearLayout>
     <Button
         android:layout_width="match_parent"

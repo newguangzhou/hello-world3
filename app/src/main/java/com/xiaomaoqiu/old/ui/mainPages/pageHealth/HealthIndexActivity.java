@@ -17,12 +17,12 @@ import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.dialog.PickSportNumberDialog_RAW_Activity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
+import com.xiaomaoqiu.now.base.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class HealthIndexActivity extends ActivityEx implements PickSportNumberDialog_RAW_Activity.OnPickNumberListener, View.OnClickListener {
+public class HealthIndexActivity extends BaseActivity implements PickSportNumberDialog_RAW_Activity.OnPickNumberListener, View.OnClickListener {
 
     static int REQ_CODE_GO_OUT = 1;
 

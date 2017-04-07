@@ -29,16 +29,15 @@ import android.view.View;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.LoginMgr;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
+import com.xiaomaoqiu.now.base.BaseActivity;
 
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class FindPetActivity extends ActivityEx implements View.OnClickListener{
+public class FindPetActivity extends BaseActivity implements View.OnClickListener{
 //    // 地图相关
 //    MapView mMapView;
 //    BaiduMap mBaiduMap;

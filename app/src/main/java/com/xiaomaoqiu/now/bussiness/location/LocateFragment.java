@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.now.View.location;
+package com.xiaomaoqiu.now.bussiness.location;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

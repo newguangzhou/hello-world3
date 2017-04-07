@@ -9,16 +9,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.HttpCode;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class RegisterActivity extends ActivityEx {
+public class RegisterActivity extends BaseActivity {
     public static String TAG_PHONE_NUM = "phone_num";
     public static String TAG_PASSWORD = "password";
 

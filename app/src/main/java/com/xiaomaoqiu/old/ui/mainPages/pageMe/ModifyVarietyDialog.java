@@ -7,11 +7,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.adapter.PetVarietyAdapter;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
 
-public class ModifyVarietyDialog extends ActivityEx {
+public class ModifyVarietyDialog extends BaseActivity {
 
 	public static String TAG_PARAM1 = "variety";
 

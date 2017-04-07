@@ -11,7 +11,7 @@ import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.HealthFragment;
-import com.xiaomaoqiu.now.View.location.LocateFragment;
+import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.old.ui.mainPages.MeFrament;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.old.widgets.BatteryView;

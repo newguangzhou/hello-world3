@@ -23,7 +23,7 @@ import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
+import com.xiaomaoqiu.now.base.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -37,7 +37,7 @@ import mbg.bottomcalender.BottomCalenderView;
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class PetInfoActivity extends ActivityEx implements  AsyncImageTask.ImageCallback{
+public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.ImageCallback{
     private final int REQ_CODE_BIRTHDAY = 1;
     private final int REQ_CODE_WEIGHT = 2;
     private final int REQ_CODE_INTRO = 3;

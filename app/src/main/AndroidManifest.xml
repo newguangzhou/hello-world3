@@ -72,7 +72,7 @@
             <!--android:value="40We8G3rHX0rg9r0gSY5KBwiGSLZUuok" />-->
 
         <activity
-            android:name="com.xiaomaoqiu.old.ui.login.LoginActivity"
+            android:name="com.xiaomaoqiu.old.com.xiaomaoqiu.now.View.user.LoginActivity"
             android:theme="@style/NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

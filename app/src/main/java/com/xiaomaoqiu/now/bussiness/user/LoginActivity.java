@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.login;
+package com.xiaomaoqiu.now.bussiness.user;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -17,21 +17,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.HttpCode;
 import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.ui.MainActivity;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
-public class LoginActivity extends ActivityEx {
+public class LoginActivity extends BaseActivity implements LoginView{
 	EditText m_editPhone; // 帐号编辑框
     EditText m_editVerifyCode;
     private ProgressDialog mProgressBar;
+    private View login_btn_sendVerify;//发送验证码按钮
+    private View login_btn_login;//登录按钮
+    private View btn_contact_service;//联系客服
+
+    private LoginPresenter loginPresenter;
+
     int     m_nWaitTime;
 
     private SharedPreferences m_Preferences;
@@ -59,22 +64,58 @@ public class LoginActivity extends ActivityEx {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
+        initListener();
+        initData();
+        loginPresenter=new LoginPresenter(this);
+    }
+
+    void initView(){
         setTitle(getResources().getString(R.string.login));
 
         setContentView(R.layout.activity_login);
 
         m_editPhone = (EditText)findViewById(R.id.login_user_edit);
         m_editVerifyCode = (EditText)findViewById(R.id.login_edit_verify);
+        login_btn_sendVerify=findViewById(R.id.login_btn_sendVerify);
 
         m_Preferences  = getSharedPreferences(FILE_ACCOUNT, Context.MODE_PRIVATE);
+        login_btn_login=findViewById(R.id.login_btn_login);
+        btn_contact_service=findViewById(R.id.btn_contact_service);
+    }
+    void initListener(){
+        login_btn_sendVerify.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                get_verify_code(v);
+            }
+        });
 
-        Boolean bLogin= m_Preferences.getBoolean(FIELD_STATUS, false);
-        if(bLogin) {
-            String strPhone = m_Preferences.getString(FIELD_PHONE, "");
-            m_editPhone.setText(strPhone);
-        }
+        login_btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                login();
 
-        findViewById(R.id.btn_contact_service).setOnClickListener(new View.OnClickListener() {
+
+                if(!checkInputs()){
+                    return;
+                }
+                 String strPhone= m_editPhone.getText().toString();
+
+                SharedPreferences.Editor editor = m_Preferences.edit();
+                editor.putString(FIELD_PHONE,strPhone);
+                editor.putBoolean(FIELD_STATUS, false);
+                editor.apply();
+
+                String verifyCode=m_editVerifyCode.getText().toString();
+                int device_type=1;//android device
+                String device_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+                loginPresenter.login(strPhone,verifyCode,device_type,device_id);
+
+
+            }
+        });
+        btn_contact_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ContactServiceDialog dlg = new ContactServiceDialog(LoginActivity.this,R.style.MyDialogStyleBottom);
@@ -82,6 +123,19 @@ public class LoginActivity extends ActivityEx {
             }
         });
     }
+    void initData(){
+        Boolean bLogin= m_Preferences.getBoolean(FIELD_STATUS, false);
+        if(bLogin) {
+            String strPhone = m_Preferences.getString(FIELD_PHONE, "");
+            m_editPhone.setText(strPhone);
+        }
+
+
+    }
+
+
+
+
 
     public static void doLogin(final String strPhone, final String strVerifyCode, final Context ctx,  final LoginHandler handler)
     {
@@ -107,7 +161,7 @@ public class LoginActivity extends ActivityEx {
 
     }
 
-    public void onLoginClick(View v) {
+    public void login() {
         if(!checkInputs()){
             return;
         }
@@ -156,23 +210,23 @@ public class LoginActivity extends ActivityEx {
         return true;
     }
 
-    public void onUserRegisterClick(View v)
-    {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivityForResult(intent, 1);
-    }
+//    public void onUserRegisterClick(View v)
+//    {
+//        Intent intent = new Intent(this, RegisterActivity.class);
+//        startActivityForResult(intent, 1);
+//    }
+//
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(requestCode == 1 && resultCode == 1)
+//        {
+//            String strPhone = data.getStringExtra(RegisterActivity.TAG_PHONE_NUM);
+//            m_editPhone.setText(strPhone);
+//            //auto login
+//            login(findViewById(R.id.login_btn_login));
+//        }
+//    }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1 && resultCode == 1)
-        {
-            String strPhone = data.getStringExtra(RegisterActivity.TAG_PHONE_NUM);
-            m_editPhone.setText(strPhone);
-            //auto login
-            onLoginClick(findViewById(R.id.login_btn_login));
-        }
-    }
-
-    public void onFetchVerifyCodeClick(View v)
+    public void get_verify_code(View v)
     {
         String strPhone = m_editPhone.getText().toString();
         if(strPhone.length()!=11)
@@ -216,7 +270,7 @@ public class LoginActivity extends ActivityEx {
         }, 1000);
     }
 
-    private void showDialog(){
+    public void showDialog(){
         if(null == mProgressBar){
             mProgressBar=new ProgressDialog(this, AlertDialog.THEME_HOLO_LIGHT);
             mProgressBar.setCanceledOnTouchOutside(false);
@@ -234,7 +288,7 @@ public class LoginActivity extends ActivityEx {
         mProgressBar.show();
     }
 
-    private void dismissDialog(){
+    public void dismissDialog(){
         if(null == mProgressBar){
             return;
         }

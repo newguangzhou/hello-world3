@@ -11,7 +11,7 @@ import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.ChartIndexPresenter;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.IChartCallback;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
+import com.xiaomaoqiu.now.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import mbg.chartviews.onChartValueSelectListener;
 /**
  * Created by Administrator on 2016/4/12.
  */
-public class SportIndexActivity extends ActivityEx implements IChartCallback {
+public class SportIndexActivity extends BaseActivity implements IChartCallback {
     private CustomLineChart monthChart;
     private CustomLineChart weekChart;
     private TextView todayTip,WeekTip,monthTip;

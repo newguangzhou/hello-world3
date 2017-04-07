@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.widgets.ActivityEx;
+import com.xiaomaoqiu.now.base.BaseActivity;
 
-public class AboutActivity extends ActivityEx {
+public class AboutActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
