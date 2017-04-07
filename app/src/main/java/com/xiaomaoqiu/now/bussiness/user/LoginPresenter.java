@@ -22,7 +22,6 @@ import retrofit2.Response;
  @SuppressLint("WrongConstant")
 public class LoginPresenter {
     private WeakReference<LoginView> loginView;
-    private UserInstance userInstance;
     LoginPresenter(LoginView loginView){
         this.loginView=new WeakReference<>(loginView);
         }

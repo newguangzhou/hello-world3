@@ -3,6 +3,8 @@ package com.xiaomaoqiu.now.http;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
+import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 
 import retrofit2.Call;
@@ -13,19 +15,58 @@ import retrofit2.http.Query;
  * Created by long
  */
 public interface ApiService {
+    /**
+     * 手机号验证码登录
+     * 	GET /user/login?phone_num=18565353866&code=000000&device_type=1&device_token=644794830960f21d HTTP/1.1
+     * @param phone
+     * @param verifyCode
+     * @param deviceType
+     * @param deviceId
+     * @return
+     */
     @GET(Constants.Url.User.login)
-    Call<UserBean> login(@Query("phone") String phone,
-                         @Query("verifyCode") String verifyCode,
-                         @Query("deviceType") int deviceType,
-                         @Query("deviceId") String deviceId
+    Call<UserBean> login(@Query("phone_num") String phone,
+                         @Query("code") String verifyCode,
+                         @Query("device_type") int deviceType,
+                         @Query("device_token") String deviceId
                  );
 
-
+    /**
+     * 获取验证码
+     * @param phone
+     * @param deviceType
+     * @return
+     */
     @GET(Constants.Url.User.get_verify_code)
     Call<MessageBean> getVerifyCode(
-            @Query("phone") String phone,
-            @Query("deviceType") int deviceType
+            @Query("phone_num") String phone,
+            @Query("device_type") int deviceType
             );
+
+
+    /**
+     * 获取宠物信息
+ 	  GET /pet/get_pet_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150 HTTP/1.1
+     * @param uid
+     * @param token
+     * @return
+     */
+    @GET(Constants.Url.Pet.get_pet_info)
+    Call<PetInfoBean> getPetInfo(@Query("uid") long uid,
+                                 @Query("token") String token
+    );
+//GET /pet/healthy/get_activity_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150&pet_id=1462786482&start_date=2017-4-7&end_date=2017-4-7 HTTP/1.1
+
+    //查看宠物的运动信息
+    @GET(Constants.Url.Pet.get_sport_info)
+    Call<PetSportBean> getSportInfo(@Query("uid") long uid,
+                                    @Query("token") String token,
+                                    @Query("pet_id") int petId,
+                                    @Query("start_date") String startDate,
+                                    @Query("end_date") String endDate
+                                    );
+
+
 }
 //    /**
 //     * 获取热门职位

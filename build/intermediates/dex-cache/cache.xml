@@ -151,15 +151,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.6/2586312cd2b8a511e4c6236736f5a039fc0f2273/rxjava-1.1.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/rxjava-1.1.6_8a7f906723c7bd46977bf1bbbb813aeef4afef4b.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/long/.android/build-cache/4cf86da6cfc7f61882e30e9d793b322fc4386e28/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -392,15 +383,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.6/2586312cd2b8a511e4c6236736f5a039fc0f2273/rxjava-1.1.6.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/rxjava-1.1.6_8a7f906723c7bd46977bf1bbbb813aeef4afef4b.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/long/Desktop/git-xmq/android/app/libs/httpmime-4.1.1.jar"
         jumboMode="false"
         optimize="true"
@@ -419,30 +401,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.android/build-cache/3e5117590fc730dba6ebcdeeb2a907713b5bd564/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_d94a12b639c7c4e8ebc22c392ba6aa4ec9511cb7.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/long/.android/build-cache/4cf86da6cfc7f61882e30e9d793b322fc4386e28/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
         <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_4f0c5a424ef98ddb60f45a9ee0e55537ee7bae0e.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/3e5117590fc730dba6ebcdeeb2a907713b5bd564/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_d94a12b639c7c4e8ebc22c392ba6aa4ec9511cb7.jar.jar" />
     </item>
     <item
         is-multidex="false"
