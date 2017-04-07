@@ -37,6 +37,21 @@ public class UserInstance {
         }
         return userInstance;
     }
+    public boolean m_bLogin=false;
+    public String  m_strNick ="";
+    public String  m_strPhone ="";
+    public String  m_strPsw="";
+    public String  m_strToken="";
+    public long    m_uid=0;
 
+
+    public void login(long uid,String strToken,String strPhone)
+    {
+        m_bLogin=true;
+        m_uid = uid;
+        m_strToken = strToken;
+        m_strPhone = strPhone;
+
+    }
 
 }

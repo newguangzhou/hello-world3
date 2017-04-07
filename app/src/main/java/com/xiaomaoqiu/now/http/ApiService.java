@@ -2,19 +2,30 @@ package com.xiaomaoqiu.now.http;
 
 
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
+import com.xiaomaoqiu.now.bean.nocommon.UserBean;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by long
  */
 public interface ApiService {
     @GET(Constants.Url.User.login)
-    Call<> login(@Query("phone") String phone,
-                 @Query("verifyCode") String verifyCode,
-                 @Query("deviceType") int deviceType,
-                 @Query("deviceId") String deviceId
+    Call<UserBean> login(@Query("phone") String phone,
+                         @Query("verifyCode") String verifyCode,
+                         @Query("deviceType") int deviceType,
+                         @Query("deviceId") String deviceId
                  );
 
 
+    @GET(Constants.Url.User.get_verify_code)
+    Call<MessageBean> getVerifyCode(
+            @Query("phone") String phone,
+            @Query("deviceType") int deviceType
+            );
 }
 //    /**
 //     * 获取热门职位

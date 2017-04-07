@@ -6,6 +6,7 @@ package com.xiaomaoqiu.now;
 
 public class Constants {
 
+    public static final int DEVICE_TYPE=1;
 
     public static class Url {
         public static String Host = "http://120.24.152.121:9100/";

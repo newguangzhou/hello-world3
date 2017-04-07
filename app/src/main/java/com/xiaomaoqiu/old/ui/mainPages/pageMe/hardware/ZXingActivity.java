@@ -12,13 +12,13 @@ import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.ImageUtil;
-import com.xiaomaoqiu.old.widgets.FragmentActivityEx;
+import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 
 /**
  * Created by Administrator on 2017/1/1.
  */
 
-public class ZXingActivity extends FragmentActivityEx {
+public class ZXingActivity extends BaseFragmentActivity {
 
     private static final String IMAGE_UNSPECIFIED = "image/*";
     private static final int REQ_ANALYZE_BITMAP=1;

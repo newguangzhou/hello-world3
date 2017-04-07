@@ -15,9 +15,9 @@ import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.old.ui.mainPages.MeFrament;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.old.widgets.BatteryView;
-import com.xiaomaoqiu.old.widgets.FragmentActivityEx;
+import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 
-public class MainActivity extends FragmentActivityEx implements View.OnClickListener {
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
     private static final String LTAG = MainActivity.class.getSimpleName();
 
 	public static MainActivity instance = null;

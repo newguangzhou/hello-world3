@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.widgets;
+package com.xiaomaoqiu.now.base;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,8 +13,8 @@ import com.xiaomaoqiu.old.R;
 /**
  * Created by Administrator on 2015/6/17.
  */
-public class FragmentActivityEx extends FragmentActivity {
-    private static String TAG = "FragmentActivityEx";
+public class BaseFragmentActivity extends FragmentActivity {
+    private static String TAG = "BaseFragmentActivity";
     private ViewGroup m_titleView;
 
     @Override

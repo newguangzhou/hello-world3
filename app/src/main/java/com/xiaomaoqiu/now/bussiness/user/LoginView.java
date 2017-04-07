@@ -7,4 +7,7 @@ package com.xiaomaoqiu.now.bussiness.user;
 public interface LoginView {
     public void showDialog();
     public void dismissDialog();
+
+    public void getVerifyNextTime(int nSecond);
+    public void LoginSuccess();
 }

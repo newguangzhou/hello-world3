@@ -1,34 +1,31 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+
 import com.xiaomaoqiu.old.ui.MainActivity;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
-import com.xiaomaoqiu.old.utils.HttpUtil;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-public class LoginActivity extends BaseActivity implements LoginView{
-	EditText m_editPhone; // 帐号编辑框
+
+@SuppressLint("WrongConstant")
+public class LoginActivity extends BaseActivity implements LoginView {
+    EditText m_editPhone; // 帐号编辑框
     EditText m_editVerifyCode;
     private ProgressDialog mProgressBar;
     private View login_btn_sendVerify;//发送验证码按钮
@@ -37,27 +34,14 @@ public class LoginActivity extends BaseActivity implements LoginView{
 
     private LoginPresenter loginPresenter;
 
-    int     m_nWaitTime;
+    int messageWaitTime;
 
-    private SharedPreferences m_Preferences;
-
-    static String FILE_ACCOUNT = "account";
-    static String FIELD_PHONE = "strPhone";
-    static String FIELD_STATUS="status";
-
-    public interface LoginHandler
-    {
-        void onLoginAck(HttpCode ret);
-    }
-
-    public boolean canGoBack()
-    {
+    public boolean canGoBack() {
         return false;
     }
 
     @Override
-    public int frameTemplate()
-    {
+    public int frameTemplate() {
         return 0;
     }
 
@@ -67,50 +51,46 @@ public class LoginActivity extends BaseActivity implements LoginView{
         initView();
         initListener();
         initData();
-        loginPresenter=new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this);
     }
 
-    void initView(){
+    void initView() {
         setTitle(getResources().getString(R.string.login));
 
         setContentView(R.layout.activity_login);
 
-        m_editPhone = (EditText)findViewById(R.id.login_user_edit);
-        m_editVerifyCode = (EditText)findViewById(R.id.login_edit_verify);
-        login_btn_sendVerify=findViewById(R.id.login_btn_sendVerify);
+        m_editPhone = (EditText) findViewById(R.id.login_user_edit);
+        m_editVerifyCode = (EditText) findViewById(R.id.login_edit_verify);
+        login_btn_sendVerify = findViewById(R.id.login_btn_sendVerify);
 
-        m_Preferences  = getSharedPreferences(FILE_ACCOUNT, Context.MODE_PRIVATE);
-        login_btn_login=findViewById(R.id.login_btn_login);
-        btn_contact_service=findViewById(R.id.btn_contact_service);
+        login_btn_login = findViewById(R.id.login_btn_login);
+        btn_contact_service = findViewById(R.id.btn_contact_service);
     }
-    void initListener(){
-        login_btn_sendVerify.setOnClickListener(new View.OnClickListener(){
+
+    void initListener() {
+        login_btn_sendVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                get_verify_code(v);
+                String strPhone = m_editPhone.getText().toString();
+                if (strPhone.length() != 11) {
+                    Toast.makeText(LoginActivity.this, R.string.tip_phone_format, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                loginPresenter.getVerifyCode(strPhone, Constants.DEVICE_TYPE);
+
             }
         });
 
         login_btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                login();
-
-
-                if(!checkInputs()){
+                if (!checkInputs()) {
                     return;
                 }
-                 String strPhone= m_editPhone.getText().toString();
-
-                SharedPreferences.Editor editor = m_Preferences.edit();
-                editor.putString(FIELD_PHONE,strPhone);
-                editor.putBoolean(FIELD_STATUS, false);
-                editor.apply();
-
-                String verifyCode=m_editVerifyCode.getText().toString();
-                int device_type=1;//android device
+                String strPhone = m_editPhone.getText().toString();
+                String verifyCode = m_editVerifyCode.getText().toString();
                 String device_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-                loginPresenter.login(strPhone,verifyCode,device_type,device_id);
+                loginPresenter.login(strPhone, verifyCode, Constants.DEVICE_TYPE, device_id);
 
 
             }
@@ -118,161 +98,42 @@ public class LoginActivity extends BaseActivity implements LoginView{
         btn_contact_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContactServiceDialog dlg = new ContactServiceDialog(LoginActivity.this,R.style.MyDialogStyleBottom);
+                ContactServiceDialog dlg = new ContactServiceDialog(LoginActivity.this, R.style.MyDialogStyleBottom);
                 dlg.show();
             }
         });
     }
-    void initData(){
-        Boolean bLogin= m_Preferences.getBoolean(FIELD_STATUS, false);
-        if(bLogin) {
-            String strPhone = m_Preferences.getString(FIELD_PHONE, "");
+
+    void initData() {
+        Boolean bLogin = SPUtil.getLoginStatus();
+        if (bLogin) {
+            String strPhone = SPUtil.getPhoneNumber();
             m_editPhone.setText(strPhone);
         }
-
-
     }
 
-
-
-
-
-    public static void doLogin(final String strPhone, final String strVerifyCode, final Context ctx,  final LoginHandler handler)
-    {
-        final int device_type=1;//android device
-        String device_id = Settings.Secure.getString(ctx.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-
-        HttpUtil.get2("user.login", new JsonHttpResponseHandler() {
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("http", "login:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {//登陆成功
-                    long uid = response.optLong("uid", 0);
-                    String strToken = response.optString("token");
-                    LoginMgr.INSTANCE.login(uid, strToken, strPhone);
-                }
-                if(null != handler)
-                {
-                    handler.onLoginAck(ret);
-                }
-            }
-        }, strPhone,strVerifyCode,device_type,device_id);
-
-    }
-
-    public void login() {
-        if(!checkInputs()){
-            return;
-        }
-        showDialog();
-        final String strPhone= m_editPhone.getText().toString();
-
-        SharedPreferences.Editor editor = m_Preferences.edit();
-        editor.putString(FIELD_PHONE,strPhone);
-        editor.putBoolean(FIELD_STATUS, false);
-        editor.apply();
-
-        doLogin(strPhone, m_editVerifyCode.getText().toString(), this, new LoginHandler() {
-            @Override
-            public void onLoginAck(HttpCode ret) {
-                dismissDialog();
-                if (ret == HttpCode.EC_SUCCESS) {//登陆成功
-                    SharedPreferences.Editor editor = m_Preferences.edit();
-                    editor.putBoolean(FIELD_STATUS, true);
-                    editor.apply();
-                    finish();
-
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-
-                } else {
-                    String strErr = String.format(getString(R.string.login_failed), ret.getValue());
-                    Toast.makeText(LoginActivity.this, strErr, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-      }
 
     /**
      * 检查是否输入完全
+     *
      * @return
      */
-    private boolean checkInputs(){
-        if(TextUtils.isEmpty(m_editPhone.getText().toString())){
-            Toast.makeText(this,"请输入手机号！",Toast.LENGTH_SHORT).show();
+    private boolean checkInputs() {
+        if (TextUtils.isEmpty(m_editPhone.getText().toString())) {
+            Toast.makeText(this, "请输入手机号！", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(TextUtils.isEmpty(m_editVerifyCode.getText().toString())){
-            Toast.makeText(this,"验证码为空！",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(m_editVerifyCode.getText().toString())) {
+            Toast.makeText(this, "验证码为空！", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
 
-//    public void onUserRegisterClick(View v)
-//    {
-//        Intent intent = new Intent(this, RegisterActivity.class);
-//        startActivityForResult(intent, 1);
-//    }
-//
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == 1 && resultCode == 1)
-//        {
-//            String strPhone = data.getStringExtra(RegisterActivity.TAG_PHONE_NUM);
-//            m_editPhone.setText(strPhone);
-//            //auto login
-//            login(findViewById(R.id.login_btn_login));
-//        }
-//    }
 
-    public void get_verify_code(View v)
-    {
-        String strPhone = m_editPhone.getText().toString();
-        if(strPhone.length()!=11)
-        {
-            Toast.makeText(this, R.string.tip_phone_format,Toast.LENGTH_LONG).show();
-            return;
-        }
-        HttpUtil.get2("user.get_verify_code", new JsonHttpResponseHandler() {
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {//成功
-                    WaitForNextFetchCode(response.optInt("next_req_interval"));
-                }else
-                {
-                    String msg = "获取验证码错误，status="+ret;
-                    Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_LONG).show();
-                }
-            }
-        }, strPhone, 1);
-    }
-
-    void WaitForNextFetchCode(int nSecond)
-    {
-        final TextView btn = (TextView)findViewById(R.id.login_btn_sendVerify);
-        m_nWaitTime = nSecond;
-        btn.setText(String.valueOf(m_nWaitTime)+"S");
-        btn.setEnabled(false);
-
-        btn.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (m_nWaitTime == 1) {
-                    btn.setEnabled(true);
-                    btn.setText(getResources().getString(R.string.fetch_verify_code));
-                } else {
-                    m_nWaitTime--;
-                    btn.setText(String.valueOf(m_nWaitTime)+"S");
-                    btn.postDelayed(this, 1000);
-                }
-            }
-        }, 1000);
-    }
-
-    public void showDialog(){
-        if(null == mProgressBar){
-            mProgressBar=new ProgressDialog(this, AlertDialog.THEME_HOLO_LIGHT);
+    public void showDialog() {
+        if (null == mProgressBar) {
+            mProgressBar = new ProgressDialog(this, AlertDialog.THEME_HOLO_LIGHT);
             mProgressBar.setCanceledOnTouchOutside(false);
             mProgressBar.setOnKeyListener(new DialogInterface.OnKeyListener() {
 
@@ -288,11 +149,45 @@ public class LoginActivity extends BaseActivity implements LoginView{
         mProgressBar.show();
     }
 
-    public void dismissDialog(){
-        if(null == mProgressBar){
+    public void dismissDialog() {
+        if (null == mProgressBar) {
             return;
         }
         mProgressBar.dismiss();
+    }
+
+    @Override
+    public void getVerifyNextTime(int nSecond) {
+        WaitForNextFetchCode(nSecond);
+
+    }
+
+    @Override
+    public void LoginSuccess() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    void WaitForNextFetchCode(int nSecond) {
+        final TextView btn = (TextView) findViewById(R.id.login_btn_sendVerify);
+        messageWaitTime = nSecond;
+        btn.setText(String.valueOf(messageWaitTime) + "S");
+        btn.setEnabled(false);
+
+        btn.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (messageWaitTime == 1) {
+                    btn.setEnabled(true);
+                    btn.setText(getResources().getString(R.string.fetch_verify_code));
+                } else {
+                    messageWaitTime--;
+                    btn.setText(String.valueOf(messageWaitTime) + "S");
+                    btn.postDelayed(this, 1000);
+                }
+            }
+        }, 1000);
     }
 
 }

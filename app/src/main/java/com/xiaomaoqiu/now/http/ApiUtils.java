@@ -2,6 +2,16 @@ package com.xiaomaoqiu.now.http;
 
 import com.xiaomaoqiu.now.Constants;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.fastjson.FastJsonConverterFactory;
+
 
 /**
  * 封装Retrofit的工具类
@@ -95,7 +105,7 @@ public class ApiUtils {
                     .retryOnConnectionFailure(true)//重试机制
                     .addInterceptor(headerInterceptor)//请求拦截器
                     .addInterceptor(logInterceptor);//Log拦截器
-            HttpsSwitcher.switchHttp(httpBuilder);
+//            HttpsSwitcher.switchHttp(httpBuilder);
             httpClient = httpBuilder.build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
