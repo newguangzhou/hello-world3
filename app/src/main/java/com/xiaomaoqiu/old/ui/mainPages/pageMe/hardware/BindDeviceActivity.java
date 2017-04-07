@@ -12,7 +12,7 @@ import android.widget.EditText;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.dataCenter.HttpCode;
+import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity;

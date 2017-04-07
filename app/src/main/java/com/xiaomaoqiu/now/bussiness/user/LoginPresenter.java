@@ -1,7 +1,8 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
+import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 import com.xiaomaoqiu.now.http.ApiUtils;
-import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.http.HttpCode;
 
 import java.lang.ref.WeakReference;
 
@@ -16,20 +17,12 @@ public class LoginPresenter {
         this.loginView=new WeakReference<>(loginView);
         }
     public void login(String phone,String verifyCode,int deviceType,String deviceId){
-        LoginView tloginView=loginView.get();
+        final LoginView tloginView=loginView.get();
         if(tloginView!=null){
             tloginView.showDialog();
-            ApiUtils.getApiService().login(phone,verifyCode,deviceType,deviceId).enqueue(new XMQCallback<UserBean>(){
+            ApiUtils.getApiService().login(phone,verifyCode,deviceType,deviceId).enqueue(new Callback<UserBean>(){
 
-                @Override
-                public void onFail(Call call, Throwable t) {
 
-                }
-
-                @Override
-                public void onSuccess(Response response, Object commJson) {
-
-                }
             })
         }
     }

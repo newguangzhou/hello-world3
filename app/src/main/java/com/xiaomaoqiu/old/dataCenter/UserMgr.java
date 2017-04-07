@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;

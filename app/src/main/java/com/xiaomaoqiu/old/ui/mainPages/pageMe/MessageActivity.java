@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.dataCenter.HttpCode;
+import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 

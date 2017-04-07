@@ -5,7 +5,7 @@ import android.util.Log;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.old.dataCenter.HttpCode;
+import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.DateUtil;
