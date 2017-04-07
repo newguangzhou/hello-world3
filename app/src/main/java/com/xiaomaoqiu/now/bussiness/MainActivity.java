@@ -1,6 +1,7 @@
-package com.xiaomaoqiu.old.ui;
+package com.xiaomaoqiu.now.bussiness;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -10,13 +11,14 @@ import android.widget.Toast;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.ui.mainPages.HealthFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetActivityFragment;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
-import com.xiaomaoqiu.old.ui.mainPages.MeFrament;
+import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.old.widgets.BatteryView;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 
+@SuppressLint("WrongConstant")
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
     private static final String LTAG = MainActivity.class.getSimpleName();
 
@@ -31,7 +33,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
 	private View mTabs[] = {null,null,null};
 
-	private HealthFragment mHealthFragment;
+	private PetActivityFragment mPetActivityFragment;
 	private LocateFragment mLocateFragment;
 	private MeFrament mMeFragment;
 
@@ -75,8 +77,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	}
 
 	private void hideAllFragment(FragmentTransaction transaction){
-		if(null != mHealthFragment){
-			transaction.hide(mHealthFragment);
+		if(null != mPetActivityFragment){
+			transaction.hide(mPetActivityFragment);
 		}
 		if(null != mLocateFragment){
 			transaction.hide(mLocateFragment);
@@ -94,12 +96,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 		hideAllFragment(transaction);
 		switch (index){
 			case 0:
-				if(null == mHealthFragment){
-					mHealthFragment=new HealthFragment();
-					transaction.add(R.id.fragment_container,mHealthFragment);
+				if(null == mPetActivityFragment){
+					mPetActivityFragment =new PetActivityFragment();
+					transaction.add(R.id.fragment_container, mPetActivityFragment);
 				}
 				mHealthTabIcon.setSelected(true);
-				transaction.show(mHealthFragment);
+				transaction.show(mPetActivityFragment);
 				break;
 			case 1:
 				if(null == mLocateFragment){
@@ -123,21 +125,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	}
 
 
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-    }
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -158,8 +145,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	long mBackClickTime=-1;
 	@Override
 	public void onBackPressed() {
-		if(null != mHealthFragment && !mHealthFragment.isHidden() && mHealthFragment.isDialogShowing()){
-			mHealthFragment.hideDialog();
+		if(null != mPetActivityFragment && !mPetActivityFragment.isHidden() && mPetActivityFragment.isDialogShowing()){
+			mPetActivityFragment.hideDialog();
 			mBackClickTime=-1;
 			return;
 		}

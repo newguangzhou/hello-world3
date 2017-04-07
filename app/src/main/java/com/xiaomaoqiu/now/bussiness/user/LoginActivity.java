@@ -19,7 +19,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.old.R;
 
-import com.xiaomaoqiu.old.ui.MainActivity;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 
 

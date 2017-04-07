@@ -14,6 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.old.R;
 
 public class WhatsnewDoorActivity extends Activity {

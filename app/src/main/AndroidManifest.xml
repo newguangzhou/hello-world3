@@ -84,7 +84,7 @@
             android:name="com.xiaomaoqiu.old.ui.WhatsnewDoorActivity"
             android:theme="@style/Anim_style2" />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.MainActivity"
+            android:name="com.xiaomaoqiu.old.com.xiaomaoqiu.now.bussiness.MainActivity"
             android:theme="@style/Anim_style2" />
         <activity
             android:name="com.xiaomaoqiu.old.ui.login.RegisterActivity"
@@ -96,7 +96,7 @@
             android:name="com.xiaomaoqiu.old.ui.dialog.ExitDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.dialog.ExitFromSettings_RAW_Activity"
+            android:name="com.xiaomaoqiu.old.com.xiaomaoqiu.now.bussiness.user.ExitFromSettings_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
             android:name="com.xiaomaoqiu.old.ui.LoadingActivity"

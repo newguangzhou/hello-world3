@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages;
+package com.xiaomaoqiu.now.bussiness.pet;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,11 +37,11 @@ import java.util.Date;
  */
 
 
-public class HealthFragment extends BaseFragment implements  View.OnClickListener, AsyncImageTask.ImageCallback {
+public class PetActivityFragment extends BaseFragment implements  View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
 
-    public HealthFragment()
+    public PetActivityFragment()
     {
         super();
     }

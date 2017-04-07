@@ -1,8 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.PetAppLike;
@@ -11,8 +9,6 @@ import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.util.SPUtil;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
-import com.xiaomaoqiu.old.ui.MainActivity;
 
 import java.lang.ref.WeakReference;
 
