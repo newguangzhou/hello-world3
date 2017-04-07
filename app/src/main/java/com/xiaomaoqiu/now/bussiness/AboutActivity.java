@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageMe;
+package com.xiaomaoqiu.now.bussiness;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,12 +15,5 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitle("关于");
         setContentView(R.layout.activity_about);
-    }
-
-    public void onBtnCall(View v)
-    {
-        String strMobile = getString(R.string.tel_service);
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + strMobile));
-        startActivity(intent);
     }
 }

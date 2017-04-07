@@ -3,7 +3,7 @@ package com.xiaomaoqiu.old.ui.mainPages.pageMe;
 import android.text.InputType;
 import android.widget.EditText;
 
-public class ModifyIntroDialog extends InputDialog {
+public class OUT___ModifyIntroDialog extends InputDialog {
 
     @Override
     protected CharSequence getInputTitle()

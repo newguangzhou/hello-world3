@@ -197,12 +197,12 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
         startActivityForResult(intent, REQ_CODE_WEIGHT);
     }
 
-    private void modifyIntro()
-    {
-        Intent intent = new Intent(this,ModifyIntroDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, UserMgr.INSTANCE.getPetInfo().getDesc());
-        startActivityForResult(intent, REQ_CODE_INTRO);
-    }
+//    private void modifyIntro()
+//    {
+//        Intent intent = new Intent(this,OUT___ModifyIntroDialog.class);
+//        intent.putExtra(InputDialog.TAG_VALUE, UserMgr.INSTANCE.getPetInfo().getDesc());
+//        startActivityForResult(intent, REQ_CODE_INTRO);
+//    }
 
     private void onPhotoSource(int mode)
     {

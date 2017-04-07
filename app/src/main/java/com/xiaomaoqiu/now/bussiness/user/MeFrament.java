@@ -12,7 +12,7 @@ import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.dialog.ExitDialog_RAW_Activity;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.AboutActivity;
+import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
