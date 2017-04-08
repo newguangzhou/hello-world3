@@ -6,7 +6,6 @@ apply from: 'tinker-support.gradle'
 
 
 android {
-//    useLibrary 'org.apache.http.legacy'
     signingConfigs {
         release_sign_config {
             keyAlias 'android.keystore'
@@ -21,7 +20,7 @@ android {
     defaultConfig {
         applicationId 'com.xiaomaoqiu.pet'
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName '1'
         javaCompileOptions {

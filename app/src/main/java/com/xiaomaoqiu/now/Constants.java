@@ -51,7 +51,7 @@ public class Constants {
             /**
              * 运动信息
              */
-            public static final String get_sport_info = "pet/healthy/get_activity_info";
+            public static final String get_activity_info = "pet/healthy/get_activity_info";
             /**
              * 设置运动信息
              */
@@ -112,10 +112,9 @@ public class Constants {
             /**
              * 去运动
              */
-            public static final String toSport="pet/activity";
-//         <pet.activity url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s&amp;pet_id=%d&amp;activity_type=%d" cache_mode="0"/>
-//
-//            <msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
+            public static final String toActivity ="pet/activity";
+
+            //<msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
 
         }
     }

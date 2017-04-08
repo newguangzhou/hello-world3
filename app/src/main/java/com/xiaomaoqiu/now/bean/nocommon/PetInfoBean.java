@@ -4,8 +4,8 @@ package com.xiaomaoqiu.now.bean.nocommon;
  * Created by long on 17/4/7.
  */
 
-public class PetInfoBean {
-    public int status;
+public class PetInfoBean extends BaseBean{
+//    public int status;
 
     public long pet_id;
 

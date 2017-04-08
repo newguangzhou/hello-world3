@@ -26,7 +26,7 @@ import java.util.List;
 public class ChartIndexPresenter {
 
     public static final String URL_GETSLEEP_STATUS="pet.health.get_sleep_info";
-    public static final String URL_GETSPROT_STATUS="pet.health.get_sport_info";
+    public static final String URL_GETSPROT_STATUS="pet.health.get_activity_info";
     public static final String DEEP_SLEEP_FIELD_NAME="deep_sleep";
     public static final String LIGHT_SLEEP_FIELD_NAME="light_sleep";
     public static final String TARGET_AMOUNT_FIELD_NAME="target_amount";

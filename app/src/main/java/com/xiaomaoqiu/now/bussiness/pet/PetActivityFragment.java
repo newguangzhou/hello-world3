@@ -81,11 +81,11 @@ public class PetActivityFragment extends BaseFragment implements  View.OnClickLi
         CircleProgressBar prog=(CircleProgressBar)v.findViewById(R.id.prog_target_done_percentage);
         prog.setProgress(75);
 
-        HttpUtil.get2("pet.health.get_sport_info", new JsonHttpResponseHandler() {
+        HttpUtil.get2("pet.health.get_activity_info", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //{"status": 0, "data": [{"date": "2016-04-16", "percentage": 26, "reality_amount": 154, "target_amount": 584},{}]}
-                Log.v("http", "pet.health.get_sport_info:" + response.toString());
+                Log.v("http", "pet.health.get_activity_info:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
                     JSONArray jsdata = response.optJSONArray("data");
