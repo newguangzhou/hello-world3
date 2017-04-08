@@ -11,6 +11,6 @@ public class UserBean {
 
     public String token;
 
-    public int uid;
+    public long uid;
 
 }

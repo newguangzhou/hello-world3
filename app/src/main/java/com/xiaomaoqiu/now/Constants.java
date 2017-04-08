@@ -7,6 +7,8 @@ package com.xiaomaoqiu.now;
 public class Constants {
 
     public static final int DEVICE_TYPE=1;
+    //TODO 去运动类型
+    public static final int ACTIVITY_TYPE=1;
 
     public static class Url {
         public static String Host = "http://120.24.152.121:9100/";
@@ -102,8 +104,13 @@ public class Constants {
 
 
         //找狗模式
-        public static class FindDog{
+        public static class Action{
             public static final String find="pet/find";
+
+            /**
+             * 去运动
+             */
+            public static final String toSport="pet/activity";
 //         <pet.activity url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s&amp;pet_id=%d&amp;activity_type=%d" cache_mode="0"/>
 //
 //            <msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>

@@ -2,8 +2,12 @@ package com.xiaomaoqiu.now.http;
 
 
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.LightStatusBean;
 import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 
@@ -45,7 +49,7 @@ public interface ApiService {
 
 
     /**
-     * 获取宠物信息
+     获取宠物信息
  	  GET /pet/get_pet_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150 HTTP/1.1
      * @param uid
      * @param token
@@ -55,16 +59,127 @@ public interface ApiService {
     Call<PetInfoBean> getPetInfo(@Query("uid") long uid,
                                  @Query("token") String token
     );
-//GET /pet/healthy/get_activity_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150&pet_id=1462786482&start_date=2017-4-7&end_date=2017-4-7 HTTP/1.1
 
-    //查看宠物的运动信息
+
+
+    /**
+     查看宠物的运动信息
+     * //GET /pet/healthy/get_activity_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150&pet_id=1462786482&start_date=2017-4-7&end_date=2017-4-7 HTTP/1.1
+
+     * @param uid
+     * @param token
+     * @param petId
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @GET(Constants.Url.Pet.get_sport_info)
     Call<PetSportBean> getSportInfo(@Query("uid") long uid,
                                     @Query("token") String token,
-                                    @Query("pet_id") int petId,
+                                    @Query("pet_id") long petId,
                                     @Query("start_date") String startDate,
                                     @Query("end_date") String endDate
                                     );
+
+
+
+
+    /**
+     获取设备信息
+     http://120.24.152.121:9100/device/get_info?uid=1462772127&token=6ec0fa3507d6e205d8a8a6585d038ebaab7fac2b&pet_id=1462786482
+
+     * @param uid
+     * @param token
+     * @param petId
+     * @return
+     */
+    @GET(Constants.Url.Device.get_info)
+    Call<DeviceInfoBean> getDeviceInfo(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long petId
+);
+
+    //绑定设备
+   // URL	http://120.24.152.121:9100/device/add_device_info?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&device_name=xmq_test
+@GET(Constants.Url.Device.add_device_info)
+Call<BaseBean> addDeviceInfo(@Query("uid") long uid,
+                             @Query("token") String token,
+                             @Query("imei") String imei,
+                             @Query("device_name") String deviceName
+                             );
+
+
+    /**
+     解除绑定
+     http://120.24.152.121:9100/device/remove_device_info?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293
+     * @param uid
+     * @param token
+     * @param imei
+     * @return
+     */
+    @GET(Constants.Url.Device.remove_device_info)
+Call<BaseBean> removeDeviceInfo(
+        @Query("uid") long uid,
+        @Query("token") String token,
+        @Query("imei") String imei
+);
+
+
+    /**
+     获取灯的状态
+     http://120.24.152.121:9100/device/get_light_status?uid=1462772127&token=6ec0fa3507d6e205d8a8a6585d038ebaab7fac2b&imei=357396080000293&
+     * @param uid
+     * @param token
+     * @param imei
+     * @return
+     */
+    @GET(Constants.Url.Device.get_light_status)
+    Call<LightStatusBean> getLightStatus(@Query("uid") long uid,
+                                         @Query("token") String token,
+                                         @Query("imei") String imei
+                                         );
+
+
+    //todo 这个链接的bean有问题
+    //http://120.24.152.121:9100/device/swicth_light?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&light_status=1
+    @GET(Constants.Url.Device.swicth_light)
+    Call<LightStatusBean> switchLightStatus(@Query("uid") long uid,
+                                            @Query("token") String token,
+                                            @Query("imei") String imei,
+                                            @Query("light_status") int light_status
+                                            );
+
+    /**
+     获取宠物位置信息
+     GET /pet/location?uid=1462772127&token=514bc7dacae3e1164af799c84df57cb662a7378e&pet_id=1462786482 HTTP/1.1
+     * @param uid
+     * @param token
+     * @param petId
+     * @return
+     */
+    @GET(Constants.Url.Pet.location)
+    Call<PetLocationBean> getPetLocation(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long petId
+);
+
+    /**
+     去运动
+    http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
+     * @param uid
+     * @param token
+     * @param petId
+     * @param activity_type
+     * @return
+     */
+    @GET(Constants.Url.Action.toSport)
+    Call<BaseBean> toSport(@Query("uid") long uid,
+                           @Query("token") String token,
+                           @Query("pet_id") long petId,
+                           @Query("activity_type") int activity_type
+                           );
 
 
 }

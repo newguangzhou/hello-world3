@@ -1,9 +1,5 @@
 package com.xiaomaoqiu.now.http;
 
-import android.text.TextUtils;
-
-import com.xiaomaoqiu.now.base.BaseJson;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,7 +8,7 @@ import retrofit2.Response;
  * Created by long on 17/4/7.
  */
 
-public abstract class XMQCallback<T extends BaseJson> implements Callback<T> {
+public abstract class XMQCallback<T> implements Callback<T> {
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
 

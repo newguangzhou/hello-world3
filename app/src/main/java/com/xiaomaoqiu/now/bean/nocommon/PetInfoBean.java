@@ -7,7 +7,7 @@ package com.xiaomaoqiu.now.bean.nocommon;
 public class PetInfoBean {
     public int status;
 
-    public int pet_id;
+    public long pet_id;
 
     public String description;
 
