@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 // 依赖插件脚本
 apply from: 'tinker-support.gradle'
 
+
+
+
 android {
 //    useLibrary 'org.apache.http.legacy'
     signingConfigs {
@@ -21,6 +24,11 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName '1'
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.xmq.MyEventBusIndex' ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -77,4 +85,11 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'org.ligboy.retrofit2:converter-fastjson:2.1.0'
 
+    compile 'org.greenrobot:eventbus:3.0.0'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+
+    //fresco
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    // 支持 GIF 动图，需要添加
+//    compile 'com.facebook.fresco:animated-gif:0.12.0'
 }

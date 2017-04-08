@@ -7,8 +7,10 @@ package com.xiaomaoqiu.now;
 public class Constants {
 
     public static final int DEVICE_TYPE=1;
-    //TODO 去运动类型
-    public static final int ACTIVITY_TYPE=1;
+    //去运动
+    public static final int TO_SPORT_ACTIVITY_TYPE=1;
+    //回家
+    public static final int TO_HOME_ACTIVITY_TYPE=2;
 
     public static class Url {
         public static String Host = "http://120.24.152.121:9100/";

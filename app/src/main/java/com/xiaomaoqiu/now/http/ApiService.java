@@ -166,8 +166,9 @@ Call<BaseBean> removeDeviceInfo(
 );
 
     /**
-     去运动
+     去运动或者回家
     http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
+     URL	http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=2
      * @param uid
      * @param token
      * @param petId

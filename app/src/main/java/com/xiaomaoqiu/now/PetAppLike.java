@@ -8,6 +8,7 @@ import android.os.Build;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
@@ -36,7 +37,10 @@ public class PetAppLike extends DefaultApplicationLike {
         super.onCreate();
         mcontext=getApplication();
         environment=Environment.Debug;
-        Config.init(mcontext);
+
+        Fresco.initialize(mcontext);
+
+//        Config.init(mcontext);
 
         // 初始化百度地图SDK
 //        SDKInitializer.initialize(mcontext);
@@ -45,7 +49,7 @@ public class PetAppLike extends DefaultApplicationLike {
 //        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetLocating.class);
 //        NotificationCenter.INSTANCE.addCallbacks(DeviceInfo.Callback_DeviceInfo.class);
 
-        Log.w(PetAppLike.TAG, "app init success");
+//        Log.w(PetAppLike.TAG, "app init success");
 
 
 
