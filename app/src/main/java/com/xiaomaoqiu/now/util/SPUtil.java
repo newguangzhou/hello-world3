@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.test.PerformanceTestCase;
 
 
 import com.xiaomaoqiu.now.PetAppLike;
@@ -14,27 +15,130 @@ import java.util.Set;
 public class SPUtil {
 
 
-
-     //电话号码
+    //电话号码
     public static final String PHONE_NUMBER = "phone_number";
-//登录态
-    public static final String LOGIN_STATUS="login_status";
-
-
+    //登录态
+    public static final String LOGIN_STATUS = "login_status";
+    //uid
+    public static final String UID="uid";
+    //token
+    public static final String TOKEN="token";
+    //宠物id
+    public static final String PET_ID="petId";
+    //宠物描述
+    public static final String PET_DESCRIPTION="petDescription";
+    //体重
+    public static final String PET_WEIGHT="petWeight";
+    //设备imei
+    public static final String DEVICE_IMEI="deviceImei";
+    //target_step
+    public static final String PET_TARGET_STEP="targetStep";
+    //性别
+    public static final String SEX="sex";
+    //昵称
+    public static final String PEI_NICK="petNick";
+    //生日
+    public static final String BIRTHDAY="birthday";
+    //宠物头像
+    public static final String PET_HEADER="logo_url";
+    //宠物类型id
+    public static final String PET_TYPE_ID="pet_type_id";
 
 
     public static String getPhoneNumber() {
         return getString(PHONE_NUMBER);
     }
-    public static void putPhoneNumber(String value){
-        putString(PHONE_NUMBER,value);
+
+    public static void putPhoneNumber(String value) {
+        putString(PHONE_NUMBER, value);
     }
-    public static boolean getLoginStatus(){
+
+    public static boolean getLoginStatus() {
         return getBoolean(LOGIN_STATUS);
     }
-    public static void putLoginStatus(boolean status){
-        putBoolean(LOGIN_STATUS,status);
+
+    public static void putLoginStatus(boolean status) {
+        putBoolean(LOGIN_STATUS, status);
     }
+
+    public static long getUid(){
+        return getLong(UID);
+    }
+    public static void putUid(long uid){
+        putLong(UID,uid);
+    }
+    public static String getToken(){
+        return getString(TOKEN);
+    }
+    public static void putToken(String token){
+        putString(TOKEN,token);
+    }
+    public static long getPetId(){
+        return getLong(PET_ID);
+    }
+    public static void putPetId(long petid){
+        putLong(PET_ID,petid);
+    }
+    public static String getPetDescription(){
+        return getString(PET_DESCRIPTION);
+    }
+    public static void putPetDescription(String description){
+        putString(PET_DESCRIPTION,description);
+    }
+    public static String getPetWeight(){
+        return getString(PET_WEIGHT);
+    }
+    public static void putWeight(String weight){
+        putString(PET_WEIGHT,weight);
+    }
+    public static String getDeviceImei(){
+        return getString(DEVICE_IMEI);
+    }
+    public static void putDeviceImei(String imei){
+        putString(DEVICE_IMEI,imei);
+    }
+    public static int getPetTargetStep(){
+        return getInt(PET_TARGET_STEP);
+    }
+    public static void putPetTargetStep(int targetStep){
+        putInt(PET_TARGET_STEP,targetStep);
+    }
+    public static int getSex(){
+        return getInt(SEX);
+    }
+    public static void putSex(int sex){
+        putInt(SEX,sex);
+    }
+    public static String getPeiNick(){
+        return getString(PEI_NICK);
+    }
+    public static void putPetNick(String nick){
+        putString(PEI_NICK,nick);
+    }
+    public static String getBirthday(){
+       return getString(BIRTHDAY);
+    }
+    public static void putBirthday(String birthday){
+        putString(BIRTHDAY,birthday);
+    }
+    public static String getPetHeader(){
+        return getString(PET_HEADER);
+    }
+    public static void putPetHeader(String url){
+        putString(PET_HEADER,url);
+    }
+    public static int getPetTypeId(){
+        return getInt(PET_TYPE_ID);
+    }
+    public static void putPetTypeId(int  id){
+        putInt(PET_TYPE_ID,id);
+    }
+
+
+
+
+
+
 
 
     private static SharedPreferences getSP() {

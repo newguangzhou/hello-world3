@@ -125,7 +125,7 @@
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity" />
+        <activity android:name="com.xiaomaoqiu.old.com.xiaomaoqiu.now.bussiness.Device.HardwareActivity" />
         <activity android:name="com.xiaomaoqiu.old.ui.mainPages.pageLocate.FindPetActivity"
             android:label="@string/pet_finding"></activity>
     </application>

@@ -37,11 +37,11 @@ import java.util.Date;
  */
 
 
-public class PetActivityFragment extends BaseFragment implements  View.OnClickListener, AsyncImageTask.ImageCallback {
+public class PetFragment extends BaseFragment implements  View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
 
-    public PetActivityFragment()
+    public PetFragment()
     {
         super();
     }

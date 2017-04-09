@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     void initData() {
         Boolean bLogin = SPUtil.getLoginStatus();
         if (bLogin) {
+            //todo 如果已经登录是什么样的业务逻辑
             String strPhone = SPUtil.getPhoneNumber();
             m_editPhone.setText(strPhone);
         }

@@ -50,7 +50,7 @@ public class ApiUtils {
      * @param baseUrl  baseUrl
      * @return Retrofit
      */
-    public static Retrofit getRetrofitClient(String baseUrl) {
+    private static Retrofit getRetrofitClient(String baseUrl) {
         //统一添加log的过滤器；
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

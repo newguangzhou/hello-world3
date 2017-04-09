@@ -28,7 +28,7 @@ import retrofit2.http.Query;
 public interface ApiService {
     /**
      * 手机号验证码登录
-     * GET /user/login?phone_num=18565353866&code=000000&device_type=1&device_token=644794830960f21d HTTP/1.1
+     * GET /user/saveLoginState?phone_num=18565353866&code=000000&device_type=1&device_token=644794830960f21d HTTP/1.1
      *
      * @param phone
      * @param verifyCode
@@ -56,17 +56,6 @@ public interface ApiService {
             @Query("device_type") int deviceType
     );
 
-    //获取健康摘要
-    // /pet/healthy/summary?uid=1462772127&token=3ad274401880013033544886746ceba9b2b08879&pet_id=1462786482 HTTP/1.1
-
-    @GET(Constants.Url.Pet.summary)
-    Call<Summary> getSummary(
-            @Query("uid") long uid,
-            @Query("token") String token,
-            @Query("pet_id") long petId
-    );
-
-
     /**
      * 获取宠物信息
      * GET /pet/get_pet_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150 HTTP/1.1
@@ -79,6 +68,19 @@ public interface ApiService {
     Call<PetInfoBean> getPetInfo(@Query("uid") long uid,
                                  @Query("token") String token
     );
+
+    //获取健康摘要
+    // /pet/healthy/summary?uid=1462772127&token=3ad274401880013033544886746ceba9b2b08879&pet_id=1462786482 HTTP/1.1
+
+    @GET(Constants.Url.Pet.summary)
+    Call<Summary> getSummary(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long petId
+    );
+
+
+
 
 
     /**

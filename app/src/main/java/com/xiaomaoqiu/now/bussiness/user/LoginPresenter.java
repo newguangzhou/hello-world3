@@ -9,12 +9,10 @@ import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.now.util.SPUtil;
 
 import java.lang.ref.WeakReference;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -79,9 +77,8 @@ public class LoginPresenter {
                     }
                     HttpCode ret = HttpCode.valueOf(response.body().status);
                     if (ret == HttpCode.EC_SUCCESS) {//登陆成功
-                        UserInstance.getUserInstance().login(message.uid, message.token, phone);
-                        SPUtil.putPhoneNumber(phone);
-                        SPUtil.putLoginStatus(true);
+                        //保存登录状态
+                        UserInstance.getUserInstance().saveLoginState(message,phone);
                         tloginView.LoginSuccess();
                     } else {
                         Toast.makeText(PetAppLike.mcontext, "登录失败", Toast.LENGTH_SHORT).show();

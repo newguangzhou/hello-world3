@@ -13,7 +13,7 @@ import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.dialog.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
@@ -94,7 +94,7 @@ public class MeFrament extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if(UserMgr.INSTANCE.getPetInfo().getDevInfo().getDeviceExist()) {
-                    Intent intent=new Intent(getActivity(), HardwareActivity.class);
+                    Intent intent=new Intent(getActivity(), DeviceActivity.class);
                     startActivity(intent);
                 }
                 else{

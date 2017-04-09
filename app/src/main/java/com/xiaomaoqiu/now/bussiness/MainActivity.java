@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.now.bussiness.pet.PetActivityFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
@@ -33,7 +33,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
 	private View mTabs[] = {null,null,null};
 
-	private PetActivityFragment mPetActivityFragment;
+	private PetFragment mPetFragment;
 	private LocateFragment mLocateFragment;
 	private MeFrament mMeFragment;
 
@@ -66,7 +66,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 			mTabs[i]=findViewById(mTabID[i]);
 			mTabs[i].setOnClickListener(this);
 		}
-
 		UserMgr.INSTANCE.queryPetInfo();
 	}
 
@@ -77,8 +76,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	}
 
 	private void hideAllFragment(FragmentTransaction transaction){
-		if(null != mPetActivityFragment){
-			transaction.hide(mPetActivityFragment);
+		if(null != mPetFragment){
+			transaction.hide(mPetFragment);
 		}
 		if(null != mLocateFragment){
 			transaction.hide(mLocateFragment);
@@ -96,12 +95,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 		hideAllFragment(transaction);
 		switch (index){
 			case 0:
-				if(null == mPetActivityFragment){
-					mPetActivityFragment =new PetActivityFragment();
-					transaction.add(R.id.fragment_container, mPetActivityFragment);
+				if(null == mPetFragment){
+					mPetFragment =new PetFragment();
+					transaction.add(R.id.fragment_container, mPetFragment);
 				}
 				mHealthTabIcon.setSelected(true);
-				transaction.show(mPetActivityFragment);
+				transaction.show(mPetFragment);
 				break;
 			case 1:
 				if(null == mLocateFragment){
@@ -145,8 +144,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	long mBackClickTime=-1;
 	@Override
 	public void onBackPressed() {
-		if(null != mPetActivityFragment && !mPetActivityFragment.isHidden() && mPetActivityFragment.isDialogShowing()){
-			mPetActivityFragment.hideDialog();
+		if(null != mPetFragment && !mPetFragment.isHidden() && mPetFragment.isDialogShowing()){
+			mPetFragment.hideDialog();
 			mBackClickTime=-1;
 			return;
 		}

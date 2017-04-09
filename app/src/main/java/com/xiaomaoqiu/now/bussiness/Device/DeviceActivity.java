@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageMe;
+package com.xiaomaoqiu.now.bussiness.Device;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import com.xiaomaoqiu.old.utils.HttpUtil;
 import org.apache.http.Header;
 import org.json.JSONObject;
 
-public class HardwareActivity extends BaseActivity {
+public class DeviceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +93,7 @@ public class HardwareActivity extends BaseActivity {
     }
 
     public static void skip(Context context){
-        Intent intent=new Intent(context,HardwareActivity.class);
+        Intent intent=new Intent(context,DeviceActivity.class);
         context.startActivity(intent);
     }
 

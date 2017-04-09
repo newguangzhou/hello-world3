@@ -16,7 +16,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
@@ -114,7 +114,7 @@ public class BindDeviceActivity extends BaseActivity {
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
                     UserMgr.INSTANCE.queryPetInfo();
-                    HardwareActivity.skip(BindDeviceActivity.this);
+                    DeviceActivity.skip(BindDeviceActivity.this);
                     finish();
                 }
                 else{
