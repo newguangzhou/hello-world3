@@ -5,8 +5,8 @@ import android.util.Log;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.DateUtil;
 import com.xiaomaoqiu.old.utils.HttpUtil;
@@ -89,7 +89,7 @@ public class ChartIndexPresenter {
 
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
     }
 
     private void parseSuccess(JSONObject response){

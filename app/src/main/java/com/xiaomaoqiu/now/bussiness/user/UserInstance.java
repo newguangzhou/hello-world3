@@ -53,5 +53,30 @@ public class UserInstance {
         m_strPhone = strPhone;
 
     }
+    public long getUid()
+    {
+        return m_uid;
+    }
+
+    public String getToken()
+    {
+        return m_strToken;
+    }
+
+
+    public String getPsw()
+    {
+        return m_strPsw;
+    }
+
+
+    public void setPhone(String strPhone){
+        m_strPhone = strPhone;
+    }
+
+    public String getPhone()
+    {
+        return m_strPhone;
+    }
 
 }

@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
@@ -53,7 +53,7 @@ public class MessageActivity extends BaseActivity {
                         Toast.makeText(MessageActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
                     }
                 },
-                LoginMgr.INSTANCE.getUid(),LoginMgr.INSTANCE.getToken());
+                UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken());
     }
 
     class MessageAdapter extends BaseAdapter

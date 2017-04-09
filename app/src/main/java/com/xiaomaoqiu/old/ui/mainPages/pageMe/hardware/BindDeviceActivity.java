@@ -11,13 +11,13 @@ import android.widget.EditText;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.HardwareActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.now.base.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -121,7 +121,7 @@ public class BindDeviceActivity extends BaseActivity {
                     showToast("设备绑定失败，请稍后重试！");
                 }
             }
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),ImeiId,"xmq_test");
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),ImeiId,"xmq_test");
     }
 
 

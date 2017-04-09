@@ -16,14 +16,14 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.now.base.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -313,7 +313,7 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
                                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                                             Log.v("http", "file.pet.upload_logo:" + responseString);
                                         }
-                                    },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken());
+                                    }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken());
 
                         }catch (Exception e)
                         {

@@ -15,9 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
@@ -202,7 +202,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
                 Toast.makeText(getContext(),"网络连接失败",Toast.LENGTH_LONG).show();
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
     }
 
     private void goHome(){
@@ -222,7 +222,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
                 Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_LONG).show();
             }
 
-        },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),2 );
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),2 );
     }
 
     @Override

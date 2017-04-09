@@ -5,6 +5,16 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.old.dataCenter.UserMgr;
+import com.xiaomaoqiu.old.utils.HttpUtil;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
+
 //import com.baidu.location.BDLocation;
 //import com.baidu.location.BDLocationListener;
 //import com.baidu.location.LocationClient;
@@ -26,16 +36,6 @@ import android.view.View;
 //import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 //import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 //import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.now.base.BaseActivity;
-
-
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 public class FindPetActivity extends BaseActivity implements View.OnClickListener{
 //    // 地图相关
@@ -154,7 +154,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
                 Log.v("http", "pet.find:" + response.toString());
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(),mode);
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(),mode);
     }
 
     Runnable mPetLocateRunnable = new Runnable() {

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
@@ -36,7 +37,7 @@ public enum UserMgr {
                 }
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(), getPetInfo().getPetID());
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), getPetInfo().getPetID());
     }
 
     public void queryPetInfo()
@@ -61,10 +62,10 @@ public enum UserMgr {
                                 mPetInfo.getDevInfo().initFromNull();
                             }
                         }
-                    },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),mPetInfo.getPetID());
+                    }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),mPetInfo.getPetID());
                 }
             }
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken());
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken());
     }
 
     public void setPetAtHome(boolean bAtHome)
@@ -145,7 +146,7 @@ public enum UserMgr {
 //                        mPetInfo.notifyChanged(fieldMask);
                     }
                 }
-            }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),mPetInfo.getPetID());
+            }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),mPetInfo.getPetID());
 
     }
 

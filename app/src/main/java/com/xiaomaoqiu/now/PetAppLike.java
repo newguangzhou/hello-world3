@@ -6,16 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
-import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
-import com.xiaomaoqiu.old.config.Config;
-import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
 
 /**
  * Created by Administrator on 2015/6/17.

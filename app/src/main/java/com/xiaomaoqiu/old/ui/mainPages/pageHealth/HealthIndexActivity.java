@@ -10,14 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.dialog.PickSportNumberDialog_RAW_Activity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
-import com.xiaomaoqiu.now.base.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -66,7 +66,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 }
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(), UserMgr.INSTANCE.getPetInfo().getPetID());
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID());
     }
 
     @Override
@@ -89,7 +89,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                     Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
                 }
 
-            },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
+            },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
 
             finish();
         }
@@ -113,7 +113,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
             }
 
-        },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),number );
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),number );
 
     }
 

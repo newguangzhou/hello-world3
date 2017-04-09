@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
+import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
@@ -24,7 +25,6 @@ import com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
-import com.xiaomaoqiu.now.base.BaseFragment;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -109,7 +109,7 @@ public class PetActivityFragment extends BaseFragment implements  View.OnClickLi
                 }
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
 
     }
 

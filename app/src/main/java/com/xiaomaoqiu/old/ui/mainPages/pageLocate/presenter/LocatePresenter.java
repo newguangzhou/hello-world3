@@ -3,8 +3,8 @@ package com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.LoginMgr;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
@@ -75,7 +75,7 @@ public class LocatePresenter {
                 onFail("网络连接失败！");
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
     }
 
     /**
@@ -97,7 +97,7 @@ public class LocatePresenter {
                 onFail("网络连接失败！");
             }
 
-        },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),2 );
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),2 );
     }
 
     /**
@@ -123,7 +123,7 @@ public class LocatePresenter {
                     onFail("查询闪光灯状态失败，请稍后重试！");
                 }
             }
-        },LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(),UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei());
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei());
     }
 
     /**
@@ -148,7 +148,7 @@ public class LocatePresenter {
                 }
             }
 
-        }, LoginMgr.INSTANCE.getUid(), LoginMgr.INSTANCE.getToken(), UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei(),bOpenLight?1:0);
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei(),bOpenLight?1:0);
     }
 
     private void onSuccessGetLightStatus(boolean isOpen,boolean isFromView){
