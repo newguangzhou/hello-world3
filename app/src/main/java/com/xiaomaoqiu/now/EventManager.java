@@ -5,7 +5,11 @@ package com.xiaomaoqiu.now;
  */
 
 public class EventManager {
+
     public static class notifyPetFramentGetActivityInfo{
+
+    }
+    public static class bindDeviceSuccess{
 
     }
 }

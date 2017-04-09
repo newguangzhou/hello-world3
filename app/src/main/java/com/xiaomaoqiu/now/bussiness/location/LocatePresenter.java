@@ -1,11 +1,13 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter;
+package com.xiaomaoqiu.now.bussiness.location;
 
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
+import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
@@ -37,9 +39,9 @@ public class LocatePresenter {
             locateView.onShowPhoneLoc();
         }/*else if(UserMgr.INSTANCE.getPetInfo().getPetID() != -1) {
             //宠物在家，查询宠物位置
-            UserMgr.INSTANCE.queryPetLocation();
+            PetInfoInstance.getPetInfoInstance().getPetLocation();
         }*/
-        UserMgr.INSTANCE.queryPetLocation();
+        PetInfoInstance.getPetInfoInstance().getPetLocation();
         queryLightStatus();
 
     }
@@ -49,7 +51,7 @@ public class LocatePresenter {
      */
     public void queryPetLocation(boolean isFindPetMode){
         this.isFindPetMode=isFindPetMode;
-        UserMgr.INSTANCE.queryPetLocation();
+        PetInfoInstance.getPetInfoInstance().getPetLocation();
     }
 
     public boolean isFindPetMode(){

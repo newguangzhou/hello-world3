@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -69,6 +70,15 @@ public class PetInfoInstance {
 
     public int pet_type_id;
 
+
+    //***********位置信息
+    public double latitude;
+
+    public double location_time;
+
+    public double longitude;
+
+
     public void savePetInfo(PetInfoBean message) {
         pet_id = message.pet_id;
         SPUtil.putPetId(pet_id);
@@ -93,9 +103,8 @@ public class PetInfoInstance {
     }
 
 
-
     //获取宠物基本信息
-    public  void getPetInfo() {
+    public void getPetInfo() {
         ApiUtils.getApiService().getPetInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken())
                 .enqueue(new XMQCallback<PetInfoBean>() {
                     @Override
@@ -107,7 +116,7 @@ public class PetInfoInstance {
                             //获取设备信息
                             DeviceInfoInstance.getInstance().getDeviceInfo();
 
-                        }else {
+                        } else {
                             Toast.makeText(PetAppLike.mcontext, "网络错误，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -117,6 +126,29 @@ public class PetInfoInstance {
                         Toast.makeText(PetAppLike.mcontext, "网络错误，请稍后重试", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void getPetLocation() {
+        ApiUtils.getApiService().getPetLocation(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+                PetInfoInstance.getPetInfoInstance().getPet_id()
+        ).enqueue(new XMQCallback<PetLocationBean>() {
+            @Override
+            public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    //TODO 发送一个位置变化的广播
+                } else {
+                    //TODO 发送一个位置为0的广播
+                }
+
+            }
+
+            @Override
+            public void onFail(Call<PetLocationBean> call, Throwable t) {
+                Toast.makeText(PetAppLike.mcontext, "位置获取失败~", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void setPet_id(long pet_id) {

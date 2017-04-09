@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
@@ -23,22 +22,17 @@ import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
-import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
 
-import org.apache.http.Header;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Date;
 
@@ -59,11 +53,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener, A
 
     String strStart;
     String strEnd;
-
-
-    public PetFragment() {
-        super();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,8 +81,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener, A
         rootView.findViewById(R.id.btn_sleep).setOnClickListener(this);
 
         initProgress();
-//        queryActivityInfo(rootView);
         EventBus.getDefault().register(this);
+
         return rootView;
     }
 
@@ -144,7 +133,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener, A
         });
     }
 
-    //更新逻辑
+    //todo 更新逻辑
     public void onPetInfoChanged(PetInfo petInfo, int nFieldMask) {
         if ((nFieldMask & petInfo.FieldMask_AtHome) != 0) {
             if (petInfo.getAtHome()) {//回家

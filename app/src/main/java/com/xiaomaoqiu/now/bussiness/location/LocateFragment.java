@@ -16,7 +16,6 @@ import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.LocatePresenter;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
 import com.xiaomaoqiu.now.base.BaseFragment;
 

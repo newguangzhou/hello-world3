@@ -4,12 +4,19 @@ import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by huangjx on 15/7/26.
@@ -19,7 +26,7 @@ public enum UserMgr {
 
     private PetInfo mPetInfo = new PetInfo();
 
-    public void queryPetLocation()
+    public void getPetLocation()
     {
         HttpUtil.get2("pet.location", new JsonHttpResponseHandler() {
             @Override
@@ -38,6 +45,7 @@ public enum UserMgr {
             }
 
         }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), getPetInfo().getPetID());
+
     }
 
     public void queryPetInfo()

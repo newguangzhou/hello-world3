@@ -10,7 +10,7 @@ import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
-import com.xiaomaoqiu.now.bean.nocommon.SleepInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.Summary;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 
@@ -115,11 +115,11 @@ public interface ApiService {
      * @return
      */
     @GET(Constants.Url.Pet.get_sleep_info)
-    Call<SleepInfoBean> getSleepInfo(@Query("uid") long uid,
-                                     @Query("token") String token,
-                                     @Query("pet_id") long petId,
-                                     @Query("start_date") String start_date,
-                                     @Query("end_date") String end_date
+    Call<PetSleepInfoBean> getSleepInfo(@Query("uid") long uid,
+                                        @Query("token") String token,
+                                        @Query("pet_id") long petId,
+                                        @Query("start_date") String start_date,
+                                        @Query("end_date") String end_date
     );
 
 

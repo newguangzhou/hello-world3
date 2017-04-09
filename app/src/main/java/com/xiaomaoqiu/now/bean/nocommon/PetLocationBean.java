@@ -7,9 +7,9 @@ package com.xiaomaoqiu.now.bean.nocommon;
 public class PetLocationBean extends BaseBean{
 //    public int status;
 
-    public String latitude;
+    public double latitude;
 
     public double location_time;
 
-    public String longitude;
+    public double longitude;
 }

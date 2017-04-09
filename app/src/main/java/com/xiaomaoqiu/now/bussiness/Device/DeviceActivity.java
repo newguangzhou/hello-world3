@@ -92,9 +92,9 @@ public class DeviceActivity extends BaseActivity {
         });
     }
 
-    public static void skip(Context context){
-        Intent intent=new Intent(context,DeviceActivity.class);
-        context.startActivity(intent);
-    }
+//    public static void skip(Context context){
+//        Intent intent=new Intent(context,DeviceActivity.class);
+//        context.startActivity(intent);
+//    }
 
 }

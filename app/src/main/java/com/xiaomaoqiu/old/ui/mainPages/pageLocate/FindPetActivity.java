@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
@@ -160,7 +161,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
     Runnable mPetLocateRunnable = new Runnable() {
         @Override
         public void run() {
-            UserMgr.INSTANCE.queryPetLocation();//查询狗位置
+            PetInfoInstance.getPetInfoInstance().getPetLocation();//查询狗位置
         }
     };
 

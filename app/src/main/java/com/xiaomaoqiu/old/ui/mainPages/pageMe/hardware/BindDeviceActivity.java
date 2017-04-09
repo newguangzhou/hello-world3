@@ -11,8 +11,10 @@ import android.widget.EditText;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -20,6 +22,9 @@ import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.util.regex.Matcher;
@@ -47,10 +52,11 @@ public class BindDeviceActivity extends BaseActivity {
                     showToast("请输入IMEI码！");
                     return;
                 }
-                BindDeciveHttp(inputImei.getText().toString());
+                DeviceInfoInstance.getInstance().bindDevice(inputImei.getText().toString());
             }
         });
         initView();
+        EventBus.getDefault().register(this);
     }
 
     private void initView(){
@@ -84,7 +90,7 @@ public class BindDeviceActivity extends BaseActivity {
             //解析成功
             String Imei=bundle.getString(CodeUtils.RESULT_STRING);
             if(isZXresultCorrect(Imei)) {
-                BindDeciveHttp(Imei);
+                DeviceInfoInstance.getInstance().bindDevice(Imei);
             }else{
                 showToast("IMEI 码错误，请正确扫码！");
             }
@@ -114,7 +120,7 @@ public class BindDeviceActivity extends BaseActivity {
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
                     PetInfoInstance.getPetInfoInstance().getPetInfo();
-                    DeviceActivity.skip(BindDeviceActivity.this);
+//                    DeviceActivity.skip(BindDeviceActivity.this);
                     finish();
                 }
                 else{
@@ -128,5 +134,13 @@ public class BindDeviceActivity extends BaseActivity {
     public static void skipTo(Context context){
         Intent intent=new Intent(context,BindDeviceActivity.class);
         context.startActivity(intent);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = false)
+    public  void toDeviceActivity(EventManager.bindDeviceSuccess event){
+        Intent intent=new Intent(this,DeviceActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

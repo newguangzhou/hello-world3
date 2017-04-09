@@ -1,5 +1,11 @@
 package com.xiaomaoqiu.now.bussiness.Device;
 
+import android.annotation.SuppressLint;
+import android.widget.Toast;
+
+import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -8,6 +14,9 @@ import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
+import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -15,7 +24,7 @@ import retrofit2.Response;
 /**
  * Created by long on 17/4/9.
  */
-
+@SuppressLint("WrongConstant")
 public class DeviceInfoInstance {
 
     //    {
@@ -99,6 +108,33 @@ public class DeviceInfoInstance {
             @Override
             public void onFail(Call<DeviceInfoBean> call, Throwable t) {
 
+            }
+        });
+    }
+
+    //绑定设备
+    public void bindDevice(String imei){
+
+        ApiUtils.getApiService().addDeviceInfo(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+               imei,
+                "xmq_test"
+                ).enqueue(new XMQCallback<BaseBean>() {
+            @Override
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    PetInfoInstance.getPetInfoInstance().getPetInfo();
+                    EventBus.getDefault().post(new EventManager.bindDeviceSuccess());
+                    Toast.makeText(PetAppLike.mcontext,"绑定成功",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(PetAppLike.mcontext,"网络问题，请重试",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+                Toast.makeText(PetAppLike.mcontext,"网络问题，请重试",Toast.LENGTH_SHORT).show();
             }
         });
     }

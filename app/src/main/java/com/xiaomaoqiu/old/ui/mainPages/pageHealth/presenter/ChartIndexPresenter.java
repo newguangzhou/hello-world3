@@ -5,8 +5,12 @@ import android.util.Log;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.DateUtil;
 import com.xiaomaoqiu.old.utils.HttpUtil;
@@ -18,6 +22,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2017/1/2.
@@ -90,6 +97,20 @@ public class ChartIndexPresenter {
             }
 
         }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
+        ApiUtils.getApiService().getSleepInfo(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+                PetInfoInstance.getPetInfoInstance().getPet_id(),strStart,strEnd
+                ).enqueue(new XMQCallback<PetSleepInfoBean>() {
+            @Override
+            public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
+
+            }
+
+            @Override
+            public void onFail(Call<PetSleepInfoBean> call, Throwable t) {
+
+            }
+        });
     }
 
     private void parseSuccess(JSONObject response){
