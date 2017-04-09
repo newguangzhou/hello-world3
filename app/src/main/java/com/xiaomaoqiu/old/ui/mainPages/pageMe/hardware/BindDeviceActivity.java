@@ -12,11 +12,11 @@ import android.widget.EditText;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.old.R;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
@@ -113,7 +113,7 @@ public class BindDeviceActivity extends BaseActivity {
                 Log.v("http", "device.add_device_info:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    UserMgr.INSTANCE.queryPetInfo();
+                    PetInfoInstance.getPetInfoInstance().getPetInfo();
                     DeviceActivity.skip(BindDeviceActivity.this);
                     finish();
                 }

@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.pet;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,11 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
@@ -27,22 +34,34 @@ import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
 
 import org.apache.http.Header;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Response;
+
 /**
  * Created by Administrator on 2015/6/12.
  */
 
-
-public class PetFragment extends BaseFragment implements  View.OnClickListener, AsyncImageTask.ImageCallback {
+@SuppressLint("WrongConstant")
+public class PetFragment extends BaseFragment implements View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
+    CircleProgressBar prog;
+    TextView tvSportDone;
+    TextView tvSportTarget;
 
-    public PetFragment()
-    {
+    String strStart;
+    String strEnd;
+
+
+    public PetFragment() {
         super();
     }
 
@@ -51,7 +70,13 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener, 
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.main_tab_health, container, false);
-        mGoSportView=(HealthGoSportView)rootView.findViewById(R.id.tab_health_gosportview);
+        mGoSportView = (HealthGoSportView) rootView.findViewById(R.id.tab_health_gosportview);
+
+        prog = (CircleProgressBar) rootView.findViewById(R.id.prog_target_done_percentage);
+        tvSportDone = (TextView) rootView.findViewById(R.id.tv_sport_done);
+        tvSportTarget = (TextView) rootView.findViewById(R.id.tv_sport_target);
+
+
         rootView.setOnClickListener(this);
         rootView.findViewById(R.id.btn_sport_index).setOnClickListener(this);
 
@@ -66,85 +91,87 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener, 
 
         rootView.findViewById(R.id.btn_sleep).setOnClickListener(this);
 
-        queryActivityInfo(rootView);
+        initProgress();
+//        queryActivityInfo(rootView);
+        EventBus.getDefault().register(this);
         return rootView;
     }
 
 
-    void queryActivityInfo(final View v)
-    {
+    public void initProgress() {
         long msEnd = System.currentTimeMillis();
         Date today = new Date(msEnd);
 
-        String strEnd = String.format("%s-%s-%s",today.getYear()+1900,today.getMonth()+1,today.getDate());
-        String strStart = strEnd;
-        CircleProgressBar prog=(CircleProgressBar)v.findViewById(R.id.prog_target_done_percentage);
+        strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
+        strStart = strEnd;
         prog.setProgress(75);
+    }
 
-        HttpUtil.get2("pet.health.get_activity_info", new JsonHttpResponseHandler() {
+    //粘性事件，等待petid返回来再进行网络操作
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = true)
+    public void getActivityInfo(EventManager.notifyPetFramentGetActivityInfo event) {
+        initProgress();
+        ApiUtils.getApiService().getActivityInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),
+                PetInfoInstance.getPetInfoInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //{"status": 0, "data": [{"date": "2016-04-16", "percentage": 26, "reality_amount": 154, "target_amount": 584},{}]}
-                Log.v("http", "pet.health.get_activity_info:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+            public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    JSONArray jsdata = response.optJSONArray("data");
-                    if (jsdata != null && jsdata.length() > 0) {
-                        int days = jsdata.length();
-                        //设置今日活动
-                        JSONObject jsToday = (JSONObject) jsdata.opt(0);
-                        int sportTarget = jsToday.optInt("target_amount", 1000);
-                        int sportDone = jsToday.optInt("reality_amount", 100);
-                        double percentage = jsToday.optDouble("percentage",100);
+                    int sportTarget = 1000;
+                    int sportDone = 100;
+                    double percentage = 100;
+                    if (message.data.size() > 0) {
+                        PetSportBean.SportBean bean = message.data.get(0);
+                        sportTarget = bean.target_amount;
+                        sportDone = bean.reality_amount;
+                        percentage = bean.percentage;
+                    } else {
+                        Toast.makeText(PetAppLike.mcontext, "当天尚无数据~", Toast.LENGTH_SHORT).show();
 
-                        CircleProgressBar prog=(CircleProgressBar)v.findViewById(R.id.prog_target_done_percentage);
-                        prog.setProgress((int) percentage);
-
-                        TextView tvSportDone = (TextView)v.findViewById(R.id.tv_sport_done);
-                        tvSportDone.setText(String.format(getResources().getString(R.string.pet_sport_done), sportDone));
-
-                        TextView tvSportTarget = (TextView)v.findViewById(R.id.tv_sport_target);
-                        tvSportTarget.setText(String.format(getResources().getString(R.string.pet_sport_target),sportTarget));
                     }
+                    prog.setProgress((int) percentage);
+                    tvSportDone.setText(String.format("已消耗%d卡", sportDone));
+                    tvSportTarget.setText(String.format("目标消耗%d卡", sportTarget));
+                } else {
+                    Toast.makeText(PetAppLike.mcontext, "获取当天数据失败", Toast.LENGTH_SHORT).show();
                 }
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
-
+            @Override
+            public void onFail(Call<PetSportBean> call, Throwable t) {
+                Toast.makeText(PetAppLike.mcontext, "获取当天数据失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //更新逻辑
     public void onPetInfoChanged(PetInfo petInfo, int nFieldMask) {
-        if((nFieldMask & petInfo.FieldMask_AtHome) != 0 )
-        {
-            if(petInfo.getAtHome())
-            {//回家
+        if ((nFieldMask & petInfo.FieldMask_AtHome) != 0) {
+            if (petInfo.getAtHome()) {//回家
                 getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
-            }else
-            {//出去玩
+            } else {//出去玩
                 getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
             }
         }
-        if((nFieldMask & PetInfo.FieldMask_Header) != 0)
-        {
-            Log.v("petinfo","set pet header:"+petInfo.getHeaderImg());
-            ImageView imgLogo = (ImageView)getActivity().findViewById(R.id.go_sport_head);
+        if ((nFieldMask & PetInfo.FieldMask_Header) != 0) {
+            Log.v("petinfo", "set pet header:" + petInfo.getHeaderImg());
+            ImageView imgLogo = (ImageView) getActivity().findViewById(R.id.go_sport_head);
             AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfo.getHeaderImg(), this);
         }
     }
 
     @Override
     public void onClick(View v) {
-        if(mGoSportView.isShowing()){
+        if (mGoSportView.isShowing()) {
             mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
             return;
         }
-        Intent intent=new Intent();
-        switch (v.getId()){
+        Intent intent = new Intent();
+        switch (v.getId()) {
             case R.id.btn_sport_index:
-                intent.setClass(getActivity(),SportIndexActivity.class);
+                intent.setClass(getActivity(), SportIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
@@ -169,7 +196,7 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener, 
                 });
                 break;
             case R.id.btn_health:
-                intent.setClass(getActivity(),HealthIndexActivity.class);
+                intent.setClass(getActivity(), HealthIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_sport:
@@ -179,29 +206,33 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener, 
                 mGoSportView.show(HealthGoSportView.STATUS_BACK);
                 break;
             case R.id.btn_sleep:
-                intent.setClass(getActivity(),SleepIndexActivity.class);
+                intent.setClass(getActivity(), SleepIndexActivity.class);
                 startActivity(intent);
                 break;
         }
     }
 
-    public boolean isDialogShowing(){
-        if(null != mGoSportView){
+    public boolean isDialogShowing() {
+        if (null != mGoSportView) {
             return mGoSportView.isShowing();
         }
         return false;
     }
 
-    public void hideDialog(){
+    public void hideDialog() {
         mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
     }
 
 
     @Override
     public void imageLoaded(String url, Bitmap obj, ImageView view) {
-        if(obj != null)
-        {
+        if (obj != null) {
             view.setImageBitmap(obj);
         }
+    }
+
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+
     }
 }

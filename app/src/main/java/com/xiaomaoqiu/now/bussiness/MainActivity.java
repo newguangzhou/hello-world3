@@ -8,15 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.xiaomaoqiu.now.base.BaseFragmentActivity;
+import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
-import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
-import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.old.widgets.BatteryView;
-import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 
 @SuppressLint("WrongConstant")
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
@@ -66,7 +66,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 			mTabs[i]=findViewById(mTabID[i]);
 			mTabs[i].setOnClickListener(this);
 		}
-		UserMgr.INSTANCE.queryPetInfo();
+		PetInfoInstance.getPetInfoInstance().getPetInfo();
 	}
 
 	private void initView(){

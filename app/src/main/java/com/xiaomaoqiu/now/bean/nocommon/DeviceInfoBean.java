@@ -20,4 +20,10 @@ public class DeviceInfoBean extends BaseBean {
     public String firmware_version;
 
     public String imei;
+
+    public String device_name;
+
+    //sim卡iccid信息
+    public String iccid;
+
 }

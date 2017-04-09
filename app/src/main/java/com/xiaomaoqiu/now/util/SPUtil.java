@@ -20,29 +20,45 @@ public class SPUtil {
     //登录态
     public static final String LOGIN_STATUS = "login_status";
     //uid
-    public static final String UID="uid";
+    public static final String UID = "uid";
     //token
-    public static final String TOKEN="token";
+    public static final String TOKEN = "token";
     //宠物id
-    public static final String PET_ID="petId";
+    public static final String PET_ID = "petId";
     //宠物描述
-    public static final String PET_DESCRIPTION="petDescription";
+    public static final String PET_DESCRIPTION = "petDescription";
     //体重
-    public static final String PET_WEIGHT="petWeight";
+    public static final String PET_WEIGHT = "petWeight";
+
+    //todo 两个imei
     //设备imei
-    public static final String DEVICE_IMEI="deviceImei";
+    public static final String DEVICE_IMEI = "deviceImei";
     //target_step
-    public static final String PET_TARGET_STEP="targetStep";
+    public static final String PET_TARGET_STEP = "targetStep";
     //性别
-    public static final String SEX="sex";
+    public static final String SEX = "sex";
     //昵称
-    public static final String PEI_NICK="petNick";
+    public static final String PEI_NICK = "petNick";
     //生日
-    public static final String BIRTHDAY="birthday";
+    public static final String BIRTHDAY = "birthday";
     //宠物头像
-    public static final String PET_HEADER="logo_url";
+    public static final String PET_HEADER = "logo_url";
     //宠物类型id
-    public static final String PET_TYPE_ID="pet_type_id";
+    public static final String PET_TYPE_ID = "pet_type_id";
+
+
+
+
+    //设备电量级别
+    public static final String BATTERY_LEVEL = "battery_level";
+
+    //firmware_version
+    public static final String FIRMWARE_VERSION="firmware_version";
+
+    //设备名称
+    public static final String DEVICE_NAME="device_name";
+    //sim卡iccid信息
+    public static final String SIM_ICCID="iccid";
 
 
     public static String getPhoneNumber() {
@@ -61,79 +77,127 @@ public class SPUtil {
         putBoolean(LOGIN_STATUS, status);
     }
 
-    public static long getUid(){
+    public static long getUid() {
         return getLong(UID);
     }
-    public static void putUid(long uid){
-        putLong(UID,uid);
-    }
-    public static String getToken(){
-        return getString(TOKEN);
-    }
-    public static void putToken(String token){
-        putString(TOKEN,token);
-    }
-    public static long getPetId(){
-        return getLong(PET_ID);
-    }
-    public static void putPetId(long petid){
-        putLong(PET_ID,petid);
-    }
-    public static String getPetDescription(){
-        return getString(PET_DESCRIPTION);
-    }
-    public static void putPetDescription(String description){
-        putString(PET_DESCRIPTION,description);
-    }
-    public static String getPetWeight(){
-        return getString(PET_WEIGHT);
-    }
-    public static void putWeight(String weight){
-        putString(PET_WEIGHT,weight);
-    }
-    public static String getDeviceImei(){
-        return getString(DEVICE_IMEI);
-    }
-    public static void putDeviceImei(String imei){
-        putString(DEVICE_IMEI,imei);
-    }
-    public static int getPetTargetStep(){
-        return getInt(PET_TARGET_STEP);
-    }
-    public static void putPetTargetStep(int targetStep){
-        putInt(PET_TARGET_STEP,targetStep);
-    }
-    public static int getSex(){
-        return getInt(SEX);
-    }
-    public static void putSex(int sex){
-        putInt(SEX,sex);
-    }
-    public static String getPeiNick(){
-        return getString(PEI_NICK);
-    }
-    public static void putPetNick(String nick){
-        putString(PEI_NICK,nick);
-    }
-    public static String getBirthday(){
-       return getString(BIRTHDAY);
-    }
-    public static void putBirthday(String birthday){
-        putString(BIRTHDAY,birthday);
-    }
-    public static String getPetHeader(){
-        return getString(PET_HEADER);
-    }
-    public static void putPetHeader(String url){
-        putString(PET_HEADER,url);
-    }
-    public static int getPetTypeId(){
-        return getInt(PET_TYPE_ID);
-    }
-    public static void putPetTypeId(int  id){
-        putInt(PET_TYPE_ID,id);
+
+    public static void putUid(long uid) {
+        putLong(UID, uid);
     }
 
+    public static String getToken() {
+        return getString(TOKEN);
+    }
+
+    public static void putToken(String token) {
+        putString(TOKEN, token);
+    }
+
+    public static long getPetId() {
+        return getLong(PET_ID);
+    }
+
+    public static void putPetId(long petid) {
+        putLong(PET_ID, petid);
+    }
+
+    public static String getPetDescription() {
+        return getString(PET_DESCRIPTION);
+    }
+
+    public static void putPetDescription(String description) {
+        putString(PET_DESCRIPTION, description);
+    }
+
+    public static String getPetWeight() {
+        return getString(PET_WEIGHT);
+    }
+
+    public static void putWeight(String weight) {
+        putString(PET_WEIGHT, weight);
+    }
+
+    public static String getDeviceImei() {
+        return getString(DEVICE_IMEI);
+    }
+
+    public static void putDeviceImei(String imei) {
+        putString(DEVICE_IMEI, imei);
+    }
+
+    public static int getPetTargetStep() {
+        return getInt(PET_TARGET_STEP);
+    }
+
+    public static void putPetTargetStep(int targetStep) {
+        putInt(PET_TARGET_STEP, targetStep);
+    }
+
+    public static int getSex() {
+        return getInt(SEX);
+    }
+
+    public static void putSex(int sex) {
+        putInt(SEX, sex);
+    }
+
+    public static String getPeiNick() {
+        return getString(PEI_NICK);
+    }
+
+    public static void putPetNick(String nick) {
+        putString(PEI_NICK, nick);
+    }
+
+    public static String getBirthday() {
+        return getString(BIRTHDAY);
+    }
+
+    public static void putBirthday(String birthday) {
+        putString(BIRTHDAY, birthday);
+    }
+
+    public static String getPetHeader() {
+        return getString(PET_HEADER);
+    }
+
+    public static void putPetHeader(String url) {
+        putString(PET_HEADER, url);
+    }
+
+    public static int getPetTypeId() {
+        return getInt(PET_TYPE_ID);
+    }
+
+    public static void putPetTypeId(int id) {
+        putInt(PET_TYPE_ID, id);
+    }
+
+    public static int getBatteryLevel() {
+        return getInt(BATTERY_LEVEL);
+    }
+
+    public static void putBatteryLevel(int level) {
+        putInt(BATTERY_LEVEL, level);
+    }
+    public static String getFirmwareVersion(){
+        return getString(FIRMWARE_VERSION);
+    }
+    public static void putFirmwareVersion(String firmwareVersion){
+        putString(FIRMWARE_VERSION,firmwareVersion);
+    }
+    public static String getDeviceName(){
+        return getString(DEVICE_NAME);
+    }
+    public static void putDeviceName(String name){
+    putString(DEVICE_NAME,name);
+    }
+    public static String getSimIccid(){
+        return getString(SIM_ICCID);
+    }
+    public static void putSimIccid(String iccid){
+        putString(SIM_ICCID,iccid);
+    }
 
 
 
