@@ -12,8 +12,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.pet.R;
+
 @SuppressLint("WrongConstant")
 public class ExitFromSettings_RAW_Activity extends Activity {
 	//private MyDialog dialog;

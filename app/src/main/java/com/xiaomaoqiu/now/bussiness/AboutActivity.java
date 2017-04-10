@@ -5,8 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.pet.R;
 
 public class AboutActivity extends BaseActivity {
 

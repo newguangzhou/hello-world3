@@ -90,6 +90,8 @@ public class LoginPresenter {
                     if (tloginView != null) {
                         tloginView.dismissDialog();
                     }
+                    Toast.makeText(PetAppLike.mcontext, "网络错误", Toast.LENGTH_SHORT).show();
+
                 }
             });
         }

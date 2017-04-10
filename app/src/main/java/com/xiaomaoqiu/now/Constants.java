@@ -25,7 +25,7 @@ public class Constants {
             /**
              * 登录
              */
-            public static final String login = "user/saveLoginState";
+            public static final String login = "user/login";
             /**
              * 退出登录
              */

@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.old.ui.dialog;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,11 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
-
+import com.xiaomaoqiu.pet.R;
+@SuppressLint("WrongConstant")
 public class GoOutConfirmDialog_RAW_Activity extends Activity implements AsyncImageTask.ImageCallback {
 	//private MyDialog dialog;
 	private LinearLayout layout;

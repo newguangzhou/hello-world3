@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.dialog.ExitDialog_RAW_Activity;
@@ -18,6 +17,7 @@ import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.pet.R;
 
 /**
  * Created by Administrator on 2015/6/12.

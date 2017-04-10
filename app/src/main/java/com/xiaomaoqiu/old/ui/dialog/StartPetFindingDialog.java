@@ -5,7 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.pet.R;
+
 
 /**
  * Created by huangjx on 2016/7/31.

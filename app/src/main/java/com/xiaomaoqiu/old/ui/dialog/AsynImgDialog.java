@@ -11,11 +11,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.utils.DensityUtil;
+import com.xiaomaoqiu.pet.R;
 
 /**
  * Created by Administrator on 2017/1/15.

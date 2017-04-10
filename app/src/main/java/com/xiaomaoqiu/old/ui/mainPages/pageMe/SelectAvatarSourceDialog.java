@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.DensityUtil;
+import com.xiaomaoqiu.pet.R;
 
 /**
  * Created by simon on 15/8/8.

@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.pet.R;
+
 
 /**
  * Created by simon on 15/8/11.

@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.xiaomaoqiu.old.R;
+
+import com.xiaomaoqiu.pet.R;
 
 import java.util.List;
 

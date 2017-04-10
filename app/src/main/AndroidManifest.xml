@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiaomaoqiu.old"
+    package="com.xiaomaoqiu.pet"
     android:versionCode="201"
     android:versionName="2.0.0">
 
@@ -46,6 +46,29 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        <!--百度定位-->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+        <!--百度鹰眼轨迹-->
+        <service
+            android:name="com.baidu.trace.LBSTraceService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="jnKFRb1jx9fVALGpeBtM8SAwor1gkXqK" />
+        <!--<meta-data
+            android:name="com.baidu.android.lbs.API_KEY"
+            android:value="gC2deHEVcqClI2bMWPtvEGt5" />-->
+        <meta-data
+            android:name="com.baidu.android.lbs.API_KEY"
+            android:value="jnKFRb1jx9fVALGpeBtM8SAwor1gkXqK" />
+
+
+
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.user.LoginActivity"
             android:theme="@style/NoTitleBar">
@@ -125,7 +148,7 @@
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.xiaomaoqiu.old.com.xiaomaoqiu.now.bussiness.Device.HardwareActivity" />
+        <activity android:name="com.xiaomaoqiu.now.bussiness.Device.DeviceActivity" />
         <activity android:name="com.xiaomaoqiu.old.ui.mainPages.pageLocate.FindPetActivity"
             android:label="@string/pet_finding"></activity>
     </application>

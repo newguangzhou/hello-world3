@@ -5,8 +5,8 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.ui.dialog.BatteryNoticeDialog;
+import com.xiaomaoqiu.pet.R;
 
 /**
  * Created by huangjx on 2016/7/24.

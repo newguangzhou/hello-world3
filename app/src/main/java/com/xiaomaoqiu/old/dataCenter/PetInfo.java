@@ -10,14 +10,14 @@ import java.util.Scanner;
  */
 public class PetInfo {
 
-//    public interface Callback_PetInfo{
-//        void onPetInfoChanged(PetInfo petInfo,int nFieldMask);
-//    }
+    public interface Callback_PetInfo{
+        void onPetInfoChanged(PetInfo petInfo,int nFieldMask);
+    }
 
-//    public interface Callback_PetLocating
-//    {
-//        void onLocateResult(boolean bFound, double latitude, double longitude);
-//    }
+    public interface Callback_PetLocating
+    {
+        void onLocateResult(boolean bFound, double latitude, double longitude);
+    }
 
     static public class Date
     {

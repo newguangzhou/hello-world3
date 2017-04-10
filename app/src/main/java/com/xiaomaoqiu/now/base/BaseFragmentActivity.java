@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.pet.R;
+
 
 /**
  * Created by Administrator on 2015/6/17.

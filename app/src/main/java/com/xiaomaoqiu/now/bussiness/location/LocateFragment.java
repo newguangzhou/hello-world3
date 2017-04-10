@@ -10,29 +10,33 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.old.R;
+import com.baidu.mapapi.map.MapView;
+import com.xiaomaoqiu.now.map.main.IMapCallBack;
+import com.xiaomaoqiu.now.map.main.MapModule;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
+import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.pet.R;
 
 
 /**
  * Created by Administrator on 2017/1/14.
  */
-
-public class LocateFragment extends BaseFragment implements View.OnClickListener
-        , ILocateView {
+@SuppressLint("WrongConstant")
+public class LocateFragment extends BaseFragment implements View.OnClickListener,PetInfo.Callback_PetLocating,PetInfo.Callback_PetInfo
+        , ILocateView,IMapCallBack {
 
     private ImageView mLightstatusView,mFindPetView,mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
     private TextView petLocation,walkpetNoticeView;
     private LinearLayout petLocContainer;
 
-//    private MapModule mMapMpdule;
+    private MapModule mMapMpdule;
     private LocatePresenter mPresenter;
 
     @Override
@@ -40,7 +44,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.main_tab_locate, container, false);
         initView(rootView);
-//        initMapModule(rootView);
+        initMapModule(rootView);
         initData();
         return rootView;
     }
@@ -62,20 +66,20 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         walkpetNoticeView=(TextView)root.findViewById(R.id.locate_walk_notice);
     }
 
-//    private void initMapModule(View rootview){
-//        MapView mapView=(MapView)rootview.findViewById(R.id.bmapView);
-//        mMapMpdule=now MapModule(mapView);
-//        mMapMpdule.setMapCallBack(this);
-//        mapPetAvaterView=now MapPetAvaterView(rootview.getContext());
-//        mMapMpdule.setPetMarkerView(mapPetAvaterView);
-//        mMapMpdule.setMapcenterWithPhone();
-//        mMapMpdule.setAddressParseListener(now addressParseListener() {
-//            @Override
-//            public void onAddressparsed(String address) {
-//                petLocation.setText(address);
-//            }
-//        });
-//    }
+    private void initMapModule(View rootview){
+        MapView mapView=(MapView)rootview.findViewById(R.id.bmapView);
+        mMapMpdule=new MapModule(mapView);
+        mMapMpdule.setMapCallBack(this);
+        mapPetAvaterView=new MapPetAvaterView(rootview.getContext());
+        mMapMpdule.setPetMarkerView(mapPetAvaterView);
+        mMapMpdule.setMapcenterWithPhone();
+        mMapMpdule.setAddressParseListener(new addressParseListener() {
+            @Override
+            public void onAddressparsed(String address) {
+                petLocation.setText(address);
+            }
+        });
+    }
 
     private void initData(){
         mPresenter=new LocatePresenter(this);
@@ -85,9 +89,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-//        if(null == mMapMpdule || null == mPresenter){
-//            return;
-//        }
+        if(null == mMapMpdule || null == mPresenter){
+            return;
+        }
         switch (v.getId()){
             case R.id.btn_find_pet:
                 //狗丢了
@@ -95,7 +99,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_phone_center:
                 //手机位置
-//                mMapMpdule.setMapcenterWithPhone();
+                mMapMpdule.setMapcenterWithPhone();
                 break;
             case R.id.btn_pet_center:
                 //狗狗位置
@@ -121,14 +125,14 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setEnabled(true);
                 mWalkPetView.setSelected(!petInfo.getAtHome());
             }
-//            if(null != mMapMpdule && !petInfo.getAtHome()){
-//                mMapMpdule.resetToWalkMode();
-//                walkpetNoticeView.setVisibility(View.VISIBLE);
-//                petLocContainer.setVisibility(View.GONE);
-//            }else{
-//                walkpetNoticeView.setVisibility(View.GONE);
-//                petLocContainer.setVisibility(View.VISIBLE);
-//            }
+            if(null != mMapMpdule && !petInfo.getAtHome()){
+                mMapMpdule.resetToWalkMode();
+                walkpetNoticeView.setVisibility(View.VISIBLE);
+                petLocContainer.setVisibility(View.GONE);
+            }else{
+                walkpetNoticeView.setVisibility(View.GONE);
+                petLocContainer.setVisibility(View.VISIBLE);
+            }
         }
         if((nFieldMask & PetInfo.FieldMask_Header) != 0)
         {
@@ -153,13 +157,13 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             return;
         }
         mFindPetView.setEnabled(true);
-//        mMapMpdule.setMapcenterWithPet(latitude,longitude);
+        mMapMpdule.setMapcenterWithPet(latitude,longitude);
     }
 
     @Override
     public void onShowPhoneLoc() {
-//        mMapMpdule.setMapMode(MapModule.MODE_WALK_PET);//遛狗模式
-//        mMapMpdule.setMapcenterWithPhone();
+        mMapMpdule.setMapMode(MapModule.MODE_WALK_PET);//遛狗模式
+        mMapMpdule.setMapcenterWithPhone();
     }
 
     @Override
@@ -189,16 +193,16 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 public void onClick(View v) {
                     mFindPetView.setSelected(true);
                     mFindPetView.setEnabled(false);
-//                    if (null != mMapMpdule) {
-//                        mMapMpdule.startFindPet();
-//                    }
+                    if (null != mMapMpdule) {
+                        mMapMpdule.startFindPet();
+                    }
                     if (null != mPresenter) {
                         mPresenter.queryPetLocation(true);
                     }
                 }
             });
         }else{
-//            mMapMpdule.onCloseFindPetMode();
+            mMapMpdule.onCloseFindPetMode();
             mFindPetView.setSelected(false);
             new DialogToast(getContext(),"已关闭紧急追踪模式。","确定",null);
         }
@@ -231,17 +235,17 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
      * @param isStart
      */
     private void showWalkPetDialog(boolean isStart){
-//        if(null == mMapMpdule){
-//            return;
-//        }
+        if(null == mMapMpdule){
+            return;
+        }
         if(isStart){
             AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if(mMapMpdule.startWalkPet())
-//                    {
-//                        mWalkPetView.setEnabled(false);
-//                    }
+                    if(mMapMpdule.startWalkPet())
+                    {
+                        mWalkPetView.setEnabled(false);
+                    }
                 }
             });
         }else{
@@ -249,16 +253,16 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 @Override
                 public void onClick(View v) {
                     mWalkPetView.setEnabled(false);
-//                    mMapMpdule.stopWalkPet();
+                    mMapMpdule.stopWalkPet();
                 }
             });
         }
     }
     @Override
     public void onDestroy() {
-//        if(null != mMapMpdule){
-//            mMapMpdule.onDestroy();
-//        }
+        if(null != mMapMpdule){
+            mMapMpdule.onDestroy();
+        }
         if(null != mPresenter){
             mPresenter.release();
         }
@@ -267,18 +271,18 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onPause() {
-//        if(null != mMapMpdule){
-//            mMapMpdule.onPause();
-//        }
+        if(null != mMapMpdule){
+            mMapMpdule.onPause();
+        }
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        if(null != mMapMpdule){
-//            mMapMpdule.onResume();
-//        }
+        if(null != mMapMpdule){
+            mMapMpdule.onResume();
+        }
     }
 
  //todo 没人调

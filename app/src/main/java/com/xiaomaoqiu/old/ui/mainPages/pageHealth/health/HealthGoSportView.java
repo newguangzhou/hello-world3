@@ -17,10 +17,10 @@ import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
+import com.xiaomaoqiu.pet.R;
 
 import org.apache.http.Header;
 import org.json.JSONObject;

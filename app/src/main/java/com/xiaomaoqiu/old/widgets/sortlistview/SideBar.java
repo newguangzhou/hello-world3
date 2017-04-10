@@ -11,7 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.pet.R;
+
 
 public class SideBar extends View {
 	// 触摸事件

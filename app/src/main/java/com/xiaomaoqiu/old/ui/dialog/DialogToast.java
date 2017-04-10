@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.DensityUtil;
+import com.xiaomaoqiu.pet.R;
 
 /**
  * Created by Administrator on 2016/12/31.

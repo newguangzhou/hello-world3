@@ -17,10 +17,10 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.util.SPUtil;
-import com.xiaomaoqiu.old.R;
 
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
+import com.xiaomaoqiu.pet.R;
 
 
 @SuppressLint("WrongConstant")

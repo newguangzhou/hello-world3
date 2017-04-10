@@ -16,7 +16,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.pet.R;
+
 
 /**
  * 自定义的圆角矩形ImageView，可以直接当组件在布局中使用。

@@ -6,8 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.pet.R;
 
 public class InputDialog extends BaseActivity {
     public static String TAG_VALUE = "value";

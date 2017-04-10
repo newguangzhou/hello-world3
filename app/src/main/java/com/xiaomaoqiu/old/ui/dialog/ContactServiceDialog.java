@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.DensityUtil;
+import com.xiaomaoqiu.pet.R;
 
 
 public class ContactServiceDialog extends Dialog {

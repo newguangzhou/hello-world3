@@ -20,7 +20,6 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
@@ -29,6 +28,7 @@ import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView;
 import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
+import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,7 +44,7 @@ import retrofit2.Response;
  */
 
 @SuppressLint("WrongConstant")
-public class PetFragment extends BaseFragment implements View.OnClickListener, AsyncImageTask.ImageCallback {
+public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInfo, View.OnClickListener, AsyncImageTask.ImageCallback {
 
     private HealthGoSportView mGoSportView;
     CircleProgressBar prog;

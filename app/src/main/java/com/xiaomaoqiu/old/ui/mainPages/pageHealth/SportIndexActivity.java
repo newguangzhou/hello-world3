@@ -7,11 +7,11 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.ChartIndexPresenter;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.IChartCallback;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.pet.R;
 
 import java.util.ArrayList;
 import java.util.List;

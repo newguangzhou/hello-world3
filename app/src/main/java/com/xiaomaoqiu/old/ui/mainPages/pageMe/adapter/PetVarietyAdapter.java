@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
+import com.xiaomaoqiu.pet.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class PetVarietyAdapter extends RecyclerView.Adapter<PetVarietyAdapter.Va
         }
         String[] petNames=context.getResources().getStringArray(R.array.petlist_name);
         TypedArray imgs=context.getResources().obtainTypedArray(R.array.petlist_img);
-        int defaValue=R.drawable.pet_variety_1;
+        int defaValue= R.drawable.pet_variety_1;
         for(int i=0;i<petNames.length;i++){
             pets.add(new PetInfo(imgs.getResourceId(i,defaValue),petNames[i]));
         }

@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter;
+package com.xiaomaoqiu.now.map.main;
 
 /**
  * Created by Administrator on 2017/1/15.

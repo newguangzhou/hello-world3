@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.old.ui.dialog;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -9,8 +10,9 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.old.R;
+import com.xiaomaoqiu.pet.R;
 
+@SuppressLint("WrongConstant")
 public class GoHomeConfirmDialog_RAW_Activity extends Activity {
 	//private MyDialog dialog;
 	private LinearLayout layout;

@@ -4,6 +4,9 @@
 #-keep class vi.com.gdi.bgl.android.**{*;}
 #-keep class com.dhtvip.discEasy.broadcastReceiver.**{*;}
 
+-keep class com.baidu.**{*;}
+-keep class vi.com.gdi.bgl.android.**{*;}
+-keep class com.dhtvip.discEasy.broadcastReceiver.**{*;}
 
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}

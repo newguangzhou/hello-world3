@@ -13,13 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.widgets.sortlistview.CharacterParser;
 import com.xiaomaoqiu.old.widgets.sortlistview.ClearEditText;
 import com.xiaomaoqiu.old.widgets.sortlistview.PinyinComparator;
 import com.xiaomaoqiu.old.widgets.sortlistview.SideBar;
 import com.xiaomaoqiu.old.widgets.sortlistview.SortAdapter;
 import com.xiaomaoqiu.old.widgets.sortlistview.SortModel;
+import com.xiaomaoqiu.pet.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

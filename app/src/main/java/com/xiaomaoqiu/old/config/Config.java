@@ -3,8 +3,8 @@ package com.xiaomaoqiu.old.config;
 import android.content.Context;
 import android.util.Log;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.httpCache.AsyncHttpClient2;
+import com.xiaomaoqiu.pet.R;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

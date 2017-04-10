@@ -13,10 +13,10 @@ import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.old.widgets.BatteryView;
+import com.xiaomaoqiu.pet.R;
 
 @SuppressLint("WrongConstant")
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {

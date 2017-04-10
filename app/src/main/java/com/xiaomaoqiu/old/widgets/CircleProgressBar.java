@@ -15,8 +15,8 @@ import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
-import com.xiaomaoqiu.old.R;
 import com.xiaomaoqiu.old.utils.DensityUtil;
+import com.xiaomaoqiu.pet.R;
 
 import java.lang.reflect.Field;
 

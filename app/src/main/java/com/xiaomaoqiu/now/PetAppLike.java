@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -37,8 +38,8 @@ public class PetAppLike extends DefaultApplicationLike {
 
 //        Config.init(mcontext);
 
-        // 初始化百度地图SDK
-//        SDKInitializer.initialize(mcontext);
+//         初始化百度地图SDK
+        SDKInitializer.initialize(mcontext);
 
 //        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetInfo.class);
 //        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetLocating.class);
