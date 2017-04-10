@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.pet.ui.mainPages.pageLocate.presenter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.SystemClock;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.CoordinateConverter;
 import com.xiaomaoqiu.pet.R;
 import com.xiaomaoqiu.pet.tracer.PetTrancer;
 import com.xiaomaoqiu.pet.tracer.listeners.onStartTracerListener;
@@ -36,7 +38,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/1/13.
  */
-
+@SuppressLint("WrongConstant")
 public class MapModule implements BDLocationListener, onTracingListener, onStartTracerListener, onStopTracerListener {
     private static final String TAG="MapModule";
     public static final int MODE_NORMAL=0;//定位模式
@@ -220,18 +222,23 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
         if(null == mPetMarker){
             initPetMarker();
         }
-        LatLng location=new LatLng(latitude,longitude);
-        mPetMarker.setPosition(location);
+        LatLng sourceLatLng=new LatLng(latitude,longitude);
+
+        LatLng desLatLng=converterLatLng(sourceLatLng);
+
+
+
+        mPetMarker.setPosition(desLatLng);
         if(MODE_FINDED_PET >= mMode) {
             mPetMarker.setVisible(true);
         }else{
             mPetMarker.setVisible(false);
         }
-        MapLocationParser.queryLocationDesc(location,addressListener);
+        MapLocationParser.queryLocationDesc(desLatLng,addressListener);
         if(MODE_FINDING_PET ==  mMode){
             setPetPosWithFindMode();
         }
-        setCenter(location,300);
+        setCenter(desLatLng,300);
     }
 
     /**
@@ -564,5 +571,17 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
             mapCallBack.onTraceSuccess(isStart);
         }
         mWalkModeFlag=0;
+    }
+
+
+
+    //  // 将google地图、soso地图、aliyun地图、mapabc地图和amap地图// 所用坐标转换成百度坐标
+    public LatLng converterLatLng(LatLng sourceLatLng ) {
+        CoordinateConverter converter = new CoordinateConverter();
+        converter.from(CoordinateConverter.CoordType.COMMON);
+// sourceLatLng待转换坐标
+        converter.coord(sourceLatLng);
+        LatLng desLatLng = converter.convert();
+        return desLatLng;
     }
 }

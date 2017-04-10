@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.pet.ui.mainPages;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ import static com.xiaomaoqiu.pet.R.id.tv_location;
 /**
  * Created by Administrator on 2017/1/14.
  */
-
+@SuppressLint("WrongConstant")
 public class LocateFragment extends FragmentEx implements View.OnClickListener, PetInfo.Callback_PetInfo
         , PetInfo.Callback_PetLocating,DeviceInfo.Callback_DeviceInfo,ILocateView, IMapCallBack {
 
