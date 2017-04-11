@@ -11,29 +11,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.map.MapView;
+import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.map.main.IMapCallBack;
 import com.xiaomaoqiu.now.map.main.MapModule;
-import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
-import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 /**
  * Created by Administrator on 2017/1/14.
  */
 @SuppressLint("WrongConstant")
-public class LocateFragment extends BaseFragment implements View.OnClickListener,PetInfo.Callback_PetLocating,PetInfo.Callback_PetInfo
-        , ILocateView,IMapCallBack {
+public class LocateFragment extends BaseFragment implements View.OnClickListener
+        , ILocateView, IMapCallBack {
 
-    private ImageView mLightstatusView,mFindPetView,mWalkPetView;
+    private ImageView mLightstatusView, mFindPetView, mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
-    private TextView petLocation,walkpetNoticeView;
+    private TextView petLocation, walkpetNoticeView;
     private LinearLayout petLocContainer;
 
     private MapModule mMapMpdule;
@@ -49,28 +53,28 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         return rootView;
     }
 
-    private void initView(View root){
-        mFindPetView=(ImageView)root.findViewById(R.id.btn_find_pet);
+    private void initView(View root) {
+        mFindPetView = (ImageView) root.findViewById(R.id.btn_find_pet);
         mFindPetView.setOnClickListener(this);
         root.findViewById(R.id.btn_phone_center).setOnClickListener(this);
         root.findViewById(R.id.btn_pet_center).setOnClickListener(this);
-        mWalkPetView=(ImageView)root.findViewById(R.id.btn_playing_pet);
+        mWalkPetView = (ImageView) root.findViewById(R.id.btn_playing_pet);
         mWalkPetView.setSelected(false);
         mWalkPetView.setOnClickListener(this);
-        mLightstatusView=(ImageView)root.findViewById(R.id.btn_open_light);
+        mLightstatusView = (ImageView) root.findViewById(R.id.btn_open_light);
         mLightstatusView.setOnClickListener(this);
         mLightstatusView.setEnabled(false);
-        petLocation=(TextView)root.findViewById(R.id.tv_location);
+        petLocation = (TextView) root.findViewById(R.id.tv_location);
         petLocation.setText("");
-        petLocContainer=(LinearLayout)root.findViewById(R.id.locate_addr_conotainer);
-        walkpetNoticeView=(TextView)root.findViewById(R.id.locate_walk_notice);
+        petLocContainer = (LinearLayout) root.findViewById(R.id.locate_addr_conotainer);
+        walkpetNoticeView = (TextView) root.findViewById(R.id.locate_walk_notice);
     }
 
-    private void initMapModule(View rootview){
-        MapView mapView=(MapView)rootview.findViewById(R.id.bmapView);
-        mMapMpdule=new MapModule(mapView);
+    private void initMapModule(View rootview) {
+        MapView mapView = (MapView) rootview.findViewById(R.id.bmapView);
+        mMapMpdule = new MapModule(mapView);
         mMapMpdule.setMapCallBack(this);
-        mapPetAvaterView=new MapPetAvaterView(rootview.getContext());
+        mapPetAvaterView = new MapPetAvaterView(rootview.getContext());
         mMapMpdule.setPetMarkerView(mapPetAvaterView);
         mMapMpdule.setMapcenterWithPhone();
         mMapMpdule.setAddressParseListener(new addressParseListener() {
@@ -81,18 +85,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         });
     }
 
-    private void initData(){
-        mPresenter=new LocatePresenter(this);
+    private void initData() {
+        mPresenter = new LocatePresenter(this);
         mPresenter.onInit();
+        EventBus.getDefault().register(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        if(null == mMapMpdule || null == mPresenter){
+        if (null == mMapMpdule || null == mPresenter) {
             return;
         }
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_find_pet:
                 //狗丢了
                 showFindpetDialog(!mFindPetView.isSelected());
@@ -117,47 +122,48 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     }
 
 
-   //todo 更新逻辑
-    public void onPetInfoChanged(PetInfo petInfo, int nFieldMask) {
-        if((nFieldMask & petInfo.FieldMask_AtHome) != 0 )
-        {
-            if(null != mWalkPetView){
+    //todo 更新逻辑
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onPetInfoChanged(EventManager.notifyPetInfoChange event) {
+
+            if (null != mWalkPetView) {
                 mWalkPetView.setEnabled(true);
-                mWalkPetView.setSelected(!petInfo.getAtHome());
+                mWalkPetView.setSelected(!PetInfoInstance.getInstance().getAtHome());
             }
-            if(null != mMapMpdule && !petInfo.getAtHome()){
+            if (null != mMapMpdule && !PetInfoInstance.getInstance().getAtHome()) {
                 mMapMpdule.resetToWalkMode();
                 walkpetNoticeView.setVisibility(View.VISIBLE);
                 petLocContainer.setVisibility(View.GONE);
-            }else{
+            } else {
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
             }
-        }
-        if((nFieldMask & PetInfo.FieldMask_Header) != 0)
-        {
-            mapPetAvaterView.setAvaterUrl(petInfo.getHeaderImg());
-        }
+
+        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+
     }
 
-    //TODO 设备更新
-    public void onDeviceInfoChanged(DeviceInfo deviceInfo) {
-        if(null != mPresenter){
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceInfoChanged(EventManager.notifyDeviceStateChange event) {
+        if (null != mPresenter) {
             mPresenter.queryLightStatus();
         }
     }
 
-   //todo 回调逻辑
-    public void onLocateResult(boolean bFound, double latitude, double longitude) {
-        if(!bFound){
-            onFail(getContext().getResources().getString(R.string.pet_locate_failed));
-            if(null != mPresenter && mPresenter.isFindPetMode()){
-                mFindPetView.setSelected(false);
-            }
-            return;
-        }
+    //todo 回调逻辑
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onLocateResult(EventManager.notifyPetLocationChange event) {
+//        boolean bFound, double latitude, double longitude
+        //todo bFound
+//        if (!bFound) {
+//            onFail(getContext().getResources().getString(R.string.pet_locate_failed));
+//            if (null != mPresenter && mPresenter.isFindPetMode()) {
+//                mFindPetView.setSelected(false);
+//            }
+//            return;
+//        }
         mFindPetView.setEnabled(true);
-        mMapMpdule.setMapcenterWithPet(latitude,longitude);
+        mMapMpdule.setMapcenterWithPet(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude);
     }
 
     @Override
@@ -167,26 +173,27 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void onChangeLightStatus(boolean isOpen,boolean isFromView) {
+    public void onChangeLightStatus(boolean isOpen, boolean isFromView) {
         mLightstatusView.setEnabled(true);
         mLightstatusView.setSelected(isOpen);
-        if(isFromView && !isOpen){
-            new DialogToast(getContext(),"追踪器灯光已关闭。","确定",null);
+        if (isFromView && !isOpen) {
+            new DialogToast(getContext(), "追踪器灯光已关闭。", "确定", null);
         }
     }
 
     @SuppressLint("WrongConstant")
     @Override
     public void onFail(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
      * 狗丢了对话框
+     *
      * @param isOpen 是丢狗模式还是取消
      */
-    private void showFindpetDialog(boolean isOpen){
-        if(isOpen) {
+    private void showFindpetDialog(boolean isOpen) {
+        if (isOpen) {
             String conent = getContext().getResources().getString(R.string.map_is_findpet);
             DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                 @Override
@@ -201,30 +208,31 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     }
                 }
             });
-        }else{
+        } else {
             mMapMpdule.onCloseFindPetMode();
             mFindPetView.setSelected(false);
-            new DialogToast(getContext(),"已关闭紧急追踪模式。","确定",null);
+            new DialogToast(getContext(), "已关闭紧急追踪模式。", "确定", null);
         }
     }
 
     /**
      * 闪光灯开启关闭对话框
+     *
      * @param isOpen
      */
-    private void showLightDialog(final boolean isOpen){
-        if(isOpen){
-            String conent=getContext().getResources().getString(R.string.map_light_open);
+    private void showLightDialog(final boolean isOpen) {
+        if (isOpen) {
+            String conent = getContext().getResources().getString(R.string.map_light_open);
             DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(null != mPresenter){
+                    if (null != mPresenter) {
                         mPresenter.setLightStatus(isOpen);
                     }
                 }
             });
-        }else{
-            if(null != mPresenter){
+        } else {
+            if (null != mPresenter) {
                 mPresenter.setLightStatus(false);
             }
         }
@@ -232,23 +240,23 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     /**
      * 遛狗按钮点击
+     *
      * @param isStart
      */
-    private void showWalkPetDialog(boolean isStart){
-        if(null == mMapMpdule){
+    private void showWalkPetDialog(boolean isStart) {
+        if (null == mMapMpdule) {
             return;
         }
-        if(isStart){
+        if (isStart) {
             AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(mMapMpdule.startWalkPet())
-                    {
+                    if (mMapMpdule.startWalkPet()) {
                         mWalkPetView.setEnabled(false);
                     }
                 }
             });
-        }else{
+        } else {
             AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -258,20 +266,23 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             });
         }
     }
+
     @Override
     public void onDestroy() {
-        if(null != mMapMpdule){
+        if (null != mMapMpdule) {
             mMapMpdule.onDestroy();
         }
-        if(null != mPresenter){
+        if (null != mPresenter) {
             mPresenter.release();
         }
+
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 
     @Override
     public void onPause() {
-        if(null != mMapMpdule){
+        if (null != mMapMpdule) {
             mMapMpdule.onPause();
         }
         super.onPause();
@@ -280,19 +291,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
-        if(null != mMapMpdule){
+        if (null != mMapMpdule) {
             mMapMpdule.onResume();
         }
     }
 
- //todo 没人调
+    //todo 没人调
     public void onTraceSuccess(boolean isStart) {
-        if(null == mPresenter){
+        if (null == mPresenter) {
             return;
         }
-        if(isStart){
+        if (isStart) {
             mPresenter.goSport();
-        }else{
+        } else {
             mPresenter.goHome();
         }
     }

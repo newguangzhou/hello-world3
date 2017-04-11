@@ -3,13 +3,16 @@ package com.xiaomaoqiu.now.bussiness.user;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,11 +108,15 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     void initData() {
+        String strPhone = SPUtil.getPhoneNumber();
+        m_editPhone.setText(strPhone);
         Boolean bLogin = SPUtil.getLoginStatus();
         if (bLogin) {
-            //todo 如果已经登录是什么样的业务逻辑
-            String strPhone = SPUtil.getPhoneNumber();
-            m_editPhone.setText(strPhone);
+
+            //todo 如果已经登录是什么样的业务逻辑,现在先处理成直接调转到主页
+            Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -189,6 +196,45 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 }
             }
         }, 1000);
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            //获取输入框当前的location位置
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击的是输入框区域，保留点击EditText的事件
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

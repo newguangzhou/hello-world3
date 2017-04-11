@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.dialog.PickSportNumberDialog_RAW_Activity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
@@ -21,7 +21,7 @@ import com.xiaomaoqiu.pet.R;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
-
+@SuppressLint("WrongConstant")
 public class HealthIndexActivity extends BaseActivity implements PickSportNumberDialog_RAW_Activity.OnPickNumberListener, View.OnClickListener {
 
     static int REQ_CODE_GO_OUT = 1;
@@ -66,7 +66,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 }
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID());
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id());
     }
 
     @Override
@@ -80,7 +80,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                     Log.v("http", "pet.activity:" + response.toString());
                     HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                     if (ret == HttpCode.EC_SUCCESS) {
-                        UserMgr.INSTANCE.setPetAtHome(false);
+                        PetInfoInstance.getInstance().setAtHome(false);
                     }
                 }
                 @Override
@@ -89,7 +89,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                     Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
                 }
 
-            },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
+            },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
 
             finish();
         }
@@ -113,7 +113,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
             }
 
-        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),number );
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
 
     }
 
@@ -121,7 +121,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.health_index_bt_sport:
-                if(UserMgr.INSTANCE.getPetInfo().getAtHome())
+                if(PetInfoInstance.getInstance().getAtHome())
                 {
                     Intent intent = new Intent(HealthIndexActivity.this,GoOutConfirmDialog_RAW_Activity.class);
                     startActivityForResult(intent,REQ_CODE_GO_OUT );

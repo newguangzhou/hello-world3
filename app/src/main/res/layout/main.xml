@@ -23,7 +23,7 @@
 				android:src="@drawable/home_text_xmq"/>
 
 
-			<com.xiaomaoqiu.old.widgets.BatteryView
+			<com.xiaomaoqiu.now.view.BatteryView
 				android:id="@+id/batteryView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

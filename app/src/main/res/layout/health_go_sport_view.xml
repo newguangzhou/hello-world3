@@ -1,114 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <!--去运动-->
     <LinearLayout
         android:id="@+id/go_sport_sport_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="36dp"
         android:layout_marginRight="16dp"
-        android:layout_centerInParent="true"
         android:orientation="vertical"
         android:visibility="invisible">
+
         <LinearLayout
             android:id="@+id/go_sport_sport_ggspeak"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="bottom"
-            android:paddingTop="44dp"
             android:layout_marginRight="16dp"
-            android:paddingLeft="80dp">
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingLeft="80dp"
+            android:paddingTop="44dp">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/go_sport_top_dialog_back"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/go_sport_top_dialog_back" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="23dp"
+                android:background="@drawable/shape_dialog_background"
                 android:paddingBottom="23dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:background="@drawable/shape_dialog_background"
-                android:textSize="16sp"
+                android:paddingTop="23dp"
+                android:text="@string/go_sport_ggspeak_text"
                 android:textColor="@color/total_color_7"
-                android:text="@string/go_sport_ggspeak_text"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:gravity="top"
-            android:orientation="horizontal"
-            android:layout_marginTop="40dp">
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_weight="1"
                 android:background="@drawable/shape_dialog_background"
+                android:orientation="vertical"
+                android:paddingBottom="39dp"
                 android:paddingLeft="17.5dp"
                 android:paddingRight="17.5dp"
-                android:paddingTop="37dp"
-                android:paddingBottom="39dp">
+                android:paddingTop="37dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <Button
                         android:id="@+id/go_sport_bt_sport_ok"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
                         style="@style/go_spoert_back_bt_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginRight="25dp"
-                        android:text="嗯！出去玩啦！"/>
+                        android:layout_weight="1"
+                        android:text="嗯！出去玩啦！" />
+
                     <Button
                         android:id="@+id/go_sport_bt_sport_quit"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
                         style="@style/go_spoert_back_bt_style"
-                        android:text="暂不出门哟~"/>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="暂不出门哟~" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="13dp"
-                    android:background="@color/total_color_4"/>
+                    android:layout_marginTop="15dp"
+                    android:background="@color/total_color_4" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/total_color_7"
                     android:gravity="center"
-                    android:text="@string/go_sport_sport_btask_info"/>
+                    android:text="@string/go_sport_sport_btask_info"
+                    android:textColor="@color/total_color_7"
+                    android:textSize="16sp" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
-                    android:background="@color/total_color_4"/>
+                    android:layout_marginTop="15dp"
+                    android:background="@color/total_color_4" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/total_color_7"
                     android:gravity="center"
-                    android:text="@string/go_sport_sport_btquit_info"/>
-
+                    android:text="@string/go_sport_sport_btquit_info"
+                    android:textColor="@color/total_color_7"
+                    android:textSize="16sp" />
 
 
             </LinearLayout>
@@ -117,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/go_sport_bottom_dialog_back"/>
+                android:src="@drawable/go_sport_bottom_dialog_back" />
         </LinearLayout>
 
 
@@ -128,58 +135,78 @@
         android:id="@+id/go_sport_back_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="36dp"
         android:layout_centerInParent="true"
-        android:paddingLeft="15.5dp"
-        android:paddingRight="15.5dp"
-        android:paddingBottom="26dp"
-        android:paddingTop="123dp"
+        android:layout_margin="36dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/shape_dialog_background"
+        android:orientation="vertical"
+        android:paddingBottom="26dp"
+        android:paddingLeft="15.5dp"
+        android:paddingRight="15.5dp"
+        android:paddingTop="123dp"
         android:visibility="invisible">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/total_color_1"
+            android:layout_marginBottom="36dp"
             android:gravity="center"
             android:text="@string/go_sport_backtext"
-            android:layout_marginBottom="36dp"/>
+            android:textColor="@color/total_color_1"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/go_sport_bt_already_bac"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
                 style="@style/go_spoert_back_bt_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
-                android:text="已安全到家"/>
+                android:layout_weight="1"
+                android:text="已安全到家" />
+
             <Button
                 android:id="@+id/go_sport_bt_not_back"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
                 style="@style/go_spoert_back_bt_style"
-                android:text="还没到家哟"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="还没到家哟" />
         </LinearLayout>
     </LinearLayout>
 
     <!--头像-->
-    <com.xiaomaoqiu.old.widgets.CircleImageView
+    <!--<com.xiaomaoqiu.old.widgets.CircleImageView-->
+    <!--android:id="@+id/go_sport_head"-->
+    <!--android:layout_width="70dp"-->
+    <!--android:layout_height="70dp"-->
+    <!--android:src="@drawable/tab_health_head_defult"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:layout_marginTop="12dp"-->
+    <!--app:inner_padding="1.5dp"-->
+    <!--app:border_width="1.5dp"-->
+    <!--app:border_color="@color/total_color_2"/>-->
+
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/go_sport_head"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/tab_health_head_defult"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
-        app:inner_padding="1.5dp"
-        app:border_width="1.5dp"
-        app:border_color="@color/total_color_2"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        fresco:fadeDuration="300"
+        fresco:actualImageScaleType="focusCrop"
+
+        fresco:placeholderImage="@drawable/tab_health_head_defult"
+        fresco:placeholderImageScaleType="fitCenter"
+
+        fresco:failureImage="@drawable/tab_health_head_defult"
+        fresco:failureImageScaleType="centerInside"
+        fresco:roundedCornerRadius="1.5dp"
+        />
 
 </RelativeLayout>

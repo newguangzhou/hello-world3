@@ -3,15 +3,23 @@ package com.xiaomaoqiu.now.bussiness.location;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.bean.nocommon.LightStatusBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
+import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 
 /**
@@ -19,8 +27,6 @@ import org.json.JSONObject;
  */
 
 public class LocatePresenter {
-    public static final String GET_LIGHT_STATUS="device.get_light_status";
-    public static final String SET_LIGHT_STATUS="device.swicth_light";
     private ILocateView locateView;
 
     private boolean isFindPetMode=false;
@@ -33,15 +39,15 @@ public class LocatePresenter {
         if(null == locateView){
             return;
         }
-        if(UserMgr.INSTANCE.getPetInfo().getAtHome() == false)
+        if(PetInfoInstance.getInstance().getAtHome() == false)
         {
             //宠物不在家，显示手机定位(遛狗模式)
             locateView.onShowPhoneLoc();
-        }/*else if(UserMgr.INSTANCE.getPetInfo().getPetID() != -1) {
+        }/*else if(petInfoInstance.getInstance().getPet_id() != -1) {
             //宠物在家，查询宠物位置
-            PetInfoInstance.getPetInfoInstance().getPetLocation();
+            PetInfoInstance.getInstance().getPetLocation();
         }*/
-        PetInfoInstance.getPetInfoInstance().getPetLocation();
+        PetInfoInstance.getInstance().getPetLocation();
         queryLightStatus();
 
     }
@@ -51,7 +57,7 @@ public class LocatePresenter {
      */
     public void queryPetLocation(boolean isFindPetMode){
         this.isFindPetMode=isFindPetMode;
-        PetInfoInstance.getPetInfoInstance().getPetLocation();
+        PetInfoInstance.getInstance().getPetLocation();
     }
 
     public boolean isFindPetMode(){
@@ -68,7 +74,7 @@ public class LocatePresenter {
                 Log.v("http", "pet.activity:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    UserMgr.INSTANCE.setPetAtHome(false);
+                    PetInfoInstance.getInstance().setAtHome(false);
                 }
             }
             @Override
@@ -77,7 +83,7 @@ public class LocatePresenter {
                 onFail("网络连接失败！");
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
     }
 
     /**
@@ -90,7 +96,8 @@ public class LocatePresenter {
                 Log.v("http", "pet.activity:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    UserMgr.INSTANCE.setPetAtHome(true);
+//                    petInfoInstance.getInstance().setAtHome(true);
+                    PetInfoInstance.getInstance().setAtHome(true);
                 }
             }
 
@@ -99,7 +106,7 @@ public class LocatePresenter {
                 onFail("网络连接失败！");
             }
 
-        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),2 );
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
     }
 
     /**
@@ -109,23 +116,43 @@ public class LocatePresenter {
         if(null == locateView){
             return;
         }
-        HttpUtil.get2(GET_LIGHT_STATUS,new JsonHttpResponseHandler(){
+//        HttpUtil.get2(GET_LIGHT_STATUS,new JsonHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                if(null == response){
+//                    onFail("查询闪光灯状态失败，请稍后重试！");
+//                    return;
+//                }
+//                Log.v("http", "pet.location:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    int status = response.optInt("light_status");
+//                    onSuccessGetLightStatus(status == 1,false);
+//                }else{
+//                    onFail("查询闪光灯状态失败，请稍后重试！");
+//                }
+//            }
+//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei());
+
+        ApiUtils.getApiService().getLightStatus(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+                DeviceInfoInstance.getInstance().packBean.imei
+                ).enqueue(new XMQCallback<LightStatusBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                if(null == response){
-                    onFail("查询闪光灯状态失败，请稍后重试！");
-                    return;
-                }
-                Log.v("http", "pet.location:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+            public void onSuccess(Response<LightStatusBean> response, LightStatusBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    int status = response.optInt("light_status");
-                    onSuccessGetLightStatus(status == 1,false);
+                    onSuccessGetLightStatus(message.light_status == 1,false);
                 }else{
-                    onFail("查询闪光灯状态失败，请稍后重试！");
+                    ToastUtil.showTost("查询闪光灯状态失败，请稍后重试！");
                 }
             }
-        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei());
+
+            @Override
+            public void onFail(Call<LightStatusBean> call, Throwable t) {
+
+            }
+        });
     }
 
     /**
@@ -133,16 +160,31 @@ public class LocatePresenter {
      * @param bOpenLight
      */
     public void setLightStatus(final boolean bOpenLight){
-        HttpUtil.get2(SET_LIGHT_STATUS, new JsonHttpResponseHandler() {
+//        HttpUtil.get2(SET_LIGHT_STATUS, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                //{"status": 0, }
+//                if(null == response){
+//                    onFailChangeLightStatus(bOpenLight);
+//                    return;
+//                }
+//                Log.v("http", "device.swicth_light:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    onSuccessGetLightStatus(bOpenLight,true);
+//                }else{
+//                    onFailChangeLightStatus(bOpenLight);
+//                }
+//            }
+//
+//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei(),bOpenLight?1:0);
+
+        ApiUtils.getApiService().switchLightStatus(UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken(),
+                DeviceInfoInstance.getInstance().packBean.imei,bOpenLight?1:0
+        ).enqueue(new XMQCallback<BaseBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //{"status": 0, }
-                if(null == response){
-                    onFailChangeLightStatus(bOpenLight);
-                    return;
-                }
-                Log.v("http", "device.swicth_light:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
                     onSuccessGetLightStatus(bOpenLight,true);
                 }else{
@@ -150,7 +192,11 @@ public class LocatePresenter {
                 }
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei(),bOpenLight?1:0);
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
     }
 
     private void onSuccessGetLightStatus(boolean isOpen,boolean isFromView){

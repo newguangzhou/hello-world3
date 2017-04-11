@@ -8,6 +8,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.xiaomaoqiu.now.Environment;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.util.ToastUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +39,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 return;
             }
         }
+        ToastUtil.showNetError();
         onFail(call, null);
     }
 

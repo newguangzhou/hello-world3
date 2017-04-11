@@ -25,8 +25,12 @@ public class SPUtil {
     public static final String TOKEN = "token";
     //宠物id
     public static final String PET_ID = "petId";
+    //宠物name
+    public static final String PET_NAME = "petName";
     //宠物描述
     public static final String PET_DESCRIPTION = "petDescription";
+    //宠物是否在家
+    public static final String PET_AT_HOME = "petAtHome";
     //体重
     public static final String PET_WEIGHT = "petWeight";
 
@@ -47,18 +51,18 @@ public class SPUtil {
     public static final String PET_TYPE_ID = "pet_type_id";
 
 
-
-
     //设备电量级别
     public static final String BATTERY_LEVEL = "battery_level";
 
     //firmware_version
-    public static final String FIRMWARE_VERSION="firmware_version";
+    public static final String FIRMWARE_VERSION = "firmware_version";
 
     //设备名称
-    public static final String DEVICE_NAME="device_name";
+    public static final String DEVICE_NAME = "device_name";
     //sim卡iccid信息
-    public static final String SIM_ICCID="iccid";
+    public static final String SIM_ICCID = "iccid";
+    //设备是否存在
+    public static final String DEVICE_EXIST = "device_exist";
 
 
     public static String getPhoneNumber() {
@@ -99,6 +103,14 @@ public class SPUtil {
 
     public static void putPetId(long petid) {
         putLong(PET_ID, petid);
+    }
+
+    public static String getPetName() {
+        return getString(PET_NAME);
+    }
+
+    public static void putPetName(String name) {
+        putString(PET_NAME, name);
     }
 
     public static String getPetDescription() {
@@ -173,36 +185,53 @@ public class SPUtil {
         putInt(PET_TYPE_ID, id);
     }
 
-    public static int getBatteryLevel() {
-        return getInt(BATTERY_LEVEL);
+    public static float getBatteryLevel() {
+        return getFloat(BATTERY_LEVEL);
     }
 
-    public static void putBatteryLevel(int level) {
-        putInt(BATTERY_LEVEL, level);
+    public static void putBatteryLevel(float level) {
+        putFloat(BATTERY_LEVEL, level);
     }
-    public static String getFirmwareVersion(){
+
+    public static String getFirmwareVersion() {
         return getString(FIRMWARE_VERSION);
     }
-    public static void putFirmwareVersion(String firmwareVersion){
-        putString(FIRMWARE_VERSION,firmwareVersion);
+
+    public static void putFirmwareVersion(String firmwareVersion) {
+        putString(FIRMWARE_VERSION, firmwareVersion);
     }
-    public static String getDeviceName(){
+
+    public static String getDeviceName() {
         return getString(DEVICE_NAME);
     }
-    public static void putDeviceName(String name){
-    putString(DEVICE_NAME,name);
+
+    public static void putDeviceName(String name) {
+        putString(DEVICE_NAME, name);
     }
-    public static String getSimIccid(){
+
+    public static String getSimIccid() {
         return getString(SIM_ICCID);
     }
-    public static void putSimIccid(String iccid){
-        putString(SIM_ICCID,iccid);
+
+    public static void putSimIccid(String iccid) {
+        putString(SIM_ICCID, iccid);
     }
 
+    public static boolean getIsDeviceExist() {
+        return getBoolean(DEVICE_EXIST);
+    }
 
+    public static void putIsDeviceExist(boolean value) {
+        putBoolean(DEVICE_EXIST, value);
+    }
 
+    public static boolean getPetAtHome() {
+        return getBoolean(PET_AT_HOME);
+    }
 
-
+    public static void putPetAtHome(boolean value) {
+        putBoolean(PET_AT_HOME, value);
+    }
 
 
     private static SharedPreferences getSP() {

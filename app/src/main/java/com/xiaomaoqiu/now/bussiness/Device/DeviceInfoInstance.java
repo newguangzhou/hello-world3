@@ -13,8 +13,8 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.SPUtil;
-import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
+import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.old.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -41,58 +41,77 @@ public class DeviceInfoInstance {
     public static DeviceInfoInstance getInstance() {
         if (instance == null) {
             instance = new DeviceInfoInstance();
+            DeviceInfoBean bean = new DeviceInfoBean();
             instance.battery_level = SPUtil.getBatteryLevel();
-            instance.imei = SPUtil.getDeviceImei();
-            instance.firmware_version = SPUtil.getFirmwareVersion();
-            instance.deviceName = SPUtil.getDeviceName();
-            instance.iccid = SPUtil.getSimIccid();
-
+            bean.imei = SPUtil.getDeviceImei();
+            bean.firmware_version = SPUtil.getFirmwareVersion();
+            bean.device_name = SPUtil.getDeviceName();
+            bean.iccid = SPUtil.getSimIccid();
+            instance.isDeviceExist = SPUtil.getIsDeviceExist();
+            instance.packBean=bean;
         }
         return instance;
     }
 
-    public int battery_level;
+    //todo 这个东西比较特殊,没有包含到bean里面
+    public float battery_level;
+//
+//    //固件版本
+//    public String firmware_version;
+//
+//    public String imei;
+//
+//    public String deviceName;
+//
+//    public String iccid;
 
-    //固件版本
-    public String firmware_version;
+  public   DeviceInfoBean packBean;
 
-    public String imei;
 
-    public String deviceName;
-
-    public String iccid;
-
+    //设备是否存在
+    public boolean isDeviceExist = false;
+    //最近获取时间
+    public String lastGetTime = "";
 
     //保存设备信息
     public void saveDeviceInfo(DeviceInfoBean message) {
-        battery_level = message.battery_level;
+        instance.battery_level = message.battery_level / 100f;
         SPUtil.putBatteryLevel(battery_level);
-        firmware_version = message.firmware_version;
-        SPUtil.putFirmwareVersion(firmware_version);
-        imei = message.imei;
-        SPUtil.putDeviceImei(imei);
-        deviceName = message.device_name;
-        SPUtil.putDeviceName(deviceName);
-        iccid = message.iccid;
-        SPUtil.putSimIccid(iccid);
+        packBean. firmware_version = message.firmware_version;
+        SPUtil.putFirmwareVersion(packBean.firmware_version);
+        packBean. imei = message.imei;
+        SPUtil.putDeviceImei(packBean.imei);
+        packBean.device_name = message.device_name;
+        SPUtil.putDeviceName(packBean.device_name);
+        packBean.iccid = message.iccid;
+        SPUtil.putSimIccid(packBean.iccid);
+        isDeviceExist = true;
+        SPUtil.putIsDeviceExist(true);
+        lastGetTime = DateUtil.deviceInfoTime(System.currentTimeMillis());
+        EventBus.getDefault().post(new EventManager.notifyDeviceStateChange());
     }
+
     //清空设备信息
-    public void clearDeviceInfo(){
-        battery_level = 0;
+    public void clearDeviceInfo() {
+        battery_level = 0.0f;
         SPUtil.putBatteryLevel(0);
-        firmware_version = "";
+        packBean.firmware_version = "";
         SPUtil.putFirmwareVersion("");
-        imei = "";
+        packBean.imei = "";
         SPUtil.putDeviceImei("");
-        deviceName = "";
+        packBean.device_name = "";
         SPUtil.putDeviceName("");
-        iccid = "";
+        packBean.iccid = "";
         SPUtil.putSimIccid("");
+        isDeviceExist = false;
+        SPUtil.putIsDeviceExist(false);
+        lastGetTime = DateUtil.deviceInfoTime(System.currentTimeMillis());
+        EventBus.getDefault().post(new EventManager.notifyDeviceStateChange());
     }
 
     //获取设备信息
-    public  void getDeviceInfo() {
-        ApiUtils.getApiService().getDeviceInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getPetInfoInstance().getPet_id()).enqueue(new XMQCallback<DeviceInfoBean>() {
+    public void getDeviceInfo() {
+        ApiUtils.getApiService().getDeviceInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<DeviceInfoBean>() {
             @Override
             public void onSuccess(Response<DeviceInfoBean> response, DeviceInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -102,39 +121,59 @@ public class DeviceInfoInstance {
                     //追踪器不存在
                     //清空信息
                     clearDeviceInfo();
+                    ToastUtil.showTost("追踪器不存在，本地信息已清空");
                 }
             }
 
             @Override
             public void onFail(Call<DeviceInfoBean> call, Throwable t) {
-
             }
         });
     }
 
     //绑定设备
-    public void bindDevice(String imei){
+    public void bindDevice(String imei) {
 
         ApiUtils.getApiService().addDeviceInfo(UserInstance.getUserInstance().getUid(),
                 UserInstance.getUserInstance().getToken(),
-               imei,
+                imei,
                 "xmq_test"
-                ).enqueue(new XMQCallback<BaseBean>() {
+        ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    PetInfoInstance.getPetInfoInstance().getPetInfo();
+                    PetInfoInstance.getInstance().getPetInfo();
                     EventBus.getDefault().post(new EventManager.bindDeviceSuccess());
-                    Toast.makeText(PetAppLike.mcontext,"绑定成功",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(PetAppLike.mcontext,"网络问题，请重试",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PetAppLike.mcontext, "网络问题，请重试", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFail(Call<BaseBean> call, Throwable t) {
-                Toast.makeText(PetAppLike.mcontext,"网络问题，请重试",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //解除绑定
+    public void unbindDevice() {
+        ApiUtils.getApiService().removeDeviceInfo(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+                DeviceInfoInstance.getInstance().packBean.imei
+        ).enqueue(new XMQCallback<BaseBean>() {
+            @Override
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    clearDeviceInfo();
+                }
+            }
+
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
             }
         });
     }

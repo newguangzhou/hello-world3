@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:id="@+id/go_sport_back_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,15 +13,35 @@
     android:paddingTop="23dp"
     android:gravity="center_horizontal"
     android:background="@drawable/shape_dialog_background">
-    <com.xiaomaoqiu.old.widgets.CircleImageView
+    <!--<com.xiaomaoqiu.old.widgets.CircleImageView-->
+        <!--android:id="@+id/asyn_dialog_imgview"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:layout_marginBottom="26dp"-->
+        <!--android:src="@drawable/tab_health_head_defult"-->
+        <!--app:inner_padding="1.5dp"-->
+        <!--app:border_width="1.5dp"-->
+        <!--app:border_color="@color/total_color_2"/>-->
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/asyn_dialog_imgview"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="26dp"
-        android:src="@drawable/tab_health_head_defult"
-        app:inner_padding="1.5dp"
-        app:border_width="1.5dp"
-        app:border_color="@color/total_color_2"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        fresco:fadeDuration="300"
+        fresco:actualImageScaleType="focusCrop"
+
+        fresco:placeholderImage="@drawable/tab_health_head_defult"
+        fresco:placeholderImageScaleType="fitCenter"
+
+        fresco:failureImage="@drawable/tab_health_head_defult"
+        fresco:failureImageScaleType="centerInside"
+        fresco:roundedCornerRadius="1.5dp"
+        />
 
 <TextView
     android:layout_width="match_parent"

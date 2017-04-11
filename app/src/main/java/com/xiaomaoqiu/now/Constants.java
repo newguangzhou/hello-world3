@@ -7,6 +7,9 @@ package com.xiaomaoqiu.now;
 public class Constants {
 
     public static final int DEVICE_TYPE=1;
+
+    public static int Male = 1;
+    public static int Female = 2;
     //去运动
     public static final int TO_SPORT_ACTIVITY_TYPE=1;
     //回家
@@ -110,7 +113,7 @@ public class Constants {
             public static final String find="pet/find";
 
             /**
-             * 去运动
+             * d宠物动作，去运动还是回家
              */
             public static final String toActivity ="pet/activity";
 

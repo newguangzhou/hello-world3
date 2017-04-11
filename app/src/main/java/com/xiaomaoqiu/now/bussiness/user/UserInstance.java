@@ -17,7 +17,6 @@ public class UserInstance {
     public static UserInstance getUserInstance() {
         if (userInstance == null) {
             userInstance = new UserInstance();
-
             userInstance.m_bLogin=SPUtil.getLoginStatus();
             userInstance.m_strPhone=SPUtil.getPhoneNumber();
             userInstance.m_uid=SPUtil.getUid();
@@ -41,8 +40,14 @@ public class UserInstance {
         SPUtil.putLoginStatus(true);
         SPUtil.putUid(message.uid);
         SPUtil.putToken(message.token);
-
-
+    }
+    public void clearLoginState(){
+        m_bLogin=false;
+        m_uid =-1;
+        m_strToken = "";
+        SPUtil.putLoginStatus(false);
+        SPUtil.putUid(m_uid);
+        SPUtil.putToken("");
     }
     public long getUid()
     {

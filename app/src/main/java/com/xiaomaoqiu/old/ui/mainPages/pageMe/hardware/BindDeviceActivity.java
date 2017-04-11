@@ -1,6 +1,5 @@
 package com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -52,7 +51,8 @@ public class BindDeviceActivity extends BaseActivity {
                     showToast("请输入IMEI码！");
                     return;
                 }
-                DeviceInfoInstance.getInstance().bindDevice(inputImei.getText().toString());
+                String imei=inputImei.getText().toString();
+                DeviceInfoInstance.getInstance().bindDevice(imei);
             }
         });
         initView();
@@ -109,32 +109,28 @@ public class BindDeviceActivity extends BaseActivity {
         return m.matches();
     }
 
-    /**
-     * 绑定设备
-     * @param ImeiId
-     */
-    private void BindDeciveHttp(String ImeiId){
-        HttpUtil.get2("device.add_device_info",new JsonHttpResponseHandler(){
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("http", "device.add_device_info:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {
-                    PetInfoInstance.getPetInfoInstance().getPetInfo();
-//                    DeviceActivity.skip(BindDeviceActivity.this);
-                    finish();
-                }
-                else{
-                    showToast("设备绑定失败，请稍后重试！");
-                }
-            }
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),ImeiId,"xmq_test");
-    }
+//    /**
+//     * 绑定设备
+//     * @param ImeiId
+//     */
+//    private void BindDeciveHttp(String ImeiId){
+//        HttpUtil.get2("device.add_device_info",new JsonHttpResponseHandler(){
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                Log.v("http", "device.add_device_info:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    PetInfoInstance.getInstance().getPetInfo();
+////                    DeviceActivity.skip(BindDeviceActivity.this);
+//                    finish();
+//                }
+//                else{
+//                    showToast("设备绑定失败，请稍后重试！");
+//                }
+//            }
+//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),ImeiId,"xmq_test");
+//    }
 
 
-    public static void skipTo(Context context){
-        Intent intent=new Intent(context,BindDeviceActivity.class);
-        context.startActivity(intent);
-    }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = false)
@@ -142,5 +138,11 @@ public class BindDeviceActivity extends BaseActivity {
         Intent intent=new Intent(this,DeviceActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

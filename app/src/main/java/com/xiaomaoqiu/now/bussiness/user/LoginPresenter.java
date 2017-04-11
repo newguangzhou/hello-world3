@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -21,9 +23,14 @@ import retrofit2.Response;
 @SuppressLint("WrongConstant")
 public class LoginPresenter {
     private WeakReference<LoginView> loginView;
+    private WeakReference<LogoutView> logoutView;
 
     LoginPresenter(LoginView loginView) {
         this.loginView = new WeakReference<>(loginView);
+    }
+
+    public LoginPresenter(LogoutView logoutView) {
+        this.logoutView = new WeakReference<LogoutView>(logoutView);
     }
 
     /**
@@ -38,13 +45,19 @@ public class LoginPresenter {
             ApiUtils.getApiService().getVerifyCode(phone, deviceType).enqueue(new XMQCallback<MessageBean>() {
                 @Override
                 public void onSuccess(Response<MessageBean> response, MessageBean message) {
-                    HttpCode ret = HttpCode.valueOf(response.body().status);
-                    if (ret == HttpCode.EC_SUCCESS) {//发送成功
-                        if (tloginView != null) {
-                            tloginView.getVerifyNextTime(message.next_req_interval);
-                        }
-                    } else {
-                        Toast.makeText(PetAppLike.mcontext, "验证码发送失败", Toast.LENGTH_LONG).show();
+                    HttpCode ret = HttpCode.valueOf(message.status);
+                    switch (ret) {
+                        case EC_SUCCESS:
+                            if (tloginView != null) {
+                                tloginView.getVerifyNextTime(message.next_req_interval);
+                            }
+                            break;
+                        case EC_UNKNOWN_ERROR:
+                            ToastUtil.showTost("此手机号不能接受验证码");
+                            break;
+                        default:
+                            ToastUtil.showTost("网络出错");
+
                     }
                 }
 
@@ -75,14 +88,20 @@ public class LoginPresenter {
                     if (tloginView != null) {
                         tloginView.dismissDialog();
                     }
-                    HttpCode ret = HttpCode.valueOf(response.body().status);
-                    if (ret == HttpCode.EC_SUCCESS) {//登陆成功
-                        //保存登录状态
-                        UserInstance.getUserInstance().saveLoginState(message,phone);
-                        tloginView.LoginSuccess();
-                    } else {
-                        Toast.makeText(PetAppLike.mcontext, "登录失败", Toast.LENGTH_SHORT).show();
+                    HttpCode ret = HttpCode.valueOf(message.status);
+                    switch (ret) {
+                        case EC_SUCCESS:
+                            //保存登录状态
+                            UserInstance.getUserInstance().saveLoginState(message, phone);
+                            tloginView.LoginSuccess();
+                            break;
+                        case EC_INVALID_VERIFY_CODE:
+                            ToastUtil.showTost("验证码无效");
+                            break;
+                        default:
+                            ToastUtil.showTost("登录异常");
                     }
+
                 }
 
                 @Override
@@ -95,5 +114,28 @@ public class LoginPresenter {
                 }
             });
         }
+    }
+
+    //退出登录
+    public void logout() {
+        ApiUtils.getApiService().logout(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken()).enqueue(new XMQCallback<BaseBean>() {
+            @Override
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {//退出登陆成功
+                    UserInstance.getUserInstance().clearLoginState();
+                    final LogoutView togoutView = logoutView.get();
+                    if (togoutView != null) {
+                        //退出登录成功
+                        togoutView.success();
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
     }
 }

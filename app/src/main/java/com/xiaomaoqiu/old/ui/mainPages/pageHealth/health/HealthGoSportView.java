@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.old.ui.mainPages.pageHealth.health;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -14,10 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.pet.R;
@@ -28,7 +30,7 @@ import org.json.JSONObject;
 /**
  * Created by Administrator on 2016/12/25.
  */
-
+@SuppressLint("WrongConstant")
 public class HealthGoSportView extends RelativeLayout implements View.OnClickListener {
     public static final int STATUS_DEFAULT=1;
     public static final int STATUS_SPORT=2;
@@ -36,7 +38,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
 
     private static final int HEAD_TRANSLATE_INTERVAL=300;
 
-    private ImageView mHead;
+    private SimpleDraweeView mHead;
 
     private LinearLayout mSportContainer;
     private Button mBtConformSport,mBtQuitSport;
@@ -158,7 +160,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
     }
 
     private void initView(){
-        mHead=(ImageView)findViewById(R.id.go_sport_head);
+        mHead= (SimpleDraweeView) findViewById(R.id.go_sport_head);
         mHead.setOnClickListener(this);
 
         mSportContainer=(LinearLayout)findViewById(R.id.go_sport_sport_container);
@@ -192,7 +194,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
                 Log.v("http", "pet.activity:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    UserMgr.INSTANCE.setPetAtHome(false);
+                    PetInfoInstance.getInstance().setAtHome(false);
                     show(STATUS_DEFAULT);
                 }
             }
@@ -202,7 +204,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
                 Toast.makeText(getContext(),"网络连接失败",Toast.LENGTH_LONG).show();
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),1 );
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
     }
 
     private void goHome(){
@@ -212,7 +214,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
                 Log.v("http", "pet.activity:" + response.toString());
                 HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
                 if (ret == HttpCode.EC_SUCCESS) {
-                    UserMgr.INSTANCE.setPetAtHome(true);
+                    PetInfoInstance.getInstance().setAtHome(true);
                     show(STATUS_DEFAULT);
                 }
             }
@@ -222,7 +224,7 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
                 Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_LONG).show();
             }
 
-        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getPetID(),2 );
+        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
     }
 
     @Override

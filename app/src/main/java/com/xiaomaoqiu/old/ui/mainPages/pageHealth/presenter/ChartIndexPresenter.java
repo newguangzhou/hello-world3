@@ -11,7 +11,6 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.DateUtil;
 import com.xiaomaoqiu.old.utils.HttpUtil;
 
@@ -96,10 +95,10 @@ public class ChartIndexPresenter {
 
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(), strStart, strEnd);
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), strStart, strEnd);
         ApiUtils.getApiService().getSleepInfo(UserInstance.getUserInstance().getUid(),
                 UserInstance.getUserInstance().getToken(),
-                PetInfoInstance.getPetInfoInstance().getPet_id(),strStart,strEnd
+                PetInfoInstance.getInstance().getPet_id(),strStart,strEnd
                 ).enqueue(new XMQCallback<PetSleepInfoBean>() {
             @Override
             public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {

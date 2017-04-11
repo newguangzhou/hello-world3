@@ -9,6 +9,8 @@ public class PetInfoBean extends BaseBean{
 
     public long pet_id;
 
+    public String name;
+
     public String description;
 
     public String weight;

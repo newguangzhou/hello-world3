@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageLocate;
+package com.xiaomaoqiu.now.bussiness.pet;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,17 +7,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
-import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.utils.HttpUtil;
-
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -40,10 +29,22 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.pet.R;
 
+import org.apache.http.Header;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONObject;
+
 @SuppressLint("WrongConstant")
-public class FindPetActivity extends BaseActivity implements View.OnClickListener,PetInfo.Callback_PetLocating{
+public class FindPetActivity extends BaseActivity implements View.OnClickListener{
     // 地图相关
     MapView mMapView;
     BaiduMap mBaiduMap;
@@ -59,6 +60,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pet);
         initView();
+        EventBus.getDefault().register(this);
     }
 
     void initView()
@@ -160,25 +162,28 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
                 Log.v("http", "pet.find:" + response.toString());
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getPetID(),mode);
+        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode);
     }
 
     Runnable mPetLocateRunnable = new Runnable() {
         @Override
         public void run() {
-            PetInfoInstance.getPetInfoInstance().getPetLocation();//查询狗位置
+            PetInfoInstance.getInstance().getPetLocation();//查询狗位置
         }
     };
 
    //todo  回调逻辑
-    public void onLocateResult(boolean bFound, double latitude, double longitude) {
-        if(!bFound) return;
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onLocateResult(EventManager.notifyPetLocationChange event) {
+//        boolean bFound, double latitude, double longitude
+        //todo bFound
+//        if(!bFound) return;
 
         mMapView.removeCallbacks(mPetLocateRunnable);
         setPetFindMode(2);
         mIsPetFound = true;
 
-        LatLng cenpt = new LatLng(latitude, longitude);
+        LatLng cenpt = new LatLng(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude);
 
         BitmapDescriptor mIconMaker = BitmapDescriptorFactory.fromResource(R.drawable.maker);
         OverlayOptions overlayOptions = new MarkerOptions().position(cenpt)
@@ -225,5 +230,11 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

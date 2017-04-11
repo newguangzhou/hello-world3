@@ -3,7 +3,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"       
         >
-
+
+
         <LinearLayout
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"  
@@ -29,7 +30,7 @@
             android:text="退出后不会删除任何历史数据，下次\n登录依然可以使用本帐号" />           
             
             <Button
-              android:id="@+id/exitBtn0"
+              android:id="@+id/btn_exit_ok"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:text="退出登录"
@@ -40,11 +41,10 @@
               android:layout_marginRight="10dp"
               android:background="@drawable/btn_style_alert_dialog_special"
               android:gravity="center"
-			  android:onClick="exitbutton0"
               />
             
             <Button
-              android:id="@+id/exitBtn1"
+              android:id="@+id/btn_exit_cacel"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="15dp"
@@ -56,7 +56,6 @@
               android:textColor="#fff"
               android:background="@drawable/btn_style_alert_dialog_cancel"
               android:gravity="center"
-			  android:onClick="exitbutton1"
               />
            
        </LinearLayout>

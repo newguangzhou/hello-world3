@@ -56,6 +56,13 @@ public interface ApiService {
             @Query("device_type") int deviceType
     );
 
+    //退出登录
+    @GET(Constants.Url.User.logout)
+    Call<BaseBean> logout(
+            @Query("uid") long uid,
+            @Query("token") String token
+    );
+
     /**
      * 获取宠物信息
      * GET /pet/get_pet_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150 HTTP/1.1
@@ -80,9 +87,6 @@ public interface ApiService {
     );
 
 
-
-
-
     /**
      * 查看宠物的运动信息
      * //GET /pet/healthy/get_activity_info?uid=1462772127&token=74bbdb4db48e43c1cf1b59708aa89af4d2229150&pet_id=1462786482&start_date=2017-4-7&end_date=2017-4-7 HTTP/1.1
@@ -96,10 +100,10 @@ public interface ApiService {
      */
     @GET(Constants.Url.Pet.get_activity_info)
     Call<PetSportBean> getActivityInfo(@Query("uid") long uid,
-                                    @Query("token") String token,
-                                    @Query("pet_id") long petId,
-                                    @Query("start_date") String startDate,
-                                    @Query("end_date") String endDate
+                                       @Query("token") String token,
+                                       @Query("pet_id") long petId,
+                                       @Query("start_date") String startDate,
+                                       @Query("end_date") String endDate
     );
 
 
@@ -182,10 +186,9 @@ public interface ApiService {
     );
 
 
-    //todo 这个链接的bean有问题
     //http://120.24.152.121:9100/device/swicth_light?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&light_status=1
     @GET(Constants.Url.Device.swicth_light)
-    Call<LightStatusBean> switchLightStatus(@Query("uid") long uid,
+    Call<BaseBean> switchLightStatus(@Query("uid") long uid,
                                             @Query("token") String token,
                                             @Query("imei") String imei,
                                             @Query("light_status") int light_status
@@ -229,10 +232,27 @@ public interface ApiService {
     //上传头像
     @Multipart
     @POST(Constants.Url.Pet.upload_logo)
-    Call<PictureBean> uploadLogo(@Part MultipartBody.Part file,
-                                    @Query("uid") long uid,
-                                    @Query("token") String token,
-                                    @Query("pet_id") long petId
+    Call<PictureBean> uploadLogo(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long petId,
+            @Part MultipartBody.Part file
+
+    );
+
+
+    //更新宠物信息
+    @GET(Constants.Url.Pet.update_pet_info)
+    Call<BaseBean> updatePetInfo(
+            @Query("token") String token,
+            @Query("pet_id") long pet_id,
+            @Query("description") String description,
+            @Query("weight") String weight,
+            @Query("sex") int sex,
+            @Query("nick") String nick,
+            @Query("birthday") String birthday,
+            @Query("logo_url") String logo_url,
+            @Query("pet_type_id") int pet_type_id
     );
 
 }

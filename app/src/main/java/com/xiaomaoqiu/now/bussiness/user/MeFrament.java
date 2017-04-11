@@ -1,6 +1,5 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,15 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
-import com.xiaomaoqiu.old.ui.dialog.ExitDialog_RAW_Activity;
+import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
+import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
-import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.pet.R;
 
 /**
@@ -39,8 +38,7 @@ public class MeFrament extends BaseFragment {
     }
 
 
-    private void initView(View root)
-    {
+    private void initView(View root) {
         root.findViewById(R.id.btn_pet_info).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +50,8 @@ public class MeFrament extends BaseFragment {
         root.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ExitDialog_RAW_Activity.class);
-                startActivityForResult(intent,REQ_EXIT);
+                Intent intent = new Intent(getActivity(), ExitDialog_RAW_Activity.class);
+                startActivity(intent);
             }
         });
 
@@ -65,7 +63,7 @@ public class MeFrament extends BaseFragment {
             }
         });
 
-        root.findViewById(R.id.btn_message).setOnClickListener(new View.OnClickListener(){
+        root.findViewById(R.id.btn_message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MessageActivity.class);
@@ -85,7 +83,7 @@ public class MeFrament extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Uri uri = Uri.parse(getString(R.string.url_mall));
-                Intent  intent = new  Intent(Intent.ACTION_VIEW, uri);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
@@ -93,12 +91,12 @@ public class MeFrament extends BaseFragment {
         root.findViewById(R.id.btn_hardware).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserMgr.INSTANCE.getPetInfo().getDevInfo().getDeviceExist()) {
-                    Intent intent=new Intent(getActivity(), DeviceActivity.class);
+                if (DeviceInfoInstance.getInstance().isDeviceExist) {
+                    Intent intent = new Intent(getActivity(), DeviceActivity.class);
                     startActivity(intent);
-                }
-                else{
-                    BindDeviceActivity.skipTo(v.getContext());
+                } else {
+                    Intent intent = new Intent(getActivity(), BindDeviceActivity.class);
+                    startActivity(intent);
                 }
 
             }
@@ -112,11 +110,5 @@ public class MeFrament extends BaseFragment {
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQ_EXIT && resultCode == Activity.RESULT_OK)
-        {
-            getActivity().finish();
-        }
-    }
+
 }

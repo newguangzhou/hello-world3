@@ -2,18 +2,16 @@ package com.xiaomaoqiu.old.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.utils.AsyncImageTask;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.old.utils.DensityUtil;
 import com.xiaomaoqiu.pet.R;
 
@@ -21,29 +19,31 @@ import com.xiaomaoqiu.pet.R;
  * Created by Administrator on 2017/1/15.
  */
 
-public class AsynImgDialog extends Dialog implements View.OnClickListener, AsyncImageTask.ImageCallback {
+public class AsynImgDialog extends Dialog implements View.OnClickListener{
 
     private Button mOkBtn,mQuitBtn;
-    private ImageView asynImg;
+    private SimpleDraweeView asynImg;
     private View.OnClickListener okClickListener,quitClickListner;
     private int innerpadding=0;
 
 
     public static AsynImgDialog createGoSportDialig(Context context, View.OnClickListener okClickListener){
         String url="";
-        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
-        if(null != petInfo){
-            url=petInfo.getHeaderImg();
-        }
+//        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
+//        if(null != petInfo){
+//            url=petInfo.getHeaderImg();
+//        }
+        url= PetInfoInstance.getInstance().packBean.logo_url;
         return new AsynImgDialog(context,R.layout.asyn_dialog_go_out,okClickListener,null,url,true,0);
     }
 
     public static AsynImgDialog createGoHomeDialog(Context context, View.OnClickListener okClickListener){
         String url="";
-        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
-        if(null != petInfo){
-            url=petInfo.getHeaderImg();
-        }
+//        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
+//        if(null != petInfo){
+//            url=petInfo.getHeaderImg();
+//        }
+        url= PetInfoInstance.getInstance().packBean.logo_url;
         int margin=context.getResources().getDimensionPixelSize(R.dimen.dialog_service_margin)*2;
         return new AsynImgDialog(context,R.layout.asyn_dialog_go_home,okClickListener,null,url,true,margin);
     }
@@ -66,11 +66,13 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener, Async
 
         mOkBtn=(Button) findViewById(R.id.asyn_dialog_ok);
         mQuitBtn=(Button)findViewById(R.id.asyn_dialog_quit);
-        asynImg=(ImageView)findViewById(R.id.asyn_dialog_imgview);
+        asynImg= (SimpleDraweeView) findViewById(R.id.asyn_dialog_imgview);
         mOkBtn.setOnClickListener(this);
         mQuitBtn.setOnClickListener(this);
         if(!TextUtils.isEmpty(url)){
-            AsyncImageTask.INSTANCE.loadImage(asynImg, url, this);
+            Uri uri = Uri.parse(url);
+            asynImg.setImageURI(uri);
+//            AsyncImageTask.INSTANCE.loadImage(asynImg, url, this);
         }
     }
 
@@ -101,10 +103,5 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener, Async
         }
     }
 
-    @Override
-    public void imageLoaded(String url, Bitmap obj, ImageView view) {
-        if(null != obj && null != view){
-            view.setImageBitmap(obj);
-        }
-    }
+
 }

@@ -3,22 +3,19 @@ package com.xiaomaoqiu.old.ui.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.utils.AsyncImageTask;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.pet.R;
 @SuppressLint("WrongConstant")
-public class GoOutConfirmDialog_RAW_Activity extends Activity implements AsyncImageTask.ImageCallback {
+public class GoOutConfirmDialog_RAW_Activity extends Activity  {
 	//private MyDialog dialog;
 	private LinearLayout layout;
 	@Override
@@ -41,12 +38,17 @@ public class GoOutConfirmDialog_RAW_Activity extends Activity implements AsyncIm
 	}
 
 	private void loadImage(){
-		PetInfo info=UserMgr.INSTANCE.getPetInfo();
-		if(null == info || TextUtils.isEmpty(info.getHeaderImg())){
-			return;
-		}
-		ImageView imgLogo = (ImageView)findViewById(R.id.go_sport_dialog_head);
-		AsyncImageTask.INSTANCE.loadImage(imgLogo, info.getHeaderImg(), this);
+		String url="";
+//        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
+//        if(null != petInfo){
+//            url=petInfo.getHeaderImg();
+//        }
+		url= PetInfoInstance.getInstance().packBean.logo_url;
+
+		SimpleDraweeView imgLogo = (SimpleDraweeView)findViewById(R.id.go_sport_dialog_head);
+		Uri uri = Uri.parse(url);
+		imgLogo.setImageURI(uri);
+//		AsyncImageTask.INSTANCE.loadImage(imgLogo, url, this);
 	}
 
 	@Override
@@ -64,11 +66,5 @@ public class GoOutConfirmDialog_RAW_Activity extends Activity implements AsyncIm
     	this.finish();
       }
 
-	@Override
-	public void imageLoaded(String url, Bitmap obj, ImageView view) {
-		if(obj != null)
-		{
-			view.setImageBitmap(obj);
-		}
-	}
+
 }

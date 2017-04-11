@@ -2,16 +2,15 @@ package com.xiaomaoqiu.now.bussiness.pet;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
@@ -20,13 +19,12 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
+import com.xiaomaoqiu.old.ui.dialog.StartPetFindingDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView;
-import com.xiaomaoqiu.old.utils.AsyncImageTask;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
 import com.xiaomaoqiu.pet.R;
 
@@ -44,7 +42,7 @@ import retrofit2.Response;
  */
 
 @SuppressLint("WrongConstant")
-public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInfo, View.OnClickListener, AsyncImageTask.ImageCallback {
+public class PetFragment extends BaseFragment implements  View.OnClickListener {
 
     private HealthGoSportView mGoSportView;
     CircleProgressBar prog;
@@ -93,7 +91,7 @@ public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInf
 
         strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
         strStart = strEnd;
-        prog.setProgress(75);
+        prog.setProgress(100);
     }
 
     //粘性事件，等待petid返回来再进行网络操作
@@ -101,7 +99,7 @@ public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInf
     public void getActivityInfo(EventManager.notifyPetFramentGetActivityInfo event) {
         initProgress();
         ApiUtils.getApiService().getActivityInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),
-                PetInfoInstance.getPetInfoInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
             public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -134,21 +132,19 @@ public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInf
     }
 
     //todo 更新逻辑
-    public void onPetInfoChanged(PetInfo petInfo, int nFieldMask) {
-        if ((nFieldMask & petInfo.FieldMask_AtHome) != 0) {
-            if (petInfo.getAtHome()) {//回家
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onPetInfoChanged(EventManager.notifyPetInfoChange event) {
+            if (PetInfoInstance.getInstance().getAtHome()) {//回家
                 getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
             } else {//出去玩
                 getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
             }
-        }
-        if ((nFieldMask & PetInfo.FieldMask_Header) != 0) {
-            Log.v("petinfo", "set pet header:" + petInfo.getHeaderImg());
-            ImageView imgLogo = (ImageView) getActivity().findViewById(R.id.go_sport_head);
-            AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfo.getHeaderImg(), this);
-        }
+        SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
+        Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
+        imgLogo.setImageURI(uri);
+//            AsyncImageTask.INSTANCE.loadImage(imgLogo, PetInfoInstance.getInstance().packBean.logo_url, this);
     }
 
     @Override
@@ -164,18 +160,18 @@ public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInf
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
-               /* StartPetFindingDialog dialog = now StartPetFindingDialog(getActivity(),
-                        now StartPetFindingDialog.OnDialogDismiss() {
+               StartPetFindingDialog dialog = new StartPetFindingDialog(getActivity(),
+                        new StartPetFindingDialog.OnDialogDismiss() {
                             @Override
                             public void onDismiss(int nID) {
                                 if(nID == R.id.btn_ok) {
-                                    Intent intent = now Intent(getActivity(), FindPetActivity.class);
+                                    Intent intent = new Intent(getActivity(), FindPetActivity.class);
                                     startActivity(intent);
                                 }
                             }
                         }
                         , R.style.MyDialogStyle);
-                dialog.show();*/
+                dialog.show();
                 String conent = getContext().getResources().getString(R.string.map_is_findpet);
                 DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                     @Override
@@ -213,14 +209,10 @@ public class PetFragment extends BaseFragment implements PetInfo.Callback_PetInf
     }
 
 
-    @Override
-    public void imageLoaded(String url, Bitmap obj, ImageView view) {
-        if (obj != null) {
-            view.setImageBitmap(obj);
-        }
-    }
+
 
     public void onDestroy() {
+        super.onDestroy();
         EventBus.getDefault().unregister(this);
 
     }

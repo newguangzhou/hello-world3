@@ -8,36 +8,39 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.utils.AsyncImageTask;
-import com.xiaomaoqiu.old.utils.HttpUtil;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.pet.R;
-
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
 import mbg.bottomcalender.BottomCalenderView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Response;
 
 
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.ImageCallback{
+public class PetInfoActivity extends BaseActivity  {
     private final int REQ_CODE_BIRTHDAY = 1;
     private final int REQ_CODE_WEIGHT = 2;
     private final int REQ_CODE_INTRO = 3;
@@ -59,8 +62,7 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
     }
 
 
-    private void initView()
-    {
+    private void initView() {
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,94 +108,78 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
         (((ToggleButton) findViewById(R.id.chk_gender))).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                PetInfo petInfo=new PetInfo();
-                if(isChecked) {
-                    petInfo.setSex(PetInfo.Female);
-                }else{
-                    petInfo.setSex(PetInfo.Male);
+                PetInfoBean tmpBean = PetInfoInstance.getInstance().getPackBean();
+                if (isChecked) {
+                    tmpBean.sex = Constants.Female;
+                } else {
+                    tmpBean.sex = Constants.Male;
                 }
-                UserMgr.INSTANCE.updatePetInfo(petInfo,PetInfo.FieldMask_Sex);
+                PetInfoInstance.getInstance().updatePetInfo(tmpBean);
             }
         });
-        initPetInfo(UserMgr.INSTANCE.getPetInfo(), PetInfo.FieldMask_All);
+        initPetInfo();
     }
 
-    private  void initPetInfo(PetInfo petInfo,int nFieldMask)
-    {
-        if((nFieldMask & PetInfo.FieldMask_Name) != 0)
-            ((TextView)findViewById(R.id.txt_pet_name)).setText(petInfo.getName());
+    private void initPetInfo() {
+        PetInfoBean petInfoBean = PetInfoInstance.getInstance().getPackBean();
+        ((TextView) findViewById(R.id.txt_pet_name)).setText(petInfoBean.name);
 
 
-        if((nFieldMask & PetInfo.FieldMask_Sex) != 0) {
-            ((ToggleButton) findViewById(R.id.chk_gender)).setChecked(petInfo.getSex() == PetInfo.Female);
-            if(petInfo.getSex() == petInfo.Female){
-                ((ImageView)findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_female);
-            }else{
-                ((ImageView)findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_male);
-            }
+        ((ToggleButton) findViewById(R.id.chk_gender)).setChecked(petInfoBean.sex == Constants.Female);
+        if (petInfoBean.sex == Constants.Female) {
+            ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_female);
+        } else {
+            ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_male);
         }
-        if((nFieldMask & PetInfo.FieldMask_Birth) != 0) {
-            PetInfo.Date date = petInfo.getBirthday();
-            ((TextView) findViewById(R.id.txt_birthday)).setText(String.format("%d-%d-%d", date.year, date.month, date.day));
-        }
-        if((nFieldMask & PetInfo.FieldMask_Weight) != 0)
-            ((TextView)findViewById(R.id.txt_weight)).setText(String.format("%.2f kg", petInfo.getWeight()));
-       /* if((nFieldMask & PetInfo.FieldMask_Desc) != 0)
-            ((TextView)findViewById(R.id.txt_intro)).setText(petInfo.getDesc());*/
 
-        if((nFieldMask & PetInfo.FieldMask_Header)!=0)
-        {
-            Log.v("petinfo","set pet header:"+petInfo.getHeaderImg());
-            ImageView imgLogo = (ImageView)findViewById(R.id.img_pet_avatar);
-            AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfo.getHeaderImg(), this);
-        }
-        if((nFieldMask & PetInfo.FieldMask_Desc) != 0){
-            ((TextView)findViewById(R.id.txt_variety)).setText(petInfo.getDesc());
-        }
+        ((TextView) findViewById(R.id.txt_birthday)).setText(petInfoBean.birthday);
+        ((TextView) findViewById(R.id.txt_weight)).setText(String.format("%.2f kg", petInfoBean.weight));
+
+        SimpleDraweeView imgLogo = (SimpleDraweeView) findViewById(R.id.img_pet_avatar);
+        Uri uri = Uri.parse(petInfoBean.logo_url);
+        imgLogo.setImageURI(uri);
+//        AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfoBean.logo_url, this);
+
+        ((TextView) findViewById(R.id.txt_variety)).setText(petInfoBean.description);
     }
 
-    private void modifyVariety()
-    {
-        Intent intent = new Intent(this,ModifyVarietyDialog.class);
-        startActivityForResult(intent,REQ_CODE_VARIETY);
+    private void modifyVariety() {
+        Intent intent = new Intent(this, ModifyVarietyDialog.class);
+        startActivityForResult(intent, REQ_CODE_VARIETY);
     }
 
-    public  void modifyAvatar()
-    {
-        Intent intent = new Intent(this,SelectAvatarSourceDialog.class);
-        startActivityForResult(intent,REQ_CODE_PHOTO_SOURCE);
+    public void modifyAvatar() {
+        Intent intent = new Intent(this, SelectAvatarSourceDialog.class);
+        startActivityForResult(intent, REQ_CODE_PHOTO_SOURCE);
     }
 
 
     private void modifyName() {
-        Intent intent = new Intent(this,ModifyNameDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, UserMgr.INSTANCE.getPetInfo().getName());
+        Intent intent = new Intent(this, ModifyNameDialog.class);
+        intent.putExtra(InputDialog.TAG_VALUE, PetInfoInstance.getInstance().packBean.name);
         startActivityForResult(intent, REQ_CODE_NAME);
     }
 
     private BottomCalenderView bottomCalenderView;
+
     private void modifyBirthday() {
-        PetInfo.Date mPetBirthDay = UserMgr.INSTANCE.getPetInfo().getBirthday();
-        if(null == mPetBirthDay){
-            return;
-        }
+        PetInfoInstance.Date mPetBirthDay=PetInfoInstance.getInstance().dateFormat_birthday;
         if (bottomCalenderView == null) {
             bottomCalenderView = new BottomCalenderView(this, mPetBirthDay.year, mPetBirthDay.month, mPetBirthDay.day, new BottomCalenderView.OnDatePickedListener() {
                 @Override
                 public void onDatePicked(int year, int month, int day) {
-                    PetInfo petInfo=new PetInfo();
-                    petInfo.setBirthday(new PetInfo.Date(year, month, day));
-                    UserMgr.INSTANCE.updatePetInfo(petInfo,PetInfo.FieldMask_Birth);
+                    PetInfoInstance.Date tmpDateFormatBirthday=new PetInfoInstance.Date(year,month,day);
+                    PetInfoInstance.getInstance().setDateFormat_birthday(tmpDateFormatBirthday);
+                    PetInfoInstance.getInstance().updatePetInfo(PetInfoInstance.getInstance().getPackBean());
                 }
             }, null);
         }
         bottomCalenderView.show();
     }
 
-    private void modifyWeight()
-    {
-        Intent intent = new Intent(this,ModifyWeightDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, String.valueOf(UserMgr.INSTANCE.getPetInfo().getWeight()));
+    private void modifyWeight() {
+        Intent intent = new Intent(this, ModifyWeightDialog.class);
+        intent.putExtra(InputDialog.TAG_VALUE, PetInfoInstance.getInstance().packBean.weight);
         startActivityForResult(intent, REQ_CODE_WEIGHT);
     }
 
@@ -204,16 +190,13 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
 //        startActivityForResult(intent, REQ_CODE_INTRO);
 //    }
 
-    private void onPhotoSource(int mode)
-    {
-        if(mode == R.id.btn_pick_from_library)
-        {
+    private void onPhotoSource(int mode) {
+        if (mode == R.id.btn_pick_from_library) {
             Intent intent = new Intent(Intent.ACTION_PICK, null);
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
             startActivityForResult(intent, REQ_CODE_PHOTO_ZOOM);
 
-        }else if(mode == R.id.btn_take_photo)
-        {
+        } else if (mode == R.id.btn_take_photo) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment
                     .getExternalStorageDirectory(), "temp.jpg")));
@@ -242,24 +225,30 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != Activity.RESULT_OK) return;
-        PetInfo petInfo = new PetInfo();
-        switch(requestCode){
+        if (resultCode != Activity.RESULT_OK) return;
+//        PetInfo petInfo = new PetInfo();
+        final PetInfoBean bean=PetInfoInstance.getInstance().packBean;
+        switch (requestCode) {
             case REQ_CODE_NAME:
-                petInfo.setName(data.getStringExtra(InputDialog.TAG_VALUE));
-                UserMgr.INSTANCE.updatePetInfo(petInfo,PetInfo.FieldMask_Name);
+//                petInfo.setName(data.getStringExtra(InputDialog.TAG_VALUE));
+//                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Name);
+                String nameBackString=data.getStringExtra(InputDialog.TAG_VALUE);
+                bean.name=nameBackString;
+                PetInfoInstance.getInstance().updatePetInfo(bean);
                 break;
             case REQ_CODE_WEIGHT:// ModifyWeightDialog
-                petInfo.setWeight(Double.valueOf(data.getStringExtra(InputDialog.TAG_VALUE)));
-                UserMgr.INSTANCE.updatePetInfo(petInfo,PetInfo.FieldMask_Weight);
+                bean.weight=data.getStringExtra(InputDialog.TAG_VALUE);
+//                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Weight);
+                PetInfoInstance.getInstance().updatePetInfo(bean);
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
-                petInfo.setDesc(data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1));
-                UserMgr.INSTANCE.updatePetInfo(petInfo,PetInfo.FieldMask_Desc);
+                bean.description=data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
+//                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
+                PetInfoInstance.getInstance().updatePetInfo(bean);
                 break;
             case REQ_CODE_PHOTO_SOURCE:
-                int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE,-1);
+                int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
                 onPhotoSource(mode);
                 break;
             case REQ_CODE_PHOTO_GRAPH:
@@ -268,8 +257,7 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
                     File picture = new File(Environment.getExternalStorageDirectory()
                             + "/temp.jpg");
                     startPhotoZoom(Uri.fromFile(picture));
-                }catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -280,43 +268,68 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
                 Bundle extras = data.getExtras();
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");
-                    if(photo!=null)
-                    {
+                    if (photo != null) {
                         try {
 
                             ImageView imgAvatar = (ImageView) findViewById(R.id.img_pet_avatar);
                             imgAvatar.setImageBitmap(photo); //把图片显示在ImageView控件上
 
-                            String strImg = Environment.getExternalStorageDirectory() + "/temp.jpg";
+                            String strImg = Environment.getExternalStorageDirectory() + "/temp.jpeg";
                             //把Bitmap保存到sd卡中
                             File fImage = new File(strImg);
                             FileOutputStream iStream = new FileOutputStream(fImage);
                             photo.compress(Bitmap.CompressFormat.JPEG, 75, iStream);// (0-100)压缩文件
                             iStream.close();
 
-                            HttpUtil.uploadFile("file.pet.upload_logo",strImg,new JsonHttpResponseHandler(){
-                                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                            //{"status": 0, "file_url": "http://www.xxx.com/abc.jpg"}
-                                            Log.v("http", "file.pet.upload_logo:" + response.toString());
-                                            HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                                            if (ret == HttpCode.EC_SUCCESS) {
-                                                //更新头像属性
-                                                String urlLogo = response.optString("file_url");
+//                            HttpUtil.uploadFile("file.pet.upload_logo", strImg, new JsonHttpResponseHandler() {
+//                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                                    //{"status": 0, "file_url": "http://www.xxx.com/abc.jpg"}
+//                                    Log.v("http", "file.pet.upload_logo:" + response.toString());
+//                                    HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                                    if (ret == HttpCode.EC_SUCCESS) {
+//                                        //更新头像属性
+//                                        String urlLogo = response.optString("file_url");
+//
+////                                        PetInfo petInfo = new PetInfo();
+//                                        bean.logo_url=urlLogo;
+////                                        UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Header);
+//                                        PetInfoInstance.getInstance().updatePetInfo(bean);
+//                                    }
+//                                }
+//
+//
+//                                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                                    Log.v("http", "file.pet.upload_logo:" + responseString);
+//                                }
+//                            }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken());
+                            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), fImage);
+                            MultipartBody.Part body = MultipartBody.Part.createFormData("flieName", fImage.getName(), requestFile);
+                            ApiUtils.getApiService().uploadLogo(UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),body).enqueue(
+                                    new XMQCallback<PictureBean>() {
+                                        @Override
+                                        public void onSuccess(Response<PictureBean> response, PictureBean message) {
+                                            HttpCode ret = HttpCode.valueOf(message.status);
+                                            switch (ret) {
+                                                case EC_SUCCESS:
+                                                    //更新头像属性
+                                                    String urlLogo = message.file_url;
+                                                    bean.logo_url=urlLogo;
+                                                    PetInfoInstance.getInstance().updatePetInfo(bean);
+                                                    break;
 
-                                                PetInfo petInfo = new PetInfo();
-                                                petInfo.setHeaderImg(urlLogo);
-                                                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Header);
+                                                default:
+//                                                    ToastUtil.showTost("");
                                             }
                                         }
 
+                                        @Override
+                                        public void onFail(Call<PictureBean> call, Throwable t) {
 
-                                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                                            Log.v("http", "file.pet.upload_logo:" + responseString);
                                         }
-                                    }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken());
+                                    }
+                            );
 
-                        }catch (Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -326,25 +339,16 @@ public class PetInfoActivity extends BaseActivity implements  AsyncImageTask.Ima
         }
     }
 
-    //todo 更新逻辑
-    public void onPetInfoChanged(PetInfo petInfo,int nFieldMask) {
-        initPetInfo(petInfo,nFieldMask);
-    }
 
-    @Override
-    public void imageLoaded(String url, Bitmap obj, ImageView view) {
-        if(obj != null)
-        {
-            view.setImageBitmap(obj);
-        }
-    }
 
-    public static void skip(Context context){
-        Intent intent=new Intent(context,PetInfoActivity.class);
+
+
+    public static void skip(Context context) {
+        Intent intent = new Intent(context, PetInfoActivity.class);
         context.startActivity(intent);
     }
 
-    public static void skipWithFinish(Activity activity){
+    public static void skipWithFinish(Activity activity) {
         skip(activity);
         activity.finish();
     }

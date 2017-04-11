@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.widgets;
+package com.xiaomaoqiu.now.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

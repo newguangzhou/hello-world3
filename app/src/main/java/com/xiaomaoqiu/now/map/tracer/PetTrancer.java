@@ -2,8 +2,6 @@ package com.xiaomaoqiu.now.map.tracer;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.LBSTraceClient;
@@ -12,17 +10,14 @@ import com.baidu.trace.OnStartTraceListener;
 import com.baidu.trace.OnStopTraceListener;
 import com.baidu.trace.OnTrackListener;
 import com.baidu.trace.Trace;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.map.tracer.bean.HistoryTrackData;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStartTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStopTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onTracingListener;
-import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
 import com.xiaomaoqiu.old.utils.CollectionUtil;
 import com.xiaomaoqiu.old.utils.JsonToObject;
 import com.xiaomaoqiu.old.utils.SpUtil;
-
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -73,19 +68,19 @@ public class PetTrancer {
     private WeakReference<onTracingListener> tracingListener;
 
     public void init(Context context){
-        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
-        if(null == petInfo){
-            isInited=false;
-            showToast(context,"未查到宠物信息，请稍后重试！");
-            return;
-        }
-        DeviceInfo deviceInfo=petInfo.getDevInfo();
-        if(null == deviceInfo || TextUtils.isEmpty(deviceInfo.getImei())){
-            isInited=false;
-            showToast(context,"未绑定追踪器，请绑定后再使用!");
-            return;
-        }
-        entityName=deviceInfo.getImei();
+//        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
+//        if(null == petInfo){
+//            isInited=false;
+//            ToastUtil.showTost("未查到宠物信息，请稍后重试！");
+//            return;
+//        }
+//        DeviceInfo deviceInfo=petInfo.getDevInfo();
+//        if(null == deviceInfo || TextUtils.isEmpty(deviceInfo.getImei())){
+//            isInited=false;
+//            ToastUtil.showTost("未绑定追踪器，请绑定后再使用!");
+//            return;
+//        }
+        entityName= DeviceInfoInstance.getInstance().packBean.imei;
         initInner(context);
     }
 
@@ -299,14 +294,6 @@ public class PetTrancer {
         }
         tracingListener.get().onGetCurTrancePos(points);
 
-    }
-
-
-
-
-
-    private void showToast(Context context, String msg){
-        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
     }
 
 }

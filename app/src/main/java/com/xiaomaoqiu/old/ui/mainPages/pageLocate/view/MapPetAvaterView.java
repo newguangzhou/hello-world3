@@ -1,26 +1,24 @@
 package com.xiaomaoqiu.old.ui.mainPages.pageLocate.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.xiaomaoqiu.old.dataCenter.PetInfo;
-import com.xiaomaoqiu.old.dataCenter.UserMgr;
-import com.xiaomaoqiu.old.utils.AsyncImageTask;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.pet.R;
 
 /**
  * Created by Administrator on 2017/1/14.
  */
 
-public class MapPetAvaterView extends LinearLayout implements AsyncImageTask.ImageCallback {
+public class MapPetAvaterView extends LinearLayout  {
     private String avaterUrl;
-    private ImageView avater;
+    private SimpleDraweeView avater;
     private boolean isShowed=false;
 
     public MapPetAvaterView(Context context) {
@@ -34,11 +32,15 @@ public class MapPetAvaterView extends LinearLayout implements AsyncImageTask.Ima
     public MapPetAvaterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View rootView= LayoutInflater.from(context).inflate(R.layout.map_pet_locview,this,true);
-        avater=(ImageView)rootView.findViewById(R.id.map_pet_loca_avater);
-        PetInfo petInfo=UserMgr.INSTANCE.getPetInfo();
-        if(null != petInfo && !TextUtils.isEmpty(petInfo.getHeaderImg())){
-            setAvaterUrl(petInfo.getHeaderImg());
-        }
+        avater= (SimpleDraweeView) rootView.findViewById(R.id.map_pet_loca_avater);
+        String url="";
+//        PetInfo petInfo= UserMgr.INSTANCE.getPetInfo();
+//        if(null != petInfo){
+//            url=petInfo.getHeaderImg();
+//        }
+        url= PetInfoInstance.getInstance().packBean.logo_url;
+            setAvaterUrl(url);
+
     }
 
     public void setAvaterUrl(String url){
@@ -49,15 +51,10 @@ public class MapPetAvaterView extends LinearLayout implements AsyncImageTask.Ima
         if(null == avater){
             return;
         }
-        AsyncImageTask.INSTANCE.loadImage(avater, avaterUrl, this);
+        Uri uri = Uri.parse(avaterUrl);
+        avater.setImageURI(uri);
+//        AsyncImageTask.INSTANCE.loadImage(avater, avaterUrl, this);
     }
 
-    @Override
-    public void imageLoaded(String url, Bitmap obj, ImageView view) {
-        if(null == obj){
-            return;
-        }
-        isShowed=true;
-        view.setImageBitmap(obj);
-    }
+
 }

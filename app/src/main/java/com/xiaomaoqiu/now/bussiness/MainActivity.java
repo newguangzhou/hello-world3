@@ -2,21 +2,27 @@ package com.xiaomaoqiu.now.bussiness;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
-import com.xiaomaoqiu.old.dataCenter.DeviceInfo;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
-import com.xiaomaoqiu.old.widgets.BatteryView;
+import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 @SuppressLint("WrongConstant")
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
@@ -44,13 +50,16 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	}
 
 	//todo 设备状态更新
-	public void onDeviceInfoChanged(DeviceInfo deviceInfo) {
-		if(!deviceInfo.getDeviceExist()){
-			BindDeviceActivity.skipTo(MainActivity.this);
+	@Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+	public void onDeviceInfoChanged(EventManager.notifyDeviceStateChange event) {
+		if(!DeviceInfoInstance.getInstance().isDeviceExist){
+			Intent intent = new Intent(this, BindDeviceActivity.class);
+			startActivity(intent);
 			return;
 		}
 		BatteryView batteryView = (BatteryView) findViewById(R.id.batteryView);
-		batteryView.setBatteryLevel(deviceInfo.getBatteryLevel(),deviceInfo.getLastGetTime());
+		batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
+				DeviceInfoInstance.getInstance().lastGetTime);
 	}
 
 
@@ -66,7 +75,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 			mTabs[i]=findViewById(mTabID[i]);
 			mTabs[i].setOnClickListener(this);
 		}
-		PetInfoInstance.getPetInfoInstance().getPetInfo();
+		PetInfoInstance.getInstance().getPetInfo();
+		EventBus.getDefault().register(this);
 	}
 
 	private void initView(){
