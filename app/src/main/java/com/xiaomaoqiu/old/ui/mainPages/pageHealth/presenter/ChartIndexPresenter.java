@@ -28,52 +28,52 @@ import retrofit2.Response;
 
 public class ChartIndexPresenter {
 
-    public static final String URL_GETSLEEP_STATUS="pet.health.get_sleep_info";
-    public static final String URL_GETSPROT_STATUS="pet.health.get_activity_info";
-    public static final String DEEP_SLEEP_FIELD_NAME="deep_sleep";
-    public static final String LIGHT_SLEEP_FIELD_NAME="light_sleep";
-    public static final String TARGET_AMOUNT_FIELD_NAME="target_amount";
-    public static final String REALITY_AMOUNT_FIELD_NAME="reality_amount";
-    public static final int FLAG_WEEK=0;
-    public static final int FLAG_MONTH=1;
-    public static final int WEEK_LENGTH=7;
-    public static final int MONTH_LENGTH=30;
+    public static final String URL_GETSLEEP_STATUS = "pet.health.get_sleep_info";
+    public static final String URL_GETSPROT_STATUS = "pet.health.get_activity_info";
+    public static final String DEEP_SLEEP_FIELD_NAME = "deep_sleep";
+    public static final String LIGHT_SLEEP_FIELD_NAME = "light_sleep";
+    public static final String TARGET_AMOUNT_FIELD_NAME = "target_amount";
+    public static final String REALITY_AMOUNT_FIELD_NAME = "reality_amount";
+    public static final int FLAG_WEEK = 0;
+    public static final int FLAG_MONTH = 1;
+    public static final int WEEK_LENGTH = 7;
+    public static final int MONTH_LENGTH = 30;
 
 
     private IChartCallback callback;
 
-    private String httpUrl="";
-    private String largeFieldName="";
-    private String lowerFieldName="";
-    private boolean isSleep=false;
-    private double todayDeep=0,todayLight=0;
+    private String httpUrl = "";
+    private String largeFieldName = "";
+    private String lowerFieldName = "";
+    private boolean isSleep = false;
+    private double todayDeep = 0, todayLight = 0;
 
 
-    public ChartIndexPresenter(IChartCallback callback, boolean isSlepp){
-        this.callback=callback;
-        this.isSleep=isSlepp;
-        if(isSlepp){
-            httpUrl=URL_GETSLEEP_STATUS;
-            largeFieldName=DEEP_SLEEP_FIELD_NAME;
-            lowerFieldName=LIGHT_SLEEP_FIELD_NAME;
-        }else{
-            httpUrl=URL_GETSPROT_STATUS;
-            largeFieldName=TARGET_AMOUNT_FIELD_NAME;
-            lowerFieldName=REALITY_AMOUNT_FIELD_NAME;
+    public ChartIndexPresenter(IChartCallback callback, boolean isSlepp) {
+        this.callback = callback;
+        this.isSleep = isSlepp;
+        if (isSlepp) {
+            httpUrl = URL_GETSLEEP_STATUS;
+            largeFieldName = DEEP_SLEEP_FIELD_NAME;
+            lowerFieldName = LIGHT_SLEEP_FIELD_NAME;
+        } else {
+            httpUrl = URL_GETSPROT_STATUS;
+            largeFieldName = TARGET_AMOUNT_FIELD_NAME;
+            lowerFieldName = REALITY_AMOUNT_FIELD_NAME;
         }
     }
 
 
-    public void queryDatas(){
+    public void queryDatas() {
         long msEnd = System.currentTimeMillis();
-        long span30 = 30l*24*3600*1000;//30天:30*24*3600*1000
+        long span30 = 30l * 24 * 3600 * 1000;//30天:30*24*3600*1000
         long msStart = msEnd - span30;
 
         Date endDate = new Date(msEnd);
         Date startDate = new Date(msStart);
 
-        String strEnd = String.format("%s-%s-%s",endDate.getYear()+1900,endDate.getMonth()+1,endDate.getDate());
-        String strStart = String.format("%s-%s-%s",startDate.getYear()+1900,startDate.getMonth()+1,startDate.getDate());
+        String strEnd = String.format("%s-%s-%s", endDate.getYear() + 1900, endDate.getMonth() + 1, endDate.getDate());
+        String strStart = String.format("%s-%s-%s", startDate.getYear() + 1900, startDate.getMonth() + 1, startDate.getDate());
 
 //        HttpUtil.get2(httpUrl, new JsonHttpResponseHandler() {
 //            @Override
@@ -93,7 +93,7 @@ public class ChartIndexPresenter {
 //            }
 //
 //        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), strStart, strEnd);
-        if(isSleep) {
+        if (isSleep) {
             ApiUtils.getApiService().getSleepInfo(UserInstance.getUserInstance().getUid(),
                     UserInstance.getUserInstance().getToken(),
                     PetInfoInstance.getInstance().getPet_id(), strStart, strEnd
@@ -116,29 +116,20 @@ public class ChartIndexPresenter {
 
                 }
             });
-        }else {
+        } else {
 
             ApiUtils.getApiService().getActivityInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),
                     PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
                 @Override
                 public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                     HttpCode ret = HttpCode.valueOf(message.status);
-                    if (ret == HttpCode.EC_SUCCESS) {
-                        int sportTarget = 1000;
-                        int sportDone = 100;
-                        double percentage = 100;
-                        if (message.data.size() > 0) {
-                            PetSportBean.SportBean bean = message.data.get(0);
-                            sportTarget = bean.target_amount;
-                            sportDone = bean.reality_amount;
-                            percentage = bean.percentage;
-                        } else {
-                            ToastUtil.showTost("当天尚无数据~");
-                        }
-
-                    } else {
-                        ToastUtil.showTost("获取当天数据失败");
+                    if (callback == null) {
+                        return;
                     }
+                    if (ret != HttpCode.EC_SUCCESS) {
+                        return;
+                    }
+                    parseSportInfo(message);
                 }
 
                 @Override
@@ -148,10 +139,11 @@ public class ChartIndexPresenter {
             });
         }
     }
+
     //解析睡眠信息
-    public void parseSleepInfo(PetSleepInfoBean message){
-        List<PetSleepInfoBean.SleepBean> sleepDatas=message.data;
-        if(sleepDatas==null||sleepDatas.size()<=0){
+    public void parseSleepInfo(PetSleepInfoBean message) {
+        List<PetSleepInfoBean.SleepBean> sleepDatas = message.data;
+        if (sleepDatas == null || sleepDatas.size() <= 0) {
             return;
         }
         //解析一天
@@ -161,40 +153,71 @@ public class ChartIndexPresenter {
         parseSleepWeekList(sleepDatas);
 
         //解析一个月
-        parseSleepMonthList(sleepDatas,"");
+        parseSleepMonthList(sleepDatas, "");
 
     }
+
     //解析一天的睡眠数据
-   void parseSleepToday(List<PetSleepInfoBean.SleepBean> sleepDatas){
-        int days=sleepDatas.size();
-        PetSleepInfoBean.SleepBean todayBean=sleepDatas.get(days-1);
-        todayDeep=todayBean.deep_sleep;
-        todayLight=todayBean.light_sleep;
-        callback.onSuccessGetWeight(todayDeep,todayLight);
+    void parseSleepToday(List<PetSleepInfoBean.SleepBean> sleepDatas) {
+        int days = sleepDatas.size();
+        PetSleepInfoBean.SleepBean todayBean = sleepDatas.get(days - 1);
+        todayDeep = todayBean.deep_sleep;
+        todayLight = todayBean.light_sleep;
+        callback.onSuccessGetWeight(todayDeep, todayLight);
     }
+
     //解析一周
-     void parseSleepWeekList(List<PetSleepInfoBean.SleepBean> sleepDatas){
-        ArrayList<String> axisLabels=new ArrayList<>();
+    void parseSleepWeekList(List<PetSleepInfoBean.SleepBean> sleepDatas) {
+        ArrayList<String> axisLabels = new ArrayList<>();
 
-        ArrayList<BarEntry> sleepList=new ArrayList<>();
-        ArrayList<Date> dates=DateUtil.getPastDates(WEEK_LENGTH);
+        ArrayList<BarEntry> sleepList = new ArrayList<>();
+        ArrayList<Date> dates = DateUtil.getPastDates(WEEK_LENGTH);
 
-        int startIndex=sleepDatas.size()-WEEK_LENGTH;
-        if(startIndex<0){
-            startIndex=0;
+        int startIndex = sleepDatas.size() - WEEK_LENGTH;
+        if (startIndex < 0) {
+            startIndex = 0;
         }
-        for(int i=startIndex; i<sleepDatas.size() ; i++){
-            Date date=dates.get(i-startIndex);
-            axisLabels.add(date.getDate()+"日");
-//            JSONObject jsday = (JSONObject)jsdata.get(i);
-            PetSleepInfoBean.SleepBean bean=sleepDatas.get(i);
-            sleepList.add(new BarEntry(i-startIndex, new float[]{(float) bean.deep_sleep,(float) bean.light_sleep}));
+        for (int i = startIndex; i < sleepDatas.size(); i++) {
+            Date date = dates.get(i - startIndex);
+            axisLabels.add(date.getDate() + "日");
+            PetSleepInfoBean.SleepBean bean = sleepDatas.get(i);
+            sleepList.add(new BarEntry(i - startIndex, new float[]{(float) bean.deep_sleep, (float) bean.light_sleep}));
         }
-        callback.onSuccessGetAxis(axisLabels,false);
-        callback.onSuccessGetWeekDataSet(sleepList,null);
+        callback.onSuccessGetAxis(axisLabels, false);
+        callback.onSuccessGetWeekDataSet(sleepList, null);
     }
 
-    private void parseSuccess(JSONObject response){
+    //解析一个月
+    void parseSleepMonthList(List<PetSleepInfoBean.SleepBean> sleepDatas, String format) {
+        int intrval = 2;
+        ArrayList<String> axisLabels = new ArrayList<>();
+        ArrayList<Entry> deepList = new ArrayList<>();
+        ArrayList<Entry> lightList = new ArrayList<>();
+        ArrayList<Date> dates = DateUtil.getPastDates(MONTH_LENGTH);
+        Date curDate = DateUtil.getFirstDataOfCurMonth();
+        String secondText = curDate.getMonth() + "月";
+        int secondIndex = curDate.getDate();
+        callback.onSuccessGetSecAxis(secondText, secondIndex, MONTH_LENGTH);
+        int startIndex = sleepDatas.size() - MONTH_LENGTH;
+        if (startIndex < 0) {
+            startIndex = 0;
+        }
+        for (int i = startIndex; i < sleepDatas.size(); i += intrval) {
+            Date date = dates.get(i - startIndex);
+            axisLabels.add(date.getDate() + format);
+//            JSONObject jsday = (JSONObject)jsdata.opt(i);
+            PetSleepInfoBean.SleepBean bean = sleepDatas.get(i);
+            float deep = (float) bean.deep_sleep;
+            float light = (float) bean.light_sleep;
+            deepList.add(new Entry(i - startIndex, (float) bean.deep_sleep));
+            lightList.add(new Entry(i - startIndex, deep + light));
+
+        }
+        callback.onSuccessGetAxis(axisLabels, true);
+        callback.onSuccessGetMonthDataSet(deepList, lightList);
+    }
+
+    private void parseSuccess(JSONObject response) {
 //        JSONArray jsdata = response.optJSONArray("data");
 //        if(null ==jsdata || jsdata.length() <= 0){
 //            onFail();
@@ -214,121 +237,154 @@ public class ChartIndexPresenter {
 //        parseList(jsdata,"",true);//30天睡眠
     }
 
-    //解析一个月
-    void parseSleepMonthList(List<PetSleepInfoBean.SleepBean> sleepDatas,String format){
-        int intrval= 2;
-        ArrayList<String> axisLabels=new ArrayList<>();
-        ArrayList<Entry> deepList=new ArrayList<>();
-        ArrayList<Entry> lightList=new ArrayList<>();
-        ArrayList<Date> dates=DateUtil.getPastDates(MONTH_LENGTH);
-        Date curDate = DateUtil.getFirstDataOfCurMonth();
-        String secondText = curDate.getMonth() + "月";
-        int secondIndex = curDate.getDate();
-        callback.onSuccessGetSecAxis(secondText,secondIndex,MONTH_LENGTH);
-        int startIndex=sleepDatas.size()-MONTH_LENGTH;
-        if(startIndex<0){
-            startIndex=0;
+    void parseSportInfo(PetSportBean message) {
+        List<PetSportBean.SportBean> sportDatas = message.data;
+        if (sportDatas == null || sportDatas.size() <= 0) {
+            return;
         }
-        for(int i=startIndex; i<sleepDatas.size() ; i+=intrval){
-            Date date=dates.get(i-startIndex);
-            axisLabels.add(date.getDate()+format);
-//            JSONObject jsday = (JSONObject)jsdata.opt(i);
-            PetSleepInfoBean.SleepBean bean=sleepDatas.get(i);
-            float deep=(float) bean.deep_sleep;
-            float light=(float) bean.light_sleep;
-            deepList.add(new Entry(i-startIndex, (float) bean.deep_sleep));
-                lightList.add(new Entry(i - startIndex,deep+light));
+        //解析当天的运动数据
+        parseSportToday(sportDatas);
+        //解析一周的运动数据
+        parseSportWeekAndMonthList(sportDatas,"日",false);
+        //解析一个月的运动数据
+        parseSportWeekAndMonthList(sportDatas,"",true);
 
-        }
-        callback.onSuccessGetAxis(axisLabels,true);
-        callback.onSuccessGetMonthDataSet(deepList,lightList);
+
     }
 
-    private void parseList(JSONArray jsdata,String format,boolean isMonth){
-        int days= isMonth ? MONTH_LENGTH : WEEK_LENGTH;
-        int intrval=isMonth ? 2 : 1;
-        ArrayList<String> axisLabels=new ArrayList<>();
+    //解析当天的运动数据
+    void parseSportToday(List<PetSportBean.SportBean> sportDatas) {
+        int days = sportDatas.size();
+        PetSportBean.SportBean todayBean = sportDatas.get(days - 1);
+        todayDeep = todayBean.target_amount;
+        todayLight = todayBean.reality_amount;
+        callback.onSuccessGetWeight(todayDeep, todayLight);
+    }
 
-        ArrayList<Entry> deepList=new ArrayList<>();
-        ArrayList<Entry> lightList=new ArrayList<>();
+    //解析一周的运动数据
+    void parseSportWeekAndMonthList(List<PetSportBean.SportBean> sportDatas,String format,boolean isMonth) {
+        int days = isMonth ? MONTH_LENGTH : WEEK_LENGTH;
+        int intrval = isMonth ? 2 : 1;
+        ArrayList<String> axisLabels = new ArrayList<>();
 
-        ArrayList<Date> dates=DateUtil.getPastDates(days);
+        ArrayList<Entry> deepList = new ArrayList<>();
+        ArrayList<Entry> lightList = new ArrayList<>();
 
-        if(isMonth) {
+        ArrayList<Date> dates = DateUtil.getPastDates(days);
+
+        if (isMonth) {
             Date curDate = DateUtil.getFirstDataOfCurMonth();
             String secondText = curDate.getMonth() + "月";
             int secondIndex = curDate.getDate();
-            callback.onSuccessGetSecAxis(secondText,secondIndex,days);
+            callback.onSuccessGetSecAxis(secondText, secondIndex, days);
         }
-        int startIndex=jsdata.length()-days;
-        if(startIndex<0){
-            startIndex=0;
+        int startIndex = sportDatas.size() - days;
+        if (startIndex < 0) {
+            startIndex = 0;
         }
-        for(int i=startIndex; i<jsdata.length() ; i+=intrval){
-            Date date=dates.get(i-startIndex);
-            axisLabels.add(date.getDate()+format);
-            JSONObject jsday = (JSONObject)jsdata.opt(i);
-            float deep= (float) jsday.optDouble(largeFieldName);
-            float light=(float) jsday.optDouble(lowerFieldName);
-            deepList.add(new Entry(i-startIndex, (float) jsday.optDouble(largeFieldName)));
-            if(isSleep) {
-                lightList.add(new Entry(i - startIndex,deep+light));
-            }
-            else {
-                lightList.add(new Entry(i - startIndex, (float) jsday.optDouble(lowerFieldName)));
-            }
+        for (int i = startIndex; i < sportDatas.size(); i += intrval) {
+            Date date = dates.get(i - startIndex);
+            axisLabels.add(date.getDate() + format);
+//            JSONObject jsday = (JSONObject) jsdata.opt(i);
+            PetSportBean.SportBean bean=sportDatas.get(i);
+            float deep = bean.target_amount;
+            float light = bean.reality_amount;
+            deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
+                lightList.add(new Entry(i - startIndex, (float)bean.reality_amount));
         }
-        callback.onSuccessGetAxis(axisLabels,isMonth);
-        if(isMonth){
-            callback.onSuccessGetMonthDataSet(deepList,lightList);
-        }else{
-            callback.onSuccessGetWeekDataSet(deepList,lightList);
+        callback.onSuccessGetAxis(axisLabels, isMonth);
+        if (isMonth) {
+            callback.onSuccessGetMonthDataSet(deepList, lightList);
+        } else {
+            callback.onSuccessGetWeekDataSet(deepList, lightList);
         }
     }
 
 
+//    private void parseList(JSONArray jsdata, String format, boolean isMonth) {
+//        int days = isMonth ? MONTH_LENGTH : WEEK_LENGTH;
+//        int intrval = isMonth ? 2 : 1;
+//        ArrayList<String> axisLabels = new ArrayList<>();
+//
+//        ArrayList<Entry> deepList = new ArrayList<>();
+//        ArrayList<Entry> lightList = new ArrayList<>();
+//
+//        ArrayList<Date> dates = DateUtil.getPastDates(days);
+//
+//        if (isMonth) {
+//            Date curDate = DateUtil.getFirstDataOfCurMonth();
+//            String secondText = curDate.getMonth() + "月";
+//            int secondIndex = curDate.getDate();
+//            callback.onSuccessGetSecAxis(secondText, secondIndex, days);
+//        }
+//        int startIndex = jsdata.length() - days;
+//        if (startIndex < 0) {
+//            startIndex = 0;
+//        }
+//        for (int i = startIndex; i < jsdata.length(); i += intrval) {
+//            Date date = dates.get(i - startIndex);
+//            axisLabels.add(date.getDate() + format);
+//            JSONObject jsday = (JSONObject) jsdata.opt(i);
+//            float deep = (float) jsday.optDouble(largeFieldName);
+//            float light = (float) jsday.optDouble(lowerFieldName);
+//            deepList.add(new Entry(i - startIndex, (float) jsday.optDouble(largeFieldName)));
+//            if (isSleep) {
+//                lightList.add(new Entry(i - startIndex, deep + light));
+//            } else {
+//                lightList.add(new Entry(i - startIndex, (float) jsday.optDouble(lowerFieldName)));
+//            }
+//        }
+//        callback.onSuccessGetAxis(axisLabels, isMonth);
+//        if (isMonth) {
+//            callback.onSuccessGetMonthDataSet(deepList, lightList);
+//        } else {
+//            callback.onSuccessGetWeekDataSet(deepList, lightList);
+//        }
+//    }
 
 
     /**
      * 显示某一固定日期数据
+     *
      * @param index
      * @param xaixsLabel
      * @param values
      * @param flag
      */
-    public void showDatas(int index,String xaixsLabel,List<Float> values,int flag){
-        if(null == callback){
+    public void showDatas(int index, String xaixsLabel, List<Float> values, int flag) {
+        if (null == callback) {
             return;
         }
-        String month=getMonth(index,FLAG_MONTH == flag);
-        xaixsLabel=xaixsLabel.replace("日","");
-        callback.onShowDataTip(month+xaixsLabel+"日",values,flag);
+        String month = getMonth(index, FLAG_MONTH == flag);
+        xaixsLabel = xaixsLabel.replace("日", "");
+        callback.onShowDataTip(month + xaixsLabel + "日", values, flag);
     }
 
-    public String getMonth(int index,boolean isMonth){
-        if(isMonth){
-            index=MONTH_LENGTH - (index * 2 -1);//在数据中真实索引
+    public String getMonth(int index, boolean isMonth) {
+        if (isMonth) {
+            index = MONTH_LENGTH - (index * 2 - 1);//在数据中真实索引
 
-        }else{
+        } else {
             index = WEEK_LENGTH - index;
         }
-        Date date =DateUtil.getPastDate(index);
-        return (date.getMonth()+1)+"月";
+        Date date = DateUtil.getPastDate(index);
+        return (date.getMonth() + 1) + "月";
     }
 
-    public double getTodayDeepValue(){
+    public double getTodayDeepValue() {
         return todayDeep;
     }
-    public double getTodayLightValue(){
+
+    public double getTodayLightValue() {
         return todayLight;
     }
 
-    private void onFail(){
+    private void onFail() {
         callback.onFail("查询失败，请稍后重试！");
     }
 
-    public void release(){
-        callback=null;
+    public void release() {
+        callback = null;
     }
 
 }
