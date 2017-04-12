@@ -37,10 +37,10 @@ public class LocatePresenter {
         {
             //宠物不在家，显示手机定位(遛狗模式)
             locateView.onShowPhoneLoc();
-        }/*else if(petInfoInstance.getInstance().getPet_id() != -1) {
+        }else if(PetInfoInstance.getInstance().getPet_id() != -1) {
             //宠物在家，查询宠物位置
             PetInfoInstance.getInstance().getPetLocation();
-        }*/
+        }
         PetInfoInstance.getInstance().getPetLocation();
         queryLightStatus();
 

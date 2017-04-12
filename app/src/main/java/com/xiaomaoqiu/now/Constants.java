@@ -87,7 +87,7 @@ public class Constants {
             /**
              * 开关灯
              */
-            public static final String swicth_light = "device/swicth_light";
+            public static final String swicth_light = "device/switch_light";
             /**
              * 获取灯的状态
              */

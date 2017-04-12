@@ -200,18 +200,15 @@ public class PetInfoInstance {
             @Override
             public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                EventManager.notifyPetLocationChange event= new EventManager.notifyPetLocationChange();
                 if (ret == HttpCode.EC_SUCCESS) {
-
-                     event.isnull=false;
+                    EventManager.notifyPetLocationChange event= new EventManager.notifyPetLocationChange();
                     latitude=message.latitude;
                     location_time=message.location_time;
                     longitude=message.longitude;
                     radius=message.radius;
-                } else {
-                    event.isnull=true;
+                    EventBus.getDefault().post(event);
+
                 }
-                EventBus.getDefault().post(event);
             }
 
             @Override
