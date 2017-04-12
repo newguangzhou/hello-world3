@@ -52,8 +52,8 @@ public class LoginPresenter {
                                 tloginView.getVerifyNextTime(message.next_req_interval);
                             }
                             break;
-                        case EC_UNKNOWN_ERROR:
-                            ToastUtil.showTost("此手机号不能接受验证码");
+                        case EC_FREQ_LIMIT:
+                            ToastUtil.showTost("发送验证码频率多");
                             break;
                         default:
                             ToastUtil.showTost("网络出错");

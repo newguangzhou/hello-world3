@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -133,7 +134,9 @@ public class PetInfoActivity extends BaseActivity  {
         }
 
         ((TextView) findViewById(R.id.txt_birthday)).setText(petInfoBean.birthday);
-        ((TextView) findViewById(R.id.txt_weight)).setText(String.format("%.2f kg", petInfoBean.weight));
+        if(!TextUtils.isEmpty(petInfoBean.weight)) {
+            ((TextView) findViewById(R.id.txt_weight)).setText(petInfoBean.weight + "kg");
+        }
 
         SimpleDraweeView imgLogo = (SimpleDraweeView) findViewById(R.id.img_pet_avatar);
         Uri uri = Uri.parse(petInfoBean.logo_url);

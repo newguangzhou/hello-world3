@@ -26,9 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 @SuppressLint("WrongConstant")
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
-    private static final String LTAG = MainActivity.class.getSimpleName();
 
-	public static MainActivity instance = null;
 	private static int mTabID[] ={
             R.id.tab_health,
             R.id.tab_locate,
@@ -52,11 +50,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	//todo 设备状态更新
 	@Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
 	public void onDeviceInfoChanged(EventManager.notifyDeviceStateChange event) {
-		if(!DeviceInfoInstance.getInstance().isDeviceExist){
-			Intent intent = new Intent(this, BindDeviceActivity.class);
-			startActivity(intent);
-			return;
-		}
+//		if(!DeviceInfoInstance.getInstance().isDeviceExist){
+//			Intent intent = new Intent(this, BindDeviceActivity.class);
+//			startActivity(intent);
+//			return;
+//		}
 		BatteryView batteryView = (BatteryView) findViewById(R.id.batteryView);
 		batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
 				DeviceInfoInstance.getInstance().lastGetTime);
@@ -67,7 +65,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-	    instance = this;
 		initView();
 		showFragment(0);
 		for(int i=0;i<3;i++)

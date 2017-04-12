@@ -59,10 +59,10 @@
                 fresco:fadeDuration="300"
                 fresco:actualImageScaleType="focusCrop"
 
-                fresco:placeholderImage="@drawable/welcome"
+                fresco:placeholderImage="@drawable/tab_health_head_defult"
                 fresco:placeholderImageScaleType="fitCenter"
 
-                fresco:failureImage="@drawable/welcome"
+                fresco:failureImage="@drawable/tab_health_head_defult"
                 fresco:failureImageScaleType="centerInside"
                 fresco:roundedCornerRadius="2dp"
                 />

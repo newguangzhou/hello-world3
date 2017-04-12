@@ -53,7 +53,7 @@ public interface ApiService {
     @GET(Constants.Url.User.get_verify_code)
     Call<MessageBean> getVerifyCode(
             @Query("phone_num") String phone,
-            @Query("device_type") int deviceType
+            @Query("type") int deviceType
     );
 
     //退出登录

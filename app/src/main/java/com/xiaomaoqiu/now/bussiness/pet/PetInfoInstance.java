@@ -147,14 +147,19 @@ public class PetInfoInstance {
                     @Override
                     public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
                         HttpCode ret = HttpCode.valueOf(message.status);
-                        if (ret == HttpCode.EC_SUCCESS) {
-                            savePetInfo(message);
-                            EventBus.getDefault().postSticky(new EventManager.notifyPetFramentGetActivityInfo());
-                            //获取设备信息
-                            DeviceInfoInstance.getInstance().getDeviceInfo();
+                        switch (ret) {
+                            case EC_SUCCESS:
+                                savePetInfo(message);
+                                EventBus.getDefault().postSticky(new EventManager.notifyPetFramentGetActivityInfo());
+                                //获取设备信息
+                                DeviceInfoInstance.getInstance().getDeviceInfo();
+                                break;
+                            case EC_PET_NOT_EXIST:
+                                ToastUtil.showTost("您还没有宠物");
+                                break;
+                            default:
+                                ToastUtil.showNetError();
 
-                        } else {
-                            ToastUtil.showNetError();
                         }
                     }
 
