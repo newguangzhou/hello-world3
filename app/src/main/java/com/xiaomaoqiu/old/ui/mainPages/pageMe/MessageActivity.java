@@ -7,17 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.pet.R;
-
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,28 +24,28 @@ public class MessageActivity extends BaseActivity {
         setContentView(R.layout.activity_message);
         mLvMessage = (ListView) findViewById(R.id.lv_message);
         mLvMessage.setAdapter(new MessageAdapter());
-        queryMessage();
+//        queryMessage();
     }
 
     public void queryMessage()
     {
-        HttpUtil.get2("msg.get_msg",new JsonHttpResponseHandler(){
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        HttpCode code = HttpCode.valueOf(response.optInt("status"));
-                        if (code == HttpCode.EC_SUCCESS) {
-                            MessageAdapter adapter = (MessageAdapter) MessageActivity.this.mLvMessage.getAdapter();
-                            adapter.initFromJson(response);
-                        }else
-                        {
-                            Toast.makeText(MessageActivity.this, "查询失败", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        Toast.makeText(MessageActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken());
+//        HttpUtil.get2("msg.get_msg",new JsonHttpResponseHandler(){
+//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                        HttpCode code = HttpCode.valueOf(response.optInt("status"));
+//                        if (code == HttpCode.EC_SUCCESS) {
+//                            MessageAdapter adapter = (MessageAdapter) MessageActivity.this.mLvMessage.getAdapter();
+//                            adapter.initFromJson();
+//                        }else
+//                        {
+//                            Toast.makeText(MessageActivity.this, "查询失败", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                        Toast.makeText(MessageActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+//                    }
+//                },
+//                UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken());
     }
 
     class MessageAdapter extends BaseAdapter
@@ -65,7 +57,7 @@ public class MessageActivity extends BaseActivity {
 
         List<MessageData> mData = new ArrayList<MessageData>();
 
-        public void initFromJson(JSONObject jsonObject)
+        public void initFromJson()
         {
             mData.clear();
 

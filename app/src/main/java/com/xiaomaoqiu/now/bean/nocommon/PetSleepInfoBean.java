@@ -12,6 +12,8 @@ public class PetSleepInfoBean extends BaseBean {
     public List<SleepBean> data=new ArrayList<SleepBean>();
 
     public static class SleepBean{
+        public double deep_sleep;
+        public double light_sleep;
 
 
     }

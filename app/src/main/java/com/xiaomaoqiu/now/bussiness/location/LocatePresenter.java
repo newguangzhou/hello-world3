@@ -1,8 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.location;
 
-import android.util.Log;
-
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.LightStatusBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
@@ -13,10 +11,6 @@ import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
-import com.xiaomaoqiu.old.utils.HttpUtil;
-
-import org.apache.http.Header;
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -68,45 +62,86 @@ public class LocatePresenter {
      * 去运动
      */
     public void goSport(){
-        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
+//        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                Log.v("http", "pet.activity:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    PetInfoInstance.getInstance().setAtHome(false);
+//                }
+//            }
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
+//            {
+//                onFail("网络连接失败！");
+//            }
+//
+//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+        ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id(),
+                Constants.TO_SPORT_ACTIVITY_TYPE
+        ).enqueue(new XMQCallback<BaseBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("http", "pet.activity:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {
-                    PetInfoInstance.getInstance().setAtHome(false);
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        PetInfoInstance.getInstance().setAtHome(false);
+                        break;
                 }
             }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-            {
-                onFail("网络连接失败！");
-            }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
+
     }
 
     /**
      * 回家
      */
     public void goHome(){
-        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
+//        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                Log.v("http", "pet.activity:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+////                    petInfoInstance.getInstance().setAtHome(true);
+//                    PetInfoInstance.getInstance().setAtHome(true);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                onFail("网络连接失败！");
+//            }
+//
+//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
+        ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
+                UserInstance.getUserInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id(),
+                Constants.TO_HOME_ACTIVITY_TYPE
+                ).enqueue(new XMQCallback<BaseBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("http", "pet.activity:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {
-//                    petInfoInstance.getInstance().setAtHome(true);
-                    PetInfoInstance.getInstance().setAtHome(true);
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        PetInfoInstance.getInstance().setAtHome(true);
+                        break;
                 }
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                onFail("网络连接失败！");
-            }
+            public void onFail(Call<BaseBean> call, Throwable t) {
 
-        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
+            }
+        });
     }
 
     /**

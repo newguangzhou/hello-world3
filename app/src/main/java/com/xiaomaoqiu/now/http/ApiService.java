@@ -106,6 +106,14 @@ public interface ApiService {
                                        @Query("end_date") String endDate
     );
 
+    //设置运动数据
+    @GET(Constants.Url.Pet.set_sport_info)
+    Call<BaseBean> setSportInfo(@Query("uid") long uid,
+                                @Query("token") String token,
+                                @Query("pet_id") long petId,
+                                @Query("target_step") int number
+                                );
+
 
     /**
      * 获取宠物的睡眠信息
@@ -189,9 +197,9 @@ public interface ApiService {
     //http://120.24.152.121:9100/device/swicth_light?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&light_status=1
     @GET(Constants.Url.Device.swicth_light)
     Call<BaseBean> switchLightStatus(@Query("uid") long uid,
-                                            @Query("token") String token,
-                                            @Query("imei") String imei,
-                                            @Query("light_status") int light_status
+                                     @Query("token") String token,
+                                     @Query("imei") String imei,
+                                     @Query("light_status") int light_status
     );
 
     /**
@@ -253,6 +261,15 @@ public interface ApiService {
             @Query("birthday") String birthday,
             @Query("logo_url") String logo_url,
             @Query("pet_type_id") int pet_type_id
+    );
+
+    //找狗模式
+    @GET(Constants.Url.Action.findPet)
+    Call<BaseBean> findPet(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long pet_id,
+            @Query("find_status") int status
     );
 
 }

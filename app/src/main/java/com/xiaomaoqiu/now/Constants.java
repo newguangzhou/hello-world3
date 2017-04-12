@@ -110,7 +110,7 @@ public class Constants {
 
         //找狗模式
         public static class Action{
-            public static final String find="pet/find";
+            public static final String findPet="pet/find";
 
             /**
              * d宠物动作，去运动还是回家
@@ -118,6 +118,10 @@ public class Constants {
             public static final String toActivity ="pet/activity";
 
             //<msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
+//            /**
+//             * 获取消息
+//             */
+//            public static final String getMsg=""
 
         }
     }

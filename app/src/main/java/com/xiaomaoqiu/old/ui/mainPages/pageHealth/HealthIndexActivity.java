@@ -3,24 +3,28 @@ package com.xiaomaoqiu.old.ui.mainPages.pageHealth;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.bean.nocommon.Summary;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
+import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.dialog.PickSportNumberDialog_RAW_Activity;
-import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.pet.R;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
+import retrofit2.Call;
+import retrofit2.Response;
+
 @SuppressLint("WrongConstant")
 public class HealthIndexActivity extends BaseActivity implements PickSportNumberDialog_RAW_Activity.OnPickNumberListener, View.OnClickListener {
 
@@ -50,23 +54,42 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     }
     private void initData()
     {
-        HttpUtil.get2("pet.health.summary", new JsonHttpResponseHandler() {
+//        HttpUtil.get2("pet.health.summary", new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                //{"status": 0, "sleep_summary": "睡眠总结", "expert_remind": "专家提醒", "activity_summary": "活动总结"}
+//                Log.v("http", "pet.health.summary:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    String tipSleep = response.optString("sleep_summary");
+//                    String tipSport = response.optString("activity_summary");
+//                    String tipSummary = response.optString("expert_remind");
+//                    mTextSportSum.setText(tipSport);
+//                    mTextSleepSum.setText(tipSleep);
+//                    mTextNotice.setText(tipSummary);
+//                }
+//            }
+//
+//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id());
+        ApiUtils.getApiService().getSummary(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<Summary>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //{"status": 0, "sleep_summary": "睡眠总结", "expert_remind": "专家提醒", "activity_summary": "活动总结"}
-                Log.v("http", "pet.health.summary:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {
-                    String tipSleep = response.optString("sleep_summary");
-                    String tipSport = response.optString("activity_summary");
-                    String tipSummary = response.optString("expert_remind");
-                    mTextSportSum.setText(tipSport);
-                    mTextSleepSum.setText(tipSleep);
-                    mTextNotice.setText(tipSummary);
+            public void onSuccess(Response<Summary> response, Summary message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        mTextSportSum.setText(message.activity_summary);
+                        mTextSleepSum.setText(message.sleep_summary);
+                        mTextNotice.setText(message.activity_summary);
+                        break;
+
                 }
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id());
+            @Override
+            public void onFail(Call<Summary> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -74,22 +97,42 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     {
         if(resultCode == RESULT_OK && requestCode == REQ_CODE_GO_OUT)
         {
-            HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
+//            HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
+//                @Override
+//                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                    Log.v("http", "pet.activity:" + response.toString());
+//                    HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                    if (ret == HttpCode.EC_SUCCESS) {
+//                        PetInfoInstance.getInstance().setAtHome(false);
+//                    }
+//                }
+//                @Override
+//                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
+//                {
+//                    Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
+//                }
+//
+//            },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+            ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
+                    UserInstance.getUserInstance().getToken(),
+                    PetInfoInstance.getInstance().getPet_id(),
+                    Constants.TO_SPORT_ACTIVITY_TYPE
+            ).enqueue(new XMQCallback<BaseBean>() {
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    Log.v("http", "pet.activity:" + response.toString());
-                    HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                    if (ret == HttpCode.EC_SUCCESS) {
-                        PetInfoInstance.getInstance().setAtHome(false);
+                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                    HttpCode ret = HttpCode.valueOf(message.status);
+                    switch (ret) {
+                        case EC_SUCCESS:
+                            PetInfoInstance.getInstance().setAtHome(false);
+                            break;
                     }
                 }
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-                {
-                    Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
-                }
 
-            },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+                @Override
+                public void onFail(Call<BaseBean> call, Throwable t) {
+
+                }
+            });
 
             finish();
         }
@@ -98,22 +141,39 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     @Override
     public void onConfirmNumber(int number) {
         //设定运动目标
-        HttpUtil.get2("pet.healthy.set_sport_info", new JsonHttpResponseHandler() {
+//        HttpUtil.get2("pet.healthy.set_sport_info", new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                Log.v("http", "pet.healthy.set_sport_info:" + response.toString());
+//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    Toast.makeText(HealthIndexActivity.this,"设定运动量成功",Toast.LENGTH_LONG).show();
+//                }
+//            }
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
+//            {
+//                Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
+//            }
+//
+//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
+        ApiUtils.getApiService().setSportInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number).enqueue(new XMQCallback<BaseBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.v("http", "pet.healthy.set_sport_info:" + response.toString());
-                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-                if (ret == HttpCode.EC_SUCCESS) {
-                    Toast.makeText(HealthIndexActivity.this,"设定运动量成功",Toast.LENGTH_LONG).show();
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        ToastUtil.showTost("设定运动量成功");
+                        break;
+
                 }
             }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-            {
-                Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
-            }
 
-        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
 
     }
 

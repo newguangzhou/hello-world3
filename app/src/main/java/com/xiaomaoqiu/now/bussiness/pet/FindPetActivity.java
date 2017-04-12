@@ -2,7 +2,6 @@ package com.xiaomaoqiu.now.bussiness.pet;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -29,19 +28,20 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.old.utils.HttpUtil;
+import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.pet.R;
 
-import org.apache.http.Header;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 @SuppressLint("WrongConstant")
 public class FindPetActivity extends BaseActivity implements View.OnClickListener{
@@ -155,14 +155,25 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
     //@param mode: 1:开始找狗 2：找到了
     void setPetFindMode(int mode)
     {
-        HttpUtil.get2("pet.find", new JsonHttpResponseHandler() {
+//        HttpUtil.get2("pet.find", new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                //{"status": 0}
+//                Log.v("http", "pet.find:" + response.toString());
+//            }
+//
+//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode);
+        ApiUtils.getApiService().findPet( UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode).enqueue(new XMQCallback<BaseBean>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //{"status": 0}
-                Log.v("http", "pet.find:" + response.toString());
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
             }
 
-        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode);
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
     }
 
     Runnable mPetLocateRunnable = new Runnable() {

@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
-import com.xiaomaoqiu.old.utils.ImageUtil;
+import com.xiaomaoqiu.now.util.ImageUtil;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 import com.xiaomaoqiu.pet.R;
 

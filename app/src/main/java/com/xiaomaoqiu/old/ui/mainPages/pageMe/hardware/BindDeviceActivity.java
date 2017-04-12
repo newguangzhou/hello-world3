@@ -3,28 +3,20 @@ package com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.EventManager;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
-import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.old.utils.HttpUtil;
 import com.xiaomaoqiu.pet.R;
 
-import org.apache.http.Header;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

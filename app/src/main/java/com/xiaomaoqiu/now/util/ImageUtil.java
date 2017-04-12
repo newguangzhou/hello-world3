@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.utils;
+package com.xiaomaoqiu.now.util;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;
