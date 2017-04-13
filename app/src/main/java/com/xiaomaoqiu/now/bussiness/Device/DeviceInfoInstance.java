@@ -80,8 +80,15 @@ public class DeviceInfoInstance {
         packBean. firmware_version = message.firmware_version;
         SPUtil.putFirmwareVersion(packBean.firmware_version);
         packBean. imei = message.imei;
+
+
         SPUtil.putDeviceImei(packBean.imei);
+
+
         UserInstance.getInstance().device_imei=packBean.imei;
+
+
+
         packBean.device_name = message.device_name;
         SPUtil.putDeviceName(packBean.device_name);
         packBean.iccid = message.iccid;
@@ -98,9 +105,16 @@ public class DeviceInfoInstance {
         packBean.firmware_version = "";
         SPUtil.putFirmwareVersion("");
         packBean.imei = "";
+
+
         SPUtil.putDeviceImei("");
         packBean.device_name = "";
+
+
         UserInstance.getInstance().device_imei="";
+
+
+
         SPUtil.putDeviceName("");
         packBean.iccid = "";
         SPUtil.putSimIccid("");

@@ -252,7 +252,12 @@ public class PetInfoInstance {
 
     public void clearPetInfo(){
         packBean.pet_id = 0;
+
+
         SPUtil.putPetId(0);
+
+        UserInstance.getInstance().pet_id=0;
+
         packBean.name ="";
         SPUtil.putPetName("");
         packBean.description = "";
