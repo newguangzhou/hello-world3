@@ -9,7 +9,11 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.xiaomaoqiu.now.Environment;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 
@@ -17,6 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.xiaomaoqiu.now.http.HttpCode.EC_DEVICE_NOT_EXIST;
 import static com.xiaomaoqiu.now.http.HttpCode.EC_PET_NOT_EXIST;
 
 /**
@@ -30,16 +35,37 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
             T message = response.body();
             if (message != null) {
 
-                //如果宠物不存在了，直接退到添加宠物页面
+
                 HttpCode ret = HttpCode.valueOf(message.status);
+                //如果宠物不存在了，直接退到添加宠物页面
                 if (EC_PET_NOT_EXIST == ret) {
                     onFail(call, null);
+
+                    UserInstance.getInstance().pet_id = 0;
+                    PetInfoInstance.getInstance().clearPetInfo();
+                    DeviceInfoInstance.getInstance().clearDeviceInfo();
+
+
                     Intent intent = new Intent(PetAppLike.mcontext, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     PetAppLike.mcontext.startActivity(intent);
                     ToastUtil.showTost("请先填写您的宠物信息");
                     return;
                 }
+                //如果设备不存在，直接退到绑定设备页面
+                if (EC_DEVICE_NOT_EXIST == ret) {
+                    onFail(call, null);
+
+                    UserInstance.getInstance().device_imei = "";
+                    DeviceInfoInstance.getInstance().clearDeviceInfo();
+
+                    Intent intent = new Intent(PetAppLike.mcontext, InitBindDeviceActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    PetAppLike.mcontext.startActivity(intent);
+                    ToastUtil.showTost("请先填写您的宠物信息");
+                    return;
+                }
+
 
                 if (PetAppLike.environment == Environment.Release) {
                     //上线状态下：此处加了统一对网络请求的异常捕获，不让用户崩溃。然后上传异常信息到bugly。

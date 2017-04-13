@@ -122,38 +122,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
     void initData() {
         String strPhone = SPUtil.getPhoneNumber();
         m_editPhone.setText(strPhone);
-        Boolean bLogin = SPUtil.getLoginStatus();
-        if (bLogin) {
-            Intent intent=new Intent();
-            if(!(UserInstance.getInstance().pet_id>0)){
-                intent.setClass(LoginActivity.this, AddPetInfoActivity.class);
-                startActivity(intent);
-                finish();
-                return;
-            }
-            if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
-                intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
-                startActivity(intent);
-                finish();
-                return;
-            }
-
-            //todo 判断是否有homewifi
-
-            if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
-                intent = new Intent(LoginActivity.this, WifiListActivity.class);
-                startActivity(intent);
-                finish();
-                return;
-            }
-
-
-            //todo 都有的话就直接跳转到主页
-            intent.setClass(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
     }
 
 

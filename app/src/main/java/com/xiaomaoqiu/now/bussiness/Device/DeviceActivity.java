@@ -16,6 +16,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class DeviceActivity extends BaseActivity {
+    @Override
+    public int frameTemplate()
+    {//没有标题栏
+        return 0;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class DeviceActivity extends BaseActivity {
         if(!TextUtils.isEmpty(bean.device_name))
             tv.setText(bean.device_name);
         else {
-            tv.setText("未绑定设备");
+            tv.setText("小毛球1号");
         }
 
         tv = (TextView) findViewById(R.id.tv_imei);

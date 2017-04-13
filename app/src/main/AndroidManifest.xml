@@ -69,16 +69,20 @@
             android:name="com.baidu.android.lbs.API_KEY"
             android:value="jnKFRb1jx9fVALGpeBtM8SAwor1gkXqK" />
 
-
-        <activity
-            android:name="com.xiaomaoqiu.now.bussiness.user.LoginActivity"
+        <activity android:name="com.xiaomaoqiu.now.bussiness.SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustResize">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.xiaomaoqiu.now.bussiness.user.LoginActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustResize">
+
         </activity>
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.MainActivity"
