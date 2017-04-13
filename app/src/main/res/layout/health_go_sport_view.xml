@@ -195,6 +195,8 @@
         android:id="@+id/go_sport_head"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:scaleType="fitXY"
@@ -208,5 +210,6 @@
         fresco:failureImageScaleType="centerInside"
         fresco:roundedCornerRadius="1.5dp"
         />
+
 
 </RelativeLayout>
