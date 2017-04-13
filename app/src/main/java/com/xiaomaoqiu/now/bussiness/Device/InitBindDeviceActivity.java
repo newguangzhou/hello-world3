@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware;
+package com.xiaomaoqiu.now.bussiness.Device;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.uuzuche.lib_zxing.activity.CodeUtils;
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
-import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,7 +26,7 @@ import java.util.regex.Pattern;
  * Created by Administrator on 2016/12/31.
  */
 
-public class BindDeviceActivity extends BaseActivity {
+public class InitBindDeviceActivity extends BaseActivity {
 
     public static final int REQUEST_SWEEP_CODE=0;
 
@@ -57,7 +58,7 @@ public class BindDeviceActivity extends BaseActivity {
         sweepBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ZXingActivity.skipToAsResult(BindDeviceActivity.this,REQUEST_SWEEP_CODE);
+                ZXingActivity.skipToAsResult(InitBindDeviceActivity.this,REQUEST_SWEEP_CODE);
             }
         });
     }
@@ -119,22 +120,31 @@ public class BindDeviceActivity extends BaseActivity {
 //                    showToast("设备绑定失败，请稍后重试！");
 //                }
 //            }
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),ImeiId,"xmq_test");
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),ImeiId,"xmq_test");
 //    }
 
 
 
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = false)
-    public  void toDeviceActivity(EventManager.bindDeviceSuccess event){
-        Intent intent=new Intent(this,DeviceActivity.class);
+    public  void toDeviceActivity(EventManage.bindDeviceSuccess event){
+        EventBus.getDefault().unregister(this);
+        if(TextUtils.isEmpty(PetInfoInstance.getInstance().packBean.wifi_bssid)) {
+            Intent intent = new Intent(this, WifiListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        //todo 进入主页
+        Intent intent=new Intent(InitBindDeviceActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        overridePendingTransition(0, 0);
         startActivity(intent);
-        finish();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }

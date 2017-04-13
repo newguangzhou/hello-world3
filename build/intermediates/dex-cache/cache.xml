@@ -192,12 +192,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/android/app/libs/BaiduTraceSDK_v2_1_15.jar"
+        jar="/Users/long/.android/build-cache/56237afee84a7499625c1f5db309c1cf1c42dbc9/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="3080175a04798e770bf5514891614e10c550f1a5">
-        <dex dex="/Users/long/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/BaiduTraceSDK_v2_1_15_467e36ac6410c6da42fd64fe7bd01b2ebe3405e8.jar.jar" />
+        sha1="5282459a7b815423df240a1b31daee3a55d6d9df">
+        <dex dex="/Users/long/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_06a01ebf47de435e93cc243f7bdbb7ff18bbdfef.jar.jar" />
     </item>
     <item
         is-multidex="false"
@@ -234,6 +234,15 @@
         revision="25.0.0"
         sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
         <dex dex="/Users/long/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/retrofit-2.1.0_c1549fcb0f9e9f7d92bf6f2c9d6060a4740b1609.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/android/app/libs/BaiduTraceSDK_v2_1_16.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="797cdb6cb6ff672aed145ff36402d55c4a8fe46f">
+        <dex dex="/Users/long/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/BaiduTraceSDK_v2_1_16_46b981f58d4563fcccb81dffc0b517d60558bca2.jar.jar" />
     </item>
     <item
         is-multidex="false"
@@ -288,15 +297,6 @@
         revision="25.0.0"
         sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
         <dex dex="/Users/long/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_67d0e275321c2f6be7b64d43197e15a392835f76.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/4fe236774a38e66da8430e83edd5340b9956c41c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f1e01a14f20e1a7a45cc291a177b4844dbe2de25">
-        <dex dex="/Users/long/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_e49aa666d21ef680eb7dc6e7a077ba04379ae2d3.jar.jar" />
     </item>
     <item
         is-multidex="false"

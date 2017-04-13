@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.bussiness.user;
 
 import android.text.TextUtils;
 
+import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 import com.xiaomaoqiu.now.util.SPUtil;
 
@@ -11,51 +12,84 @@ import com.xiaomaoqiu.now.util.SPUtil;
 
 public class UserInstance {
     private static UserInstance userInstance;
+
     private UserInstance() {
     }
 
-    public static UserInstance getUserInstance() {
+    public static UserInstance getInstance() {
         if (userInstance == null) {
             userInstance = new UserInstance();
-            userInstance.m_bLogin=SPUtil.getLoginStatus();
-            userInstance.m_strPhone=SPUtil.getPhoneNumber();
-            userInstance.m_uid=SPUtil.getUid();
-            userInstance.m_strToken=SPUtil.getToken();
+            userInstance.m_bLogin = SPUtil.getLoginStatus();
+            userInstance.m_strPhone = SPUtil.getPhoneNumber();
+            userInstance.m_uid = SPUtil.getUid();
+            userInstance.m_strToken = SPUtil.getToken();
+
+
+            userInstance.pet_id = SPUtil.getPetId();
+            userInstance.device_imei = SPUtil.getDeviceImei();
+            userInstance.wifi_bssid = SPUtil.getHomeWifiMac();
+
         }
         return userInstance;
     }
-    public boolean m_bLogin=false;
-    public String  m_strPhone ="";
-    public String  m_strToken="";
-    public long    m_uid=0;
+
+    public boolean m_bLogin = false;
+    public String m_strPhone = "";
+    public String m_strToken = "";
+    public long m_uid = 0;
 
 
-    public void saveLoginState(UserBean message, String strPhone)
-    {
-        m_bLogin=true;
+    //判断业务流程相关
+    public long pet_id;
+
+    public String device_imei;
+
+    public String wifi_bssid;
+
+
+    public void saveLoginState(LoginBean message, String strPhone) {
+        m_bLogin = true;
         m_uid = message.uid;
         m_strToken = message.token;
         m_strPhone = strPhone;
+
         SPUtil.putPhoneNumber(strPhone);
         SPUtil.putLoginStatus(true);
         SPUtil.putUid(message.uid);
         SPUtil.putToken(message.token);
     }
-    public void clearLoginState(){
-        m_bLogin=false;
-        m_uid =-1;
+
+
+    public void clearLoginInfo() {
+        m_bLogin = false;
+        m_uid = -1;
         m_strToken = "";
         SPUtil.putLoginStatus(false);
         SPUtil.putUid(m_uid);
         SPUtil.putToken("");
     }
-    public long getUid()
-    {
+
+    public void saveUserInfo(UserBean userBean) {
+        if (!TextUtils.isEmpty(userBean.imei)) {
+            device_imei = userBean.imei;
+            SPUtil.putDeviceImei(device_imei);
+        }
+        if(userBean.pet_id>0){
+            pet_id=userBean.pet_id;
+            SPUtil.putPetId(pet_id);
+        }
+
+        if(!TextUtils.isEmpty(userBean.wifi_bssid)){
+            wifi_bssid=userBean.wifi_bssid;
+            SPUtil.putHomeWifiMac(wifi_bssid);
+        }
+    }
+
+    public long getUid() {
         return m_uid;
     }
 
-    public String getToken()
-    {
+    public String getToken() {
         return m_strToken;
     }
 

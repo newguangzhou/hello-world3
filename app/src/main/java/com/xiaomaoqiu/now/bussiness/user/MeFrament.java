@@ -14,8 +14,8 @@ import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;
 import com.xiaomaoqiu.pet.R;
 
 /**

@@ -2,21 +2,18 @@ package com.xiaomaoqiu.now.bussiness;
 
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.BindDeviceActivity;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.pet.R;
 
@@ -49,7 +46,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
 	//todo 设备状态更新
 	@Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-	public void onDeviceInfoChanged(EventManager.notifyDeviceStateChange event) {
+	public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
 //		if(!DeviceInfoInstance.getInstance().isDeviceExist){
 //			Intent intent = new Intent(this, BindDeviceActivity.class);
 //			startActivity(intent);
@@ -72,7 +69,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 			mTabs[i]=findViewById(mTabID[i]);
 			mTabs[i].setOnClickListener(this);
 		}
-		PetInfoInstance.getInstance().getPetInfo();
+
 		EventBus.getDefault().register(this);
 	}
 

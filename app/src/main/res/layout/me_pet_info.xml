@@ -53,7 +53,9 @@
                 android:id="@+id/img_pet_avatar"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginTop="43dp"
                 android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:scaleType="fitXY"
                 fresco:fadeDuration="300"
@@ -195,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_weight"
                 android:layout_centerVertical="true"
-                android:text="10KG"
+                android:text=""
                 android:layout_toLeftOf="@+id/pet_info_weight_arrow_icon"/>
 
         </RelativeLayout>
@@ -224,6 +226,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/btn_variety_selector"/>
             <TextView
+                android:id="@+id/tv_pet_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

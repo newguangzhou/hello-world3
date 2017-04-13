@@ -64,6 +64,9 @@ public class SPUtil {
     //设备是否存在
     public static final String DEVICE_EXIST = "device_exist";
 
+    //HOME_WIFI_MAC
+    public static final String HOME_WIFI_MAC="home_wifi_mac";
+
 
     public static String getPhoneNumber() {
         return getString(PHONE_NUMBER);
@@ -232,6 +235,15 @@ public class SPUtil {
     public static void putPetAtHome(boolean value) {
         putBoolean(PET_AT_HOME, value);
     }
+
+    public static String getHomeWifiMac(){
+        return getString(HOME_WIFI_MAC);
+    }
+    public static void putHomeWifiMac(String value){
+        putString(HOME_WIFI_MAC,value);
+    }
+
+
 
 
     private static SharedPreferences getSP() {

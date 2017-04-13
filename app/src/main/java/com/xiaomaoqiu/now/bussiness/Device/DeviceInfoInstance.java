@@ -3,7 +3,7 @@ package com.xiaomaoqiu.now.bussiness.Device;
 import android.annotation.SuppressLint;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
@@ -81,6 +81,7 @@ public class DeviceInfoInstance {
         SPUtil.putFirmwareVersion(packBean.firmware_version);
         packBean. imei = message.imei;
         SPUtil.putDeviceImei(packBean.imei);
+        UserInstance.getInstance().device_imei=packBean.imei;
         packBean.device_name = message.device_name;
         SPUtil.putDeviceName(packBean.device_name);
         packBean.iccid = message.iccid;
@@ -88,7 +89,6 @@ public class DeviceInfoInstance {
         isDeviceExist = true;
         SPUtil.putIsDeviceExist(true);
         lastGetTime = DateUtil.deviceInfoTime(System.currentTimeMillis());
-        EventBus.getDefault().post(new EventManager.notifyDeviceStateChange());
     }
 
     //清空设备信息
@@ -100,18 +100,18 @@ public class DeviceInfoInstance {
         packBean.imei = "";
         SPUtil.putDeviceImei("");
         packBean.device_name = "";
+        UserInstance.getInstance().device_imei="";
         SPUtil.putDeviceName("");
         packBean.iccid = "";
         SPUtil.putSimIccid("");
         isDeviceExist = false;
         SPUtil.putIsDeviceExist(false);
         lastGetTime = DateUtil.deviceInfoTime(System.currentTimeMillis());
-        EventBus.getDefault().post(new EventManager.notifyDeviceStateChange());
     }
 
     //获取设备信息
     public void getDeviceInfo() {
-        ApiUtils.getApiService().getDeviceInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<DeviceInfoBean>() {
+        ApiUtils.getApiService().getDeviceInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<DeviceInfoBean>() {
             @Override
             public void onSuccess(Response<DeviceInfoBean> response, DeviceInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -123,6 +123,7 @@ public class DeviceInfoInstance {
                     clearDeviceInfo();
                     ToastUtil.showTost("追踪器不存在，本地信息已清空");
                 }
+                EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
             }
 
             @Override
@@ -134,8 +135,8 @@ public class DeviceInfoInstance {
     //绑定设备
     public void bindDevice(String imei) {
 
-        ApiUtils.getApiService().addDeviceInfo(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().addDeviceInfo(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
                 imei,
                 "xmq_test"
         ).enqueue(new XMQCallback<BaseBean>() {
@@ -143,8 +144,10 @@ public class DeviceInfoInstance {
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    PetInfoInstance.getInstance().getPetInfo();
-                    EventBus.getDefault().post(new EventManager.bindDeviceSuccess());
+
+                   getDeviceInfo();
+
+                    EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
                     Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(PetAppLike.mcontext, "网络问题，请重试", Toast.LENGTH_SHORT).show();
@@ -159,8 +162,8 @@ public class DeviceInfoInstance {
 
     //解除绑定
     public void unbindDevice() {
-        ApiUtils.getApiService().removeDeviceInfo(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().removeDeviceInfo(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
                 DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override

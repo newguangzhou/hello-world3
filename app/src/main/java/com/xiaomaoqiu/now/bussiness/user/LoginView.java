@@ -9,5 +9,4 @@ public interface LoginView {
     public void dismissDialog();
 
     public void getVerifyNextTime(int nSecond);
-    public void LoginSuccess();
 }

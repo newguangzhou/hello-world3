@@ -5,10 +5,12 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.LightStatusBean;
+import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
 import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
+import com.xiaomaoqiu.now.bean.nocommon.PetStatusBean;
 import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.Summary;
@@ -37,10 +39,10 @@ public interface ApiService {
      * @return
      */
     @GET(Constants.Url.User.login)
-    Call<UserBean> login(@Query("phone_num") String phone,
-                         @Query("code") String verifyCode,
-                         @Query("device_type") int deviceType,
-                         @Query("device_token") String deviceId
+    Call<LoginBean> login(@Query("phone_num") String phone,
+                          @Query("code") String verifyCode,
+                          @Query("device_type") int deviceType,
+                          @Query("device_token") String deviceId
     );
 
     /**
@@ -56,11 +58,37 @@ public interface ApiService {
             @Query("type") int deviceType
     );
 
+    /**
+     * 获取用户基本信息
+     * @param uid
+     * @param token
+     * @return
+     */
+    @GET(Constants.Url.User.get_user_info)
+    Call<UserBean> getUserInfo(
+            @Query("uid") long uid,
+            @Query("token") String token
+    );
+
     //退出登录
     @GET(Constants.Url.User.logout)
     Call<BaseBean> logout(
             @Query("uid") long uid,
             @Query("token") String token
+    );
+
+    //增加宠物信息
+    @GET(Constants.Url.Pet.add_pet_info)
+    Call<PetInfoBean> addPetInfo(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("description") String description,
+            @Query("weight") String weight,
+            @Query("sex") int sex,
+            @Query("nick") String nick,
+            @Query("birthday") String birthday,
+            @Query("pet_type_id") int pet_type_id
+
     );
 
     /**
@@ -219,22 +247,34 @@ public interface ApiService {
     );
 
     /**
-     * 去运动或者回家
-     * http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
-     * URL	http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=2
-     *
-     * @param uid
-     * @param token
-     * @param petId
-     * @param activity_type
-     * @return
+
+     * 获取宠物的状态
+     * pet_status : 0：正常 1：遛狗 2:寻狗
      */
-    @GET(Constants.Url.Action.toActivity)
-    Call<BaseBean> toActivity(@Query("uid") long uid,
-                              @Query("token") String token,
-                              @Query("pet_id") long petId,
-                              @Query("activity_type") int activity_type
+    @GET(Constants.Url.Pet.get_pet_stauts)
+    Call<PetStatusBean> getPetStatus(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long petId
     );
+//    /**
+   // 已废弃
+//     * 去运动或者回家
+//     * http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
+//     * URL	http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=2
+//     *
+//     * @param uid
+//     * @param token
+//     * @param petId
+//     * @param activity_type
+//     * @return
+//     */
+//    @GET(Constants.Url.Action.toActivity)
+//    Call<BaseBean> toActivity(@Query("uid") long uid,
+//                              @Query("token") String token,
+//                              @Query("pet_id") long petId,
+//                              @Query("activity_type") int activity_type
+//    );
 
 
     //上传头像

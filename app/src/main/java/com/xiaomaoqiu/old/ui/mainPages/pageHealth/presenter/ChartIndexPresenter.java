@@ -12,7 +12,6 @@ import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.utils.DateUtil;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -92,10 +91,10 @@ public class ChartIndexPresenter {
 //
 //            }
 //
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), strStart, strEnd);
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), strStart, strEnd);
         if (isSleep) {
-            ApiUtils.getApiService().getSleepInfo(UserInstance.getUserInstance().getUid(),
-                    UserInstance.getUserInstance().getToken(),
+            ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(),
+                    UserInstance.getInstance().getToken(),
                     PetInfoInstance.getInstance().getPet_id(), strStart, strEnd
             ).enqueue(new XMQCallback<PetSleepInfoBean>() {
                 @Override
@@ -118,7 +117,7 @@ public class ChartIndexPresenter {
             });
         } else {
 
-            ApiUtils.getApiService().getActivityInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),
+            ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                     PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
                 @Override
                 public void onSuccess(Response<PetSportBean> response, PetSportBean message) {

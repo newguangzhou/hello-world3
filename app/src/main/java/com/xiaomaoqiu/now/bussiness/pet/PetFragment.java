@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
@@ -96,9 +96,9 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
 
     //粘性事件，等待petid返回来再进行网络操作
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = true)
-    public void getActivityInfo(EventManager.notifyPetFramentGetActivityInfo event) {
+    public void getActivityInfo(EventManage.notifyPetFramentGetActivityInfo event) {
         initProgress();
-        ApiUtils.getApiService().getActivityInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
             public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
@@ -133,7 +133,7 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
 
     //todo 更新逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onPetInfoChanged(EventManager.notifyPetInfoChange event) {
+    public void onPetInfoChanged(EventManage.notifyPetInfoChange event) {
             if (PetInfoInstance.getInstance().getAtHome()) {//回家
                 getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);

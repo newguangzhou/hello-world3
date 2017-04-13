@@ -62,6 +62,7 @@ public class LocatePresenter {
      * 去运动
      */
     public void goSport(){
+        PetInfoInstance.getInstance().setAtHome(false);
 //        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -77,27 +78,27 @@ public class LocatePresenter {
 //                onFail("网络连接失败！");
 //            }
 //
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
-        ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(),
-                Constants.TO_SPORT_ACTIVITY_TYPE
-        ).enqueue(new XMQCallback<BaseBean>() {
-            @Override
-            public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret) {
-                    case EC_SUCCESS:
-                        PetInfoInstance.getInstance().setAtHome(false);
-                        break;
-                }
-            }
-
-            @Override
-            public void onFail(Call<BaseBean> call, Throwable t) {
-
-            }
-        });
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+//        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(),
+//                UserInstance.getInstance().getToken(),
+//                PetInfoInstance.getInstance().getPet_id(),
+//                Constants.TO_SPORT_ACTIVITY_TYPE
+//        ).enqueue(new XMQCallback<BaseBean>() {
+//            @Override
+//            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+//                HttpCode ret = HttpCode.valueOf(message.status);
+//                switch (ret) {
+//                    case EC_SUCCESS:
+//                        PetInfoInstance.getInstance().setAtHome(false);
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Call<BaseBean> call, Throwable t) {
+//
+//            }
+//        });
 
     }
 
@@ -105,6 +106,7 @@ public class LocatePresenter {
      * 回家
      */
     public void goHome(){
+        PetInfoInstance.getInstance().setAtHome(true);
 //        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -121,27 +123,28 @@ public class LocatePresenter {
 //                onFail("网络连接失败！");
 //            }
 //
-//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
-        ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(),
-                Constants.TO_HOME_ACTIVITY_TYPE
-                ).enqueue(new XMQCallback<BaseBean>() {
-            @Override
-            public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret) {
-                    case EC_SUCCESS:
-                        PetInfoInstance.getInstance().setAtHome(true);
-                        break;
-                }
-            }
-
-            @Override
-            public void onFail(Call<BaseBean> call, Throwable t) {
-
-            }
-        });
+//        },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
+//        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(),
+//                UserInstance.getInstance().getToken(),
+//                PetInfoInstance.getInstance().getPet_id(),
+//                Constants.TO_HOME_ACTIVITY_TYPE
+//                ).enqueue(new XMQCallback<BaseBean>() {
+//            @Override
+//            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+//                HttpCode ret = HttpCode.valueOf(message.status);
+//                switch (ret) {
+//                    case EC_SUCCESS:
+//                        PetInfoInstance.getInstance().setAtHome(true);
+//
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Call<BaseBean> call, Throwable t) {
+//
+//            }
+//        });
     }
 
     /**
@@ -167,10 +170,10 @@ public class LocatePresenter {
 //                    onFail("查询闪光灯状态失败，请稍后重试！");
 //                }
 //            }
-//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei());
+//        },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei());
 
-        ApiUtils.getApiService().getLightStatus(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().getLightStatus(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
                 DeviceInfoInstance.getInstance().packBean.imei
                 ).enqueue(new XMQCallback<LightStatusBean>() {
             @Override
@@ -212,9 +215,9 @@ public class LocatePresenter {
 //                }
 //            }
 //
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei(),bOpenLight?1:0);
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserMgr.INSTANCE.getPetInfo().getDevInfo().getImei(),bOpenLight?1:0);
 
-        ApiUtils.getApiService().switchLightStatus(UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().switchLightStatus(UserInstance.getInstance().getUid(),UserInstance.getInstance().getToken(),
                 DeviceInfoInstance.getInstance().packBean.imei,bOpenLight?1:0
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override

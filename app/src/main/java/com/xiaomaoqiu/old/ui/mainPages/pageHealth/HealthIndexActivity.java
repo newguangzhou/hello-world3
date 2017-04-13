@@ -70,8 +70,8 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 //                }
 //            }
 //
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id());
-        ApiUtils.getApiService().getSummary(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<Summary>() {
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id());
+        ApiUtils.getApiService().getSummary(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<Summary>() {
             @Override
             public void onSuccess(Response<Summary> response, Summary message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -97,6 +97,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     {
         if(resultCode == RESULT_OK && requestCode == REQ_CODE_GO_OUT)
         {
+            PetInfoInstance.getInstance().setAtHome(false);
 //            HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
 //                @Override
 //                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -112,27 +113,27 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 //                    Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
 //                }
 //
-//            },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
-            ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
-                    UserInstance.getUserInstance().getToken(),
-                    PetInfoInstance.getInstance().getPet_id(),
-                    Constants.TO_SPORT_ACTIVITY_TYPE
-            ).enqueue(new XMQCallback<BaseBean>() {
-                @Override
-                public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                    HttpCode ret = HttpCode.valueOf(message.status);
-                    switch (ret) {
-                        case EC_SUCCESS:
-                            PetInfoInstance.getInstance().setAtHome(false);
-                            break;
-                    }
-                }
-
-                @Override
-                public void onFail(Call<BaseBean> call, Throwable t) {
-
-                }
-            });
+//            },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+//            ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(),
+//                    UserInstance.getInstance().getToken(),
+//                    PetInfoInstance.getInstance().getPet_id(),
+//                    Constants.TO_SPORT_ACTIVITY_TYPE
+//            ).enqueue(new XMQCallback<BaseBean>() {
+//                @Override
+//                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+//                    HttpCode ret = HttpCode.valueOf(message.status);
+//                    switch (ret) {
+//                        case EC_SUCCESS:
+//                            PetInfoInstance.getInstance().setAtHome(false);
+//                            break;
+//                    }
+//                }
+//
+//                @Override
+//                public void onFail(Call<BaseBean> call, Throwable t) {
+//
+//                }
+//            });
 
             finish();
         }
@@ -156,8 +157,8 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 //                Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
 //            }
 //
-//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
-        ApiUtils.getApiService().setSportInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number).enqueue(new XMQCallback<BaseBean>() {
+//        },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
+        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);

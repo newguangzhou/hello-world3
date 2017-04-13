@@ -3,14 +3,20 @@ package com.xiaomaoqiu.now.bussiness.user;
 import android.annotation.SuppressLint;
 import android.widget.Toast;
 
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
 import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.lang.ref.WeakReference;
 
@@ -70,6 +76,14 @@ public class LoginPresenter {
 
     }
 
+
+    /**
+     * 获取用户基本信息
+     */
+    public void getUserInfo() {
+
+    }
+
     /**
      * 登录
      *
@@ -82,9 +96,9 @@ public class LoginPresenter {
         final LoginView tloginView = loginView.get();
         if (tloginView != null) {
             tloginView.showDialog();
-            ApiUtils.getApiService().login(phone, verifyCode, deviceType, deviceId).enqueue(new XMQCallback<UserBean>() {
+            ApiUtils.getApiService().login(phone, verifyCode, deviceType, deviceId).enqueue(new XMQCallback<LoginBean>() {
                 @Override
-                public void onSuccess(Response<UserBean> response, UserBean message) {
+                public void onSuccess(Response<LoginBean> response, LoginBean message) {
                     if (tloginView != null) {
                         tloginView.dismissDialog();
                     }
@@ -92,8 +106,32 @@ public class LoginPresenter {
                     switch (ret) {
                         case EC_SUCCESS:
                             //保存登录状态
-                            UserInstance.getUserInstance().saveLoginState(message, phone);
-                            tloginView.LoginSuccess();
+                            UserInstance.getInstance().saveLoginState(message, phone);
+
+
+                            //获取用户基本信息
+                            ApiUtils.getApiService().getUserInfo(UserInstance.getInstance().getUid(),
+                                    UserInstance.getInstance().getToken()
+                            ).enqueue(new XMQCallback<UserBean>() {
+                                @Override
+                                public void onSuccess(Response<UserBean> response, UserBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
+                                            UserInstance.getInstance().saveUserInfo(message);
+                                            EventBus.getDefault().post(new EventManage.getUserInfoEvent());
+                                            break;
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFail(Call<UserBean> call, Throwable t) {
+
+                                }
+                            });
+
+
                             break;
                         case EC_INVALID_VERIFY_CODE:
                             ToastUtil.showTost("验证码无效");
@@ -105,11 +143,10 @@ public class LoginPresenter {
                 }
 
                 @Override
-                public void onFail(Call<UserBean> call, Throwable t) {
+                public void onFail(Call<LoginBean> call, Throwable t) {
                     if (tloginView != null) {
                         tloginView.dismissDialog();
                     }
-                    Toast.makeText(PetAppLike.mcontext, "网络错误", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -118,12 +155,14 @@ public class LoginPresenter {
 
     //退出登录
     public void logout() {
-        ApiUtils.getApiService().logout(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken()).enqueue(new XMQCallback<BaseBean>() {
+        ApiUtils.getApiService().logout(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken()).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {//退出登陆成功
-                    UserInstance.getUserInstance().clearLoginState();
+                    UserInstance.getInstance().clearLoginInfo();
+                    PetInfoInstance.getInstance().clearPetInfo();
+                    DeviceInfoInstance.getInstance().clearDeviceInfo();
                     final LogoutView togoutView = logoutView.get();
                     if (togoutView != null) {
                         //退出登录成功

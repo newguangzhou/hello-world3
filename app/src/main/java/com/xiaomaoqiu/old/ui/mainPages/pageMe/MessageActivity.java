@@ -45,7 +45,7 @@ public class MessageActivity extends BaseActivity {
 //                        Toast.makeText(MessageActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
 //                    }
 //                },
-//                UserInstance.getUserInstance().getUid(),UserInstance.getUserInstance().getToken());
+//                UserInstance.getInstance().getUid(),UserInstance.getInstance().getToken());
     }
 
     class MessageAdapter extends BaseAdapter

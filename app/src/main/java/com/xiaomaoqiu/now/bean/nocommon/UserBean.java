@@ -7,10 +7,10 @@ package com.xiaomaoqiu.now.bean.nocommon;
 public class UserBean extends BaseBean {
 //    public int status;
 
-    public int token_expire_secs;
+    public long pet_id;
 
-    public String token;
+    public String imei;
 
-    public long uid;
+    public String  wifi_bssid;
 
 }

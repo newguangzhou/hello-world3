@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
@@ -44,7 +44,7 @@ public class DeviceActivity extends BaseActivity {
 
     //todo 设备更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onDeviceInfoChanged(EventManager.notifyDeviceStateChange event) {
+    public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         showMessageOnUI();
     }
     //显示设备信息
@@ -88,7 +88,7 @@ public class DeviceActivity extends BaseActivity {
 //                            finish();
 //                        }
 //                    }
-//                }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),petInfo.getDevInfo().getImei());
+//                }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),petInfo.getDevInfo().getImei());
                 DeviceInfoInstance.getInstance().unbindDevice();
             }
         });

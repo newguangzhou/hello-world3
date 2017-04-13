@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/total_color_8"
-    tools:context="com.xiaomaoqiu.old.com.xiaomaoqiu.now.bussiness.Device.HardwareActivity">
+    tools:context="com.xiaomaoqiu.now.bussiness.Device.DeviceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

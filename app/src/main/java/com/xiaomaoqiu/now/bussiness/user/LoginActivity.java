@@ -18,12 +18,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
+import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
+import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 @SuppressLint("WrongConstant")
@@ -55,6 +66,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         initListener();
         initData();
         loginPresenter = new LoginPresenter(this);
+        EventBus.getDefault().register(this);
     }
 
     void initView() {
@@ -112,11 +124,35 @@ public class LoginActivity extends BaseActivity implements LoginView {
         m_editPhone.setText(strPhone);
         Boolean bLogin = SPUtil.getLoginStatus();
         if (bLogin) {
+            Intent intent=new Intent();
+            if(!(UserInstance.getInstance().pet_id>0)){
+                intent.setClass(LoginActivity.this, AddPetInfoActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+            if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
+                intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
 
-            //todo 如果已经登录是什么样的业务逻辑,现在先处理成直接调转到主页
-            Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+            //todo 判断是否有homewifi
+
+            if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
+                intent = new Intent(LoginActivity.this, WifiListActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+
+
+            //todo 都有的话就直接跳转到主页
+            intent.setClass(LoginActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
+            return;
         }
     }
 
@@ -170,11 +206,34 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     }
 
-    @Override
-    public void LoginSuccess() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void next(EventManage.getUserInfoEvent event) {
+        Intent intent = new Intent();
+        if(!(UserInstance.getInstance().pet_id>0)){
+            intent.setClass(LoginActivity.this, AddPetInfoActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
+            intent.setClass(LoginActivity.this, BindDeviceActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)){
+            intent.setClass(LoginActivity.this, WifiListActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
+        EventBus.getDefault().unregister(this);
+
+
+
+
     }
 
     void WaitForNextFetchCode(int nSecond) {

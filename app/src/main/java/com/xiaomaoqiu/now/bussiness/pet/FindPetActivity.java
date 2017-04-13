@@ -28,7 +28,7 @@ import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -162,8 +162,8 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
 //                Log.v("http", "pet.find:" + response.toString());
 //            }
 //
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode);
-        ApiUtils.getApiService().findPet( UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode).enqueue(new XMQCallback<BaseBean>() {
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode);
+        ApiUtils.getApiService().findPet( UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
 
@@ -185,7 +185,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
 
    //todo  回调逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onLocateResult(EventManager.notifyPetLocationChange event) {
+    public void onLocateResult(EventManage.notifyPetLocationChange event) {
 //        boolean bFound, double latitude, double longitude
         //todo bFound
 //        if(!bFound) return;

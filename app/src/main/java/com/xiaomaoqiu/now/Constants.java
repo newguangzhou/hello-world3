@@ -26,6 +26,10 @@ public class Constants {
              */
             public static final String get_verify_code = "user/get_verify_code";
             /**
+             * 获取用户基本信息
+             */
+            public static final String get_user_info="user/get_base_infomation";
+            /**
              * 登录
              */
             public static final String login = "user/login";
@@ -37,6 +41,7 @@ public class Constants {
              * 注册
              */
             public static final String register = "user/register";
+
 
         }
 
@@ -59,10 +64,20 @@ public class Constants {
              * 设置运动信息
              */
             public static final String set_sport_info = "pet/healthy/set_sport_info";
+
+            /**
+             * 增加宠物信息
+             */
+            public static final String add_pet_info="pet/add_pet_info";
             /**
              * 获取宠物信息
              */
             public static final String get_pet_info = "pet/get_pet_info";
+            /**
+             * 获取宠物的状态
+             * pet_status : 0：正常 1：遛狗 2:寻狗
+             */
+            public static final String get_pet_stauts="pet/get_pet_stauts";
             /**
              * 更新宠物信息
              */
@@ -112,10 +127,10 @@ public class Constants {
         public static class Action{
             public static final String findPet="pet/find";
 
-            /**
-             * d宠物动作，去运动还是回家
-             */
-            public static final String toActivity ="pet/activity";
+//            /**
+//             * d宠物动作，去运动还是回家
+//             */
+//            public static final String toActivity ="pet/activity";
 
             //<msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
 //            /**

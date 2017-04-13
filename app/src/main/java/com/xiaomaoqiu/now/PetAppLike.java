@@ -36,18 +36,9 @@ public class PetAppLike extends DefaultApplicationLike {
 
         Fresco.initialize(mcontext);
 
-//        Config.init(mcontext);
 
 //         初始化百度地图SDK
         SDKInitializer.initialize(mcontext);
-
-//        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetInfo.class);
-//        NotificationCenter.INSTANCE.addCallbacks(PetInfo.Callback_PetLocating.class);
-//        NotificationCenter.INSTANCE.addCallbacks(DeviceInfo.Callback_DeviceInfo.class);
-
-//        Log.w(PetAppLike.TAG, "app init success");
-
-
 
 
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId

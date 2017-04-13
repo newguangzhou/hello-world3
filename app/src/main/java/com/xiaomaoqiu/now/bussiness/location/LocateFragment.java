@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.map.MapView;
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.map.main.IMapCallBack;
@@ -124,7 +124,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     //todo 更新逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onPetInfoChanged(EventManager.notifyPetInfoChange event) {
+    public void onPetInfoChanged(EventManage.atHomeOrtoSport event) {
 
             if (null != mWalkPetView) {
                 mWalkPetView.setEnabled(true);
@@ -144,7 +144,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onDeviceInfoChanged(EventManager.notifyDeviceStateChange event) {
+    public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         if (null != mPresenter) {
             mPresenter.queryLightStatus();
         }
@@ -152,7 +152,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     //todo 回调逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onLocateResult(EventManager.notifyPetLocationChange event) {
+    public void onLocateResult(EventManage.notifyPetLocationChange event) {
 //        boolean bFound, double latitude, double longitude
         //todo bFound
 //        if (!bFound) {

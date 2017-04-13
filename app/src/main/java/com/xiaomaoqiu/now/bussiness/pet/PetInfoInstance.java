@@ -2,9 +2,10 @@ package com.xiaomaoqiu.now.bussiness.pet;
 
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.now.EventManager;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
@@ -43,7 +44,7 @@ public class PetInfoInstance {
 
     public boolean petAtHome = true; //true - 宠物在家, false - 宠物活动中
 
-    public Date dateFormat_birthday;
+
 
     private PetInfoInstance() {
 
@@ -80,6 +81,7 @@ public class PetInfoInstance {
             year = y;
             month = m;
             day = d;
+
         }
 
         public int year;
@@ -94,35 +96,60 @@ public class PetInfoInstance {
 
 
     public void savePetInfo(PetInfoBean message) {
-        packBean.pet_id = message.pet_id;
-        SPUtil.putPetId(packBean.pet_id);
-        packBean.name = message.name;
-        SPUtil.putPetName(packBean.name);
-        packBean.description = message.description;
-        SPUtil.putPetDescription(packBean.description);
-        packBean.weight = message.weight;
-        SPUtil.putWeight(packBean.weight);
-        packBean.device_imei = message.device_imei;
-        SPUtil.putDeviceImei(packBean.device_imei);
-        packBean.target_step = message.target_step;
-        SPUtil.putPetTargetStep(packBean.target_step);
+        if(message.pet_id>0) {
+            packBean.pet_id = message.pet_id;
+            SPUtil.putPetId(packBean.pet_id);
+            UserInstance.getInstance().pet_id=packBean.pet_id;
+        }
+        if(!TextUtils.isEmpty(message.name)) {
+            packBean.name = message.name;
+            SPUtil.putPetName(packBean.name);
+        }
+        if(!TextUtils.isEmpty(message.description)) {
+            packBean.description = message.description;
+            SPUtil.putPetDescription(packBean.description);
+        }
+        if(!TextUtils.isEmpty(message.weight)) {
+            packBean.weight = message.weight;
+            SPUtil.putWeight(packBean.weight);
+        }
+        if(!TextUtils.isEmpty(message.device_imei)) {
+            packBean.device_imei = message.device_imei;
+            SPUtil.putDeviceImei(packBean.device_imei);
+            UserInstance.getInstance().device_imei=packBean.device_imei;
+        }
+        if(message.target_step!=0) {
+            packBean.target_step = message.target_step;
+            SPUtil.putPetTargetStep(packBean.target_step);
+        }
         packBean.sex = message.sex;
         SPUtil.putSex(packBean.sex);
-        packBean.nick = message.nick;
-        SPUtil.putPetNick(packBean.nick);
-        packBean.birthday = message.birthday;
-        SPUtil.putBirthday(packBean.birthday);
-        packBean.logo_url = message.logo_url;
-        SPUtil.putPetHeader(packBean.logo_url);
+
+        if(!TextUtils.isEmpty(message.nick)) {
+            packBean.nick = message.nick;
+            SPUtil.putPetNick(packBean.nick);
+        }
+        if(!TextUtils.isEmpty(message.birthday)) {
+            packBean.birthday = message.birthday;
+            SPUtil.putBirthday(packBean.birthday);
+        }
+        if(!TextUtils.isEmpty(message.logo_url)) {
+            packBean.logo_url = message.logo_url;
+            SPUtil.putPetHeader(packBean.logo_url);
+        }
         packBean.pet_type_id = message.pet_type_id;
         SPUtil.putPetTypeId(packBean.pet_type_id);
         setDateFormat_birthday(packBean.birthday);
 
 
-        EventBus.getDefault().post(new EventManager.notifyPetInfoChange());
+        EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
     }
 
     public void setDateFormat_birthday(String birthdayString) {
+        if(TextUtils.isEmpty(birthdayString)){
+
+            return;
+        }
         int year;
         int month;
         int day;
@@ -137,12 +164,41 @@ public class PetInfoInstance {
             month = 0;
             day = 0;
         }
-        dateFormat_birthday=new Date(year, month, day);
+        packBean.dateFormat_birthday=new Date(year, month, day);
     }
 
+
+    //添加宠物信息
+    public void addPetInfo(PetInfoBean petInfoBean){
+        ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(),UserInstance.getInstance().getToken(),
+                petInfoBean.description,petInfoBean.weight,petInfoBean.sex,petInfoBean.nick,
+                petInfoBean.birthday,petInfoBean.pet_type_id
+                ).enqueue(new XMQCallback<PetInfoBean>() {
+            @Override
+            public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        savePetInfo(message);
+                        EventBus.getDefault().post(new EventManage.addPetInfoSuccess());
+                        break;
+                    case EC_INVALID_ARGS:
+                        ToastUtil.showTost("请填写完整信息");
+                        break;
+                }
+            }
+
+            @Override
+            public void onFail(Call<PetInfoBean> call, Throwable t) {
+
+            }
+        });
+
+
+    }
     //获取宠物基本信息
     public void getPetInfo() {
-        ApiUtils.getApiService().getPetInfo(UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken())
+        ApiUtils.getApiService().getPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken())
                 .enqueue(new XMQCallback<PetInfoBean>() {
                     @Override
                     public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
@@ -150,12 +206,13 @@ public class PetInfoInstance {
                         switch (ret) {
                             case EC_SUCCESS:
                                 savePetInfo(message);
-                                EventBus.getDefault().postSticky(new EventManager.notifyPetFramentGetActivityInfo());
+                                EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
                                 //获取设备信息
                                 DeviceInfoInstance.getInstance().getDeviceInfo();
                                 break;
                             case EC_PET_NOT_EXIST:
-                                ToastUtil.showTost("您还没有宠物");
+//                                ToastUtil.showTost("您还没有宠物");
+                                EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
                                 break;
                             default:
                                 ToastUtil.showNetError();
@@ -171,7 +228,7 @@ public class PetInfoInstance {
 
     //更新宠物信息
     public void updatePetInfo(final PetInfoBean petInfoBean) {
-        ApiUtils.getApiService().updatePetInfo(UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getToken(),
                 petInfoBean.pet_id, petInfoBean.description, petInfoBean.weight, petInfoBean.sex,
                 petInfoBean.nick, petInfoBean.birthday, petInfoBean.logo_url, petInfoBean.pet_type_id
         ).enqueue(new XMQCallback<BaseBean>() {
@@ -192,16 +249,43 @@ public class PetInfoInstance {
 
     }
 
+
+    public void clearPetInfo(){
+        packBean.pet_id = 0;
+        SPUtil.putPetId(0);
+        packBean.name ="";
+        SPUtil.putPetName("");
+        packBean.description = "";
+        SPUtil.putPetDescription("");
+        packBean.weight = "";
+        SPUtil.putWeight("");
+        packBean.device_imei = "";
+        SPUtil.putDeviceImei("");
+        packBean.target_step = 0;
+        SPUtil.putPetTargetStep(packBean.target_step);
+        packBean.sex =2;
+        SPUtil.putSex(2);
+        packBean.nick = "";
+        SPUtil.putPetNick("");
+        packBean.birthday ="";
+        SPUtil.putBirthday("");
+        packBean.logo_url = "";
+        SPUtil.putPetHeader("");
+        packBean.pet_type_id = 0;
+        SPUtil.putPetTypeId(0);
+        setDateFormat_birthday("");
+    }
+
     public void getPetLocation() {
-        ApiUtils.getApiService().getPetLocation(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
+        ApiUtils.getApiService().getPetLocation(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id()
         ).enqueue(new XMQCallback<PetLocationBean>() {
             @Override
             public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    EventManager.notifyPetLocationChange event= new EventManager.notifyPetLocationChange();
+                    EventManage.notifyPetLocationChange event= new EventManage.notifyPetLocationChange();
                     latitude=message.latitude;
                     location_time=message.location_time;
                     longitude=message.longitude;
@@ -255,7 +339,7 @@ public class PetInfoInstance {
     }
 
     public void setDateFormat_birthday(Date date) {
-        dateFormat_birthday = date;
+        packBean.dateFormat_birthday = date;
         packBean.birthday = date.toString();
     }
 
@@ -311,6 +395,8 @@ public class PetInfoInstance {
     public void setAtHome(boolean bAtHome) {
         this.petAtHome = bAtHome;
         SPUtil.putPetAtHome(bAtHome);
+        EventManage.atHomeOrtoSport event=new EventManage.atHomeOrtoSport();
+        EventBus.getDefault().post(event);
     }
 
     public boolean getAtHome() {

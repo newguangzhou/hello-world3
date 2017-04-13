@@ -13,18 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.xiaomaoqiu.now.Constants;
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
-import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.http.ApiUtils;
-import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.PetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.pet.R;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/12/25.
@@ -187,6 +178,8 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
 
 
     private void goSport(){
+        PetInfoInstance.getInstance().setAtHome(false);
+        show(STATUS_DEFAULT);
 //        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -203,31 +196,33 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
 //                Toast.makeText(getContext(),"网络连接失败",Toast.LENGTH_LONG).show();
 //            }
 //
-//        }, UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
-        ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(),
-                Constants.TO_SPORT_ACTIVITY_TYPE
-        ).enqueue(new XMQCallback<BaseBean>() {
-            @Override
-            public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret) {
-                    case EC_SUCCESS:
-                        PetInfoInstance.getInstance().setAtHome(false);
-                        show(STATUS_DEFAULT);
-                        break;
-                }
-            }
-
-            @Override
-            public void onFail(Call<BaseBean> call, Throwable t) {
-
-            }
-        });
+//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
+//        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(),
+//                UserInstance.getInstance().getToken(),
+//                PetInfoInstance.getInstance().getPet_id(),
+//                Constants.TO_SPORT_ACTIVITY_TYPE
+//        ).enqueue(new XMQCallback<BaseBean>() {
+//            @Override
+//            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+//                HttpCode ret = HttpCode.valueOf(message.status);
+//                switch (ret) {
+//                    case EC_SUCCESS:
+//                        PetInfoInstance.getInstance().setAtHome(false);
+//                        show(STATUS_DEFAULT);
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Call<BaseBean> call, Throwable t) {
+//
+//            }
+//        });
     }
 
     private void goHome(){
+        PetInfoInstance.getInstance().setAtHome(true);
+        show(STATUS_DEFAULT);
 //        HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -244,28 +239,28 @@ public class HealthGoSportView extends RelativeLayout implements View.OnClickLis
 //                Toast.makeText(getContext(), "网络连接失败", Toast.LENGTH_LONG).show();
 //            }
 //
-//        },UserInstance.getUserInstance().getUid(), UserInstance.getUserInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
-        ApiUtils.getApiService().toActivity(UserInstance.getUserInstance().getUid(),
-                UserInstance.getUserInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(),
-                Constants.TO_HOME_ACTIVITY_TYPE
-        ).enqueue(new XMQCallback<BaseBean>() {
-            @Override
-            public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret) {
-                    case EC_SUCCESS:
-                        PetInfoInstance.getInstance().setAtHome(true);
-                        show(STATUS_DEFAULT);
-                        break;
-                }
-            }
-
-            @Override
-            public void onFail(Call<BaseBean> call, Throwable t) {
-
-            }
-        });
+//        },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),2 );
+//        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(),
+//                UserInstance.getInstance().getToken(),
+//                PetInfoInstance.getInstance().getPet_id(),
+//                Constants.TO_HOME_ACTIVITY_TYPE
+//        ).enqueue(new XMQCallback<BaseBean>() {
+//            @Override
+//            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+//                HttpCode ret = HttpCode.valueOf(message.status);
+//                switch (ret) {
+//                    case EC_SUCCESS:
+//                        PetInfoInstance.getInstance().setAtHome(true);
+//                        show(STATUS_DEFAULT);
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Call<BaseBean> call, Throwable t) {
+//
+//            }
+//        });
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.xiaomaoqiu.now.bean.nocommon;
 
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+
 /**
  * Created by long on 17/4/7.
  */
@@ -28,4 +30,15 @@ public class PetInfoBean extends BaseBean{
     public String logo_url;
 
     public int pet_type_id;
+
+
+    //wifi 名称
+    public String wifi_ssid;
+    //wifi mac地址
+    public String wifi_bssid;
+
+
+    public PetInfoInstance.Date dateFormat_birthday=new PetInfoInstance.Date(0, 0, 0);
+
+
 }
