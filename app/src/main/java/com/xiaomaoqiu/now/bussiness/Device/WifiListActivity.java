@@ -50,7 +50,7 @@ public class WifiListActivity extends BaseActivity {
         setNextView("下一步", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)){
+                if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
                     ToastUtil.showTost("您必须选择一个homewifi");
                     return;
                 }
@@ -60,7 +60,7 @@ public class WifiListActivity extends BaseActivity {
             }
         });
         rv_wifilist.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new CheckStateAdapter(DeviceInfoInstance.getInstance().wiflist,this);
+        adapter = new CheckStateAdapter(DeviceInfoInstance.getInstance().wiflist, this);
         rv_wifilist.setAdapter(adapter);
     }
 
@@ -69,9 +69,9 @@ public class WifiListActivity extends BaseActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void getWifiList(EventManage.wifiListSuccess event){
-
-
+    public void getWifiList(EventManage.wifiListSuccess event) {
+        //刷新列表
+        adapter.notifyDataSetChanged();
     }
 
     @Override

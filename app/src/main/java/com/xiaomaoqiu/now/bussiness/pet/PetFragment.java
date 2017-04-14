@@ -19,7 +19,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.old.ui.dialog.DialogToast;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.dialog.StartPetFindingDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity;

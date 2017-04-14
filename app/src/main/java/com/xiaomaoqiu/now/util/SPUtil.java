@@ -1,12 +1,22 @@
 package com.xiaomaoqiu.now.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.test.PerformanceTestCase;
+import android.util.Base64;
+import android.widget.Toast;
 
 
 import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -54,6 +64,9 @@ public class SPUtil {
     //设备电量级别
     public static final String BATTERY_LEVEL = "battery_level";
 
+    //设备wifi列表
+    public static final String DEVICE_WIFI_LIST = "device_wifi_list";
+
     //firmware_version
     public static final String FIRMWARE_VERSION = "firmware_version";
 
@@ -65,7 +78,7 @@ public class SPUtil {
     public static final String DEVICE_EXIST = "device_exist";
 
     //HOME_WIFI_MAC
-    public static final String HOME_WIFI_MAC="home_wifi_mac";
+    public static final String HOME_WIFI_MAC = "home_wifi_mac";
 
 
     public static String getPhoneNumber() {
@@ -236,14 +249,20 @@ public class SPUtil {
         putBoolean(PET_AT_HOME, value);
     }
 
-    public static String getHomeWifiMac(){
+    public static String getHomeWifiMac() {
         return getString(HOME_WIFI_MAC);
     }
-    public static void putHomeWifiMac(String value){
-        putString(HOME_WIFI_MAC,value);
+
+    public static void putHomeWifiMac(String value) {
+        putString(HOME_WIFI_MAC, value);
     }
 
-
+    public static WifiListBean getWifiList(){
+        return (WifiListBean) getSerializable(DEVICE_WIFI_LIST);
+    }
+    public static void putWifiList(WifiListBean wifiListBean) {
+        putSerializable(DEVICE_WIFI_LIST, wifiListBean);
+    }
 
 
     private static SharedPreferences getSP() {
@@ -320,6 +339,44 @@ public class SPUtil {
 
     private static Set<String> getStringSet(String key) {
         return getSP().getStringSet(key, null);
+    }
+
+    private static Serializable getSerializable(String key) {
+        Serializable serializable = null;
+        try {
+            SharedPreferences sharedPreferences = getSP();
+            String serializableString = sharedPreferences.getString(key, "");
+            byte[] mobileBytes = Base64.decode(serializableString.getBytes(), Base64.DEFAULT);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(mobileBytes);
+            ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+
+            try {
+                serializable = (Serializable) objectInputStream.readObject();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            objectInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return serializable;
+    }
+
+    private static void putSerializable(String key, Serializable value) {
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(value);
+            SharedPreferences sharedPreferences = getSP();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            String mobilesString = new String(Base64.encode(byteArrayOutputStream.toByteArray(), Base64.DEFAULT));
+            editor.putString(key, mobilesString);
+            editor.commit();
+            objectOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

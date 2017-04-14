@@ -9,7 +9,7 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
 import com.xiaomaoqiu.now.view.BatteryView;
-import com.xiaomaoqiu.old.ui.dialog.DialogToast;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;

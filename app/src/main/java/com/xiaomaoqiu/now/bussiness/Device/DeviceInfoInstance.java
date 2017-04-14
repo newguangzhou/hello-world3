@@ -53,6 +53,10 @@ public class DeviceInfoInstance {
             bean.iccid = SPUtil.getSimIccid();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
+            instance.wiflist=SPUtil.getWifiList();
+            if(instance.wiflist==null){
+                instance.wiflist=new WifiListBean();
+            }
         }
         return instance;
     }
@@ -78,7 +82,7 @@ public class DeviceInfoInstance {
     public String lastGetTime = "";
 
     //wifi列表
-    public WifiListBean wiflist=new WifiListBean();
+    public WifiListBean wiflist;
 
     //保存设备信息
     public void saveDeviceInfo(DeviceInfoBean message) {
@@ -213,6 +217,7 @@ public class DeviceInfoInstance {
                 if (ret == HttpCode.EC_SUCCESS) {
                     if(message.data!=null&&message.data.size()>0){
                         wiflist.data=message.data;
+                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     }
                 }

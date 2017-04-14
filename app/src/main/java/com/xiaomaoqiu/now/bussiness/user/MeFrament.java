@@ -12,7 +12,7 @@ import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
-import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
+import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;

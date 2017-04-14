@@ -21,16 +21,12 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 
-import com.xiaomaoqiu.now.bussiness.MainActivity;
-import com.xiaomaoqiu.old.ui.dialog.ContactServiceDialog;
+import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;

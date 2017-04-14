@@ -17,7 +17,7 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.map.main.IMapCallBack;
 import com.xiaomaoqiu.now.map.main.MapModule;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
-import com.xiaomaoqiu.old.ui.dialog.DialogToast;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;

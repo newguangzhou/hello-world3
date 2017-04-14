@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.dialog;
+package com.xiaomaoqiu.now.view;
 
 import android.app.Dialog;
 import android.content.Context;

@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.old.widgets;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -26,6 +27,7 @@ import java.util.List;
  * Email: tiantian.china.2@gmail.com
  * Date: 7/1/14.
  */
+@SuppressLint("WrongConstant")
 public class WheelView extends ScrollView {
     public static final String TAG = WheelView.class.getSimpleName();
 
