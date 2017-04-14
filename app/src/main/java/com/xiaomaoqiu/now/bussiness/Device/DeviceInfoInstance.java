@@ -7,8 +7,10 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiService;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
@@ -17,6 +19,8 @@ import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.lang.reflect.Array;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -48,7 +52,7 @@ public class DeviceInfoInstance {
             bean.device_name = SPUtil.getDeviceName();
             bean.iccid = SPUtil.getSimIccid();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
-            instance.packBean=bean;
+            instance.packBean = bean;
         }
         return instance;
     }
@@ -65,7 +69,7 @@ public class DeviceInfoInstance {
 //
 //    public String iccid;
 
-  public   DeviceInfoBean packBean;
+    public DeviceInfoBean packBean;
 
 
     //设备是否存在
@@ -73,20 +77,22 @@ public class DeviceInfoInstance {
     //最近获取时间
     public String lastGetTime = "";
 
+    //wifi列表
+    public WifiListBean wiflist=new WifiListBean();
+
     //保存设备信息
     public void saveDeviceInfo(DeviceInfoBean message) {
         instance.battery_level = message.battery_level / 100f;
         SPUtil.putBatteryLevel(battery_level);
-        packBean. firmware_version = message.firmware_version;
+        packBean.firmware_version = message.firmware_version;
         SPUtil.putFirmwareVersion(packBean.firmware_version);
-        packBean. imei = message.imei;
+        packBean.imei = message.imei;
 
 
         SPUtil.putDeviceImei(packBean.imei);
 
 
-        UserInstance.getInstance().device_imei=packBean.imei;
-
+        UserInstance.getInstance().device_imei = packBean.imei;
 
 
         packBean.device_name = message.device_name;
@@ -111,8 +117,7 @@ public class DeviceInfoInstance {
         packBean.device_name = "";
 
 
-        UserInstance.getInstance().device_imei="";
-
+        UserInstance.getInstance().device_imei = "";
 
 
         SPUtil.putDeviceName("");
@@ -159,7 +164,7 @@ public class DeviceInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
 
-                   getDeviceInfo();
+                    getDeviceInfo();
 
                     EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
                     Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
@@ -190,6 +195,31 @@ public class DeviceInfoInstance {
 
             @Override
             public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    //获取wifi列表
+    public void getWifiList() {
+        ApiUtils.getApiService().getWifiList(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id()
+        ).enqueue(new XMQCallback<WifiListBean>() {
+            @Override
+            public void onSuccess(Response<WifiListBean> response, WifiListBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    if(message.data!=null&&message.data.size()>0){
+                        wiflist.data=message.data;
+                        EventBus.getDefault().post(new EventManage.wifiListSuccess());
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(Call<WifiListBean> call, Throwable t) {
 
             }
         });

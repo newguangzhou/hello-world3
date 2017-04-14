@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,6 +63,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("longtianlove", "activity-login");
         initView();
         initListener();
         initData();
@@ -91,6 +93,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
                     Toast.makeText(LoginActivity.this, R.string.tip_phone_format, Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 loginPresenter.getVerifyCode(strPhone, Constants.DEVICE_TYPE);
 
             }

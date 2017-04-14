@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.WindowManager;
 
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
@@ -33,27 +35,32 @@ public class SplashActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-    }
-
-    Intent intent = new Intent();
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        Log.e("longtianlove","activity_splash");
         toWhere();//判断跳转逻辑
-        new Handler(getMainLooper()).postDelayed(new Runnable() {
+        PetAppLike. mainHandler=new Handler(getMainLooper());
+        PetAppLike.mainHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(intent);
                 finish();
             }
-        }, 3000);
+        },3000);
+    }
+
+    Intent intent;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
 
 
     }
 
     //判断跳转逻辑
     void toWhere() {
+        intent = new Intent();
         if (!SPUtil.getLoginStatus()) {
             intent.setClass(SplashActivity.this, LoginActivity.class);
             return;

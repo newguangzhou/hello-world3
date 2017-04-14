@@ -67,7 +67,7 @@ public class PetInfoActivity extends BaseActivity {
     private TextView txt_variety;
 
 
-    final PetInfoBean modifyBean = PetInfoInstance.getInstance().packBean;
+     PetInfoBean modifyBean =PetInfoInstance.getInstance().packBean;
 
 
     @Override
@@ -124,7 +124,7 @@ public class PetInfoActivity extends BaseActivity {
 
         chk_gender = (ToggleButton) findViewById(R.id.chk_gender);
 
-
+        modifyBean= PetInfoInstance.getInstance().packBean;
         initPetInfo();
     }
 

@@ -100,6 +100,14 @@ public class Constants {
              */
             public static final String get_info = "device/get_info";
             /**
+             * 获取wifi列表
+             */
+            public static final String get_wifi_list="device/getWifilist";
+            /**
+             * 设置homewifi
+             */
+            public static final String set_home_wifi="user/set_homewifi";
+            /**
              * 开关灯
              */
             public static final String swicth_light = "device/switch_light";

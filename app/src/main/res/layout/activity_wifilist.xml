@@ -11,7 +11,8 @@
         android:layout_marginBottom="10dp"
         />
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/id_recyclerview"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rv_wifilist"
         android:divider="#ffff0000"
         android:dividerHeight="10dp"
         android:layout_width="match_parent"

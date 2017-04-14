@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
+import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.old.ui.dialog.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
@@ -21,12 +22,21 @@ public class DeviceActivity extends BaseActivity {
     {//没有标题栏
         return 0;
     }
+    private View btn_go_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.title_hardware));
         setContentView(R.layout.activity_hardware);
+        btn_go_back=this.findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         //todo 设备状态更新
         showMessageOnUI();
         findViewById(R.id.tv_unbind).setOnClickListener(new View.OnClickListener() {
@@ -51,6 +61,9 @@ public class DeviceActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         showMessageOnUI();
+        BatteryView batteryView = (BatteryView) findViewById(R.id.batteryView);
+        batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
+                DeviceInfoInstance.getInstance().lastGetTime);
     }
     //显示设备信息
     void showMessageOnUI(){

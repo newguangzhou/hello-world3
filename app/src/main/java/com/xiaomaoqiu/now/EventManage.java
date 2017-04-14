@@ -43,4 +43,9 @@ public class EventManage {
     }
     public static class atHomeOrtoSport{
     }
+
+    //wifi列表获取成功
+    public static class wifiListSuccess{
+
+    }
 }

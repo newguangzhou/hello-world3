@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.xiaomaoqiu.pet"
-    android:versionCode="201"
-    android:versionName="2.0.0">
+   >
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -68,9 +67,16 @@
         <meta-data
             android:name="com.baidu.android.lbs.API_KEY"
             android:value="jnKFRb1jx9fVALGpeBtM8SAwor1gkXqK" />
+<!--buyly应用升级-->
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
 
         <activity android:name="com.xiaomaoqiu.now.bussiness.SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar"
+            android:alwaysRetainTaskState="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,7 +87,7 @@
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.user.LoginActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
         </activity>
         <activity

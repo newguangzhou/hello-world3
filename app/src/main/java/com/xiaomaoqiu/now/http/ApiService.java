@@ -15,6 +15,8 @@ import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.Summary;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
+import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
+import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -188,6 +190,26 @@ public interface ApiService {
                                  @Query("device_name") String deviceName
     );
 
+    /**
+     * 获取wifi列表
+     */
+    @GET(Constants.Url.Device.get_wifi_list)
+    Call<WifiListBean> getWifiList(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query(("pet_id")) long pet_id
+    );
+    /**
+     * 设置homewifi
+     */
+    @GET(Constants.Url.Device.set_home_wifi)
+    Call<BaseBean> setHomeWifi(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("wifi_ssid") String wifi_ssid,
+            @Query("wifi_bssid") String wifi_bssid
+
+    );
 
     /**
      * 解除绑定
