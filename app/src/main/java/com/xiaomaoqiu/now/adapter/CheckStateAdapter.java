@@ -39,8 +39,9 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
     @Override
     public void onBindViewHolder(final StateHolder holder, final int position) {
         if (null == mdatas || mdatas.size() == 0) return;
-        holder.itemView.setSelected(selectedPosition == position);
-        if (selectedPosition == position) {
+        WifiBean bean=mdatas.get(position);
+        holder.itemView.setSelected(bean.Is_homewifi);
+        if (bean.Is_homewifi) {
             holder.ivSelected.setVisibility(View.VISIBLE);
         } else {
             holder.ivSelected.setVisibility(View.INVISIBLE);
@@ -60,7 +61,7 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
 
     @Override
     public int getItemCount() {
-        return mdatas.size() == 0 ? 0 : mdatas.size();
+        return (mdatas==null)||(mdatas.size() == 0 )? 0 : mdatas.size();
     }
 
     public void updateData(ArrayList<WifiBean> datas) {
@@ -71,14 +72,7 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
         }
     }
 
-    public class StateHolder extends RecyclerView.ViewHolder {
-        TextView tvState;
-        ImageView ivSelected;
 
-        public StateHolder(View itemView) {
-            super(itemView);
-        }
-    }
 
     private OnItemClickListener onItemClickListener;
 
@@ -88,5 +82,21 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) { //实现点击
         this.onItemClickListener = onItemClickListener;
+    }
+
+
+
+
+
+
+    public class StateHolder extends RecyclerView.ViewHolder {
+        TextView tvState;
+        ImageView ivSelected;
+
+        public StateHolder(View itemView) {
+            super(itemView);
+            tvState= (TextView) itemView.findViewById(R.id.tv_state);
+            ivSelected= (ImageView) itemView.findViewById(R.id.iv_selected);
+        }
     }
 }

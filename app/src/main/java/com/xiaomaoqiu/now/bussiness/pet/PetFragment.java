@@ -42,7 +42,7 @@ import retrofit2.Response;
  */
 
 @SuppressLint("WrongConstant")
-public class PetFragment extends BaseFragment implements  View.OnClickListener {
+public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     private HealthGoSportView mGoSportView;
     CircleProgressBar prog;
@@ -81,9 +81,14 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
         initProgress();
         EventBus.getDefault().register(this);
 
+        initData();
+
         return rootView;
     }
 
+    void initData() {
+        PetInfoInstance.getInstance().getPetInfo();
+    }
 
     public void initProgress() {
         long msEnd = System.currentTimeMillis();
@@ -95,8 +100,8 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
     }
 
     //粘性事件，等待petid返回来再进行网络操作
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = true)
-    public void getActivityInfo(EventManage.notifyPetFramentGetActivityInfo event) {
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getActivityInfo(EventManage.notifyPetInfoChange event) {
         initProgress();
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
@@ -134,13 +139,13 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
     //todo 更新逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onPetInfoChanged(EventManage.notifyPetInfoChange event) {
-            if (PetInfoInstance.getInstance().getAtHome()) {//回家
-                getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
-                getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
-            } else {//出去玩
-                getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
-                getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
-            }
+        if (PetInfoInstance.getInstance().getAtHome()) {//回家
+            getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
+        } else {//出去玩
+            getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
+            getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
+        }
         SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
         Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
         imgLogo.setImageURI(uri);
@@ -160,11 +165,11 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
-               StartPetFindingDialog dialog = new StartPetFindingDialog(getActivity(),
+                StartPetFindingDialog dialog = new StartPetFindingDialog(getActivity(),
                         new StartPetFindingDialog.OnDialogDismiss() {
                             @Override
                             public void onDismiss(int nID) {
-                                if(nID == R.id.btn_ok) {
+                                if (nID == R.id.btn_ok) {
                                     Intent intent = new Intent(getActivity(), FindPetActivity.class);
                                     startActivity(intent);
                                 }
@@ -207,8 +212,6 @@ public class PetFragment extends BaseFragment implements  View.OnClickListener {
     public void hideDialog() {
         mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
     }
-
-
 
 
     public void onDestroy() {
