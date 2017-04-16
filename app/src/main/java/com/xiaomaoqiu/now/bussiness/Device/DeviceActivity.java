@@ -83,7 +83,7 @@ public class DeviceActivity extends BaseActivity {
         }
 
         tv = (TextView) findViewById(R.id.tv_hardware);
-        if(TextUtils.isEmpty(bean.firmware_version))
+        if(!TextUtils.isEmpty(bean.firmware_version))
             tv.setText(bean.firmware_version);
         else {
             tv.setText("未绑定设备");

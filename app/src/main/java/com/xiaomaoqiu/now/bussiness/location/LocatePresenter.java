@@ -42,7 +42,7 @@ public class LocatePresenter {
             PetInfoInstance.getInstance().getPetLocation();
         }
         PetInfoInstance.getInstance().getPetLocation();
-        queryLightStatus();
+//        queryLightStatus();
 
     }
 
@@ -147,9 +147,9 @@ public class LocatePresenter {
 //        });
     }
 
-    /**
+   /* *//**
      * 查询闪光灯状态
-     */
+     *//*
     public void queryLightStatus(){
         if(null == locateView){
             return;
@@ -193,10 +193,10 @@ public class LocatePresenter {
         });
     }
 
-    /**
+    *//**
      * 改变闪光灯状态
-     * @param bOpenLight
-     */
+     * @param
+     *//*
     public void setLightStatus(final boolean bOpenLight){
 //        HttpUtil.get2(SET_LIGHT_STATUS, new JsonHttpResponseHandler() {
 //            @Override
@@ -235,7 +235,7 @@ public class LocatePresenter {
 
             }
         });
-    }
+    }*/
 
     private void onSuccessGetLightStatus(boolean isOpen,boolean isFromView){
         if(null == locateView){

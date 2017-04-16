@@ -231,29 +231,30 @@ public interface ApiService {
     );
 
 
-    /**
-     * 获取灯的状态
-     * http://120.24.152.121:9100/device/get_light_status?uid=1462772127&token=6ec0fa3507d6e205d8a8a6585d038ebaab7fac2b&imei=357396080000293&
-     *
-     * @param uid
-     * @param token
-     * @param imei
-     * @return
-     */
-    @GET(Constants.Url.Device.get_light_status)
-    Call<LightStatusBean> getLightStatus(@Query("uid") long uid,
-                                         @Query("token") String token,
-                                         @Query("imei") String imei
-    );
+//    /**
+//    已经废弃
+//     * 获取灯的状态
+//     * http://120.24.152.121:9100/device/get_light_status?uid=1462772127&token=6ec0fa3507d6e205d8a8a6585d038ebaab7fac2b&imei=357396080000293&
+//     *
+//     * @param uid
+//     * @param token
+//     * @param imei
+//     * @return
+//     */
+//    @GET(Constants.Url.Device.get_light_status)
+//    Call<LightStatusBean> getLightStatus(@Query("uid") long uid,
+//                                         @Query("token") String token,
+//                                         @Query("imei") String imei
+//    );
 
 
-    //http://120.24.152.121:9100/device/swicth_light?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&light_status=1
-    @GET(Constants.Url.Device.swicth_light)
-    Call<BaseBean> switchLightStatus(@Query("uid") long uid,
-                                     @Query("token") String token,
-                                     @Query("imei") String imei,
-                                     @Query("light_status") int light_status
-    );
+//    //http://120.24.152.121:9100/device/swicth_light?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&light_status=1
+//    @GET(Constants.Url.Device.swicth_light)
+//    Call<BaseBean> switchLightStatus(@Query("uid") long uid,
+//                                     @Query("token") String token,
+//                                     @Query("imei") String imei,
+//                                     @Query("light_status") int light_status
+//    );
 
     /**
      * 获取宠物位置信息
@@ -290,24 +291,23 @@ public interface ApiService {
             @Query("token") String token,
             @Query("pet_id") long petId
     );
-//    /**
-    // 已废弃
-//     * 去运动或者回家
-//     * http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
-//     * URL	http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=2
-//     *
-//     * @param uid
-//     * @param token
-//     * @param petId
-//     * @param activity_type
-//     * @return
-//     */
-//    @GET(Constants.Url.Action.toActivity)
-//    Call<BaseBean> toActivity(@Query("uid") long uid,
-//                              @Query("token") String token,
-//                              @Query("pet_id") long petId,
-//                              @Query("activity_type") int activity_type
-//    );
+    /**
+     * 去运动或者回家
+     * http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
+     * URL	http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=2
+     *
+     * @param uid
+     * @param token
+     * @param petId
+     * @param activity_type
+     * @return
+     */
+    @GET(Constants.Url.Action.toActivity)
+    Call<BaseBean> toActivity(@Query("uid") long uid,
+                              @Query("token") String token,
+                              @Query("pet_id") long petId,
+                              @Query("activity_type") int activity_type
+    );
 
 
     //上传头像

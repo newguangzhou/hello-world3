@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.bussiness.location;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,7 +117,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_open_light:
                 //闪光灯
-                showLightDialog(!mLightstatusView.isSelected());
+//                showLightDialog(!mLightstatusView.isSelected());
                 break;
         }
     }
@@ -145,9 +146,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
-        if (null != mPresenter) {
-            mPresenter.queryLightStatus();
-        }
+//        if (null != mPresenter) {
+//            mPresenter.queryLightStatus();
+//        }
     }
 
     //todo 回调逻辑
@@ -215,28 +216,28 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
-    /**
-     * 闪光灯开启关闭对话框
-     *
-     * @param isOpen
-     */
-    private void showLightDialog(final boolean isOpen) {
-        if (isOpen) {
-            String conent = getContext().getResources().getString(R.string.map_light_open);
-            DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (null != mPresenter) {
-                        mPresenter.setLightStatus(isOpen);
-                    }
-                }
-            });
-        } else {
-            if (null != mPresenter) {
-                mPresenter.setLightStatus(false);
-            }
-        }
-    }
+//    /**
+//     * 闪光灯开启关闭对话框
+//     *
+//     * @param isOpen
+//     */
+//    private void showLightDialog(final boolean isOpen) {
+//        if (isOpen) {
+//            String conent = getContext().getResources().getString(R.string.map_light_open);
+//            DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (null != mPresenter) {
+//                        mPresenter.setLightStatus(isOpen);
+//                    }
+//                }
+//            });
+//        } else {
+//            if (null != mPresenter) {
+//                mPresenter.setLightStatus(false);
+//            }
+//        }
+//    }
 
     /**
      * 遛狗按钮点击

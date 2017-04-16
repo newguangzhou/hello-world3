@@ -25,6 +25,10 @@ import java.util.Set;
 public class SPUtil {
 
 
+    public static final String CRASHTIME = "crashTime";
+    public static final String LAST_START_WALK_TIME="last_walk_pet_time";
+
+
     //电话号码
     public static final String PHONE_NUMBER = "phone_number";
     //登录态
@@ -263,6 +267,31 @@ public class SPUtil {
     public static void putWifiList(WifiListBean wifiListBean) {
         putSerializable(DEVICE_WIFI_LIST, wifiListBean);
     }
+    /**
+     * 获取
+     */
+    public static long getCrashTime() {
+        return getLong(CRASHTIME);
+    }
+
+    /**
+     * 保存
+     */
+    public static void putCrashTime(long value) {
+        putLong(CRASHTIME, value);
+    }
+
+    public static int getLAST_START_WALK_TIME(){
+        return getInt(LAST_START_WALK_TIME,(int) (System.currentTimeMillis()/1000));
+    }
+    public static void putLAST_START_WALK_TIME(int value){
+        putInt(LAST_START_WALK_TIME,value);
+    }
+
+
+
+
+
 
 
     private static SharedPreferences getSP() {

@@ -15,9 +15,9 @@ import com.xiaomaoqiu.now.map.tracer.bean.HistoryTrackData;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStartTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStopTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onTracingListener;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.old.utils.CollectionUtil;
 import com.xiaomaoqiu.old.utils.JsonToObject;
-import com.xiaomaoqiu.old.utils.SpUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -34,7 +34,7 @@ import rx.schedulers.Schedulers;
 @SuppressLint("WrongConstant")
 public class PetTrancer {
 
-    public static final String LAST_START_WALK_TIME="last_walk_pet_time";
+//    public static final String LAST_START_WALK_TIME="last_walk_pet_time";
 
     public static final long serviceId=132924;//轨迹服务的ID
     public static final int GATHER_INTERVAL=10;//轨迹采集周期
@@ -153,7 +153,8 @@ public class PetTrancer {
     private int startTime = 0;
     public void startTraceWithTimer(){
         startTime= (int) (System.currentTimeMillis()/1000);
-        SpUtil.setIntConfig(LAST_START_WALK_TIME, startTime);
+//        SpUtil.setIntConfig(LAST_START_WALK_TIME, startTime);
+        SPUtil.putLAST_START_WALK_TIME(startTime);
         startTraceWithTimer(PACK_INTERVAL);
     }
 
@@ -271,7 +272,8 @@ public class PetTrancer {
      * 退出重新进入系统时启动
      */
     public void queryHistoryTrackByRecord(){
-        startTime=SpUtil.getIntConfig(LAST_START_WALK_TIME, (int) (System.currentTimeMillis()/1000));
+//        startTime=SpUtil.getIntConfig(LAST_START_WALK_TIME, (int) (System.currentTimeMillis()/1000));
+        startTime=SPUtil.getLAST_START_WALK_TIME();
         //queryHistoryTrack(startTime,0);
         startTraceWithTimer(0);
     }

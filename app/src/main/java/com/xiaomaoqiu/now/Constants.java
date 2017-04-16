@@ -113,14 +113,14 @@ public class Constants {
              * 设置homewifi
              */
             public static final String set_home_wifi="user/set_homewifi";
-            /**
-             * 开关灯
-             */
-            public static final String swicth_light = "device/switch_light";
-            /**
-             * 获取灯的状态
-             */
-            public static final String get_light_status = "device/get_light_status";
+//            /**
+//             * 开关灯
+//             */
+//            public static final String swicth_light = "device/switch_light";
+//            /**
+//             * 获取灯的状态
+//             */
+//            public static final String get_light_status = "device/get_light_status";
             /**
              * 添加设备信息
              */
@@ -141,10 +141,10 @@ public class Constants {
         public static class Action{
             public static final String findPet="pet/find";
 
-//            /**
-//             * d宠物动作，去运动还是回家
-//             */
-//            public static final String toActivity ="pet/activity";
+            /**
+             * d宠物动作，去运动还是回家
+             */
+            public static final String toActivity ="pet/activity";
 
             //<msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
 //            /**

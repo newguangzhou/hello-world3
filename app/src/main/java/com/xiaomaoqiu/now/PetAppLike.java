@@ -49,6 +49,12 @@ public class PetAppLike extends DefaultApplicationLike {
         // 调试时，将第三个参数改为true
         Bugly.init(getApplication(), "5eb6432b7a", environment.bugly_log);
 
+
+
+        XMQCrashHandler handler = XMQCrashHandler.getMyCrashHandler();
+        handler.init(getApplication());
+        Thread.setDefaultUncaughtExceptionHandler(handler);
+
 //        aboutBugly();
 
     }
