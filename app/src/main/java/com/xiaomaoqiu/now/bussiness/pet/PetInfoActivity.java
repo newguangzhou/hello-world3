@@ -83,7 +83,11 @@ public class PetInfoActivity extends BaseActivity {
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyAvatar();
+
+                //TODO 暂时尚未开放修改头像功能，请期待
+                ToastUtil.showTost("暂时尚未开放修改头像功能，请期待");
+
+               // modifyAvatar();
             }
         });
 
@@ -379,120 +383,4 @@ public class PetInfoActivity extends BaseActivity {
                 break;
         }
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (resultCode != Activity.RESULT_OK) return;
-////        PetInfo petInfo = new PetInfo();
-//        final PetInfoBean bean = PetInfoInstance.getInstance().packBean;
-//        switch (requestCode) {
-//            case REQ_CODE_NAME:
-////                petInfo.setName(data.getStringExtra(InputDialog.TAG_VALUE));
-////                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Name);
-//                String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
-//                bean.name = nameBackString;
-//                PetInfoInstance.getInstance().updatePetInfo(bean);
-//                break;
-//            case REQ_CODE_WEIGHT:// ModifyWeightDialog
-//                bean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
-////                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Weight);
-//                PetInfoInstance.getInstance().updatePetInfo(bean);
-//                break;
-//            case REQ_CODE_VARIETY:
-//            case REQ_CODE_INTRO:
-//                bean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
-////                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
-//                PetInfoInstance.getInstance().updatePetInfo(bean);
-//                break;
-//            case REQ_CODE_PHOTO_SOURCE:
-//                int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
-//                onPhotoSource(mode);
-//                break;
-//            case REQ_CODE_PHOTO_GRAPH:
-//                // 设置文件保存路径
-//                try {
-//                    File picture = new File(Environment.getExternalStorageDirectory()
-//                            + "/temp.jpg");
-//                    startPhotoZoom(Uri.fromFile(picture));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                break;
-//            case REQ_CODE_PHOTO_ZOOM:
-//                startPhotoZoom(data.getData());
-//                break;
-//            case REQ_CODE_PHOTO_RESULT:
-//                Bundle extras = data.getExtras();
-//                if (extras != null) {
-//                    Bitmap photo = extras.getParcelable("data");
-//                    if (photo != null) {
-//                        try {
-//
-//                            ImageView imgAvatar = (ImageView) findViewById(R.id.img_pet_avatar);
-//                            imgAvatar.setImageBitmap(photo); //把图片显示在ImageView控件上
-//
-//                            String strImg = Environment.getExternalStorageDirectory() + "/temp.jpeg";
-//                            //把Bitmap保存到sd卡中
-//                            File fImage = new File(strImg);
-//                            FileOutputStream iStream = new FileOutputStream(fImage);
-//                            photo.compress(Bitmap.CompressFormat.JPEG, 75, iStream);// (0-100)压缩文件
-//                            iStream.close();
-//
-////                            HttpUtil.uploadFile("file.pet.upload_logo", strImg, new JsonHttpResponseHandler() {
-////                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-////                                    //{"status": 0, "file_url": "http://www.xxx.com/abc.jpg"}
-////                                    Log.v("http", "file.pet.upload_logo:" + response.toString());
-////                                    HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-////                                    if (ret == HttpCode.EC_SUCCESS) {
-////                                        //更新头像属性
-////                                        String urlLogo = response.optString("file_url");
-////
-//////                                        PetInfo petInfo = new PetInfo();
-////                                        modifyBean.logo_url=urlLogo;
-//////                                        UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Header);
-////                                        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
-////                                    }
-////                                }
-////
-////
-////                                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-////                                    Log.v("http", "file.pet.upload_logo:" + responseString);
-////                                }
-////                            }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken());
-//                            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), fImage);
-//                            MultipartBody.Part body = MultipartBody.Part.createFormData("flieName", fImage.getName(), requestFile);
-//                            ApiUtils.getApiService().uploadLogo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), body).enqueue(
-//                                    new XMQCallback<PictureBean>() {
-//                                        @Override
-//                                        public void onSuccess(Response<PictureBean> response, PictureBean message) {
-//                                            HttpCode ret = HttpCode.valueOf(message.status);
-//                                            switch (ret) {
-//                                                case EC_SUCCESS:
-//                                                    //更新头像属性
-//                                                    String urlLogo = message.file_url;
-//                                                    bean.logo_url = urlLogo;
-//                                                    PetInfoInstance.getInstance().updatePetInfo(bean);
-//                                                    break;
-//
-//                                                default:
-////                                                    ToastUtil.showTost("");
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onFail(Call<PictureBean> call, Throwable t) {
-//
-//                                        }
-//                                    }
-//                            );
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                }
-//                break;
-//        }
-//    }
 }

@@ -208,7 +208,7 @@
 
         fresco:failureImage="@drawable/tab_health_head_defult"
         fresco:failureImageScaleType="centerInside"
-        fresco:roundedCornerRadius="1.5dp"
+        fresco:roundedCornerRadius="35dp"
         />
 
 

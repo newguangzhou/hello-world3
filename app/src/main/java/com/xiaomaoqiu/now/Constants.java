@@ -90,6 +90,12 @@ public class Constants {
              * 位置
              */
             public static final String location = "pet/location";
+
+
+
+            //测试使用
+            public static final String location_test="pet/location_test";
+
         }
 
 

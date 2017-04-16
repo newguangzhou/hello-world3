@@ -43,8 +43,7 @@ public class SelectAvatarSourceDialog extends Activity implements View.OnClickLi
             Intent data = new Intent();
             data.putExtra(TAG_MODE, v.getId());
             setResult(Activity.RESULT_OK, data);
-        }else
-        {
+        }else {
             setResult(Activity.RESULT_CANCELED);
         }
         finish();

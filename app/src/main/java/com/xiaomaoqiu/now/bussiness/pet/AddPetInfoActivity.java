@@ -27,6 +27,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.InputDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyVarietyDialog;
@@ -97,7 +98,10 @@ public class AddPetInfoActivity extends BaseActivity {
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyAvatar();
+                //TODO 暂时尚未开放修改头像功能，请期待
+                ToastUtil.showTost("暂时尚未开放修改头像功能，请期待");
+
+                // modifyAvatar();
             }
         });
 

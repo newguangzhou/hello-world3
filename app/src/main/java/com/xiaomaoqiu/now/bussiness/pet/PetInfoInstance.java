@@ -12,9 +12,11 @@ import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiService;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.test.TestLocationBean;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
@@ -304,6 +306,24 @@ public class PetInfoInstance {
             @Override
             public void onFail(Call<PetLocationBean> call, Throwable t) {
                 Toast.makeText(PetAppLike.mcontext, "位置获取失败~", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getTestLocation() {
+        ApiUtils.getApiService().getTestLocation(
+                UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id()
+        ).enqueue(new XMQCallback<TestLocationBean>() {
+            @Override
+            public void onSuccess(Response<TestLocationBean> response, TestLocationBean message) {
+
+            }
+
+            @Override
+            public void onFail(Call<TestLocationBean> call, Throwable t) {
+
             }
         });
     }

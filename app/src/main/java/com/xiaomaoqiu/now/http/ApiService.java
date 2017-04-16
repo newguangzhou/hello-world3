@@ -17,6 +17,7 @@ import com.xiaomaoqiu.now.bean.nocommon.Summary;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
+import com.xiaomaoqiu.now.test.TestLocationBean;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -62,6 +63,7 @@ public interface ApiService {
 
     /**
      * 获取用户基本信息
+     *
      * @param uid
      * @param token
      * @return
@@ -142,7 +144,7 @@ public interface ApiService {
                                 @Query("token") String token,
                                 @Query("pet_id") long petId,
                                 @Query("target_step") int number
-                                );
+    );
 
 
     /**
@@ -199,6 +201,7 @@ public interface ApiService {
             @Query("token") String token,
             @Query(("pet_id")) long pet_id
     );
+
     /**
      * 设置homewifi
      */
@@ -268,8 +271,16 @@ public interface ApiService {
             @Query("pet_id") long petId
     );
 
-    /**
 
+    //测试使用
+    @GET(Constants.Url.Pet.location_test)
+    Call<TestLocationBean> getTestLocation(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("pet_id") long petId
+    );
+
+    /**
      * 获取宠物的状态
      * pet_status : 0：正常 1：遛狗 2:寻狗
      */
@@ -280,7 +291,7 @@ public interface ApiService {
             @Query("pet_id") long petId
     );
 //    /**
-   // 已废弃
+    // 已废弃
 //     * 去运动或者回家
 //     * http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
 //     * URL	http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=2
