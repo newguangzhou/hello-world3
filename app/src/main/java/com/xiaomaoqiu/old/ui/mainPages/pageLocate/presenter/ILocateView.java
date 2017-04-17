@@ -6,6 +6,6 @@ package com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter;
 
 public interface ILocateView {
     void onShowPhoneLoc();
-    void onChangeLightStatus(boolean isOpen,boolean isFromView);
+//    void onChangeLightStatus(boolean isOpen,boolean isFromView);
     void onFail(String msg);
 }

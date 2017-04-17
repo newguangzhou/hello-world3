@@ -237,12 +237,12 @@ public class LocatePresenter {
         });
     }*/
 
-    private void onSuccessGetLightStatus(boolean isOpen,boolean isFromView){
-        if(null == locateView){
-            return;
-        }
-        locateView.onChangeLightStatus(isOpen,isFromView);
-    }
+//    private void onSuccessGetLightStatus(boolean isOpen,boolean isFromView){
+//        if(null == locateView){
+//            return;
+//        }
+//        locateView.onChangeLightStatus(isOpen,isFromView);
+//    }
 
     private void onFailChangeLightStatus(boolean isOpen){
         if(null == locateView){

@@ -36,7 +36,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class LocateFragment extends BaseFragment implements View.OnClickListener
         , ILocateView, IMapCallBack {
 
-    private ImageView mLightstatusView, mFindPetView, mWalkPetView;
+    private ImageView  mFindPetView, mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
     private TextView petLocation, walkpetNoticeView;
     private LinearLayout petLocContainer;
@@ -62,9 +62,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mWalkPetView = (ImageView) root.findViewById(R.id.btn_playing_pet);
         mWalkPetView.setSelected(false);
         mWalkPetView.setOnClickListener(this);
-        mLightstatusView = (ImageView) root.findViewById(R.id.btn_open_light);
-        mLightstatusView.setOnClickListener(this);
-        mLightstatusView.setEnabled(false);
+//        mLightstatusView = (ImageView) root.findViewById(R.id.btn_open_light);
+//        mLightstatusView.setOnClickListener(this);
+//        mLightstatusView.setEnabled(false);
         petLocation = (TextView) root.findViewById(R.id.tv_location);
         petLocation.setText("");
         petLocContainer = (LinearLayout) root.findViewById(R.id.locate_addr_conotainer);
@@ -115,10 +115,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 //遛狗
                 showWalkPetDialog(!mWalkPetView.isSelected());
                 break;
-            case R.id.btn_open_light:
-                //闪光灯
-//                showLightDialog(!mLightstatusView.isSelected());
-                break;
+//            case R.id.btn_open_light:
+//                //闪光灯
+////                showLightDialog(!mLightstatusView.isSelected());
+//                break;
         }
     }
 
@@ -173,14 +173,14 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mMapMpdule.setMapcenterWithPhone();
     }
 
-    @Override
-    public void onChangeLightStatus(boolean isOpen, boolean isFromView) {
-        mLightstatusView.setEnabled(true);
-        mLightstatusView.setSelected(isOpen);
-        if (isFromView && !isOpen) {
-            new DialogToast(getContext(), "追踪器灯光已关闭。", "确定", null);
-        }
-    }
+//    @Override
+//    public void onChangeLightStatus(boolean isOpen, boolean isFromView) {
+//        mLightstatusView.setEnabled(true);
+//        mLightstatusView.setSelected(isOpen);
+//        if (isFromView && !isOpen) {
+//            new DialogToast(getContext(), "追踪器灯光已关闭。", "确定", null);
+//        }
+//    }
 
     @SuppressLint("WrongConstant")
     @Override
