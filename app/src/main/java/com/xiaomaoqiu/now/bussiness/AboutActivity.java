@@ -20,6 +20,6 @@ public class AboutActivity extends BaseActivity {
         setTitle("关于");
         setContentView(R.layout.activity_about);
         tv_versionname= (TextView) findViewById(R.id.tv_versionname);
-        tv_versionname.setText(Apputil.getVersionName(this));
+        tv_versionname.setText("版本信息：小毛球 "+Apputil.getVersionName(this));
     }
 }

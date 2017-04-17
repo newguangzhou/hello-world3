@@ -2,6 +2,7 @@ package com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
@@ -12,6 +13,7 @@ import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.utils.DateUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -256,8 +258,11 @@ public class ChartIndexPresenter {
         int days = sportDatas.size();
         PetSportBean.SportBean todayBean = sportDatas.get(days - 1);
         todayDeep = todayBean.target_amount;
-        todayLight = todayBean.reality_amount;
+        todayLight = todayBean.reality_amount/1000;
         callback.onSuccessGetWeight(todayDeep, todayLight);
+        EventManage.TodaySportData event=new EventManage.TodaySportData();
+        event.sportBean=todayBean;
+        EventBus.getDefault().post(event);
     }
 
     //解析一周的运动数据
@@ -284,12 +289,9 @@ public class ChartIndexPresenter {
         for (int i = startIndex; i < sportDatas.size(); i += intrval) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + format);
-//            JSONObject jsday = (JSONObject) jsdata.opt(i);
             PetSportBean.SportBean bean=sportDatas.get(i);
-            float deep = bean.target_amount;
-            float light = bean.reality_amount;
             deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
-                lightList.add(new Entry(i - startIndex, (float)bean.reality_amount));
+                lightList.add(new Entry(i - startIndex, (float)bean.reality_amount/1000));
         }
         callback.onSuccessGetAxis(axisLabels, isMonth);
         if (isMonth) {

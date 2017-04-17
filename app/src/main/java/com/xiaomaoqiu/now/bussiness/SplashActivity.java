@@ -35,7 +35,6 @@ public class SplashActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-        Log.e("longtianlove","activity_splash");
         toWhere();//判断跳转逻辑
         PetAppLike. mainHandler=new Handler(getMainLooper());
         PetAppLike.mainHandler.postDelayed(new Runnable() {
@@ -44,19 +43,13 @@ public class SplashActivity extends BaseActivity {
                 startActivity(intent);
                 finish();
             }
-        },3000);
+        },1000);
     }
 
     Intent intent;
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-
-
-    }
 
     //判断跳转逻辑
     void toWhere() {

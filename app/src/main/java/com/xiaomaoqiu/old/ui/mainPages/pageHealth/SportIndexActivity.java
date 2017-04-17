@@ -96,7 +96,7 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     public void onSuccessGetWeight(double deep, double light) {
         View vDoneSport = findViewById(R.id.v_sport_done);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) vDoneSport.getLayoutParams();
-        layoutParams.weight = (float) deep / 1000;
+        layoutParams.weight = (float) light / 1000;
         vDoneSport.setLayoutParams(layoutParams);
 
         View vSportRemain = findViewById(R.id.v_sport_remain);

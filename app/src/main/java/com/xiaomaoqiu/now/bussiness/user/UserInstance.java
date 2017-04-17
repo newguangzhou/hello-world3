@@ -28,6 +28,7 @@ public class UserInstance {
             userInstance.pet_id = SPUtil.getPetId();
             userInstance.device_imei = SPUtil.getDeviceImei();
             userInstance.wifi_bssid = SPUtil.getHomeWifiMac();
+            userInstance.wifi_ssid=SPUtil.getHomeWifiSsid();
 
         }
         return userInstance;
@@ -45,6 +46,8 @@ public class UserInstance {
     public String device_imei;
 
     public String wifi_bssid;
+
+    public String wifi_ssid;
 
 
     public void saveLoginState(LoginBean message, String strPhone) {
@@ -82,6 +85,10 @@ public class UserInstance {
         if(!TextUtils.isEmpty(userBean.wifi_bssid)){
             wifi_bssid=userBean.wifi_bssid;
             SPUtil.putHomeWifiMac(wifi_bssid);
+        }
+        if(!TextUtils.isEmpty(userBean.wifi_ssid)){
+            wifi_ssid=userBean.wifi_ssid;
+            SPUtil.putHomeWifiSsid(wifi_ssid);
         }
     }
 

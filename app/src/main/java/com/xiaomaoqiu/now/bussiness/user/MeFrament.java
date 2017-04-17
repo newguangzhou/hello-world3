@@ -11,6 +11,7 @@ import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
@@ -82,9 +83,10 @@ public class MeFrament extends BaseFragment {
         root.findViewById(R.id.btn_mall).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse(getString(R.string.url_mall));
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+//                Uri uri = Uri.parse(getString(R.string.url_mall));
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
+                ToastUtil.showTost("暂时尚未开放商城功能，敬请期待");
             }
         });
 

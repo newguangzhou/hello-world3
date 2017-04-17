@@ -1,12 +1,14 @@
 package com.xiaomaoqiu.now.bussiness.Device;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
+import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -53,10 +55,20 @@ public class DeviceInfoInstance {
             bean.iccid = SPUtil.getSimIccid();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
-            instance.wiflist=SPUtil.getWifiList();
-            if(instance.wiflist==null){
-                instance.wiflist=new WifiListBean();
+            if(!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
+                WifiBean wifiBean = new WifiBean();
+                wifiBean.wifi_ssid = UserInstance.getInstance().wifi_ssid;
+                wifiBean.wifi_bssid = UserInstance.getInstance().wifi_bssid;
+                wifiBean.Is_homewifi = true;
+                instance.wiflist.data.add(wifiBean);
             }
+
+
+
+//            instance.wiflist=SPUtil.getWifiList();
+//            if(instance.wiflist==null){
+//                instance.wiflist=new WifiListBean();
+//            }
         }
         return instance;
     }
@@ -82,7 +94,7 @@ public class DeviceInfoInstance {
     public String lastGetTime = "";
 
     //wifi列表
-    public WifiListBean wiflist;
+    public WifiListBean wiflist = new WifiListBean();
 
     //保存设备信息
     public void saveDeviceInfo(DeviceInfoBean message) {
@@ -122,6 +134,8 @@ public class DeviceInfoInstance {
 
 
         UserInstance.getInstance().device_imei = "";
+        UserInstance.getInstance().wifi_ssid = "";
+        UserInstance.getInstance().wifi_bssid = "";
 
 
         SPUtil.putDeviceName("");
@@ -215,9 +229,9 @@ public class DeviceInfoInstance {
             public void onSuccess(Response<WifiListBean> response, WifiListBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    if(message.data!=null&&message.data.size()>0){
-                        wiflist.data=message.data;
-                        SPUtil.putWifiList(wiflist);
+                    if (message.data != null && message.data.size() > 0) {
+                        wiflist.data = message.data;
+//                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     }
                 }

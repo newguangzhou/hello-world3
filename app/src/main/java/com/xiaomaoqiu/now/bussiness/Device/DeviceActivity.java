@@ -18,19 +18,20 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class DeviceActivity extends BaseActivity {
     @Override
-    public int frameTemplate()
-    {//没有标题栏
+    public int frameTemplate() {//没有标题栏
         return 0;
     }
+
     private View btn_go_back;
+    BatteryView batteryView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.title_hardware));
         setContentView(R.layout.activity_hardware);
-        btn_go_back=this.findViewById(R.id.btn_go_back);
-        btn_go_back.setOnClickListener(new View.OnClickListener(){
+        btn_go_back = this.findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -43,6 +44,13 @@ public class DeviceActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 bindDeviceDialog();
+            }
+        });
+        batteryView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
+                        DeviceInfoInstance.getInstance().lastGetTime);
             }
         });
 
@@ -61,36 +69,37 @@ public class DeviceActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         showMessageOnUI();
-        BatteryView batteryView = (BatteryView) findViewById(R.id.batteryView);
-        batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
+        batteryView = (BatteryView) findViewById(R.id.batteryView);
+        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
                 DeviceInfoInstance.getInstance().lastGetTime);
     }
+
     //显示设备信息
-    void showMessageOnUI(){
+    void showMessageOnUI() {
         TextView tv = (TextView) findViewById(R.id.tv_device_name);
-        DeviceInfoBean bean=DeviceInfoInstance.getInstance().packBean;
-        if(!TextUtils.isEmpty(bean.device_name))
+        DeviceInfoBean bean = DeviceInfoInstance.getInstance().packBean;
+        if (!TextUtils.isEmpty(bean.device_name))
             tv.setText(bean.device_name);
         else {
             tv.setText("小毛球1号");
         }
 
         tv = (TextView) findViewById(R.id.tv_imei);
-        if(!TextUtils.isEmpty(bean.imei))
+        if (!TextUtils.isEmpty(bean.imei))
             tv.setText(bean.imei);
         else {
             tv.setText("未绑定设备");
         }
 
         tv = (TextView) findViewById(R.id.tv_hardware);
-        if(!TextUtils.isEmpty(bean.firmware_version))
+        if (!TextUtils.isEmpty(bean.firmware_version))
             tv.setText(bean.firmware_version);
         else {
             tv.setText("未绑定设备");
         }
     }
 
-    private void bindDeviceDialog(){
+    private void bindDeviceDialog() {
         new DialogToast(this, "确认解除绑定？", "确认", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +120,7 @@ public class DeviceActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

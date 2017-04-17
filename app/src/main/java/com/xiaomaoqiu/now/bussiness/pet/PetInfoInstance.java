@@ -144,7 +144,6 @@ public class PetInfoInstance {
         setDateFormat_birthday(packBean.birthday);
 
 
-        EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
     }
 
     public void setDateFormat_birthday(String birthdayString) {
@@ -215,6 +214,7 @@ public class PetInfoInstance {
                                 break;
                             case EC_PET_NOT_EXIST:
 //                                ToastUtil.showTost("您还没有宠物");
+                                clearPetInfo();
                                 EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
                                 break;
                             default:

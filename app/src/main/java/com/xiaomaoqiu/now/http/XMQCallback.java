@@ -48,8 +48,8 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
 //                    SPUtil.putPetId(0);
 //                    UserInstance.getInstance().device_imei="";
 //                    SPUtil.putDeviceImei("");
-                    UserInstance.getInstance().wifi_bssid = "";
                     SPUtil.putHomeWifiMac("");
+                    SPUtil.putHomeWifiSsid("");
                     PetInfoInstance.getInstance().clearPetInfo();
                     DeviceInfoInstance.getInstance().clearDeviceInfo();
 

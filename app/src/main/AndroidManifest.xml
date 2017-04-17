@@ -140,7 +140,7 @@
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.SelectAvatarSourceDialog"
             android:theme="@style/MyDialogStyleBottom" />

@@ -83,6 +83,9 @@ public class SPUtil {
 
     //HOME_WIFI_MAC
     public static final String HOME_WIFI_MAC = "home_wifi_mac";
+    //home_wifi_ssid
+    public static final String HOME_WIFI_SSID="home_wifi_ssid";
+
 
 
     public static String getPhoneNumber() {
@@ -261,6 +264,14 @@ public class SPUtil {
         putString(HOME_WIFI_MAC, value);
     }
 
+    public static String getHomeWifiSsid(){
+        return getString(HOME_WIFI_SSID);
+    }
+    public static void putHomeWifiSsid(String ssid){
+        putString(HOME_WIFI_SSID,ssid);
+    }
+
+
     public static WifiListBean getWifiList(){
         return (WifiListBean) getSerializable(DEVICE_WIFI_LIST);
     }
@@ -402,6 +413,7 @@ public class SPUtil {
             String mobilesString = new String(Base64.encode(byteArrayOutputStream.toByteArray(), Base64.DEFAULT));
             editor.putString(key, mobilesString);
             editor.commit();
+            objectOutputStream.flush();
             objectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();

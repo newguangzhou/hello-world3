@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 
+import com.tencent.bugly.crashreport.CrashReport;
 import com.xiaomaoqiu.now.bussiness.SplashActivity;
 import com.xiaomaoqiu.now.util.SPUtil;
+import com.xiaomaoqiu.now.util.ToastUtil;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -71,6 +74,8 @@ public class XMQCrashHandler implements UncaughtExceptionHandler {
 //                if (CrashManager.ifRestart(errorMsg)) {
                     // 根据CrashManager的判断来决定重启与否。
 //                    LogUtil.e("lz", "要重启");
+                Log.e("longtianlove","重启了");
+                CrashReport.postCatchedException(new Exception(errorMsg));
                     Intent intent = new Intent(context, SplashActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//这一行不能去掉。
                     context.startActivity(intent);
@@ -83,6 +88,8 @@ public class XMQCrashHandler implements UncaughtExceptionHandler {
             // 最后完成自杀的操作
             android.os.Process.killProcess(android.os.Process.myPid());
         } catch (Exception e) {
+//            Log.e("longtianlove","重启了");
+            CrashReport.postCatchedException(e);
             e.printStackTrace();
             android.os.Process.killProcess(android.os.Process.myPid());
         }

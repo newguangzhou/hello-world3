@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static com.tencent.bugly.crashreport.CrashReport.testJavaCrash;
 import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
 
 /**
@@ -55,6 +56,7 @@ public class WifiListActivity extends BaseActivity {
 
         initView();
         initData();
+        DeviceInfoInstance.getInstance().getWifiList();
         EventBus.getDefault().register(this);
     }
 
@@ -108,18 +110,18 @@ public class WifiListActivity extends BaseActivity {
     String wifi_bssid;//homewifi   mac
     String wifi_ssid;//wifi名称
     private void initData() {
-        //销毁
-        WifiListBean wifiListBean = new WifiListBean();
-        wifiListBean.data = new ArrayList<WifiBean>();
-        for (int i = 0; i < 5; i++) {
-            WifiBean wifiBean = new WifiBean();
-            wifiBean.wifi_bssid = i + "----" + i;
-            wifiBean.wifi_ssid = i + "----" + i;
-            wifiListBean.data.add(wifiBean);
-        }
-        adapter.mdatas = wifiListBean.data;
-
-        adapter.notifyDataSetChanged();
+//        //销毁
+//        WifiListBean wifiListBean = new WifiListBean();
+//        wifiListBean.data = new ArrayList<WifiBean>();
+//        for (int i = 0; i < 5; i++) {
+//            WifiBean wifiBean = new WifiBean();
+//            wifiBean.wifi_bssid = i + "----" + i;
+//            wifiBean.wifi_ssid = i + "----" + i;
+//            wifiListBean.data.add(wifiBean);
+//        }
+//        adapter.mdatas = wifiListBean.data;
+//
+//        adapter.notifyDataSetChanged();
 
         adapter.setOnItemClickListener(new CheckStateAdapter.OnItemClickListener(){
 

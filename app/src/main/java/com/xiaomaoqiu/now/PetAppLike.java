@@ -51,9 +51,9 @@ public class PetAppLike extends DefaultApplicationLike {
 
 
 
-        XMQCrashHandler handler = XMQCrashHandler.getMyCrashHandler();
-        handler.init(getApplication());
-        Thread.setDefaultUncaughtExceptionHandler(handler);
+//        XMQCrashHandler handler = XMQCrashHandler.getMyCrashHandler();
+//        handler.init(getApplication());
+//        Thread.setDefaultUncaughtExceptionHandler(handler);
 
 //        aboutBugly();
 

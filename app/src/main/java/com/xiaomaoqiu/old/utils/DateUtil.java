@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.old.utils;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -11,7 +12,7 @@ import java.util.TimeZone;
 /**
  * Created by Administrator on 2016/12/18.
  */
-
+@SuppressLint("WrongConstant")
 public class DateUtil {
     /**
      * 获取过去任意天内的日期数组
@@ -89,7 +90,7 @@ public class DateUtil {
     public static String deviceInfoTime(long timemills) {
         Calendar c = Calendar.getInstance(TimeZone.getDefault());
         c.setTimeInMillis(timemills);
-        int curYear = c.get(Calendar.YEAR);
+       int curYear = c.get(Calendar.YEAR);
         int curMon = c.get(Calendar.MONTH) + 1;
         int curDay = c.get(Calendar.DATE);
         int curHour=c.get(Calendar.HOUR_OF_DAY);

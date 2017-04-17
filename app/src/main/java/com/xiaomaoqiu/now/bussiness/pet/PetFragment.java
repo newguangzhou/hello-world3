@@ -19,6 +19,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.dialog.StartPetFindingDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
@@ -51,6 +52,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     String strStart;
     String strEnd;
+
+    int sportTarget = 1000;
+    int sportDone = 100;
+    double percentage = 100;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,46 +104,55 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         prog.setProgress(100);
     }
 
-    //粘性事件，等待petid返回来再进行网络操作
+
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
-        initProgress();
+        updateActivityView();
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
             public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    int sportTarget = 1000;
-                    int sportDone = 100;
-                    double percentage = 100;
+
                     if (message.data.size() > 0) {
                         PetSportBean.SportBean bean = message.data.get(0);
                         sportTarget = bean.target_amount;
-                        sportDone = bean.reality_amount;
-                        percentage = bean.percentage;
+                        sportDone = bean.reality_amount/1000;
+                        percentage = bean.percentage/1000;
                     } else {
-                        Toast.makeText(PetAppLike.mcontext, "当天尚无数据~", Toast.LENGTH_SHORT).show();
+                        ToastUtil.showTost("当天尚无数据~");
 
                     }
                     prog.setProgress((int) percentage);
                     tvSportDone.setText(String.format("已消耗%d卡", sportDone));
                     tvSportTarget.setText(String.format("目标消耗%d卡", sportTarget));
                 } else {
-                    Toast.makeText(PetAppLike.mcontext, "获取当天数据失败", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showTost("获取当天数据失败");
                 }
             }
 
             @Override
             public void onFail(Call<PetSportBean> call, Throwable t) {
-                Toast.makeText(PetAppLike.mcontext, "获取当天数据失败", Toast.LENGTH_SHORT).show();
+                ToastUtil.showTost("获取当天数据失败");
             }
         });
     }
 
-    //todo 更新逻辑
+    //今日运动数据更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onPetInfoChanged(EventManage.notifyPetInfoChange event) {
+    public void todaySportData(EventManage.TodaySportData event){
+
+        sportTarget = event.sportBean.target_amount;
+        sportDone = event.sportBean.reality_amount/1000;
+        percentage = event.sportBean.percentage/1000;
+        prog.setProgress((int) percentage);
+        tvSportDone.setText(String.format("已消耗%d卡", sportDone));
+        tvSportTarget.setText(String.format("目标消耗%d卡", sportTarget));
+    }
+
+    //更新去运动还是回家的view
+   void updateActivityView(){
         if (PetInfoInstance.getInstance().getAtHome()) {//回家
             getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
             getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
@@ -149,8 +163,23 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
         Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
         imgLogo.setImageURI(uri);
-//            AsyncImageTask.INSTANCE.loadImage(imgLogo, PetInfoInstance.getInstance().packBean.logo_url, this);
     }
+//
+//    //todo 更新逻辑
+//    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+//    public void onPetInfoChanged(EventManage.notifyPetInfoChange event) {
+//        if (PetInfoInstance.getInstance().getAtHome()) {//回家
+//            getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
+//            getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
+//        } else {//出去玩
+//            getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
+//            getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
+//        }
+//        SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
+//        Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
+//        imgLogo.setImageURI(uri);
+////            AsyncImageTask.INSTANCE.loadImage(imgLogo, PetInfoInstance.getInstance().packBean.logo_url, this);
+//    }
 
     @Override
     public void onClick(View v) {
@@ -181,7 +210,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+//todo  为什么没有处理
                     }
                 });
                 break;

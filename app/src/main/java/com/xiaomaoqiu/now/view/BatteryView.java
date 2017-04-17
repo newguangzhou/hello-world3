@@ -57,6 +57,23 @@ public class BatteryView extends ImageView {
             }
         }
     }
+    public void pushBatteryDialog(float level,String time){
+        new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+        for(int i=0; i<batteryLevels.length ;i++){
+            if(level >= batteryLevels[i]){
+                setImageResource(batteryLevelRes[i]);
+                break;
+            }
+        }
+    }
+    public void showBatterylevel(float level,String time){
+        for(int i=0; i<batteryLevels.length ;i++){
+            if(level >= batteryLevels[i]){
+                setImageResource(batteryLevelRes[i]);
+                break;
+            }
+        }
+    }
 
 
 }

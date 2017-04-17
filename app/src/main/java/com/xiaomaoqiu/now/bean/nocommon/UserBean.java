@@ -13,4 +13,6 @@ public class UserBean extends BaseBean {
 
     public String  wifi_bssid;
 
+    public String wifi_ssid;
+
 }

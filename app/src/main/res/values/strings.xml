@@ -65,8 +65,8 @@
     <string name="variety">品种</string>
     <string name="intro">介绍</string>
     <string name="title_activity_health_index">HealthIndex</string>
-    <string name="pet_sport_done">已消耗%d卡</string>
-    <string name="pet_sport_target">目标消耗%d卡</string>
+    <string name="pet_sport_done">已消耗%d千卡</string>
+    <string name="pet_sport_target">目标消耗%d千卡</string>
     <string name="go_out_title">小毛球温馨提示</string>
     <string name="go_out_tip">带狗狗出门时按下此按钮，通知小毛球APP，可避免小毛球误判狗狗溜走哦，玩结束后回到家也请按下“回到家”告知小毛球</string>
     <string name="go_out_confirm">嗯，出去玩</string>

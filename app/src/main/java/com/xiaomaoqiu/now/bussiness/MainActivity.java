@@ -4,6 +4,7 @@ package com.xiaomaoqiu.now.bussiness;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 	private LocateFragment mLocateFragment;
 	private MeFrament mMeFragment;
 
+	BatteryView batteryView;//右上角的电池
+
 	@Override
 	public int frameTemplate()
 	{//没有标题栏
@@ -52,7 +55,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 //			startActivity(intent);
 //			return;
 //		}
-		BatteryView batteryView = (BatteryView) findViewById(R.id.batteryView);
 		batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
 				DeviceInfoInstance.getInstance().lastGetTime);
 	}
@@ -77,6 +79,17 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 		mHealthTabIcon=(ImageView)findViewById(R.id.main_tab_health);
 		mLocateTabIcon=(ImageView)findViewById(R.id.main_tab_locate);
 		mMeTabIcon=(ImageView)findViewById(R.id.main_tab_me);
+		batteryView = (BatteryView) findViewById(R.id.batteryView);
+
+		//点击弹出电池
+		batteryView.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View view) {
+				batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
+						DeviceInfoInstance.getInstance().lastGetTime);
+			}
+		});
 	}
 
 	private void hideAllFragment(FragmentTransaction transaction){

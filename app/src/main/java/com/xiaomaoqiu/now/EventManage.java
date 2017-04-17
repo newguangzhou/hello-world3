@@ -1,5 +1,7 @@
 package com.xiaomaoqiu.now;
 
+import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
+
 /**
  * Created by long on 17/4/8.
  */
@@ -47,5 +49,10 @@ public class EventManage {
     //wifi列表获取成功
     public static class wifiListSuccess{
 
+    }
+
+    //当天运动量
+    public static class TodaySportData{
+       public  PetSportBean.SportBean sportBean=new PetSportBean.SportBean();
     }
 }
