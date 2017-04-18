@@ -251,7 +251,7 @@ public class ChartIndexPresenter {
         //解析一周的运动数据
         parseSportWeekAndMonthList(sportDatas, "日", false);
         //解析一个月的运动数据
-        parseSportWeekAndMonthList(sportDatas, "", true);
+        parseSportWeekAndMonthList(sportDatas, "日", true);
 
 
     }
@@ -293,6 +293,7 @@ public class ChartIndexPresenter {
             deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
             lightList.add(new Entry(i - startIndex, (float) bean.reality_amount / 1000));
         }
+        callback.onSuccessGetAxis(axisLabels, isMonth);
         if (isMonth) {
             callback.onSuccessGetMonthDataSet(deepList, lightList);
         } else {

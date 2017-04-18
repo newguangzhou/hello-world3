@@ -125,7 +125,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                     }
                     prog.setProgress((int) percentage);
-                    tvSportDone.setText(String.format("已消耗%dqia千卡", sportDone));
+                    tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
                     tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
                 } else {
                     ToastUtil.showTost("获取当天数据失败");
