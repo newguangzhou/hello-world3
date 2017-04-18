@@ -82,10 +82,10 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     @Override
     public void onSuccessGetAxis(ArrayList<String> labels, boolean ismonth) {
         if(ismonth){
-            if(null != labels && labels.size() >0) {
-                String last = labels.get(labels.size() - 1);
-                labels.set(labels.size()-1,last+"日");
-            }
+//            if(null != labels && labels.size() >0) {
+//                String last = labels.get(labels.size() - 1);
+//                labels.set(labels.size()-1,last+"日");
+//            }
             monthChart.setXAxisLabels(labels);
         }else{
             weekChart.setXAxisLabels(labels);

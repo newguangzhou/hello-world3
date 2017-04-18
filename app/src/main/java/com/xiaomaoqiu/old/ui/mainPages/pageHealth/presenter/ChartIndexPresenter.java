@@ -18,6 +18,7 @@ import com.xiaomaoqiu.old.utils.DateUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -305,48 +306,42 @@ public class ChartIndexPresenter {
     public PetSportBean.SportBean timeEqual(Date date, List<PetSportBean.SportBean> sportDatas) {
         for (PetSportBean.SportBean bean : sportDatas) {
             String dateString = bean.date;
-            if (equalDateDay(date,changeFormat(dateString))) {
+            if (equalDateDay(date, dateString)) {
                 return bean;
             }
         }
         return new PetSportBean.SportBean();
     }
+
     //只要日期对，就可以
-    boolean equalDateDay(Date date1,Date date2){
-        if(date1.getDay()!=date2.getDay()){
-            return false;
-        }
-        if(date1.getMonth()!=date2.getMonth()){
-            return false;
-        }
-        if(date1.getYear()!=date2.getYear()){
-            return false;
-        }
-        return true;
+    boolean equalDateDay(Date date1, String date2) {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+        String changeResult=sdf.format(date1);
+        return changeResult.equals(date2);
     }
 
-    //切换时间字符串
-    public Date changeFormat(String timeString) {
-        if (TextUtils.isEmpty(timeString)) {
-
-            return new Date(0, 0, 0);
-        }
-        int year;
-        int month;
-        int day;
-        try {
-            Scanner scanner = new Scanner(timeString);
-            scanner.useDelimiter("-");
-            year = scanner.nextInt();
-            month = scanner.nextInt();
-            day = scanner.nextInt();
-        } catch (Exception e) {
-            year = 0;
-            month = 0;
-            day = 0;
-        }
-        return new Date(year, month, day);
-    }
+//    //切换时间字符串
+//    public Date changeFormat(String timeString) {
+//        if (TextUtils.isEmpty(timeString)) {
+//
+//            return new Date(0, 0, 0);
+//        }
+//        int year;
+//        int month;
+//        int day;
+//        try {
+//            Scanner scanner = new Scanner(timeString);
+//            scanner.useDelimiter("-");
+//            year = scanner.nextInt();
+//            month = scanner.nextInt();
+//            day = scanner.nextInt();
+//        } catch (Exception e) {
+//            year = 0;
+//            month = 0;
+//            day = 0;
+//        }
+//        return new Date(year, month, day);
+//    }
 
 
 //    private void parseList(JSONArray jsdata, String format, boolean isMonth) {

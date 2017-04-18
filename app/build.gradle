@@ -22,7 +22,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
-        versionName 'inner_test'
+        versionName '0.0.1.inner_test'
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [ eventBusIndex : 'com.xmq.MyEventBusIndex' ]
