@@ -1,11 +1,13 @@
 package com.xiaomaoqiu.now.bussiness.Device;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
 import com.xiaomaoqiu.now.view.BatteryView;
@@ -73,6 +75,15 @@ public class DeviceActivity extends BaseActivity {
         batteryView = (BatteryView) findViewById(R.id.batteryView);
         batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
                 DeviceInfoInstance.getInstance().lastGetTime);
+    }
+
+    //解绑成功
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void unbindDeviceSuccess(EventManage.unbindDeviceSuccess event){
+        Intent intent = new Intent(PetAppLike.mcontext, InitBindDeviceActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PetAppLike.mcontext.startActivity(intent);
+
     }
 
     //显示设备信息

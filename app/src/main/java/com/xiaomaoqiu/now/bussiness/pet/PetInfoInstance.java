@@ -12,7 +12,6 @@ import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.http.ApiService;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
@@ -74,8 +73,8 @@ public class PetInfoInstance {
         return instance;
     }
 
-    static public class Date {
-        public Date(int y, int m, int d) {
+    static public class MyDate {
+        public MyDate(int y, int m, int d) {
             setDate(y, m, d);
         }
 
@@ -165,7 +164,7 @@ public class PetInfoInstance {
             month = 0;
             day = 0;
         }
-        packBean.dateFormat_birthday = new Date(year, month, day);
+        packBean.dateFormat_birthday = new MyDate(year, month, day);
     }
 
 
@@ -293,12 +292,16 @@ public class PetInfoInstance {
             public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    EventManage.notifyPetLocationChange event = new EventManage.notifyPetLocationChange();
-                    latitude = message.latitude;
-                    location_time = message.location_time;
-                    longitude = message.longitude;
-                    radius = message.radius;
-                    EventBus.getDefault().post(event);
+                    if(message.latitude>0.0d) {
+                        EventManage.notifyPetLocationChange event = new EventManage.notifyPetLocationChange();
+                        latitude = message.latitude;
+                        location_time = message.location_time;
+                        longitude = message.longitude;
+                        radius = message.radius;
+                        EventBus.getDefault().post(event);
+                    }else {
+                        ToastUtil.showTost("位置获取失败！");
+                    }
 
                 }
             }
@@ -364,7 +367,7 @@ public class PetInfoInstance {
         packBean.birthday = birthday;
     }
 
-    public void setDateFormat_birthday(Date date) {
+    public void setDateFormat_birthday(MyDate date) {
         packBean.dateFormat_birthday = date;
         packBean.birthday = date.toString();
     }

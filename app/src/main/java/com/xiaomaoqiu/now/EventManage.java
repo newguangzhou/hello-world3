@@ -17,6 +17,10 @@ public class EventManage {
     public static class bindDeviceSuccess {
 
     }
+    //解除绑定之后
+    public static class unbindDeviceSuccess{
+
+    }
 
     //获取设备信息成功之后
     public static class notifyDeviceStateChange {

@@ -19,7 +19,6 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
-import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -199,12 +198,12 @@ public class PetInfoActivity extends BaseActivity {
     private BottomCalenderView bottomCalenderView;
 
     private void modifyBirthday() {
-        PetInfoInstance.Date mPetBirthDay = modifyBean.dateFormat_birthday;
+        PetInfoInstance.MyDate mPetBirthDay = modifyBean.dateFormat_birthday;
         if (bottomCalenderView == null) {
             bottomCalenderView = new BottomCalenderView(this, mPetBirthDay.year, mPetBirthDay.month, mPetBirthDay.day, new BottomCalenderView.OnDatePickedListener() {
                 @Override
                 public void onDatePicked(int year, int month, int day) {
-                    PetInfoInstance.Date tmpDateFormatBirthday = new PetInfoInstance.Date(year, month, day);
+                    PetInfoInstance.MyDate tmpDateFormatBirthday = new PetInfoInstance.MyDate(year, month, day);
                     modifyBean.dateFormat_birthday = tmpDateFormatBirthday;
                     modifyBean.birthday = tmpDateFormatBirthday.toString();
                     txt_birthday.setText(modifyBean.birthday);

@@ -110,4 +110,10 @@ public class DateUtil {
         date.setMonth(date.getMonth()+1);
         return date;
     }
+
+    //获取当天日期
+    public static Date getCurrentDate(){
+        Date date=new Date();
+        return date;
+    }
 }

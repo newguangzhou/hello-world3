@@ -38,7 +38,7 @@ public class PetInfoBean extends BaseBean{
     public String wifi_bssid;
 
 
-    public PetInfoInstance.Date dateFormat_birthday=new PetInfoInstance.Date(0, 0, 0);
+    public PetInfoInstance.MyDate dateFormat_birthday=new PetInfoInstance.MyDate(0, 0, 0);
 
 
 }

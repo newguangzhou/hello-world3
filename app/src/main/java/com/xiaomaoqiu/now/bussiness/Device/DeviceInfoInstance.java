@@ -208,6 +208,7 @@ public class DeviceInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
                     clearDeviceInfo();
+                    EventBus.getDefault().post(new EventManage.unbindDeviceSuccess());
                 }
             }
 

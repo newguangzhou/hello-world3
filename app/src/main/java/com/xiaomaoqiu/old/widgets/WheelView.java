@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Author: wangjie
  * Email: tiantian.china.2@gmail.com
- * Date: 7/1/14.
+ * MyDate: 7/1/14.
  */
 @SuppressLint("WrongConstant")
 public class WheelView extends ScrollView {

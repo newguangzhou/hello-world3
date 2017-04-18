@@ -141,6 +141,7 @@ public class WifiListActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
         //刷新列表
+        adapter.mdatas=DeviceInfoInstance.getInstance().wiflist.data;
         adapter.notifyDataSetChanged();
     }
 

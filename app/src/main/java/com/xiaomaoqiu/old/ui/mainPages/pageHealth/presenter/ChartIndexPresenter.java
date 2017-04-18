@@ -1,5 +1,7 @@
 package com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter;
 
+import android.text.TextUtils;
+
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.xiaomaoqiu.now.EventManage;
@@ -19,6 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -246,9 +249,9 @@ public class ChartIndexPresenter {
         //解析当天的运动数据
         parseSportToday(sportDatas);
         //解析一周的运动数据
-        parseSportWeekAndMonthList(sportDatas,"日",false);
+        parseSportWeekAndMonthList(sportDatas, "日", false);
         //解析一个月的运动数据
-        parseSportWeekAndMonthList(sportDatas,"",true);
+        parseSportWeekAndMonthList(sportDatas, "", true);
 
 
     }
@@ -258,15 +261,15 @@ public class ChartIndexPresenter {
         int days = sportDatas.size();
         PetSportBean.SportBean todayBean = sportDatas.get(days - 1);
         todayDeep = todayBean.target_amount;
-        todayLight = todayBean.reality_amount/1000;
+        todayLight = todayBean.reality_amount / 1000;
         callback.onSuccessGetWeight(todayDeep, todayLight);
-        EventManage.TodaySportData event=new EventManage.TodaySportData();
-        event.sportBean=todayBean;
+        EventManage.TodaySportData event = new EventManage.TodaySportData();
+        event.sportBean = todayBean;
         EventBus.getDefault().post(event);
     }
 
     //解析一周的运动数据
-    void parseSportWeekAndMonthList(List<PetSportBean.SportBean> sportDatas,String format,boolean isMonth) {
+    void parseSportWeekAndMonthList(List<PetSportBean.SportBean> sportDatas, String format, boolean isMonth) {
         int days = isMonth ? MONTH_LENGTH : WEEK_LENGTH;
         int intrval = isMonth ? 2 : 1;
         ArrayList<String> axisLabels = new ArrayList<>();
@@ -282,23 +285,66 @@ public class ChartIndexPresenter {
             int secondIndex = curDate.getDate();
             callback.onSuccessGetSecAxis(secondText, secondIndex, days);
         }
-        int startIndex = sportDatas.size() - days;
-        if (startIndex < 0) {
-            startIndex = 0;
-        }
-        for (int i = startIndex; i < sportDatas.size(); i += intrval) {
+        int startIndex = 0;
+        for (int i = startIndex; i < days; i += intrval) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + format);
-            PetSportBean.SportBean bean=sportDatas.get(i);
+            PetSportBean.SportBean bean = timeEqual(date, sportDatas);
             deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
-                lightList.add(new Entry(i - startIndex, (float)bean.reality_amount/1000));
+            lightList.add(new Entry(i - startIndex, (float) bean.reality_amount / 1000));
         }
-        callback.onSuccessGetAxis(axisLabels, isMonth);
         if (isMonth) {
             callback.onSuccessGetMonthDataSet(deepList, lightList);
         } else {
             callback.onSuccessGetWeekDataSet(deepList, lightList);
         }
+    }
+
+    //获取bean
+    public PetSportBean.SportBean timeEqual(Date date, List<PetSportBean.SportBean> sportDatas) {
+        for (PetSportBean.SportBean bean : sportDatas) {
+            String dateString = bean.date;
+            if (equalDateDay(date,changeFormat(dateString))) {
+                return bean;
+            }
+        }
+        return new PetSportBean.SportBean();
+    }
+    //只要日期对，就可以
+    boolean equalDateDay(Date date1,Date date2){
+        if(date1.getDay()!=date2.getDay()){
+            return false;
+        }
+        if(date1.getMonth()!=date2.getMonth()){
+            return false;
+        }
+        if(date1.getYear()!=date2.getYear()){
+            return false;
+        }
+        return true;
+    }
+
+    //切换时间字符串
+    public Date changeFormat(String timeString) {
+        if (TextUtils.isEmpty(timeString)) {
+
+            return new Date(0, 0, 0);
+        }
+        int year;
+        int month;
+        int day;
+        try {
+            Scanner scanner = new Scanner(timeString);
+            scanner.useDelimiter("-");
+            year = scanner.nextInt();
+            month = scanner.nextInt();
+            day = scanner.nextInt();
+        } catch (Exception e) {
+            year = 0;
+            month = 0;
+            day = 0;
+        }
+        return new Date(year, month, day);
     }
 
 
@@ -310,10 +356,10 @@ public class ChartIndexPresenter {
 //        ArrayList<Entry> deepList = new ArrayList<>();
 //        ArrayList<Entry> lightList = new ArrayList<>();
 //
-//        ArrayList<Date> dates = DateUtil.getPastDates(days);
+//        ArrayList<MyDate> dates = DateUtil.getPastDates(days);
 //
 //        if (isMonth) {
-//            Date curDate = DateUtil.getFirstDataOfCurMonth();
+//            MyDate curDate = DateUtil.getFirstDataOfCurMonth();
 //            String secondText = curDate.getMonth() + "月";
 //            int secondIndex = curDate.getDate();
 //            callback.onSuccessGetSecAxis(secondText, secondIndex, days);
@@ -323,7 +369,7 @@ public class ChartIndexPresenter {
 //            startIndex = 0;
 //        }
 //        for (int i = startIndex; i < jsdata.length(); i += intrval) {
-//            Date date = dates.get(i - startIndex);
+//            MyDate date = dates.get(i - startIndex);
 //            axisLabels.add(date.getDate() + format);
 //            JSONObject jsday = (JSONObject) jsdata.opt(i);
 //            float deep = (float) jsday.optDouble(largeFieldName);
