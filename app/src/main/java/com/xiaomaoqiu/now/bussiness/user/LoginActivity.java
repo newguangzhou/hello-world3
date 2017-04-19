@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     EditText m_editPhone; // 帐号编辑框
     EditText m_editVerifyCode;
     private ProgressDialog mProgressBar;
-    private View login_btn_sendVerify;//发送验证码按钮
+    private Button login_btn_sendVerify;//发送验证码按钮
     private Button login_btn_login;//登录按钮
     private View btn_contact_service;//联系客服
 
@@ -76,13 +76,33 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
         m_editPhone = (EditText) findViewById(R.id.login_user_edit);
         m_editVerifyCode = (EditText) findViewById(R.id.login_edit_verify);
-        login_btn_sendVerify = findViewById(R.id.login_btn_sendVerify);
+        login_btn_sendVerify = (Button) findViewById(R.id.login_btn_sendVerify);
 
         login_btn_login = (Button) findViewById(R.id.login_btn_login);
         btn_contact_service = findViewById(R.id.btn_contact_service);
     }
 
     void initListener() {
+        m_editPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 11) {
+                    login_btn_sendVerify.setEnabled(true);
+                }else{
+                    login_btn_sendVerify.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         m_editVerifyCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,10 +127,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
             @Override
             public void onClick(View v) {
                 String strPhone = m_editPhone.getText().toString();
-                if (strPhone.length() != 11) {
-                    Toast.makeText(LoginActivity.this, R.string.tip_phone_format, Toast.LENGTH_LONG).show();
-                    return;
-                }
+//                if (strPhone.length() != 11) {
+//                    Toast.makeText(LoginActivity.this, R.string.tip_phone_format, Toast.LENGTH_LONG).show();
+//                    return;
+//                }
 
                 loginPresenter.getVerifyCode(strPhone, Constants.DEVICE_TYPE);
 

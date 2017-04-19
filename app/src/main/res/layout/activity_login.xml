@@ -80,7 +80,7 @@
 			android:maxEms="6"
 			android:maxLines="1"/>
 
-		<TextView
+		<Button
 			android:id="@+id/login_btn_sendVerify"
 			android:layout_width="110dp"
 			android:layout_height="wrap_content"
