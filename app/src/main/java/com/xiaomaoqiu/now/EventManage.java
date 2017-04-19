@@ -47,6 +47,12 @@ public class EventManage {
         //位置是不是为0
         public boolean isnull;
     }
+    //测试位置获取
+    public static class testPetLocation{
+
+    }
+
+
     public static class atHomeOrtoSport{
     }
 

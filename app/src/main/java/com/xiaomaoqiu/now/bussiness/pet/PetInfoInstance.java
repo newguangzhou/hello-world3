@@ -15,6 +15,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.test.TestInstance;
 import com.xiaomaoqiu.now.test.TestLocationBean;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -230,8 +231,8 @@ public class PetInfoInstance {
     }
 
     //更新宠物信息
-    public void updatePetInfo(final PetInfoBean petInfoBean,Map<String, String> params) {
-        ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(),UserInstance.getInstance().getToken(),
+    public void updatePetInfo(final PetInfoBean petInfoBean, Map<String, String> params) {
+        ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.pet_id, params
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
@@ -292,14 +293,14 @@ public class PetInfoInstance {
             public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    if(message.latitude>0.0d) {
+                    if (message.latitude > 0.0d) {
                         EventManage.notifyPetLocationChange event = new EventManage.notifyPetLocationChange();
                         latitude = message.latitude;
                         location_time = message.location_time;
                         longitude = message.longitude;
                         radius = message.radius;
                         EventBus.getDefault().post(event);
-                    }else {
+                    } else {
                         ToastUtil.showTost("位置获取失败！");
                     }
 
@@ -311,24 +312,9 @@ public class PetInfoInstance {
                 Toast.makeText(PetAppLike.mcontext, "位置获取失败~", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    public void getTestLocation() {
-        ApiUtils.getApiService().getTestLocation(
-                UserInstance.getInstance().getUid(),
-                UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id()
-        ).enqueue(new XMQCallback<TestLocationBean>() {
-            @Override
-            public void onSuccess(Response<TestLocationBean> response, TestLocationBean message) {
+        TestInstance.getTestInstance().getTestLocation();
 
-            }
-
-            @Override
-            public void onFail(Call<TestLocationBean> call, Throwable t) {
-
-            }
-        });
     }
 
     public PetInfoBean getPackBean() {

@@ -45,7 +45,6 @@ public class WifiListActivity extends BaseActivity {
     RecyclerView rv_wifilist;
     Button bt_refresh;
 
-    WifiListBean wifiListBean;
 
     CheckStateAdapter adapter;
 
@@ -63,14 +62,14 @@ public class WifiListActivity extends BaseActivity {
     }
 
     private void initView() {
-        bt_refresh= (Button) this.findViewById(R.id.bt_refresh);
-        bt_refresh.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                DeviceInfoInstance.getInstance().getWifiList();
-            }
-        });
+//        bt_refresh= (Button) this.findViewById(R.id.bt_refresh);
+//        bt_refresh.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//                DeviceInfoInstance.getInstance().getWifiList();
+//            }
+//        });
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         setNextView("下一步", new View.OnClickListener() {
             @Override

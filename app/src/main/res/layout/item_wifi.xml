@@ -5,25 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="45dp"
     android:layout_margin="5dp"
-    android:gravity="center"
-    android:orientation="horizontal"
     android:background="@drawable/background_wifi_select"
-    >
-    <TextView
-        android:id="@+id/tv_state"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="xiaomaoqiu"
-        />
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
     <ImageView
         android:id="@+id/iv_selected"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/wifi_selected"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:src="@drawable/pet_variety_23" />
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="xiaomaoqiu"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:layout_marginRight="10dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/wifi_power" />
 </LinearLayout>

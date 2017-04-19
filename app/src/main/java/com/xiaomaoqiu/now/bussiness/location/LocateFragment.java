@@ -87,9 +87,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void initData() {
+        EventBus.getDefault().register(this);
         mPresenter = new LocatePresenter(this);
         mPresenter.onInit();
-        EventBus.getDefault().register(this);
     }
 
 

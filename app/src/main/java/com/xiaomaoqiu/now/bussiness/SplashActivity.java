@@ -55,6 +55,11 @@ public class SplashActivity extends BaseActivity {
     //网络获取用户信息成功
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void next(EventManage.getUserInfoEvent event) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+
+        }
         Intent intent = new Intent();
         if (!(UserInstance.getInstance().pet_id > 0)) {
             intent.setClass(SplashActivity.this, AddPetInfoActivity.class);

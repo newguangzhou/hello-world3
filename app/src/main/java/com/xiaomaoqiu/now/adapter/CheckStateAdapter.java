@@ -22,7 +22,6 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
     //    private String[] arrayState;
     WifiListBean mdatasWrapper;
     public ArrayList<WifiBean> mdatas;
-    private int selectedPosition = -5; //默认一个参数
 
     public CheckStateAdapter(WifiListBean datasWrapper, Context context) {
         this.context = context;
@@ -51,7 +50,6 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
                                                @Override
                                                public void onClick(View view) {
                                                    onItemClickListener.OnItemClick(view, holder, holder.getAdapterPosition());
-                                                   selectedPosition = position; //选择的position赋值给参数，
 //                                                   notifyItemChanged(selectedPosition);//刷新当前点击item
                                                }
                                            }
@@ -64,13 +62,7 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
         return (mdatas==null)||(mdatas.size() == 0 )? 0 : mdatas.size();
     }
 
-    public void updateData(ArrayList<WifiBean> datas) {
-        if (null != datas && datas.size() > 0) {
-            selectedPosition = -5;
-            mdatas = datas;
-            notifyDataSetChanged();
-        }
-    }
+
 
 
 
