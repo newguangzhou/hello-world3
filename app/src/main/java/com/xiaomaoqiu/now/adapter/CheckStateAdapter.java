@@ -39,8 +39,8 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
     public void onBindViewHolder(final StateHolder holder, final int position) {
         if (null == mdatas || mdatas.size() == 0) return;
         WifiBean bean=mdatas.get(position);
-        holder.itemView.setSelected(bean.Is_homewifi);
-        if (bean.Is_homewifi) {
+        holder.itemView.setSelected(bean.is_homewifi==1);
+        if (bean.is_homewifi==1) {
             holder.ivSelected.setVisibility(View.VISIBLE);
         } else {
             holder.ivSelected.setVisibility(View.INVISIBLE);

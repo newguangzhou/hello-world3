@@ -1,7 +1,5 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
-import android.text.TextUtils;
-
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
@@ -108,23 +106,23 @@ public class UserInstance {
     }
 
     public void saveUserInfo(UserBean userBean) {
-        if (!TextUtils.isEmpty(userBean.imei)) {
-            device_imei = userBean.imei;
+//        if (!TextUtils.isEmpty(userBean.device_imei)) {
+            device_imei = userBean.device_imei;
             SPUtil.putDeviceImei(device_imei);
-        }
-        if(userBean.pet_id>0){
+//        }
+//        if(userBean.pet_id>0){
             pet_id=userBean.pet_id;
             SPUtil.putPetId(pet_id);
-        }
+//        }
 
-        if(!TextUtils.isEmpty(userBean.wifi_bssid)){
+//        if(!TextUtils.isEmpty(userBean.wifi_bssid)){
             wifi_bssid=userBean.wifi_bssid;
             SPUtil.putHomeWifiMac(wifi_bssid);
-        }
-        if(!TextUtils.isEmpty(userBean.wifi_ssid)){
+//        }
+//        if(!TextUtils.isEmpty(userBean.wifi_ssid)){
             wifi_ssid=userBean.wifi_ssid;
             SPUtil.putHomeWifiSsid(wifi_ssid);
-        }
+//        }
     }
 
     public long getUid() {

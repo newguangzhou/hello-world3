@@ -191,7 +191,7 @@ public interface ApiService {
     @GET(Constants.Url.Device.add_device_info)
     Call<BaseBean> addDeviceInfo(@Query("uid") long uid,
                                  @Query("token") String token,
-                                 @Query("imei") String imei,
+                                 @Query("device_imei") String imei,
                                  @Query("device_name") String deviceName
     );
 
@@ -240,7 +240,7 @@ public interface ApiService {
     Call<BaseBean> removeDeviceInfo(
             @Query("uid") long uid,
             @Query("token") String token,
-            @Query("imei") String imei
+            @Query("device_imei") String imei
     );
 
 
@@ -251,13 +251,13 @@ public interface ApiService {
 //     *
 //     * @param uid
 //     * @param token
-//     * @param imei
+//     * @param device_imei
 //     * @return
 //     */
 //    @GET(Constants.Url.Device.get_light_status)
 //    Call<LightStatusBean> getLightStatus(@Query("uid") long uid,
 //                                         @Query("token") String token,
-//                                         @Query("imei") String imei
+//                                         @Query("device_imei") String device_imei
 //    );
 
 
@@ -265,7 +265,7 @@ public interface ApiService {
 //    @GET(Constants.Url.Device.swicth_light)
 //    Call<BaseBean> switchLightStatus(@Query("uid") long uid,
 //                                     @Query("token") String token,
-//                                     @Query("imei") String imei,
+//                                     @Query("device_imei") String device_imei,
 //                                     @Query("light_status") int light_status
 //    );
 

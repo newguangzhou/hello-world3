@@ -169,6 +169,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         if (mGoSportView.isShowing()) {
             mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
             return;

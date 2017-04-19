@@ -267,7 +267,7 @@ public class ChartIndexPresenter {
         Date date=new Date();
         PetSportBean.SportBean todayBean = timeEqualSportBean(date,sportDatas);
         todayDeep = todayBean.target_amount;
-        todayLight = todayBean.reality_amount / 1000;
+        todayLight = todayBean.reality_amount;
         callback.onSuccessGetWeight(todayDeep, todayLight);
         EventManage.TodaySportData event = new EventManage.TodaySportData();
         event.sportBean = todayBean;
@@ -297,7 +297,7 @@ public class ChartIndexPresenter {
             axisLabels.add(date.getDate() + format);
             PetSportBean.SportBean bean = timeEqualSportBean(date, sportDatas);
             deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
-            lightList.add(new Entry(i - startIndex, (float) bean.reality_amount / 1000));
+            lightList.add(new Entry(i - startIndex, (float) bean.reality_amount ));
         }
         callback.onSuccessGetAxis(axisLabels, isMonth);
         if (isMonth) {

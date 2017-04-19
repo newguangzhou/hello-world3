@@ -27,7 +27,7 @@ public enum HttpCode {
     EC_INVALID_FILE_TYPE(21),        //文件类型不对
     EC_DAY_REQUEST_COUNT_LIMITED(22),//每天的请求数量限制
     EC_SHOP_NOT_EXIST(23),           //店铺不存在
-    EC_ALREADY_FAV(24),              //已经收藏或关注
+    EC_ALREADY_FAV(24),              //已经收藏或关注------设备被别人绑定了
     EC_NOT_FAV(25),                  //没有收藏或关注
     EC_INVALID_ACTIVITY(26),         //无效的活动
     EC_AUDITING(27),                 //审核中
@@ -35,7 +35,8 @@ public enum HttpCode {
     EC_ACCOUNT_FREEZED_TEMP(29),     //账号被暂时冻结
     EC_DEVICE_NOT_EXIST(30),         //追踪器不存在
     EC_CURRENT_TIME_NOT_ALLOW(31),      //当前时段不允许
-    EC_NODATA(32)                      //没有数据
+    EC_NODATA(32) ,                     //没有数据
+    EC_OFFLINE(100)                    //设备离线
     ;
 
     HttpCode(int code) {
@@ -110,6 +111,8 @@ public enum HttpCode {
                 return EC_CURRENT_TIME_NOT_ALLOW;      //当前时段不允许
             case 32:
                 return EC_NODATA;                     //没有数据
+            case 100:
+                return EC_OFFLINE;  //设备离线
             default:
                 return EC_UNDEFINED;
 //            case 0:return EC_SUCCESS;

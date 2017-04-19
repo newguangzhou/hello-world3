@@ -190,7 +190,7 @@
             android:layout_marginBottom="16dp"
             app:yAxis_textColor="@color/total_color_7"
             app:yAxis_textSize="11sp"
-            app:yAxis_show="true"
+            app:yAxis_show="false"
             app:xAxis_textSize="11sp"
             app:xAxis_textColor="@color/total_color_7"
             app:xAxis_show="false"

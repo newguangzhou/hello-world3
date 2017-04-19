@@ -37,7 +37,7 @@ public class DeviceInfoInstance {
 //        "status": 0,
 //            "battery_level": 0,
 //            "firmware_version": "X2_Plus_V1.1",
-//            "imei": "357396080000293"
+//            "device_imei": "357396080000293"
 //    }
     public static DeviceInfoInstance instance;
 
@@ -59,7 +59,7 @@ public class DeviceInfoInstance {
                 WifiBean wifiBean = new WifiBean();
                 wifiBean.wifi_ssid = UserInstance.getInstance().wifi_ssid;
                 wifiBean.wifi_bssid = UserInstance.getInstance().wifi_bssid;
-                wifiBean.Is_homewifi = true;
+                wifiBean.is_homewifi = 1;
                 instance.wiflist.data.add(wifiBean);
             }
 
@@ -78,7 +78,7 @@ public class DeviceInfoInstance {
 //    //固件版本
 //    public String firmware_version;
 //
-//    public String imei;
+//    public String device_imei;
 //
 //    public String deviceName;
 //
@@ -179,15 +179,23 @@ public class DeviceInfoInstance {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                if (ret == HttpCode.EC_SUCCESS) {
+                switch (ret){
+                    case EC_SUCCESS:
+                        getDeviceInfo();
 
-                    getDeviceInfo();
-
-                    EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
-                    Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PetAppLike.mcontext, "网络问题，请重试", Toast.LENGTH_SHORT).show();
+                        EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
+                        Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case EC_ALREADY_FAV:
+                        ToastUtil.showTost("此设备已经被别人绑定，请联系客服");
+                        break;
                 }
+//                if (ret == HttpCode.EC_SUCCESS) {
+//
+//
+//                } else {
+//                    Toast.makeText(PetAppLike.mcontext, "网络问题，请重试", Toast.LENGTH_SHORT).show();
+//                }
             }
 
             @Override
@@ -219,8 +227,11 @@ public class DeviceInfoInstance {
     }
 
 
+    public static int count=0;
+
     //发送获取wifi列表的命令
     public void sendGetWifiListCmd() {
+        count=0;
         ApiUtils.getApiService().sendGetWifiListCmd(
                 UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
@@ -229,19 +240,25 @@ public class DeviceInfoInstance {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                if (ret == HttpCode.EC_SUCCESS) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    getWifiList();
+                switch (ret){
+                    case  EC_SUCCESS:
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                            getWifiList();
+                        break;
+                    case EC_OFFLINE:
+                        EventBus.getDefault().post(new EventManage.wifiListError());
+                        break;
                 }
             }
 
             @Override
             public void onFail(Call<BaseBean> call, Throwable t) {
-
+                EventBus.getDefault().post(new EventManage.wifiListError());
             }
         });
     }
@@ -262,12 +279,14 @@ public class DeviceInfoInstance {
 //                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     } else {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        if((count++)<5) {
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            getWifiList();
                         }
-                        getWifiList();
                     }
                 }
             }

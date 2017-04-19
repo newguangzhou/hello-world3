@@ -40,17 +40,15 @@ public class SplashActivity extends BaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         EventBus.getDefault().register(this);
-        toWhere();//判断跳转逻辑
-//        PetAppLike. mainHandler=new Handler(getMainLooper());
-//        PetAppLike.mainHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                startActivity(intent);
-//                finish();
-//            }
-//        },1000);
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        toWhere();//判断跳转逻辑
+    }
 
     //网络获取用户信息成功
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
@@ -78,21 +76,31 @@ public class SplashActivity extends BaseActivity {
             intent.setClass(SplashActivity.this, WifiListActivity.class);
             startActivity(intent);
             finish();
+            return;
         }
-
+        intent.setClass(SplashActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 
 
     //判断跳转逻辑
     void toWhere() {
-        Intent intent;
-        intent = new Intent();
+
         if (!SPUtil.getLoginStatus()) {
-            intent.setClass(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            return;
+
+            PetAppLike.mainHandler = new Handler(getMainLooper());
+            PetAppLike.mainHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent();
+                    intent.setClass(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 1000);
+
         }
 
         //获取基本信息

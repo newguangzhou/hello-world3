@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.Device;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,12 +39,14 @@ import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
 /**
  * Created by long on 2017/4/12.
  */
-
+@SuppressLint("WrongConstant")
 public class WifiListActivity extends BaseActivity {
 
-
+    View ll_loading;
     RecyclerView rv_wifilist;
+
     Button bt_refresh;
+    View tv_tip;
 
 
     CheckStateAdapter adapter;
@@ -57,19 +60,21 @@ public class WifiListActivity extends BaseActivity {
 
         initView();
         initData();
-        DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+
         EventBus.getDefault().register(this);
     }
 
     private void initView() {
-//        bt_refresh= (Button) this.findViewById(R.id.bt_refresh);
-//        bt_refresh.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                DeviceInfoInstance.getInstance().getWifiList();
-//            }
-//        });
+        ll_loading = findViewById(R.id.ll_loading);
+        bt_refresh = (Button) this.findViewById(R.id.bt_refresh);
+        tv_tip = findViewById(R.id.tv_tip);
+        bt_refresh.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+            }
+        });
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         setNextView("下一步", new View.OnClickListener() {
             @Override
@@ -137,14 +142,16 @@ public class WifiListActivity extends BaseActivity {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
-                adapter.mdatas.get(position).Is_homewifi = !adapter.mdatas.get(position).Is_homewifi;
+                adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi==0?1:0;
 
-                if (adapter.mdatas.get(position).Is_homewifi) {
+                if (adapter.mdatas.get(position).is_homewifi==1) {
                     wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                     wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
 
-                    for(WifiBean bean:adapter.mdatas){
-                        bean.Is_homewifi=false;
+                    for (WifiBean bean : adapter.mdatas) {
+                        if(!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
+                            bean.is_homewifi = 0;
+                        }
                     }
                 }
 
@@ -156,9 +163,26 @@ public class WifiListActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
+        bt_refresh.setVisibility(View.GONE);
+        tv_tip.setVisibility(View.VISIBLE);
+        ll_loading.setVisibility(View.GONE);
+
         //刷新列表
         adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
         adapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getWifiListError(EventManage.wifiListError event) {
+        bt_refresh.setVisibility(View.VISIBLE);
+        tv_tip.setVisibility(View.GONE);
+        ll_loading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DeviceInfoInstance.getInstance().sendGetWifiListCmd();
     }
 
     @Override

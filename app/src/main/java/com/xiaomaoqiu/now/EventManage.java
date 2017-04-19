@@ -13,6 +13,7 @@ public class EventManage {
 
     }
 
+
     //绑定设备成功之后
     public static class bindDeviceSuccess {
 
@@ -60,6 +61,9 @@ public class EventManage {
     public static class wifiListSuccess{
 
     }
+
+    //WIFI列表获取失败
+    public static class wifiListError{}
 
     //当天运动量
     public static class TodaySportData{

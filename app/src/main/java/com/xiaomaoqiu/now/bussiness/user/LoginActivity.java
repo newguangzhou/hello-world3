@@ -26,6 +26,8 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.SplashActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
@@ -236,7 +238,11 @@ public class LoginActivity extends BaseActivity implements LoginView {
             intent.setClass(LoginActivity.this, WifiListActivity.class);
             startActivity(intent);
             finish();
+            return;
         }
+        intent.setClass(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
 
 
         EventBus.getDefault().unregister(this);

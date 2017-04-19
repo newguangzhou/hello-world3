@@ -75,8 +75,7 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <activity android:name="com.xiaomaoqiu.now.bussiness.SplashActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:alwaysRetainTaskState="true"
+            android:theme="@style/Appwelcome"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

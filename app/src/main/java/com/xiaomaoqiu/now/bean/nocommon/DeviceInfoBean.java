@@ -9,7 +9,7 @@ public class DeviceInfoBean extends BaseBean {
 //        "status": 0,
 //            "battery_level": 0,
 //            "firmware_version": "X2_Plus_V1.1",
-//            "imei": "357396080000293"
+//            "device_imei": "357396080000293"
 //    }
 
 

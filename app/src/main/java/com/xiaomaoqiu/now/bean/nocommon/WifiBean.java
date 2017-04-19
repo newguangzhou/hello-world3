@@ -13,5 +13,5 @@ public class WifiBean extends BaseBean{
     //wifi场强大小
     public double wifi_power;
     //是否是homewifi
-    public boolean Is_homewifi;
+    public int is_homewifi;
 }

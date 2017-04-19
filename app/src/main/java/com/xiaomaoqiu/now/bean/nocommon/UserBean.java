@@ -9,7 +9,7 @@ public class UserBean extends BaseBean {
 
     public long pet_id;
 
-    public String imei;
+    public String device_imei;
 
     public String  wifi_bssid;
 
