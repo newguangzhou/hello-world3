@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"       
-        >
 
 
-        <LinearLayout
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"  
-            android:gravity="center_horizontal"
-             >
-        
-       <LinearLayout
-        	android:id="@+id/exit_layout2"
-        	android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:gravity="center_horizontal"
-        	android:layout_gravity="bottom"
-        	android:orientation="vertical"
-        	android:background="@drawable/exit_dialog_bg" >
+<LinearLayout android:id="@+id/exit_layout2"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    android:background="@drawable/exit_dialog_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,8 +17,8 @@
             android:gravity="center"
             android:textColor="#fff"
             android:textSize="16sp"
-            android:text="退出后不会删除任何历史数据，下次\n登录依然可以使用本帐号" />           
-            
+            android:text="退出后将清空用户信息" />
+
             <Button
               android:id="@+id/btn_exit_ok"
               android:layout_width="fill_parent"
@@ -42,7 +32,7 @@
               android:background="@drawable/btn_style_alert_dialog_special"
               android:gravity="center"
               />
-            
+
             <Button
               android:id="@+id/btn_exit_cacel"
               android:layout_width="fill_parent"
@@ -57,8 +47,6 @@
               android:background="@drawable/btn_style_alert_dialog_cancel"
               android:gravity="center"
               />
-           
+
        </LinearLayout>
 
-    </LinearLayout>
-</RelativeLayout>

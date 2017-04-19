@@ -180,13 +180,6 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
      */
     private void setPhonePos(BDLocation location) {
         LatLng postion = new LatLng(location.getLatitude(), location.getLongitude());
-
-        float f = mBaiduMap.getMaxZoomLevel();//19.0
-//float m = mBaiduMap.getMinZoomLevel();//3.0
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
-        mBaiduMap.animateMapStatus(u);
-
-
         if (MODE_FINDING_PET != mMode) {
             setCenter(postion, 300);
         }
@@ -210,7 +203,7 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
                 .position(new LatLng(0, 0))
                 .visible(false);
         mBaiduMap.addOverlay(options);
-        Log.e("longtianlove", "图片调用");
+        Log.e("longtianlove","图片调用");
         mPhoneMarker = (Marker) (mBaiduMap.addOverlay(options));
     }
 

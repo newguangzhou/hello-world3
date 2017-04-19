@@ -143,13 +143,13 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
 
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
-//        if (null != mPresenter) {
-//            mPresenter.queryLightStatus();
-//        }
-    }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+//    public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
+////        if (null != mPresenter) {
+////            mPresenter.queryLightStatus();
+////        }
+//    }
 
     //todo 回调逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)

@@ -148,6 +148,7 @@
                             android:src="@drawable/tab_health_rest"/>
 
                         <TextView
+                            android:id="@+id/tv_sleep_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"

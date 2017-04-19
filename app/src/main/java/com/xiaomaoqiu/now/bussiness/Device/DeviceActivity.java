@@ -56,7 +56,8 @@ public class DeviceActivity extends BaseActivity {
             }
         });
 
-
+        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                DeviceInfoInstance.getInstance().lastGetTime);
         findViewById(R.id.tv_sim_recharge).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

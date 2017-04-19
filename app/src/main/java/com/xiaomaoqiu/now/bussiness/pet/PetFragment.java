@@ -14,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -50,6 +51,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     TextView tvSportDone;
     TextView tvSportTarget;
 
+    TextView tv_sleep_time;
+
     String strStart;
     String strEnd;
 
@@ -67,7 +70,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         prog = (CircleProgressBar) rootView.findViewById(R.id.prog_target_done_percentage);
         tvSportDone = (TextView) rootView.findViewById(R.id.tv_sport_done);
         tvSportTarget = (TextView) rootView.findViewById(R.id.tv_sport_target);
-
+        tv_sleep_time= (TextView) rootView.findViewById(R.id.tv_sleep_time);
 
         rootView.setOnClickListener(this);
         rootView.findViewById(R.id.btn_sport_index).setOnClickListener(this);
@@ -118,7 +121,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     if (message.data.size() > 0) {
                         PetSportBean.SportBean bean = message.data.get(0);
                         sportTarget = bean.target_amount;
-                        sportDone = bean.reality_amount/1000;
+                        sportDone = bean.reality_amount;
                         percentage = bean.percentage/1000;
                     } else {
                         ToastUtil.showTost("当天尚无数据~");
@@ -135,6 +138,27 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onFail(Call<PetSportBean> call, Throwable t) {
                 ToastUtil.showTost("获取当天数据失败");
+            }
+        });
+        ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id(),strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
+            @Override
+            public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    if (message.data.size() > 0) {
+                        PetSleepInfoBean.SleepBean bean=message.data.get(0);
+                        double allSleepTime=bean.deep_sleep+bean.light_sleep;
+                        tv_sleep_time.setText("今日休息时间："+allSleepTime+"h");
+                    }
+                }else {
+                    ToastUtil.showTost("获取当天数据失败");
+                }
+            }
+
+            @Override
+            public void onFail(Call<PetSleepInfoBean> call, Throwable t) {
+
             }
         });
     }
