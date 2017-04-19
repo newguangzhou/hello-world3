@@ -105,10 +105,13 @@ public class Constants {
              * 获取设备信息
              */
             public static final String get_info = "device/get_info";
+
+            //发送获取wifi的指令
+            public static final String send_get_wifi_list_cmd="device/send_get_wifi_list_cmd";
             /**
              * 获取wifi列表
              */
-            public static final String get_wifi_list="device/getWifilist";
+            public static final String get_wifi_list="device/get_wifi_list";
             /**
              * 设置homewifi
              */
@@ -133,6 +136,8 @@ public class Constants {
              * 设置sim卡信息
              */
             public static final String set_sim_info = "device/set_sim_info";
+
+
 
         }
 

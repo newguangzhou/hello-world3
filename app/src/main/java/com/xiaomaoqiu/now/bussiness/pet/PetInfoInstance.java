@@ -231,7 +231,7 @@ public class PetInfoInstance {
 
     //更新宠物信息
     public void updatePetInfo(final PetInfoBean petInfoBean,Map<String, String> params) {
-        ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getToken(),
+        ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(),UserInstance.getInstance().getToken(),
                 petInfoBean.pet_id, params
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override

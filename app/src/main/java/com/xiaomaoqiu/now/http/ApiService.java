@@ -196,6 +196,16 @@ public interface ApiService {
     );
 
     /**
+     * 发送获取wifi列表的指令
+     */
+    @GET(Constants.Url.Device.send_get_wifi_list_cmd)
+    Call<BaseBean> sendGetWifiListCmd(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query(("pet_id")) long pet_id
+    );
+
+    /**
      * 获取wifi列表
      */
     @GET(Constants.Url.Device.get_wifi_list)
@@ -328,6 +338,7 @@ public interface ApiService {
     //更新宠物信息
     @GET(Constants.Url.Pet.update_pet_info)
     Call<BaseBean> updatePetInfo(
+            @Query("uid") long uid,
             @Query("token") String token,
             @Query("pet_id") long pet_id,
             @QueryMap Map<String, String> params

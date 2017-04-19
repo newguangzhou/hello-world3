@@ -58,7 +58,7 @@ public class WifiListActivity extends BaseActivity {
 
         initView();
         initData();
-        DeviceInfoInstance.getInstance().getWifiList();
+        DeviceInfoInstance.getInstance().sendGetWifiListCmd();
         EventBus.getDefault().register(this);
     }
 
@@ -80,7 +80,10 @@ public class WifiListActivity extends BaseActivity {
 //                startActivity(intent);
 //                finish();
 ////
-
+                if (TextUtils.isEmpty(wifi_bssid)) {
+                    ToastUtil.showTost("您必须选择一个homewifi");
+                    return;
+                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
@@ -105,10 +108,7 @@ public class WifiListActivity extends BaseActivity {
 
                     }
                 });
-                if (TextUtils.isEmpty(wifi_bssid)) {
-                    ToastUtil.showTost("您必须选择一个homewifi");
-                    return;
-                }
+
 
             }
         });
@@ -143,7 +143,13 @@ public class WifiListActivity extends BaseActivity {
                 if (adapter.mdatas.get(position).Is_homewifi) {
                     wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                     wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
+
+                    for(WifiBean bean:adapter.mdatas){
+                        bean.Is_homewifi=false;
+                    }
                 }
+
+                adapter.notifyDataSetChanged();
             }
         });
 

@@ -55,14 +55,13 @@ public class DeviceInfoInstance {
             bean.iccid = SPUtil.getSimIccid();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
-            if(!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
+            if (!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
                 WifiBean wifiBean = new WifiBean();
                 wifiBean.wifi_ssid = UserInstance.getInstance().wifi_ssid;
                 wifiBean.wifi_bssid = UserInstance.getInstance().wifi_bssid;
                 wifiBean.Is_homewifi = true;
                 instance.wiflist.data.add(wifiBean);
             }
-
 
 
 //            instance.wiflist=SPUtil.getWifiList();
@@ -220,6 +219,34 @@ public class DeviceInfoInstance {
     }
 
 
+    //发送获取wifi列表的命令
+    public void sendGetWifiListCmd() {
+        ApiUtils.getApiService().sendGetWifiListCmd(
+                UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id()
+        ).enqueue(new XMQCallback<BaseBean>() {
+            @Override
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    getWifiList();
+                }
+            }
+
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+
     //获取wifi列表
     public void getWifiList() {
         ApiUtils.getApiService().getWifiList(UserInstance.getInstance().getUid(),
@@ -234,6 +261,13 @@ public class DeviceInfoInstance {
                         wiflist.data = message.data;
 //                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
+                    } else {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        getWifiList();
                     }
                 }
             }

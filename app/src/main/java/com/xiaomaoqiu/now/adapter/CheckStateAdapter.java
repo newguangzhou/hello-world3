@@ -52,7 +52,7 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
                                                public void onClick(View view) {
                                                    onItemClickListener.OnItemClick(view, holder, holder.getAdapterPosition());
                                                    selectedPosition = position; //选择的position赋值给参数，
-                                                   notifyItemChanged(selectedPosition);//刷新当前点击item
+//                                                   notifyItemChanged(selectedPosition);//刷新当前点击item
                                                }
                                            }
 
