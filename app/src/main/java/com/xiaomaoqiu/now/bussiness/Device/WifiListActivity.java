@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.adapter.CheckStateAdapter;
@@ -42,6 +43,7 @@ public class WifiListActivity extends BaseActivity {
 
 
     RecyclerView rv_wifilist;
+    Button bt_refresh;
 
     WifiListBean wifiListBean;
 
@@ -61,15 +63,23 @@ public class WifiListActivity extends BaseActivity {
     }
 
     private void initView() {
+        bt_refresh= (Button) this.findViewById(R.id.bt_refresh);
+        bt_refresh.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DeviceInfoInstance.getInstance().getWifiList();
+            }
+        });
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         setNextView("下一步", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//todo  之后删除
-                Intent intent = new Intent(WifiListActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-//todo  之后删除
+////
+//                Intent intent = new Intent(WifiListActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+////
 
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
@@ -78,10 +88,10 @@ public class WifiListActivity extends BaseActivity {
                 ).enqueue(new XMQCallback<BaseBean>() {
                     @Override
                     public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                        HttpCode ret=HttpCode.valueOf(message.status);
-                        if(ret==EC_SUCCESS){
-                            PetInfoInstance.getInstance().getPackBean().wifi_bssid=wifi_bssid;
-                            PetInfoInstance.getInstance().getPackBean().wifi_ssid=wifi_ssid;
+                        HttpCode ret = HttpCode.valueOf(message.status);
+                        if (ret == EC_SUCCESS) {
+                            PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
+                            PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
                             Intent intent = new Intent(WifiListActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -109,6 +119,7 @@ public class WifiListActivity extends BaseActivity {
 
     String wifi_bssid;//homewifi   mac
     String wifi_ssid;//wifi名称
+
     private void initData() {
 //        //销毁
 //        WifiListBean wifiListBean = new WifiListBean();
@@ -123,15 +134,15 @@ public class WifiListActivity extends BaseActivity {
 //
 //        adapter.notifyDataSetChanged();
 
-        adapter.setOnItemClickListener(new CheckStateAdapter.OnItemClickListener(){
+        adapter.setOnItemClickListener(new CheckStateAdapter.OnItemClickListener() {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
-                adapter.mdatas.get(position).Is_homewifi=!adapter.mdatas.get(position).Is_homewifi;
+                adapter.mdatas.get(position).Is_homewifi = !adapter.mdatas.get(position).Is_homewifi;
 
-                if(adapter.mdatas.get(position).Is_homewifi){
-                    wifi_bssid=adapter.mdatas.get(position).wifi_bssid;
-                    wifi_ssid=adapter.mdatas.get(position).wifi_ssid;
+                if (adapter.mdatas.get(position).Is_homewifi) {
+                    wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
+                    wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
                 }
             }
         });
@@ -141,7 +152,7 @@ public class WifiListActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
         //刷新列表
-        adapter.mdatas=DeviceInfoInstance.getInstance().wiflist.data;
+        adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
         adapter.notifyDataSetChanged();
     }
 

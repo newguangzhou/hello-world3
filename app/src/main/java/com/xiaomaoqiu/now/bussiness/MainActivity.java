@@ -47,7 +47,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 		return 0;
 	}
 
-	//todo 设备状态更新
+	//设备状态更新
 	@Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
 	public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
 //		if(!DeviceInfoInstance.getInstance().isDeviceExist){

@@ -19,6 +19,8 @@ import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 import com.xiaomaoqiu.now.test.TestLocationBean;
 
+import java.util.Map;
+
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -26,6 +28,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by long
@@ -327,13 +330,14 @@ public interface ApiService {
     Call<BaseBean> updatePetInfo(
             @Query("token") String token,
             @Query("pet_id") long pet_id,
-            @Query("description") String description,
-            @Query("weight") String weight,
-            @Query("sex") int sex,
-            @Query("nick") String nick,
-            @Query("birthday") String birthday,
-            @Query("logo_url") String logo_url,
-            @Query("pet_type_id") int pet_type_id
+            @QueryMap Map<String, String> params
+//            @Query("description") String description,
+//            @Query("weight") String weight,
+//            @Query("sex") int sex,
+//            @Query("nick") String nick,
+//            @Query("birthday") String birthday,
+//            @Query("logo_url") String logo_url,
+//            @Query("pet_type_id") int pet_type_id
     );
 
     //找狗模式

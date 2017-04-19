@@ -123,7 +123,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     }
 
 
-    //todo 更新逻辑
+    //是回家还是在运动
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onPetInfoChanged(EventManage.atHomeOrtoSport event) {
 

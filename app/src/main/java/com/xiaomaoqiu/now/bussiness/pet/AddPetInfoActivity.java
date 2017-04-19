@@ -393,7 +393,8 @@ public class AddPetInfoActivity extends BaseActivity {
                                                     //更新头像属性
                                                     String urlLogo = message.file_url;
                                                     modifyBean.logo_url = urlLogo;
-                                                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                                                    //todo 修复之后需要解开
+//                                                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
                                                     break;
 
                                                 default:

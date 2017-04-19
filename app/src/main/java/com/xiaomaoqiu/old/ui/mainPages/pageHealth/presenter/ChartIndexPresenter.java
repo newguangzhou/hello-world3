@@ -1,7 +1,5 @@
 package com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter;
 
-import android.text.TextUtils;
-
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.xiaomaoqiu.now.EventManage;
@@ -22,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -165,7 +162,9 @@ public class ChartIndexPresenter {
     //解析一天的睡眠数据
     void parseSleepToday(List<PetSleepInfoBean.SleepBean> sleepDatas) {
         int days = sleepDatas.size();
-        PetSleepInfoBean.SleepBean todayBean = sleepDatas.get(days - 1);
+        Date date=new Date();
+        PetSleepInfoBean.SleepBean todayBean =timeEqualSleepBean(date,sleepDatas);
+
         todayDeep = todayBean.deep_sleep;
         todayLight = todayBean.light_sleep;
         callback.onSuccessGetWeight(todayDeep, todayLight);
@@ -178,18 +177,26 @@ public class ChartIndexPresenter {
         ArrayList<BarEntry> sleepList = new ArrayList<>();
         ArrayList<Date> dates = DateUtil.getPastDates(WEEK_LENGTH);
 
-        int startIndex = sleepDatas.size() - WEEK_LENGTH;
-        if (startIndex < 0) {
-            startIndex = 0;
-        }
-        for (int i = startIndex; i < sleepDatas.size(); i++) {
+        int startIndex =0;
+        for (int i = startIndex; i < WEEK_LENGTH; i++) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + "日");
-            PetSleepInfoBean.SleepBean bean = sleepDatas.get(i);
+
+            PetSleepInfoBean.SleepBean bean =timeEqualSleepBean(date,sleepDatas);
             sleepList.add(new BarEntry(i - startIndex, new float[]{(float) bean.deep_sleep, (float) bean.light_sleep}));
         }
         callback.onSuccessGetAxis(axisLabels, false);
         callback.onSuccessGetWeekDataSet(sleepList, null);
+    }
+    //获取bean
+    public PetSleepInfoBean.SleepBean timeEqualSleepBean(Date date, List<PetSleepInfoBean.SleepBean> sleeptDatas) {
+        for (PetSleepInfoBean.SleepBean bean : sleeptDatas) {
+            String dateString = bean.date;
+            if (equalDateDay(date, dateString)) {
+                return bean;
+            }
+        }
+        return new PetSleepInfoBean.SleepBean();
     }
 
     //解析一个月
@@ -203,15 +210,12 @@ public class ChartIndexPresenter {
         String secondText = curDate.getMonth() + "月";
         int secondIndex = curDate.getDate();
         callback.onSuccessGetSecAxis(secondText, secondIndex, MONTH_LENGTH);
-        int startIndex = sleepDatas.size() - MONTH_LENGTH;
-        if (startIndex < 0) {
-            startIndex = 0;
-        }
-        for (int i = startIndex; i < sleepDatas.size(); i += intrval) {
+        int startIndex =0;
+        for (int i = startIndex; i < MONTH_LENGTH; i += intrval) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + format);
 //            JSONObject jsday = (JSONObject)jsdata.opt(i);
-            PetSleepInfoBean.SleepBean bean = sleepDatas.get(i);
+            PetSleepInfoBean.SleepBean bean = timeEqualSleepBean(date,sleepDatas);
             float deep = (float) bean.deep_sleep;
             float light = (float) bean.light_sleep;
             deepList.add(new Entry(i - startIndex, (float) bean.deep_sleep));
@@ -260,7 +264,8 @@ public class ChartIndexPresenter {
     //解析当天的运动数据
     void parseSportToday(List<PetSportBean.SportBean> sportDatas) {
         int days = sportDatas.size();
-        PetSportBean.SportBean todayBean = sportDatas.get(days - 1);
+        Date date=new Date();
+        PetSportBean.SportBean todayBean = timeEqualSportBean(date,sportDatas);
         todayDeep = todayBean.target_amount;
         todayLight = todayBean.reality_amount / 1000;
         callback.onSuccessGetWeight(todayDeep, todayLight);
@@ -290,7 +295,7 @@ public class ChartIndexPresenter {
         for (int i = startIndex; i < days; i += intrval) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + format);
-            PetSportBean.SportBean bean = timeEqual(date, sportDatas);
+            PetSportBean.SportBean bean = timeEqualSportBean(date, sportDatas);
             deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
             lightList.add(new Entry(i - startIndex, (float) bean.reality_amount / 1000));
         }
@@ -303,7 +308,7 @@ public class ChartIndexPresenter {
     }
 
     //获取bean
-    public PetSportBean.SportBean timeEqual(Date date, List<PetSportBean.SportBean> sportDatas) {
+    public PetSportBean.SportBean timeEqualSportBean(Date date, List<PetSportBean.SportBean> sportDatas) {
         for (PetSportBean.SportBean bean : sportDatas) {
             String dateString = bean.date;
             if (equalDateDay(date, dateString)) {

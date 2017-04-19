@@ -34,6 +34,8 @@ import com.xiaomaoqiu.pet.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import mbg.bottomcalender.BottomCalenderView;
 import okhttp3.MediaType;
@@ -270,7 +272,9 @@ public class PetInfoActivity extends BaseActivity {
                     String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
                     modifyBean.name = nameBackString;
                     (txt_pet_name).setText(modifyBean.name);
-                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                    Map<String,String> param=new HashMap<>();
+                    param.put("nick",modifyBean.name);
+                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
                 }
 
                 break;
@@ -278,7 +282,9 @@ public class PetInfoActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(modifyBean.weight)) {
                     modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
                     txt_weight.setText(modifyBean.weight + "kg");
-                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                    Map<String,String> param=new HashMap<>();
+                    param.put("weight",modifyBean.weight);
+                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
                 }
 
                 break;
@@ -288,7 +294,9 @@ public class PetInfoActivity extends BaseActivity {
                     modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
-                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                    Map<String,String> param=new HashMap<>();
+                    param.put("description",modifyBean.description);
+                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
                 }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
@@ -358,7 +366,8 @@ public class PetInfoActivity extends BaseActivity {
                                                     //更新头像属性
                                                     String urlLogo = message.file_url;
                                                     modifyBean.logo_url = urlLogo;
-                                                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                                                    //todo 修复之后需要解开
+//                                                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
                                                     break;
 
                                                 default:

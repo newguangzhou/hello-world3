@@ -34,6 +34,7 @@ import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,14 +45,14 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 @SuppressLint("WrongConstant")
-public class FindPetActivity extends BaseActivity implements View.OnClickListener{
+public class FindPetActivity extends BaseActivity implements View.OnClickListener {
     // 地图相关
     MapView mMapView;
     BaiduMap mBaiduMap;
     LocationClient mLocationClient;
 
-    LatLng  mPhoneLocation;
-    LatLng  mPetLocation;
+    LatLng mPhoneLocation;
+    LatLng mPetLocation;
 
     boolean mIsPetFound = false;
 
@@ -63,8 +64,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         EventBus.getDefault().register(this);
     }
 
-    void initView()
-    {
+    void initView() {
         // 初始化地图
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
@@ -76,33 +76,29 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         //开始找狗
         setPetFindMode(1);
         //启动定时器查询宠物位置
-        mMapView.postDelayed(mPetLocateRunnable,1000);
+        mMapView.postDelayed(mPetLocateRunnable, 1000);
     }
 
-    public void onClick(View v)
-    {
-        if(v.getId() == R.id.btn_phone_center)
-        {
-            if(mPhoneLocation != null) {
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_phone_center) {
+            if (mPhoneLocation != null) {
                 MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(mPhoneLocation);
                 mBaiduMap.animateMapStatus(u);
-            }else
-            {
-                Toast.makeText(this,"定位中...",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "定位中...", Toast.LENGTH_LONG).show();
             }
-        }else if(v.getId() == R.id.btn_pet_center)
-        {
-            if(mPetLocation != null) {
+        } else if (v.getId() == R.id.btn_pet_center) {
+            if (mPetLocation != null) {
                 MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(mPetLocation);
                 mBaiduMap.animateMapStatus(u);
-            }else
-            {
-                Toast.makeText(this,"宠物追踪中...",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "宠物追踪中...", Toast.LENGTH_LONG).show();
             }
         }
     }
 
     boolean mIsFirstLocation = true;
+
     class MyLocationListener implements BDLocationListener {
 
         @Override
@@ -117,9 +113,20 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
             mBaiduMap.setMyLocationData(locData);
             mPhoneLocation = new LatLng(location.getLatitude(),
                     location.getLongitude());
-            if(mIsFirstLocation) {
+            if (mIsFirstLocation) {
+//                float f = mBaiduMap.getMaxZoomLevel();//19.0
+//
+////float m = mBaiduMap.getMinZoomLevel();//3.0
+//
+//                MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, f-2);
+//
+//                mBaiduMap.animateMapStatus(u);
+
+
+                float f = mBaiduMap.getMaxZoomLevel();//19.0
+                //float m = mBaiduMap.getMinZoomLevel();//3.0
                 mIsFirstLocation = false;
-                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(mPhoneLocation);
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(mPhoneLocation, f - 2);
                 mBaiduMap.animateMapStatus(u);
             }
         }
@@ -139,7 +146,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         mLocationClient = new LocationClient(this);
         mLocationClient.registerLocationListener(new MyLocationListener());
 
-        LocationClientOption option = new  LocationClientOption();
+        LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
         option.setAddrType("all");// 返回的定位结果包含地址信息,(注意如果想获取关于地址的信息，这里必须进行设置)
         option.setCoorType("bd09ll"); // 设置坐标类型
@@ -153,8 +160,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
     }
 
     //@param mode: 1:开始找狗 2：找到了
-    void setPetFindMode(int mode)
-    {
+    void setPetFindMode(int mode) {
 //        HttpUtil.get2("pet.find", new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -163,7 +169,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
 //            }
 //
 //        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode);
-        ApiUtils.getApiService().findPet( UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(),mode).enqueue(new XMQCallback<BaseBean>() {
+        ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), mode).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
 
@@ -183,7 +189,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         }
     };
 
-   //todo  回调逻辑
+    //宠物信息更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
 //        boolean bFound, double latitude, double longitude
@@ -199,7 +205,7 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         BitmapDescriptor mIconMaker = BitmapDescriptorFactory.fromResource(R.drawable.maker);
         OverlayOptions overlayOptions = new MarkerOptions().position(cenpt)
                 .icon(mIconMaker).zIndex(5);
-        Marker mPetMarker= (Marker) (mBaiduMap.addOverlay(overlayOptions));
+        Marker mPetMarker = (Marker) (mBaiduMap.addOverlay(overlayOptions));
 
         //定义地图状态
         MapStatus mMapStatus = new MapStatus.Builder().target(cenpt).zoom(mBaiduMap.getMapStatus().zoom).build();
@@ -209,17 +215,17 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
         mBaiduMap.animateMapStatus(mMapStatusUpdate);
         queryLocationDesc(cenpt);
 
-        Toast.makeText(this,"宠物找到了",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "宠物找到了", Toast.LENGTH_LONG).show();
     }
 
-    void queryLocationDesc(LatLng loc)
-    {
+    void queryLocationDesc(LatLng loc) {
         OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
             // 地理编码查询结果回调函数
             @Override
             public void onGetGeoCodeResult(GeoCodeResult result) {
             }
-                // 反地理编码查询结果回调函数
+
+            // 反地理编码查询结果回调函数
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
                 TextView tvLoc = (TextView) findViewById(R.id.tv_location);
@@ -233,11 +239,13 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            if(!mIsPetFound) return false;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!mIsPetFound) {
+                ToastUtil.showTost("宠物还未发现，请稍等……");
+                return false;
+
+            }
         }
 
         return super.onKeyDown(keyCode, event);

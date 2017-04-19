@@ -135,7 +135,6 @@ public class InitBindDeviceActivity extends BaseActivity {
             finish();
             return;
         }
-        //todo 进入主页
         Intent intent=new Intent(InitBindDeviceActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         overridePendingTransition(0, 0);

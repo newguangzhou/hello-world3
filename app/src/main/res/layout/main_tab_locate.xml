@@ -122,6 +122,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
             android:src="@drawable/btn_location_playing_selector"
+            android:layout_alignParentBottom="true"
             android:id="@+id/btn_playing_pet"/>
 
         <!--<ImageView-->

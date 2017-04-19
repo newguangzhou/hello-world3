@@ -68,7 +68,6 @@ public class SplashActivity extends BaseActivity {
             return;
         }
 
-        //todo 判断是否有homewifi
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent = new Intent(SplashActivity.this, WifiListActivity.class);
@@ -76,7 +75,6 @@ public class SplashActivity extends BaseActivity {
         }
 
 
-        //todo 都有的话就直接跳转到主页
         intent.setClass(SplashActivity.this, MainActivity.class);
         return;
     }

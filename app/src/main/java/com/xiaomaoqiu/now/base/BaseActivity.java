@@ -14,7 +14,6 @@ import com.xiaomaoqiu.pet.R;
 /**
  * Created by Administrator on 2015/6/17.
  */
-//todo 类----待重构
 public class BaseActivity extends Activity {
     private static String TAG = "BaseActivity";
     private ViewGroup m_titleView;

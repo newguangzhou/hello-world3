@@ -1,7 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,12 @@ import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
-import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
-import com.xiaomaoqiu.now.view.ContactServiceDialog;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
+import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
-import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;
+import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.ContactServiceDialog;
+import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
+import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.pet.R;
 
 /**
@@ -97,7 +96,7 @@ public class MeFrament extends BaseFragment {
                     Intent intent = new Intent(getActivity(), DeviceActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(getActivity(), BindDeviceActivity.class);
+                    Intent intent = new Intent(getActivity(), InitBindDeviceActivity.class);
                     startActivity(intent);
                 }
 

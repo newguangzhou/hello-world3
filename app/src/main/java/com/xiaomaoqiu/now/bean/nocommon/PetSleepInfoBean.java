@@ -14,6 +14,7 @@ public class PetSleepInfoBean extends BaseBean {
     public static class SleepBean{
         public double deep_sleep;
         public double light_sleep;
+        public String date;
 
 
     }

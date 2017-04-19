@@ -40,7 +40,6 @@ public class DeviceActivity extends BaseActivity {
                 finish();
             }
         });
-        //todo 设备状态更新
         showMessageOnUI();
         findViewById(R.id.tv_unbind).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +67,6 @@ public class DeviceActivity extends BaseActivity {
         EventBus.getDefault().register(this);
     }
 
-    //todo 设备更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         showMessageOnUI();

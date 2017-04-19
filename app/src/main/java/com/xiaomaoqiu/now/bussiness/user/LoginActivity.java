@@ -8,12 +8,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,12 +24,11 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.util.SPUtil;
-
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
-import com.xiaomaoqiu.now.bussiness.Device.BindDeviceActivity;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -40,7 +42,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     EditText m_editVerifyCode;
     private ProgressDialog mProgressBar;
     private View login_btn_sendVerify;//发送验证码按钮
-    private View login_btn_login;//登录按钮
+    private Button login_btn_login;//登录按钮
     private View btn_contact_service;//联系客服
 
     private LoginPresenter loginPresenter;
@@ -76,11 +78,31 @@ public class LoginActivity extends BaseActivity implements LoginView {
         m_editVerifyCode = (EditText) findViewById(R.id.login_edit_verify);
         login_btn_sendVerify = findViewById(R.id.login_btn_sendVerify);
 
-        login_btn_login = findViewById(R.id.login_btn_login);
+        login_btn_login = (Button) findViewById(R.id.login_btn_login);
         btn_contact_service = findViewById(R.id.btn_contact_service);
     }
 
     void initListener() {
+        m_editVerifyCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 6) {
+                    login_btn_login.setEnabled(true);
+                }else{
+                    login_btn_login.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         login_btn_sendVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +131,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
             }
         });
+
         btn_contact_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,20 +199,20 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void next(EventManage.getUserInfoEvent event) {
         Intent intent = new Intent();
-        if(!(UserInstance.getInstance().pet_id>0)){
+        if (!(UserInstance.getInstance().pet_id > 0)) {
             intent.setClass(LoginActivity.this, AddPetInfoActivity.class);
             startActivity(intent);
             finish();
             return;
         }
         if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
-            intent.setClass(LoginActivity.this, BindDeviceActivity.class);
+            intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
             startActivity(intent);
             finish();
             return;
         }
 
-        if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)){
+        if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent.setClass(LoginActivity.this, WifiListActivity.class);
             startActivity(intent);
             finish();
@@ -197,8 +220,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
 
         EventBus.getDefault().unregister(this);
-
-
 
 
     }

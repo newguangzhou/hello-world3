@@ -21,6 +21,7 @@ import com.xiaomaoqiu.now.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Map;
 import java.util.Scanner;
 
 import retrofit2.Call;
@@ -229,10 +230,9 @@ public class PetInfoInstance {
     }
 
     //更新宠物信息
-    public void updatePetInfo(final PetInfoBean petInfoBean) {
+    public void updatePetInfo(final PetInfoBean petInfoBean,Map<String, String> params) {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getToken(),
-                petInfoBean.pet_id, petInfoBean.description, petInfoBean.weight, petInfoBean.sex,
-                petInfoBean.nick, petInfoBean.birthday, petInfoBean.logo_url, petInfoBean.pet_type_id
+                petInfoBean.pet_id, params
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {

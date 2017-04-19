@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_selected="true"
-        android:drawable="@color/white"
+        android:drawable="@color/wifilist_background_unselected"
         />
 
     <item android:state_selected="false"
-        android:drawable="@color/black"
+        android:drawable="@color/wifilist_background_selected"
         />
 
 
