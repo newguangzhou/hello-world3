@@ -11,6 +11,7 @@ import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
@@ -106,7 +107,9 @@ public class MeFrament extends BaseFragment {
         root.findViewById(R.id.btn_me_home_wifi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), WifiListActivity.class);
+                startActivity(intent);
             }
         });
     }

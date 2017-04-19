@@ -39,7 +39,7 @@ public class LocatePresenter {
             locateView.onShowPhoneLoc();
         }else if(PetInfoInstance.getInstance().getPet_id() != -1) {
             //宠物在家，查询宠物位置
-            PetInfoInstance.getInstance().getPetLocation();
+//            PetInfoInstance.getInstance().getPetLocation();
         }
         PetInfoInstance.getInstance().getPetLocation();
 //        queryLightStatus();

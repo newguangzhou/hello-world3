@@ -109,28 +109,7 @@ public class LoginPresenter {
                             UserInstance.getInstance().saveLoginState(message, phone);
 
 
-                            //获取用户基本信息
-                            ApiUtils.getApiService().getUserInfo(UserInstance.getInstance().getUid(),
-                                    UserInstance.getInstance().getToken()
-                            ).enqueue(new XMQCallback<UserBean>() {
-                                @Override
-                                public void onSuccess(Response<UserBean> response, UserBean message) {
-                                    HttpCode ret = HttpCode.valueOf(message.status);
-                                    switch (ret) {
-                                        case EC_SUCCESS:
-                                            UserInstance.getInstance().saveUserInfo(message);
-                                            EventBus.getDefault().post(new EventManage.getUserInfoEvent());
-                                            break;
-                                    }
-
-                                }
-
-                                @Override
-                                public void onFail(Call<UserBean> call, Throwable t) {
-
-                                }
-                            });
-
+                           UserInstance.getInstance().getUserInfo();
 
                             break;
                         case EC_INVALID_VERIFY_CODE:

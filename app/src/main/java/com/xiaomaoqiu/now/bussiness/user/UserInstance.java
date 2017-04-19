@@ -2,9 +2,18 @@ package com.xiaomaoqiu.now.bussiness.user;
 
 import android.text.TextUtils;
 
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
 import com.xiaomaoqiu.now.bean.nocommon.UserBean;
+import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.HttpCode;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.SPUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by long on 17/4/7.
@@ -49,6 +58,32 @@ public class UserInstance {
 
     public String wifi_ssid;
 
+
+    //获取用户基本信息
+    public void getUserInfo(){
+        //获取用户基本信息
+        ApiUtils.getApiService().getUserInfo(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken()
+        ).enqueue(new XMQCallback<UserBean>() {
+            @Override
+            public void onSuccess(Response<UserBean> response, UserBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        UserInstance.getInstance().saveUserInfo(message);
+                        break;
+                }
+                EventBus.getDefault().post(new EventManage.getUserInfoEvent());
+
+            }
+
+            @Override
+            public void onFail(Call<UserBean> call, Throwable t) {
+                EventBus.getDefault().post(new EventManage.getUserInfoEvent());
+            }
+        });
+
+    }
 
     public void saveLoginState(LoginBean message, String strPhone) {
         m_bLogin = true;

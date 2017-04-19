@@ -37,7 +37,7 @@ public class EventManage {
     }
 
     //用户信息获取成功
-    public static class getUserInfoEvent{
+    public static class getUserInfoEvent {
 
     }
 
