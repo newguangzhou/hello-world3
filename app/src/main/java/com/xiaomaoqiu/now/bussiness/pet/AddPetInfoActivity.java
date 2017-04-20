@@ -86,7 +86,7 @@ public class AddPetInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)) {
+                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)||TextUtils.isEmpty(modifyBean.description)) {
                     ToastUtil.showTost("信息需要完整");
                     return;
                 }
