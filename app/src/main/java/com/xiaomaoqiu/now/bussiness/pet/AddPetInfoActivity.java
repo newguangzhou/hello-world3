@@ -163,8 +163,10 @@ public class AddPetInfoActivity extends BaseActivity {
 
         ((ToggleButton) findViewById(R.id.chk_gender)).setChecked(modifyBean.sex == Constants.Female);
         if (modifyBean.sex == Constants.Female) {
+            modifyBean.sex=Constants.Female;
             ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_female);
         } else {
+            modifyBean.sex=Constants.Male;
             ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_male);
         }
 

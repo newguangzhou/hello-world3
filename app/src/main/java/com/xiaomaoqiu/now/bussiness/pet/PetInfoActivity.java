@@ -154,9 +154,11 @@ public class PetInfoActivity extends BaseActivity {
 
         ((ToggleButton) findViewById(R.id.chk_gender)).setChecked(modifyBean.sex == Constants.Female);
         if (modifyBean.sex == Constants.Female) {
-            ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_female);
+            modifyBean.sex=Constants.Female;
+                    ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_female);
         } else {
             ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_male);
+            modifyBean.sex=Constants.Male;
         }
 
         txt_birthday = (TextView) findViewById(R.id.txt_birthday);

@@ -279,14 +279,15 @@ public class DeviceInfoInstance {
 //                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     } else {
-                        if((count++)<5) {
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            getWifiList();
-                        }
+                        EventBus.getDefault().post(new EventManage.wifiListError());
+//                        if((count++)<5) {
+//                            try {
+//                                Thread.sleep(2000);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                            getWifiList();
+//                        }
                     }
                 }
             }
