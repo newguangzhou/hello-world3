@@ -317,7 +317,7 @@ public class PetInfoInstance {
             }
         });
 
-        TestInstance.getTestInstance().getTestLocation();
+//        TestInstance.getTestInstance().getTestLocation();
 
     }
 

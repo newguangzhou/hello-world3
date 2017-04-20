@@ -36,7 +36,7 @@ public class PetAppLike extends DefaultApplicationLike {
         super.onCreate();
         mcontext=getApplication();
 
-        environment=Environment.Debug;
+        environment=Environment.Release;
 
         Fresco.initialize(mcontext);
 
