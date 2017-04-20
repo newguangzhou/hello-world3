@@ -56,9 +56,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     String strStart;
     String strEnd;
 
-    int sportTarget = 1000;
-    int sportDone = 100;
-    double percentage = 100;
+    int sportTarget = 0;
+    int sportDone = 0;
+    double percentage = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,7 +104,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
         strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
         strStart = strEnd;
-        prog.setProgress(100);
+        prog.setProgress(0);
     }
 
 
@@ -168,7 +168,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     public void todaySportData(EventManage.TodaySportData event){
 
         sportTarget = event.sportBean.target_amount;
-        sportDone = event.sportBean.reality_amount/1000;
+        sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage/1000;
         prog.setProgress((int) percentage);
         tvSportDone.setText(String.format("已消耗%d卡", sportDone));

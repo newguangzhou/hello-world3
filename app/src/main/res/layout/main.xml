@@ -30,6 +30,7 @@
 				android:layout_centerVertical="true"
 				android:layout_alignParentRight="true"
 				android:layout_marginRight="16dp"
+				android:clickable="true"
 				android:src="@drawable/battery100"/>
 
 		</RelativeLayout>

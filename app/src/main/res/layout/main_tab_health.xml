@@ -17,7 +17,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="16dp"
                 android:textSize="16sp"
-                android:gravity="right"
+                android:gravity="center"
                 android:textColor="@color/total_color_7"
                 android:text="今日活动"/>
 
@@ -296,7 +296,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android_custom:hide_dialogback="#59595757"
-        android_custom:back_paddingTop="25dp"/>
+     />
 
 
 </RelativeLayout>

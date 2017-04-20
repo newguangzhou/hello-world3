@@ -187,6 +187,9 @@ public class PetInfoInstance {
                     case EC_INVALID_ARGS:
                         ToastUtil.showTost("请填写完整信息");
                         break;
+                    case EC_ALREADY_FAV:
+                        ToastUtil.showTost("已绑定！");
+                        break;
                 }
             }
 

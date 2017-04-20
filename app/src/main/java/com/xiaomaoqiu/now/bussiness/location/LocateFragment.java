@@ -139,8 +139,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
             }
-
-        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+//todo 修改头像之后解开
+//        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
 
     }
 //

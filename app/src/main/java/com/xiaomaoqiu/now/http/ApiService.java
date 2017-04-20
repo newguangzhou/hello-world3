@@ -191,7 +191,7 @@ public interface ApiService {
     @GET(Constants.Url.Device.add_device_info)
     Call<BaseBean> addDeviceInfo(@Query("uid") long uid,
                                  @Query("token") String token,
-                                 @Query("device_imei") String imei,
+                                 @Query("imei") String imei,
                                  @Query("device_name") String deviceName
     );
 

@@ -193,10 +193,9 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/go_sport_head"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:scaleType="fitXY"
@@ -208,7 +207,7 @@
 
         fresco:failureImage="@drawable/tab_health_head_defult"
         fresco:failureImageScaleType="centerInside"
-        fresco:roundedCornerRadius="35dp"
+        fresco:roundedCornerRadius="20dp"
         />
 
 

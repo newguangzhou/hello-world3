@@ -57,7 +57,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     Intent intent = new Intent(PetAppLike.mcontext, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     PetAppLike.mcontext.startActivity(intent);
-                    ToastUtil.showTost("登录失效，请重新登录");
+                    ToastUtil.showTost("身份过期，请重新登录");
                     return;
                 }
                 //如果宠物不存在了，直接退到添加宠物页面

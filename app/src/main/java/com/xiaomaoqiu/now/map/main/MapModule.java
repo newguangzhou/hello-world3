@@ -235,11 +235,11 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
 
 
         mPetMarker.setPosition(desLatLng);
-        if (MODE_FINDED_PET >= mMode) {
+//        if (MODE_FINDED_PET >= mMode) {
             mPetMarker.setVisible(true);
-        } else {
-            mPetMarker.setVisible(false);
-        }
+//        } else {
+//            mPetMarker.setVisible(false);
+//        }
         MapLocationParser.queryLocationDesc(desLatLng, addressListener);
         if (MODE_FINDING_PET == mMode) {
             setPetPosWithFindMode();

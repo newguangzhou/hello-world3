@@ -39,7 +39,9 @@ public class MapPetAvaterView extends LinearLayout  {
 //            url=petInfo.getHeaderImg();
 //        }
         url= PetInfoInstance.getInstance().packBean.logo_url;
-            setAvaterUrl(url);
+
+        //todo 修复头像之后解开
+//            setAvaterUrl(url);
 
     }
 

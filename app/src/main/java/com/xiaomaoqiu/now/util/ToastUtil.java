@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.now.util;
 
 import android.annotation.SuppressLint;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.PetAppLike;
@@ -15,5 +16,12 @@ public class ToastUtil {
     }
     public static void showNetError(){
         Toast.makeText(PetAppLike.mcontext,"网络错误，请稍后重试",Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showAtCenter(String msg){
+        Toast toast= Toast.makeText(PetAppLike.mcontext,
+                "Toast Here", Toast.LENGTH_SHORT);
+      toast.setGravity(Gravity.CENTER, 0, 0);
+       toast.show();
     }
 }
