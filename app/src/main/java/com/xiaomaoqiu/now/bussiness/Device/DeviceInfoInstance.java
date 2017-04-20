@@ -187,7 +187,7 @@ public class DeviceInfoInstance {
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         break;
                     case EC_ALREADY_FAV:
-                        ToastUtil.showAtCenter("此设备已经被别人绑定，请联系客服");
+                        ToastUtil.showAtCenter("设备已被绑定");
                         break;
                 }
 //                if (ret == HttpCode.EC_SUCCESS) {

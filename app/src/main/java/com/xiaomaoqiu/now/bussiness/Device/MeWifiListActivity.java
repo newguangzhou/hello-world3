@@ -14,7 +14,6 @@ import com.xiaomaoqiu.now.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
-import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -28,19 +27,16 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Response;
 
-import static com.tencent.bugly.crashreport.CrashReport.testJavaCrash;
 import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
 
 /**
  * Created by long on 2017/4/12.
  */
 @SuppressLint("WrongConstant")
-public class WifiListActivity extends BaseActivity {
+public class MeWifiListActivity extends BaseActivity {
 
     View ll_loading;
     RecyclerView rv_wifilist;
@@ -50,6 +46,7 @@ public class WifiListActivity extends BaseActivity {
 
 
     CheckStateAdapter adapter;
+    public Object lock=new Object();
 
 
     @Override
@@ -76,11 +73,11 @@ public class WifiListActivity extends BaseActivity {
             }
         });
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
-        setNextView("下一步", new View.OnClickListener() {
+        setNextView("保存", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 ////
-//                Intent intent = new Intent(WifiListActivity.this, MainActivity.class);
+//                Intent intent = new Intent(InitWifiListActivity.this, MainActivity.class);
 //                startActivity(intent);
 //                finish();
 ////
@@ -99,8 +96,8 @@ public class WifiListActivity extends BaseActivity {
                         if (ret == EC_SUCCESS) {
                             PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
                             PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
-                            Intent intent = new Intent(WifiListActivity.this, MainActivity.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(MeWifiListActivity.this, MainActivity.class);
+//                            startActivity(intent);
                             finish();
                         }
 
@@ -142,20 +139,28 @@ public class WifiListActivity extends BaseActivity {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
-                adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi==0?1:0;
-
-                if (adapter.mdatas.get(position).is_homewifi==1) {
-                    wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
-                    wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
-
-                    for (WifiBean bean : adapter.mdatas) {
-                        if(!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
-                            bean.is_homewifi = 0;
-                        }
-                    }
+                if(position>adapter.mdatas.size()){
+                    return;
                 }
 
-                adapter.notifyDataSetChanged();
+                synchronized (lock) {
+                    wifi_bssid="";
+                    wifi_ssid="";
+                    adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
+
+                    if (adapter.mdatas.get(position).is_homewifi == 1) {
+                        wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
+                        wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
+
+                        for (WifiBean bean : adapter.mdatas) {
+                            if (!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
+                                bean.is_homewifi = 0;
+                            }
+                        }
+                    }
+
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -166,10 +171,11 @@ public class WifiListActivity extends BaseActivity {
         bt_refresh.setVisibility(View.GONE);
         tv_tip.setVisibility(View.VISIBLE);
         ll_loading.setVisibility(View.GONE);
-
-        //刷新列表
-        adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
-        adapter.notifyDataSetChanged();
+        synchronized (lock) {
+            //刷新列表
+            adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)

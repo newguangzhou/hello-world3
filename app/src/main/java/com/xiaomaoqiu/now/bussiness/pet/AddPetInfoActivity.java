@@ -21,7 +21,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
-import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
+import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -74,7 +74,7 @@ public class AddPetInfoActivity extends BaseActivity {
     private TextView txt_variety;
 
 
-    final PetInfoBean modifyBean = PetInfoInstance.getInstance().packBean;
+     PetInfoBean modifyBean = PetInfoInstance.getInstance().packBean;
 
 
     @Override
@@ -85,6 +85,11 @@ public class AddPetInfoActivity extends BaseActivity {
         setNextView("下一步", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)) {
+                    ToastUtil.showTost("信息需要完整");
+                    return;
+                }
 
                 PetInfoInstance.getInstance().addPetInfo(modifyBean);
             }
@@ -147,9 +152,12 @@ public class AddPetInfoActivity extends BaseActivity {
     }
 
     private void initPetInfo() {
-        txt_pet_name=(TextView) findViewById(R.id.txt_pet_name);
-        if(!TextUtils.isEmpty(modifyBean.name)) {
+        modifyBean = PetInfoInstance.getInstance().packBean;
+        txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
+        if (!TextUtils.isEmpty(modifyBean.name)) {
             (txt_pet_name).setText(modifyBean.name);
+        }else{
+            modifyBean.name="旺财";
         }
 
 
@@ -160,21 +168,20 @@ public class AddPetInfoActivity extends BaseActivity {
             ((ImageView) findViewById(R.id.img_pet_sex)).setImageResource(R.drawable.petinfo_sex_male);
         }
 
-        txt_birthday=(TextView) findViewById(R.id.txt_birthday);
+        txt_birthday = (TextView) findViewById(R.id.txt_birthday);
         txt_birthday.setText(modifyBean.birthday);
-        txt_weight=(TextView) findViewById(R.id.txt_weight);
+        txt_weight = (TextView) findViewById(R.id.txt_weight);
         if (!TextUtils.isEmpty(modifyBean.weight)) {
 
             txt_weight.setText(modifyBean.weight + "kg");
         }
 
-        txt_variety= (TextView) findViewById(R.id.txt_variety);
+        txt_variety = (TextView) findViewById(R.id.txt_variety);
 
 
         SimpleDraweeView imgLogo = (SimpleDraweeView) findViewById(R.id.img_pet_avatar);
         Uri uri = Uri.parse(modifyBean.logo_url);
         imgLogo.setImageURI(uri);
-//        AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfoBean.logo_url, this);
 
         ((TextView) findViewById(R.id.txt_variety)).setText(modifyBean.description);
 
@@ -197,20 +204,20 @@ public class AddPetInfoActivity extends BaseActivity {
     public void addPetInfoSuccess(EventManage.addPetInfoSuccess event) {
         EventBus.getDefault().unregister(this);
         Intent intent;
-        if(TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
-             intent = new Intent(AddPetInfoActivity.this, InitBindDeviceActivity.class);
+        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
+            intent = new Intent(AddPetInfoActivity.this, InitBindDeviceActivity.class);
             startActivity(intent);
             finish();
             return;
         }
 
-        if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)){
-            intent=new Intent(AddPetInfoActivity.this, WifiListActivity.class);
+        if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
+            intent = new Intent(AddPetInfoActivity.this, InitWifiListActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-        intent=new Intent(AddPetInfoActivity.this, MainActivity.class);
+        intent = new Intent(AddPetInfoActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
 
@@ -237,14 +244,13 @@ public class AddPetInfoActivity extends BaseActivity {
     private BottomCalenderView bottomCalenderView;
 
     private void modifyBirthday() {
-        PetInfoInstance.MyDate mPetBirthDay = modifyBean.dateFormat_birthday;
         if (bottomCalenderView == null) {
-            bottomCalenderView = new BottomCalenderView(this, mPetBirthDay.year, mPetBirthDay.month, mPetBirthDay.day, new BottomCalenderView.OnDatePickedListener() {
+            bottomCalenderView = new BottomCalenderView(this, 2000, 1, 1, new BottomCalenderView.OnDatePickedListener() {
                 @Override
                 public void onDatePicked(int year, int month, int day) {
                     PetInfoInstance.MyDate tmpDateFormatBirthday = new PetInfoInstance.MyDate(year, month, day);
-                    modifyBean.dateFormat_birthday=tmpDateFormatBirthday;
-                    modifyBean.birthday=tmpDateFormatBirthday.toString();
+                    modifyBean.dateFormat_birthday = tmpDateFormatBirthday;
+                    modifyBean.birthday = tmpDateFormatBirthday.toString();
                     txt_birthday.setText(modifyBean.birthday);
                 }
             }, null);
@@ -307,7 +313,7 @@ public class AddPetInfoActivity extends BaseActivity {
             case REQ_CODE_NAME:
                 String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
                 modifyBean.name = nameBackString;
-                if(!TextUtils.isEmpty(modifyBean.name)) {
+                if (!TextUtils.isEmpty(modifyBean.name)) {
                     (txt_pet_name).setText(modifyBean.name);
                 }
                 break;
@@ -322,7 +328,7 @@ public class AddPetInfoActivity extends BaseActivity {
             case REQ_CODE_INTRO:
                 modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
-                if(!TextUtils.isEmpty(modifyBean.description)){
+                if (!TextUtils.isEmpty(modifyBean.description)) {
                     txt_variety.setText(modifyBean.description);
                 }
                 break;

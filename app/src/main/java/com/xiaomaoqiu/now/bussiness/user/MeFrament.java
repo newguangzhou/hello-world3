@@ -11,9 +11,9 @@ import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
-import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
+import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
+import com.xiaomaoqiu.now.bussiness.ShopCityActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
-import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
@@ -86,7 +86,10 @@ public class MeFrament extends BaseFragment {
 //                Uri uri = Uri.parse(getString(R.string.url_mall));
 //                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 //                startActivity(intent);
-                ToastUtil.showTost("暂时尚未开放商城功能，敬请期待");
+                Intent intent=new Intent(getActivity(), ShopCityActivity.class);
+                intent.putExtra("web_url","http://www.xiaomaoqiu.com/wechat_shop.html");
+                startActivity(intent);
+//                ToastUtil.showTost("暂时尚未开放商城功能，敬请期待");
             }
         });
 
@@ -108,7 +111,7 @@ public class MeFrament extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-                intent.setClass(getActivity(), WifiListActivity.class);
+                intent.setClass(getActivity(), MeWifiListActivity.class);
                 startActivity(intent);
             }
         });

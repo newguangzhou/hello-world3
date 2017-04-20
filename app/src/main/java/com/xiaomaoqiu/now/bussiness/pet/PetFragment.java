@@ -34,6 +34,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -149,7 +150,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     if (message.data.size() > 0) {
                         PetSleepInfoBean.SleepBean bean=message.data.get(0);
                         double allSleepTime=bean.deep_sleep+bean.light_sleep;
-                        tv_sleep_time.setText("今日休息时间："+allSleepTime+"h");
+                        DecimalFormat df = new DecimalFormat("0.00");//格式化
+                        String sleepTimeString  = df.format(allSleepTime);
+                        tv_sleep_time.setText("今日休息时间："+sleepTimeString +"h");
                     }
                 }else {
                     ToastUtil.showTost("获取当天数据失败");

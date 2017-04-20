@@ -14,7 +14,11 @@ import android.widget.Toast;
 import com.baidu.mapapi.map.MapView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.IMapCallBack;
 import com.xiaomaoqiu.now.map.main.MapModule;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
@@ -27,6 +31,9 @@ import com.xiaomaoqiu.pet.R;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 
 /**
@@ -199,6 +206,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
                     mFindPetView.setSelected(true);
                     mFindPetView.setEnabled(false);
                     if (null != mMapMpdule) {
@@ -207,12 +216,42 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     if (null != mPresenter) {
                         mPresenter.queryPetLocation(true);
                     }
+
+                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<BaseBean>() {
+                        @Override
+                        public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
+                        }
+
+                        @Override
+                        public void onFail(Call<BaseBean> call, Throwable t) {
+
+                        }
+                    });
                 }
             });
         } else {
             mMapMpdule.onCloseFindPetMode();
             mFindPetView.setSelected(false);
-            new DialogToast(getContext(), "已关闭紧急追踪模式。", "确定", null);
+            new DialogToast(getContext(), "已关闭紧急追踪模式。", "确定", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<BaseBean>() {
+                        @Override
+                        public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
+                        }
+
+                        @Override
+                        public void onFail(Call<BaseBean> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+            });
+
         }
     }
 

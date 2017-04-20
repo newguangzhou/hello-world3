@@ -36,18 +36,17 @@ public class PetAppLike extends DefaultApplicationLike {
         super.onCreate();
         mcontext=getApplication();
 
-        environment=Environment.Release;
+        environment=Environment.Debug;
 
         Fresco.initialize(mcontext);
 
 
-//         初始化百度地图SDK
-        SDKInitializer.initialize(mcontext);
+
 
 
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         // 调试时，将第三个参数改为true
-        Bugly.init(getApplication(), "61e9af8769", environment.bugly_log);
+        Bugly.init(getApplication(), "5eb6432b7a", environment.bugly_log);
 
 
 

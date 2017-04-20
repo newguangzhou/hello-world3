@@ -6,11 +6,12 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.WindowManager;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
-import com.xiaomaoqiu.now.bussiness.Device.WifiListActivity;
+import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -39,15 +40,37 @@ public class SplashActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-        EventBus.getDefault().register(this);
+        //         初始化百度地图SDK
+        SDKInitializer.initialize(PetAppLike.mcontext);
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         toWhere();//判断跳转逻辑
+    }
+
+    //判断跳转逻辑
+    void toWhere() {
+        if (!SPUtil.getLoginStatus()) {
+
+            PetAppLike.mainHandler = new Handler(getMainLooper());
+            PetAppLike.mainHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent();
+                    intent.setClass(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 1000);
+            return;
+        }
+        EventBus.getDefault().register(this);
+        //获取基本信息
+        UserInstance.getInstance().getUserInfo();
     }
 
     //网络获取用户信息成功
@@ -73,7 +96,7 @@ public class SplashActivity extends BaseActivity {
         }
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
-            intent.setClass(SplashActivity.this, WifiListActivity.class);
+            intent.setClass(SplashActivity.this, InitWifiListActivity.class);
             startActivity(intent);
             finish();
             return;
@@ -85,46 +108,6 @@ public class SplashActivity extends BaseActivity {
     }
 
 
-    //判断跳转逻辑
-    void toWhere() {
-
-        if (!SPUtil.getLoginStatus()) {
-
-            PetAppLike.mainHandler = new Handler(getMainLooper());
-            PetAppLike.mainHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent();
-                    intent.setClass(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, 1000);
-
-        }
-
-        //获取基本信息
-        UserInstance.getInstance().getUserInfo();
-
-//        if (!(UserInstance.getInstance().pet_id > 0)) {
-//            intent.setClass(SplashActivity.this, AddPetInfoActivity.class);
-//            return;
-//        }
-//        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
-//            intent.setClass(SplashActivity.this, InitBindDeviceActivity.class);
-//            return;
-//        }
-//
-//
-//        if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
-//            intent = new Intent(SplashActivity.this, WifiListActivity.class);
-//            return;
-//        }
-//
-//
-//        intent.setClass(SplashActivity.this, MainActivity.class);
-//        return;
-    }
 
     @Override
     protected void onDestroy() {

@@ -76,6 +76,7 @@
 
         <activity android:name="com.xiaomaoqiu.now.bussiness.SplashActivity"
             android:theme="@style/Appwelcome"
+            android:alwaysRetainTaskState="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -112,10 +113,13 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.xiaomaoqiu.now.bussiness.Device.WifiListActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
+        <activity
+            android:name="com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity"
             android:label="@string/zxing"
@@ -166,6 +170,7 @@
         <activity
             android:name="com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />
+
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity"
             android:theme="@android:style/Theme.NoTitleBar"
@@ -174,6 +179,9 @@
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.FindPetActivity"
             android:label="@string/pet_finding"></activity>
+
+
+        <activity android:name="com.xiaomaoqiu.now.bussiness.ShopCityActivity"/>
     </application>
 
 </manifest>

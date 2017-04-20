@@ -240,7 +240,7 @@ public interface ApiService {
     Call<BaseBean> removeDeviceInfo(
             @Query("uid") long uid,
             @Query("token") String token,
-            @Query("device_imei") String imei
+            @Query("imei") String imei
     );
 
 
@@ -341,14 +341,13 @@ public interface ApiService {
             @Query("uid") long uid,
             @Query("token") String token,
             @Query("pet_id") long pet_id,
-            @QueryMap Map<String, String> params
-//            @Query("description") String description,
-//            @Query("weight") String weight,
-//            @Query("sex") int sex,
-//            @Query("nick") String nick,
-//            @Query("birthday") String birthday,
-//            @Query("logo_url") String logo_url,
-//            @Query("pet_type_id") int pet_type_id
+            @Query("description") String description,
+            @Query("weight") String weight,
+            @Query("sex") int sex,
+            @Query("nick") String nick,
+            @Query("birthday") String birthday,
+            @Query("logo_url") String logo_url,
+            @Query("pet_type_id") int pet_type_id
     );
 
     //找狗模式

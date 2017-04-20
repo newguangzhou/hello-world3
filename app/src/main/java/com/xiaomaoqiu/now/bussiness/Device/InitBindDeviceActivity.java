@@ -11,6 +11,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
 import com.xiaomaoqiu.pet.R;
@@ -53,6 +54,15 @@ public class InitBindDeviceActivity extends BaseActivity {
     }
 
     private void initView(){
+        View btnGoBack = findViewById(R.id.btn_go_back);
+        btnGoBack.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(InitBindDeviceActivity.this, PetInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         inputImei=(EditText)findViewById(R.id.bind_device_input_imei);
         sweepBt=(Button)findViewById(R.id.bind_device_button);
         sweepBt.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +140,7 @@ public class InitBindDeviceActivity extends BaseActivity {
     public  void toDeviceActivity(EventManage.bindDeviceSuccess event){
         EventBus.getDefault().unregister(this);
         if(TextUtils.isEmpty(PetInfoInstance.getInstance().packBean.wifi_bssid)) {
-            Intent intent = new Intent(this, WifiListActivity.class);
+            Intent intent = new Intent(this, InitWifiListActivity.class);
             startActivity(intent);
             finish();
             return;

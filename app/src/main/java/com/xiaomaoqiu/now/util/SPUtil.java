@@ -362,7 +362,7 @@ public class SPUtil {
     }
 
     private static long getLong(String key) {
-        return getSP().getLong(key, 0);
+        return getSP().getLong(key, -1);
     }
 
     private static String getString(String key, String defaultValue) {

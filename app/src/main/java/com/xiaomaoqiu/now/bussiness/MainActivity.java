@@ -116,6 +116,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 					mPetFragment =new PetFragment();
 					transaction.add(R.id.fragment_container, mPetFragment);
 				}
+				batteryView.setVisibility(View.GONE);
 				mHealthTabIcon.setSelected(true);
 				transaction.show(mPetFragment);
 				break;
@@ -124,6 +125,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 					mLocateFragment=new LocateFragment();
 					transaction.add(R.id.fragment_container,mLocateFragment);
 				}
+				batteryView.setVisibility(View.VISIBLE);
 				mLocateTabIcon.setSelected(true);
 				transaction.show(mLocateFragment);
 				break;
@@ -131,7 +133,10 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 				if(null == mMeFragment){
 					mMeFragment=new MeFrament();
 					transaction.add(R.id.fragment_container,mMeFragment);
+
 				}
+				batteryView.setVisibility(View.VISIBLE);
+
 				mMeTabIcon.setSelected(true);
 				transaction.show(mMeFragment);
 				break;

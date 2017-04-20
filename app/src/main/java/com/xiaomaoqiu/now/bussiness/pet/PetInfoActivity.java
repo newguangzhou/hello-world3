@@ -70,13 +70,23 @@ public class PetInfoActivity extends BaseActivity {
 
      PetInfoBean modifyBean =PetInfoInstance.getInstance().packBean;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.pet_info));
         setContentView(R.layout.me_pet_info);
         initView();
+        setNextView("保存", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)) {
+                    ToastUtil.showTost("信息需要完整");
+                    return;
+                }
+                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+            }
+        });
     }
 
 
@@ -137,6 +147,8 @@ public class PetInfoActivity extends BaseActivity {
         txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
         if (!TextUtils.isEmpty(modifyBean.name)) {
             (txt_pet_name).setText(modifyBean.name);
+        }else{
+            modifyBean.name="旺财";
         }
 
 
@@ -202,7 +214,7 @@ public class PetInfoActivity extends BaseActivity {
     private void modifyBirthday() {
         PetInfoInstance.MyDate mPetBirthDay = modifyBean.dateFormat_birthday;
         if (bottomCalenderView == null) {
-            bottomCalenderView = new BottomCalenderView(this, mPetBirthDay.year, mPetBirthDay.month, mPetBirthDay.day, new BottomCalenderView.OnDatePickedListener() {
+            bottomCalenderView = new BottomCalenderView(this,2000,1, 1, new BottomCalenderView.OnDatePickedListener() {
                 @Override
                 public void onDatePicked(int year, int month, int day) {
                     PetInfoInstance.MyDate tmpDateFormatBirthday = new PetInfoInstance.MyDate(year, month, day);
@@ -268,24 +280,18 @@ public class PetInfoActivity extends BaseActivity {
 //        PetInfo petInfo = new PetInfo();
         switch (requestCode) {
             case REQ_CODE_NAME:
-                if (!TextUtils.isEmpty(modifyBean.name)) {
-                    String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
-                    modifyBean.name = nameBackString;
+                String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
+                modifyBean.name = nameBackString;
                     (txt_pet_name).setText(modifyBean.name);
-                    Map<String,String> param=new HashMap<>();
-                    param.put("nick",modifyBean.name);
-                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
-                }
+//                    Map<String,String> param=new HashMap<>();
+//                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
 
                 break;
             case REQ_CODE_WEIGHT:// ModifyWeightDialog
-                if (!TextUtils.isEmpty(modifyBean.weight)) {
                     modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
                     txt_weight.setText(modifyBean.weight + "kg");
-                    Map<String,String> param=new HashMap<>();
-                    param.put("weight",modifyBean.weight);
-                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
-                }
+
+//                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
 
                 break;
             case REQ_CODE_VARIETY:
@@ -294,9 +300,7 @@ public class PetInfoActivity extends BaseActivity {
                     modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
-                    Map<String,String> param=new HashMap<>();
-                    param.put("description",modifyBean.description);
-                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
+//                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
                 }
                 break;
             case REQ_CODE_PHOTO_SOURCE:

@@ -234,14 +234,15 @@ public class PetInfoInstance {
     }
 
     //更新宠物信息
-    public void updatePetInfo(final PetInfoBean petInfoBean, Map<String, String> params) {
+    public void updatePetInfo(final PetInfoBean petInfoBean) {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                petInfoBean.pet_id, params
+                petInfoBean.pet_id, petInfoBean.description,petInfoBean.weight,petInfoBean.sex,petInfoBean.nick,petInfoBean.birthday,petInfoBean.logo_url,petInfoBean.pet_type_id
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
+                    ToastUtil.showTost("更新成功");
                     savePetInfo(petInfoBean);
                 } else {
                     ToastUtil.showTost("更新失败");

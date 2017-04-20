@@ -180,6 +180,15 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
      */
     private void setPhonePos(BDLocation location) {
         LatLng postion = new LatLng(location.getLatitude(), location.getLongitude());
+        float f = mBaiduMap.getMaxZoomLevel();//19.0
+
+//float m = mBaiduMap.getMinZoomLevel();//3.0
+
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f-2);
+
+        mBaiduMap.animateMapStatus(u);
+
+
         if (MODE_FINDING_PET != mMode) {
             setCenter(postion, 300);
         }
@@ -292,7 +301,7 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
      */
     private void setPetPosWithFindMode() {
         mFindPetFlag = mFindPetFlag | (1 << FIND_PET_SERVICE);
-        showToast("狗狗找到了！");
+//        showToast("狗狗找到了！");
         onFindPet();
     }
 

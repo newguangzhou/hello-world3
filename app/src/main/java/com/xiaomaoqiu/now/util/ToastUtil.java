@@ -20,7 +20,7 @@ public class ToastUtil {
 
     public static void showAtCenter(String msg){
         Toast toast= Toast.makeText(PetAppLike.mcontext,
-                "Toast Here", Toast.LENGTH_SHORT);
+                msg, Toast.LENGTH_SHORT);
       toast.setGravity(Gravity.CENTER, 0, 0);
        toast.show();
     }
