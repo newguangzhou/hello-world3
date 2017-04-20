@@ -13,6 +13,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
 import com.xiaomaoqiu.pet.R;
 
@@ -136,10 +137,10 @@ public class InitBindDeviceActivity extends BaseActivity {
 
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0, sticky = false)
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public  void toDeviceActivity(EventManage.bindDeviceSuccess event){
         EventBus.getDefault().unregister(this);
-        if(TextUtils.isEmpty(PetInfoInstance.getInstance().packBean.wifi_bssid)) {
+        if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             Intent intent = new Intent(this, InitWifiListActivity.class);
             startActivity(intent);
             finish();
@@ -155,5 +156,6 @@ public class InitBindDeviceActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -66,16 +66,18 @@ public class SplashActivity extends BaseActivity {
                     finish();
                 }
             }, 1000);
-            return;
+
+        }else {
+            EventBus.getDefault().register(this);
+            //获取基本信息
+            UserInstance.getInstance().getUserInfo();
         }
-        EventBus.getDefault().register(this);
-        //获取基本信息
-        UserInstance.getInstance().getUserInfo();
     }
 
     //网络获取用户信息成功
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void next(EventManage.getUserInfoEvent event) {
+        EventBus.getDefault().unregister(this);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

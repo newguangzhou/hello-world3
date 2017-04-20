@@ -169,6 +169,7 @@ public class InitWifiListActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
+
         bt_refresh.setVisibility(View.GONE);
         tv_tip.setVisibility(View.VISIBLE);
         ll_loading.setVisibility(View.GONE);
@@ -190,6 +191,12 @@ public class InitWifiListActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
