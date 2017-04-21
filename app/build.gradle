@@ -2,8 +2,10 @@ apply plugin: 'com.android.application'
 // 依赖插件脚本
 apply from: 'tinker-support.gradle'
 
+
+
+
 android {
-//    useLibrary 'org.apache.http.legacy'
     signingConfigs {
         release_sign_config {
             keyAlias 'android.keystore'
@@ -18,9 +20,14 @@ android {
     defaultConfig {
         applicationId 'com.xiaomaoqiu.pet'
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
-        versionName '1'
+        versionName '0.0.1.inner_test'
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.xmq.MyEventBusIndex' ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -31,6 +38,7 @@ android {
         }
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.release_sign_config
         }
     }
     lintOptions{
@@ -54,22 +62,32 @@ dependencies {
     compile project(':bottomcalender')
     compile project(':lib-zxing')
     compile project(':chartviews')
-    compile files('libs/locSDK_6.13.jar')
-    compile files('libs/baidumapapi_v3_5_0.jar')
-    compile files('libs/BaiduTraceSDK_v2_1_15.jar')
     compile project(':PullToRefresh')
-
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'io.reactivex:rxandroid:1.2.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
-    // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex:rxjava:1.1.6'
+    // explicitly depend on RxJava's latest version for bug fixes and now features.
+    //    compile 'io.reactivex:rxjava:1.1.6'
     compile files('libs/org.apache.http.legacy.jar')
-
-
-    compile "com.android.support:multidex:1.0.1" // 多dex配置
+    compile 'com.android.support:multidex:1.0.1'
+    // 多dex配置
     //注释掉原有bugly的仓库
     //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.3.2
-    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
-//    compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    //    compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'org.ligboy.retrofit2:converter-fastjson:2.1.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    //fresco
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    // 支持 GIF 动图，需要添加
+    //    compile 'com.facebook.fresco:animated-gif:0.12.0'
+    compile files('libs/baidumapapi_v3_5_0.jar')
+    compile files('libs/BaiduTraceSDK_v2_1_15.jar')
+    compile files('libs/locSDK_6.13.jar')
+    compile files('libs/BaiduTraceSDK_v2_1_16.jar')
 }

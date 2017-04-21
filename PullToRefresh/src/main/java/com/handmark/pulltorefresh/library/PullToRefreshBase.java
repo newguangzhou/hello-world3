@@ -1467,7 +1467,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		 * pulling.
 		 * 
 		 * @param refreshView - View which has had it's state change.
-		 * @param state - The new state of View.
+		 * @param state - The now state of View.
 		 * @param direction - One of {@link Mode#PULL_FROM_START} or
 		 *            {@link Mode#PULL_FROM_END} depending on which direction
 		 *            the user is pulling. Only useful when <var>state</var> is

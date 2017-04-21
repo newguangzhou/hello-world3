@@ -5,8 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/total_color_8"
-    tools:context="com.xiaomaoqiu.pet.ui.mainPages.pageMe.HardwareActivity">
+    tools:context="com.xiaomaoqiu.now.bussiness.Device.DeviceActivity">
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@color/total_color_1"
+        android:paddingRight="10dp">
 
+
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_width="70dp"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="宠物追踪器"
+            />
+        <com.xiaomaoqiu.now.view.BatteryView
+            android:id="@+id/batteryView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/battery100"/>
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

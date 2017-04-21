@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
-    tools:context="com.xiaomaoqiu.pet.ui.login.RegisterActivity"
+    tools:context="com.xiaomaoqiu.old.ui.login.RegisterActivity"
     android:background="@color/white">
 
     <EditText
@@ -63,7 +63,7 @@
             android:textColor="@color/white"
             android:id="@+id/btn_fetch_verify_code"
             android:text="@string/fetch_verify_code"
-            android:onClick="onFetchVerifyCodeClick"/>
+            android:onClick="get_verify_code"/>
     </LinearLayout>
     <Button
         android:layout_width="match_parent"

@@ -17,7 +17,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="16dp"
                 android:textSize="16sp"
-                android:gravity="right"
+                android:gravity="center"
                 android:textColor="@color/total_color_7"
                 android:text="今日活动"/>
 
@@ -39,7 +39,7 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent">
 
-                    <com.xiaomaoqiu.pet.widgets.CircleProgressBar
+                    <com.xiaomaoqiu.old.widgets.CircleProgressBar
                         android:layout_width="141dp"
                         android:layout_height="141dp"
                         android:layout_centerInParent="true"
@@ -148,11 +148,13 @@
                             android:src="@drawable/tab_health_rest"/>
 
                         <TextView
+                            android:id="@+id/tv_sleep_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"
                             android:textSize="16sp"
                             android:textColor="@color/total_color_7"
+                            android:gravity="center"
                             android:text="今日休息"/>
 
                     </LinearLayout>
@@ -290,12 +292,12 @@
             
         </LinearLayout>
 
-    <com.xiaomaoqiu.pet.ui.mainPages.pageHealth.health.HealthGoSportView
+    <com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView
         android:id="@+id/tab_health_gosportview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android_custom:hide_dialogback="#59595757"
-        android_custom:back_paddingTop="25dp"/>
+     />
 
 
 </RelativeLayout>

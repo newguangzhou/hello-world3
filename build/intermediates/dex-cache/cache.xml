@@ -3,637 +3,102 @@
 
     <item
         is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.1.56.android/4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6/fastjson-1.1.56.android.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/fastjson-1.1.56.android_d257dd672ac744f5a8e176f20da4a3aeb0c5195e.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/httpmime-4.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d34b163e52a9727101aced60775d51c5085390a1">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/httpmime-4.1.1_0732b03674cd754a369626913533219a143ff247.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/lib-zxing/build/intermediates/bundles/default/libs/zxing.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="657431ffc6f0c763c22579b392e0bdfab26fc817">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/8/zxing_f797a7347d903c501699449de01f1b2cca3538f8.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/httpmime-4.1.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d34b163e52a9727101aced60775d51c5085390a1">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/httpmime-4.1.1_5c1b5518aedf3c77b329212cd874d4bb6f89c51a.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/chartviews/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="661f35fbc8c1550b6c831a5465e714d08fc44156">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_016677def3818183683712657ad89efb15dfd07a.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.1.56.android/4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6/fastjson-1.1.56.android.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/fastjson-1.1.56.android_d257dd672ac744f5a8e176f20da4a3aeb0c5195e.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/chartviews/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="5867faabcd63c2e7caba50deabbb8b95ae0e3137">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-chartviews-unspecified_5aafe65983a30d28bcdf3fc7d0765eb7647bc6c2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.1/369f9aa48a629b4e92557b37326f42dc3de796e4/MPAndroidChart-v3.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="369f9aa48a629b4e92557b37326f42dc3de796e4">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/MPAndroidChart-v3.0.1_daa8edd07ea38af8fd2495cbc3e981d861d5964c.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/PullToRefresh/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="348d75431a50e1c13cc056a6019ca6b0953a60ab">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_cb750d9943071762ecefd0ac66b6ce297443b1fc.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.7/cd78109020f9ec803ef4e652c17ee4615b03e20a/android-async-http-1.4.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="cd78109020f9ec803ef4e652c17ee4615b03e20a">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/android-async-http-1.4.7_66da09305319c9db0ec9f29c252e345bf05a67c3.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="debf30ce0a7560396b6235edef77e447006454c2">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.3.0_0c2354039abfa5e2de51431904d4c06fa9b1a6ac.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/bottomcalender/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0be25d78b8b4f29d4e9945e03571011a836b547c">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_fc7a2d557b638649b5dec020b56a53957e5f70bf.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/5fa29900505ad076e3ddb8cbf8cb97bfaef67788/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_256805c3693c62a08e6d26823df3096398c2bef2.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/cc3a6043e4a87943897fcc4bccc7b2bf6b1c5631/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="debf30ce0a7560396b6235edef77e447006454c2">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_2dc4e320c9d865340d1096438b6a5efd2079e0dc.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/BaiduTraceSDK_v2_1_15.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="3080175a04798e770bf5514891614e10c550f1a5">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/BaiduTraceSDK_v2_1_15_04300fbe424fd43ac39ed2862356c45e1eb2732b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.6/2586312cd2b8a511e4c6236736f5a039fc0f2273/rxjava-1.1.6.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/rxjava-1.1.6_8a7f906723c7bd46977bf1bbbb813aeef4afef4b.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/4cf86da6cfc7f61882e30e9d793b322fc4386e28/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_4f0c5a424ef98ddb60f45a9ee0e55537ee7bae0e.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/support-annotations-23.4.0_8b758f4c5926e19e77c0d65012fd34247714c4fd.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/PullToRefresh/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="57e3e749fe8f8b183594708acaa3095e1e95bafd">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-PullToRefresh-unspecified_bd50fd456aaa015b34ff962c8793557ac9998ade.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_7a5e2152592897464b61c2de15b3936b26862ce3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/locSDK_6.13.jar"
+        jar="/Users/long/Desktop/android/app/libs/locSDK_6.13.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/locSDK_6.13_1a21623add8cb39f95e9e1469f8baabb16d4a0b0.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/bottomcalender/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="79e4df837d3ac4cf060121b956cf7f0b9029d88c">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-bottomcalender-unspecified_e823224301808101292b5bd891e92f24ca0242e8.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_14f94c1c32a815c4d811cb7fbfe6ccb0c83c35f7.jar" />
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/locSDK_6.13_d497eda9ff61f0fdbbe87214b6b7a0af56d201b2.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/lib-zxing/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0b5aa100e301f4bd89d12a5fa7fa325853a48b88">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_22a42238ebed9f5021d01d66ef17b84965b8b4e5.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/AndroidCharts/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="7ef3e80128859a68ca82b6a98b6c5967a2cd818f">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_d5ff31ac0408e36447a5b5636041c2cbfcd8ce3a.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/baidumapapi_v3_5_0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="ba79500bb64218f10b5fd0d5ea54503b2bf6b3bb">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/baidumapapi_v3_5_0_75d640f5653afd08018d19e924f3229aafd4d8ed.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/PullToRefresh/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="348d75431a50e1c13cc056a6019ca6b0953a60ab">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_cb750d9943071762ecefd0ac66b6ce297443b1fc.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/AndroidCharts/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="2afdfcc37255c4fbf4be18a90f59f63e241484e7">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-AndroidCharts-unspecified_91c97a2dad833684819ecd9b57ba6f8bd299f5d2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/e4a1b3e5113d3dc640d2c9be6e361c4117b33151/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_75f1256e5c94ca3097e8314bf6670543bdab6459.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_806eec159ed12bcb6289b1daa2d9ad498b584082.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/5fa29900505ad076e3ddb8cbf8cb97bfaef67788/output/jars/libs/internal_impl-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/internal_impl-23.4.0_bf77f409561facb048b685119634d275b427da1f.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/io.reactivex/rxandroid/1.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/io.reactivex-rxandroid-1.2.1_46580b17217cdf6fc48f9285c56cdb80b505a85e.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/jars/libs/zxing.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="a47a112b084e4b969a67db81c577a27b0b9a04a7">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/zxing_7c97005513181ebcc97a1d2c998a2b4e98cf80b2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/BaiduTraceSDK_v2_1_15.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3080175a04798e770bf5514891614e10c550f1a5">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/BaiduTraceSDK_v2_1_15_396f63ccaea5dbccf840f4926d166c2c7167fd0c.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.1/369f9aa48a629b4e92557b37326f42dc3de796e4/MPAndroidChart-v3.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="369f9aa48a629b4e92557b37326f42dc3de796e4">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/MPAndroidChart-v3.0.1_daa8edd07ea38af8fd2495cbc3e981d861d5964c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/baidumapapi_v3_5_0.jar"
+        jar="/Users/long/Desktop/android/app/libs/baidumapapi_v3_5_0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="ba79500bb64218f10b5fd0d5ea54503b2bf6b3bb">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/baidumapapi_v3_5_0_baa903a20e8eebe4c48ae0a719e31ff9e4d2487f.jar.jar" />
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/baidumapapi_v3_5_0_b8f9903c5c5cf2ab8290987518dff202c86b7ec6.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.android/build-cache/9ff3ee852ff72cb92776a385fecd429f8f75a133/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_be7f03d91147e4950ffdea780aa27f1f89d7e259.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/1bb5d1747100bbbed7385b5aa662f38ee4327852/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_65e5e648c954e031dce22c44fb681f70ef989433.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/chartviews/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="661f35fbc8c1550b6c831a5465e714d08fc44156">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_016677def3818183683712657ad89efb15dfd07a.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/BaiduTraceSDK_v2_1_15.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3080175a04798e770bf5514891614e10c550f1a5">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/BaiduTraceSDK_v2_1_15_396f63ccaea5dbccf840f4926d166c2c7167fd0c.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v3.0.1/369f9aa48a629b4e92557b37326f42dc3de796e4/MPAndroidChart-v3.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="369f9aa48a629b4e92557b37326f42dc3de796e4">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/MPAndroidChart-v3.0.1_daa8edd07ea38af8fd2495cbc3e981d861d5964c.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/org.apache.http.legacy.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_4c7b3a678be36f34d71301597724d964032569c5.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/trunk/lib-zxing/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="d5e3add6a1b3961e382c994b24c8891d1aad21dd">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/trunk-lib-zxing-unspecified_2d568d054667291045c3649ca841dd48c68f4a67.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/eba68e92f6ccdb377116c809b7dcb27032cf1bd9/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f1e01a14f20e1a7a45cc291a177b4844dbe2de25">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_ef33aace3829032cd010ad6566262e89b1e31812.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/cc3a6043e4a87943897fcc4bccc7b2bf6b1c5631/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="debf30ce0a7560396b6235edef77e447006454c2">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_2dc4e320c9d865340d1096438b6a5efd2079e0dc.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/lib-zxing/build/intermediates/bundles/default/libs/zxing.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="657431ffc6f0c763c22579b392e0bdfab26fc817">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/8/zxing_f797a7347d903c501699449de01f1b2cca3538f8.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.6/2586312cd2b8a511e4c6236736f5a039fc0f2273/rxjava-1.1.6.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/rxjava-1.1.6_8a7f906723c7bd46977bf1bbbb813aeef4afef4b.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.1.56.android/4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6/fastjson-1.1.56.android.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="4eef0ac3ef5e18db7af5d44ca0228ca5c29dd2f6">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/fastjson-1.1.56.android_d257dd672ac744f5a8e176f20da4a3aeb0c5195e.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/httpmime-4.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d34b163e52a9727101aced60775d51c5085390a1">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/httpmime-4.1.1_5c1b5518aedf3c77b329212cd874d4bb6f89c51a.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/5fa29900505ad076e3ddb8cbf8cb97bfaef67788/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_256805c3693c62a08e6d26823df3096398c2bef2.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/3e5117590fc730dba6ebcdeeb2a907713b5bd564/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_d94a12b639c7c4e8ebc22c392ba6aa4ec9511cb7.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/4cf86da6cfc7f61882e30e9d793b322fc4386e28/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_4f0c5a424ef98ddb60f45a9ee0e55537ee7bae0e.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/3e5117590fc730dba6ebcdeeb2a907713b5bd564/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_d94a12b639c7c4e8ebc22c392ba6aa4ec9511cb7.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/AndroidCharts/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="7ef3e80128859a68ca82b6a98b6c5967a2cd818f">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_d5ff31ac0408e36447a5b5636041c2cbfcd8ce3a.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/lib-zxing/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0b5aa100e301f4bd89d12a5fa7fa325853a48b88">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_22a42238ebed9f5021d01d66ef17b84965b8b4e5.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/baidumapapi_v3_5_0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ba79500bb64218f10b5fd0d5ea54503b2bf6b3bb">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/baidumapapi_v3_5_0_baa903a20e8eebe4c48ae0a719e31ff9e4d2487f.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/bottomcalender/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0be25d78b8b4f29d4e9945e03571011a836b547c">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_fc7a2d557b638649b5dec020b56a53957e5f70bf.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_8b758f4c5926e19e77c0d65012fd34247714c4fd.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/locSDK_6.13.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/locSDK_6.13_1a21623add8cb39f95e9e1469f8baabb16d4a0b0.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/d8cd89f9c79836414af1008ff21859eded6efc06/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_aec33d3d39bbe769d59b0dbd62ba476434a6cca6.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.7/cd78109020f9ec803ef4e652c17ee4615b03e20a/android-async-http-1.4.7.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="cd78109020f9ec803ef4e652c17ee4615b03e20a">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/android-async-http-1.4.7_66da09305319c9db0ec9f29c252e345bf05a67c3.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.3.0_0cab2aedc036a998ff81654818d8dd3c404e7cbe.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/9ff3ee852ff72cb92776a385fecd429f8f75a133/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_be7f03d91147e4950ffdea780aa27f1f89d7e259.jar.jar" />
-    </item>
-    <item
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.7/cd78109020f9ec803ef4e652c17ee4615b03e20a/android-async-http-1.4.7.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="cd78109020f9ec803ef4e652c17ee4615b03e20a">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.7_66da09305319c9db0ec9f29c252e345bf05a67c3.jar" />
-    </item>
-    <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_15c20d739d0c65bdea3aeed3d37eef5ca7cbddcf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/git-xmq/android/app/libs/org.apache.http.legacy.jar"
+        jar="/Users/long/Desktop/android/app/libs/org.apache.http.legacy.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_4c7b3a678be36f34d71301597724d964032569c5.jar.jar" />
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_75612a032a672b000bd5f649bcf17d0c44260255.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/support-annotations-23.4.0_8b758f4c5926e19e77c0d65012fd34247714c4fd.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/.android/build-cache/5fa29900505ad076e3ddb8cbf8cb97bfaef67788/output/jars/libs/internal_impl-23.4.0.jar"
+        jar="/Users/long/Desktop/android/app/libs/httpmime-4.1.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/internal_impl-23.4.0_bf77f409561facb048b685119634d275b427da1f.jar.jar" />
+        sha1="d34b163e52a9727101aced60775d51c5085390a1">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/httpmime-4.1.1_f331c578c7b663e7b7300c10b4338e4dd19e6c4a.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.android/build-cache/1bb5d1747100bbbed7385b5aa662f38ee4327852/output/jars/classes.jar"
+        jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/libs/zxing.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_65e5e648c954e031dce22c44fb681f70ef989433.jar.jar" />
+        sha1="657431ffc6f0c763c22579b392e0bdfab26fc817">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/8/zxing_a4b977085d90c9ef8eb7174f9d2efc8674c2182e.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.android/build-cache/e4a1b3e5113d3dc640d2c9be6e361c4117b33151/output/jars/classes.jar"
+        jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/long/Desktop/git-xmq/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_75f1256e5c94ca3097e8314bf6670543bdab6459.jar.jar" />
+        sha1="0b5aa100e301f4bd89d12a5fa7fa325853a48b88">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_35ef57c91f95d9b8d442d71d154ca822020db9dd.jar.jar" />
     </item>
     <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="false"
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/PullToRefresh/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_88902b67a5b132768293c39d8cc5efd494096f3f.jar" />
+        revision="25.0.0"
+        sha1="348d75431a50e1c13cc056a6019ca6b0953a60ab">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_64fd9bb50b2a505286182aa82b9f9dc6e13f5776.jar.jar" />
     </item>
     <item
-        jar="/Users/long/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.6/2586312cd2b8a511e4c6236736f5a039fc0f2273/rxjava-1.1.6.jar"
-        jumboMode="false"
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/app/libs/BaiduTraceSDK_v2_1_16.jar"
+        jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/rxjava-1.1.6_8a7f906723c7bd46977bf1bbbb813aeef4afef4b.jar" />
+        revision="25.0.0"
+        sha1="797cdb6cb6ff672aed145ff36402d55c4a8fe46f">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/BaiduTraceSDK_v2_1_16_a4df37f264af6d8fc24563b51cd8a7dfdc9c0b81.jar.jar" />
     </item>
     <item
-        jar="/Users/long/Desktop/XMQ/client/android/trunk/app/libs/locSDK_6.13.jar"
-        jumboMode="false"
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/bottomcalender/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
         optimize="true"
-        revision="23.0.3"
-        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="/Users/long/Desktop/XMQ/client/android/trunk/app/build/intermediates/pre-dexed/debug/locSDK_6.13_7a04d9e785853b75be2d84c724fd88263db916c8.jar" />
+        revision="25.0.0"
+        sha1="0be25d78b8b4f29d4e9945e03571011a836b547c">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_f9386ae5dfc0b547d78e7db01d00cb9f5cbb6a39.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/AndroidCharts/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7ef3e80128859a68ca82b6a98b6c5967a2cd818f">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_b0f3faf5278cacfc8fc8e723c7df5edc845e253a.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/chartviews/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="661f35fbc8c1550b6c831a5465e714d08fc44156">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_0c4e326890b41e55a4434e8e46efdbf5e25a0b3b.jar.jar" />
     </item>
 
 </items>

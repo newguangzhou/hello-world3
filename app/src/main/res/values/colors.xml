@@ -29,6 +29,7 @@
     <color name="near_title_press_color">#ec4f30</color>
     <color name="near_title_search_color">#ec4f30</color>
     <color name="near_title_search_hint_text_color">#f9cec9</color>
+
     <color name="background_color">#eeeeee</color>
     <color name="category_text_color">#373737</color>
     <color name="text_color">#212121</color>
@@ -163,6 +164,13 @@
     <!--图表-->
     <color name="chart_fill_select_color">#eeffffff</color>
     <color name="chart_normal_select_color">#44c6c6c6</color>
-    
+
+
+    <!--wifi列表-->
+    <color name="wifilist_background_selected">#f9cec9</color>
+    <color name="wifilist_background_unselected">#fff</color>
+
+
+
 
 </resources>
