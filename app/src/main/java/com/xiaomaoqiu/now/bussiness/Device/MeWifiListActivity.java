@@ -139,7 +139,7 @@ public class MeWifiListActivity extends BaseActivity {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
-                if(position>adapter.mdatas.size()){
+                if(position>adapter.mdatas.size()||position<0){
                     return;
                 }
 
