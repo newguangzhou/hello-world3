@@ -39,7 +39,7 @@ public class PetInfoInstance {
     //***********位置信息
     public double latitude;
 
-    public double location_time;
+    public long location_time;
 
     public double longitude;
 

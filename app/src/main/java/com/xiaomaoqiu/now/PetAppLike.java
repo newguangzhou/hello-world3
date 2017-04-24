@@ -27,7 +27,7 @@ public class PetAppLike extends DefaultApplicationLike {
 
 
 
-    public static Context mcontext;
+    public static Application mcontext;
     public static Environment environment;//当前环境
     public static Handler mainHandler;
 
@@ -35,9 +35,7 @@ public class PetAppLike extends DefaultApplicationLike {
     public void onCreate() {
         super.onCreate();
         mcontext=getApplication();
-
         environment=Environment.Release;
-
         Fresco.initialize(mcontext);
 
 
@@ -46,7 +44,7 @@ public class PetAppLike extends DefaultApplicationLike {
 
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         // 调试时，将第三个参数改为true
-        Bugly.init(getApplication(), "5eb6432b7a", environment.bugly_log);
+        Bugly.init(getApplication(), "61e9af8769", environment.bugly_log);
 
 
 

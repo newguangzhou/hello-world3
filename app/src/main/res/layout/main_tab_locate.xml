@@ -47,7 +47,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7.5dp"
                 android:layout_marginLeft="23.5dp"
                 android:layout_marginBottom="24.5dp"
                 android:layout_marginRight="15dp"

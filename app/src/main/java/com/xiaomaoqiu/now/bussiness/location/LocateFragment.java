@@ -32,6 +32,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -88,7 +92,15 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mMapMpdule.setAddressParseListener(new addressParseListener() {
             @Override
             public void onAddressparsed(String address) {
-                petLocation.setText(address);
+                String textString=address;
+
+                if(PetInfoInstance.getInstance().location_time!=0) {
+                    SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String d = format.format(PetInfoInstance.getInstance().location_time*1000);//unix时间戳转化为java的毫秒，然后转成时间
+                    textString+=d;
+                }
+
+                petLocation.setText(textString);
             }
         });
     }

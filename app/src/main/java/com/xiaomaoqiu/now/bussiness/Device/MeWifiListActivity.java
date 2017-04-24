@@ -139,11 +139,12 @@ public class MeWifiListActivity extends BaseActivity {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
-                if(position>adapter.mdatas.size()||position<0){
-                    return;
-                }
+
 
                 synchronized (lock) {
+                    if(position>=adapter.mdatas.size()||position<0){
+                        return;
+                    }
                     wifi_bssid="";
                     wifi_ssid="";
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;

@@ -123,7 +123,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         PetSportBean.SportBean bean = message.data.get(0);
                         sportTarget = bean.target_amount;
                         sportDone = bean.reality_amount;
-                        percentage = bean.percentage/1000;
+                        percentage = bean.percentage;
                     } else {
                         ToastUtil.showTost("当天尚无数据~");
 
@@ -172,7 +172,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
         sportTarget = event.sportBean.target_amount;
         sportDone = event.sportBean.reality_amount;
-        percentage = event.sportBean.percentage/1000;
+        percentage = event.sportBean.percentage;
         prog.setProgress((int) percentage);
         tvSportDone.setText(String.format("已消耗%d卡", sportDone));
         tvSportTarget.setText(String.format("目标消耗%d卡", sportTarget));
