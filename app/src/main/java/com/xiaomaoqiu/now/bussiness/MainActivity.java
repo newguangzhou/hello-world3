@@ -18,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.pet.R;
@@ -179,26 +180,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
 
-    long mBackClickTime = -1;
 
     @Override
     public void onBackPressed() {
-        if (null != mPetFragment && !mPetFragment.isHidden() ) {
-            mBackClickTime = -1;
-            return;
-        }
-        if (mBackClickTime == -1) {
-            mBackClickTime = System.currentTimeMillis();
-            Toast.makeText(this, R.string.exit_delay, Toast.LENGTH_LONG).show();
-        } else {
-            long clickInterval = System.currentTimeMillis() - mBackClickTime;
-            if (clickInterval > 2000) {
-                mBackClickTime = System.currentTimeMillis();
-                Toast.makeText(this, R.string.exit_delay, Toast.LENGTH_LONG).show();
-            } else {
+        DialogUtil.showTwoButtonDialog(this, "确定要退出小毛球吗？", "取消", "确认", null, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
-        }
+        });
     }
 
     @Override

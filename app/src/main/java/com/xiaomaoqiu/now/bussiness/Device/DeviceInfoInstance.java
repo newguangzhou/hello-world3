@@ -134,7 +134,10 @@ public class DeviceInfoInstance {
 
         UserInstance.getInstance().device_imei = "";
         UserInstance.getInstance().wifi_ssid = "";
+        SPUtil.putHomeWifiSsid("");
         UserInstance.getInstance().wifi_bssid = "";
+        SPUtil.putHomeWifiMac("");
+
 
 
         SPUtil.putDeviceName("");

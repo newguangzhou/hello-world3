@@ -81,12 +81,7 @@ public class LoginPresenter {
     }
 
 
-    /**
-     * 获取用户基本信息
-     */
-    public void getUserInfo() {
 
-    }
 
     /**
      * 登录
