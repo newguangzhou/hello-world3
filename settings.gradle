@@ -1,2 +1,1 @@
 include ':app', ':AndroidCharts', ':bottomcalender', ':chartviews', 'AndroidCharts', ':lib-zxing'
-include ':PullToRefresh'
