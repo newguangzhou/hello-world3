@@ -33,9 +33,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="#888"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="取消"
-            android:background="@null"/>
+            android:background="@drawable/btn_background_color_3"/>
         <View
             android:layout_width="1px"
             android:layout_height="30dp"
@@ -49,8 +49,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="#FF5A5A"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="确定"
-            android:background="@null"/>
+            android:background="@drawable/btn_background_color_2"/>
     </LinearLayout>
 </LinearLayout>

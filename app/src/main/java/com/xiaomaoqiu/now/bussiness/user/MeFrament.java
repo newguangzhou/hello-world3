@@ -16,6 +16,7 @@ import com.xiaomaoqiu.now.bussiness.ShopCityActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.pet.R;
@@ -58,16 +59,16 @@ public class MeFrament extends BaseFragment implements LogoutView{
             public void onClick(View v) {
 //                Intent intent = new Intent(getActivity(), ExitDialog_RAW_Activity.class);
 //                startActivity(intent);
-                DialogUtil.showTwoButtonDialog(getActivity(), "确认退出登录？", "取消", "确认", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                    }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        loginPresenter.logout();
-                    }
-                });
+
+                DialogToast.createDialogWithTwoButton(getActivity(), "确认退出登录？", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                loginPresenter.logout();
+                            }
+                        }
+                );
+
             }
         });
 

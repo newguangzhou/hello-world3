@@ -21,6 +21,7 @@ import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -183,12 +184,16 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(this, "确定要退出小毛球吗？", "取消", "确认", null, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
+
+
     }
 
     @Override

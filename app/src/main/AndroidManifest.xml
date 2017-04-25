@@ -164,9 +164,7 @@
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="com.xiaomaoqiu.old.ui.dialog.GoHomeConfirmDialog_RAW_Activity"
-            android:theme="@style/MyDialogStyleBottom" />
+
         <activity
             android:name="com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom" />

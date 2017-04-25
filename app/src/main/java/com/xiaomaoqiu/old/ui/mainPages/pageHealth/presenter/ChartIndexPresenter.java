@@ -10,8 +10,8 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.AppDialog;
 import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.old.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -175,7 +175,7 @@ public class ChartIndexPresenter {
         ArrayList<String> axisLabels = new ArrayList<>();
 
         ArrayList<BarEntry> sleepList = new ArrayList<>();
-        ArrayList<Date> dates = DateUtil.getPastDates(WEEK_LENGTH);
+        ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(WEEK_LENGTH);
 
         int startIndex =0;
         for (int i = startIndex; i < WEEK_LENGTH; i++) {
@@ -205,8 +205,8 @@ public class ChartIndexPresenter {
         ArrayList<String> axisLabels = new ArrayList<>();
         ArrayList<Entry> deepList = new ArrayList<>();
         ArrayList<Entry> lightList = new ArrayList<>();
-        ArrayList<Date> dates = DateUtil.getPastDates(MONTH_LENGTH);
-        Date curDate = DateUtil.getFirstDataOfCurMonth();
+        ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(MONTH_LENGTH);
+        Date curDate = AppDialog.DateUtil.getFirstDataOfCurMonth();
         String secondText = curDate.getMonth() + "月";
         int secondIndex = curDate.getDate();
         callback.onSuccessGetSecAxis(secondText, secondIndex, MONTH_LENGTH);
@@ -283,10 +283,10 @@ public class ChartIndexPresenter {
         ArrayList<Entry> deepList = new ArrayList<>();
         ArrayList<Entry> lightList = new ArrayList<>();
 
-        ArrayList<Date> dates = DateUtil.getPastDates(days);
+        ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(days);
 
         if (isMonth) {
-            Date curDate = DateUtil.getFirstDataOfCurMonth();
+            Date curDate = AppDialog.DateUtil.getFirstDataOfCurMonth();
             String secondText = curDate.getMonth() + "月";
             int secondIndex = curDate.getDate();
             callback.onSuccessGetSecAxis(secondText, secondIndex, days);
@@ -415,7 +415,7 @@ public class ChartIndexPresenter {
         } else {
             index = WEEK_LENGTH - index;
         }
-        Date date = DateUtil.getPastDate(index);
+        Date date = AppDialog.DateUtil.getPastDate(index);
         return (date.getMonth() + 1) + "月";
     }
 

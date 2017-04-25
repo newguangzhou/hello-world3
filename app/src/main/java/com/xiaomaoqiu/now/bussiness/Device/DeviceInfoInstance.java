@@ -12,17 +12,14 @@ import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.http.ApiService;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.AppDialog;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.old.utils.DateUtil;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.lang.reflect.Array;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -116,7 +113,7 @@ public class DeviceInfoInstance {
         SPUtil.putSimIccid(packBean.iccid);
         isDeviceExist = true;
         SPUtil.putIsDeviceExist(true);
-        lastGetTime = DateUtil.deviceInfoTime(System.currentTimeMillis());
+        lastGetTime = AppDialog.DateUtil.deviceInfoTime(System.currentTimeMillis());
     }
 
     //清空设备信息
@@ -145,7 +142,7 @@ public class DeviceInfoInstance {
         SPUtil.putSimIccid("");
         isDeviceExist = false;
         SPUtil.putIsDeviceExist(false);
-        lastGetTime = DateUtil.deviceInfoTime(System.currentTimeMillis());
+        lastGetTime = AppDialog.DateUtil.deviceInfoTime(System.currentTimeMillis());
     }
 
     //获取设备信息
