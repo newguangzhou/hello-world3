@@ -21,12 +21,15 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -38,15 +41,12 @@ import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
 @SuppressLint("WrongConstant")
 public class InitWifiListActivity extends BaseActivity {
 
-    View ll_loading;
+    MaterialDesignPtrFrameLayout ptr_refresh;
     RecyclerView rv_wifilist;
 
-    Button bt_refresh;
-    View tv_tip;
 
 
     CheckStateAdapter adapter;
-
     public Object lock=new Object();
 
 
@@ -55,7 +55,7 @@ public class InitWifiListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.title_home_wifi));
         setContentView(R.layout.activity_wifilist);
-
+        ptr_refresh= (MaterialDesignPtrFrameLayout) this.findViewById(R.id.ptr_refresh);
         initView();
         initData();
 
@@ -63,16 +63,8 @@ public class InitWifiListActivity extends BaseActivity {
     }
 
     private void initView() {
-        ll_loading = findViewById(R.id.ll_loading);
-        bt_refresh = (Button) this.findViewById(R.id.bt_refresh);
-        tv_tip = findViewById(R.id.tv_tip);
-        bt_refresh.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                DeviceInfoInstance.getInstance().sendGetWifiListCmd();
-            }
-        });
+
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         setNextView("下一步", new View.OnClickListener() {
             @Override
@@ -117,6 +109,16 @@ public class InitWifiListActivity extends BaseActivity {
         rv_wifilist.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CheckStateAdapter(DeviceInfoInstance.getInstance().wiflist, this);
         rv_wifilist.setAdapter(adapter);
+
+        /**
+         * 下拉刷新
+         */
+        ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+            }
+        });
     }
 
     String wifi_bssid;//homewifi   mac
@@ -140,6 +142,8 @@ public class InitWifiListActivity extends BaseActivity {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
+
+
                 synchronized (lock) {
                     if(position>=adapter.mdatas.size()||position<0){
                         return;
@@ -168,34 +172,25 @@ public class InitWifiListActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
-
-        bt_refresh.setVisibility(View.GONE);
-        tv_tip.setVisibility(View.VISIBLE);
-        ll_loading.setVisibility(View.GONE);
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
             adapter.notifyDataSetChanged();
         }
+
+        ptr_refresh.refreshComplete();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiListError(EventManage.wifiListError event) {
-        bt_refresh.setVisibility(View.VISIBLE);
-        tv_tip.setVisibility(View.GONE);
-        ll_loading.setVisibility(View.VISIBLE);
+        ToastUtil.showTost("设备不在线，请启动");
+        ptr_refresh.refreshComplete();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         DeviceInfoInstance.getInstance().sendGetWifiListCmd();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override

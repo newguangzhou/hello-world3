@@ -16,12 +16,14 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
+import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
 import com.xiaomaoqiu.old.ui.dialog.StartPetFindingDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity;
@@ -37,6 +39,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -46,6 +50,9 @@ import retrofit2.Response;
 
 @SuppressLint("WrongConstant")
 public class PetFragment extends BaseFragment implements View.OnClickListener {
+
+
+    MaterialDesignPtrFrameLayout ptr_refresh;
 
     private HealthGoSportView mGoSportView;
     CircleProgressBar prog;
@@ -66,6 +73,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.main_tab_health, container, false);
+        ptr_refresh= (MaterialDesignPtrFrameLayout) rootView.findViewById(R.id.ptr_refresh);
+
         mGoSportView = (HealthGoSportView) rootView.findViewById(R.id.tab_health_gosportview);
 
         prog = (CircleProgressBar) rootView.findViewById(R.id.prog_target_done_percentage);
@@ -87,6 +96,16 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
         rootView.findViewById(R.id.btn_sleep).setOnClickListener(this);
 
+        /**
+         * 下拉刷新
+         */
+        ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                PetInfoInstance.getInstance().getPetInfo();
+            }
+        });
+
         initProgress();
         EventBus.getDefault().register(this);
 
@@ -96,6 +115,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     }
 
     void initData() {
+
         PetInfoInstance.getInstance().getPetInfo();
     }
 
@@ -106,11 +126,13 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
         strStart = strEnd;
         prog.setProgress(0);
+
     }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
+        ptr_refresh.refreshComplete();
 //        updateActivityView();
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {

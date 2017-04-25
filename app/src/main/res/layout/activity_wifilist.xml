@@ -4,49 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="确认设备开机后再发送获取wifi的指令"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:id="@+id/ll_loading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="正在获取wifi，请稍等" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/loading" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_tip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="请选择宠物常住地常用WIFI"
-        android:visibility="gone" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_wifilist"
+    <com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ptr_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#ffff0000"
-        android:dividerHeight="10dp" />
+        cube_ptr:ptr_duration_to_close="300"
+        cube_ptr:ptr_duration_to_close_header="2000"
+        cube_ptr:ptr_keep_header_when_refresh="true"
+        cube_ptr:ptr_pull_to_fresh="false"
+        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        cube_ptr:ptr_resistance="1.7">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_wifilist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#ffff0000"
+            android:dividerHeight="10dp" />
+    </com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>
 </LinearLayout>
