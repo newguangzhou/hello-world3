@@ -21,6 +21,8 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.IMapCallBack;
 import com.xiaomaoqiu.now.map.main.MapModule;
+import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.ILocateView;
@@ -47,7 +49,7 @@ import retrofit2.Response;
 public class LocateFragment extends BaseFragment implements View.OnClickListener
         , ILocateView, IMapCallBack {
 
-    private ImageView  mFindPetView, mWalkPetView;
+    private ImageView mFindPetView, mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
     private TextView petLocation, walkpetNoticeView;
     private LinearLayout petLocContainer;
@@ -92,12 +94,12 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mMapMpdule.setAddressParseListener(new addressParseListener() {
             @Override
             public void onAddressparsed(String address) {
-                String textString=address;
+                String textString = address;
 
-                if(PetInfoInstance.getInstance().location_time!=0) {
-                    SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    String d = format.format(PetInfoInstance.getInstance().location_time*1000);//unix时间戳转化为java的毫秒，然后转成时间
-                    textString+=d;
+                if (PetInfoInstance.getInstance().location_time != 0) {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String d = format.format(PetInfoInstance.getInstance().location_time * 1000);//unix时间戳转化为java的毫秒，然后转成时间
+                    textString += d;
                 }
 
                 petLocation.setText(textString);
@@ -114,6 +116,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+            return;
+        }
         if (null == mMapMpdule || null == mPresenter) {
             return;
         }
@@ -146,18 +151,18 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onPetInfoChanged(EventManage.atHomeOrtoSport event) {
 
-            if (null != mWalkPetView) {
-                mWalkPetView.setEnabled(true);
-                mWalkPetView.setSelected(!PetInfoInstance.getInstance().getAtHome());
-            }
-            if (null != mMapMpdule && !PetInfoInstance.getInstance().getAtHome()) {
-                mMapMpdule.resetToWalkMode();
-                walkpetNoticeView.setVisibility(View.VISIBLE);
-                petLocContainer.setVisibility(View.GONE);
-            } else {
-                walkpetNoticeView.setVisibility(View.GONE);
-                petLocContainer.setVisibility(View.VISIBLE);
-            }
+        if (null != mWalkPetView) {
+            mWalkPetView.setEnabled(true);
+            mWalkPetView.setSelected(!PetInfoInstance.getInstance().getAtHome());
+        }
+        if (null != mMapMpdule && !PetInfoInstance.getInstance().getAtHome()) {
+            mMapMpdule.resetToWalkMode();
+            walkpetNoticeView.setVisibility(View.VISIBLE);
+            petLocContainer.setVisibility(View.GONE);
+        } else {
+            walkpetNoticeView.setVisibility(View.GONE);
+            petLocContainer.setVisibility(View.VISIBLE);
+        }
 //todo 修改头像之后解开
 //        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
 

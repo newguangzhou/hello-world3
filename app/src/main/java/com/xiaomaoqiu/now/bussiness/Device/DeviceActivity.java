@@ -10,6 +10,7 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
@@ -51,13 +52,21 @@ public class DeviceActivity extends BaseActivity {
         batteryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (DeviceInfoInstance.getInstance().battery_level < 0) {
+                    ToastUtil.showTost("您的设备尚未开机！");
+                    return;
+                }
                 batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
                         DeviceInfoInstance.getInstance().lastGetTime);
             }
         });
+        if (DeviceInfoInstance.getInstance().battery_level < 0) {
+            ToastUtil.showTost("您的设备尚未开机！");
+        }else{
+            batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                    DeviceInfoInstance.getInstance().lastGetTime);
+        }
 
-        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
-                DeviceInfoInstance.getInstance().lastGetTime);
         findViewById(R.id.tv_sim_recharge).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +81,10 @@ public class DeviceActivity extends BaseActivity {
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         showMessageOnUI();
         batteryView = (BatteryView) findViewById(R.id.batteryView);
+        if (DeviceInfoInstance.getInstance().battery_level < 0) {
+            ToastUtil.showTost("您的设备尚未开机！");
+            return;
+        }
         batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
                 DeviceInfoInstance.getInstance().lastGetTime);
     }

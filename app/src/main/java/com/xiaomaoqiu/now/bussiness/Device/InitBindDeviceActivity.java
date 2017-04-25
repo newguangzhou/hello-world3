@@ -14,6 +14,7 @@ import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
 import com.xiaomaoqiu.pet.R;
 
@@ -42,6 +43,9 @@ public class InitBindDeviceActivity extends BaseActivity {
         setNextView("下一步", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                    return;
+                }
                 if(inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())){
                     showToast("请输入IMEI码！");
                     return;

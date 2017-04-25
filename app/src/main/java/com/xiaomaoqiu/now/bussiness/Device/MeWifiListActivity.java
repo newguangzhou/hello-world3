@@ -177,7 +177,7 @@ public class MeWifiListActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiListError(EventManage.wifiListError event) {
-        ToastUtil.showTost("设备不在线，请启动");
+        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
 

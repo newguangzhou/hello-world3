@@ -27,6 +27,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.InputDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog;
@@ -85,7 +86,9 @@ public class AddPetInfoActivity extends BaseActivity {
         setNextView("下一步", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                    return;
+                }
                 if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)||TextUtils.isEmpty(modifyBean.description)) {
                     ToastUtil.showTost("信息需要完整");
                     return;
