@@ -174,8 +174,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
         prog.setProgress((int) percentage);
-        tvSportDone.setText(String.format("已消耗%d卡", sportDone));
-        tvSportTarget.setText(String.format("目标消耗%d卡", sportTarget));
+        tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
+        tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
     }
 
     //更新去运动还是回家的view
