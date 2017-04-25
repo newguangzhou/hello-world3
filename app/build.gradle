@@ -25,7 +25,7 @@ android {
         versionName '0.0.1.inner_test'
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ eventBusIndex : 'com.xmq.MyEventBusIndex' ]
+                arguments = [eventBusIndex: 'com.xmq.MyEventBusIndex']
             }
         }
     }
@@ -41,7 +41,7 @@ android {
             signingConfig signingConfigs.release_sign_config
         }
     }
-    lintOptions{
+    lintOptions {
 //        checkReleaseBuilds false
         abortOnError false
         disable 'MissingTranslation'
@@ -89,4 +89,8 @@ dependencies {
     compile files('libs/BaiduTraceSDK_v2_1_15.jar')
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/BaiduTraceSDK_v2_1_16.jar')
+
+   //下拉刷新
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+
 }
