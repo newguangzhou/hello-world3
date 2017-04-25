@@ -15,18 +15,19 @@
         cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
         cube_ptr:ptr_resistance="1.7">
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@color/white"-->
-            <!--android:orientation="vertical">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <!--<TextView-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="32dp"-->
+                <!--android:layout_marginRight="16dp"-->
                 <!--android:textSize="16sp"-->
                 <!--android:gravity="center"-->
-                <!--android:layout_marginTop="14dp"-->
                 <!--android:textColor="@color/total_color_7"-->
                 <!--android:text="今日活动"/>-->
 
@@ -125,7 +126,7 @@
 
 
                 </LinearLayout>
-            <!--</LinearLayout>-->
+            </LinearLayout>
 
 
             <View
@@ -302,12 +303,12 @@
         </LinearLayout>
     </com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>
 
-    <com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView
-        android:id="@+id/tab_health_gosportview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android_custom:hide_dialogback="#59595757"
-     />
+    <!--<com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView-->
+        <!--android:id="@+id/tab_health_gosportview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android_custom:hide_dialogback="#59595757"-->
+     <!--/>-->
 
 
 </RelativeLayout>

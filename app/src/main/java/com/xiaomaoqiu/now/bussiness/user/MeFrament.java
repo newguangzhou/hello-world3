@@ -14,6 +14,7 @@ import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.ShopCityActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
@@ -22,9 +23,11 @@ import com.xiaomaoqiu.pet.R;
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class MeFrament extends BaseFragment {
+public class MeFrament extends BaseFragment implements LogoutView{
 
     static int REQ_EXIT = 1;
+    LoginPresenter loginPresenter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +37,8 @@ public class MeFrament extends BaseFragment {
         View mRoot = inflater.inflate(R.layout.main_tab_me, container, false);
 
         initView(mRoot);
+        loginPresenter=new LoginPresenter(this);
+
 
         return mRoot;
     }
@@ -51,8 +56,18 @@ public class MeFrament extends BaseFragment {
         root.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ExitDialog_RAW_Activity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), ExitDialog_RAW_Activity.class);
+//                startActivity(intent);
+                DialogUtil.showTwoButtonDialog(getActivity(), "确认退出登录？", "取消", "确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                });
             }
         });
 
@@ -116,6 +131,15 @@ public class MeFrament extends BaseFragment {
             }
         });
     }
-
+    @Override
+    public void success() {
+        if(getActivity()==null){
+            return;
+        }
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        getActivity().overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
 
 }

@@ -8,15 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
-import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -24,11 +21,11 @@ import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
+import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.old.ui.dialog.StartPetFindingDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
 import com.xiaomaoqiu.pet.R;
 
@@ -54,7 +51,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     MaterialDesignPtrFrameLayout ptr_refresh;
 
-    private HealthGoSportView mGoSportView;
+//    private HealthGoSportView mGoSportView;
     CircleProgressBar prog;
     TextView tvSportDone;
     TextView tvSportTarget;
@@ -75,7 +72,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.main_tab_health, container, false);
         ptr_refresh= (MaterialDesignPtrFrameLayout) rootView.findViewById(R.id.ptr_refresh);
 
-        mGoSportView = (HealthGoSportView) rootView.findViewById(R.id.tab_health_gosportview);
+//        mGoSportView = (HealthGoSportView) rootView.findViewById(R.id.tab_health_gosportview);
 
         prog = (CircleProgressBar) rootView.findViewById(R.id.prog_target_done_percentage);
         tvSportDone = (TextView) rootView.findViewById(R.id.tv_sport_done);
@@ -219,10 +216,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        if (mGoSportView.isShowing()) {
-            mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
-            return;
-        }
+//        if (mGoSportView.isShowing()) {
+//            mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
+//            return;
+//        }
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.btn_sport_index:
@@ -257,10 +254,24 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_sport:
-                mGoSportView.show(HealthGoSportView.STATUS_SPORT);
+//                mGoSportView.show(HealthGoSportView.STATUS_SPORT);
+                AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PetInfoInstance.getInstance().setAtHome(false);
+                    }
+                });
                 break;
             case R.id.btn_go_home:
-                mGoSportView.show(HealthGoSportView.STATUS_BACK);
+//                mGoSportView.show(HealthGoSportView.STATUS_BACK);
+                AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        mWalkPetView.setEnabled(false);
+//                        mMapMpdule.stopWalkPet();
+                        PetInfoInstance.getInstance().setAtHome(true);
+                    }
+                });
                 break;
             case R.id.btn_sleep:
                 intent.setClass(getActivity(), SleepIndexActivity.class);
@@ -269,16 +280,16 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    public boolean isDialogShowing() {
-        if (null != mGoSportView) {
-            return mGoSportView.isShowing();
-        }
-        return false;
-    }
+//    public boolean isDialogShowing() {
+//        if (null != mGoSportView) {
+//            return mGoSportView.isShowing();
+//        }
+//        return false;
+//    }
 
-    public void hideDialog() {
-        mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
-    }
+//    public void hideDialog() {
+//        mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
+//    }
 
 
     public void onDestroy() {

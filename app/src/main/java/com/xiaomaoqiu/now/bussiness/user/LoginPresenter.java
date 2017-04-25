@@ -47,7 +47,9 @@ public class LoginPresenter {
      */
     public void getVerifyCode(String phone, int deviceType) {
         final LoginView tloginView = loginView.get();
+
         if (tloginView != null) {
+            tloginView.showDialog();
             ApiUtils.getApiService().getVerifyCode(phone, deviceType).enqueue(new XMQCallback<MessageBean>() {
                 @Override
                 public void onSuccess(Response<MessageBean> response, MessageBean message) {
@@ -65,11 +67,13 @@ public class LoginPresenter {
                             ToastUtil.showTost("网络出错");
 
                     }
+                    tloginView.dismissDialog();
                 }
 
                 @Override
                 public void onFail(Call<MessageBean> call, Throwable t) {
                     Toast.makeText(PetAppLike.mcontext, "验证码发送失败", Toast.LENGTH_LONG).show();
+                    tloginView.dismissDialog();
                 }
             });
         }

@@ -28,6 +28,7 @@ import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.pet.R;
@@ -187,28 +188,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
 
     public void showDialog() {
-        if (null == mProgressBar) {
-            mProgressBar = new ProgressDialog(this, AlertDialog.THEME_HOLO_LIGHT);
-            mProgressBar.setCanceledOnTouchOutside(false);
-            mProgressBar.setOnKeyListener(new DialogInterface.OnKeyListener() {
 
-                @Override
-                public boolean onKey(DialogInterface dialog, int keyCode,
-                                     KeyEvent event) {
-                    return true;
-                }
-            });
-            mProgressBar.setMessage("正在登录，请稍候....");
-            mProgressBar.setCancelable(false);
-        }
-        mProgressBar.show();
+            DialogUtil.showProgress(this, "请稍等");
     }
 
     public void dismissDialog() {
-        if (null == mProgressBar) {
-            return;
-        }
-        mProgressBar.dismiss();
+        DialogUtil.closeProgress();
     }
 
     @Override

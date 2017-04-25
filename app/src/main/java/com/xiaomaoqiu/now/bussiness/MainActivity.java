@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.bussiness;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -9,11 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
@@ -40,6 +43,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private LocateFragment mLocateFragment;
     private MeFrament mMeFragment;
 
+    SimpleDraweeView sdv_header;
     BatteryView batteryView;//右上角的电池
 
     @Override
@@ -82,8 +86,17 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mHealthTabIcon = (ImageView) findViewById(R.id.main_tab_health);
         mLocateTabIcon = (ImageView) findViewById(R.id.main_tab_locate);
         mMeTabIcon = (ImageView) findViewById(R.id.main_tab_me);
+        sdv_header= (SimpleDraweeView) findViewById(R.id.sdv_header);
         batteryView = (BatteryView) findViewById(R.id.batteryView);
 
+        sdv_header.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,PetInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         //点击弹出电池
         batteryView.setOnClickListener(new View.OnClickListener() {
 
@@ -170,8 +183,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        if (null != mPetFragment && !mPetFragment.isHidden() && mPetFragment.isDialogShowing()) {
-            mPetFragment.hideDialog();
+        if (null != mPetFragment && !mPetFragment.isHidden() ) {
             mBackClickTime = -1;
             return;
         }

@@ -65,6 +65,7 @@ public class BaseActivity extends Activity {
     protected void onDestroy()
     {
 //        NotificationCenter.INSTANCE.removeObserver(this);
+        isDestoryed = true;
         super.onDestroy();
     }
     public ViewGroup getRightView(){ return (ViewGroup)m_titleView.findViewById(R.id.fl_right);}
@@ -129,5 +130,14 @@ public class BaseActivity extends Activity {
 
     protected void showToast(String Msg){
         Toast.makeText(this,Msg,Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean isDestoryed;
+    /**
+     * 是否销毁了
+     * @return 页面是否销毁掉  bug fixxed with umeng at 5.0.1 by yangwenxin
+     */
+    public boolean isDestroy(){
+        return  isDestoryed;
     }
 }

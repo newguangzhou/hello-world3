@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="bottom"
+        android:gravity="center"
         android:layout_marginRight="16dp">
 
         <!--<com.xiaomaoqiu.old.widgets.CircleImageView-->
@@ -31,8 +31,7 @@
             android:id="@+id/asyn_dialog_imgview"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginBottom="26dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
             android:scaleType="fitXY"
             fresco:fadeDuration="300"
