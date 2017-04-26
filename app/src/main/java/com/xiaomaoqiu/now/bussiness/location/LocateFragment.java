@@ -136,7 +136,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mPresenter.queryPetLocation(true);
                 break;
             case R.id.btn_playing_pet:
-                //遛狗
+                //去运动
                 showWalkPetDialog(!mWalkPetView.isSelected());
                 break;
 //            case R.id.btn_open_light:

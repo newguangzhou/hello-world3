@@ -232,19 +232,19 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//todo  为什么没有处理
-                        StartPetFindingDialog dialog = new StartPetFindingDialog(getActivity(),
-                                new StartPetFindingDialog.OnDialogDismiss() {
-                                    @Override
-                                    public void onDismiss(int nID) {
-                                        if (nID == R.id.btn_ok) {
-                                            Intent intent = new Intent(getActivity(), FindPetActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    }
-                                }
-                                , R.style.MyDialogStyle);
-                        dialog.show();
+////todo  为什么没有处理
+//                        StartPetFindingDialog dialog = new StartPetFindingDialog(getActivity(),
+//                                new StartPetFindingDialog.OnDialogDismiss() {
+//                                    @Override
+//                                    public void onDismiss(int nID) {
+//                                        if (nID == R.id.btn_ok) {
+//                                            Intent intent = new Intent(getActivity(), FindPetActivity.class);
+//                                            startActivity(intent);
+//                                        }
+//                                    }
+//                                }
+//                                , R.style.MyDialogStyle);
+//                        dialog.show();
 
                     }
                 });

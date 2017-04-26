@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.now.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -10,6 +11,7 @@ import com.xiaomaoqiu.pet.R;
 /**
  * Created by huangjx on 2016/7/24.
  */
+@SuppressLint("AppCompatCustomView")
 public class BatteryView extends ImageView {
 
     private float[] batteryLevels;
@@ -46,9 +48,17 @@ public class BatteryView extends ImageView {
 
     public void setBatteryLevel(float level,String time)
     {
+
+
         if(level <= mWarnLevel)
         {
             new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+        }
+        //如果超过1，说明在充电中……
+        if(level>1.0f){
+            setImageResource(charginRid);
+//            new BatteryIngNoticeDialog(getContext());
+            return;
         }
         for(int i=0; i<batteryLevels.length ;i++){
             if(level >= batteryLevels[i]){
@@ -58,7 +68,14 @@ public class BatteryView extends ImageView {
         }
     }
     public void pushBatteryDialog(float level,String time){
+        //如果超过1，说明在充电中……
+        if(level>1.0f){
+            setImageResource(charginRid);
+            new BatteryIngNoticeDialog(getContext());
+            return;
+        }
         new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+
         for(int i=0; i<batteryLevels.length ;i++){
             if(level >= batteryLevels[i]){
                 setImageResource(batteryLevelRes[i]);
@@ -67,6 +84,10 @@ public class BatteryView extends ImageView {
         }
     }
     public void showBatterylevel(float level,String time){
+        if(level>1.0f){
+            setImageResource(charginRid);
+            return;
+        }
         for(int i=0; i<batteryLevels.length ;i++){
             if(level >= batteryLevels[i]){
                 setImageResource(batteryLevelRes[i]);

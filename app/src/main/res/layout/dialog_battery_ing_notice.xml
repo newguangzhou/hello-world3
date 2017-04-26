@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/shape_dialog_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:minHeight="50dp"
+        android:layout_margin="30dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="27sp"
+            android:textColor="@color/total_color_2"
+            android:text="电池正在充电中……"
+            android:id="@+id/battery_notice_level"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/battery_notice_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/login_loginbt_bg"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp"
+        android:paddingLeft="38dp"
+        android:paddingRight="38dp"
+        android:text="关闭"/>
+
+
+</LinearLayout>
