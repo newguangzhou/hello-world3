@@ -98,10 +98,10 @@ public class PetInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                //TODO 暂时尚未开放修改头像功能，请期待
-                ToastUtil.showTost("暂时尚未开放修改头像功能，敬请期待");
+//                //TODO 暂时尚未开放修改头像功能，请期待
+//                ToastUtil.showTost("暂时尚未开放修改头像功能，敬请期待");
 
-               // modifyAvatar();
+                modifyAvatar();
             }
         });
 

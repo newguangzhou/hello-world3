@@ -63,7 +63,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 }
                 //如果宠物不存在了，直接退到添加宠物页面
                 if (EC_PET_NOT_EXIST == ret) {
-                    ToastUtil.showTost("请先填写您的宠物信息");
+//                    ToastUtil.showTost("请先填写您的宠物信息");
                     onFail(call, null);
 
                     PetInfoInstance.getInstance().clearPetInfo();
@@ -78,7 +78,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 }
                 //如果设备不存在，直接退到绑定设备页面
                 if (EC_DEVICE_NOT_EXIST == ret) {
-                    ToastUtil.showTost("请先填写您的宠物信息");
+//                    ToastUtil.showTost("请先填写您的宠物信息");
                     onFail(call, null);
 
                     DeviceInfoInstance.getInstance().clearDeviceInfo();

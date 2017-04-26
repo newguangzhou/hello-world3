@@ -45,9 +45,6 @@ public class AppDialog extends Dialog {
 		super(context, R.style.AppDialog);
 	}
 
-    /**
-     * Created by Administrator on 2016/12/18.
-     */
     @SuppressLint("WrongConstant")
     public static class DateUtil {
         /**
