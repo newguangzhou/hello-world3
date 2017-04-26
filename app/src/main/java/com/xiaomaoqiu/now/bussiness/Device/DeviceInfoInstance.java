@@ -129,7 +129,9 @@ public class DeviceInfoInstance {
         packBean.device_name = "";
 
 
+
         UserInstance.getInstance().device_imei = "";
+        wiflist.data.clear();
         UserInstance.getInstance().wifi_ssid = "";
         SPUtil.putHomeWifiSsid("");
         UserInstance.getInstance().wifi_bssid = "";
