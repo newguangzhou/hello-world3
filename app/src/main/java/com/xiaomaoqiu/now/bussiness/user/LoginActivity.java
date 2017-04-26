@@ -204,6 +204,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void next(EventManage.getUserInfoEvent event) {
+        dismissDialog();//隐藏加载中动画
         Intent intent = new Intent();
         if (!(UserInstance.getInstance().pet_id > 0)) {
             intent.setClass(LoginActivity.this, AddPetInfoActivity.class);

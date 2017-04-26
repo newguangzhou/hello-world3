@@ -98,9 +98,7 @@ public class LoginPresenter {
             ApiUtils.getApiService().login(phone, verifyCode, deviceType, deviceId).enqueue(new XMQCallback<LoginBean>() {
                 @Override
                 public void onSuccess(Response<LoginBean> response, LoginBean message) {
-                    if (tloginView != null) {
-                        tloginView.dismissDialog();
-                    }
+
                     HttpCode ret = HttpCode.valueOf(message.status);
                     switch (ret) {
                         case EC_SUCCESS:
@@ -113,9 +111,16 @@ public class LoginPresenter {
                             break;
                         case EC_INVALID_VERIFY_CODE:
                             ToastUtil.showTost("验证码无效");
+                            if (tloginView != null) {
+                                tloginView.dismissDialog();
+                            }
                             break;
                         default:
                             ToastUtil.showTost("登录异常");
+                            if (tloginView != null) {
+                                tloginView.dismissDialog();
+                            }
+                            break;
                     }
 
                 }
