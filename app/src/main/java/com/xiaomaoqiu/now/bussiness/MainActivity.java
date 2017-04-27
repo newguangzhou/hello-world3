@@ -108,6 +108,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 startActivity(intent);
             }
         });
+        Uri uri = Uri.parse(PetInfoInstance.getInstance().getPackBean().logo_url);
+        sdv_header.setImageURI(uri);
         //点击弹出电池
         batteryView.setOnClickListener(new View.OnClickListener() {
 
