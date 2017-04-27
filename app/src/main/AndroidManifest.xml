@@ -180,6 +180,10 @@
 
 
         <activity android:name="com.xiaomaoqiu.now.bussiness.ShopCityActivity"/>
+
+        <activity android:name="com.xiaomaoqiu.now.view.crop.CropImageActivity"/>
+
+
     </application>
 
 </manifest>

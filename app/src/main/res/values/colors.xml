@@ -173,4 +173,16 @@
 
 
     <color name="refresh_color">#141e41</color>>
+
+
+
+
+    <!--截图-->
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+
+    <color name="gray_text_hint_l">#FFB4B4B4</color>
+    <color name="gray_line_hint_l">#FFDDDDDD</color>
 </resources>

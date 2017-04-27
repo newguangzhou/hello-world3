@@ -32,12 +32,19 @@ public class ApiUtils {
 
 
     /**
-     * http://my.api.chinahr.com
      *
      * @return
      */
     public static ApiService getApiService() {
         xmqApiService = getRetrofitClient(Constants.Url.Host).create(ApiService.class);
+        return xmqApiService;
+    }
+
+    /**
+     * 文件上传端口不同
+     */
+    public static ApiService getFileApiService(){
+        xmqApiService = getRetrofitClient(Constants.Url.File_Host).create(ApiService.class);
         return xmqApiService;
     }
 

@@ -3,6 +3,7 @@ package com.xiaomaoqiu.now.bussiness;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -67,6 +69,13 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         }
         batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
                 DeviceInfoInstance.getInstance().lastGetTime);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getActivityInfo(EventManage.uploadImageSuccess event) {
+        Uri uri = Uri.parse(PetInfoInstance.getInstance().getPackBean().logo_url);
+        sdv_header.setImageURI(uri);
+
     }
 
 

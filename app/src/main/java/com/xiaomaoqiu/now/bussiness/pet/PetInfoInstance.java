@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.bussiness.pet;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -10,6 +11,7 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
+import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -17,14 +19,20 @@ import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.test.TestInstance;
 import com.xiaomaoqiu.now.test.TestLocationBean;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Map;
 import java.util.Scanner;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -320,6 +328,46 @@ public class PetInfoInstance {
 //        TestInstance.getTestInstance().getTestLocation();
 
     }
+
+    //上传头像信息
+    public void uploadImage(String path){
+        try {
+
+            //把Bitmap保存到sd卡中
+        File fImage = new File(path);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), fImage);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("flieName", fImage.getName(), requestFile);
+        ApiUtils.getFileApiService().uploadLogo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), body).enqueue(
+                new XMQCallback<PictureBean>() {
+                    @Override
+                    public void onSuccess(Response<PictureBean> response, PictureBean message) {
+                        DialogUtil.closeProgress();
+                        HttpCode ret = HttpCode.valueOf(message.status);
+                        switch (ret) {
+                            case EC_SUCCESS:
+                                //更新头像属性
+                                packBean.logo_url=message.file_url;
+                                if (!TextUtils.isEmpty(packBean.logo_url)) {
+                                    SPUtil.putPetHeader(packBean.logo_url);
+                                }
+                                EventBus.getDefault().post(new EventManage.uploadImageSuccess());
+                                break;
+
+                        }
+                    }
+
+                    @Override
+                    public void onFail(Call<PictureBean> call, Throwable t) {
+                        DialogUtil.closeProgress();
+                    }
+                }
+        );
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+}
 
     public PetInfoBean getPackBean() {
         return packBean;

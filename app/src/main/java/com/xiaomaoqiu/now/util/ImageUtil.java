@@ -9,11 +9,26 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Administrator on 2017/1/1.
  */
 
 public class ImageUtil {
+
+    /**
+     * 生成图片文件名称(依据当前时间)
+     *
+     * @return 文件名
+     */
+    public static String getFileNameByTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        return "xmq/" + dateFormat.format(new Date()) + ".jpg";
+    }
+
+
     /**
      * 根据Uri获取图片绝对路径，解决Android4.4以上版本Uri转换
      *

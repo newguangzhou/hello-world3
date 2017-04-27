@@ -18,6 +18,8 @@ public class Constants {
     public static class Url {
         public static String Host = "http://120.24.152.121:9100/";
 
+        public static String File_Host="http://120.24.152.121:9700/";
+
 
         //用户相关
         public static class User {

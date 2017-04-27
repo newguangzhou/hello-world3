@@ -69,4 +69,7 @@ public class EventManage {
     public static class TodaySportData{
        public  PetSportBean.SportBean sportBean=new PetSportBean.SportBean();
     }
+
+    //上传头像成功
+    public static class uploadImageSuccess{}
 }

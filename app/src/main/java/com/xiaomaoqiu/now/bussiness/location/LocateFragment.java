@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.now.bussiness.location;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -163,9 +164,13 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             walkpetNoticeView.setVisibility(View.GONE);
             petLocContainer.setVisibility(View.VISIBLE);
         }
-//todo 修改头像之后解开
-//        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getActivityInfo(EventManage.uploadImageSuccess event) {
+        mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
     }
 //
 //    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)

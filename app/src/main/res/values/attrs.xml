@@ -72,4 +72,25 @@
         <attr name="hide_dialogback" format="color|reference"/>
         <attr name="back_paddingTop" format="dimension|reference"/>
     </declare-styleable>
+
+    <!--截图-->
+    <attr name="cropImageStyle" format="reference" />
+
+    <declare-styleable name="CropImageView">
+        <attr name="highlightColor" format="reference|color" />
+        <attr name="showThirds" format="boolean" />
+        <attr name="showCircle" format="boolean" />
+        <attr name="showHandles">
+            <enum name="changing" value="0" />
+            <enum name="always" value="1" />
+            <enum name="never" value="2" />
+        </attr>
+    </declare-styleable>
+    <attr name="hasLoadMore" forMymat="boolean" />
+
+    <declare-styleable name="ChinaHrListView">
+        <!--是否有加载更多的属性-->
+        <attr name="hasLoadMore" />
+    </declare-styleable>
+
 </resources>

@@ -19,4 +19,9 @@
     <dimen name="chart_hole_radius">1dp</dimen>
     <dimen name="chart_fill_circle_radius">0.85dp</dimen>
     <dimen name="chart_highligh_width">5dp</dimen>
+
+
+
+    <!--截图-->
+    <dimen name="crop__bar_height">56dp</dimen>
 </resources>

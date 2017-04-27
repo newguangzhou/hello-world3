@@ -1,4 +1,6 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <string name="go_back">返回</string>
     <string name="login">登陆</string>
@@ -120,4 +122,11 @@
     <string name="map_light_open">夜晚时段可开启小夜灯。开启小夜灯将导致追踪器耗电量增加，是否仍然开启灯光？</string>
     <string name="map_is_findpet">紧急搜寻模式将启动所有定位模块，小毛球追踪器的功耗将被开至最大。\n省电提示：找到狗狗后记得关闭紧急搜寻模式哦！</string>
     <string name="map_walkpet_notice">注意：当前在遛狗模式，若狗狗离开视线，请点击打开找狗模式定位狗狗精确位置。</string>
+
+    <!--截图-->
+    <string name="crop__wait">Si us plau esperi…</string>
+    <string name="crop__pick_error">No hi ha imatges disponibles</string>
+
+    <string name="crop__done">ACCEPTAR</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL·LAR</string>
 </resources>
