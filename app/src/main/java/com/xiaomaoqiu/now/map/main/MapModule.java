@@ -126,6 +126,8 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
             //TODO 定位失败弹窗提示
             return;
         }
+
+        //todo 这里出问题了
         if (MODE_NORMAL == mMode || MODE_FINDED_PET == mMode || MODE_WALKING_PET == mMode) {
             setPhonePos(bdLocation);
         } else if (MODE_FINDING_PET == mMode) {

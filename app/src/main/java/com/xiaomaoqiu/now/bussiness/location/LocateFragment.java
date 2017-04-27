@@ -193,7 +193,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onShowPhoneLoc() {
-        mMapMpdule.setMapMode(MapModule.MODE_WALK_PET);//遛狗模式
+        mMapMpdule.setMapMode(MapModule.MODE_NORMAL);//找狗模式
         mMapMpdule.setMapcenterWithPhone();
     }
 
