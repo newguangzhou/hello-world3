@@ -304,8 +304,12 @@ public class PetInfoActivity extends BaseActivity {
                 }
                 break;
             case REQ_CODE_GET_PHOTO_FROM_TAKEPHOTO:
+                //todo 判断相机是否有返回
                 File picture = new File(Environment.getExternalStorageDirectory()
                         + "/temp.jpg");
+                if(!picture.exists()){
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 // 选择图片后进入裁剪
                 Uri source = Uri.fromFile(picture);

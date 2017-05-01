@@ -61,7 +61,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.main_tab_locate, container, false);
+          ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.main_tab_locate, container, false);
         initView(rootView);
         initMapModule(rootView);
         initData();

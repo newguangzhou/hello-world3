@@ -3,30 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/Users/long/Desktop/android/app/libs/locSDK_6.13.jar"
+        jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/locSDK_6.13_d497eda9ff61f0fdbbe87214b6b7a0af56d201b2.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/android/app/libs/baidumapapi_v3_5_0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ba79500bb64218f10b5fd0d5ea54503b2bf6b3bb">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/baidumapapi_v3_5_0_b8f9903c5c5cf2ab8290987518dff202c86b7ec6.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/android/app/libs/org.apache.http.legacy.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_75612a032a672b000bd5f649bcf17d0c44260255.jar.jar" />
+        sha1="0b5aa100e301f4bd89d12a5fa7fa325853a48b88">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_35ef57c91f95d9b8d442d71d154ca822020db9dd.jar.jar" />
     </item>
     <item
         is-multidex="false"
@@ -39,30 +21,30 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/libs/zxing.jar"
+        jar="/Users/long/.android/build-cache/b48c81a60bf26bbe0c9d1bed9b87b2cdd98cbf16/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="657431ffc6f0c763c22579b392e0bdfab26fc817">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/8/zxing_a4b977085d90c9ef8eb7174f9d2efc8674c2182e.jar.jar" />
+        sha1="a0bdf70123d26dd83d8462d602b3a83a41934cf6">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_fbce50194166ce5fad6604ac1956ced44663b083.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/classes.jar"
+        jar="/Users/long/Desktop/android/chartviews/build/intermediates/bundles/default/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="0b5aa100e301f4bd89d12a5fa7fa325853a48b88">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_35ef57c91f95d9b8d442d71d154ca822020db9dd.jar.jar" />
+        sha1="661f35fbc8c1550b6c831a5465e714d08fc44156">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_0c4e326890b41e55a4434e8e46efdbf5e25a0b3b.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/Desktop/android/PullToRefresh/build/intermediates/bundles/default/classes.jar"
+        jar="/Users/long/Desktop/android/app/libs/locSDK_6.13.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="348d75431a50e1c13cc056a6019ca6b0953a60ab">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_64fd9bb50b2a505286182aa82b9f9dc6e13f5776.jar.jar" />
+        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/locSDK_6.13_d497eda9ff61f0fdbbe87214b6b7a0af56d201b2.jar.jar" />
     </item>
     <item
         is-multidex="false"
@@ -84,6 +66,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/libs/zxing.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="657431ffc6f0c763c22579b392e0bdfab26fc817">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/8/zxing_a4b977085d90c9ef8eb7174f9d2efc8674c2182e.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/long/Desktop/android/AndroidCharts/build/intermediates/bundles/default/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -93,12 +84,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/Desktop/android/chartviews/build/intermediates/bundles/default/classes.jar"
+        jar="/Users/long/Desktop/android/app/libs/baidumapapi_v3_5_0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="661f35fbc8c1550b6c831a5465e714d08fc44156">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_0c4e326890b41e55a4434e8e46efdbf5e25a0b3b.jar.jar" />
+        sha1="ba79500bb64218f10b5fd0d5ea54503b2bf6b3bb">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/baidumapapi_v3_5_0_b8f9903c5c5cf2ab8290987518dff202c86b7ec6.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/app/libs/org.apache.http.legacy.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_75612a032a672b000bd5f649bcf17d0c44260255.jar.jar" />
     </item>
 
 </items>
