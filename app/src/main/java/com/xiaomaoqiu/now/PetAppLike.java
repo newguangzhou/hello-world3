@@ -13,6 +13,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
+import com.xiaomaoqiu.now.push.XMPushManager;
+import com.xiaomaoqiu.now.util.Apputil;
 
 /**
  * Created by Administrator on 2015/6/17.
@@ -34,27 +36,30 @@ public class PetAppLike extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
+
         mcontext=getApplication();
         environment=Environment.Release;
-        Fresco.initialize(mcontext);
-
-
-
-
-
-        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
-        // 调试时，将第三个参数改为true
-        Bugly.init(getApplication(), "61e9af8769", environment.bugly_log);
-
-
+        if (isMainProcess(getApplication())) {
+            Fresco.initialize(mcontext);
+            // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
+            // 调试时，将第三个参数改为true
+            Bugly.init(getApplication(), "61e9af8769", environment.bugly_log);
 
 //        XMQCrashHandler handler = XMQCrashHandler.getMyCrashHandler();
 //        handler.init(getApplication());
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
 
 //        aboutBugly();
+            //小米push
+            XMPushManager.init();
+        }
 
     }
+
+    public boolean isMainProcess(Context context) {
+        return Apputil.getCurProcessName(context).equals("com.xiaomaoqiu.pet");
+    }
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onBaseContextAttached(Context base) {

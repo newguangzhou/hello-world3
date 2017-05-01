@@ -1,11 +1,14 @@
 package com.xiaomaoqiu.now.util;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 
 import com.xiaomaoqiu.now.PetAppLike;
+
+import java.util.List;
 
 /**
  * Created by long on 2017/4/17.
@@ -36,6 +39,28 @@ public class Apputil {
         return context.getPackageName();
     }
 
+    /**
+     * 获取当前进程名
+     * @param context
+     * @return
+     */
+    public static String getCurProcessName(Context context) {
+        if(context == null){
+            return "context为null";
+        }
+        int pid = android.os.Process.myPid();
+        ActivityManager mActivityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfos =  mActivityManager.getRunningAppProcesses();
+        if(mActivityManager != null && runningAppProcessInfos != null && runningAppProcessInfos.size() > 0){
+            for (ActivityManager.RunningAppProcessInfo appProcess : runningAppProcessInfos) {
+                if (appProcess != null && appProcess.pid == pid) {
+                    return appProcess.processName;
+                }
+            }
+        }
+        return "";
+    }
 
 
 }

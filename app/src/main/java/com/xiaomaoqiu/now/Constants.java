@@ -5,6 +5,8 @@ package com.xiaomaoqiu.now;
  */
 
 public class Constants {
+    public final static String DEFAULT_TAG = "xiaomaoqiu";
+
 
     public static final int DEVICE_TYPE=1;
 

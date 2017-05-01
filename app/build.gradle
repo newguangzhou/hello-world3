@@ -89,8 +89,7 @@ dependencies {
     compile files('libs/BaiduTraceSDK_v2_1_15.jar')
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/BaiduTraceSDK_v2_1_16.jar')
-
-   //下拉刷新
+    //下拉刷新
     compile 'in.srain.cube:ultra-ptr:1.0.11'
-
+    compile files('libs/MiPush_SDK_Client_3_2_2.jar')
 }
