@@ -52,6 +52,7 @@ public class PetAppLike extends DefaultApplicationLike {
 //        aboutBugly();
             //小米push
             XMPushManager.init();
+            SDKInitializer.initialize(PetAppLike.mcontext);
         }
 
     }
