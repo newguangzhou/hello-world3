@@ -13,7 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
-import com.xiaomaoqiu.now.push.XMPushManager;
+import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.Apputil;
 
 /**
@@ -50,8 +50,9 @@ public class PetAppLike extends DefaultApplicationLike {
 //        Thread.setDefaultUncaughtExceptionHandler(handler);
 
 //        aboutBugly();
-            //小米push
-            XMPushManager.init();
+
+
+            //百度地图
             SDKInitializer.initialize(PetAppLike.mcontext);
         }
 

@@ -14,6 +14,7 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -104,8 +105,8 @@ public class LoginPresenter {
                         case EC_SUCCESS:
                             //保存登录状态
                             UserInstance.getInstance().saveLoginState(message, phone);
-
-
+                            //小米push
+                            XMPushManagerInstance.getInstance().init();
                            UserInstance.getInstance().getUserInfo();
 
                             break;
@@ -143,13 +144,16 @@ public class LoginPresenter {
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {//退出登陆成功
+                    XMPushManagerInstance.getInstance().stop();
                     UserInstance.getInstance().clearLoginInfo();
                     PetInfoInstance.getInstance().clearPetInfo();
                     DeviceInfoInstance.getInstance().clearDeviceInfo();
+
                     final LogoutView togoutView = logoutView.get();
                     if (togoutView != null) {
                         //退出登录成功
                         togoutView.success();
+
                     }
                 }
             }

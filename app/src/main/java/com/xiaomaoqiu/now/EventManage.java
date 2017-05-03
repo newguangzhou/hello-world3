@@ -7,6 +7,19 @@ import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
  */
 
 public class EventManage {
+    //小米push注册成功
+    public static class XMPushRegister{
+
+    }
+    //小米设置uid成功
+    public static class setAccountSuccess{
+
+    }
+    //小米设置uid成功
+    public static class setAccountFail{
+
+    }
+
 
     //通知PetFragment可以获取运动信息了
     public static class notifyPetFramentGetActivityInfo {

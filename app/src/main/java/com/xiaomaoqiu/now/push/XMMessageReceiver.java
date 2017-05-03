@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.util.LogUtil;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -11,12 +12,10 @@ import com.xiaomi.mipush.sdk.MiPushCommandMessage;
 import com.xiaomi.mipush.sdk.MiPushMessage;
 import com.xiaomi.mipush.sdk.PushMessageReceiver;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 /**
  * Created by long on 17/5/1.
@@ -34,6 +33,8 @@ public class XMMessageReceiver extends PushMessageReceiver {
     private String mUserAccount;
     private String mStartTime;
     private String mEndTime;
+
+    //todo 非ui线程
     //通透消息到达
     @Override
     public void onReceivePassThroughMessage(Context context, MiPushMessage message) {
@@ -47,7 +48,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
             mUserAccount=message.getUserAccount();
         }
     }
-    //消息推送被点击
+    //通知消息推送被点击
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage message) {
         mMessage = message.getContent();
@@ -63,7 +64,8 @@ public class XMMessageReceiver extends PushMessageReceiver {
 //        String url = getTargetUrl();
 //        com.chinahr.android.common.instance.UrlManager.getInstance().filterPushUrl(context, url, false);
     }
-    //通知消息到达
+    //通知消息到达，对于应用在前台时不弹出通知的通知消息，
+    // SDK会将消息通过广播方式传给AndroidManifest中注册的PushMessageReceiver的子类的onNotificationMessageArrived方法
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage message) {
         mMessage = message.getContent();
@@ -82,31 +84,50 @@ public class XMMessageReceiver extends PushMessageReceiver {
     @Override
     public void onCommandResult(Context context, MiPushCommandMessage message) {
         String command = message.getCommand();
-        LogUtil.e(TAG,command);
+        LogUtil.e(TAG,"command:"+command);
         List<String> arguments = message.getCommandArguments();
         String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
         String cmdArg2 = ((arguments != null && arguments.size() > 1) ? arguments.get(1) : null);
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mRegId = cmdArg1;
-                LogUtil.e(TAG,mRegId);
+                LogUtil.e(TAG,"mRegId:"+mRegId);
+                //todo 注册成功
+                EventBus.getDefault().post(new EventManage.XMPushRegister());
             }
         } else if (MiPushClient.COMMAND_SET_ALIAS.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mAlias = cmdArg1;
-                if(XMPushManager.getOnRegisterResult()!=null){
-                    XMPushManager.getOnRegisterResult().onSuccess();
+                if(XMPushManagerInstance.getInstance().getOnRegisterResult()!=null){
+                    XMPushManagerInstance.getInstance().getOnRegisterResult().onSuccess();
                 }
             }else{
-                if(XMPushManager.getOnRegisterResult()!=null){
-                    XMPushManager.getOnRegisterResult().onFailed();
+                if(XMPushManagerInstance.getInstance().getOnRegisterResult()!=null){
+                    XMPushManagerInstance.getInstance().getOnRegisterResult().onFailed();
                 }
             }
         } else if (MiPushClient.COMMAND_UNSET_ALIAS.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mAlias = cmdArg1;
             }
-        } else if (MiPushClient.COMMAND_SUBSCRIBE_TOPIC.equals(command)) {
+        }else if(MiPushClient.COMMAND_SET_ACCOUNT.equals(command)){
+            if (message.getResultCode() == ErrorCode.SUCCESS) {
+//                mUserAccount = cmdArg1;
+                LogUtil.e(TAG,"mUserAccount:"+cmdArg1);
+                //todo 设置set-account成功
+                EventBus.getDefault().post(new EventManage.setAccountSuccess());
+            }else{
+                LogUtil.e(TAG,"mUserAccount:"+cmdArg1);
+                //todo 设置set-account失败后，重新发送
+                EventBus.getDefault().post(new EventManage.setAccountFail());
+            }
+        } else if(MiPushClient.COMMAND_UNSET_ACCOUNT.equals(command)){
+            if (message.getResultCode() == ErrorCode.SUCCESS) {
+                mUserAccount = cmdArg1;
+            }
+        }
+
+        else if (MiPushClient.COMMAND_SUBSCRIBE_TOPIC.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mTopic = cmdArg1;
             }
@@ -125,13 +146,14 @@ public class XMMessageReceiver extends PushMessageReceiver {
     @Override
     public void onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
         String command = message.getCommand();
-        LogUtil.e(TAG,command);
+        LogUtil.e(TAG,"command:"+command);
         List<String> arguments = message.getCommandArguments();
         String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
         String cmdArg2 = ((arguments != null && arguments.size() > 1) ? arguments.get(1) : null);
         if (MiPushClient.COMMAND_REGISTER.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mRegId = cmdArg1;
+
             }
         }
     }

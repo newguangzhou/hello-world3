@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by long on 2017/4/17.
  */
-
+@SuppressLint("WrongConstant")
 public class Apputil {
 
     //SD卡下通用的存储路径：SD卡路径下：Android/data/包名；
@@ -24,7 +24,7 @@ public class Apputil {
     public static String imei;
 
 
-    public static String getVersionName(Context context){
+    public static String getVersionName(Context context) {
         String versionName = "";
         PackageManager pm = context.getPackageManager();
         try {
@@ -36,27 +36,29 @@ public class Apputil {
         }
         return versionName;
     }
+
     /**
      * 获取应用包名
      */
-    public static String getPackageName(Context context){
+    public static String getPackageName(Context context) {
         return context.getPackageName();
     }
 
     /**
      * 获取当前进程名
+     *
      * @param context
      * @return
      */
     public static String getCurProcessName(Context context) {
-        if(context == null){
+        if (context == null) {
             return "context为null";
         }
         int pid = android.os.Process.myPid();
         @SuppressLint("WrongConstant") ActivityManager mActivityManager = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfos =  mActivityManager.getRunningAppProcesses();
-        if(mActivityManager != null && runningAppProcessInfos != null && runningAppProcessInfos.size() > 0){
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfos = mActivityManager.getRunningAppProcesses();
+        if (mActivityManager != null && runningAppProcessInfos != null && runningAppProcessInfos.size() > 0) {
             for (ActivityManager.RunningAppProcessInfo appProcess : runningAppProcessInfos) {
                 if (appProcess != null && appProcess.pid == pid) {
                     return appProcess.processName;
@@ -68,24 +70,26 @@ public class Apputil {
 
 
     /**
-     *手机获取imei的方法
-     * */
+     * 手机获取imei的方法
+     */
     public static String getIMEI(Context context) {
-        if(!TextUtils.isEmpty(imei))return  imei;
-        try{
+        if (!TextUtils.isEmpty(imei)) return imei;
+        try {
             TelephonyManager tm = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
             imei = tm.getDeviceId();
-        }catch (Exception e){
+        } catch (Exception e) {
         }
-        if(TextUtils.isEmpty(imei)||"000000000000000".equals(imei)||"0".equals(imei)){
-            imei = SPUtil.getImeikey();
+        if (TextUtils.isEmpty(imei) || "000000000000000".equals(imei) || "0".equals(imei)) {
+            //todo 获取手机imei
+//            imei = SPUtil.getImeikey();
         }
-        if(TextUtils.isEmpty(imei)){
+        if (TextUtils.isEmpty(imei)) {
             StringBuilder stringBuilder = new StringBuilder("35");
-            for(int i=0;i<13;i++){
-                stringBuilder.append(String.valueOf((int)(Math.random() * 10)));
+            for (int i = 0; i < 13; i++) {
+                stringBuilder.append(String.valueOf((int) (Math.random() * 10)));
             }
-            SPUtil.putImeikey(stringBuilder.toString());
+            //todo 获取手机imei
+//            SPUtil.putImeikey(stringBuilder.toString());
         }
         return imei;
     }
