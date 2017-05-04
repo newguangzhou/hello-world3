@@ -65,6 +65,8 @@ public class BatteryView extends ImageView {
                 setImageResource(batteryLevelRes[i]);
                 break;
             }
+            setImageResource(batteryLevelRes[4]);
+
         }
     }
     public void pushBatteryDialog(float level,String time){
@@ -81,6 +83,7 @@ public class BatteryView extends ImageView {
                 setImageResource(batteryLevelRes[i]);
                 break;
             }
+            setImageResource(batteryLevelRes[4]);
         }
     }
     public void showBatterylevel(float level,String time){
@@ -93,6 +96,7 @@ public class BatteryView extends ImageView {
                 setImageResource(batteryLevelRes[i]);
                 break;
             }
+            setImageResource(batteryLevelRes[4]);
         }
     }
 

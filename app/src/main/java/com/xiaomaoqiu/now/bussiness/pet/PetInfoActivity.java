@@ -280,15 +280,13 @@ public class PetInfoActivity extends BaseActivity {
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
-                if (!TextUtils.isEmpty(modifyBean.description)) {
                     modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
 //                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
-                }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
-                if (data != null && data.getData() != null) {
+                if (data != null) {
                     int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
                     onPhotoSource(mode);
                 }

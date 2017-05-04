@@ -18,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
 import com.xiaomaoqiu.pet.R;
@@ -169,6 +170,11 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
         overridePendingTransition(0, 0);
         startActivity(intent);
 
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void deviceAlreadyBind(EventManage.deviceAlreadyBind event){
+        ContactServiceDialog dlg = new ContactServiceDialog(InitBindDeviceActivity.this, R.style.MyDialogStyleBottom);
+        dlg.show();
     }
 
     @Override

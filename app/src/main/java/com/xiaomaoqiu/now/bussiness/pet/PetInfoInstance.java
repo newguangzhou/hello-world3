@@ -350,7 +350,11 @@ public class PetInfoInstance {
                                 if (!TextUtils.isEmpty(packBean.logo_url)) {
                                     SPUtil.putPetHeader(packBean.logo_url);
                                 }
+
+                                updatePetInfo(packBean);
+
                                 EventBus.getDefault().post(new EventManage.uploadImageSuccess());
+
                                 break;
 
                         }

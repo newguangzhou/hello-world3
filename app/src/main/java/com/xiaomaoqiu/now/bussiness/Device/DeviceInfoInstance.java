@@ -183,13 +183,13 @@ public class DeviceInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret){
                     case EC_SUCCESS:
-                        getDeviceInfo();
-
+//                        getDeviceInfo();
                         EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         break;
                     case EC_ALREADY_FAV:
                         ToastUtil.showAtCenter("设备已被绑定");
+                        EventBus.getDefault().post(new EventManage.deviceAlreadyBind());
                         break;
                 }
 //                if (ret == HttpCode.EC_SUCCESS) {

@@ -31,6 +31,10 @@ public class EventManage {
     public static class bindDeviceSuccess {
 
     }
+    //设备已被绑定之后
+    public static class deviceAlreadyBind{
+
+    }
     //解除绑定之后
     public static class unbindDeviceSuccess{
 
