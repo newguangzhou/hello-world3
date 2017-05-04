@@ -98,4 +98,18 @@ public class DialogUtil {
         dialog.show();
     }
 
+    public static void showLogoutDialog(Context context){
+        final Dialog dialog = new AppDialog(context,R.layout.dialog_logout,-1,-2,0,Gravity.CENTER);
+        Button logout_confirm = (Button) dialog.findViewById(R.id.logout_confirm);
+        logout_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
 }

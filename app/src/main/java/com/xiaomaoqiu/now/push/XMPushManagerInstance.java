@@ -46,7 +46,6 @@ public class XMPushManagerInstance {
     private static final String APP_SECRET = "aQLLX8h129sPKm3NeY9lcA==";
 
 
-    private OnResult onRegisterResult;
 
     private void openLogger() {
         //打开Logcat调试日志
@@ -114,19 +113,16 @@ public class XMPushManagerInstance {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void setUserAccount(EventManage.XMPushRegister event) {
         String uid = UserInstance.getInstance().getUid() + "";
-            MiPushClient.setUserAccount(PetAppLike.mcontext, uid, null);
+            MiPushClient.setAlias(PetAppLike.mcontext, uid, null);
     }
 
-    public void againSetUserAccount(EventManage.setAccountFail event){
+    public void againSetUserAccount(EventManage.setAliasFail event){
         String uid = UserInstance.getInstance().getUid() + "";
-            MiPushClient.setUserAccount(PetAppLike.mcontext, uid, null);
+            MiPushClient.setAlias(PetAppLike.mcontext, uid, null);
     }
 
     public String getRegId() {
         return MiPushClient.getRegId(PetAppLike.mcontext);
     }
 
-    public OnResult getOnRegisterResult() {
-        return onRegisterResult;
-    }
 }

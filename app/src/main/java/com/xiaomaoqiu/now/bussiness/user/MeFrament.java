@@ -14,10 +14,8 @@ import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.ShopCityActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
-import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.DialogToast;
-import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.pet.R;
 

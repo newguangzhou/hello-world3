@@ -288,8 +288,10 @@ public class PetInfoActivity extends BaseActivity {
                 }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
-                int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
-                onPhotoSource(mode);
+                if (data != null && data.getData() != null) {
+                    int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
+                    onPhotoSource(mode);
+                }
 
 
                 break;
@@ -307,7 +309,7 @@ public class PetInfoActivity extends BaseActivity {
                 //todo 判断相机是否有返回
                 File picture = new File(Environment.getExternalStorageDirectory()
                         + "/temp.jpg");
-                if(!picture.exists()){
+                if (!picture.exists()) {
                     return;
                 }
                 Bundle bundle = new Bundle();

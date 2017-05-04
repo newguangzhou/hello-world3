@@ -16,11 +16,15 @@ import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
+import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
+import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
 import com.xiaomaoqiu.pet.R;
 
@@ -39,11 +43,11 @@ import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
  * Created by long on 2017/4/12.
  */
 @SuppressLint("WrongConstant")
-public class InitWifiListActivity extends BaseActivity {
+public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
     MaterialDesignPtrFrameLayout ptr_refresh;
     RecyclerView rv_wifilist;
-
+    LoginPresenter loginPresenter;
 
 
     CheckStateAdapter adapter;
@@ -60,9 +64,26 @@ public class InitWifiListActivity extends BaseActivity {
         initData();
 
         EventBus.getDefault().register(this);
+        loginPresenter=new LoginPresenter(this);
     }
 
     private void initView() {
+        View btnGoBack = findViewById(R.id.btn_go_back);
+        btnGoBack.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                loginPresenter.logout();
+                            }
+                        }
+                );
+            }
+        });
+
 
 
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
@@ -197,5 +218,24 @@ public class InitWifiListActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    public void success() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        getActivity().overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                }
+        );
     }
 }

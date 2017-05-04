@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PushEventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
@@ -63,7 +64,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("longtianlove", "activity-login");
         initView();
         initListener();
         initData();
@@ -298,5 +298,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+
+    //设备状态更新
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true,priority = 0)
+    public void onKickOff(PushEventManage.otherLogin event){
+        DialogUtil.showLogoutDialog(this);
     }
 }

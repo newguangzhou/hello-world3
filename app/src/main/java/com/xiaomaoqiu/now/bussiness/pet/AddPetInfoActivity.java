@@ -23,12 +23,16 @@ import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
+import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
+import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.crop.Crop;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.InputDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog;
@@ -56,7 +60,7 @@ import retrofit2.Response;
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class AddPetInfoActivity extends BaseActivity {
+public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     private final int REQ_CODE_BIRTHDAY = 1;
     private final int REQ_CODE_WEIGHT = 2;
     private final int REQ_CODE_INTRO = 3;
@@ -77,6 +81,9 @@ public class AddPetInfoActivity extends BaseActivity {
 
 
     PetInfoBean modifyBean = PetInfoInstance.getInstance().packBean;
+
+    LoginPresenter loginPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +106,14 @@ public class AddPetInfoActivity extends BaseActivity {
             }
         });
         EventBus.getDefault().register(this);
+        loginPresenter=new LoginPresenter(this);
+
     }
 
 
     private void initView() {
+
+
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,6 +165,23 @@ public class AddPetInfoActivity extends BaseActivity {
     }
 
     private void initPetInfo() {
+        View btnGoBack = findViewById(R.id.btn_go_back);
+        btnGoBack.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                loginPresenter.logout();
+                            }
+                        }
+                );
+            }
+        });
+
+
         txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
         if (!TextUtils.isEmpty(modifyBean.name)) {
             (txt_pet_name).setText(modifyBean.name);
@@ -318,8 +346,10 @@ public class AddPetInfoActivity extends BaseActivity {
                 }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
-                int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
-                onPhotoSource(mode);
+                if(data!=null&& data.getData() != null) {
+                    int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
+                    onPhotoSource(mode);
+                }
 
 
                 break;
@@ -356,5 +386,25 @@ public class AddPetInfoActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+
+    public void success() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        getActivity().overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                }
+        );
     }
 }

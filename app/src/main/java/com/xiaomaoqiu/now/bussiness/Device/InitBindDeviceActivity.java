@@ -13,8 +13,12 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
+import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
+import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
 import com.xiaomaoqiu.pet.R;
 
@@ -29,12 +33,14 @@ import java.util.regex.Pattern;
  * Created by Administrator on 2016/12/31.
  */
 
-public class InitBindDeviceActivity extends BaseActivity {
+public class InitBindDeviceActivity extends BaseActivity  implements LogoutView {
 
     public static final int REQUEST_SWEEP_CODE=0;
 
     private EditText inputImei;
     private Button sweepBt;
+
+    LoginPresenter loginPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,8 @@ public class InitBindDeviceActivity extends BaseActivity {
         });
         initView();
         EventBus.getDefault().register(this);
+        loginPresenter=new LoginPresenter(this);
+
     }
 
     private void initView(){
@@ -64,8 +72,14 @@ public class InitBindDeviceActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(InitBindDeviceActivity.this, PetInfoActivity.class);
-                startActivity(intent);
+                DialogToast.createDialogWithTwoButton(InitBindDeviceActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                loginPresenter.logout();
+                            }
+                        }
+                );
             }
         });
         inputImei=(EditText)findViewById(R.id.bind_device_input_imei);
@@ -162,4 +176,25 @@ public class InitBindDeviceActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-}
+
+
+    public void success() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        getActivity().overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DialogToast.createDialogWithTwoButton(InitBindDeviceActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                }
+        );
+    }
+
+    }

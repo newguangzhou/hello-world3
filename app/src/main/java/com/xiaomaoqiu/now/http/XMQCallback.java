@@ -17,7 +17,6 @@ import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
