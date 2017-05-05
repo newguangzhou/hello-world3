@@ -104,6 +104,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 }
 
                 petLocation.setText(textString);
+                Log.e("longtianlove",textString);
+
             }
         });
     }

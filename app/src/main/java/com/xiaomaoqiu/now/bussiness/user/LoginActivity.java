@@ -43,7 +43,6 @@ import org.greenrobot.eventbus.ThreadMode;
 public class LoginActivity extends BaseActivity implements LoginView {
     EditText m_editPhone; // 帐号编辑框
     EditText m_editVerifyCode;
-    private ProgressDialog mProgressBar;
     private Button login_btn_sendVerify;//发送验证码按钮
     private Button login_btn_login;//登录按钮
     private View btn_contact_service;//联系客服
@@ -189,7 +188,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     public void showDialog() {
 
-            DialogUtil.showProgress(this, "请稍等");
+            DialogUtil.showProgress(this, "");
     }
 
     public void dismissDialog() {
@@ -294,9 +293,17 @@ public class LoginActivity extends BaseActivity implements LoginView {
         }
         return false;
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DialogUtil.closeProgress();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         EventBus.getDefault().unregister(this);
     }
 

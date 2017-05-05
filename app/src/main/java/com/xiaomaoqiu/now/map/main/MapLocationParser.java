@@ -1,5 +1,7 @@
 package com.xiaomaoqiu.now.map.main;
 
+import android.util.Log;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
@@ -27,6 +29,7 @@ public class MapLocationParser {
                 if(null == parseListener){
                     return;
                 }
+                Log.e("longtianlove--result",result.getLocation().latitude+":"+result.getLocation().longitude+"$"+result.getAddress());
                 parseListener.onAddressparsed(result.getAddress());
                 if(geoCoder != null){
                     geoCoder.destroy();

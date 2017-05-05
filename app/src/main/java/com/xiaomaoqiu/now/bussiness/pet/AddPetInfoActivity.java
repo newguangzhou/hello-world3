@@ -328,20 +328,26 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQ_CODE_NAME:
-                String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
-                modifyBean.name = nameBackString;
-                (txt_pet_name).setText(modifyBean.name);
+                if (data != null) {
+                    String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
+                    modifyBean.name = nameBackString;
+                    (txt_pet_name).setText(modifyBean.name);
+                }
                 break;
             case REQ_CODE_WEIGHT:// ModifyWeightDialog
-                modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
-                txt_weight.setText(modifyBean.weight + "kg");
+                if (data != null) {
+                    modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
+                    txt_weight.setText(modifyBean.weight + "kg");
+                }
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
+                if (data != null) {
                     modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
 //                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
+                }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
                 if(data!=null) {

@@ -345,7 +345,7 @@ public class CropImageActivity extends MonitoredActivity implements CropImageVie
         }
 
 
-        DialogUtil.showProgress(this, "请稍等");
+        DialogUtil.showProgress(this, "");
         //todo 上传头像
         PetInfoInstance.getInstance().uploadImage(clipImagePath);
 

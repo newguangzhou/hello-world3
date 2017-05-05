@@ -214,7 +214,6 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
                 .position(new LatLng(0, 0))
                 .visible(false);
         mBaiduMap.addOverlay(options);
-        Log.e("longtianlove","图片调用");
         mPhoneMarker = (Marker) (mBaiduMap.addOverlay(options));
     }
 
@@ -244,7 +243,7 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
 
         LatLng desLatLng=converterLatLng(sourceLatLng);
 
-
+Log.e("longtianlove--source",desLatLng.latitude+":"+desLatLng.longitude);
 
         mPetMarker.setPosition(desLatLng);
         if(MODE_FINDED_PET >= mMode) {
