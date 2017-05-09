@@ -105,7 +105,6 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             mFindPetView.setSelected(true);
             walkpetNoticeView.setVisibility(View.GONE);
             petLocContainer.setVisibility(View.VISIBLE);
-            MapInstance.getInstance().startFindPet();
         }else{
             mWalkPetView.setVisibility(View.VISIBLE);
             mFindPetView.setSelected(false);
@@ -118,8 +117,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
             }
-        }
 
+        }
+        MapInstance.getInstance(). startLocListener(1000);
         PetInfoInstance.getInstance().getPetLocation();
     }
 
@@ -142,7 +142,6 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 PetInfoInstance.getInstance().getPetLocation();
                 break;
             case R.id.btn_playing_pet:
-
                 //去运动
                 showWalkPetDialog(!mWalkPetView.isSelected());
                 break;

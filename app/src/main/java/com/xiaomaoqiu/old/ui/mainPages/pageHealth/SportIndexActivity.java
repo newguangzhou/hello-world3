@@ -32,9 +32,7 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.sport_index));
-
         setContentView(R.layout.activity_sport_index);
-
         initView();
         initData();
     }

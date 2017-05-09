@@ -99,8 +99,6 @@ public class PetInfoActivity extends BaseActivity {
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 modifyAvatar();
             }
         });
@@ -178,15 +176,10 @@ public class PetInfoActivity extends BaseActivity {
         imgLogo = (SimpleDraweeView) findViewById(R.id.img_pet_avatar);
         Uri uri = Uri.parse(modifyBean.logo_url);
         imgLogo.setImageURI(uri);
-//        AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfoBean.logo_url, this);
-
         ((TextView) findViewById(R.id.txt_variety)).setText(modifyBean.description);
-
-
         chk_gender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                PetInfoBean tmpBean = PetInfoInstance.getInstance().getPackBean();
                 if (isChecked) {
                     modifyBean.sex = Constants.Female;
                 } else {
@@ -286,9 +279,7 @@ public class PetInfoActivity extends BaseActivity {
             case REQ_CODE_INTRO:
                 if (data != null) {
                     modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
-//                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
-//                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
                 }
                 break;
             case REQ_CODE_PHOTO_SOURCE:

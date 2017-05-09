@@ -250,7 +250,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                 public void onSuccess(Response<BaseBean> response, BaseBean message) {
                                     MapInstance.getInstance().setGPSState(false);
                                     EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-//                                    checkIndex.changeLocatefragment();
                                 }
 
                                 @Override

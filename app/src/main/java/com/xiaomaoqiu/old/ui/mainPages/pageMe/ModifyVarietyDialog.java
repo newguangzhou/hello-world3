@@ -43,7 +43,6 @@ public class ModifyVarietyDialog extends BaseActivity {
 			public void onItemClick(View view, String name) {
 				Intent data = new Intent();
 				data.putExtra(ModifyVarietyDialog.TAG_PARAM1,name);
-				setResult(Activity.RESULT_OK, data);
 				ModifyVarietyDialog.this.finish();
 			}
 		});

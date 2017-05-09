@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.now.map.main;
 
+import android.opengl.Visibility;
 import android.view.View;
 
 import com.baidu.location.BDLocation;
@@ -165,7 +166,7 @@ public class MapInstance implements BDLocationListener {
     /**
      * 开始位置监听
      */
-    private void startLocListener(int scan) {
+    public void startLocListener(int scan) {
         if (null != mLocationClient && !mLocationClient.isStarted()) {
             mLocationClient.getLocOption().setScanSpan(scan);
             mLocationClient.start();
@@ -190,7 +191,6 @@ public class MapInstance implements BDLocationListener {
      * 开始找宠物
      */
     public void startFindPet() {
-//        mode_map=Mode_Map.GPS_OPEN;
         setGPSState(true);
         startLocListener(1000);
     }
@@ -202,19 +202,13 @@ public class MapInstance implements BDLocationListener {
     private void setPhonePos() {
         LatLng postion = new LatLng(mLatitude, mLongitude);
         float f = mBaiduMap.getMaxZoomLevel();//19.0
-
-//float m = mBaiduMap.getMinZoomLevel();//3.0
-
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f-2);
-
         mBaiduMap.animateMapStatus(u);
-
-
         if (!GPS_OPEN) {
             setCenter(postion, 300);
         }
         mPhoneMarker.setPosition(postion);
-        stopLocListener();
+
     }
 
 
@@ -258,17 +252,7 @@ public class MapInstance implements BDLocationListener {
             //todo 如果不在家，就设置为另一个头像
 
         }
-//        switch (mode_map){
-//            case Mode_Map.Normal://定位模式
-//                setPhonePos();
-//                break;
-//            case Mode_Map.GPS_OPEN://找狗模式
-//                setPhonePos();
-//                break;
-//            case Mode_Map.Work_The_Dog://遛狗模式
-//                setPhonePos();
-//                break;
-//        }
+        stopLocListener();
     }
 
     @Override
