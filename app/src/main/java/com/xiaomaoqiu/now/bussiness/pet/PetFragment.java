@@ -20,6 +20,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
+import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
@@ -126,18 +127,15 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     public void initProgress() {
         long msEnd = System.currentTimeMillis();
         Date today = new Date(msEnd);
-
         strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
         strStart = strEnd;
         prog.setProgress(0);
-
     }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
         ptr_refresh.refreshComplete();
-//        updateActivityView();
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
@@ -195,7 +193,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     //今日运动数据更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void todaySportData(EventManage.TodaySportData event) {
-
         sportTarget = event.sportBean.target_amount;
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
@@ -214,7 +211,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
             getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
         }
-//        SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
         Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
         AsynImgDialog.asynImg.setImageURI(uri);
     }
@@ -233,6 +229,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+            return;
+        }
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.btn_sport_index:
@@ -251,7 +250,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                 public void onSuccess(Response<BaseBean> response, BaseBean message) {
                                     MapInstance.getInstance().setGPSState(false);
                                     EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-                                    checkIndex.changeLocatefragment();
+//                                    checkIndex.changeLocatefragment();
                                 }
 
                                 @Override
