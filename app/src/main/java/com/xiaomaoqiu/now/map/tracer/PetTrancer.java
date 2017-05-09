@@ -5,11 +5,13 @@ import android.content.Context;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.trace.LBSTraceClient;
-import com.baidu.trace.LocationMode;
-import com.baidu.trace.OnStartTraceListener;
-import com.baidu.trace.OnStopTraceListener;
-import com.baidu.trace.OnTrackListener;
+
 import com.baidu.trace.Trace;
+import com.baidu.trace.api.track.OnTrackListener;
+import com.baidu.trace.model.LocationMode;
+import com.baidu.trace.model.OnTraceListener;
+import com.baidu.trace.model.ProtocolType;
+import com.baidu.trace.model.PushMessage;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.map.tracer.bean.HistoryTrackData;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStartTracerListener;
@@ -34,12 +36,15 @@ import rx.schedulers.Schedulers;
 @SuppressLint("WrongConstant")
 public class PetTrancer {
 
+
+    // 是否需要对象存储服务，注意:若需要对象存储服务，一定要导入 bos-android-sdk-1.0.2.jar。
+    boolean isNeedObjectStorage = false;
+
 //    public static final String LAST_START_WALK_TIME="last_walk_pet_time";
 
-    public static final long serviceId=132924;//轨迹服务的ID
+    public static final long serviceId=140388;//轨迹服务的ID
     public static final int GATHER_INTERVAL=10;//轨迹采集周期
     public static final int PACK_INTERVAL=60;//轨迹打包上传周期
-    public static final int PROTOCOL_TYPE=1;//http协议类型
 
     /**
      * 轨迹服务类型（0 : 不建立socket长连接， 1 : 建立socket长连接但不上传位置数据，2 : 建立socket长连接并上传位置数据）
@@ -85,31 +90,31 @@ public class PetTrancer {
     }
 
     public void initInner(Context context){
-        trace=new Trace(context.getApplicationContext(),serviceId,entityName,traceType);
+        trace=new Trace(serviceId,entityName,isNeedObjectStorage);
         client=new LBSTraceClient(context.getApplicationContext());
         client.setInterval(GATHER_INTERVAL,PACK_INTERVAL);
         //设置定位模式
         client.setLocationMode(LocationMode.High_Accuracy);
-        client.setProtocolType(PROTOCOL_TYPE);
+        client.setProtocolType(ProtocolType.HTTP);
         initListener();
         isInited=true;
     }
     private void initListener(){
-        trackListener=new OnTrackListener() {
+//        trackListener=new OnTrackListener() {
+//            @Override
+//            public void onRequestFailedCallback(String s) {
+//
+//            }
+//
+//            @Override
+//            public void onQueryHistoryTrackCallback(String s) {
+//                super.onQueryHistoryTrackCallback(s);
+//                parseHistorytraceData(s);
+//            }
+//        };
+        client.setOnTraceListener(new OnTraceListener() {
             @Override
-            public void onRequestFailedCallback(String s) {
-
-            }
-
-            @Override
-            public void onQueryHistoryTrackCallback(String s) {
-                super.onQueryHistoryTrackCallback(s);
-                parseHistorytraceData(s);
-            }
-        };
-        client.setOnStartTraceListener(new OnStartTraceListener() {
-            @Override
-            public void onTraceCallback(int i, String s) {
+            public void onStartTraceCallback(int i, String s) {
                 if(null == startTracerListener || null == startTracerListener.get()){
                     return;
                 }
@@ -128,13 +133,56 @@ public class PetTrancer {
                         startTracerListener.get().onFailStartTrace("网络可能有些问题，请检查后重试！");
                         break;
                 }
+            }
+
+            @Override
+            public void onStopTraceCallback(int i, String s) {
+                if(null != stopTracerListener && null != startTracerListener.get()){
+                    stopTracerListener.get().onSuccessStopTracer();
+                }
+            }
+
+            @Override
+            public void onStartGatherCallback(int i, String s) {
 
             }
 
             @Override
-            public void onTracePushCallback(byte b, String s) {
+            public void onStopGatherCallback(int i, String s) {
 
             }
+
+            @Override
+            public void onPushCallback(byte b, PushMessage pushMessage) {
+
+            }
+//            @Override
+//            public void onTraceCallback(int i, String s) {
+//                if(null == startTracerListener || null == startTracerListener.get()){
+//                    return;
+//                }
+//                switch (i){
+//                    case 0:
+//                    case 10006:
+//                        startTracerListener.get().onSuccessStartTrace();
+//                        break;
+//                    case 10000:
+//                    case 10001:
+//                    case 10002:
+//                        startTracerListener.get().onFailStartTrace("定位模式开启失败，请稍后重试！");
+//                        break;
+//                    case 10003:
+//                    case 10004:
+//                        startTracerListener.get().onFailStartTrace("网络可能有些问题，请检查后重试！");
+//                        break;
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onTracePushCallback(byte b, String s) {
+//
+//            }
         });
     }
 
@@ -208,7 +256,7 @@ public class PetTrancer {
         if(!isInited){
             return;
         }
-        client.startTrace(trace);
+//        client.startTrace(trace);
     }
 
     /**
@@ -221,21 +269,21 @@ public class PetTrancer {
         if(!isInited){
             return;
         }
-        client.stopTrace(trace, new OnStopTraceListener() {
-            @Override
-            public void onStopTraceSuccess() {
-                if(null != stopTracerListener && null != startTracerListener.get()){
-                    stopTracerListener.get().onSuccessStopTracer();
-                }
-            }
-
-            @Override
-            public void onStopTraceFailed(int i, String s) {
-                if(null != stopTracerListener && null != startTracerListener.get()){
-                    stopTracerListener.get().onFailStopTracer(s);
-                }
-            }
-        });
+//        client.stopTrace(trace, new OnStopTraceListener() {
+//            @Override
+//            public void onStopTraceSuccess() {
+//                if(null != stopTracerListener && null != startTracerListener.get()){
+//                    stopTracerListener.get().onSuccessStopTracer();
+//                }
+//            }
+//
+//            @Override
+//            public void onStopTraceFailed(int i, String s) {
+//                if(null != stopTracerListener && null != startTracerListener.get()){
+//                    stopTracerListener.get().onFailStopTracer(s);
+//                }
+//            }
+//        });
     }
 
     /**
@@ -264,7 +312,7 @@ public class PetTrancer {
         int isProcessed = 1;//1设置需要纠偏，为0则返回原始轨迹
         // 纠偏选项
         String processOption = "need_denoise=1,need_vacuate=1,need_mapmatch=1,transport_mode=3";//当前业务需求绑路,出行方式是步行
-        client.queryHistoryTrack(serviceId, entityName, simpleReturn,isProcessed,processOption, startTime, endTime,pageSize,pageIndex,trackListener);
+//        client.queryHistoryTrack(serviceId, entityName, simpleReturn,isProcessed,processOption, startTime, endTime,pageSize,pageIndex,trackListener);
 
     }
 

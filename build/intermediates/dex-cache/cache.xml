@@ -93,12 +93,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/long/Desktop/android/app/libs/MiPush_SDK_Client_3_2_2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="74c4db77df1c064b6ae16fbecb575c029971ab96">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/MiPush_SDK_Client_3_2_2_4ea42cf44b38ab52397d42713ca2d6f4d2e28ef3.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/long/Desktop/android/app/libs/org.apache.http.legacy.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
         <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_75612a032a672b000bd5f649bcf17d0c44260255.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/.android/build-cache/69bab1a9204d223e1ad5bb23d8f7bbb80720a3f3/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5743268f3a177e4256453dfec5607ae0896b6f29">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_ffa2a3b78533a413bc51e0834948f5f0512ee735.jar.jar" />
     </item>
 
 </items>

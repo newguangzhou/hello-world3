@@ -141,6 +141,11 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
         }
     }
 
+    @Override
+    public void onConnectHotSpotMessage(String s, int i) {
+
+    }
+
     /**
      * 判断定位是否成功
      *

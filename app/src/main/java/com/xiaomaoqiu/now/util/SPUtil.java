@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
+import com.xiaomaoqiu.now.map.main.MapModule;
+import com.xiaomaoqiu.now.map.main.Mode_Map;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -86,6 +88,14 @@ public class SPUtil {
     //home_wifi_ssid
     public static final String HOME_WIFI_SSID="home_wifi_ssid";
 
+
+    //地图定位模式
+    public static final String MAP_MODE="map_mode";
+
+    //纬度
+    public static final String LATITUDE="latitude";
+    //经度
+    public static final String LONGITUDE="longitude";
 
 
     public static String getPhoneNumber() {
@@ -278,6 +288,27 @@ public class SPUtil {
     public static void putWifiList(WifiListBean wifiListBean) {
         putSerializable(DEVICE_WIFI_LIST, wifiListBean);
     }
+
+    public static String getMode_Map(){
+        return getString(MAP_MODE,Mode_Map.Normal);
+    }
+    public static void putMode_Map(String value){
+        putString(MAP_MODE,value);
+    }
+    public static String getLatitude(){
+        return getString(LATITUDE,"0");
+    }
+    public static void putLatitude(String latitude){
+        putString(LATITUDE,latitude);
+    }
+    public static String getLongitude(){
+        return getString(LONGITUDE,"0");
+    }
+    public static void putLongitude(String value){
+        putString(LONGITUDE,value);
+    }
+
+
     /**
      * 获取
      */
@@ -419,5 +450,6 @@ public class SPUtil {
             e.printStackTrace();
         }
     }
+
 
 }

@@ -207,9 +207,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
             getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
         }
-        SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
+//        SimpleDraweeView imgLogo = (SimpleDraweeView) getActivity().findViewById(R.id.go_sport_head);
         Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
-        imgLogo.setImageURI(uri);
+        AsynImgDialog.asynImg.setImageURI(uri);
     }
 
 

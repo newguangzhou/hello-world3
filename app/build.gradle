@@ -19,7 +19,7 @@ android {
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId 'com.xiaomaoqiu.pet'
-        minSdkVersion 14
+        minSdkVersion 18
         targetSdkVersion 22
         versionCode 1
         versionName '0.0.1.inner_test'
@@ -91,7 +91,9 @@ dependencies {
     compile files('libs/BaiduTraceSDK_v2_1_16.jar')
     //下拉刷新
     compile 'in.srain.cube:ultra-ptr:1.0.11'
-
     //小米推送
     compile files('libs/MiPush_SDK_Client_3_2_2.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/BaiduTraceSDK_v3_0_1.jar')
+    compile files('libs/bos-android-sdk-1.0.2.jar')
 }

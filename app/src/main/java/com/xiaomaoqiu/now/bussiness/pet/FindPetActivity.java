@@ -131,9 +131,11 @@ public class FindPetActivity extends BaseActivity implements View.OnClickListene
             }
         }
 
-        public void onReceivePoi(BDLocation poiLocation) {
+        @Override
+        public void onConnectHotSpotMessage(String s, int i) {
 
         }
+
 
     }
 

@@ -22,7 +22,7 @@ import com.xiaomaoqiu.pet.R;
 public class AsynImgDialog extends Dialog implements View.OnClickListener{
 
     private Button mOkBtn,mQuitBtn;
-    private SimpleDraweeView asynImg;
+    public static SimpleDraweeView asynImg;
     private View.OnClickListener okClickListener,quitClickListner;
     private int innerpadding=0;
 
