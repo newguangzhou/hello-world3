@@ -17,7 +17,7 @@
         <!--app:border_width="1.5dp"-->
         <!--app:border_color="@color/total_color_2"/>-->
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/map_pet_loca_avater"
+        android:id="@+id/map_phone_loca_avater"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"
@@ -26,11 +26,8 @@
         fresco:fadeDuration="300"
         fresco:actualImageScaleType="focusCrop"
 
-        fresco:placeholderImage="@drawable/tab_health_head_defult"
+        fresco:placeholderImage="@drawable/map_location_phone"
         fresco:placeholderImageScaleType="fitCenter"
-
-        fresco:failureImage="@drawable/tab_health_head_defult"
-        fresco:failureImageScaleType="centerInside"
         fresco:roundedCornerRadius="16dp"
         />
 

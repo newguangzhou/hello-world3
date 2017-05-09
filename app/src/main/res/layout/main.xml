@@ -35,13 +35,7 @@
 
                 fresco:placeholderImage="@drawable/tab_health_head_defult"
                 fresco:placeholderImageScaleType="fitCenter"
-                fresco:roundedCornerRadius="20dp" />
-            <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:src="@drawable/home_text_xmq"/>-->
-
+                fresco:roundedCornerRadius="25dp" />
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"

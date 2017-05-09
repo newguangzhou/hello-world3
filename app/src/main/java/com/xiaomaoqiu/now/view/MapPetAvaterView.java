@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageLocate.view;
+package com.xiaomaoqiu.now.view;
 
 import android.content.Context;
 import android.net.Uri;

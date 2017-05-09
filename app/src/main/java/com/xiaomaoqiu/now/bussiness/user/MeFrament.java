@@ -55,9 +55,6 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), ExitDialog_RAW_Activity.class);
-//                startActivity(intent);
-
                 DialogToast.createDialogWithTwoButton(getActivity(), "确认退出登录？", new View.OnClickListener() {
 
                             @Override
@@ -97,13 +94,9 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_mall).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Uri uri = Uri.parse(getString(R.string.url_mall));
-//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//                startActivity(intent);
                 Intent intent=new Intent(getActivity(), ShopCityActivity.class);
                 intent.putExtra("web_url","http://www.xiaomaoqiu.com/wechat_shop.html");
                 startActivity(intent);
-//                ToastUtil.showTost("暂时尚未开放商城功能，敬请期待");
             }
         });
 
@@ -137,7 +130,6 @@ public class MeFrament extends BaseFragment implements LogoutView{
         }
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-//        getActivity().overridePendingTransition(0, 0);
         startActivity(intent);
     }
 

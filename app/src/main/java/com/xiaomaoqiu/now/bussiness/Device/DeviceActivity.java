@@ -27,6 +27,9 @@ public class DeviceActivity extends BaseActivity {
 
     private View btn_go_back;
     BatteryView batteryView;
+    TextView tv_newhardware;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,7 @@ public class DeviceActivity extends BaseActivity {
     //显示设备信息
     void showMessageOnUI() {
         TextView tv = (TextView) findViewById(R.id.tv_device_name);
+        tv_newhardware= (TextView) findViewById(R.id.tv_newhardware);
         DeviceInfoBean bean = DeviceInfoInstance.getInstance().packBean;
         if (!TextUtils.isEmpty(bean.device_name))
             tv.setText(bean.device_name);

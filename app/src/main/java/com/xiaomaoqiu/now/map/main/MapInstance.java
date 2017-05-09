@@ -20,8 +20,9 @@ import com.baidu.mapapi.utils.CoordinateConverter;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
+import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
+import com.xiaomaoqiu.now.view.MapPetAvaterView;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 import com.xiaomaoqiu.pet.R;
 
@@ -135,7 +136,7 @@ public class MapInstance implements BDLocationListener {
      * 初始化手机位置地图标识
      */
     private void initPhoneMarker() {
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.map_location_phone);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
         OverlayOptions options = new MarkerOptions()
                 .icon(bitmapDescriptor)
                 .draggable(true)

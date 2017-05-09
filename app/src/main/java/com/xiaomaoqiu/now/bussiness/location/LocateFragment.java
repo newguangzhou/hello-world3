@@ -20,11 +20,10 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
-import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
+import com.xiaomaoqiu.now.view.MapPetAvaterView;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
