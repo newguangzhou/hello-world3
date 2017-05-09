@@ -89,4 +89,9 @@ public class EventManage {
 
     //上传头像成功
     public static class uploadImageSuccess{}
+
+    //GPS变化
+    public static class GPS_CHANGE{
+
+    }
 }

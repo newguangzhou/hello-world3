@@ -281,6 +281,7 @@
                             android:src="@drawable/tab_health_search"/>
 
                         <TextView
+                            android:id="@+id/tv_findpet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"

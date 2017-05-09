@@ -1,17 +1,12 @@
 package com.xiaomaoqiu.now.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.test.PerformanceTestCase;
 import android.util.Base64;
-import android.widget.Toast;
 
 
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
-import com.xiaomaoqiu.now.map.main.MapModule;
-import com.xiaomaoqiu.now.map.main.Mode_Map;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -96,6 +91,9 @@ public class SPUtil {
     public static final String LATITUDE="latitude";
     //经度
     public static final String LONGITUDE="longitude";
+
+    //gps是否开启
+    public static final String GPS_OPEN="gps_open";
 
 
     public static String getPhoneNumber() {
@@ -289,12 +287,12 @@ public class SPUtil {
         putSerializable(DEVICE_WIFI_LIST, wifiListBean);
     }
 
-    public static String getMode_Map(){
-        return getString(MAP_MODE,Mode_Map.Normal);
-    }
-    public static void putMode_Map(String value){
-        putString(MAP_MODE,value);
-    }
+//    public static String getMode_Map(){
+//        return getString(MAP_MODE,Mode_Map.Normal);
+//    }
+//    public static void putMode_Map(String value){
+//        putString(MAP_MODE,value);
+//    }
     public static String getLatitude(){
         return getString(LATITUDE,"0");
     }
@@ -308,6 +306,13 @@ public class SPUtil {
         putString(LONGITUDE,value);
     }
 
+
+    public static boolean getGPS_OPEN(){
+        return getBoolean(GPS_OPEN);
+    }
+    public static void putGPS_OPEN(boolean value){
+        putBoolean(GPS_OPEN,value);
+    }
 
     /**
      * 获取

@@ -16,6 +16,7 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
+import com.xiaomaoqiu.now.bussiness.pet.CheckIndex;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
@@ -31,7 +32,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 @SuppressLint("WrongConstant")
-public class MainActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener,CheckIndex {
 
     private static int mTabID[] = {
             R.id.tab_health,
@@ -58,11 +59,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     //设备状态更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
-//		if(!DeviceInfoInstance.getInstance().isDeviceExist){
-//			Intent intent = new Intent(this, BindDeviceActivity.class);
-//			startActivity(intent);
-//			return;
-//		}
         if (DeviceInfoInstance.getInstance().battery_level < 0) {
             ToastUtil.showTost("您的设备尚未开机！");
             return;
@@ -164,7 +160,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 if (null == mMeFragment) {
                     mMeFragment = new MeFrament();
                     transaction.add(R.id.fragment_container, mMeFragment);
-
                 }
 
                 mMeTabIcon.setSelected(true);
@@ -172,7 +167,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 break;
         }
         transaction.commit();
-
     }
 
 
@@ -211,6 +205,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void changeLocatefragment() {
+        showFragment(1);
     }
 }
     

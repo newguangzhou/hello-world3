@@ -12,12 +12,14 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
@@ -51,12 +53,12 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     MaterialDesignPtrFrameLayout ptr_refresh;
 
-//    private HealthGoSportView mGoSportView;
+    //    private HealthGoSportView mGoSportView;
     CircleProgressBar prog;
     TextView tvSportDone;
     TextView tvSportTarget;
-
     TextView tv_sleep_time;
+    TextView tv_findpet;
 
     String strStart;
     String strEnd;
@@ -65,32 +67,29 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     int sportDone = 0;
     double percentage = 0;
 
+    CheckIndex checkIndex;
+
+
+    boolean isopen;//gps是否打开
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.main_tab_health, container, false);
-        ptr_refresh= (MaterialDesignPtrFrameLayout) rootView.findViewById(R.id.ptr_refresh);
-
-//        mGoSportView = (HealthGoSportView) rootView.findViewById(R.id.tab_health_gosportview);
-
+        ptr_refresh = (MaterialDesignPtrFrameLayout) rootView.findViewById(R.id.ptr_refresh);
         prog = (CircleProgressBar) rootView.findViewById(R.id.prog_target_done_percentage);
         tvSportDone = (TextView) rootView.findViewById(R.id.tv_sport_done);
         tvSportTarget = (TextView) rootView.findViewById(R.id.tv_sport_target);
-        tv_sleep_time= (TextView) rootView.findViewById(R.id.tv_sleep_time);
+        tv_sleep_time = (TextView) rootView.findViewById(R.id.tv_sleep_time);
+        tv_findpet = (TextView) rootView.findViewById(R.id.tv_findpet);
 
         rootView.setOnClickListener(this);
         rootView.findViewById(R.id.btn_sport_index).setOnClickListener(this);
-
         rootView.findViewById(R.id.btn_locate).setOnClickListener(this);
-
         rootView.findViewById(R.id.btn_health).setOnClickListener(this);
-
-
         rootView.findViewById(R.id.btn_sport).setOnClickListener(this);
-
         rootView.findViewById(R.id.btn_go_home).setOnClickListener(this);
-
         rootView.findViewById(R.id.btn_sleep).setOnClickListener(this);
 
         /**
@@ -104,6 +103,14 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         });
 
         initProgress();
+
+        isopen = MapInstance.getInstance().GPS_OPEN;
+        if (isopen) {
+            tv_findpet.setText("关闭搜寻");
+        } else {
+            tv_findpet.setText("紧急搜寻");
+        }
+
         EventBus.getDefault().register(this);
 
         initData();
@@ -112,7 +119,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     }
 
     void initData() {
-
+        checkIndex= (CheckIndex) getActivity();
         PetInfoInstance.getInstance().getPetInfo();
     }
 
@@ -161,19 +168,19 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             }
         });
         ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(),strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
+                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
             @Override
             public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
                     if (message.data.size() > 0) {
-                        PetSleepInfoBean.SleepBean bean=message.data.get(0);
-                        double allSleepTime=bean.deep_sleep+bean.light_sleep;
+                        PetSleepInfoBean.SleepBean bean = message.data.get(0);
+                        double allSleepTime = bean.deep_sleep + bean.light_sleep;
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
-                        String sleepTimeString  = df.format(allSleepTime);
-                        tv_sleep_time.setText("今日休息时间："+sleepTimeString +"h");
+                        String sleepTimeString = df.format(allSleepTime);
+                        tv_sleep_time.setText("今日休息时间：" + sleepTimeString + "h");
                     }
-                }else {
+                } else {
                     ToastUtil.showTost("获取当天数据失败");
                 }
             }
@@ -187,7 +194,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     //今日运动数据更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void todaySportData(EventManage.TodaySportData event){
+    public void todaySportData(EventManage.TodaySportData event) {
 
         sportTarget = event.sportBean.target_amount;
         sportDone = event.sportBean.reality_amount;
@@ -199,7 +206,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     //更新去运动还是回家的view
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-  public void updateActivityView(EventManage.atHomeOrtoSport  event){
+    public void updateActivityView(EventManage.atHomeOrtoSport event) {
         if (PetInfoInstance.getInstance().getAtHome()) {//回家
             getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
             getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
@@ -212,14 +219,20 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         AsynImgDialog.asynImg.setImageURI(uri);
     }
 
+    //gps状态变化
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void updateGPSState(EventManage.GPS_CHANGE event) {
+        isopen = MapInstance.getInstance().GPS_OPEN;
+        if (isopen) {
+            tv_findpet.setText("关闭搜寻");
+        }else{
+            tv_findpet.setText("紧急搜寻");
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
-
-//        if (mGoSportView.isShowing()) {
-//            mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
-//            return;
-//        }
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.btn_sport_index:
@@ -227,49 +240,82 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
+                isopen = MapInstance.getInstance().GPS_OPEN;
+                if (isopen) {
+                    new DialogToast(getContext(), "是否关闭紧急追踪模式。", "确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            tv_findpet.setText("紧急搜寻");
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<BaseBean>() {
+                                @Override
+                                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                                    MapInstance.getInstance().setGPSState(false);
+                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                                    checkIndex.changeLocatefragment();
+                                }
 
-                String conent = getContext().getResources().getString(R.string.map_is_findpet);
-                DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-////todo  为什么没有处理
-//                        StartPetFindingDialog dialog = new StartPetFindingDialog(getActivity(),
-//                                new StartPetFindingDialog.OnDialogDismiss() {
-//                                    @Override
-//                                    public void onDismiss(int nID) {
-//                                        if (nID == R.id.btn_ok) {
-//                                            Intent intent = new Intent(getActivity(), FindPetActivity.class);
-//                                            startActivity(intent);
-//                                        }
-//                                    }
-//                                }
-//                                , R.style.MyDialogStyle);
-//                        dialog.show();
+                                @Override
+                                public void onFail(Call<BaseBean> call, Throwable t) {
 
-                    }
-                });
+                                }
+                            });
+
+                        }
+                    });
+                } else {
+
+                    String conent = getContext().getResources().getString(R.string.map_is_findpet);
+                    DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            tv_findpet.setText("关闭搜寻");
+                            MapInstance.getInstance().startFindPet();
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<BaseBean>() {
+                                @Override
+                                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                                    MapInstance.getInstance().setGPSState(true);
+                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                                    checkIndex.changeLocatefragment();
+                                }
+
+                                @Override
+                                public void onFail(Call<BaseBean> call, Throwable t) {
+
+                                }
+                            });
+                            PetInfoInstance.getInstance().getPetLocation();
+                        }
+                    });
+                }
+
                 break;
             case R.id.btn_health:
                 intent.setClass(getActivity(), HealthIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_sport:
-//                mGoSportView.show(HealthGoSportView.STATUS_SPORT);
+                if(MapInstance.getInstance().GPS_OPEN){
+                    ToastUtil.showTost("紧急模式下不能使用该功能");
+                    return;
+                }
                 AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         PetInfoInstance.getInstance().setAtHome(false);
+                        checkIndex.changeLocatefragment();
                     }
                 });
                 break;
             case R.id.btn_go_home:
-//                mGoSportView.show(HealthGoSportView.STATUS_BACK);
+                if(MapInstance.getInstance().GPS_OPEN){
+                    ToastUtil.showTost("紧急模式下不能使用该功能");
+                    return;
+                }
                 AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        mWalkPetView.setEnabled(false);
-//                        mMapMpdule.stopWalkPet();
                         PetInfoInstance.getInstance().setAtHome(true);
+                        checkIndex.changeLocatefragment();
                     }
                 });
                 break;
@@ -279,17 +325,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
-
-//    public boolean isDialogShowing() {
-//        if (null != mGoSportView) {
-//            return mGoSportView.isShowing();
-//        }
-//        return false;
-//    }
-
-//    public void hideDialog() {
-//        mGoSportView.show(HealthGoSportView.STATUS_DEFAULT);
-//    }
 
 
     public void onDestroy() {

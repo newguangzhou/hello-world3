@@ -18,9 +18,11 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.view.MapPetAvaterView;
+import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 import com.xiaomaoqiu.pet.R;
 
 /**
@@ -40,7 +42,7 @@ public class MapInstance implements BDLocationListener {
             synchronized (MapInstance.class) {
                 if (instance == null) {
                     instance = new MapInstance();
-                    mode_map= SPUtil.getMode_Map();
+                    GPS_OPEN=SPUtil.getGPS_OPEN();
                     mLatitude=Double.valueOf(SPUtil.getLatitude());
                     mLongitude=Double.valueOf(SPUtil.getLongitude());
                 }
@@ -53,7 +55,8 @@ public class MapInstance implements BDLocationListener {
     public static double mLatitude;
     public static double mLongitude;
 
-    public static String mode_map;//地图模式
+//    public static String mode_map;//地图模式
+    public static boolean GPS_OPEN;//GPS是否开启
 
     private MapView mapView;
     private MapPetAvaterView mapPetAvaterView;
@@ -66,22 +69,13 @@ public class MapInstance implements BDLocationListener {
 
     public void init(MapView mapView) {
         this.mapView = mapView;
-        mapPetAvaterView = new MapPetAvaterView(PetAppLike.mcontext);
         initMap();
         initPhoneMarker();
         initPetMarker();
-        switch (mode_map){
-            case Mode_Map.Normal://定位模式
-                setPhonePos();
-                break;
-            case Mode_Map.GPS_OPEN://找狗模式
-                setPhonePos();
-                break;
-            case Mode_Map.Work_The_Dog://遛狗模式
-                setPhonePos();
-                break;
-        }
-
+        setPhonePos();
+    }
+    public void setPetAvaterView(MapPetAvaterView mapPetAvaterView){
+        this.mapPetAvaterView =mapPetAvaterView;
     }
     private void initMap() {
         mapView.showZoomControls(false);//不显示放大缩小控件
@@ -123,9 +117,9 @@ public class MapInstance implements BDLocationListener {
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
         OverlayOptions options = new MarkerOptions()
                 .icon(bitmapDescriptor)
-                .draggable(false)
-                .position(new LatLng(0, 0))
-                .visible(false);
+                .draggable(true)
+                .position(new LatLng(mLatitude, mLongitude))
+                .visible(true);
         mPetMarker = (Marker) (mBaiduMap.addOverlay(options));
     }
 
@@ -144,9 +138,9 @@ public class MapInstance implements BDLocationListener {
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.map_location_phone);
         OverlayOptions options = new MarkerOptions()
                 .icon(bitmapDescriptor)
-                .draggable(false)
-                .position(new LatLng(0, 0))
-                .visible(false);
+                .draggable(true)
+                .position(new LatLng(mLatitude, mLongitude))
+                .visible(true);
         mBaiduMap.addOverlay(options);
         mPhoneMarker = (Marker) (mBaiduMap.addOverlay(options));
     }
@@ -162,7 +156,6 @@ public class MapInstance implements BDLocationListener {
 
 
         mPetMarker.setPosition(desLatLng);
-            mPetMarker.setVisible(true);
         MapLocationParser.queryLocationDesc(desLatLng,addressListener);
         setCenter(desLatLng,300);
 
@@ -196,7 +189,8 @@ public class MapInstance implements BDLocationListener {
      * 开始找宠物
      */
     public void startFindPet() {
-        mode_map=Mode_Map.GPS_OPEN;
+//        mode_map=Mode_Map.GPS_OPEN;
+        setGPSState(true);
         startLocListener(1000);
     }
 
@@ -215,7 +209,7 @@ public class MapInstance implements BDLocationListener {
         mBaiduMap.animateMapStatus(u);
 
 
-        if (mode_map.equals(Mode_Map.GPS_OPEN)) {
+        if (!GPS_OPEN) {
             setCenter(postion, 300);
         }
         mPhoneMarker.setPosition(postion);
@@ -243,9 +237,14 @@ public class MapInstance implements BDLocationListener {
         mBaiduMap.animateMapStatus(mapStatusUpdate, delayMills);
     }
 
-    public void setMapMode(String mode_map) {
-        this.mode_map = mode_map;
-        SPUtil.putMode_Map(mode_map);
+//    public void setMapMode(String mode_map) {
+//        this.mode_map = mode_map;
+//        SPUtil.putMode_Map(mode_map);
+//    }
+
+    public void setGPSState(boolean flag){
+        GPS_OPEN=flag;
+        SPUtil.putGPS_OPEN(GPS_OPEN);
     }
 
 
@@ -253,17 +252,22 @@ public class MapInstance implements BDLocationListener {
     public void onReceiveLocation(BDLocation bdLocation) {
         mLatitude=bdLocation.getLatitude();
         mLongitude=bdLocation.getLongitude();
-        switch (mode_map){
-            case Mode_Map.Normal://定位模式
-                setPhonePos();
-                break;
-            case Mode_Map.GPS_OPEN://找狗模式
-                setPhonePos();
-                break;
-            case Mode_Map.Work_The_Dog://遛狗模式
-                setPhonePos();
-                break;
+        setPhonePos();
+        if(!PetInfoInstance.getInstance().getAtHome()){
+            //todo 如果不在家，就设置为另一个头像
+
         }
+//        switch (mode_map){
+//            case Mode_Map.Normal://定位模式
+//                setPhonePos();
+//                break;
+//            case Mode_Map.GPS_OPEN://找狗模式
+//                setPhonePos();
+//                break;
+//            case Mode_Map.Work_The_Dog://遛狗模式
+//                setPhonePos();
+//                break;
+//        }
     }
 
     @Override
