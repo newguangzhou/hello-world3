@@ -64,7 +64,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     String strStart;
     String strEnd;
 
-    int sportTarget = 0;
+    int sportTarget = PetInfoInstance.getInstance().getTarget_step();
     int sportDone = 0;
     double percentage = 0;
 
@@ -146,6 +146,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     if (message.data.size() > 0) {
                         PetSportBean.SportBean bean = message.data.get(0);
                         sportTarget = bean.target_amount;
+                        PetInfoInstance.getInstance().setTarget_step(sportTarget);
                         sportDone = bean.reality_amount;
                         percentage = bean.percentage;
                     } else {
@@ -198,6 +199,12 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         percentage = event.sportBean.percentage;
         prog.setProgress((int) percentage);
         tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
+        tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
+    }
+    //目标运动量发生变化
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void sportTargetDataChange(EventManage.targetSportData event) {
+        sportTarget= PetInfoInstance.getInstance().getTarget_step();
         tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
     }
 
@@ -293,7 +300,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_sport:
                 if(MapInstance.getInstance().GPS_OPEN){
-                    ToastUtil.showTost("紧急模式下不能使用该功能");
+                    ToastUtil.showTost("紧急搜索模式下不能使用该功能");
                     return;
                 }
                 AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
@@ -306,7 +313,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_go_home:
                 if(MapInstance.getInstance().GPS_OPEN){
-                    ToastUtil.showTost("紧急模式下不能使用该功能");
+                    ToastUtil.showTost("紧急搜索模式下不能使用该功能");
                     return;
                 }
                 AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {

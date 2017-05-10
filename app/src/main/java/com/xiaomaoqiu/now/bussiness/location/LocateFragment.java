@@ -177,7 +177,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //todo 回调逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
-        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude);
+        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude,PetInfoInstance.getInstance().radius);
     }
 
     //gps状态变化

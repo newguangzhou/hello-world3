@@ -86,6 +86,9 @@ public class EventManage {
     public static class TodaySportData{
        public  PetSportBean.SportBean sportBean=new PetSportBean.SportBean();
     }
+    //目标运动量变化
+    public static class targetSportData{
+    }
 
     //上传头像成功
     public static class uploadImageSuccess{}

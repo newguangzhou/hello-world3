@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
 import com.xiaomaoqiu.now.bean.nocommon.Summary;
@@ -21,6 +22,8 @@ import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity;
 import com.xiaomaoqiu.old.ui.dialog.PickSportNumberDialog_RAW_Activity;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -140,7 +143,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     }
 
     @Override
-    public void onConfirmNumber(int number) {
+    public void onConfirmNumber(final int number) {
         //设定运动目标
 //        HttpUtil.get2("pet.healthy.set_sport_info", new JsonHttpResponseHandler() {
 //            @Override
@@ -165,6 +168,9 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 switch (ret) {
                     case EC_SUCCESS:
                         ToastUtil.showTost("设定运动量成功");
+                        EventManage.targetSportData event= new EventManage.targetSportData();
+                        PetInfoInstance.getInstance().setTarget_step(number);
+                        EventBus.getDefault().post(event);
                         break;
 
                 }

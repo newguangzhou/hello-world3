@@ -270,7 +270,9 @@ public class ChartIndexPresenter {
         todayLight = todayBean.reality_amount;
         callback.onSuccessGetWeight(todayDeep, todayLight);
         EventManage.TodaySportData event = new EventManage.TodaySportData();
+
         event.sportBean = todayBean;
+        PetInfoInstance.getInstance().setTarget_step( event.sportBean.target_amount);
         EventBus.getDefault().post(event);
     }
 

@@ -1,7 +1,6 @@
 package com.xiaomaoqiu.now.map.main;
 
-import android.opengl.Visibility;
-import android.view.View;
+import android.graphics.Color;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -10,12 +9,16 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.CircleOptions;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Polyline;
+import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.xiaomaoqiu.now.PetAppLike;
@@ -24,8 +27,8 @@ import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
-import com.xiaomaoqiu.pet.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by long on 2017/5/8.
@@ -44,9 +47,11 @@ public class MapInstance implements BDLocationListener {
             synchronized (MapInstance.class) {
                 if (instance == null) {
                     instance = new MapInstance();
-                    GPS_OPEN=SPUtil.getGPS_OPEN();
-                    mLatitude=Double.valueOf(SPUtil.getLatitude());
-                    mLongitude=Double.valueOf(SPUtil.getLongitude());
+                    GPS_OPEN = SPUtil.getGPS_OPEN();
+                    phoneLatitude = Double.valueOf(SPUtil.getPhoneLatitude());
+                    phoneLongitude = Double.valueOf(SPUtil.getPhoneLongitude());
+                    petLatitude = Double.valueOf(SPUtil.getPetLatitude());
+                    petLongitude = Double.valueOf(SPUtil.getPetLongtitude());
                 }
             }
         }
@@ -54,19 +59,24 @@ public class MapInstance implements BDLocationListener {
     }
 
 
-    public static double mLatitude;
-    public static double mLongitude;
+    public static double phoneLatitude;
+    public static double phoneLongitude;
+    public static double petLatitude;
+    public static double petLongitude;
 
-//    public static String mode_map;//地图模式
+    //    public static String mode_map;//地图模式
     public static boolean GPS_OPEN;//GPS是否开启
 
     private MapView mapView;
     private MapPetAvaterView mapPetAvaterView;
     private Marker mPetMarker, mPhoneMarker;//狗狗位置和手机位置
+    private Polyline mFindPolyline;//找狗连线
+
     private BaiduMap mBaiduMap;
+
+
     private LocationClient mLocationClient;
-
-
+    CircleOptions mCircleOptions;
 
 
     public void init(MapView mapView) {
@@ -76,17 +86,33 @@ public class MapInstance implements BDLocationListener {
         initPetMarker();
         setPhonePos();
     }
-    public void setPetAvaterView(MapPetAvaterView mapPetAvaterView){
-        this.mapPetAvaterView =mapPetAvaterView;
+
+    public void setPetAvaterView(MapPetAvaterView mapPetAvaterView) {
+        this.mapPetAvaterView = mapPetAvaterView;
     }
+
     private void initMap() {
         mapView.showZoomControls(false);//不显示放大缩小控件
         mBaiduMap = mapView.getMap();
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);//只显示普通地图就好
         mBaiduMap.setBuildingsEnabled(true);//设置是否允许楼块效果
-        mBaiduMap.setIndoorEnable(true);//设置是否显示室内图, 默认室内图不显示
+
+//        mBaiduMap.setOnBaseIndoorMapListener(new BaiduMap.OnBaseIndoorMapListener() {
+//            @Override
+//            public void onBaseIndoorMapMode(boolean b, MapBaseIndoorMapInfo mapBaseIndoorMapInfo) {
+//                if (b) {
+//                    // 进入室内图
+//                    // 通过获取回调参数 mapBaseIndoorMapInfo 来获取室内图信息，包含楼层信息，室内ID等
+//                } else {
+//                    // 移除室内图
+//                }
+//            }
+//        });
+
+//        mBaiduMap.setIndoorEnable(true);//设置是否显示室内图, 默认室内图不显示
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
+
         initLocation();
     }
 
@@ -120,7 +146,7 @@ public class MapInstance implements BDLocationListener {
         OverlayOptions options = new MarkerOptions()
                 .icon(bitmapDescriptor)
                 .draggable(true)
-                .position(new LatLng(mLatitude, mLongitude))
+                .position(new LatLng(petLatitude, petLongitude))
                 .visible(true);
         mPetMarker = (Marker) (mBaiduMap.addOverlay(options));
     }
@@ -141,25 +167,68 @@ public class MapInstance implements BDLocationListener {
         OverlayOptions options = new MarkerOptions()
                 .icon(bitmapDescriptor)
                 .draggable(true)
-                .position(new LatLng(mLatitude, mLongitude))
+                .position(new LatLng(phoneLatitude, phoneLongitude))
                 .visible(true);
-        mBaiduMap.addOverlay(options);
         mPhoneMarker = (Marker) (mBaiduMap.addOverlay(options));
+
     }
 
+    int a = 0;
 
     /**
      * 设置宠物位置为地图中心
      */
-    public void setPetLocation(double latitude, double longitude) {
-        LatLng sourceLatLng=new LatLng(latitude,longitude);
+    public void setPetLocation(double latitude, double longitude, double radius) {
 
-        LatLng desLatLng=converterLatLng(sourceLatLng);
 
+
+
+        LatLng sourceLatLng = new LatLng(latitude, longitude);
+
+        LatLng desLatLng = converterLatLng(sourceLatLng);
+        petLatitude = desLatLng.latitude;
+        petLongitude = desLatLng.longitude;
+        SPUtil.putPetLatitude(petLatitude + "");
+        SPUtil.putPhoneLongitude(petLongitude + "");
 
         mPetMarker.setPosition(desLatLng);
-        MapLocationParser.queryLocationDesc(desLatLng,addressListener);
-        setCenter(desLatLng,300);
+        MapLocationParser.queryLocationDesc(desLatLng, addressListener);
+        setCenter(desLatLng, 300);
+//        if (a == 2) {
+//            radius = 3;
+//        } else if (radius == 1) {
+//            radius = 10;
+//        } else {
+//            radius = 8;
+//        }
+//        a++;
+        mBaiduMap.clear();
+        initPhoneMarker();
+        initPetMarker();
+        mCircleOptions = new CircleOptions()
+                .center(desLatLng) // 圆心坐标
+                .radius((int)radius) // 半径 单位 米
+                .visible(true)
+//                .stroke(new Stroke(2, Color.parseColor("#ffffff"))) // 设置边框 Stroke 参数 宽度单位像素默认5px 颜色
+                .fillColor(Color.parseColor("#7B2e68AA")); // 设置圆的填充颜色
+        mBaiduMap.addOverlay(mCircleOptions);
+
+
+        if (GPS_OPEN) {
+            ArrayList<LatLng> points = new ArrayList<>();
+            points.add(mPhoneMarker.getPosition());
+            points.add(mPetMarker.getPosition());
+            PolylineOptions options = new PolylineOptions()
+                    .points(points)
+                    .color(Color.rgb(250, 90, 95))
+                    .width(7)
+                    .visible(true);
+            mFindPolyline = (Polyline) (mBaiduMap.addOverlay(options));
+        } else {
+            if (mFindPolyline != null) {
+                mFindPolyline.remove();
+            }
+        }
 
     }
 
@@ -197,20 +266,17 @@ public class MapInstance implements BDLocationListener {
 
     /**
      * 绘制手机位置
-     *
      */
     private void setPhonePos() {
-        LatLng postion = new LatLng(mLatitude, mLongitude);
+        LatLng postion = new LatLng(phoneLatitude, phoneLongitude);
         float f = mBaiduMap.getMaxZoomLevel();//19.0
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f-2);
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
         mBaiduMap.animateMapStatus(u);
         if (!GPS_OPEN) {
             setCenter(postion, 300);
         }
         mPhoneMarker.setPosition(postion);
-
     }
-
 
 
     /**
@@ -237,18 +303,28 @@ public class MapInstance implements BDLocationListener {
 //        SPUtil.putMode_Map(mode_map);
 //    }
 
-    public void setGPSState(boolean flag){
-        GPS_OPEN=flag;
+    public void setGPSState(boolean flag) {
+        GPS_OPEN = flag;
         SPUtil.putGPS_OPEN(GPS_OPEN);
+
+        if (!GPS_OPEN) {
+            if (mFindPolyline != null) {
+                mFindPolyline.remove();
+            }
+        }
+
+
     }
 
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
-        mLatitude=bdLocation.getLatitude();
-        mLongitude=bdLocation.getLongitude();
+        phoneLatitude = bdLocation.getLatitude();
+        phoneLongitude = bdLocation.getLongitude();
+        SPUtil.putPhoneLatitude(phoneLatitude + "");
+        SPUtil.putPhoneLongitude(phoneLongitude + "");
         setPhonePos();
-        if(!PetInfoInstance.getInstance().getAtHome()){
+        if (!PetInfoInstance.getInstance().getAtHome()) {
             //todo 如果不在家，就设置为另一个头像
 
         }
@@ -288,7 +364,7 @@ public class MapInstance implements BDLocationListener {
 
 
     //  // 将google地图、soso地图、aliyun地图、mapabc地图和amap地图// 所用坐标转换成百度坐标
-    public LatLng converterLatLng(LatLng sourceLatLng ) {
+    public LatLng converterLatLng(LatLng sourceLatLng) {
         CoordinateConverter converter = new CoordinateConverter();
         converter.from(CoordinateConverter.CoordType.COMMON);
 // sourceLatLng待转换坐标

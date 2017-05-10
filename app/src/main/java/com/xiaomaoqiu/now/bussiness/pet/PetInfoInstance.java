@@ -395,6 +395,7 @@ public class PetInfoInstance {
 
     public void setTarget_step(int target_step) {
         packBean.target_step = target_step;
+        SPUtil.putPetTargetStep(target_step);
     }
 
     public void setSex(int sex) {

@@ -60,6 +60,9 @@ public class SPUtil {
     public static final String PET_HEADER = "logo_url";
     //宠物类型id
     public static final String PET_TYPE_ID = "pet_type_id";
+    //宠物运动量
+    public static final String SPORT_TARGET="sport_target";
+
 
 
     //设备电量级别
@@ -88,9 +91,11 @@ public class SPUtil {
     public static final String MAP_MODE="map_mode";
 
     //纬度
-    public static final String LATITUDE="latitude";
+    public static final String PHONE_LATITUDE ="phone_latitude";
     //经度
-    public static final String LONGITUDE="longitude";
+    public static final String PHONE_LONGITUDE ="phone_longitude";
+    public static final  String PET_LATITUDE="pet_latitude";
+    public static final String PET_LONGTITUDE="pet_longitude";
 
     //gps是否开启
     public static final String GPS_OPEN="gps_open";
@@ -216,6 +221,14 @@ public class SPUtil {
         putInt(PET_TYPE_ID, id);
     }
 
+    public  static int getSportTarget(){
+        return getInt(SPORT_TARGET);
+    }
+
+    public static void putSportTarget(int sportTarget){
+        putInt(SPORT_TARGET,sportTarget);
+    }
+
     public static float getBatteryLevel() {
         return getFloat(BATTERY_LEVEL);
     }
@@ -293,17 +306,30 @@ public class SPUtil {
 //    public static void putMode_Map(String value){
 //        putString(MAP_MODE,value);
 //    }
-    public static String getLatitude(){
-        return getString(LATITUDE,"0");
+    public static String getPhoneLatitude(){
+        return getString(PHONE_LATITUDE,"0");
     }
-    public static void putLatitude(String latitude){
-        putString(LATITUDE,latitude);
+    public static void putPhoneLatitude(String latitude){
+        putString(PHONE_LATITUDE,latitude);
     }
-    public static String getLongitude(){
-        return getString(LONGITUDE,"0");
+    public static String getPhoneLongitude(){
+        return getString(PHONE_LONGITUDE,"0");
     }
-    public static void putLongitude(String value){
-        putString(LONGITUDE,value);
+    public static void putPhoneLongitude(String value){
+        putString(PHONE_LONGITUDE,value);
+    }
+
+    public static String getPetLatitude(){
+        return getString(PET_LATITUDE,"0");
+    }
+    public static void putPetLatitude(String latitude){
+        putString(PET_LATITUDE,latitude);
+    }
+    public static String getPetLongtitude(){
+        return getString(PET_LONGTITUDE,"0");
+    }
+    public static void putPetLongitude(String longitude){
+        putString(PET_LONGTITUDE,longitude);
     }
 
 

@@ -7,11 +7,17 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.ChartIndexPresenter;
 import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.IChartCallback;
+import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,9 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     private CustomLineChart weekChart;
     private TextView todayTip,WeekTip,monthTip;
     private ChartIndexPresenter presenter;
+    public double targetSport;
+    public double edSport;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,21 +101,23 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onSuccessGetWeight(double deep, double light) {
+        targetSport=deep;
+        edSport=light;
         View vDoneSport = findViewById(R.id.v_sport_done);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) vDoneSport.getLayoutParams();
-        layoutParams.weight = (float) light / 1000;
+        layoutParams.weight = (float) edSport / 1000;
         vDoneSport.setLayoutParams(layoutParams);
 
         View vSportRemain = findViewById(R.id.v_sport_remain);
         layoutParams = (LinearLayout.LayoutParams) vSportRemain.getLayoutParams();
-        layoutParams.weight = (float) (deep - light) / 1000;
+        layoutParams.weight = (float) (targetSport - edSport) / 1000;
         vSportRemain.setLayoutParams(layoutParams);
 
         View vNoneSport = findViewById(R.id.v_sport_none);
         layoutParams = (LinearLayout.LayoutParams) vNoneSport.getLayoutParams();
-        layoutParams.weight = (float) (1000 - deep - light) / 1000;
+        layoutParams.weight = (float) (1000 - targetSport - edSport) / 1000;
         vNoneSport.setLayoutParams(layoutParams);
-        String tip="今日目标消耗为"+deep+"千卡，实际消耗为"+light+"千卡。";
+        String tip="今日目标消耗为"+targetSport+"千卡，实际消耗为"+edSport+"千卡。";
         todayTip.setText(tip);
     }
 
@@ -167,4 +178,12 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
             monthTip.setText("");
         }
     }
+
+
+//    //目标运动量发生变化
+//    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+//    public void sportTargetDataChange(EventManage.targetSportData event) {
+//        targetSport= PetInfoInstance.getInstance().getTarget_step();
+//        onSuccessGetWeight(targetSport,edSport);
+//    }
 }
