@@ -14,7 +14,7 @@ import com.xiaomaoqiu.pet.R;
  * Created by long on 2017/4/20.
  */
 
-public class ShopCityActivity extends BaseActivity {
+public class BaseWebViewActivity extends BaseActivity {
     public int frameTemplate(){
         return 0;
     }

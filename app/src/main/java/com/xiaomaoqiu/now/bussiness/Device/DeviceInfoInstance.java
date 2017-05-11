@@ -50,6 +50,8 @@ public class DeviceInfoInstance {
             bean.firmware_version = SPUtil.getFirmwareVersion();
             bean.device_name = SPUtil.getDeviceName();
             bean.iccid = SPUtil.getSimIccid();
+            bean.device_version=SPUtil.getDeviceVersion();
+            bean.sim_deadline=SPUtil.getSimDeadline();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
             if (!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
@@ -99,9 +101,11 @@ public class DeviceInfoInstance {
         packBean.firmware_version = message.firmware_version;
         SPUtil.putFirmwareVersion(packBean.firmware_version);
         packBean.imei = message.imei;
-
-
         SPUtil.putDeviceImei(packBean.imei);
+        packBean.sim_deadline=message.sim_deadline;
+        SPUtil.putSimDeadline(packBean.sim_deadline);
+        packBean.device_version=message.device_version;
+        SPUtil.putDeviceVersion(packBean.device_version);
 
 
         UserInstance.getInstance().device_imei = packBean.imei;

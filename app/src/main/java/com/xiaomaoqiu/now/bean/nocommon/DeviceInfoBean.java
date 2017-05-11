@@ -17,6 +17,8 @@ public class DeviceInfoBean extends BaseBean {
 
     public int battery_level;
 
+
+//固件版本号
     public String firmware_version;
 
     public String imei;
@@ -25,5 +27,11 @@ public class DeviceInfoBean extends BaseBean {
 
     //sim卡iccid信息
     public String iccid;
+
+    //sim卡充值到期时间
+    public String sim_deadline;
+
+    //设备版本号
+    public String device_version;
 
 }

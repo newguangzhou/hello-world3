@@ -200,7 +200,7 @@
             android:label="@string/pet_finding"></activity>
 
 
-        <activity android:name="com.xiaomaoqiu.now.bussiness.ShopCityActivity"/>
+        <activity android:name="com.xiaomaoqiu.now.bussiness.BaseWebViewActivity"/>
 
         <activity android:name="com.xiaomaoqiu.now.view.crop.CropImageActivity"/>
 

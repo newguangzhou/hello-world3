@@ -76,10 +76,14 @@ public class SPUtil {
 
     //设备名称
     public static final String DEVICE_NAME = "device_name";
+    //设备版本号
+    public static final String DEVICE_VERSION="device_version";
     //sim卡iccid信息
     public static final String SIM_ICCID = "iccid";
     //设备是否存在
     public static final String DEVICE_EXIST = "device_exist";
+    //设备sim卡充值到期时间
+    public static final String SIM_DEADLINE="sim_deadline";
 
     //HOME_WIFI_MAC
     public static final String HOME_WIFI_MAC = "home_wifi_mac";
@@ -253,12 +257,26 @@ public class SPUtil {
         putString(DEVICE_NAME, name);
     }
 
+    public static String getDeviceVersion(){
+        return getString(DEVICE_VERSION);
+    }
+    public static void putDeviceVersion(String deviceversion){
+        putString(DEVICE_VERSION,deviceversion);
+    }
+
     public static String getSimIccid() {
         return getString(SIM_ICCID);
     }
 
     public static void putSimIccid(String iccid) {
         putString(SIM_ICCID, iccid);
+    }
+
+    public static String getSimDeadline(){
+        return getString(SIM_DEADLINE);
+    }
+    public static void putSimDeadline(String simdeadline){
+        putString(SIM_DEADLINE,simdeadline);
     }
 
     public static boolean getIsDeviceExist() {

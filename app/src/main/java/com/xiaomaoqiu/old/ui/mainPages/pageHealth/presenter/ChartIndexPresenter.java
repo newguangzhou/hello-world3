@@ -279,7 +279,8 @@ public class ChartIndexPresenter {
     //解析一周的运动数据
     void parseSportWeekAndMonthList(List<PetSportBean.SportBean> sportDatas, String format, boolean isMonth) {
         int days = isMonth ? MONTH_LENGTH : WEEK_LENGTH;
-        int intrval = isMonth ? 2 : 1;
+//        int intrval = isMonth ? 2 : 1;
+        int intrval=1;
         ArrayList<String> axisLabels = new ArrayList<>();
 
         ArrayList<Entry> deepList = new ArrayList<>();

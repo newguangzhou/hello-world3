@@ -28,6 +28,7 @@ public class DeviceActivity extends BaseActivity {
     private View btn_go_back;
     BatteryView batteryView;
     TextView tv_newhardware;
+    TextView tv_sim_deadline;
 
 
 
@@ -44,6 +45,8 @@ public class DeviceActivity extends BaseActivity {
                 finish();
             }
         });
+        tv_sim_deadline= (TextView) findViewById(R.id.tv_sim_deadline);
+        tv_sim_deadline.setText("当前sim卡已经充值到"+DeviceInfoInstance.getInstance().packBean.sim_deadline);
         showMessageOnUI();
         findViewById(R.id.tv_unbind).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +68,7 @@ public class DeviceActivity extends BaseActivity {
         });
         if (DeviceInfoInstance.getInstance().battery_level < 0) {
             ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
         }else{
             batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
                     DeviceInfoInstance.getInstance().lastGetTime);
@@ -77,6 +81,7 @@ public class DeviceActivity extends BaseActivity {
             }
         });
 
+
         EventBus.getDefault().register(this);
     }
 
@@ -86,6 +91,7 @@ public class DeviceActivity extends BaseActivity {
         batteryView = (BatteryView) findViewById(R.id.batteryView);
         if (DeviceInfoInstance.getInstance().battery_level < 0) {
             ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
             return;
         }
         batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
@@ -111,6 +117,9 @@ public class DeviceActivity extends BaseActivity {
         else {
             tv.setText("小毛球1号");
         }
+        if(!TextUtils.isEmpty(bean.device_version)){
+            tv_newhardware.setText(bean.device_version);
+        }
 
         tv = (TextView) findViewById(R.id.tv_imei);
         if (!TextUtils.isEmpty(bean.imei))
@@ -119,11 +128,14 @@ public class DeviceActivity extends BaseActivity {
             tv.setText("未绑定设备");
         }
 
-        tv = (TextView) findViewById(R.id.tv_hardware);
+        tv = (TextView) findViewById(R.id.tv_hardware_version);
         if (!TextUtils.isEmpty(bean.firmware_version))
             tv.setText(bean.firmware_version);
         else {
             tv.setText("未绑定设备");
+        }
+        if(!"".equals(DeviceInfoInstance.getInstance().packBean.sim_deadline)){
+            tv_sim_deadline.setText("当前sim卡已经充值到"+DeviceInfoInstance.getInstance().packBean.sim_deadline);
         }
     }
 

@@ -47,7 +47,7 @@ public class BatteryView extends ImageView {
 
 
     public void setDeviceOffline(){
-        setImageResource(batteryLevelRes[4]);
+        setImageResource(R.drawable.battery_bkgnd);
     }
 
     public void setBatteryLevel(float level,String time)
