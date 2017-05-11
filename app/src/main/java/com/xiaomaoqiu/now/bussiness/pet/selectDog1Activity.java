@@ -1,6 +1,5 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageMe;
+package com.xiaomaoqiu.now.bussiness.pet;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,7 +10,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.adapter.PetVarietyAdapter;
 import com.xiaomaoqiu.pet.R;
 
-public class ModifyVarietyDialog extends BaseActivity {
+public class selectDog1Activity extends BaseActivity {
 
 	public static String TAG_PARAM1 = "variety";
 
@@ -30,7 +29,7 @@ public class ModifyVarietyDialog extends BaseActivity {
 		findViewById(R.id.btn_all_variety).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(),ModifyVarietyDialog2.class);
+				Intent intent = new Intent(getApplicationContext(),selectDog2Activity.class);
 				startActivityForResult(intent, 1);
 			}
 		});
@@ -42,8 +41,9 @@ public class ModifyVarietyDialog extends BaseActivity {
 			@Override
 			public void onItemClick(View view, String name) {
 				Intent data = new Intent();
-				data.putExtra(ModifyVarietyDialog.TAG_PARAM1,name);
-				ModifyVarietyDialog.this.finish();
+				data.putExtra(selectDog1Activity.TAG_PARAM1,name);
+				setResult(1,data);
+				selectDog1Activity.this.finish();
 			}
 		});
 		mRecyclerView.setAdapter(mAdapter);

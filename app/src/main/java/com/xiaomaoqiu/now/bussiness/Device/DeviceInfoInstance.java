@@ -188,7 +188,7 @@ public class DeviceInfoInstance {
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         break;
                     case EC_ALREADY_FAV:
-                        ToastUtil.showAtCenter("设备已被绑定");
+//                        ToastUtil.showAtCenter("设备已被绑定");
                         EventBus.getDefault().post(new EventManage.deviceAlreadyBind());
                         break;
                 }

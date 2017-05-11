@@ -61,6 +61,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         if (DeviceInfoInstance.getInstance().battery_level < 0) {
             ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
             return;
         }
         batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,

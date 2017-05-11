@@ -15,7 +15,7 @@ import com.xiaomaoqiu.pet.R;
 public class BatteryView extends ImageView {
 
     private float[] batteryLevels;
-    private int[] batteryLevelRes;
+    public int[] batteryLevelRes;
     float mWarnLevel = 0.3f;//报警电量
     float mEmptyLevel = 0.05f;//电量超低警示
     private boolean charging;
@@ -45,6 +45,10 @@ public class BatteryView extends ImageView {
         a.recycle();
     }
 
+
+    public void setDeviceOffline(){
+        setImageResource(batteryLevelRes[4]);
+    }
 
     public void setBatteryLevel(float level,String time)
     {

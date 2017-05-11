@@ -95,10 +95,10 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 //                startActivity(intent);
 //                finish();
 ////
-                if (TextUtils.isEmpty(wifi_bssid)) {
-                    ToastUtil.showTost("您必须选择一个homewifi");
-                    return;
-                }
+//                if (TextUtils.isEmpty(wifi_bssid)) {
+//                    ToastUtil.showTost("您必须选择一个homewifi");
+//                    return;
+//                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
@@ -110,10 +110,10 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
                         if (ret == EC_SUCCESS) {
                             PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
                             PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
-                            Intent intent = new Intent(InitWifiListActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
                         }
+                        Intent intent = new Intent(InitWifiListActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
 
 
                     }

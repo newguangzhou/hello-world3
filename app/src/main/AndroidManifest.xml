@@ -162,11 +162,15 @@
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.SelectAvatarSourceDialog"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyVarietyDialog"
+        android:name="com.xiaomaoqiu.now.bussiness.pet.SelectPetTypeActivity"
+        android:theme="@android:style/Theme.NoTitleBar"
+        android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.xiaomaoqiu.now.bussiness.pet.selectDog1Activity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyVarietyDialog2"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.selectDog2Activity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity

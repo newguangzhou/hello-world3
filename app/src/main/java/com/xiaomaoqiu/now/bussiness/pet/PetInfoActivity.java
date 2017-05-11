@@ -1,8 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.pet;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,34 +16,18 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
-import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
-import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.http.ApiUtils;
-import com.xiaomaoqiu.now.http.HttpCode;
-import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
-import com.xiaomaoqiu.now.util.ImageUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.crop.Crop;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.InputDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyVarietyDialog;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyVarietyDialog2;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyWeightDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.SelectAvatarSourceDialog;
 import com.xiaomaoqiu.pet.R;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import mbg.bottomcalender.BottomCalenderView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Response;
 
 
 /**
@@ -191,7 +173,7 @@ public class PetInfoActivity extends BaseActivity {
 
 
     private void modifyVariety() {
-        Intent intent = new Intent(this, ModifyVarietyDialog.class);
+        Intent intent = new Intent(this, SelectPetTypeActivity.class);
         startActivityForResult(intent, REQ_CODE_VARIETY);
     }
 
@@ -278,7 +260,7 @@ public class PetInfoActivity extends BaseActivity {
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
                 if (data != null) {
-                    modifyBean.description = data.getStringExtra(ModifyVarietyDialog2.TAG_PARAM1);
+                    modifyBean.description = data.getStringExtra(selectDog2Activity.TAG_PARAM1);
                     txt_variety.setText(modifyBean.description);
                 }
                 break;
