@@ -86,7 +86,7 @@
             <ImageView
                 android:id="@+id/main_tab_health"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:src="@drawable/main_bottombg_home" />
         </LinearLayout>
@@ -108,7 +108,7 @@
             <ImageView
                 android:id="@+id/main_tab_locate"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:scaleType="matrix"
                 android:src="@drawable/main_bottombg_pos" />
@@ -130,7 +130,7 @@
             <ImageView
                 android:id="@+id/main_tab_me"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:scaleType="matrix"
                 android:src="@drawable/main_bottombg_service" />
