@@ -110,6 +110,7 @@ public class MeWifiListActivity extends BaseActivity {
         ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
+
                 DeviceInfoInstance.getInstance().sendGetWifiListCmd();
             }
         });

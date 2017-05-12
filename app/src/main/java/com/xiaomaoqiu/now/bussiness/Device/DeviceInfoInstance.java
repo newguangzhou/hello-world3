@@ -237,7 +237,6 @@ public class DeviceInfoInstance {
 
     //发送获取wifi列表的命令
     public void sendGetWifiListCmd() {
-        count=0;
         ApiUtils.getApiService().sendGetWifiListCmd(
                 UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),

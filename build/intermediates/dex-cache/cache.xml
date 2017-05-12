@@ -16,35 +16,8 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="0b5aa100e301f4bd89d12a5fa7fa325853a48b88">
+        sha1="d241135317077e33b2f52fc33897d630eb5460f5">
         <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_35ef57c91f95d9b8d442d71d154ca822020db9dd.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/android/bottomcalender/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="0be25d78b8b4f29d4e9945e03571011a836b547c">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_f9386ae5dfc0b547d78e7db01d00cb9f5cbb6a39.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/android/AndroidCharts/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="7ef3e80128859a68ca82b6a98b6c5967a2cd818f">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_b0f3faf5278cacfc8fc8e723c7df5edc845e253a.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/android/app/libs/org.apache.http.legacy.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_75612a032a672b000bd5f649bcf17d0c44260255.jar.jar" />
     </item>
     <item
         is-multidex="false"
@@ -75,6 +48,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/long/Desktop/android/bottomcalender/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0be25d78b8b4f29d4e9945e03571011a836b547c">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_f9386ae5dfc0b547d78e7db01d00cb9f5cbb6a39.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/libs/zxing.jar"
         jumboMode="true"
         optimize="true"
@@ -84,12 +66,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/long/Desktop/android/AndroidCharts/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7ef3e80128859a68ca82b6a98b6c5967a2cd818f">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_b0f3faf5278cacfc8fc8e723c7df5edc845e253a.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/long/Desktop/android/app/libs/bos-android-sdk-1.0.2.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="4d8935bd82163a43871e2907ebb4ef363ec4ab50">
         <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/bos-android-sdk-1.0.2_d8bdf5e95d9a8970ea8daac8bab0e50aae38b270.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/Desktop/android/app/libs/org.apache.http.legacy.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fa331331b626ee78c52bea16ce1e34b39e666ce5">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/org.apache.http.legacy_75612a032a672b000bd5f649bcf17d0c44260255.jar.jar" />
     </item>
     <item
         is-multidex="false"

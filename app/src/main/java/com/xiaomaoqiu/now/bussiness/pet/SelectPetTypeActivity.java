@@ -1,5 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.pet;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -53,14 +54,14 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.iv_pettype_cat:
 
                 data.putExtra(selectDog1Activity.TAG_PARAM1, "猫");
-                setResult(1, data);
+                setResult(Activity.RESULT_OK, data);
                 finish();
                 break;
 
             case R.id.iv_pettype_other:
 
                 data.putExtra(selectDog1Activity.TAG_PARAM1, "其他");
-                setResult(1, data);
+                setResult(Activity.RESULT_OK, data);
                 finish();
                 break;
         }
