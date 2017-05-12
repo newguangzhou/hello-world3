@@ -208,7 +208,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiListError(EventManage.wifiListError event) {
         DialogUtil.closeProgress();
-//        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
+        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
 
