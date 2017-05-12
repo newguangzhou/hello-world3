@@ -20,6 +20,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
 import com.xiaomaoqiu.pet.R;
@@ -70,10 +71,10 @@ public class MeWifiListActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                if (TextUtils.isEmpty(wifi_bssid)) {
-                    ToastUtil.showTost("您必须选择一个homewifi");
-                    return;
-                }
+//                if (TextUtils.isEmpty(wifi_bssid)) {
+//                    ToastUtil.showTost("您必须选择一个homewifi");
+//                    return;
+//                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
@@ -110,7 +111,7 @@ public class MeWifiListActivity extends BaseActivity {
         ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-
+                DialogUtil.showProgress(MeWifiListActivity.this, "");
                 DeviceInfoInstance.getInstance().sendGetWifiListCmd();
             }
         });
@@ -167,6 +168,7 @@ public class MeWifiListActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
+        DialogUtil.closeProgress();
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
@@ -178,14 +180,22 @@ public class MeWifiListActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiListError(EventManage.wifiListError event) {
-        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
+        DialogUtil.closeProgress();
+//        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        DialogUtil.showProgress(this, "");
         DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DialogUtil.closeProgress();
     }
 
     @Override

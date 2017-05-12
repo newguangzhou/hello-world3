@@ -299,7 +299,7 @@ public class DeviceInfoInstance {
 
             @Override
             public void onFail(Call<WifiListBean> call, Throwable t) {
-
+                EventBus.getDefault().post(new EventManage.wifiListError());
             }
         });
     }

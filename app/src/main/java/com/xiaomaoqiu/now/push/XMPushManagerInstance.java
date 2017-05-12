@@ -90,9 +90,7 @@ public class XMPushManagerInstance {
         return false;
     }
 
-//    public static void checkManifest(){
-//        MiPushClient.checkManifest(PetAppLike.mcontext);
-//    }
+
 
     public void resume() {
         MiPushClient.resumePush(PetAppLike.mcontext, null);

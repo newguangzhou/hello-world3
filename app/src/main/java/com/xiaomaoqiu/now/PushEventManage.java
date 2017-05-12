@@ -5,8 +5,25 @@ package com.xiaomaoqiu.now;
  */
 
 public class PushEventManage {
-public static class otherLogin{
+    /*
+    异地登录
+     */
+    public static class otherLogin {
 
-}
+    }
+
+    /**
+     * 设备离线
+     */
+    public static class deviceOffline {
+
+    }
+
+    /**
+     * 位置变化
+     */
+    public static class locationChange {
+        
+    }
 
 }

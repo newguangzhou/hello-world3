@@ -23,6 +23,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
@@ -137,6 +138,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
         ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
+                DialogUtil.showProgress(InitWifiListActivity.this, "");
                 DeviceInfoInstance.getInstance().sendGetWifiListCmd();
             }
         });
@@ -193,6 +195,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
+        DialogUtil.closeProgress();
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
@@ -204,14 +207,22 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiListError(EventManage.wifiListError event) {
-        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
+        DialogUtil.closeProgress();
+//        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        DialogUtil.showProgress(this, "");
         DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DialogUtil.closeProgress();
     }
 
     @Override
@@ -227,8 +238,10 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
         startActivity(intent);
     }
 
+
     @Override
     public void onBackPressed() {
+
         DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
 
                     @Override

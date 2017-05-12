@@ -105,7 +105,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 return;
             }
         }
-        ToastUtil.showNetError();
+//        ToastUtil.showNetError();
         onFail(call, null);
     }
 

@@ -134,8 +134,10 @@ public class DeviceActivity extends BaseActivity {
         else {
             tv.setText("未绑定设备");
         }
-        if(!"".equals(DeviceInfoInstance.getInstance().packBean.sim_deadline)){
+        if(DeviceInfoInstance.getInstance().packBean.sim_deadline!=null&&!"".equals(DeviceInfoInstance.getInstance().packBean.sim_deadline)){
             tv_sim_deadline.setText("当前sim卡已经充值到"+DeviceInfoInstance.getInstance().packBean.sim_deadline);
+        }else{
+            tv_sim_deadline.setText("请注意sim卡充值");
         }
     }
 
