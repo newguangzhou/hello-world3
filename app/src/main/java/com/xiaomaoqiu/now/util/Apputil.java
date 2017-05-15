@@ -94,5 +94,29 @@ public class Apputil {
         return imei;
     }
 
+    /**
+     * 获取操作系统信息
+     */
+    public static String getOSName(){
+       return  "Android-" + android.os.Build.VERSION.SDK_INT;
+    }
+    /**
+     * 获取版本号
+     */
+    public static int getVersionCode(){
+        int versionCode = 0;
+        PackageManager pm = PetAppLike.mcontext.getPackageManager();
+        try {
+            PackageInfo pi = pm.getPackageInfo(getPackageName(PetAppLike.mcontext), 0);
+            versionCode = pi.versionCode;
+        } catch (Exception e) {// android.os.DeadObjectException  by yangwenxin 5.1.0
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return versionCode;
+    }
+
+
+
 
 }

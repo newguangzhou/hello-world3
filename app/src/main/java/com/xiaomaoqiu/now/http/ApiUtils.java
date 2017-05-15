@@ -1,8 +1,11 @@
 package com.xiaomaoqiu.now.http;
 
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.util.Apputil;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -70,6 +73,9 @@ public class ApiUtils {
 
                 // 添加 统一的Header
                 Request.Builder requestBuilder = original.newBuilder()
+                        .header("X-OS", "Android"+android.os.Build.VERSION.RELEASE)
+                        .header("X-App-Version", Apputil.getVersionName(PetAppLike.mcontext))
+                        .header("X-OS-Name", URLEncoder.encode(android.os.Build.MODEL.replaceAll(" ", ""), "UTF-8"))
 //                        .header("versionCode", "Android_" + DeviceUtil.getVersionCode())
 //                        .header("versionName", "Android_" + DeviceUtil.getVersionName(ChrApplication.getContext()))
 //                        .header("UMengChannel", Constants.UMengChannel)
