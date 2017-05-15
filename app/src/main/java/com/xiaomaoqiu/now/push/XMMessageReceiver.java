@@ -47,6 +47,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
         } else if(!TextUtils.isEmpty(message.getUserAccount())) {
             mUserAccount=message.getUserAccount();
         }
+       PushDataCenter.getInstance().notifyData(mMessage);
 
 
 
@@ -106,7 +107,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
 //                }
                 LogUtil.e(TAG,"mAlias:"+cmdArg1);
                 //todo 设置set-alias成功
-                EventBus.getDefault().post(new EventManage.setAliasSuccess());
+                EventBus.getDefault().post(new EventManage.setUserAccountSuccess());
             }else{
 //                if(XMPushManagerInstance.getInstance().getOnRegisterResult()!=null){
 //                    XMPushManagerInstance.getInstance().getOnRegisterResult().onFailed();
@@ -117,6 +118,17 @@ public class XMMessageReceiver extends PushMessageReceiver {
         } else if (MiPushClient.COMMAND_UNSET_ALIAS.equals(command)) {
             if (message.getResultCode() == ErrorCode.SUCCESS) {
                 mAlias = cmdArg1;
+            }
+        }
+        else if(MiPushClient.COMMAND_SET_ACCOUNT.equals(command)){
+            mUserAccount=cmdArg1;
+            LogUtil.e(TAG,"mUserAccount:"+cmdArg1);
+            //todo 设置set-mUserAccount成功
+            EventBus.getDefault().post(new EventManage.setUserAccountSuccess());
+        }
+        else if(MiPushClient.COMMAND_UNSET_ACCOUNT.equals(command)){
+            if (message.getResultCode() == ErrorCode.SUCCESS) {
+                mUserAccount = cmdArg1;
             }
         }
 

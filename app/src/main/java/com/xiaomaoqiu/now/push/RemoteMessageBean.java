@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Created by long on 2017/5/3.
  */
 
-public class RemoteMessage {
+public class RemoteMessageBean {
     /**
      * 推送类型：
      * user:用户相关
