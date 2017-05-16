@@ -28,7 +28,7 @@ public class LogUtil {
 			if (Environment.getExternalStorageState().equals(
 					Environment.MEDIA_MOUNTED)) {
 				path = Apputil.sdNormalPath
-						+ "/ChinaHr_Log/";
+						+ "/xmq_Log/";
 				File file_Path = new File(path);
 				file_Path.mkdirs();
 				File file = new File(path, "log.txt");

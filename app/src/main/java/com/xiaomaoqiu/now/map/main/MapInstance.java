@@ -210,7 +210,7 @@ public class MapInstance implements BDLocationListener {
                 .radius((int)radius) // 半径 单位 米
                 .visible(true)
 //                .stroke(new Stroke(2, Color.parseColor("#ffffff"))) // 设置边框 Stroke 参数 宽度单位像素默认5px 颜色
-                .fillColor(Color.parseColor("#7B2e68AA")); // 设置圆的填充颜色
+                .fillColor(Color.parseColor("#1B2e68AA")); // 设置圆的填充颜色
         mBaiduMap.addOverlay(mCircleOptions);
 
 

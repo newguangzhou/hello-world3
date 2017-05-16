@@ -89,11 +89,14 @@
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" />
 
         <activity android:name="com.xiaomaoqiu.now.bussiness.SplashActivity"
             android:theme="@style/Appwelcome"
             android:alwaysRetainTaskState="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -104,105 +107,182 @@
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.user.LoginActivity"
             android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
         </activity>
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.MainActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
         <activity
             android:name="com.xiaomaoqiu.now.view.ExitDialog_RAW_Activity"
-            android:theme="@style/MyDialogStyleBottom" />
+            android:theme="@style/MyDialogStyleBottom"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.AboutActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity"
             android:label="@string/title_activity_health_index"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity"
             android:label="@string/bind_device"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity"
             android:label="@string/zxing"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyWeightDialog"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.OUT___ModifyIntroDialog"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.SelectAvatarSourceDialog"
-            android:theme="@style/MyDialogStyleBottom" />
+            android:theme="@style/MyDialogStyleBottom"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
         android:name="com.xiaomaoqiu.now.bussiness.pet.SelectPetTypeActivity"
         android:theme="@android:style/Theme.NoTitleBar"
-        android:windowSoftInputMode="stateAlwaysHidden" />
+        android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.selectDog1Activity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.selectDog2Activity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name="com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity"
-            android:theme="@style/MyDialogStyleBottom" />
+            android:theme="@style/MyDialogStyleBottom"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.xiaomaoqiu.now.bussiness.Device.DeviceActivity" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="com.xiaomaoqiu.now.bussiness.Device.DeviceActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.FindPetActivity"
-            android:label="@string/pet_finding"></activity>
+            android:label="@string/pet_finding"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            ></activity>
 
 
-        <activity android:name="com.xiaomaoqiu.now.bussiness.BaseWebViewActivity"/>
+        <activity android:name="com.xiaomaoqiu.now.bussiness.BaseWebViewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
 
-        <activity android:name="com.xiaomaoqiu.now.view.crop.CropImageActivity"/>
+        <activity android:name="com.xiaomaoqiu.now.view.crop.CropImageActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
 
         <!-- 小米推送开始-->
         <service
