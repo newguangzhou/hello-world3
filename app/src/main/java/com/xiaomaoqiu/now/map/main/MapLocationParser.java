@@ -29,7 +29,6 @@ public class MapLocationParser {
                 if(null == parseListener){
                     return;
                 }
-                Log.e("longtianlove--result",result.getLocation().latitude+":"+result.getLocation().longitude+"$"+result.getAddress());
                 parseListener.onAddressparsed(result.getAddress());
                 if(geoCoder != null){
                     geoCoder.destroy();

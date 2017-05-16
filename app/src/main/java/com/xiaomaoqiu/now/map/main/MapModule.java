@@ -248,7 +248,6 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
 
         LatLng desLatLng=converterLatLng(sourceLatLng);
 
-Log.e("longtianlove--source",desLatLng.latitude+":"+desLatLng.longitude);
 
         mPetMarker.setPosition(desLatLng);
         if(MODE_FINDED_PET >= mMode) {
