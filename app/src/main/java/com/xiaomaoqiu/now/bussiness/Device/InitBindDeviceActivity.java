@@ -11,6 +11,8 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.SplashActivity;
+import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
@@ -159,6 +161,13 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public  void toDeviceActivity(EventManage.bindDeviceSuccess event){
         EventBus.getDefault().unregister(this);
+        if (!(UserInstance.getInstance().pet_id > 0)) {
+            Intent intent=new Intent();
+            intent.setClass(InitBindDeviceActivity.this, AddPetInfoActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             Intent intent = new Intent(this, InitWifiListActivity.class);
             startActivity(intent);
@@ -193,11 +202,11 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(InitBindDeviceActivity.this, "确认退出登录？", new View.OnClickListener() {
+        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        loginPresenter.logout();
+                        finish();
                     }
                 }
         );

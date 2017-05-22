@@ -17,7 +17,6 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
-import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
@@ -221,12 +220,12 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     public void addPetInfoSuccess(EventManage.addPetInfoSuccess event) {
         EventBus.getDefault().unregister(this);
         Intent intent;
-        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
-            intent = new Intent(AddPetInfoActivity.this, InitBindDeviceActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+//        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
+//            intent = new Intent(AddPetInfoActivity.this, InitBindDeviceActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent = new Intent(AddPetInfoActivity.this, InitWifiListActivity.class);
@@ -388,11 +387,11 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
+        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        loginPresenter.logout();
+                        finish();
                     }
                 }
         );

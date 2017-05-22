@@ -242,11 +242,11 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
     @Override
     public void onBackPressed() {
 
-        DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
+        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        loginPresenter.logout();
+                        finish();
                     }
                 }
         );

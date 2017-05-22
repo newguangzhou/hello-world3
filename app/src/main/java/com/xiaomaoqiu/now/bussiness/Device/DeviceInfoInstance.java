@@ -50,7 +50,7 @@ public class DeviceInfoInstance {
             bean.firmware_version = SPUtil.getFirmwareVersion();
             bean.device_name = SPUtil.getDeviceName();
             bean.iccid = SPUtil.getSimIccid();
-            bean.device_version=SPUtil.getDeviceVersion();
+            bean.hardware_version =SPUtil.getDeviceVersion();
             bean.sim_deadline=SPUtil.getSimDeadline();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
@@ -104,8 +104,8 @@ public class DeviceInfoInstance {
         SPUtil.putDeviceImei(packBean.imei);
         packBean.sim_deadline=message.sim_deadline;
         SPUtil.putSimDeadline(packBean.sim_deadline);
-        packBean.device_version=message.device_version;
-        SPUtil.putDeviceVersion(packBean.device_version);
+        packBean.hardware_version =message.hardware_version;
+        SPUtil.putDeviceVersion(packBean.hardware_version);
 
 
         UserInstance.getInstance().device_imei = packBean.imei;

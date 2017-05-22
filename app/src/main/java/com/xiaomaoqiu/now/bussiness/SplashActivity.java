@@ -78,18 +78,19 @@ public class SplashActivity extends BaseActivity {
 
         }
         Intent intent = new Intent();
-        if (!(UserInstance.getInstance().pet_id > 0)) {
-            intent.setClass(SplashActivity.this, AddPetInfoActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
         if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
             intent.setClass(SplashActivity.this, InitBindDeviceActivity.class);
             startActivity(intent);
             finish();
             return;
         }
+        if (!(UserInstance.getInstance().pet_id > 0)) {
+            intent.setClass(SplashActivity.this, AddPetInfoActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent.setClass(SplashActivity.this, InitWifiListActivity.class);

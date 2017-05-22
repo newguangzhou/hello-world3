@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.now;
+package com.xiaomaoqiu.now.push;
 
 /**
  * Created by long on 2017/5/3.

@@ -32,6 +32,6 @@ public class DeviceInfoBean extends BaseBean {
     public String sim_deadline;
 
     //设备版本号
-    public String device_version;
+    public String hardware_version;
 
 }

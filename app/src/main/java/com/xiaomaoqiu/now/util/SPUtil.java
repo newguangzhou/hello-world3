@@ -77,7 +77,7 @@ public class SPUtil {
     //设备名称
     public static final String DEVICE_NAME = "device_name";
     //设备版本号
-    public static final String DEVICE_VERSION="device_version";
+    public static final String DEVICE_VERSION="hardware_version";
     //sim卡iccid信息
     public static final String SIM_ICCID = "iccid";
     //设备是否存在

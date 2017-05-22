@@ -12,7 +12,7 @@ public class EventManage {
 
     }
     //小米设置uid成功
-    public static class setUserAccountSuccess {
+    public static class setAlias {
 
     }
     //小米设置uid成功

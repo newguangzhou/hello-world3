@@ -70,6 +70,7 @@ public class PushDataCenter {
      */
     public void dealUser() {
         switch (formatBean.signal) {
+
         }
     }
 

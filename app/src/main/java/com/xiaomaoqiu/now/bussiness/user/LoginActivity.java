@@ -1,18 +1,13 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +18,7 @@ import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.PushEventManage;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
@@ -205,18 +200,19 @@ public class LoginActivity extends BaseActivity implements LoginView {
     public void next(EventManage.getUserInfoEvent event) {
         dismissDialog();//隐藏加载中动画
         Intent intent = new Intent();
-        if (!(UserInstance.getInstance().pet_id > 0)) {
-            intent.setClass(LoginActivity.this, AddPetInfoActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
         if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
             intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
             startActivity(intent);
             finish();
             return;
         }
+        if (!(UserInstance.getInstance().pet_id > 0)) {
+            intent.setClass(LoginActivity.this, AddPetInfoActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent.setClass(LoginActivity.this, InitWifiListActivity.class);

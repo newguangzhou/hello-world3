@@ -107,7 +107,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
 //                }
                 LogUtil.e(TAG,"mAlias:"+cmdArg1);
                 //todo 设置set-alias成功
-                EventBus.getDefault().post(new EventManage.setUserAccountSuccess());
+                EventBus.getDefault().post(new EventManage.setAlias());
             }else{
 //                if(XMPushManagerInstance.getInstance().getOnRegisterResult()!=null){
 //                    XMPushManagerInstance.getInstance().getOnRegisterResult().onFailed();
@@ -124,7 +124,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
             mUserAccount=cmdArg1;
             LogUtil.e(TAG,"mUserAccount:"+cmdArg1);
             //todo 设置set-mUserAccount成功
-            EventBus.getDefault().post(new EventManage.setUserAccountSuccess());
+            EventBus.getDefault().post(new EventManage.setAlias());
         }
         else if(MiPushClient.COMMAND_UNSET_ACCOUNT.equals(command)){
             if (message.getResultCode() == ErrorCode.SUCCESS) {

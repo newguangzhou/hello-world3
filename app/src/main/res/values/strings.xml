@@ -85,7 +85,7 @@
     <string name="tip_battery_warn">电池电量即将用完，请立即充电</string>
     <string name="tip_battery_empty">电池电量低，请及时充电</string>
     <string name="tip_battery_null">为了您的宠物的安全，请注意及时充电。</string>
-    <string name="title_hardware">狗狗追踪器</string>
+    <string name="title_hardware">宠物追踪器</string>
     <string name="title_home_wifi">常住地WIFI</string>
     <string name="title_message">最新信息</string>
     <string name="title_contact">联系客服</string>

@@ -117,8 +117,8 @@ public class DeviceActivity extends BaseActivity {
         else {
             tv.setText("小毛球1号");
         }
-        if(!TextUtils.isEmpty(bean.device_version)){
-            tv_newhardware.setText(bean.device_version);
+        if(!TextUtils.isEmpty(bean.hardware_version)){
+            tv_newhardware.setText(bean.hardware_version);
         }
 
         tv = (TextView) findViewById(R.id.tv_imei);
