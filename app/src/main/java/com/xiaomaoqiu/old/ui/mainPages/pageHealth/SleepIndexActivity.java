@@ -152,7 +152,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         if(values == null || values.size() <2){
             return;
         }
-        String tip=data+"深度睡眠为"+(values.get(1))+"小时，浅度睡眠为"+(values.get(0))+"小时。";
+        String tip=data+"深度睡眠为"+(values.get(0))+"小时，浅度睡眠为"+(values.get(1))+"小时。";
         if(ChartIndexPresenter.FLAG_WEEK == flag){
             weekTip.setText(tip);
         }else{
