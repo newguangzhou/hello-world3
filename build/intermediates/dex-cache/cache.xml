@@ -57,12 +57,39 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/long/.android/build-cache/a880e59e89a29b5d809442afd211f1e1d35f626a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_c7fc6adab7a62322cbf5c2a73bae3663836cc9e1.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/.android/build-cache/fb5606f70bbe7b1a882d210f0c5c7ba8e06d4894/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a0bdf70123d26dd83d8462d602b3a83a41934cf6">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_742b814a3fc98e3519b1149448e5dd3522d0d473.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/long/Desktop/android/lib-zxing/build/intermediates/bundles/default/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="d241135317077e33b2f52fc33897d630eb5460f5">
         <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_35ef57c91f95d9b8d442d71d154ca822020db9dd.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/.android/build-cache/23b66664f815054facb1664cd2a784793bb6371f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="145da27a459a63ea0c4e318930365cf0a8b8e891">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_5abf11db87926b03ae958312dc4b31c28441c148.jar.jar" />
     </item>
     <item
         is-multidex="false"
@@ -102,21 +129,48 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.android/build-cache/69bab1a9204d223e1ad5bb23d8f7bbb80720a3f3/output/jars/classes.jar"
+        jar="/Users/long/.android/build-cache/a9e604d0714870471743e918b72ae85252c887d9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a540784239c611ea490593e2053a5e2890675c68">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_e06b7c03925176a3fd0a9f9712451c04c50ca3d1.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/.android/build-cache/fc9b3b57d528818ba4d4a8721c28d66407ee7d0d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c9a86e6bc8300fc00c191949ac61a2f7165e35c7">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_f03418b6a1e9f581b3382f69a2b7f1e2547dca4a.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/.android/build-cache/8ab631cc48c3530e6ce1701e952a78ab7a90d7ad/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="5743268f3a177e4256453dfec5607ae0896b6f29">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_ffa2a3b78533a413bc51e0834948f5f0512ee735.jar.jar" />
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_93b81414b39bd852ea32b4a35d9b18652016246d.jar.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/long/.android/build-cache/b48c81a60bf26bbe0c9d1bed9b87b2cdd98cbf16/output/jars/classes.jar"
+        jar="/Users/long/.android/build-cache/5630ca11798f0ad18db648bc7d7cbb26f80706c1/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="a0bdf70123d26dd83d8462d602b3a83a41934cf6">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_fbce50194166ce5fad6604ac1956ced44663b083.jar.jar" />
+        sha1="40e5cb8708fc25fe57cb403cc82e9ef98376b648">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_f65062126a16c232aa133601fd2d9c3f1959b13d.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/long/.android/build-cache/e5bb7f657fa785a88a8de5a1eff546dab950166f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1e346707e4770db216049a532ab3eb5e317cf82a">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/10/classes_32f1fcaf5b01f988756aace157b544bc926a7274.jar.jar" />
     </item>
 
 </items>

@@ -25,10 +25,9 @@ import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
-import com.xiaomaoqiu.old.ui.dialog.StartPetFindingDialog;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity;
+import com.xiaomaoqiu.now.bussiness.petmessage.HealthIndexActivity;
+import com.xiaomaoqiu.now.bussiness.petmessage.SleepIndexActivity;
+import com.xiaomaoqiu.now.bussiness.petmessage.SportIndexActivity;
 import com.xiaomaoqiu.old.widgets.CircleProgressBar;
 import com.xiaomaoqiu.pet.R;
 

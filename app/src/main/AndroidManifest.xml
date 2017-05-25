@@ -134,7 +134,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.HealthIndexActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.petmessage.HealthIndexActivity"
             android:label="@string/title_activity_health_index"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -172,7 +172,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.SleepIndexActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.petmessage.SleepIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"
@@ -241,7 +241,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageHealth.SportIndexActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.petmessage.SportIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"
@@ -266,13 +266,6 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
-        <activity
-            android:name="com.xiaomaoqiu.now.bussiness.pet.FindPetActivity"
-            android:label="@string/pet_finding"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            ></activity>
-
 
         <activity android:name="com.xiaomaoqiu.now.bussiness.BaseWebViewActivity"
             android:configChanges="keyboardHidden|orientation"

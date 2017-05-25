@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.old.ui.mainPages.pageHealth;
+package com.xiaomaoqiu.now.bussiness.petmessage;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
