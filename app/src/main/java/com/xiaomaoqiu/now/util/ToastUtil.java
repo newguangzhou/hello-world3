@@ -12,7 +12,10 @@ import com.xiaomaoqiu.now.PetAppLike;
 @SuppressLint("WrongConstant")
 public class ToastUtil {
     public static void showTost(String msg){
-        Toast.makeText(PetAppLike.mcontext,msg,Toast.LENGTH_SHORT).show();
+        Toast toast= Toast.makeText(PetAppLike.mcontext,
+                msg, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
     public static void showNetError(){
         Toast.makeText(PetAppLike.mcontext,"网络错误，请稍后重试",Toast.LENGTH_SHORT).show();

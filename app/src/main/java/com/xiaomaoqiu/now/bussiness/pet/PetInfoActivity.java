@@ -53,13 +53,14 @@ public class PetInfoActivity extends BaseActivity {
     private TextView txt_variety;
 
 
-    PetInfoBean modifyBean = PetInfoInstance.getInstance().packBean;
+    PetInfoBean modifyBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.pet_info));
         setContentView(R.layout.me_pet_info);
+        modifyBean = PetInfoInstance.getInstance().packBean;;
         initView();
         setNextView("保存", new View.OnClickListener() {
             @Override
@@ -67,7 +68,7 @@ public class PetInfoActivity extends BaseActivity {
                 if (DoubleClickUtil.isFastMiniDoubleClick()) {
                     return;
                 }
-                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)) {
+                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
                     ToastUtil.showTost("信息需要完整");
                     return;
                 }
@@ -128,10 +129,10 @@ public class PetInfoActivity extends BaseActivity {
 
     private void initPetInfo() {
         txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
-        if (!TextUtils.isEmpty(modifyBean.name)) {
-            (txt_pet_name).setText(modifyBean.name);
+        if (!TextUtils.isEmpty(modifyBean.nick)) {
+            (txt_pet_name).setText(modifyBean.nick);
         } else {
-            modifyBean.name = "旺财";
+            modifyBean.nick = "旺财";
         }
 
 
@@ -158,7 +159,7 @@ public class PetInfoActivity extends BaseActivity {
         imgLogo = (SimpleDraweeView) findViewById(R.id.img_pet_avatar);
         Uri uri = Uri.parse(modifyBean.logo_url);
         imgLogo.setImageURI(uri);
-        ((TextView) findViewById(R.id.txt_variety)).setText(modifyBean.description);
+        txt_variety.setText(modifyBean.description);
         chk_gender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -185,7 +186,7 @@ public class PetInfoActivity extends BaseActivity {
 
     private void modifyName() {
         Intent intent = new Intent(this, ModifyNameDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.name);
+        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
         startActivityForResult(intent, REQ_CODE_NAME);
     }
 
@@ -247,8 +248,8 @@ public class PetInfoActivity extends BaseActivity {
             case REQ_CODE_NAME:
                 if (data != null) {
                     String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
-                    modifyBean.name = nameBackString;
-                    (txt_pet_name).setText(modifyBean.name);
+                    modifyBean.nick = nameBackString;
+                    (txt_pet_name).setText(modifyBean.nick);
                 }
                 break;
             case REQ_CODE_WEIGHT:// ModifyWeightDialog
@@ -259,10 +260,9 @@ public class PetInfoActivity extends BaseActivity {
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
-                if (data != null) {
-                    modifyBean.description = data.getStringExtra(selectDog2Activity.TAG_PARAM1);
+                    modifyBean.description = PetUtil.getInstance().dogName;
+                    modifyBean.enerty_type=PetUtil.getInstance().energyType;
                     txt_variety.setText(modifyBean.description);
-                }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
                 if (data != null) {

@@ -79,11 +79,16 @@ public class MapInstance implements BDLocationListener {
     CircleOptions mCircleOptions;
 
 
+    BitmapDescriptor petbitmapDescriptor ;
+    BitmapDescriptor phonebitmapDescriptor ;
+
     public void init(MapView mapView) {
         this.mapView = mapView;
         initMap();
-        initPhoneMarker();
-        initPetMarker();
+        petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
+        phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
+//        initPhoneMarker();
+//        initPetMarker();
         setPhonePos();
     }
 
@@ -138,13 +143,13 @@ public class MapInstance implements BDLocationListener {
     }
 
 
+
     /**
      * 初始化宠物位置地图标识
      */
     private void initPetMarker() {
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
         OverlayOptions options = new MarkerOptions()
-                .icon(bitmapDescriptor)
+                .icon(petbitmapDescriptor)
                 .draggable(true)
                 .position(new LatLng(petLatitude, petLongitude))
                 .visible(true);
@@ -159,13 +164,13 @@ public class MapInstance implements BDLocationListener {
         startLocListener(1000);
     }
 
+
     /**
      * 初始化手机位置地图标识
      */
     private void initPhoneMarker() {
-        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
         OverlayOptions options = new MarkerOptions()
-                .icon(bitmapDescriptor)
+                .icon(phonebitmapDescriptor)
                 .draggable(true)
                 .position(new LatLng(phoneLatitude, phoneLongitude))
                 .visible(true);
@@ -174,6 +179,8 @@ public class MapInstance implements BDLocationListener {
     }
 
     int a = 0;
+    LatLng desLatLng;
+    double radius=20;
 
     /**
      * 设置宠物位置为地图中心
@@ -181,11 +188,9 @@ public class MapInstance implements BDLocationListener {
     public void setPetLocation(double latitude, double longitude, double radius) {
 
 
-
-
         LatLng sourceLatLng = new LatLng(latitude, longitude);
 
-        LatLng desLatLng = converterLatLng(sourceLatLng);
+         desLatLng = converterLatLng(sourceLatLng);
         petLatitude = desLatLng.latitude;
         petLongitude = desLatLng.longitude;
         SPUtil.putPetLatitude(petLatitude + "");
@@ -202,18 +207,32 @@ public class MapInstance implements BDLocationListener {
 //            radius = 8;
 //        }
 //        a++;
+        this.radius=radius;
+        refreshMap();
+
+
+
+
+
+    }
+
+    /**
+     * 刷新地图
+     */
+    public void refreshMap(){
         mBaiduMap.clear();
         initPhoneMarker();
         initPetMarker();
+        if(desLatLng==null){
+            desLatLng=new LatLng(petLatitude,petLongitude);
+        }
         mCircleOptions = new CircleOptions()
                 .center(desLatLng) // 圆心坐标
-                .radius((int)radius) // 半径 单位 米
+                .radius((int) radius) // 半径 单位 米
                 .visible(true)
 //                .stroke(new Stroke(2, Color.parseColor("#ffffff"))) // 设置边框 Stroke 参数 宽度单位像素默认5px 颜色
                 .fillColor(Color.parseColor("#1B2e68AA")); // 设置圆的填充颜色
         mBaiduMap.addOverlay(mCircleOptions);
-
-
         if (GPS_OPEN) {
             ArrayList<LatLng> points = new ArrayList<>();
             points.add(mPhoneMarker.getPosition());
@@ -229,7 +248,6 @@ public class MapInstance implements BDLocationListener {
                 mFindPolyline.remove();
             }
         }
-
     }
 
     /**
@@ -275,6 +293,7 @@ public class MapInstance implements BDLocationListener {
         if (!GPS_OPEN) {
             setCenter(postion, 300);
         }
+        refreshMap();
         mPhoneMarker.setPosition(postion);
     }
 

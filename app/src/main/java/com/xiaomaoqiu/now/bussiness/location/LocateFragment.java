@@ -118,7 +118,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             }
 
         }
-        MapInstance.getInstance(). startLocListener(1000);
+        MapInstance.getInstance().startLocListener(1000);
         PetInfoInstance.getInstance().getPetLocation();
     }
 

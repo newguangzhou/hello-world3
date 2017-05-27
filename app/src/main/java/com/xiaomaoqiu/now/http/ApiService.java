@@ -94,7 +94,8 @@ public interface ApiService {
             @Query("sex") int sex,
             @Query("nick") String nick,
             @Query("birthday") String birthday,
-            @Query("pet_type_id") int pet_type_id
+            @Query("pet_type_id") int pet_type_id,
+            @Query("energy_type") String energy_type
 
     );
 
@@ -347,7 +348,8 @@ public interface ApiService {
             @Query("nick") String nick,
             @Query("birthday") String birthday,
             @Query("logo_url") String logo_url,
-            @Query("pet_type_id") int pet_type_id
+            @Query("pet_type_id") int pet_type_id,
+            @Query("energy_type") String energy_type
     );
 
     //找狗模式

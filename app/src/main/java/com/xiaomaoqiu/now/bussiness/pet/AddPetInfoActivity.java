@@ -82,7 +82,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
                 if (DoubleClickUtil.isFastMiniDoubleClick()) {
                     return;
                 }
-                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.name) || TextUtils.isEmpty(modifyBean.weight)||TextUtils.isEmpty(modifyBean.description)) {
+                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)||TextUtils.isEmpty(modifyBean.description)) {
                     ToastUtil.showTost("信息需要完整");
                     return;
                 }
@@ -168,10 +168,10 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
 
         txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
-        if (!TextUtils.isEmpty(modifyBean.name)) {
-            (txt_pet_name).setText(modifyBean.name);
+        if (!TextUtils.isEmpty(modifyBean.nick)) {
+            (txt_pet_name).setText(modifyBean.nick);
         } else {
-            modifyBean.name = "旺财";
+            modifyBean.nick = "旺财";
         }
 
 
@@ -253,7 +253,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
     private void modifyName() {
         Intent intent = new Intent(this, ModifyNameDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.name);
+        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
         startActivityForResult(intent, REQ_CODE_NAME);
     }
 
@@ -315,8 +315,8 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
             case REQ_CODE_NAME:
                 if (data != null) {
                     String nameBackString = data.getStringExtra(InputDialog.TAG_VALUE);
-                    modifyBean.name = nameBackString;
-                    (txt_pet_name).setText(modifyBean.name);
+                    modifyBean.nick = nameBackString;
+                    (txt_pet_name).setText(modifyBean.nick);
                 }
                 break;
             case REQ_CODE_WEIGHT:// ModifyWeightDialog
@@ -327,12 +327,11 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
-                if (data != null) {
-                    modifyBean.description = data.getStringExtra(selectDog2Activity.TAG_PARAM1);
+                    modifyBean.description = PetUtil.getInstance().dogName;
+                    modifyBean.enerty_type=PetUtil.getInstance().energyType;
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
 //                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
-                }
                 break;
             case REQ_CODE_PHOTO_SOURCE:
                 if(data!=null) {

@@ -30,7 +30,8 @@ public class selectDog1Activity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(),selectDog2Activity.class);
-				startActivityForResult(intent, 1);
+				startActivity(intent);
+				finish();
 			}
 		});
 
@@ -40,10 +41,8 @@ public class selectDog1Activity extends BaseActivity {
 		mAdapter.setOnItemClickListener(new PetVarietyAdapter.onVerityItemClickListener() {
 			@Override
 			public void onItemClick(View view, String name) {
-				Intent data = new Intent();
-				data.putExtra(selectDog1Activity.TAG_PARAM1,name);
-				setResult(1,data);
-				selectDog1Activity.this.finish();
+				PetUtil.getInstance().setPetName(name);
+				finish();
 			}
 		});
 		mRecyclerView.setAdapter(mAdapter);
@@ -51,13 +50,6 @@ public class selectDog1Activity extends BaseActivity {
 
 	}
 
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode== 1 && resultCode == RESULT_OK)
-		{
-			setResult(resultCode,data);
-			finish();
-		}
-	}
+
 
 }

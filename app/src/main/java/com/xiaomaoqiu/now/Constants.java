@@ -18,9 +18,10 @@ public class Constants {
     public static final int TO_HOME_ACTIVITY_TYPE=2;
 
     public static class Url {
-        public static String Host = "http://120.24.152.121:9100/";
-
-        public static String File_Host="http://120.24.152.121:9700/";
+        public static String Host = "http://47.93.249.1:9100/";
+        public static String File_Host="http://47.93.249.1:9700/";
+//        public static String Host = "http://120.24.152.121:9100/";
+//        public static String File_Host="http://120.24.152.121:9700/";
 
 
         //用户相关

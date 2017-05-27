@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -40,8 +41,10 @@ public class MapPetAvaterView extends LinearLayout {
 
     public void setAvaterUrl(String url) {
         if (TextUtils.isEmpty(url)) {
+            Log.e("longtianlove","url为空");
             return;
         }
+        Log.e("longtianlove",url);
         avaterUrl = url;
         if (null == avater) {
             return;

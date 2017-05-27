@@ -49,35 +49,22 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.iv_pettype_dog:
                 Intent intent = new Intent(this, selectDog1Activity.class);
                 startActivityForResult(intent, REQ_CODE_VARIETY);
+                finish();
                 break;
 
             case R.id.iv_pettype_cat:
 
-                data.putExtra(selectDog1Activity.TAG_PARAM1, "猫");
-                setResult(Activity.RESULT_OK, data);
+                PetUtil.getInstance().dogName=("猫");
+                PetUtil.getInstance().energyType="2";
                 finish();
                 break;
 
             case R.id.iv_pettype_other:
 
-                data.putExtra(selectDog1Activity.TAG_PARAM1, "其他");
-                setResult(Activity.RESULT_OK, data);
+                PetUtil.getInstance().dogName=("其他");
+                PetUtil.getInstance().energyType="2";
                 finish();
                 break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case REQ_CODE_VARIETY:
-            if (data != null) {
-                data.putExtra(selectDog1Activity.TAG_PARAM1,  data.getStringExtra(selectDog2Activity.TAG_PARAM1));
-                setResult(1, data);
-                finish();
-            }
-            break;
         }
     }
 }

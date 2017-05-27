@@ -40,6 +40,8 @@ public class SPUtil {
     public static final String PET_NAME = "petName";
     //宠物描述
     public static final String PET_DESCRIPTION = "petDescription";
+    //宠物运动量计算类型
+    public static final String ENERGY_TYPE="energy_type";
     //宠物是否在家
     public static final String PET_AT_HOME = "petAtHome";
     //体重
@@ -159,6 +161,12 @@ public class SPUtil {
 
     public static void putPetDescription(String description) {
         putString(PET_DESCRIPTION, description);
+    }
+    public static String getEnergyType(){
+        return getString(ENERGY_TYPE);
+    }
+    public static void putEnergyType(String energy_type){
+        putString(ENERGY_TYPE,energy_type);
     }
 
     public static String getPetWeight() {

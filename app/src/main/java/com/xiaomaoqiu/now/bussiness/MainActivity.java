@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.EventManage;
@@ -21,7 +19,6 @@ import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
-import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -81,7 +78,29 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initView();
-        showFragment(0);
+        if(savedInstanceState!=null){
+            mPetFragment= (PetFragment) getSupportFragmentManager().findFragmentByTag(PetFragment.class.getName());
+            mLocateFragment= (LocateFragment) getSupportFragmentManager().findFragmentByTag(LocateFragment.class.getName());
+            mMeFragment= (MeFrament) getSupportFragmentManager().findFragmentByTag(MeFrament.class.getName());
+            getSupportFragmentManager().beginTransaction()
+                    .show(mPetFragment)
+                    .hide(mLocateFragment)
+                    .hide(mMeFragment).commit();
+        }else{
+            mPetFragment = new PetFragment();
+            mLocateFragment = new LocateFragment();
+            mMeFragment = new MeFrament();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container,mPetFragment,PetFragment.class.getName())
+                    .add(R.id.fragment_container,mLocateFragment,LocateFragment.class.getName())
+                    .add(R.id.fragment_container,mMeFragment,MeFrament.class.getName())
+                    .show(mPetFragment)
+                    .hide(mLocateFragment)
+                    .hide(mMeFragment).commit();
+        }
+
+
+
         for (int i = 0; i < 3; i++) {
             mTabs[i] = findViewById(mTabID[i]);
             mTabs[i].setOnClickListener(this);
@@ -122,52 +141,46 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         });
     }
 
-    private void hideAllFragment(FragmentTransaction transaction) {
-        if (null != mPetFragment) {
-            transaction.hide(mPetFragment);
-        }
-        if (null != mLocateFragment) {
-            transaction.hide(mLocateFragment);
-        }
-        if (null != mMeFragment) {
-            transaction.hide(mMeFragment);
-        }
+    private void hideAllTabIcon() {
+//        if (null != mPetFragment) {
+//            transaction.hide(mPetFragment);
+//        }
+//        if (null != mLocateFragment) {
+//            transaction.hide(mLocateFragment);
+//        }
+//        if (null != mMeFragment) {
+//            transaction.hide(mMeFragment);
+//        }
         mHealthTabIcon.setSelected(false);
         mLocateTabIcon.setSelected(false);
         mMeTabIcon.setSelected(false);
     }
 
     private void showFragment(int index) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        hideAllFragment(transaction);
+        hideAllTabIcon();
         switch (index) {
             case 0:
-                if (null == mPetFragment) {
-                    mPetFragment = new PetFragment();
-                    transaction.add(R.id.fragment_container, mPetFragment);
-                }
+                getSupportFragmentManager().beginTransaction()
+                        .show(mPetFragment)
+                        .hide(mLocateFragment)
+                        .hide(mMeFragment).commit();
                 mHealthTabIcon.setSelected(true);
-                transaction.show(mPetFragment);
                 break;
             case 1:
-                if (null == mLocateFragment) {
-                    mLocateFragment = new LocateFragment();
-                    transaction.add(R.id.fragment_container, mLocateFragment);
-                }
+                getSupportFragmentManager().beginTransaction()
+                        .show(mLocateFragment)
+                        .hide(mPetFragment)
+                        .hide(mMeFragment).commit();
                 mLocateTabIcon.setSelected(true);
-                transaction.show(mLocateFragment);
                 break;
             case 2:
-                if (null == mMeFragment) {
-                    mMeFragment = new MeFrament();
-                    transaction.add(R.id.fragment_container, mMeFragment);
-                }
-
+                getSupportFragmentManager().beginTransaction()
+                        .show(mMeFragment)
+                        .hide(mPetFragment)
+                        .hide(mLocateFragment).commit();
                 mMeTabIcon.setSelected(true);
-                transaction.show(mMeFragment);
                 break;
         }
-        transaction.commit();
     }
 
 

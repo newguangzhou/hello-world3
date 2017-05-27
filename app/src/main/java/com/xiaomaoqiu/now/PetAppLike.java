@@ -13,6 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
+import com.xiaomaoqiu.now.bussiness.pet.PetUtil;
 import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.Apputil;
 
@@ -54,6 +55,8 @@ public class PetAppLike extends DefaultApplicationLike {
 
             //百度地图
             SDKInitializer.initialize(PetAppLike.mcontext);
+            //宠物能量运算工具初始化
+            PetUtil.getInstance().init();
         }
 
     }

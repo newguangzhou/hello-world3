@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="date">
+    <string-array name="alldog_name">
         <item>古代长须牧羊犬</item>
         <item>戈登雪达犬</item>
         <item>古代英国牧羊犬</item>
@@ -149,6 +149,158 @@
         <item>指示犬</item>
         <item>藏獒</item>
     </string-array>
+
+
+    //对应的宠物能量公式代号
+    <string-array name="all_energyFormulaCodeList">
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>3</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>3</item>
+        <item>1</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>2</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+        <item>4</item>
+        <item>4</item>
+        <item>2</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>4</item>
+        <item>2</item>
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+    </string-array>
+
 
     <string-array name="petlist_name">
         <item>阿拉斯加雪撬犬</item>
