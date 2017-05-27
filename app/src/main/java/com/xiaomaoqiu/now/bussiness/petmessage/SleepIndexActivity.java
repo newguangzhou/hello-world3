@@ -10,8 +10,6 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.ChartIndexPresenter;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.IChartCallback;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.pet.R;
 
@@ -31,7 +29,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     private CustomBarChart weekChartView;
     private TextView todayTip,weekTip,monthTip;
 
-    private ChartIndexPresenter presenter;
+    private SleepChartIndexPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,29 +48,29 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         monthChartView.setOnChartValueSelectListener(new onChartValueSelectListener() {
             @Override
             public void onChartValueSelect(int index, String xLabel, List<Float> values) {
-                presenter.showDatas(index,xLabel,values,ChartIndexPresenter.FLAG_MONTH);
+                presenter.showDatas(index,xLabel,values, SleepChartIndexPresenter.FLAG_MONTH);
             }
 
             @Override
             public void onCancleSelect() {
-                onHideDataTip(ChartIndexPresenter.FLAG_MONTH);
+                onHideDataTip(SleepChartIndexPresenter.FLAG_MONTH);
             }
         });
         weekChartView.setOnChartValueSelectListener(new onChartValueSelectListener() {
             @Override
             public void onChartValueSelect(int index, String xLabel, List<Float> values) {
-                presenter.showDatas(index,xLabel,values,ChartIndexPresenter.FLAG_WEEK);
+                presenter.showDatas(index,xLabel,values, SleepChartIndexPresenter.FLAG_WEEK);
             }
 
             @Override
             public void onCancleSelect() {
-                onHideDataTip(ChartIndexPresenter.FLAG_WEEK);
+                onHideDataTip(SleepChartIndexPresenter.FLAG_WEEK);
             }
         });
     }
 
     private void initData(){
-        presenter=new ChartIndexPresenter(this,true);
+        presenter=new SleepChartIndexPresenter(this);
         presenter.queryDatas();
     }
 
@@ -153,7 +151,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
             return;
         }
         String tip=data+"深度睡眠为"+(values.get(0))+"小时，浅度睡眠为"+(values.get(1))+"小时。";
-        if(ChartIndexPresenter.FLAG_WEEK == flag){
+        if(SleepChartIndexPresenter.FLAG_WEEK == flag){
             weekTip.setText(tip);
         }else{
             monthTip.setText(tip);
@@ -162,7 +160,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onHideDataTip(int flag) {
-        if(ChartIndexPresenter.FLAG_WEEK == flag){
+        if(SleepChartIndexPresenter.FLAG_WEEK == flag){
             weekTip.setText("");
         }else{
             monthTip.setText("");

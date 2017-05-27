@@ -7,17 +7,9 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.ChartIndexPresenter;
-import com.xiaomaoqiu.old.ui.mainPages.pageHealth.presenter.IChartCallback;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.pet.R;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +19,13 @@ import mbg.chartviews.onChartValueSelectListener;
 
 
 /**
- * Created by Administrator on 2016/4/12.
+ * Created by long on 2016/4/12.
  */
 public class SportIndexActivity extends BaseActivity implements IChartCallback {
     private CustomLineChart monthChart;
     private CustomLineChart weekChart;
     private TextView todayTip,WeekTip,monthTip;
-    private ChartIndexPresenter presenter;
+    private SportChartIndexPresenter presenter;
     public double targetSport;
     public double edSport;
 
@@ -56,13 +48,13 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
             @Override
             public void onChartValueSelect(int index, String xLabel, List<Float> values) {
                 if(null != presenter){
-                    presenter.showDatas(index,xLabel,values,ChartIndexPresenter.FLAG_MONTH);
+                    presenter.showDatas(index,xLabel,values, SportChartIndexPresenter.FLAG_MONTH);
                 }
             }
 
             @Override
             public void onCancleSelect() {
-                onHideDataTip(ChartIndexPresenter.FLAG_MONTH);
+                onHideDataTip(SportChartIndexPresenter.FLAG_MONTH);
             }
         });
 
@@ -70,29 +62,25 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
             @Override
             public void onChartValueSelect(int index, String xLabel, List<Float> values) {
                 if(null != presenter){
-                    presenter.showDatas(index,xLabel,values,ChartIndexPresenter.FLAG_WEEK);
+                    presenter.showDatas(index,xLabel,values, SportChartIndexPresenter.FLAG_WEEK);
                 }
             }
 
             @Override
             public void onCancleSelect() {
-                onHideDataTip(ChartIndexPresenter.FLAG_WEEK);
+                onHideDataTip(SportChartIndexPresenter.FLAG_WEEK);
             }
         });
     }
 
     private void initData(){
-        presenter=new ChartIndexPresenter(this,false);
+        presenter=new SportChartIndexPresenter(this);
         presenter.queryDatas();
     }
 
     @Override
     public void onSuccessGetAxis(ArrayList<String> labels, boolean ismonth) {
         if(ismonth){
-//            if(null != labels && labels.size() >0) {
-//                String last = labels.get(labels.size() - 1);
-//                labels.set(labels.size()-1,last+"日");
-//            }
             monthChart.setXAxisLabels(labels);
         }else{
             weekChart.setXAxisLabels(labels);
@@ -163,7 +151,7 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
             return;
         }
         String tip=data+"消耗目标为"+values.get(0)+"千卡，实际消耗为"+values.get(1)+"千卡。";
-        if(ChartIndexPresenter.FLAG_WEEK == flag){
+        if(SportChartIndexPresenter.FLAG_WEEK == flag){
             WeekTip.setText(tip);
         }else{
             monthTip.setText(tip);
@@ -172,18 +160,10 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onHideDataTip(int flag) {
-        if(ChartIndexPresenter.FLAG_WEEK == flag){
+        if(SportChartIndexPresenter.FLAG_WEEK == flag){
             WeekTip.setText("");
         }else{
             monthTip.setText("");
         }
     }
-
-
-//    //目标运动量发生变化
-//    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-//    public void sportTargetDataChange(EventManage.targetSportData event) {
-//        targetSport= PetInfoInstance.getInstance().getTarget_step();
-//        onSuccessGetWeight(targetSport,edSport);
-//    }
 }
