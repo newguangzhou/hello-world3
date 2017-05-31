@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.xiaomaoqiu.now.view.chart.TextAimView;
+import com.xiaomaoqiu.now.view.chart.ThreePartLineView;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.pet.R;
@@ -26,8 +28,8 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     private CustomLineChart weekChart;
     private TextView todayTip,WeekTip,monthTip;
     private SportChartIndexPresenter presenter;
-    public double targetSport;
-    public double edSport;
+    ThreePartLineView threePartLineView_sport;
+    TextAimView textAimView_sport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     }
 
     private void initView(){
+        threePartLineView_sport= (ThreePartLineView) findViewById(R.id.threePartLineView_sport);
+        textAimView_sport= (TextAimView) findViewById(R.id.textAimView_sport);
         monthChart=(CustomLineChart)findViewById(R.id.line_chart_month);
         weekChart=(CustomLineChart)findViewById(R.id.line_chart_week);
         todayTip=(TextView)findViewById(R.id.sport_index_totay_tip);
@@ -88,23 +92,10 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     }
 
     @Override
-    public void onSuccessGetWeight(double deep, double light) {
-        targetSport=deep;
-        edSport=light;
-        View vDoneSport = findViewById(R.id.v_sport_done);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) vDoneSport.getLayoutParams();
-        layoutParams.weight = (float) edSport / 1000;
-        vDoneSport.setLayoutParams(layoutParams);
-
-        View vSportRemain = findViewById(R.id.v_sport_remain);
-        layoutParams = (LinearLayout.LayoutParams) vSportRemain.getLayoutParams();
-        layoutParams.weight = (float) (targetSport - edSport) / 1000;
-        vSportRemain.setLayoutParams(layoutParams);
-
-        View vNoneSport = findViewById(R.id.v_sport_none);
-        layoutParams = (LinearLayout.LayoutParams) vNoneSport.getLayoutParams();
-        layoutParams.weight = (float) (1000 - targetSport - edSport) / 1000;
-        vNoneSport.setLayoutParams(layoutParams);
+    public void onSuccessGetWeight(double targetSport, double edSport) {
+        threePartLineView_sport.setData((int)(targetSport),(int)(edSport));
+        int totalWidth=threePartLineView_sport.getWidth();
+        textAimView_sport.setAim((int)edSport+"",(int)targetSport+"", (int)((edSport*totalWidth)/targetSport));
         String tip="今日目标消耗为"+targetSport+"千卡，实际消耗为"+edSport+"千卡。";
         todayTip.setText(tip);
     }

@@ -3,21 +3,21 @@
 
     <item
         is-multidex="false"
+        jar="/Users/long/Desktop/android/chartviews/build/intermediates/bundles/default/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="765afee050a8caca1684944bfec5474d21b82a1b">
+        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_0c4e326890b41e55a4434e8e46efdbf5e25a0b3b.jar.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/long/Desktop/android/app/libs/MiPush_SDK_Client_3_2_2.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="74c4db77df1c064b6ae16fbecb575c029971ab96">
         <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/2/MiPush_SDK_Client_3_2_2_4ea42cf44b38ab52397d42713ca2d6f4d2e28ef3.jar.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/long/Desktop/android/chartviews/build/intermediates/bundles/default/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="661f35fbc8c1550b6c831a5465e714d08fc44156">
-        <dex dex="/Users/long/Desktop/android/app/build/intermediates/transforms/preDex/release/jars/1000/4/classes_0c4e326890b41e55a4434e8e46efdbf5e25a0b3b.jar.jar" />
     </item>
     <item
         is-multidex="false"

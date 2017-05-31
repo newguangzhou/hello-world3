@@ -150,7 +150,7 @@ public class SleepChartIndexPresenter {
             float deep = (float) bean.deep_sleep;
             float light = (float) bean.light_sleep;
             deepList.add(new Entry(i - startIndex, (float) bean.deep_sleep));
-            lightList.add(new Entry(i - startIndex, deep + light));
+            lightList.add(new Entry(i - startIndex, light));
 
         }
         callback.onSuccessGetAxis(axisLabels, true);

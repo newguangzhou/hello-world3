@@ -10,6 +10,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.view.chart.TextAimView;
+import com.xiaomaoqiu.now.view.chart.ThreePartLineView;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.pet.R;
 
@@ -29,6 +31,10 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     private CustomBarChart weekChartView;
     private TextView todayTip,weekTip,monthTip;
 
+
+    ThreePartLineView threePartLineView_sleep;
+    TextAimView textAimView_sleep;
+
     private SleepChartIndexPresenter presenter;
 
     @Override
@@ -40,6 +46,8 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         initData();
     }
     private void initView(){
+        threePartLineView_sleep= (ThreePartLineView) findViewById(R.id.threePartLineView_sleep);
+        textAimView_sleep= (TextAimView) findViewById(R.id.textAimView_sleep);
         monthChartView=(CustomLineChart)findViewById(R.id.line_chart_month);
         weekChartView=(CustomBarChart)findViewById(R.id.bar_chart_week);
         todayTip=(TextView)findViewById(R.id.sleep_index_totay_tip);
@@ -98,20 +106,11 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onSuccessGetWeight(double deep, double light) {
-        View vDeepSleep = findViewById(R.id.v_sleep_deep);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) vDeepSleep.getLayoutParams();
-        layoutParams.weight = (float) deep / 12;
-        vDeepSleep.setLayoutParams(layoutParams);
-
-        View vLightSleep = findViewById(R.id.v_sleep_light);
-        layoutParams = (LinearLayout.LayoutParams) vLightSleep.getLayoutParams();
-        layoutParams.weight = (float) light / 12;
-        vLightSleep.setLayoutParams(layoutParams);
-
-        View vNoneSleep = findViewById(R.id.v_sleep_none);
-        layoutParams = (LinearLayout.LayoutParams) vNoneSleep.getLayoutParams();
-        layoutParams.weight = (float) (12 - deep - light) / 12;
-        vNoneSleep.setLayoutParams(layoutParams);
+        light=10;
+        deep=100;
+        threePartLineView_sleep.setData((int)(deep+light),(int)light);
+        int totalWidth=threePartLineView_sleep.getWidth();
+        textAimView_sleep.setAim((int)light+"",(int)(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
         String tip="今日深度睡眠为"+deep+"小时，浅度睡眠为"+light+"小时。";
         todayTip.setText(tip);
     }
@@ -123,12 +122,14 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onSuccessGetMonthDataSet(ArrayList<Entry> deepList, ArrayList<Entry> lightList) {
-        LineDataSet lightDataset=ChartDataSetUtils.getDefaultBlueDataSetFill(this);
-        lightDataset.setValues(lightList);
-        monthChartView.addData(lightDataset);
+
         LineDataSet deepDataset= ChartDataSetUtils.getDefaultRedDataSetFill(this);
         deepDataset.setValues(deepList);
         monthChartView.addData(deepDataset);
+        LineDataSet lightDataset=ChartDataSetUtils.getDefaultBlueDataSetFill(this);
+        lightDataset.setValues(lightList);
+        monthChartView.addData(lightDataset);
+
         monthChartView.drawChart();
 
     }

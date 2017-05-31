@@ -143,7 +143,7 @@ public abstract class CustomCombineChart extends RelativeLayout {
          * 禁止所有放大缩小和拖动事件
          */
         mChart.setDoubleTapToZoomEnabled(false);
-        mChart.setDragEnabled(false);
+        mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
         mChart.getDescription().setEnabled(false);
         mChart.getLegend().setEnabled(false);
