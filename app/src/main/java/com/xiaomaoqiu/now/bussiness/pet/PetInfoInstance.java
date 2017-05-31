@@ -2,23 +2,20 @@ package com.xiaomaoqiu.now.bussiness.pet;
 
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
-import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
+import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
+import com.xiaomaoqiu.now.bussiness.bean.PictureBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-import com.xiaomaoqiu.now.test.TestInstance;
-import com.xiaomaoqiu.now.test.TestLocationBean;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -26,8 +23,6 @@ import com.xiaomaoqiu.now.util.ToastUtil;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Map;
 import java.util.Scanner;
 
 import okhttp3.MediaType;

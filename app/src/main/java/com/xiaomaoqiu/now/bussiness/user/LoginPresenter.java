@@ -3,12 +3,10 @@ package com.xiaomaoqiu.now.bussiness.user;
 import android.annotation.SuppressLint;
 import android.widget.Toast;
 
-import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
-import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
-import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
-import com.xiaomaoqiu.now.bean.nocommon.UserBean;
+import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
+import com.xiaomaoqiu.now.bussiness.bean.MessageBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -16,8 +14,6 @@ import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.ToastUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.lang.ref.WeakReference;
 

@@ -1,10 +1,8 @@
 package com.xiaomaoqiu.now.bussiness.petmessage;
 
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -14,7 +12,6 @@ import com.xiaomaoqiu.now.util.AppDialog;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

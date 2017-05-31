@@ -16,7 +16,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;

@@ -2,24 +2,20 @@ package com.xiaomaoqiu.now.http;
 
 
 import com.xiaomaoqiu.now.Constants;
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
-import com.xiaomaoqiu.now.bean.nocommon.DeviceInfoBean;
-import com.xiaomaoqiu.now.bean.nocommon.LightStatusBean;
-import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
-import com.xiaomaoqiu.now.bean.nocommon.MessageBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetStatusBean;
-import com.xiaomaoqiu.now.bean.nocommon.PictureBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
-import com.xiaomaoqiu.now.bean.nocommon.Summary;
-import com.xiaomaoqiu.now.bean.nocommon.UserBean;
-import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
-import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
+import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
+import com.xiaomaoqiu.now.bussiness.bean.MessageBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
+import com.xiaomaoqiu.now.bussiness.bean.PictureBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.Summary;
+import com.xiaomaoqiu.now.bussiness.bean.UserBean;
+import com.xiaomaoqiu.now.bussiness.bean.WifiListBean;
 import com.xiaomaoqiu.now.test.TestLocationBean;
-
-import java.util.Map;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -28,7 +24,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * Created by long

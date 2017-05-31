@@ -2,7 +2,7 @@ package com.xiaomaoqiu.now.bussiness.petmessage;
 
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.xiaomaoqiu.now.bean.nocommon.PetSleepInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;

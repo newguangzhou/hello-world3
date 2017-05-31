@@ -1,10 +1,12 @@
-package com.xiaomaoqiu.now.bean.nocommon;
+package com.xiaomaoqiu.now.bussiness.bean;
+
+import com.xiaomaoqiu.now.base.BaseBean;
 
 /**
  * Created by long on 2017/4/14.
  */
 
-public class WifiBean extends BaseBean{
+public class WifiBean extends BaseBean {
 
     //wifi 名称
     public String wifi_ssid;

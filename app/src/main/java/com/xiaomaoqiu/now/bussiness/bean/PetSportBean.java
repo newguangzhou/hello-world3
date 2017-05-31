@@ -1,4 +1,6 @@
-package com.xiaomaoqiu.now.bean.nocommon;
+package com.xiaomaoqiu.now.bussiness.bean;
+
+import com.xiaomaoqiu.now.base.BaseBean;
 
 import java.util.ArrayList;
 import java.util.List;

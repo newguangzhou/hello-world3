@@ -1,6 +1,6 @@
 package com.xiaomaoqiu.now;
 
-import com.xiaomaoqiu.now.bean.nocommon.PetSportBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 
 /**
  * Created by long on 17/4/8.

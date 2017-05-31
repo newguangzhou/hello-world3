@@ -1,12 +1,13 @@
-package com.xiaomaoqiu.now.bean.nocommon;
+package com.xiaomaoqiu.now.bussiness.bean;
 
+import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 
 /**
  * Created by long on 17/4/7.
  */
 
-public class PetInfoBean extends BaseBean{
+public class PetInfoBean extends BaseBean {
 //    public int status;
 
     public long pet_id;

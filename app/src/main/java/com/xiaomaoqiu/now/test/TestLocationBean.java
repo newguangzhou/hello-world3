@@ -1,7 +1,7 @@
 package com.xiaomaoqiu.now.test;
 
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
-import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
+import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
 
 /**
  * Created by long on 2017/4/16.

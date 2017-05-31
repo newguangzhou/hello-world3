@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
-import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
+import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
+import com.xiaomaoqiu.now.bussiness.bean.WifiListBean;
 import com.xiaomaoqiu.pet.R;
 
 import java.util.ArrayList;

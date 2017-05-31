@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
-import com.xiaomaoqiu.now.bean.nocommon.WifiBean;
+import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;

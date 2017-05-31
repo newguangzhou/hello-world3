@@ -1,8 +1,8 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.bean.nocommon.LoginBean;
-import com.xiaomaoqiu.now.bean.nocommon.UserBean;
+import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
+import com.xiaomaoqiu.now.bussiness.bean.UserBean;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;

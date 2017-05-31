@@ -6,7 +6,7 @@ import android.util.Base64;
 
 
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.bean.nocommon.WifiListBean;
+import com.xiaomaoqiu.now.bussiness.bean.WifiListBean;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

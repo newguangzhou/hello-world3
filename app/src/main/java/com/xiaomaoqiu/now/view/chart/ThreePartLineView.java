@@ -19,9 +19,6 @@ import com.xiaomaoqiu.pet.R;
 
 public class ThreePartLineView extends View {
 
-    private float mBorderWidth;
-    private int mBorderColor;
-
     private Paint mPaint;
 
     private RectF mBounds;
@@ -39,21 +36,6 @@ public class ThreePartLineView extends View {
 
     public ThreePartLineView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-//        TypedArray typedArray = context.getTheme()
-//                .obtainStyledAttributes(
-//                        attrs,
-//                        R.styleable.CustomView
-//                        , 0, 0);
-//
-//        try{
-//            mBorderColor = typedArray.getColor(R.styleable.CustomView_border_color,0xff000000);
-//            mBorderWidth = typedArray.getDimension(R.styleable.CustomView_border_width,2);
-//        }finally {
-//            typedArray.recycle();
-//        }
-        mBorderColor = 0xff000000;
-        mBorderWidth = 2;
-
         init();
     }
 
@@ -63,13 +45,10 @@ public class ThreePartLineView extends View {
     }
     private void init(){
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-//        mPaint.setStyle(Paint.Style.STROKE);
-//        mPaint.setStrokeWidth(mBorderWidth);
-//        mPaint.setColor(mBorderColor);
     }
 
-    int target=100;
-    int reality=50;
+    int target;
+    int reality;
 
 
     @Override

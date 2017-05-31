@@ -15,7 +15,7 @@ import android.widget.ToggleButton;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bean.nocommon.PetInfoBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.crop.Crop;

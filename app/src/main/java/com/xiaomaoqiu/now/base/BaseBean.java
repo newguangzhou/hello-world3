@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.now.bean.nocommon;
+package com.xiaomaoqiu.now.base;
 
 import java.io.Serializable;
 

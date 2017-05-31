@@ -1,14 +1,12 @@
 package com.xiaomaoqiu.now.test;
 
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.bean.nocommon.PetLocationBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
-
-import junit.framework.Test;
 
 import org.greenrobot.eventbus.EventBus;
 

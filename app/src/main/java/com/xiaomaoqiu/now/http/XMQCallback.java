@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.xiaomaoqiu.now.Environment;
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.bean.nocommon.BaseBean;
+import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
