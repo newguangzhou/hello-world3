@@ -328,7 +328,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
                     modifyBean.description = PetUtil.getInstance().dogName;
-                    modifyBean.enerty_type=PetUtil.getInstance().energyType;
+                    modifyBean.target_energy=PetUtil.getInstance().energyType;
 //                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
 //                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);

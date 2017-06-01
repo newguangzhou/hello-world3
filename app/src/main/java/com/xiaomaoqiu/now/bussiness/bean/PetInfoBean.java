@@ -32,7 +32,7 @@ public class PetInfoBean extends BaseBean {
 
     public int pet_type_id;
 
-    public String enerty_type;
+    public String target_energy;
 
 
     //wifi 名称

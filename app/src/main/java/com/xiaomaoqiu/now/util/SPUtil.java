@@ -69,6 +69,8 @@ public class SPUtil {
 
     //设备电量级别
     public static final String BATTERY_LEVEL = "battery_level";
+    //设备电量获取时间
+    public static final String BATTERY_LAST_GET_TIME="battery_last_get_time";
 
     //设备wifi列表
     public static final String DEVICE_WIFI_LIST = "device_wifi_list";
@@ -247,6 +249,13 @@ public class SPUtil {
 
     public static void putBatteryLevel(float level) {
         putFloat(BATTERY_LEVEL, level);
+    }
+
+    public static float getBatteryLastGetTime(){
+        return getFloat(BATTERY_LAST_GET_TIME);
+    }
+    public static void putBatteryLastGetTime(float time){
+        putFloat(BATTERY_LAST_GET_TIME,time);
     }
 
     public static String getFirmwareVersion() {

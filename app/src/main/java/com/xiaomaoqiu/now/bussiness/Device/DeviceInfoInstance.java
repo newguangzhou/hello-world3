@@ -52,6 +52,7 @@ public class DeviceInfoInstance {
             bean.iccid = SPUtil.getSimIccid();
             bean.hardware_version =SPUtil.getDeviceVersion();
             bean.sim_deadline=SPUtil.getSimDeadline();
+            bean.battery_last_get_time=SPUtil.getLAST_START_WALK_TIME();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
             if (!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
@@ -117,7 +118,10 @@ public class DeviceInfoInstance {
         SPUtil.putSimIccid(packBean.iccid);
         isDeviceExist = true;
         SPUtil.putIsDeviceExist(true);
-        lastGetTime = AppDialog.DateUtil.deviceInfoTime(System.currentTimeMillis());
+
+        packBean.battery_last_get_time=message.battery_last_get_time;
+        SPUtil.putBatteryLastGetTime(packBean.battery_last_get_time);
+        lastGetTime = AppDialog.DateUtil.deviceInfoTime(packBean.battery_last_get_time);
     }
 
     //清空设备信息
@@ -148,7 +152,7 @@ public class DeviceInfoInstance {
         SPUtil.putSimIccid("");
         isDeviceExist = false;
         SPUtil.putIsDeviceExist(false);
-        lastGetTime = AppDialog.DateUtil.deviceInfoTime(System.currentTimeMillis());
+//        lastGetTime = AppDialog.DateUtil.deviceInfoTime(System.currentTimeMillis());
     }
 
     //获取设备信息
@@ -256,6 +260,7 @@ public class DeviceInfoInstance {
                             getWifiList();
                         break;
                     case EC_OFFLINE:
+                        EventBus.getDefault().post(new EventManage.DeviceOffline());
                         EventBus.getDefault().post(new EventManage.wifiListError());
                         break;
                 }

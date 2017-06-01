@@ -13,19 +13,21 @@ import java.util.HashMap;
 
 public class PetUtil {
     private static PetUtil instance;
-    private PetUtil(){
+
+    private PetUtil() {
 
     }
-    public static PetUtil getInstance(){
-        if(instance==null){
-            instance=new PetUtil();
+
+    public static PetUtil getInstance() {
+        if (instance == null) {
+            instance = new PetUtil();
 
         }
         return instance;
     }
 
 
-    public   HashMap<String,String> allDogEnergyAndNameMap=new HashMap<>();
+    public HashMap<String, String> allDogEnergyAndNameMap = new HashMap<>();
     /**
      * 所有狗的名字
      */
@@ -38,25 +40,55 @@ public class PetUtil {
 
 
     public String dogName;
-    public String energyType="";
+    public String energyType = "";
 
-    public void init(){
-        dogName= SPUtil.getPetDescription();
-        energyType=SPUtil.getEnergyType();
+
+
+    public void init() {
+        dogName = SPUtil.getPetDescription();
+        energyType = SPUtil.getEnergyType();
         allDogEnergyAndNameMap.clear();
-        allDogNameList= PetAppLike.mcontext.getResources().getStringArray(R.array.alldog_name);
-        allDogEnergyList=PetAppLike.mcontext.getResources().getStringArray(R.array.all_energyFormulaCodeList);
-        int length=allDogNameList.length;
-        for(int i=0;i<length;i++){
-            allDogEnergyAndNameMap.put(allDogNameList[i],allDogEnergyList[i]);
+        allDogNameList = PetAppLike.mcontext.getResources().getStringArray(R.array.alldog_name);
+        allDogEnergyList = PetAppLike.mcontext.getResources().getStringArray(R.array.all_energyFormulaCodeList);
+        int length = allDogNameList.length;
+        for (int i = 0; i < length; i++) {
+            allDogEnergyAndNameMap.put(allDogNameList[i], allDogEnergyList[i]);
         }
+
     }
 
 
-    public void setPetName(String name){
-        dogName=name;
-        energyType=allDogEnergyAndNameMap.get(name);
+    public void setPetName(String name) {
+        dogName = name;
+        energyType = allDogEnergyAndNameMap.get(name);
     }
+
+
+    //计算运动量推荐值
+    private String calculate() {
+        switch (energyType){
+            case "1":
+
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+            case "4":
+
+                break;
+            default:
+
+                break;
+        }
+
+
+        return "";
+    }
+
+    //公式1
 
 
 

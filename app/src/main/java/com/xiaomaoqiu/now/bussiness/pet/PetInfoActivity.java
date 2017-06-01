@@ -261,7 +261,7 @@ public class PetInfoActivity extends BaseActivity {
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
                     modifyBean.description = PetUtil.getInstance().dogName;
-                    modifyBean.enerty_type=PetUtil.getInstance().energyType;
+                    modifyBean.target_energy=PetUtil.getInstance().energyType;
                     txt_variety.setText(modifyBean.description);
                 break;
             case REQ_CODE_PHOTO_SOURCE:

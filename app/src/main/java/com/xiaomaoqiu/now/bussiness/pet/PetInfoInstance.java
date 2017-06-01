@@ -71,7 +71,7 @@ public class PetInfoInstance {
             baseBean.birthday = SPUtil.getBirthday();
             baseBean.logo_url = SPUtil.getPetHeader();
             baseBean.pet_type_id = SPUtil.getPetTypeId();
-            baseBean.enerty_type=SPUtil.getEnergyType();
+            baseBean.target_energy=SPUtil.getEnergyType();
             instance.setDateFormat_birthday(baseBean.birthday);
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
@@ -146,8 +146,8 @@ public class PetInfoInstance {
         }
         packBean.pet_type_id = message.pet_type_id;
         SPUtil.putPetTypeId(packBean.pet_type_id);
-        packBean.enerty_type=message.enerty_type;
-        SPUtil.putEnergyType(packBean.enerty_type);
+        packBean.target_energy=message.target_energy;
+        SPUtil.putEnergyType(packBean.target_energy);
         setDateFormat_birthday(packBean.birthday);
 
 
@@ -180,7 +180,7 @@ public class PetInfoInstance {
     public void addPetInfo(PetInfoBean petInfoBean) {
         ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick,
-                petInfoBean.birthday, petInfoBean.pet_type_id,petInfoBean.enerty_type
+                petInfoBean.birthday, petInfoBean.pet_type_id,petInfoBean.target_energy
         ).enqueue(new XMQCallback<PetInfoBean>() {
             @Override
             public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
@@ -242,7 +242,7 @@ public class PetInfoInstance {
     //更新宠物信息
     public void updatePetInfo(final PetInfoBean petInfoBean) {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                petInfoBean.pet_id, petInfoBean.description,petInfoBean.weight,petInfoBean.sex,petInfoBean.nick,petInfoBean.birthday,petInfoBean.logo_url,petInfoBean.pet_type_id,petInfoBean.enerty_type
+                petInfoBean.pet_id, petInfoBean.description,petInfoBean.weight,petInfoBean.sex,petInfoBean.nick,petInfoBean.birthday,petInfoBean.logo_url,petInfoBean.pet_type_id,petInfoBean.target_energy
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {

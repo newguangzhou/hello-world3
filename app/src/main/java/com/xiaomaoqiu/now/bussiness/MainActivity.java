@@ -88,15 +88,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     .hide(mMeFragment).commit();
         }else{
             mPetFragment = new PetFragment();
-            mLocateFragment = new LocateFragment();
-            mMeFragment = new MeFrament();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container,mPetFragment,PetFragment.class.getName())
-                    .add(R.id.fragment_container,mLocateFragment,LocateFragment.class.getName())
-                    .add(R.id.fragment_container,mMeFragment,MeFrament.class.getName())
-                    .show(mPetFragment)
-                    .hide(mLocateFragment)
-                    .hide(mMeFragment).commit();
+                    .show(mPetFragment).commit();
         }
 
 
@@ -141,43 +135,49 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         });
     }
 
-    private void hideAllTabIcon() {
-//        if (null != mPetFragment) {
-//            transaction.hide(mPetFragment);
-//        }
-//        if (null != mLocateFragment) {
-//            transaction.hide(mLocateFragment);
-//        }
-//        if (null != mMeFragment) {
-//            transaction.hide(mMeFragment);
-//        }
+    private void hideAllTabIcon(FragmentTransaction transaction) {
+        if (null != mPetFragment) {
+            transaction.hide(mPetFragment);
+        }
+        if (null != mLocateFragment) {
+            transaction.hide(mLocateFragment);
+        }
+        if (null != mMeFragment) {
+            transaction.hide(mMeFragment);
+        }
         mHealthTabIcon.setSelected(false);
         mLocateTabIcon.setSelected(false);
         mMeTabIcon.setSelected(false);
     }
 
     private void showFragment(int index) {
-        hideAllTabIcon();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        hideAllTabIcon(transaction);
         switch (index) {
             case 0:
-                getSupportFragmentManager().beginTransaction()
-                        .show(mPetFragment)
-                        .hide(mLocateFragment)
-                        .hide(mMeFragment).commit();
+                if(mPetFragment==null){
+                    mPetFragment = new PetFragment();
+                    transaction.add(R.id.fragment_container,mPetFragment,PetFragment.class.getName());
+                }
+                transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
                 break;
             case 1:
-                getSupportFragmentManager().beginTransaction()
-                        .show(mLocateFragment)
-                        .hide(mPetFragment)
-                        .hide(mMeFragment).commit();
+                if(mLocateFragment==null){
+                    mLocateFragment = new LocateFragment();
+                    transaction.add(R.id.fragment_container,mLocateFragment,LocateFragment.class.getName());
+                }
+                transaction
+                        .show(mLocateFragment).commit();
                 mLocateTabIcon.setSelected(true);
                 break;
             case 2:
-                getSupportFragmentManager().beginTransaction()
-                        .show(mMeFragment)
-                        .hide(mPetFragment)
-                        .hide(mLocateFragment).commit();
+                if(mMeFragment==null){
+                    mMeFragment = new MeFrament();
+                    transaction.add(R.id.fragment_container,mMeFragment,MeFrament.class.getName());
+                }
+                transaction
+                        .show(mMeFragment).commit();
                 mMeTabIcon.setSelected(true);
                 break;
         }

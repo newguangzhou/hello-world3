@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.now.push;
 
 import com.alibaba.fastjson.JSON;
+import com.xiaomaoqiu.now.util.ToastUtil;
 
 /**
  * Created by long on 2017/5/15.
@@ -43,7 +44,7 @@ public class PushDataCenter {
     RemoteMessageBean formatBean;
 
     public void notifyData(String message) {
-
+        ToastUtil.showTost("收到小米推送消息：" + message);
         formatBean = JSON.parseObject(message, RemoteMessageBean.class);
         if (formatBean == null) {
             return;

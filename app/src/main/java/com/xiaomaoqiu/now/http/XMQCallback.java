@@ -44,10 +44,6 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     ToastUtil.showTost("身份过期，请重新登录");
                     onFail(call, null);
                     UserInstance.getInstance().clearLoginInfo();
-//                    UserInstance.getInstance().pet_id = 0;
-//                    SPUtil.putPetId(0);
-//                    UserInstance.getInstance().device_imei="";
-//                    SPUtil.putDeviceImei("");
                     SPUtil.putHomeWifiMac("");
                     SPUtil.putHomeWifiSsid("");
                     PetInfoInstance.getInstance().clearPetInfo();
@@ -103,7 +99,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 return;
             }
         }
-//        ToastUtil.showNetError();
+        ToastUtil.showTost("网络错误");
         onFail(call, null);
     }
 

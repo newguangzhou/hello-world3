@@ -121,6 +121,9 @@ public class AppDialog extends Dialog {
 
 
         public static String deviceInfoTime(long timemills) {
+            if(timemills==0){
+                timemills=System.currentTimeMillis();
+            }
             Calendar c = Calendar.getInstance(TimeZone.getDefault());
             c.setTimeInMillis(timemills);
            int curYear = c.get(Calendar.YEAR);

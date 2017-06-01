@@ -27,6 +27,11 @@ public class EventManage {
     }
 
 
+
+    //设备离线
+    public static  class DeviceOffline{
+
+    }
     //绑定设备成功之后
     public static class bindDeviceSuccess {
 
