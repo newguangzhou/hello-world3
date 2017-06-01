@@ -99,6 +99,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             mTabs[i] = findViewById(mTabID[i]);
             mTabs[i].setOnClickListener(this);
         }
+        mHealthTabIcon.setSelected(true);
 
         EventBus.getDefault().register(this);
     }
