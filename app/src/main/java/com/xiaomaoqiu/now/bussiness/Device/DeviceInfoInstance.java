@@ -286,7 +286,6 @@ public class DeviceInfoInstance {
                 if (ret == HttpCode.EC_SUCCESS) {
                     if (message.data != null && message.data.size() >=0) {
                         wiflist.data = message.data;
-//                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     } else {
                         EventBus.getDefault().post(new EventManage.wifiListError());

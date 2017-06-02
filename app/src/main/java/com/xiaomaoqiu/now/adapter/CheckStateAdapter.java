@@ -36,14 +36,14 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
     @Override
     public void onBindViewHolder(final StateHolder holder, final int position) {
         if (null == mdatas || mdatas.size() == 0) return;
-        WifiBean bean=mdatas.get(position);
-        holder.itemView.setSelected(bean.is_homewifi==1);
-        if (bean.is_homewifi==1) {
+        WifiBean bean = mdatas.get(position);
+        holder.itemView.setSelected(bean.is_homewifi == 1);
+        if (bean.is_homewifi == 1) {
             holder.ivSelected.setVisibility(View.VISIBLE);
         } else {
             holder.ivSelected.setVisibility(View.INVISIBLE);
         }
-        holder.tvState.setText(mdatas.get(position).wifi_ssid);
+        holder.tvState.setText(bean.wifi_ssid);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
@@ -52,15 +52,25 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
                                            }
 
         );
+        //判断wifi强度   -65 -80
+        if (bean.wifi_power > -65) {
+            //3格
+            holder.iv_wifi_power.setImageResource(R.drawable.wifi_power_third);
+        } else if (bean.wifi_power > -80) {
+            //2格
+            holder.iv_wifi_power.setImageResource(R.drawable.wifi_power_second);
+        } else {
+            //1格
+            holder.iv_wifi_power.setImageResource(R.drawable.wifi_power_first);
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return (mdatas==null)||(mdatas.size() == 0 )? 0 : mdatas.size();
+        return (mdatas == null) || (mdatas.size() == 0) ? 0 : mdatas.size();
     }
-
-
-
 
 
     private OnItemClickListener onItemClickListener;
@@ -74,18 +84,16 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
     }
 
 
-
-
-
-
     public class StateHolder extends RecyclerView.ViewHolder {
         TextView tvState;
         ImageView ivSelected;
+        ImageView iv_wifi_power;
 
         public StateHolder(View itemView) {
             super(itemView);
-            tvState= (TextView) itemView.findViewById(R.id.tv_state);
-            ivSelected= (ImageView) itemView.findViewById(R.id.iv_selected);
+            tvState = (TextView) itemView.findViewById(R.id.tv_state);
+            ivSelected = (ImageView) itemView.findViewById(R.id.iv_selected);
+            iv_wifi_power = (ImageView) itemView.findViewById(R.id.iv_wifi_power);
         }
     }
 }
