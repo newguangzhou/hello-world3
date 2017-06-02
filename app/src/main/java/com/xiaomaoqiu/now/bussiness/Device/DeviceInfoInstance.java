@@ -284,20 +284,12 @@ public class DeviceInfoInstance {
             public void onSuccess(Response<WifiListBean> response, WifiListBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    if (message.data != null && message.data.size() > 0) {
+                    if (message.data != null && message.data.size() >=0) {
                         wiflist.data = message.data;
 //                        SPUtil.putWifiList(wiflist);
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     } else {
                         EventBus.getDefault().post(new EventManage.wifiListError());
-//                        if((count++)<5) {
-//                            try {
-//                                Thread.sleep(2000);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                            getWifiList();
-//                        }
                     }
                 }
             }

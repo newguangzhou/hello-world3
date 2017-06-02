@@ -14,6 +14,7 @@ import android.widget.ToggleButton;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
@@ -24,6 +25,10 @@ import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyWeightDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.SelectAvatarSourceDialog;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
@@ -55,6 +60,12 @@ public class PetInfoActivity extends BaseActivity {
 
     PetInfoBean modifyBean;
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void oncallbackUpdatePetInfo(EventManage.callbackUpdatePetInfo event) {
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +86,7 @@ public class PetInfoActivity extends BaseActivity {
                 PetInfoInstance.getInstance().updatePetInfo(modifyBean);
             }
         });
+        EventBus.getDefault().register(this);
     }
 
 

@@ -58,6 +58,10 @@ public class EventManage {
     public static class notifyPetInfoChange {
 
     }
+    //宠物信息更新回调
+    public static class callbackUpdatePetInfo{
+
+    }
 
     //用户信息获取成功
     public static class getUserInfoEvent {

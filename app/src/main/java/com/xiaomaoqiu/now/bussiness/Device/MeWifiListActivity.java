@@ -168,6 +168,9 @@ public class MeWifiListActivity extends BaseActivity {
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
+            if(adapter.mdatas.size()==0){
+                ToastUtil.showTost("当前没有扫描到wifi");
+            }
             adapter.notifyDataSetChanged();
         }
 

@@ -248,8 +248,9 @@ public class PetInfoInstance {
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    ToastUtil.showTost("更新成功");
+//                    ToastUtil.showTost("更新成功");
                     savePetInfo(petInfoBean);
+                    EventBus.getDefault().post(new EventManage.callbackUpdatePetInfo());
                 } else {
                     ToastUtil.showTost("更新失败");
                 }

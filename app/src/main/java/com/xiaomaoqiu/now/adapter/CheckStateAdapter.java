@@ -19,13 +19,11 @@ import java.util.ArrayList;
 public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.StateHolder> {
 
     private Context context;
-    //    private String[] arrayState;
     WifiListBean mdatasWrapper;
     public ArrayList<WifiBean> mdatas;
 
     public CheckStateAdapter(WifiListBean datasWrapper, Context context) {
         this.context = context;
-//        this.arrayState = arrayState;
         this.mdatasWrapper = datasWrapper;
         mdatas = datasWrapper.data;
     }
@@ -50,7 +48,6 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
                                                @Override
                                                public void onClick(View view) {
                                                    onItemClickListener.OnItemClick(view, holder, holder.getAdapterPosition());
-//                                                   notifyItemChanged(selectedPosition);//刷新当前点击item
                                                }
                                            }
 
