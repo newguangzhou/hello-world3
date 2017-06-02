@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.AlreadyBindDeviceBean;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiListBean;
@@ -185,31 +186,26 @@ public class DeviceInfoInstance {
                 UserInstance.getInstance().getToken(),
                 imei,
                 "xmq_test"
-        ).enqueue(new XMQCallback<BaseBean>() {
+        ).enqueue(new XMQCallback<AlreadyBindDeviceBean>() {
             @Override
-            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+            public void onSuccess(Response<AlreadyBindDeviceBean> response, AlreadyBindDeviceBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret){
                     case EC_SUCCESS:
-//                        getDeviceInfo();
                         EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         break;
                     case EC_ALREADY_FAV:
 //                        ToastUtil.showAtCenter("设备已被绑定");
-                        EventBus.getDefault().post(new EventManage.deviceAlreadyBind());
+                        EventManage.deviceAlreadyBind event=new EventManage.deviceAlreadyBind();
+                        event.old_account=message.old_account;
+                        EventBus.getDefault().post(event);
                         break;
                 }
-//                if (ret == HttpCode.EC_SUCCESS) {
-//
-//
-//                } else {
-//                    Toast.makeText(PetAppLike.mcontext, "网络问题，请重试", Toast.LENGTH_SHORT).show();
-//                }
             }
 
             @Override
-            public void onFail(Call<BaseBean> call, Throwable t) {
+            public void onFail(Call<AlreadyBindDeviceBean> call, Throwable t) {
             }
         });
     }

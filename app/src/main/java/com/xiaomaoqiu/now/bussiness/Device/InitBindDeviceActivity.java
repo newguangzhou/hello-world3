@@ -19,6 +19,7 @@ import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -134,30 +135,6 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
         return m.matches();
     }
 
-//    /**
-//     * 绑定设备
-//     * @param ImeiId
-//     */
-//    private void BindDeciveHttp(String ImeiId){
-//        HttpUtil.get2("device.add_device_info",new JsonHttpResponseHandler(){
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                Log.v("http", "device.add_device_info:" + response.toString());
-//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-//                if (ret == HttpCode.EC_SUCCESS) {
-//                    PetInfoInstance.getInstance().getPetInfo();
-////                    DeviceActivity.skip(BindDeviceActivity.this);
-//                    finish();
-//                }
-//                else{
-//                    showToast("设备绑定失败，请稍后重试！");
-//                }
-//            }
-//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),ImeiId,"xmq_test");
-//    }
-
-
-
-
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public  void toDeviceActivity(EventManage.bindDeviceSuccess event){
         EventBus.getDefault().unregister(this);
@@ -182,8 +159,7 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     }
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void deviceAlreadyBind(EventManage.deviceAlreadyBind event){
-        ContactServiceDialog dlg = new ContactServiceDialog(InitBindDeviceActivity.this, R.style.MyDialogStyleBottom);
-        dlg.show();
+        DialogUtil.showDeviceAlreadyBindedDialog(InitBindDeviceActivity.this,event.old_account);
     }
 
     @Override
@@ -196,7 +172,6 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     public void success() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-//        getActivity().overridePendingTransition(0, 0);
         startActivity(intent);
     }
 

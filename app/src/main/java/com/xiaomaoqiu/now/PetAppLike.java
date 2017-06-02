@@ -17,9 +17,6 @@ import com.xiaomaoqiu.now.bussiness.pet.PetUtil;
 import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.Apputil;
 
-/**
- * Created by Administrator on 2015/6/17.
- */
 public class PetAppLike extends DefaultApplicationLike {
     public static String TAG = "com.xiaomaoqiu.now";
     public PetAppLike(Application application, int tinkerFlags,

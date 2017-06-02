@@ -35,7 +35,7 @@ public class DialogUtil {
      */
     public static void closeProgress() {
         if (mCustomProgress != null && mCustomProgress.isShowing()) {
-            try {//bug fixxed with umeng at 5.0.1 by yangwenxin
+            try {//bug fixxed with umeng at 5.0.1 by long
                 mCustomProgress.dismiss();
             }catch (Exception e){
                 e.printStackTrace();
@@ -44,7 +44,7 @@ public class DialogUtil {
         }
     }
     /**
-     * 如果Activity destory了不能运行dialog bug fixxed with umeng at 5.0.1 by yangwenxin
+     * 如果Activity destory了不能运行dialog bug fixxed with umeng at 5.0.1 by long
      * @param context
      * @return
      */
@@ -98,6 +98,25 @@ public class DialogUtil {
         dialog.show();
     }
 
+    //设备被绑定弹窗
+    public static void showDeviceAlreadyBindedDialog(Context context,String oldaccount){
+        final Dialog dialog = new AppDialog(context,R.layout.dialog_device_already_bind,-1,-2,0,Gravity.CENTER);
+        TextView tv_old_account= (TextView) dialog.findViewById(R.id.tv_old_account);
+        tv_old_account.setText("设备已被账号 "+oldaccount+" 绑定" +
+                "无法绑定到当前帐号");
+        Button already_bind_confirm = (Button) dialog.findViewById(R.id.already_bind_confirm);
+        already_bind_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    //异地登录弹窗
     public static void showLogoutDialog(Context context){
         final Dialog dialog = new AppDialog(context,R.layout.dialog_logout,-1,-2,0,Gravity.CENTER);
         Button logout_confirm = (Button) dialog.findViewById(R.id.logout_confirm);

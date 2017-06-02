@@ -102,8 +102,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 modifyAvatar();
             }
         });

@@ -38,7 +38,7 @@ public class EventManage {
     }
     //设备已被绑定之后
     public static class deviceAlreadyBind{
-
+        public String old_account;
     }
     //解除绑定之后
     public static class unbindDeviceSuccess{

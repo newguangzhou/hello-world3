@@ -148,7 +148,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         sportDone = bean.reality_amount;
                         percentage = bean.percentage;
                     } else {
-                        ToastUtil.showTost("当天尚无数据~");
+//                        ToastUtil.showTost("当天尚无数据~");
 
                     }
                     prog.setProgress((int) percentage);

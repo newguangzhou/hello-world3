@@ -71,7 +71,7 @@ public class PetInfoInstance {
             baseBean.birthday = SPUtil.getBirthday();
             baseBean.logo_url = SPUtil.getPetHeader();
             baseBean.pet_type_id = SPUtil.getPetTypeId();
-            baseBean.target_energy=SPUtil.getEnergyType();
+            baseBean.target_energy = SPUtil.getEnergyType();
             instance.setDateFormat_birthday(baseBean.birthday);
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
@@ -146,7 +146,7 @@ public class PetInfoInstance {
         }
         packBean.pet_type_id = message.pet_type_id;
         SPUtil.putPetTypeId(packBean.pet_type_id);
-        packBean.target_energy=message.target_energy;
+        packBean.target_energy = message.target_energy;
         SPUtil.putEnergyType(packBean.target_energy);
         setDateFormat_birthday(packBean.birthday);
 
@@ -180,7 +180,7 @@ public class PetInfoInstance {
     public void addPetInfo(PetInfoBean petInfoBean) {
         ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick,
-                petInfoBean.birthday, petInfoBean.pet_type_id,petInfoBean.target_energy
+                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy,petInfoBean.logo_url
         ).enqueue(new XMQCallback<PetInfoBean>() {
             @Override
             public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
@@ -242,7 +242,7 @@ public class PetInfoInstance {
     //更新宠物信息
     public void updatePetInfo(final PetInfoBean petInfoBean) {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                petInfoBean.pet_id, petInfoBean.description,petInfoBean.weight,petInfoBean.sex,petInfoBean.nick,petInfoBean.birthday,petInfoBean.logo_url,petInfoBean.pet_type_id,petInfoBean.target_energy
+                petInfoBean.pet_id, petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick, petInfoBean.birthday, petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -329,48 +329,47 @@ public class PetInfoInstance {
     }
 
     //上传头像信息
-    public void uploadImage(String path){
+    public void uploadImage(String path) {
         try {
 
             //把Bitmap保存到sd卡中
-        File fImage = new File(path);
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), fImage);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("flieName", fImage.getName(), requestFile);
-        ApiUtils.getFileApiService().uploadLogo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), body).enqueue(
-                new XMQCallback<PictureBean>() {
-                    @Override
-                    public void onSuccess(Response<PictureBean> response, PictureBean message) {
-                        DialogUtil.closeProgress();
-                        HttpCode ret = HttpCode.valueOf(message.status);
-                        switch (ret) {
-                            case EC_SUCCESS:
-                                //更新头像属性
-                                packBean.logo_url=message.file_url;
-                                if (!TextUtils.isEmpty(packBean.logo_url)) {
-                                    SPUtil.putPetHeader(packBean.logo_url);
-                                }
+            File fImage = new File(path);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), fImage);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("flieName", fImage.getName(), requestFile);
+            ApiUtils.getFileApiService().uploadLogo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), body).enqueue(
+                    new XMQCallback<PictureBean>() {
+                        @Override
+                        public void onSuccess(Response<PictureBean> response, PictureBean message) {
+                            DialogUtil.closeProgress();
+                            HttpCode ret = HttpCode.valueOf(message.status);
+                            switch (ret) {
+                                case EC_SUCCESS:
+                                    //更新头像属性
+                                    packBean.logo_url = message.file_url;
+                                    if (!TextUtils.isEmpty(packBean.logo_url)) {
+                                        SPUtil.putPetHeader(packBean.logo_url);
+                                    }
+                                    if (packBean.pet_id > 0) {
+                                        updatePetInfo(packBean);
+                                    }
+                                    EventBus.getDefault().post(new EventManage.uploadImageSuccess());
+                                    break;
 
-                                updatePetInfo(packBean);
+                            }
+                        }
 
-                                EventBus.getDefault().post(new EventManage.uploadImageSuccess());
-
-                                break;
-
+                        @Override
+                        public void onFail(Call<PictureBean> call, Throwable t) {
+                            DialogUtil.closeProgress();
                         }
                     }
+            );
 
-                    @Override
-                    public void onFail(Call<PictureBean> call, Throwable t) {
-                        DialogUtil.closeProgress();
-                    }
-                }
-        );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-
-}
 
     public PetInfoBean getPackBean() {
         return packBean;

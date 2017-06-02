@@ -3,6 +3,7 @@ package com.xiaomaoqiu.now.http;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.AlreadyBindDeviceBean;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
 import com.xiaomaoqiu.now.bussiness.bean.MessageBean;
@@ -90,7 +91,8 @@ public interface ApiService {
             @Query("nick") String nick,
             @Query("birthday") String birthday,
             @Query("pet_type_id") int pet_type_id,
-            @Query("energy_type") String energy_type
+            @Query("energy_type") String energy_type,
+            @Query("logo_url") String logo_url
 
     );
 
@@ -185,10 +187,10 @@ public interface ApiService {
     //绑定设备
     // URL	http://120.24.152.121:9100/device/add_device_info?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293&device_name=xmq_test
     @GET(Constants.Url.Device.add_device_info)
-    Call<BaseBean> addDeviceInfo(@Query("uid") long uid,
-                                 @Query("token") String token,
-                                 @Query("imei") String imei,
-                                 @Query("device_name") String deviceName
+    Call<AlreadyBindDeviceBean> addDeviceInfo(@Query("uid") long uid,
+                                              @Query("token") String token,
+                                              @Query("imei") String imei,
+                                              @Query("device_name") String deviceName
     );
 
     /**
