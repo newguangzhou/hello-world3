@@ -106,8 +106,8 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onSuccessGetWeight(double deep, double light) {
-        light=10;
-        deep=100;
+//        light=10;
+//        deep=100;
         threePartLineView_sleep.setData((int)(deep+light),(int)light);
         int totalWidth=threePartLineView_sleep.getWidth();
         textAimView_sleep.setAim((int)light+"",(int)(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
