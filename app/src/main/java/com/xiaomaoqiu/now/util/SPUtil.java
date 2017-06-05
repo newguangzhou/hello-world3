@@ -94,6 +94,8 @@ public class SPUtil {
     //home_wifi_ssid
     public static final String HOME_WIFI_SSID="home_wifi_ssid";
 
+    //是否重启
+    public static final String HAS_REBOOT="has_reboot";
 
     //地图定位模式
     public static final String MAP_MODE="map_mode";
@@ -325,6 +327,13 @@ public class SPUtil {
     }
     public static void putHomeWifiSsid(String ssid){
         putString(HOME_WIFI_SSID,ssid);
+    }
+
+    public static void putHasReboot(int hasreboot){
+        putInt(HAS_REBOOT,hasreboot);
+    }
+    public static int getHasReboot(){
+        return getInt(HAS_REBOOT);
     }
 
 

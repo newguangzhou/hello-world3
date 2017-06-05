@@ -19,6 +19,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.crop.Crop;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.InputDialog;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog;
@@ -73,19 +74,12 @@ public class PetInfoActivity extends BaseActivity {
         setContentView(R.layout.me_pet_info);
         modifyBean = PetInfoInstance.getInstance().packBean;;
         initView();
-        setNextView("保存", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                    return;
-                }
-                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
-                    ToastUtil.showTost("信息需要完整");
-                    return;
-                }
-                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
-            }
-        });
+//        setNextView("保存", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         EventBus.getDefault().register(this);
     }
 
@@ -140,6 +134,31 @@ public class PetInfoActivity extends BaseActivity {
     }
 
     private void initPetInfo() {
+        View btnGoBack = findViewById(R.id.btn_go_back);
+        btnGoBack.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DialogToast.createDialogWithTwoButton(PetInfoActivity.this, "确认重启设备？", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                //todo 如果没有变化，就直接退出
+
+                                if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                                    return;
+                                }
+                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+                                    ToastUtil.showTost("信息需要完整");
+                                    return;
+                                }
+                                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                            }
+                        }
+                );
+            }
+        });
+
         txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
         if (!TextUtils.isEmpty(modifyBean.nick)) {
             (txt_pet_name).setText(modifyBean.nick);

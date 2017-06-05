@@ -73,6 +73,7 @@ public interface ApiService {
             @Query("token") String token
     );
 
+
     //退出登录
     @GET(Constants.Url.User.logout)
     Call<BaseBean> logout(
@@ -92,7 +93,8 @@ public interface ApiService {
             @Query("birthday") String birthday,
             @Query("pet_type_id") int pet_type_id,
             @Query("energy_type") String energy_type,
-            @Query("logo_url") String logo_url
+            @Query("logo_url") String logo_url,
+            @Query("imei") String imei
 
     );
 
@@ -191,6 +193,14 @@ public interface ApiService {
                                               @Query("token") String token,
                                               @Query("imei") String imei,
                                               @Query("device_name") String deviceName
+    );
+
+    @GET(Constants.Url.Device.reboot_device)
+    Call<BaseBean> rebootDevice(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("imei") String imei,
+            @Query("pet_id") long petId
     );
 
     /**
@@ -346,7 +356,8 @@ public interface ApiService {
             @Query("birthday") String birthday,
             @Query("logo_url") String logo_url,
             @Query("pet_type_id") int pet_type_id,
-            @Query("energy_type") String energy_type
+            @Query("energy_type") String energy_type,
+            @Query("imei") String imei
     );
 
     //找狗模式

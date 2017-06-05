@@ -35,7 +35,8 @@ public class UserInstance {
             userInstance.pet_id = SPUtil.getPetId();
             userInstance.device_imei = SPUtil.getDeviceImei();
             userInstance.wifi_bssid = SPUtil.getHomeWifiMac();
-            userInstance.wifi_ssid=SPUtil.getHomeWifiSsid();
+            userInstance.wifi_ssid = SPUtil.getHomeWifiSsid();
+            userInstance.has_reboot=SPUtil.getHasReboot();
 
         }
         return userInstance;
@@ -56,9 +57,10 @@ public class UserInstance {
 
     public String wifi_ssid;
 
+    public int has_reboot;//更新数据后是否已经重启过设备，0：未重启，1：已重启
 
     //获取用户基本信息
-    public void getUserInfo(){
+    public void getUserInfo() {
         //获取用户基本信息
         ApiUtils.getApiService().getUserInfo(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken()
@@ -107,22 +109,26 @@ public class UserInstance {
 
     public void saveUserInfo(UserBean userBean) {
 //        if (!TextUtils.isEmpty(userBean.device_imei)) {
-            device_imei = userBean.device_imei;
-            SPUtil.putDeviceImei(device_imei);
+        device_imei = userBean.device_imei;
+        SPUtil.putDeviceImei(device_imei);
 //        }
 //        if(userBean.pet_id>0){
-            pet_id=userBean.pet_id;
-            SPUtil.putPetId(pet_id);
+        pet_id = userBean.pet_id;
+        SPUtil.putPetId(pet_id);
 //        }
 
 //        if(!TextUtils.isEmpty(userBean.wifi_bssid)){
-            wifi_bssid=userBean.wifi_bssid;
-            SPUtil.putHomeWifiMac(wifi_bssid);
+        wifi_bssid = userBean.wifi_bssid;
+        SPUtil.putHomeWifiMac(wifi_bssid);
 //        }
 //        if(!TextUtils.isEmpty(userBean.wifi_ssid)){
-            wifi_ssid=userBean.wifi_ssid;
-            SPUtil.putHomeWifiSsid(wifi_ssid);
+        wifi_ssid = userBean.wifi_ssid;
+        SPUtil.putHomeWifiSsid(wifi_ssid);
 //        }
+        has_reboot = userBean.has_reboot;
+        SPUtil.putHasReboot(has_reboot);
+
+
     }
 
     public long getUid() {

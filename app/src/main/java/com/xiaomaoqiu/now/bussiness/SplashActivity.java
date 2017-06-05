@@ -14,6 +14,7 @@ import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
+import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
@@ -94,6 +95,12 @@ public class SplashActivity extends BaseActivity {
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent.setClass(SplashActivity.this, InitWifiListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if(UserInstance.getInstance().has_reboot==0){
+            intent.setClass(SplashActivity.this, RebootActivity.class);
             startActivity(intent);
             finish();
             return;

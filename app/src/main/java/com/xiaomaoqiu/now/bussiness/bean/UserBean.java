@@ -17,4 +17,6 @@ public class UserBean extends BaseBean {
 
     public String wifi_ssid;
 
+    public int has_reboot;
+
 }

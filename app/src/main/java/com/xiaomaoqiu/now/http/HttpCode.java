@@ -115,38 +115,6 @@ public enum HttpCode {
                 return EC_OFFLINE;  //设备离线
             default:
                 return EC_UNDEFINED;
-//            case 0:return EC_SUCCESS;
-//            case 1:return EC_FREQ_LIMIT;
-//            case 2:return EC_INVALID_VERIFY_CODE;
-//            case 3:
-//            case 4:return EC_USER_ALREADY_REGISTERED;
-//            case 5:return EC_INVALID_TOKEN;
-//            case 6:return EC_USER_ALREADY_LOGINED;
-//            case 7:return EC_USER_NOT_EXIST;
-//            case 8:return EC_USER_NOT_LOGINED;
-//            case 9:return EC_SYS_ERROR;
-//            case 10:return EC_UNKNOWN_ERROR;
-//            case 11:return EC_INVALID_TOKEN;
-//            case 12:return EC_TOKEN_EXPIRED;
-//            case 13:return EC_INVALID_ARGS;
-//            case 14:return EC_INVALID_PASS;
-//            case 16:return EC_INVALID_SHOP_ID;
-//            case 17:return EC_INVALID_SHOP_GOODS_ID;
-//            case 18:return EC_INVALID_AREA;
-//            case 19:return EC_INVALID_LOCATION;
-//            case 20:return EC_USER_ALREADY_REGISTERED;
-//            case 21:return EC_ACCOUNT_FREEZED;
-//            case 22:return EC_DAY_REQUEST_COUNT_LIMITED;
-//            case 23:return EC_SHOP_NOT_EXIST;
-//            case 24:return EC_ALREADY_FAV;
-//            case 25:return EC_NOT_FAV;
-//            case 26:return EC_INVALID_ACTIVITY;
-//            case 27:return EC_AUDITING;
-//            case 28:return EC_AUDIT_FAILED;
-//            case 29:return EC_ACCOUNT_FREEZED_TEMP;
-//            case 30:return EC_DEVICE_NOT_EXIST;
-//            case 31:return EC_CURRENT_TIME_NOT_ALLOW;
-//            default: return EC_UNDEFINED;
         }
     }
 

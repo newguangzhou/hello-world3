@@ -180,7 +180,7 @@ public class PetInfoInstance {
     public void addPetInfo(PetInfoBean petInfoBean) {
         ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick,
-                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy,petInfoBean.logo_url
+                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy, petInfoBean.logo_url, DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<PetInfoBean>() {
             @Override
             public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
@@ -245,7 +245,9 @@ public class PetInfoInstance {
     //更新宠物信息
     public void updatePetInfo(final PetInfoBean petInfoBean) {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                petInfoBean.pet_id, petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick, petInfoBean.birthday, petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy
+                petInfoBean.pet_id, petInfoBean.description,
+                petInfoBean.weight, petInfoBean.sex, petInfoBean.nick, petInfoBean.birthday,
+                petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy, DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -474,5 +476,29 @@ public class PetInfoInstance {
 
     public boolean getAtHome() {
         return petAtHome;
+    }
+
+
+    public boolean petInfoisChanged(PetInfoBean bean) {
+        if (!bean.name.equals(packBean.name)) {
+            return true;
+        }
+
+        if (bean.sex != packBean.sex) {
+            return true;
+        }
+
+        if (!bean.birthday.equals(packBean.birthday)) {
+            return true;
+        }
+        if (!bean.description.equals(packBean.description)) {
+            return true;
+        }
+        if (!bean.logo_url.equals(packBean.logo_url)) {
+            return true;
+        }
+
+
+        return false;
     }
 }

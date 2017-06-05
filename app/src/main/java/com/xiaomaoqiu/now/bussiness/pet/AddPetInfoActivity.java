@@ -22,6 +22,7 @@ import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
+import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -227,6 +228,12 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent = new Intent(AddPetInfoActivity.this, InitWifiListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if(UserInstance.getInstance().has_reboot==0){
+             intent=new Intent(this, RebootActivity.class);
             startActivity(intent);
             finish();
             return;

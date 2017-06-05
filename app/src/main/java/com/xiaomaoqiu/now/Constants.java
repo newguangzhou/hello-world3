@@ -107,9 +107,15 @@ public class Constants {
         //设备相关
         public static class Device {
             /**
+             * 重启设备
+             */
+            public static final String reboot_device="/device/reboot_device_cmd";
+
+            /**
              * 获取设备信息
              */
             public static final String get_info = "device/get_info";
+
 
             //发送获取wifi的指令
             public static final String send_get_wifi_list_cmd="device/send_get_wifi_list_cmd";

@@ -40,6 +40,10 @@ public class EventManage {
     public static class deviceAlreadyBind{
         public String old_account;
     }
+    //设备重启成功
+    public static class deviceReboot{
+
+    }
     //解除绑定之后
     public static class unbindDeviceSuccess{
 

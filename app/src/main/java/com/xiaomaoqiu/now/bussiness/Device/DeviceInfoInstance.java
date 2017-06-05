@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.tencent.bugly.crashreport.biz.UserInfoBean;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
@@ -51,9 +52,9 @@ public class DeviceInfoInstance {
             bean.firmware_version = SPUtil.getFirmwareVersion();
             bean.device_name = SPUtil.getDeviceName();
             bean.iccid = SPUtil.getSimIccid();
-            bean.hardware_version =SPUtil.getDeviceVersion();
-            bean.sim_deadline=SPUtil.getSimDeadline();
-            bean.battery_last_get_time=SPUtil.getLAST_START_WALK_TIME();
+            bean.hardware_version = SPUtil.getDeviceVersion();
+            bean.sim_deadline = SPUtil.getSimDeadline();
+            bean.battery_last_get_time = SPUtil.getLAST_START_WALK_TIME();
             instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
             if (!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
@@ -104,9 +105,9 @@ public class DeviceInfoInstance {
         SPUtil.putFirmwareVersion(packBean.firmware_version);
         packBean.imei = message.imei;
         SPUtil.putDeviceImei(packBean.imei);
-        packBean.sim_deadline=message.sim_deadline;
+        packBean.sim_deadline = message.sim_deadline;
         SPUtil.putSimDeadline(packBean.sim_deadline);
-        packBean.hardware_version =message.hardware_version;
+        packBean.hardware_version = message.hardware_version;
         SPUtil.putDeviceVersion(packBean.hardware_version);
 
 
@@ -120,7 +121,7 @@ public class DeviceInfoInstance {
         isDeviceExist = true;
         SPUtil.putIsDeviceExist(true);
 
-        packBean.battery_last_get_time=message.battery_last_get_time;
+        packBean.battery_last_get_time = message.battery_last_get_time;
         SPUtil.putBatteryLastGetTime(packBean.battery_last_get_time);
         lastGetTime = AppDialog.DateUtil.deviceInfoTime(packBean.battery_last_get_time);
     }
@@ -137,15 +138,16 @@ public class DeviceInfoInstance {
         SPUtil.putDeviceImei("");
         packBean.device_name = "";
 
-
-
         UserInstance.getInstance().device_imei = "";
+
+        UserInstance.getInstance().has_reboot = 0;
+        SPUtil.putHasReboot(0);
+
         wiflist.data.clear();
         UserInstance.getInstance().wifi_ssid = "";
         SPUtil.putHomeWifiSsid("");
         UserInstance.getInstance().wifi_bssid = "";
         SPUtil.putHomeWifiMac("");
-
 
 
         SPUtil.putDeviceName("");
@@ -180,7 +182,7 @@ public class DeviceInfoInstance {
     }
 
     //绑定设备
-    public void bindDevice(String imei) {
+    public void bindDevice(final String imei) {
 
         ApiUtils.getApiService().addDeviceInfo(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
@@ -190,15 +192,17 @@ public class DeviceInfoInstance {
             @Override
             public void onSuccess(Response<AlreadyBindDeviceBean> response, AlreadyBindDeviceBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret){
+                switch (ret) {
                     case EC_SUCCESS:
                         EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
+                        UserInstance.getInstance().device_imei=imei;
+                        SPUtil.putDeviceImei(imei);
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         break;
                     case EC_ALREADY_FAV:
 //                        ToastUtil.showAtCenter("设备已被绑定");
-                        EventManage.deviceAlreadyBind event=new EventManage.deviceAlreadyBind();
-                        event.old_account=message.old_account;
+                        EventManage.deviceAlreadyBind event = new EventManage.deviceAlreadyBind();
+                        event.old_account = message.old_account;
                         EventBus.getDefault().post(event);
                         break;
                 }
@@ -206,6 +210,36 @@ public class DeviceInfoInstance {
 
             @Override
             public void onFail(Call<AlreadyBindDeviceBean> call, Throwable t) {
+            }
+        });
+    }
+
+    //重启设备
+    public void rebootDevice() {
+        ApiUtils.getApiService().rebootDevice(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
+                DeviceInfoInstance.getInstance().packBean.imei,
+                PetInfoInstance.getInstance().getPet_id()
+        ).enqueue(new XMQCallback<BaseBean>() {
+            @Override
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        //更新数据后是否已经重启过设备，0：未重启，1：已重启
+                        UserInstance.getInstance().has_reboot=1;
+                        SPUtil.putHasReboot(1);
+                        EventBus.getDefault().post(new EventManage.deviceReboot());
+                        break;
+                    case EC_ALREADY_FAV:
+
+                        break;
+                }
+            }
+
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
             }
         });
     }
@@ -233,7 +267,6 @@ public class DeviceInfoInstance {
     }
 
 
-    public static int count=0;
 
     //发送获取wifi列表的命令
     public void sendGetWifiListCmd() {
@@ -245,15 +278,15 @@ public class DeviceInfoInstance {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret){
-                    case  EC_SUCCESS:
+                switch (ret) {
+                    case EC_SUCCESS:
                         try {
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
 
-                            getWifiList();
+                        getWifiList();
                         break;
                     case EC_OFFLINE:
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
@@ -280,7 +313,7 @@ public class DeviceInfoInstance {
             public void onSuccess(Response<WifiListBean> response, WifiListBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    if (message.data != null && message.data.size() >=0) {
+                    if (message.data != null && message.data.size() >= 0) {
                         wiflist.data = message.data;
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());
                     } else {

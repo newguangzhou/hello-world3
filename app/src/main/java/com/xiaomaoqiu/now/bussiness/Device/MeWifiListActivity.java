@@ -17,6 +17,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.DialogUtil;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
 import com.xiaomaoqiu.pet.R;
@@ -82,6 +83,10 @@ public class MeWifiListActivity extends BaseActivity {
                         if (ret == EC_SUCCESS) {
                             PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
                             PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
+                            UserInstance.getInstance().wifi_bssid = wifi_bssid;
+                            UserInstance.getInstance().wifi_ssid = wifi_ssid;
+                            SPUtil.putHomeWifiMac(wifi_bssid);
+                            SPUtil.putHomeWifiSsid(wifi_ssid);
                             finish();
                         }
 

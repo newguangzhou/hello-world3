@@ -18,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
+import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
@@ -147,6 +148,12 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
         }
         if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             Intent intent = new Intent(this, InitWifiListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if(UserInstance.getInstance().has_reboot==0){
+            Intent intent=new Intent(this, RebootActivity.class);
             startActivity(intent);
             finish();
             return;

@@ -17,11 +17,13 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
+import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.DialogUtil;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
@@ -50,7 +52,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
 
     CheckStateAdapter adapter;
-    public Object lock=new Object();
+    public Object lock = new Object();
 
 
     @Override
@@ -58,17 +60,17 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.title_home_wifi));
         setContentView(R.layout.activity_wifilist);
-        ptr_refresh= (MaterialDesignPtrFrameLayout) this.findViewById(R.id.ptr_refresh);
+        ptr_refresh = (MaterialDesignPtrFrameLayout) this.findViewById(R.id.ptr_refresh);
         initView();
         initData();
 
         EventBus.getDefault().register(this);
-        loginPresenter=new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this);
     }
 
     private void initView() {
         View btnGoBack = findViewById(R.id.btn_go_back);
-        btnGoBack.setOnClickListener(new View.OnClickListener(){
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -82,7 +84,6 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
                 );
             }
         });
-
 
 
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
@@ -109,7 +110,19 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
                         if (ret == EC_SUCCESS) {
                             PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
                             PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
+                            UserInstance.getInstance().wifi_bssid = wifi_bssid;
+                            UserInstance.getInstance().wifi_ssid = wifi_ssid;
+                            SPUtil.putHomeWifiMac(wifi_bssid);
+                            SPUtil.putHomeWifiSsid(wifi_ssid);
+
                         }
+                        if (UserInstance.getInstance().has_reboot == 0) {
+                            Intent intent = new Intent(InitWifiListActivity.this, RebootActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
+
                         Intent intent = new Intent(InitWifiListActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -166,11 +179,11 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
 
                 synchronized (lock) {
-                    if(position>=adapter.mdatas.size()||position<0){
+                    if (position >= adapter.mdatas.size() || position < 0) {
                         return;
                     }
-                    wifi_bssid="";
-                    wifi_ssid="";
+                    wifi_bssid = "";
+                    wifi_ssid = "";
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
 
                     if (adapter.mdatas.get(position).is_homewifi == 1) {
@@ -231,7 +244,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
     public void success() {
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 //        getActivity().overridePendingTransition(0, 0);
         startActivity(intent);
     }
