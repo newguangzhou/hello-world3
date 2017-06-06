@@ -121,10 +121,10 @@ public class XMMessageReceiver extends PushMessageReceiver {
             }
         }
         else if(MiPushClient.COMMAND_SET_ACCOUNT.equals(command)){
-            mUserAccount=cmdArg1;
-            LogUtil.e(TAG,"mUserAccount:"+cmdArg1);
-            //todo 设置set-mUserAccount成功
-            EventBus.getDefault().post(new EventManage.setAlias());
+//            mUserAccount=cmdArg1;
+//            LogUtil.e(TAG,"mUserAccount:"+cmdArg1);
+//            //todo 设置set-mUserAccount成功
+//            EventBus.getDefault().post(new EventManage.setAlias());
         }
         else if(MiPushClient.COMMAND_UNSET_ACCOUNT.equals(command)){
             if (message.getResultCode() == ErrorCode.SUCCESS) {

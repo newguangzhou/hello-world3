@@ -337,7 +337,6 @@ public interface ApiService {
     Call<PictureBean> uploadLogo(
             @Query("uid") long uid,
             @Query("token") String token,
-            @Query("pet_id") long petId,
             @Part MultipartBody.Part file
 
     );

@@ -129,12 +129,7 @@ public class BaseActivity extends Activity {
     }
 
 
-    //设备离线
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void deviceOffline(EventManage.DeviceOffline event) {
-        ToastUtil.showTost("设备离线");
 
-    }
 
     private boolean isDestoryed;
 

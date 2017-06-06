@@ -52,8 +52,6 @@ public class BatteryView extends ImageView {
 
     public void setBatteryLevel(float level,String time)
     {
-
-
         if(level <= mWarnLevel)
         {
             new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
@@ -70,9 +68,11 @@ public class BatteryView extends ImageView {
                 break;
             }
             setImageResource(batteryLevelRes[4]);
-
         }
     }
+
+
+
     public void pushBatteryDialog(float level,String time){
         //如果超过1，说明在充电中……
         if(level>1.0f){
@@ -90,6 +90,9 @@ public class BatteryView extends ImageView {
             setImageResource(batteryLevelRes[4]);
         }
     }
+
+
+
     public void showBatterylevel(float level,String time){
         if(level>1.0f){
             setImageResource(charginRid);

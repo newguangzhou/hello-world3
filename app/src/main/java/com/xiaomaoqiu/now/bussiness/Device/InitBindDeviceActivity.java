@@ -119,7 +119,7 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
             if(isZXresultCorrect(Imei)) {
                 DeviceInfoInstance.getInstance().bindDevice(Imei);
             }else{
-                showToast("IMEI 码错误，请正确扫码！");
+                showToast("IMEI码错误，请正确扫码！");
             }
         }
     }

@@ -1,7 +1,18 @@
 package com.xiaomaoqiu.now.push;
 
+import android.content.Intent;
+
 import com.alibaba.fastjson.JSON;
+import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by long on 2017/5/15.
@@ -27,11 +38,12 @@ public class PushDataCenter {
     public static final String EXTRA = "extra";
 
     public static class User {
-
+        public static final String REMOTE_LOGIN = "remote-login";
     }
 
     public static class Device {
         public static final String OFFLINE = "offline";
+        public static final String ONLINE="online";
         public static final String LOW_BATTERY = "low-battery";
         public static final String ULTRA_LOW_BATTERY = "ultra-low-battery";
 
@@ -63,7 +75,6 @@ public class PushDataCenter {
                 dealExtra();
                 break;
         }
-
     }
 
     /**
@@ -71,7 +82,20 @@ public class PushDataCenter {
      */
     public void dealUser() {
         switch (formatBean.signal) {
+            case User.REMOTE_LOGIN:
+                UserInstance.getInstance().clearLoginInfo();
+                SPUtil.putHomeWifiMac("");
+                SPUtil.putHomeWifiSsid("");
+                PetInfoInstance.getInstance().clearPetInfo();
+                DeviceInfoInstance.getInstance().clearDeviceInfo();
 
+                SPUtil.putDeviceImei("");
+                Intent intent = new Intent(PetAppLike.mcontext, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                PetAppLike.mcontext.startActivity(intent);
+
+                EventBus.getDefault().postSticky(new PushEventManage.otherLogin());
+                break;
         }
     }
 
@@ -79,16 +103,21 @@ public class PushDataCenter {
      * 处理设备相关
      */
     public void dealDevice() {
-
         switch (formatBean.signal) {
             case Device.OFFLINE:
-
+                EventBus.getDefault().post(new PushEventManage.deviceOffline());
+                EventBus.getDefault().post(new EventManage.DeviceOffline());
+                break;
+            case Device.ONLINE:
+                EventBus.getDefault().post(new PushEventManage.deviceOnline());
                 break;
             case Device.LOW_BATTERY:
-
+                DeviceInfoInstance.getInstance().battery_level= (float) formatBean.data.get("battery_level");
+                EventBus.getDefault().post(new PushEventManage.batteryLowLevel());
                 break;
             case Device.ULTRA_LOW_BATTERY:
-
+                DeviceInfoInstance.getInstance().battery_level= (float) formatBean.data.get("battery_level");
+                EventBus.getDefault().post(new PushEventManage.batterySuperLowLevel());
                 break;
         }
     }
@@ -99,7 +128,12 @@ public class PushDataCenter {
     public void dealPet() {
         switch (formatBean.signal) {
             case Pet.LOCATIONCHANGE:
-
+                PushEventManage.locationChange event = new PushEventManage.locationChange();
+                PetInfoInstance.getInstance().latitude = (double) formatBean.data.get("latitude");
+                PetInfoInstance.getInstance().location_time = (long) formatBean.data.get("location_time");
+                PetInfoInstance.getInstance().longitude = (double) formatBean.data.get("longitude");
+                PetInfoInstance.getInstance().radius = (double) formatBean.data.get("radius");
+                EventBus.getDefault().post(event);
                 break;
         }
     }

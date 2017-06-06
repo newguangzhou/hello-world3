@@ -19,6 +19,8 @@ import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
+import com.xiaomaoqiu.now.push.PushEventManage;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -29,7 +31,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 @SuppressLint("WrongConstant")
-public class MainActivity extends BaseFragmentActivity implements View.OnClickListener,CheckIndex {
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, CheckIndex {
 
     private static int mTabID[] = {
             R.id.tab_health,
@@ -53,6 +55,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         return 0;
     }
 
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceOffline(EventManage.DeviceOffline event) {
+        batteryView.setDeviceOffline();
+    }
+
     //设备状态更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
@@ -65,34 +73,53 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 DeviceInfoInstance.getInstance().lastGetTime);
     }
 
+    //宠物头像更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.uploadImageSuccess event) {
         Uri uri = Uri.parse(PetInfoInstance.getInstance().getPackBean().logo_url);
         sdv_header.setImageURI(uri);
+    }
+
+
+    //todo 小米推送
+    //设备低电量
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void batteryLowlevel(PushEventManage.batteryLowLevel event) {
 
     }
 
+    //todo 小米推送
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
+        batteryView.setDeviceOffline();
+        DialogUtil.showDeviceOfflineDialog(this);
+    }
+    //todo 小米推送
+    //设备重新在线
+    public void receivePushDeviceOnline(PushEventManage.deviceOnline event){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initView();
-        if(savedInstanceState!=null){
-            mPetFragment= (PetFragment) getSupportFragmentManager().findFragmentByTag(PetFragment.class.getName());
-            mLocateFragment= (LocateFragment) getSupportFragmentManager().findFragmentByTag(LocateFragment.class.getName());
-            mMeFragment= (MeFrament) getSupportFragmentManager().findFragmentByTag(MeFrament.class.getName());
+        if (savedInstanceState != null) {
+            mPetFragment = (PetFragment) getSupportFragmentManager().findFragmentByTag(PetFragment.class.getName());
+            mLocateFragment = (LocateFragment) getSupportFragmentManager().findFragmentByTag(LocateFragment.class.getName());
+            mMeFragment = (MeFrament) getSupportFragmentManager().findFragmentByTag(MeFrament.class.getName());
             getSupportFragmentManager().beginTransaction()
                     .show(mPetFragment)
                     .hide(mLocateFragment)
                     .hide(mMeFragment).commit();
-        }else{
+        } else {
             mPetFragment = new PetFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container,mPetFragment,PetFragment.class.getName())
+                    .add(R.id.fragment_container, mPetFragment, PetFragment.class.getName())
                     .show(mPetFragment).commit();
         }
-
 
 
         for (int i = 0; i < 3; i++) {
@@ -108,14 +135,14 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mHealthTabIcon = (ImageView) findViewById(R.id.main_tab_health);
         mLocateTabIcon = (ImageView) findViewById(R.id.main_tab_locate);
         mMeTabIcon = (ImageView) findViewById(R.id.main_tab_me);
-        sdv_header= (SimpleDraweeView) findViewById(R.id.sdv_header);
+        sdv_header = (SimpleDraweeView) findViewById(R.id.sdv_header);
         batteryView = (BatteryView) findViewById(R.id.batteryView);
 
-        sdv_header.setOnClickListener(new View.OnClickListener(){
+        sdv_header.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PetInfoActivity.class);
+                Intent intent = new Intent(MainActivity.this, PetInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -156,26 +183,26 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         hideAllTabIcon(transaction);
         switch (index) {
             case 0:
-                if(mPetFragment==null){
+                if (mPetFragment == null) {
                     mPetFragment = new PetFragment();
-                    transaction.add(R.id.fragment_container,mPetFragment,PetFragment.class.getName());
+                    transaction.add(R.id.fragment_container, mPetFragment, PetFragment.class.getName());
                 }
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
                 break;
             case 1:
-                if(mLocateFragment==null){
+                if (mLocateFragment == null) {
                     mLocateFragment = new LocateFragment();
-                    transaction.add(R.id.fragment_container,mLocateFragment,LocateFragment.class.getName());
+                    transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
                 }
                 transaction
                         .show(mLocateFragment).commit();
                 mLocateTabIcon.setSelected(true);
                 break;
             case 2:
-                if(mMeFragment==null){
+                if (mMeFragment == null) {
                     mMeFragment = new MeFrament();
-                    transaction.add(R.id.fragment_container,mMeFragment,MeFrament.class.getName());
+                    transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
                 }
                 transaction
                         .show(mMeFragment).commit();
@@ -199,7 +226,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 break;
         }
     }
-
 
 
     @Override

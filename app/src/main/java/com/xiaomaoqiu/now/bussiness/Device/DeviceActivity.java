@@ -85,6 +85,13 @@ public class DeviceActivity extends BaseActivity {
         EventBus.getDefault().register(this);
     }
 
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceOffline(EventManage.DeviceOffline event){
+        batteryView.setDeviceOffline();
+    }
+
+
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
         showMessageOnUI();

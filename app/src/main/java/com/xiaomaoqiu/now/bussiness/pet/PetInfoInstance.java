@@ -341,7 +341,7 @@ public class PetInfoInstance {
             File fImage = new File(path);
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), fImage);
             MultipartBody.Part body = MultipartBody.Part.createFormData("flieName", fImage.getName(), requestFile);
-            ApiUtils.getFileApiService().uploadLogo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), body).enqueue(
+            ApiUtils.getFileApiService().uploadLogo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), body).enqueue(
                     new XMQCallback<PictureBean>() {
                         @Override
                         public void onSuccess(Response<PictureBean> response, PictureBean message) {

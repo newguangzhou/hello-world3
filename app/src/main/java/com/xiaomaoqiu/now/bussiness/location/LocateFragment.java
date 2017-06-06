@@ -18,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
@@ -175,6 +176,11 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //todo 回调逻辑
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
+        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude,PetInfoInstance.getInstance().radius);
+    }
+    //todo 小米推送
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onLocateResult(PushEventManage.locationChange event) {
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude,PetInfoInstance.getInstance().radius);
     }
 

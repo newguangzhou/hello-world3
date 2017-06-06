@@ -37,7 +37,6 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
             T message = response.body();
             if (message != null) {
 
-
                 HttpCode ret = HttpCode.valueOf(message.status);
                 //如果token过期，直接跳转到登录页面
                 if (EC_INVALID_TOKEN == ret) {

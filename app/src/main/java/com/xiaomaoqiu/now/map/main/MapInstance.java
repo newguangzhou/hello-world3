@@ -21,6 +21,7 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
@@ -79,8 +80,8 @@ public class MapInstance implements BDLocationListener {
     CircleOptions mCircleOptions;
 
 
-    BitmapDescriptor petbitmapDescriptor ;
-    BitmapDescriptor phonebitmapDescriptor ;
+    BitmapDescriptor petbitmapDescriptor;
+    BitmapDescriptor phonebitmapDescriptor;
 
     public void init(MapView mapView) {
         this.mapView = mapView;
@@ -143,7 +144,6 @@ public class MapInstance implements BDLocationListener {
     }
 
 
-
     /**
      * 初始化宠物位置地图标识
      */
@@ -178,9 +178,8 @@ public class MapInstance implements BDLocationListener {
 
     }
 
-    int a = 0;
     LatLng desLatLng;
-    double radius=20;
+    double radius = 20;
 
     /**
      * 设置宠物位置为地图中心
@@ -190,7 +189,7 @@ public class MapInstance implements BDLocationListener {
 
         LatLng sourceLatLng = new LatLng(latitude, longitude);
 
-         desLatLng = converterLatLng(sourceLatLng);
+        desLatLng = converterLatLng(sourceLatLng);
         petLatitude = desLatLng.latitude;
         petLongitude = desLatLng.longitude;
         SPUtil.putPetLatitude(petLatitude + "");
@@ -199,19 +198,8 @@ public class MapInstance implements BDLocationListener {
         mPetMarker.setPosition(desLatLng);
         MapLocationParser.queryLocationDesc(desLatLng, addressListener);
         setCenter(desLatLng, 300);
-//        if (a == 2) {
-//            radius = 3;
-//        } else if (radius == 1) {
-//            radius = 10;
-//        } else {
-//            radius = 8;
-//        }
-//        a++;
-        this.radius=radius;
+        this.radius = radius;
         refreshMap();
-
-
-
 
 
     }
@@ -219,12 +207,12 @@ public class MapInstance implements BDLocationListener {
     /**
      * 刷新地图
      */
-    public void refreshMap(){
+    public void refreshMap() {
         mBaiduMap.clear();
         initPhoneMarker();
         initPetMarker();
-        if(desLatLng==null){
-            desLatLng=new LatLng(petLatitude,petLongitude);
+        if (desLatLng == null) {
+            desLatLng = new LatLng(petLatitude, petLongitude);
         }
         mCircleOptions = new CircleOptions()
                 .center(desLatLng) // 圆心坐标
@@ -317,10 +305,7 @@ public class MapInstance implements BDLocationListener {
         mBaiduMap.animateMapStatus(mapStatusUpdate, delayMills);
     }
 
-//    public void setMapMode(String mode_map) {
-//        this.mode_map = mode_map;
-//        SPUtil.putMode_Map(mode_map);
-//    }
+
 
     public void setGPSState(boolean flag) {
         GPS_OPEN = flag;
@@ -382,13 +367,21 @@ public class MapInstance implements BDLocationListener {
     }
 
 
-    //  // 将google地图、soso地图、aliyun地图、mapabc地图和amap地图// 所用坐标转换成百度坐标
+    //将google地图、soso地图、aliyun地图、mapabc地图和amap地图// 所用坐标转换成百度坐标
     public LatLng converterLatLng(LatLng sourceLatLng) {
         CoordinateConverter converter = new CoordinateConverter();
         converter.from(CoordinateConverter.CoordType.COMMON);
-// sourceLatLng待转换坐标
+        // sourceLatLng待转换坐标
         converter.coord(sourceLatLng);
         LatLng desLatLng = converter.convert();
         return desLatLng;
     }
+
+
+    //计算距离,根据用户指定的两个坐标点，计算这两个点的实际地理距离
+    public double calculateDistance(LatLng phoneLatLng, LatLng petLatLng) {
+        //计算p1、p2两点之间的直线距离，单位：米
+        return DistanceUtil.getDistance(phoneLatLng, petLatLng);
+    }
+
 }

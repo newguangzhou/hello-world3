@@ -18,12 +18,31 @@ public class PushEventManage {
     public static class deviceOffline {
 
     }
+    /**
+     * 设备重新在线
+     */
+    public static class deviceOnline{
+
+    }
+
+    /**
+     * 设备低电量
+     */
+    public static class batteryLowLevel{
+
+    }
+    /**
+     * 设备超低电量
+     */
+    public static class batterySuperLowLevel{
+
+    }
 
     /**
      * 位置变化
      */
     public static class locationChange {
-        
+
     }
 
 }

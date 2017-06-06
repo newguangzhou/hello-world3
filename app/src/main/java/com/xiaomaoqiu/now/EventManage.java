@@ -20,14 +20,6 @@ public class EventManage {
 
     }
 
-
-    //通知PetFragment可以获取运动信息了
-    public static class notifyPetFramentGetActivityInfo {
-
-    }
-
-
-
     //设备离线
     public static  class DeviceOffline{
 
@@ -62,6 +54,7 @@ public class EventManage {
     public static class notifyPetInfoChange {
 
     }
+
     //宠物信息更新回调
     public static class callbackUpdatePetInfo{
 
@@ -72,17 +65,16 @@ public class EventManage {
 
     }
 
-
     //位置有更新
     public static class notifyPetLocationChange {
         //位置是不是为0
         public boolean isnull;
     }
+
     //测试位置获取
     public static class testPetLocation{
 
     }
-
 
     public static class atHomeOrtoSport{
     }
@@ -99,6 +91,7 @@ public class EventManage {
     public static class TodaySportData{
        public  PetSportBean.SportBean sportBean=new PetSportBean.SportBean();
     }
+
     //目标运动量变化
     public static class targetSportData{
     }
