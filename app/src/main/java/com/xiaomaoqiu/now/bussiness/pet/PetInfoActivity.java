@@ -72,7 +72,8 @@ public class PetInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.pet_info));
         setContentView(R.layout.me_pet_info);
-        modifyBean = PetInfoInstance.getInstance().packBean;;
+        modifyBean = PetInfoInstance.getInstance().packBean;
+        ;
         initView();
 //        setNextView("保存", new View.OnClickListener() {
 //            @Override
@@ -135,15 +136,20 @@ public class PetInfoActivity extends BaseActivity {
 
     private void initPetInfo() {
         View btnGoBack = findViewById(R.id.btn_go_back);
-        btnGoBack.setOnClickListener(new View.OnClickListener(){
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                //todo 如果没有变化，就直接退出
+                if (!PetInfoInstance.getInstance().petInfoisChanged(modifyBean)) {
+                    finish();
+                    return;
+                }
                 DialogToast.createDialogWithTwoButton(PetInfoActivity.this, "确认重启设备？", new View.OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
-                                //todo 如果没有变化，就直接退出
+
 
                                 if (DoubleClickUtil.isFastMiniDoubleClick()) {
                                     return;
@@ -291,9 +297,9 @@ public class PetInfoActivity extends BaseActivity {
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
-                    modifyBean.description = PetUtil.getInstance().dogName;
-                    modifyBean.target_energy=PetUtil.getInstance().energyType;
-                    txt_variety.setText(modifyBean.description);
+                modifyBean.description = PetUtil.getInstance().dogName;
+                modifyBean.target_energy = PetUtil.getInstance().energyType;
+                txt_variety.setText(modifyBean.description);
                 break;
             case REQ_CODE_PHOTO_SOURCE:
                 if (data != null) {

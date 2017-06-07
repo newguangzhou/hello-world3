@@ -97,7 +97,11 @@ public class PetInfoInstance {
 
         @Override
         public String toString() {
-            return year + "-" + month + "-" + day;
+            return year
+                    + "-"
+                    + (month <10?("0"+month):month)
+                    + "-"
+                    + (day<10?("0"+day):day);
         }
     }
 
@@ -480,21 +484,21 @@ public class PetInfoInstance {
 
 
     public boolean petInfoisChanged(PetInfoBean bean) {
-        if (!bean.name.equals(packBean.name)) {
+        if (!bean.nick.equals(SPUtil.getPeiNick())) {
             return true;
         }
 
-        if (bean.sex != packBean.sex) {
+        if (bean.sex != SPUtil.getSex()) {
             return true;
         }
 
-        if (!bean.birthday.equals(packBean.birthday)) {
+        if (!bean.birthday.equals(SPUtil.getBirthday())) {
             return true;
         }
-        if (!bean.description.equals(packBean.description)) {
+        if (!bean.description.equals(SPUtil.getPetDescription())) {
             return true;
         }
-        if (!bean.logo_url.equals(packBean.logo_url)) {
+        if (!bean.logo_url.equals(SPUtil.getPetHeader())) {
             return true;
         }
 

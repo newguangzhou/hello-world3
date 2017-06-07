@@ -109,6 +109,8 @@ public class PushDataCenter {
                 EventBus.getDefault().post(new EventManage.DeviceOffline());
                 break;
             case Device.ONLINE:
+                DeviceInfoInstance.getInstance().battery_level= (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().lastGetTime= (String) formatBean.data.get("battery_last_get_time");
                 EventBus.getDefault().post(new PushEventManage.deviceOnline());
                 break;
             case Device.LOW_BATTERY:
