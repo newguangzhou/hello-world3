@@ -37,7 +37,7 @@ import retrofit2.Response;
 
 
 /**
- * Created by Administrator on 2017/1/14.
+ * Created by long on 2017/1/14.
  */
 @SuppressLint("WrongConstant")
 public class LocateFragment extends BaseFragment implements View.OnClickListener {

@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.adapter.CheckStateAdapter;
+import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;

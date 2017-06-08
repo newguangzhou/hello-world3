@@ -31,7 +31,6 @@ public class UserInstance {
             userInstance.m_uid = SPUtil.getUid();
             userInstance.m_strToken = SPUtil.getToken();
 
-
             userInstance.pet_id = SPUtil.getPetId();
             userInstance.device_imei = SPUtil.getDeviceImei();
             userInstance.wifi_bssid = SPUtil.getHomeWifiMac();
@@ -108,23 +107,14 @@ public class UserInstance {
     }
 
     public void saveUserInfo(UserBean userBean) {
-//        if (!TextUtils.isEmpty(userBean.device_imei)) {
         device_imei = userBean.device_imei;
         SPUtil.putDeviceImei(device_imei);
-//        }
-//        if(userBean.pet_id>0){
         pet_id = userBean.pet_id;
         SPUtil.putPetId(pet_id);
-//        }
-
-//        if(!TextUtils.isEmpty(userBean.wifi_bssid)){
         wifi_bssid = userBean.wifi_bssid;
         SPUtil.putHomeWifiMac(wifi_bssid);
-//        }
-//        if(!TextUtils.isEmpty(userBean.wifi_ssid)){
         wifi_ssid = userBean.wifi_ssid;
         SPUtil.putHomeWifiSsid(wifi_ssid);
-//        }
         has_reboot = userBean.has_reboot;
         SPUtil.putHasReboot(has_reboot);
 

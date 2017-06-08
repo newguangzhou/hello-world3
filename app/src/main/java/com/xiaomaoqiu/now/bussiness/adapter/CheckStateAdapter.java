@@ -1,4 +1,4 @@
-package com.xiaomaoqiu.now.adapter;
+package com.xiaomaoqiu.now.bussiness.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

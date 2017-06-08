@@ -110,9 +110,7 @@ public class DeviceInfoInstance {
         packBean.hardware_version = message.hardware_version;
         SPUtil.putDeviceVersion(packBean.hardware_version);
 
-
         UserInstance.getInstance().device_imei = packBean.imei;
-
 
         packBean.device_name = message.device_name;
         SPUtil.putDeviceName(packBean.device_name);
@@ -134,7 +132,6 @@ public class DeviceInfoInstance {
         SPUtil.putFirmwareVersion("");
         packBean.imei = "";
 
-
         SPUtil.putDeviceImei("");
         packBean.device_name = "";
 
@@ -148,7 +145,6 @@ public class DeviceInfoInstance {
         SPUtil.putHomeWifiSsid("");
         UserInstance.getInstance().wifi_bssid = "";
         SPUtil.putHomeWifiMac("");
-
 
         SPUtil.putDeviceName("");
         packBean.iccid = "";
@@ -268,8 +264,6 @@ public class DeviceInfoInstance {
             }
         });
     }
-
-
 
     //发送获取wifi列表的命令
     public void sendGetWifiListCmd() {
