@@ -15,6 +15,7 @@ import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
@@ -88,6 +89,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     try {
                         onSuccess(response, message);
                     } catch (Exception e) {
+                        DialogUtil.closeProgress();
                         CrashReport.postCatchedException(e);
                         Toast.makeText(PetAppLike.mcontext, "**服务器小哥去看片了，稍等一下**", Toast.LENGTH_SHORT).show();
                         Log.e(PetAppLike.TAG, "callback出错了" + e.getMessage());
@@ -99,6 +101,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
             }
         }
         ToastUtil.showTost("网络错误");
+
         onFail(call, null);
     }
 

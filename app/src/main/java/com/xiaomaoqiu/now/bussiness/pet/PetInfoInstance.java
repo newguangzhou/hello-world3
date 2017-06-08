@@ -256,12 +256,19 @@ public class PetInfoInstance {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                if (ret == HttpCode.EC_SUCCESS) {
-//                    ToastUtil.showTost("更新成功");
-                    savePetInfo(petInfoBean);
-                    EventBus.getDefault().post(new EventManage.callbackUpdatePetInfo());
-                } else {
-                    ToastUtil.showTost("更新失败");
+                switch (ret) {
+                    case EC_SUCCESS:
+                        //                    ToastUtil.showTost("更新成功");
+                        savePetInfo(petInfoBean);
+                        EventBus.getDefault().post(new EventManage.callbackUpdatePetInfo());
+                        break;
+                    case EC_OFFLINE:
+                        ToastUtil.showTost("设备处于离线状态，请开机");
+                        break;
+                    default:
+                        ToastUtil.showTost("更新失败");
+                        break;
+
                 }
             }
 
@@ -312,19 +319,24 @@ public class PetInfoInstance {
             @Override
             public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
-                if (ret == HttpCode.EC_SUCCESS) {
-                    if (message.latitude > 0.0d) {
-                        EventManage.notifyPetLocationChange event = new EventManage.notifyPetLocationChange();
-                        latitude = message.latitude;
-                        location_time = message.location_time;
-                        longitude = message.longitude;
-                        radius = message.radius;
-                        EventBus.getDefault().post(event);
-                    } else {
-                        ToastUtil.showTost("位置获取失败！");
-                    }
-
+                switch (ret) {
+                    case EC_SUCCESS:
+                        if (message.latitude > 0.0d) {
+                            EventManage.notifyPetLocationChange event = new EventManage.notifyPetLocationChange();
+                            latitude = message.latitude;
+                            location_time = message.location_time;
+                            longitude = message.longitude;
+                            radius = message.radius;
+                            EventBus.getDefault().post(event);
+                        } else {
+                            ToastUtil.showTost("位置获取失败！");
+                        }
+                        break;
+                    case EC_NODATA:
+                        ToastUtil.showTost("当前无位置数据");
+                        break;
                 }
+
             }
 
             @Override

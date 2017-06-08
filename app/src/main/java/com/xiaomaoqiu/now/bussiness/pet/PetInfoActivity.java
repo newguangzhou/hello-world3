@@ -75,12 +75,6 @@ public class PetInfoActivity extends BaseActivity {
         modifyBean = PetInfoInstance.getInstance().packBean;
         ;
         initView();
-//        setNextView("保存", new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         EventBus.getDefault().register(this);
     }
 
@@ -140,7 +134,6 @@ public class PetInfoActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                //todo 如果没有变化，就直接退出
                 if (!PetInfoInstance.getInstance().petInfoisChanged(modifyBean)) {
                     finish();
                     return;
@@ -171,7 +164,6 @@ public class PetInfoActivity extends BaseActivity {
         } else {
             modifyBean.nick = "旺财";
         }
-
 
         ((ToggleButton) findViewById(R.id.chk_gender)).setChecked(modifyBean.sex == Constants.Female);
         if (modifyBean.sex == Constants.Female) {
@@ -298,7 +290,8 @@ public class PetInfoActivity extends BaseActivity {
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
                 modifyBean.description = PetUtil.getInstance().dogName;
-                modifyBean.target_energy = PetUtil.getInstance().energyType;
+//                modifyBean.target_energy = PetUtil.getInstance().energyType;
+                modifyBean.target_energy=PetUtil.getInstance().calculateEnergy()+"";
                 txt_variety.setText(modifyBean.description);
                 break;
             case REQ_CODE_PHOTO_SOURCE:
@@ -306,12 +299,9 @@ public class PetInfoActivity extends BaseActivity {
                     int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
                     onPhotoSource(mode);
                 }
-
-
                 break;
             case REQ_CODE_GET_PHOTO_FROM_GALLERY:
                 if (data != null && data.getData() != null) {
-
                     Bundle bundle = new Bundle();
                     // 选择图片后进入裁剪
                     String path = data.getData().getPath();

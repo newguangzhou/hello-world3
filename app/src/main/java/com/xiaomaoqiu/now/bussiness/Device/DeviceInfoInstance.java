@@ -205,6 +205,9 @@ public class DeviceInfoInstance {
                         event.old_account = message.old_account;
                         EventBus.getDefault().post(event);
                         break;
+                    case EC_INVALID_ARGS:
+                        ToastUtil.showTost("设备不存在");
+                        break;
                 }
             }
 

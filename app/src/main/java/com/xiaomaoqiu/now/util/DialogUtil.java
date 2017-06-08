@@ -70,6 +70,7 @@ public class DialogUtil {
     //关闭设备离线弹窗
     public static void closeDeviceOfflineDialog() {
         if (offlineDialog != null && offlineDialog.isShowing()) {
+
             try {
                 offlineDialog.dismiss();
             } catch (Exception e) {

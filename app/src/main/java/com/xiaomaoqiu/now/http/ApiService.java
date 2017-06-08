@@ -92,7 +92,7 @@ public interface ApiService {
             @Query("nick") String nick,
             @Query("birthday") String birthday,
             @Query("pet_type_id") int pet_type_id,
-            @Query("energy_type") String energy_type,
+            @Query("target_energy") String target_energy,
             @Query("logo_url") String logo_url,
             @Query("imei") String imei
 

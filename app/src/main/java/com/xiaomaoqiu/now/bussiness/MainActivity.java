@@ -97,6 +97,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
     //todo 小米推送
     //设备重新在线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOnline(PushEventManage.deviceOnline event){
         batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
                 DeviceInfoInstance.getInstance().lastGetTime);
