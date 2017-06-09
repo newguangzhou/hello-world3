@@ -146,7 +146,8 @@ public interface ApiService {
     Call<BaseBean> setSportInfo(@Query("uid") long uid,
                                 @Query("token") String token,
                                 @Query("pet_id") long petId,
-                                @Query("target_step") int number
+                                @Query("target_step") int number,
+                                @Query("target_energy ") String target_energy
     );
 
 
@@ -355,7 +356,7 @@ public interface ApiService {
             @Query("birthday") String birthday,
             @Query("logo_url") String logo_url,
             @Query("pet_type_id") int pet_type_id,
-            @Query("energy_type") String energy_type,
+            @Query("target_energy") String target_energy,
             @Query("imei") String imei
     );
 

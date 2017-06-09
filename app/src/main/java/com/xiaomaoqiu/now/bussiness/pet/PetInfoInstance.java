@@ -71,7 +71,7 @@ public class PetInfoInstance {
             baseBean.birthday = SPUtil.getBirthday();
             baseBean.logo_url = SPUtil.getPetHeader();
             baseBean.pet_type_id = SPUtil.getPetTypeId();
-            baseBean.target_energy = SPUtil.getEnergyType();
+            baseBean.target_energy = SPUtil.getTargetEnergy();
             instance.setDateFormat_birthday(baseBean.birthday);
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;

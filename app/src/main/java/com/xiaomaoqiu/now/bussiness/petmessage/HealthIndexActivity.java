@@ -160,7 +160,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 //            }
 //
 //        },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
-        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number).enqueue(new XMQCallback<BaseBean>() {
+        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number,number+"").enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);

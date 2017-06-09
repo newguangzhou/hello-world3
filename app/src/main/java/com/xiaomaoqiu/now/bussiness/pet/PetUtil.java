@@ -1,7 +1,6 @@
 package com.xiaomaoqiu.now.bussiness.pet;
 
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.push.PushDataCenter;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.pet.R;
 
@@ -46,7 +45,7 @@ public class PetUtil {
 
     public void init() {
         dogName = SPUtil.getPetDescription();
-        energyType = SPUtil.getEnergyType();
+        energyType = SPUtil.getTargetEnergy();
         allDogEnergyAndNameMap.clear();
         allDogNameList = PetAppLike.mcontext.getResources().getStringArray(R.array.alldog_name);
         allDogEnergyList = PetAppLike.mcontext.getResources().getStringArray(R.array.all_energyFormulaCodeList);
@@ -141,6 +140,11 @@ public class PetUtil {
 
 
         double temp;
+        if((energyType==null)||("".equals(energyType))){
+            temp=method2Energy;
+            return temp;
+        }
+
         switch (energyType) {
             case "1":
                 temp = method1Energy;
