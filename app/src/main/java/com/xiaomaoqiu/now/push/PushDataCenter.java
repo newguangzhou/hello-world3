@@ -94,7 +94,14 @@ public class PushDataCenter {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 PetAppLike.mcontext.startActivity(intent);
 
-                EventBus.getDefault().postSticky(new PushEventManage.otherLogin());
+                String remote_login_time= (String) formatBean.data.get("remote_login_time");
+                String X_OS_Name= (String) formatBean.data.get("X_OS_Name");
+                PushEventManage.otherLogin event=new PushEventManage.otherLogin();
+                event.remote_login_time=remote_login_time;
+                event.X_OS_Name=X_OS_Name;
+
+
+                EventBus.getDefault().postSticky(event);
                 break;
         }
     }

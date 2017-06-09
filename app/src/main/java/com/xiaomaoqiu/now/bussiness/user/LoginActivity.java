@@ -307,6 +307,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
     //设备状态更新
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true,priority = 0)
     public void onKickOff(PushEventManage.otherLogin event){
-        DialogUtil.showLogoutDialog(this);
+        DialogUtil.showLogoutDialog(this,event.remote_login_time,event.X_OS_Name);
     }
 }

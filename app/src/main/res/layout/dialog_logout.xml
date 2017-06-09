@@ -26,6 +26,7 @@
         android:textColor="#555"
         />
     <TextView
+        android:id="@+id/tv_remote_login"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
