@@ -344,9 +344,6 @@ public class PetInfoInstance {
                 Toast.makeText(PetAppLike.mcontext, "位置获取失败~", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        TestInstance.getTestInstance().getTestLocation();
-
     }
 
     //上传头像信息

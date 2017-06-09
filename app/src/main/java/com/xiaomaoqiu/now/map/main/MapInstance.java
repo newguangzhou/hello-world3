@@ -88,8 +88,6 @@ public class MapInstance implements BDLocationListener {
         initMap();
         petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
         phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
-//        initPhoneMarker();
-//        initPetMarker();
         setPhonePos();
     }
 
