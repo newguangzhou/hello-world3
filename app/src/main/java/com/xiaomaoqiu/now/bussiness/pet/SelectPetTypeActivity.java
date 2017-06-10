@@ -45,10 +45,12 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         Intent data = new Intent();
+        int pet_type_id;
         switch (v.getId()) {
             case R.id.iv_pettype_dog:
                 Intent intent = new Intent(this, selectDog1Activity.class);
                 startActivityForResult(intent, REQ_CODE_VARIETY);
+                pet_type_id=1;
                 finish();
                 break;
 
@@ -56,6 +58,7 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
 
                 PetUtil.getInstance().dogName=("猫");
                 PetUtil.getInstance().energyType="2";
+                pet_type_id=2;
                 finish();
                 break;
 
@@ -63,8 +66,17 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
 
                 PetUtil.getInstance().dogName=("其他");
                 PetUtil.getInstance().energyType="2";
+                pet_type_id=-1;
+                finish();
+                break;
+            default:
+                PetUtil.getInstance().dogName=("其他");
+                PetUtil.getInstance().energyType="2";
+                pet_type_id=-1;
                 finish();
                 break;
         }
+        PetInfoInstance.getInstance().packBean.pet_type_id=pet_type_id;
+
     }
 }

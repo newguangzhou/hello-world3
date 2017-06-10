@@ -71,7 +71,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
         mWalkPetView.setOnClickListener(this);
 
-        mapPetAvaterView=new MapPetAvaterView(root.getContext());
+        mapPetAvaterView = new MapPetAvaterView(root.getContext());
         petLocation = (TextView) root.findViewById(R.id.tv_location);
         petLocation.setText("");
         petLocContainer = (LinearLayout) root.findViewById(R.id.locate_addr_conotainer);
@@ -99,19 +99,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         MapInstance.getInstance().setPetAvaterView(mapPetAvaterView);
         MapInstance.getInstance().init(mapView);
         isOpen = MapInstance.getInstance().GPS_OPEN;
-        if(isOpen){
+        if (isOpen) {
             mWalkPetView.setVisibility(View.GONE);
             mFindPetView.setSelected(true);
             walkpetNoticeView.setVisibility(View.GONE);
             petLocContainer.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             mWalkPetView.setVisibility(View.VISIBLE);
             mFindPetView.setSelected(false);
-            if(!PetInfoInstance.getInstance().getAtHome()){
+            if (!PetInfoInstance.getInstance().getAtHome()) {
                 mWalkPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.VISIBLE);
                 petLocContainer.setVisibility(View.GONE);
-            }else{
+            } else {
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
@@ -174,31 +174,32 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
-        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude,PetInfoInstance.getInstance().radius);
+        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
     }
+
     //todo 小米推送
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(PushEventManage.locationChange event) {
-        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude,PetInfoInstance.getInstance().radius);
+        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
     }
 
     //gps状态变化
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void updateGPSState(EventManage.GPS_CHANGE event) {
         isOpen = MapInstance.getInstance().GPS_OPEN;
-        if(isOpen){
+        if (isOpen) {
             mWalkPetView.setVisibility(View.GONE);
             mFindPetView.setSelected(true);
             walkpetNoticeView.setVisibility(View.GONE);
             petLocContainer.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             mWalkPetView.setVisibility(View.VISIBLE);
             mFindPetView.setSelected(false);
-            if(!PetInfoInstance.getInstance().getAtHome()){
+            if (!PetInfoInstance.getInstance().getAtHome()) {
                 mWalkPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.VISIBLE);
                 petLocContainer.setVisibility(View.GONE);
-            }else{
+            } else {
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
@@ -209,10 +210,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     /**
      * 狗丢了对话框
-     *
      */
     private void showFindpetDialog() {
-       isOpen= MapInstance.getInstance().GPS_OPEN;
+        isOpen = MapInstance.getInstance().GPS_OPEN;
         if (isOpen) {
 
             new DialogToast(getContext(), "是否关闭紧急追踪模式。", "确定", new View.OnClickListener() {
