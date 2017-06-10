@@ -24,6 +24,7 @@ import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -246,6 +247,11 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         startActivity(intent);
         finish();
 
+    }
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceOffline(EventManage.DeviceOffline event) {
+        DialogUtil.showDeviceOfflineDialog(this);
     }
 
 

@@ -198,7 +198,7 @@ public class PetInfoInstance {
                         ToastUtil.showTost("请填写完整信息");
                         break;
                     case EC_OFFLINE:
-                        ToastUtil.showTost("设备离线，请开机");
+                        EventBus.getDefault().post(new EventManage.DeviceOffline());
                         break;
 //                    case EC_ALREADY_FAV:
 ////                        ToastUtil.showTost("已绑定！");

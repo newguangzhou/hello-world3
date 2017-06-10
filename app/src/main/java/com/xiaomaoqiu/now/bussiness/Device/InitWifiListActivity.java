@@ -225,6 +225,11 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
         ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceOffline(EventManage.DeviceOffline event) {
+        DialogUtil.showDeviceOfflineDialog(this);
+    }
 
     @Override
     protected void onResume() {
