@@ -97,7 +97,7 @@ public class SportChartIndexPresenter {
         EventManage.TodaySportData event = new EventManage.TodaySportData();
 
         event.sportBean = todayBean;
-        PetInfoInstance.getInstance().setTarget_step( event.sportBean.target_amount);
+        PetInfoInstance.getInstance().setTarget_step( (int)event.sportBean.target_amount);
         EventBus.getDefault().post(event);
     }
 

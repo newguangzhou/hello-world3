@@ -145,7 +145,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                     if (message.data.size() > 0) {
                         PetSportBean.SportBean bean = message.data.get(0);
-                        sportTarget = bean.target_amount;
+                        sportTarget = (int)bean.target_amount;
                         PetInfoInstance.getInstance().setTarget_step(sportTarget);
                         sportDone = bean.reality_amount;
                         percentage = bean.percentage;
@@ -194,7 +194,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     //今日运动数据更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void todaySportData(EventManage.TodaySportData event) {
-        sportTarget = event.sportBean.target_amount;
+        sportTarget = (int)event.sportBean.target_amount;
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
         prog.setProgress((int) percentage);
