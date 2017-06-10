@@ -10,7 +10,10 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,16 +24,21 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by long on 2017/6/4.
  */
 
-public class RebootActivity extends BaseActivity {
+public class RebootActivity extends BaseActivity implements LogoutView {
     public int frameTemplate() {//没有标题栏
         return 0;
     }
 
     Button btn_reboot;
 
+    LoginPresenter loginPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //未进入主页
+        SPUtil.putHome(false);
+
         setContentView(R.layout.activity_reboot);
         btn_reboot = (Button) this.findViewById(R.id.btn_reboot);
         btn_reboot.setOnClickListener(new View.OnClickListener() {
@@ -56,5 +64,24 @@ public class RebootActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    public void success() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        getActivity().overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DialogToast.createDialogWithTwoButton(RebootActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                }
+        );
     }
 }

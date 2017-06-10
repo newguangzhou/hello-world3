@@ -21,6 +21,7 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DialogUtil;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -80,12 +81,26 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         sdv_header.setImageURI(uri);
     }
 
+    //todo 小米推送正常电量
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getCommonBattery(PushEventManage.commonBattery event) {
+        EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
+    }
+
 
     //todo 小米推送
     //设备低电量
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void batteryLowlevel(PushEventManage.batteryLowLevel event) {
+        EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
+        DialogUtil.showLowBatteryDialog(this);
+    }
 
+    //todo 小米推送
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void batterySuperLowlevel(PushEventManage.batterySuperLowLevel event) {
+        EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
+        DialogUtil.showSuperLowBatteryDialog(this);
     }
 
     //todo 小米推送
@@ -95,12 +110,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         batteryView.setDeviceOffline();
         DialogUtil.showDeviceOfflineDialog(this);
     }
+
     //todo 小米推送
     //设备重新在线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void receivePushDeviceOnline(PushEventManage.deviceOnline event){
-        batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
-                DeviceInfoInstance.getInstance().lastGetTime);
+    public void receivePushDeviceOnline(PushEventManage.deviceOnline event) {
+        EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
         DialogUtil.closeDeviceOfflineDialog();
     }
 
@@ -108,6 +123,10 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        //进入主页
+        SPUtil.putHome(true);
+
+
         initView();
         if (savedInstanceState != null) {
             mPetFragment = (PetFragment) getSupportFragmentManager().findFragmentByTag(PetFragment.class.getName());

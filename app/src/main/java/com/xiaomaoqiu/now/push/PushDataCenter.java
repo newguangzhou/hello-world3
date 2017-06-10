@@ -43,7 +43,8 @@ public class PushDataCenter {
 
     public static class Device {
         public static final String OFFLINE = "offline";
-        public static final String ONLINE="online";
+        public static final String ONLINE = "online";
+        public static final String COMMON_BATTERY="common-battery";
         public static final String LOW_BATTERY = "low-battery";
         public static final String ULTRA_LOW_BATTERY = "ultra-low-battery";
 
@@ -56,6 +57,13 @@ public class PushDataCenter {
     RemoteMessageBean formatBean;
 
     public void notifyData(String message) {
+
+        if (!SPUtil.getHome()) {
+            //如果不能进主页,直接不处理了
+            return;
+        }
+
+
         ToastUtil.showTost("收到小米推送消息：" + message);
         formatBean = JSON.parseObject(message, RemoteMessageBean.class);
         if (formatBean == null) {
@@ -94,11 +102,11 @@ public class PushDataCenter {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 PetAppLike.mcontext.startActivity(intent);
 
-                String remote_login_time= (String) formatBean.data.get("remote_login_time");
-                String X_OS_Name= (String) formatBean.data.get("X_OS_Name");
-                PushEventManage.otherLogin event=new PushEventManage.otherLogin();
-                event.remote_login_time=remote_login_time;
-                event.X_OS_Name=X_OS_Name;
+                String remote_login_time = (String) formatBean.data.get("remote_login_time");
+                String X_OS_Name = (String) formatBean.data.get("X_OS_Name");
+                PushEventManage.otherLogin event = new PushEventManage.otherLogin();
+                event.remote_login_time = remote_login_time;
+                event.X_OS_Name = X_OS_Name;
 
 
                 EventBus.getDefault().postSticky(event);
@@ -116,16 +124,23 @@ public class PushDataCenter {
                 EventBus.getDefault().post(new EventManage.DeviceOffline());
                 break;
             case Device.ONLINE:
-                DeviceInfoInstance.getInstance().battery_level= ((int)formatBean.data.get("battery_level"))/ 100f;
-                DeviceInfoInstance.getInstance().lastGetTime= (String) formatBean.data.get("battery_last_get_time");
+                DeviceInfoInstance.getInstance().battery_level = ((int) formatBean.data.get("battery_level")) / 100f;
+                DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
                 EventBus.getDefault().post(new PushEventManage.deviceOnline());
                 break;
+            case Device.COMMON_BATTERY:
+                DeviceInfoInstance.getInstance().battery_level = ((int) formatBean.data.get("battery_level")) / 100f;
+                DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
+                EventBus.getDefault().post(new PushEventManage.commonBattery());
+                break;
             case Device.LOW_BATTERY:
-                DeviceInfoInstance.getInstance().battery_level= (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().battery_level = (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
                 EventBus.getDefault().post(new PushEventManage.batteryLowLevel());
                 break;
             case Device.ULTRA_LOW_BATTERY:
-                DeviceInfoInstance.getInstance().battery_level= (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().battery_level = (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
                 EventBus.getDefault().post(new PushEventManage.batterySuperLowLevel());
                 break;
         }
@@ -138,10 +153,10 @@ public class PushDataCenter {
         switch (formatBean.signal) {
             case Pet.LOCATIONCHANGE:
                 PushEventManage.locationChange event = new PushEventManage.locationChange();
-                PetInfoInstance.getInstance().latitude = (double) formatBean.data.get("latitude");
-                PetInfoInstance.getInstance().location_time = (long) formatBean.data.get("location_time");
-                PetInfoInstance.getInstance().longitude = (double) formatBean.data.get("longitude");
-                PetInfoInstance.getInstance().radius = (double) formatBean.data.get("radius");
+                PetInfoInstance.getInstance().latitude = Double.valueOf((String)formatBean.data.get("latitude"));
+                PetInfoInstance.getInstance().location_time = Long.valueOf((String)formatBean.data.get("location_time"));
+                PetInfoInstance.getInstance().longitude = Double.valueOf((String)formatBean.data.get("longitude"));
+                PetInfoInstance.getInstance().radius = Double.valueOf((String)formatBean.data.get("radius"));
                 EventBus.getDefault().post(event);
                 break;
         }

@@ -13,9 +13,12 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.push.XMPushManagerInstance;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.URLEncoder;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -88,11 +91,11 @@ public class LoginPresenter {
      * @param deviceType 手机类型
      * @param deviceId
      */
-    public void login(final String phone, String verifyCode, int deviceType, String deviceId) {
+    public void login(final String phone, String verifyCode, int deviceType, String deviceId) throws IOException {
         final LoginView tloginView = loginView.get();
         if (tloginView != null) {
             tloginView.showDialog();
-            ApiUtils.getApiService().login(phone, verifyCode, deviceType, deviceId).enqueue(new XMQCallback<LoginBean>() {
+            ApiUtils.getApiService().login(phone, verifyCode, deviceType, deviceId, URLEncoder.encode(android.os.Build.MODEL.replaceAll(" ", ""), "UTF-8")).enqueue(new XMQCallback<LoginBean>() {
                 @Override
                 public void onSuccess(Response<LoginBean> response, LoginBean message) {
 

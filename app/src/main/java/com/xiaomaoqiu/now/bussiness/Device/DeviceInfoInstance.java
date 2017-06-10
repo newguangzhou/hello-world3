@@ -55,7 +55,7 @@ public class DeviceInfoInstance {
             bean.hardware_version = SPUtil.getDeviceVersion();
             bean.sim_deadline = SPUtil.getSimDeadline();
             bean.battery_last_get_time = SPUtil.getLAST_START_WALK_TIME();
-            instance.isDeviceExist = SPUtil.getIsDeviceExist();
+//            instance.isDeviceExist = SPUtil.getIsDeviceExist();
             instance.packBean = bean;
             if (!TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
                 WifiBean wifiBean = new WifiBean();
@@ -89,8 +89,8 @@ public class DeviceInfoInstance {
     public DeviceInfoBean packBean;
 
 
-    //设备是否存在
-    public boolean isDeviceExist = false;
+//    //设备是否存在
+//    public boolean isDeviceExist = false;
     //最近获取时间
     public String lastGetTime = "";
 
@@ -116,8 +116,8 @@ public class DeviceInfoInstance {
         SPUtil.putDeviceName(packBean.device_name);
         packBean.iccid = message.iccid;
         SPUtil.putSimIccid(packBean.iccid);
-        isDeviceExist = true;
-        SPUtil.putIsDeviceExist(true);
+//        isDeviceExist = true;
+//        SPUtil.putIsDeviceExist(true);
 
         packBean.battery_last_get_time = message.battery_last_get_time;
         SPUtil.putBatteryLastGetTime(packBean.battery_last_get_time);
@@ -149,7 +149,7 @@ public class DeviceInfoInstance {
         SPUtil.putDeviceName("");
         packBean.iccid = "";
         SPUtil.putSimIccid("");
-        isDeviceExist = false;
+//        isDeviceExist = false;
         SPUtil.putIsDeviceExist(false);
 //        lastGetTime = AppDialog.DateUtil.deviceInfoTime(System.currentTimeMillis());
     }
@@ -254,6 +254,8 @@ public class DeviceInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
                     clearDeviceInfo();
+                    //清空宠物信息
+                    PetInfoInstance.getInstance().clearPetInfo();
                     EventBus.getDefault().post(new EventManage.unbindDeviceSuccess());
                 }
             }

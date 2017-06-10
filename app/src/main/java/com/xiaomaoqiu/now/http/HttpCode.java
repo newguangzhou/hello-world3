@@ -36,6 +36,7 @@ public enum HttpCode {
     EC_DEVICE_NOT_EXIST(30),         //追踪器不存在
     EC_CURRENT_TIME_NOT_ALLOW(31),      //当前时段不允许
     EC_NODATA(32) ,                     //没有数据
+    EC_LOGIN_IN_OTHER_PHONE(50),   //异地登录
     EC_OFFLINE(100)                    //设备离线
     ;
 
@@ -111,6 +112,8 @@ public enum HttpCode {
                 return EC_CURRENT_TIME_NOT_ALLOW;      //当前时段不允许
             case 32:
                 return EC_NODATA;                     //没有数据
+            case 50:
+                return EC_LOGIN_IN_OTHER_PHONE;    //异地登录
             case 100:
                 return EC_OFFLINE;  //设备离线
             default:

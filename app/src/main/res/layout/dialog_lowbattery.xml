@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="39dp"
+    android:layout_marginRight="39dp"
+    android:background="@drawable/dialog_logout_bg"
+    >
+    <ImageView
+        android:layout_marginTop="48dp"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo_warning"
+        android:adjustViewBounds="true"
+        />
+    <TextView
+        android:id="@+id/tv_old_account"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="低电量，请尽快充电"
+        android:textSize="16sp"
+        android:textColor="#555"
+        />
+    <View
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#ddd"/>
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:text="确 认"
+        android:background="@null"
+        android:textSize="18sp"
+        android:textColor="#FF5A5A"/>
+</LinearLayout>

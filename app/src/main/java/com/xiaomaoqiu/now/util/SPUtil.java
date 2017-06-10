@@ -110,6 +110,9 @@ public class SPUtil {
     //gps是否开启
     public static final String GPS_OPEN="gps_open";
 
+    //是否进入主页
+    public static final String HOME="home";
+
 
     public static String getPhoneNumber() {
         return getString(PHONE_NUMBER);
@@ -406,6 +409,21 @@ public class SPUtil {
     }
 
 
+    /**
+     * 获取
+     * @return
+     */
+    public static boolean getHome(){
+        return getBoolean(HOME);
+    }
+
+    /**
+     * 保存
+     * @return
+     */
+    public static void putHome(boolean isHome){
+        putBoolean(HOME,isHome);
+    }
 
 
 

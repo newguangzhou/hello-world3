@@ -15,9 +15,13 @@ import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.push.PushEventManage;
+import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +29,7 @@ import retrofit2.Response;
 
 import static com.xiaomaoqiu.now.http.HttpCode.EC_DEVICE_NOT_EXIST;
 import static com.xiaomaoqiu.now.http.HttpCode.EC_INVALID_TOKEN;
+import static com.xiaomaoqiu.now.http.HttpCode.EC_LOGIN_IN_OTHER_PHONE;
 import static com.xiaomaoqiu.now.http.HttpCode.EC_PET_NOT_EXIST;
 
 /**
@@ -41,6 +46,8 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 //如果token过期，直接跳转到登录页面
                 if (EC_INVALID_TOKEN == ret) {
+                    //注销小米账号
+                    XMPushManagerInstance.getInstance().stop();
                     ToastUtil.showTost("身份过期，请重新登录");
                     onFail(call, null);
                     UserInstance.getInstance().clearLoginInfo();
@@ -56,6 +63,32 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
 
                     return;
                 }
+                if(EC_LOGIN_IN_OTHER_PHONE==ret){
+                    //注销小米账号
+                    XMPushManagerInstance.getInstance().stop();
+                    UserInstance.getInstance().clearLoginInfo();
+                    SPUtil.putHomeWifiMac("");
+                    SPUtil.putHomeWifiSsid("");
+                    PetInfoInstance.getInstance().clearPetInfo();
+                    DeviceInfoInstance.getInstance().clearDeviceInfo();
+
+                    SPUtil.putDeviceImei("");
+                    Intent intent = new Intent(PetAppLike.mcontext, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    PetAppLike.mcontext.startActivity(intent);
+
+//                    String remote_login_time= (String) formatBean.data.get("remote_login_time");
+//                    String X_OS_Name= (String) formatBean.data.get("X_OS_Name");
+                    PushEventManage.otherLogin event=new PushEventManage.otherLogin();
+//                    event.remote_login_time=remote_login_time;
+//                    event.X_OS_Name=X_OS_Name;
+
+                    EventBus.getDefault().postSticky(event);
+
+                    return;
+                }
+
+
                 //如果设备不存在，直接退到绑定设备页面
                 if (EC_DEVICE_NOT_EXIST == ret) {
 //                    ToastUtil.showTost("请先填写您的宠物信息");

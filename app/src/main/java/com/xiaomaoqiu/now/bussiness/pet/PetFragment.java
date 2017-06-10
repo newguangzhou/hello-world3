@@ -134,6 +134,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
         ptr_refresh.refreshComplete();
+        sportTarget = PetInfoInstance.getInstance().getTarget_step();
+        tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override

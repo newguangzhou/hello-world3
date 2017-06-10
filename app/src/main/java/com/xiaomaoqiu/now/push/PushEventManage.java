@@ -14,6 +14,13 @@ public class PushEventManage {
     }
 
     /**
+     * 普通电量
+     */
+    public static class commonBattery{
+
+    }
+
+    /**
      * 设备离线
      */
     public static class deviceOffline {

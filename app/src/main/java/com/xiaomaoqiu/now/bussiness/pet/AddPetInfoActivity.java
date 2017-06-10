@@ -25,6 +25,7 @@ import com.xiaomaoqiu.now.bussiness.user.LogoutView;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.crop.Crop;
@@ -74,6 +75,9 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //未进入主页
+        SPUtil.putHome(false);
+
         setTitle(getString(R.string.pet_info));
         setContentView(R.layout.me_pet_info);
         initView();

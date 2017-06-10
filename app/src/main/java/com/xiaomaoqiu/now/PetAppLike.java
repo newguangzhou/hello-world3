@@ -41,7 +41,7 @@ public class PetAppLike extends DefaultApplicationLike {
             Fresco.initialize(mcontext);
             // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
             // 调试时，将第三个参数改为true
-            Bugly.init(getApplication(), "61e9af8769", environment.bugly_log);
+            Bugly.init(getApplication(), "5bd407f8b5", environment.bugly_log);
 
 //        XMQCrashHandler handler = XMQCrashHandler.getMyCrashHandler();
 //        handler.init(getApplication());

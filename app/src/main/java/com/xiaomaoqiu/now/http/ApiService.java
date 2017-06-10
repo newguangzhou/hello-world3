@@ -44,7 +44,8 @@ public interface ApiService {
     Call<LoginBean> login(@Query("phone_num") String phone,
                           @Query("code") String verifyCode,
                           @Query("device_type") int deviceType,
-                          @Query("device_token") String deviceId
+                          @Query("device_token") String deviceId,
+                          @Query("x_os_name") String x_os_name
     );
 
     /**
@@ -147,7 +148,7 @@ public interface ApiService {
                                 @Query("token") String token,
                                 @Query("pet_id") long petId,
                                 @Query("target_step") int number,
-                                @Query("target_energy ") String target_energy
+                                @Query("target_energy") String target_energy
     );
 
 

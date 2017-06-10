@@ -103,13 +103,13 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_hardware).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DeviceInfoInstance.getInstance().isDeviceExist) {
+//                if (DeviceInfoInstance.getInstance().isDeviceExist) {
                     Intent intent = new Intent(getActivity(), DeviceActivity.class);
                     startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getActivity(), InitBindDeviceActivity.class);
-                    startActivity(intent);
-                }
+//                } else {
+//                    Intent intent = new Intent(getActivity(), InitBindDeviceActivity.class);
+//                    startActivity(intent);
+//                }
 
             }
         });

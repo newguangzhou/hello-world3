@@ -22,6 +22,7 @@ import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity;
@@ -49,6 +50,10 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //未进入主页
+        SPUtil.putHome(false);
+
+
         setTitle(getString(R.string.bind_device));
         setContentView(R.layout.activity_bind_device);
         setNextView("下一步", new View.OnClickListener() {

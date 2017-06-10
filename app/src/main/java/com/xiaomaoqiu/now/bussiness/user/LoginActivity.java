@@ -33,6 +33,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.IOException;
+
 
 @SuppressLint("WrongConstant")
 public class LoginActivity extends BaseActivity implements LoginView {
@@ -58,6 +60,9 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //未进入主页
+        SPUtil.putHome(false);
+
         initView();
         initListener();
         initData();
@@ -142,7 +147,11 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 String strPhone = m_editPhone.getText().toString();
                 String verifyCode = m_editVerifyCode.getText().toString();
                 String device_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-                loginPresenter.login(strPhone, verifyCode, Constants.DEVICE_TYPE, device_id);
+                try {
+                    loginPresenter.login(strPhone, verifyCode, Constants.DEVICE_TYPE, device_id);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
             }

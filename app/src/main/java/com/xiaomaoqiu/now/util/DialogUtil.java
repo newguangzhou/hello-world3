@@ -45,10 +45,13 @@ public class DialogUtil {
         }
     }
 
-    public static Dialog offlineDialog;
+    public static Dialog offlineDialog;//设备离线框
+    public static Dialog lowBatteryDialog;//低电量弹窗
+    public static Dialog superLowBatteryDialog;//超低电量
 
     //展示设备离线弹窗
     public static void showDeviceOfflineDialog(Context context) {
+        closeAllDialog();
         if (offlineDialog == null) {
             offlineDialog = new AppDialog(context, R.layout.dialog_device_already_bind, -1, -2, 0, Gravity.CENTER);
             TextView tv_old_account = (TextView) offlineDialog.findViewById(R.id.tv_old_account);
@@ -77,6 +80,73 @@ public class DialogUtil {
                 e.printStackTrace();
             }
             offlineDialog = null;
+        }
+    }
+
+    //设备低电量弹窗
+    public static void showLowBatteryDialog(Context context){
+        closeAllDialog();
+        if(lowBatteryDialog==null){
+            lowBatteryDialog=new AppDialog(context,R.layout.dialog_lowbattery,-1, -2, 0, Gravity.CENTER);
+            Button btn_ok = (Button) lowBatteryDialog.findViewById(R.id.btn_ok);
+            btn_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lowBatteryDialog.dismiss();
+                }
+            });
+
+            lowBatteryDialog.setCancelable(false);
+            lowBatteryDialog.setCanceledOnTouchOutside(false);
+        }
+        lowBatteryDialog.show();
+    }
+
+    //设备超低电量
+    public static void showSuperLowBatteryDialog(Context context){
+        closeAllDialog();
+        if(superLowBatteryDialog==null){
+            superLowBatteryDialog=new AppDialog(context,R.layout.dialog_superlowbattery,-1, -2, 0, Gravity.CENTER);
+            Button btn_ok = (Button) superLowBatteryDialog.findViewById(R.id.btn_ok);
+            btn_ok.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+                                              superLowBatteryDialog.dismiss();
+                                          }
+            });
+            superLowBatteryDialog.setCancelable(false);
+            superLowBatteryDialog.setCanceledOnTouchOutside(false);
+        }
+        superLowBatteryDialog.show();
+    }
+
+
+    //关闭所有弹窗
+    public static void closeAllDialog(){
+        if(offlineDialog != null && offlineDialog.isShowing()){
+            try {
+                offlineDialog.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            offlineDialog = null;
+        }
+        if(lowBatteryDialog!=null&&lowBatteryDialog.isShowing()){
+            try {
+                lowBatteryDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            lowBatteryDialog=null;
+        }
+        if(superLowBatteryDialog!=null&&superLowBatteryDialog.isShowing()){
+            try {
+                superLowBatteryDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            superLowBatteryDialog=null;
+
         }
     }
 
