@@ -125,7 +125,13 @@ public class DeviceActivity extends BaseActivity {
             tv.setText("小毛球1号");
         }
         if(!TextUtils.isEmpty(bean.hardware_version)){
-            tv_newhardware.setText(bean.hardware_version);
+            String[] a=bean.hardware_version.split("_");
+            if((a.length>0)&&(!"".equals(a[a.length-1]))){
+                tv_newhardware.setText(a[a.length-1]);
+            }else{
+                tv_newhardware.setText(bean.hardware_version);
+            }
+
         }
 
         tv = (TextView) findViewById(R.id.tv_imei);
@@ -136,9 +142,14 @@ public class DeviceActivity extends BaseActivity {
         }
 
         tv = (TextView) findViewById(R.id.tv_hardware_version);
-        if (!TextUtils.isEmpty(bean.firmware_version))
-            tv.setText(bean.firmware_version);
-        else {
+        if (!TextUtils.isEmpty(bean.firmware_version)) {
+            String[] a=bean.firmware_version.split("_");
+            if((a.length>0)&&(!"".equals(a[a.length-1]))){
+                tv.setText(a[a.length-1]);
+            }else {
+                tv.setText(bean.firmware_version);
+            }
+        } else {
             tv.setText("未绑定设备");
         }
         if(DeviceInfoInstance.getInstance().packBean.sim_deadline!=null&&!"".equals(DeviceInfoInstance.getInstance().packBean.sim_deadline)){
