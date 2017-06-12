@@ -22,12 +22,15 @@ import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
 import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -234,6 +237,8 @@ public class MapInstance implements BDLocationListener {
                 mFindPolyline.remove();
             }
         }
+
+        calculateDistance();
     }
 
     /**
@@ -302,7 +307,6 @@ public class MapInstance implements BDLocationListener {
         MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(centerPoint);
         mBaiduMap.animateMapStatus(mapStatusUpdate, delayMills);
     }
-
 
 
     public void setGPSState(boolean flag) {
@@ -377,9 +381,13 @@ public class MapInstance implements BDLocationListener {
 
 
     //计算距离,根据用户指定的两个坐标点，计算这两个点的实际地理距离
-    public double calculateDistance(LatLng phoneLatLng, LatLng petLatLng) {
+    public void calculateDistance() {
+        LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
+        LatLng petLatLng = new LatLng(petLatitude, petLongitude);
         //计算p1、p2两点之间的直线距离，单位：米
-        return DistanceUtil.getDistance(phoneLatLng, petLatLng);
+        if(GPS_OPEN&&DistanceUtil.getDistance(phoneLatLng, petLatLng)<10){
+            EventBus.getDefault().post(new EventManage.distanceClose());
+        }
     }
 
 }

@@ -10,15 +10,21 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.CheckIndex;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
@@ -30,6 +36,9 @@ import com.xiaomaoqiu.pet.R;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 @SuppressLint("WrongConstant")
 public class MainActivity extends BaseFragmentActivity implements View.OnClickListener, CheckIndex {
@@ -81,8 +90,65 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         sdv_header.setImageURI(uri);
     }
 
+
+    //位置很近
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void distanceCloseiInGPS(EventManage.distanceClose event) {
+        DialogUtil.showTwoButtonDialog(this, "已找到宠物?", "NO", "YES", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
+                            @Override
+                            public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                MapInstance.getInstance().setGPSState(false);
+                                EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+
+
+                                switch (message.pet_status) {
+                                    case Constants.PET_STATUS_COMMON:
+                                        if(!PetInfoInstance.getInstance().getAtHome()) {
+                                            PetInfoInstance.getInstance().setAtHome(true);
+                                        }
+                                        break;
+                                    case Constants.PET_STATUS_WALK:
+                                        if(PetInfoInstance.getInstance().getAtHome()) {
+                                            PetInfoInstance.getInstance().setAtHome(false);
+                                        }
+                                        break;
+                                    default:
+                                        if(!PetInfoInstance.getInstance().getAtHome()) {
+                                            PetInfoInstance.getInstance().setAtHome(true);
+                                        }
+                                        break;
+                                }
+
+                            }
+
+                            @Override
+                            public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                            }
+                        });
+
+
+
+
+                    }
+                }
+        );
+    }
+
     //todo 小米推送正常电量
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+
     public void getCommonBattery(PushEventManage.commonBattery event) {
         EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
     }
@@ -118,6 +184,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
         DialogUtil.closeDeviceOfflineDialog();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

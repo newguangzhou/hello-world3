@@ -103,4 +103,10 @@ public class EventManage {
     public static class GPS_CHANGE{
 
     }
+
+    //手机和设备距离很近
+    public static  class distanceClose{
+
+    }
+
 }

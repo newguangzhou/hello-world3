@@ -21,6 +21,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -54,6 +55,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     private LinearLayout petLocContainer;
 
     boolean isOpen;
+
+    private String locationString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +96,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     String d = format.format(PetInfoInstance.getInstance().location_time * 1000);//unix时间戳转化为java的毫秒，然后转成时间
                     textString += d;
                 }
+                locationString=textString;
                 petLocation.setText(textString);
             }
         });
@@ -179,6 +183,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+
     }
 
     //todo 小米推送
@@ -187,6 +192,20 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         //手机位置
         MapInstance.getInstance().startLoc();
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+    }
+
+    //todo 小米推送
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
+        petLocation.setText(locationString+"设备目前已离线");
+    }
+
+    //todo 小米推送
+    //设备重新在线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void receivePushDeviceOnline(PushEventManage.deviceOnline event) {
+        petLocation.setText(locationString);
     }
 
     //gps状态变化
