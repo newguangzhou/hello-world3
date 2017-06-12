@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -98,6 +100,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 PetInfoInstance.getInstance().getPetInfo();
+                PetInfoInstance.getInstance().getPetStatus();
             }
         });
 
@@ -120,6 +123,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     void initData() {
         checkIndex= (CheckIndex) getActivity();
         PetInfoInstance.getInstance().getPetInfo();
+        PetInfoInstance.getInstance().getPetStatus();
     }
 
     public void initProgress() {
@@ -252,15 +256,34 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         @Override
                         public void onClick(View v) {
                             tv_findpet.setText("紧急搜寻");
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<BaseBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
-                                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     MapInstance.getInstance().setGPSState(false);
                                     EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+
+                                    switch (message.pet_status) {
+                                        case Constants.PET_STATUS_COMMON:
+                                            if(!PetInfoInstance.getInstance().getAtHome()) {
+                                                PetInfoInstance.getInstance().setAtHome(true);
+                                            }
+                                            break;
+                                        case Constants.PET_STATUS_WALK:
+                                            if(PetInfoInstance.getInstance().getAtHome()) {
+                                                PetInfoInstance.getInstance().setAtHome(false);
+                                            }
+                                            break;
+                                        default:
+                                            if(!PetInfoInstance.getInstance().getAtHome()) {
+                                                PetInfoInstance.getInstance().setAtHome(true);
+                                            }
+                                            break;
+                                    }
+
                                 }
 
                                 @Override
-                                public void onFail(Call<BaseBean> call, Throwable t) {
+                                public void onFail(Call<PetStatusBean> call, Throwable t) {
 
                                 }
                             });
@@ -275,16 +298,16 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         public void onClick(View v) {
                             tv_findpet.setText("关闭搜寻");
                             MapInstance.getInstance().startFindPet();
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<BaseBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
-                                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     MapInstance.getInstance().setGPSState(true);
                                     EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                                     checkIndex.changeLocatefragment();
                                 }
 
                                 @Override
-                                public void onFail(Call<BaseBean> call, Throwable t) {
+                                public void onFail(Call<PetStatusBean> call, Throwable t) {
 
                                 }
                             });

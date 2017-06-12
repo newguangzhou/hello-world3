@@ -32,29 +32,29 @@ public class TestInstance {
     public PetLocationBean basedata=new PetLocationBean();
     public PetLocationBean wifidata=new PetLocationBean();
 
-    //获取宠物基站，wifi位置信息
-    public void getTestLocation() {
-        ApiUtils.getApiService().getTestLocation(
-                UserInstance.getInstance().getUid(),
-                UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id()
-        ).enqueue(new XMQCallback<TestLocationBean>() {
-            @Override
-            public void onSuccess(Response<TestLocationBean> response, TestLocationBean message) {
-                HttpCode ret = HttpCode.valueOf(message.status);
-                if (ret == HttpCode.EC_SUCCESS) {
-                    basedata=message.basedata;
-                    wifidata=message.wifidata;
-
-                    EventBus.getDefault().post(new EventManage.testPetLocation());
-                }
-            }
-
-            @Override
-            public void onFail(Call<TestLocationBean> call, Throwable t) {
-
-            }
-        });
-    }
+//    //获取宠物基站，wifi位置信息
+//    public void getTestLocation() {
+//        ApiUtils.getApiService().getTestLocation(
+//                UserInstance.getInstance().getUid(),
+//                UserInstance.getInstance().getToken(),
+//                PetInfoInstance.getInstance().getPet_id()
+//        ).enqueue(new XMQCallback<TestLocationBean>() {
+//            @Override
+//            public void onSuccess(Response<TestLocationBean> response, TestLocationBean message) {
+//                HttpCode ret = HttpCode.valueOf(message.status);
+//                if (ret == HttpCode.EC_SUCCESS) {
+//                    basedata=message.basedata;
+//                    wifidata=message.wifidata;
+//
+//                    EventBus.getDefault().post(new EventManage.testPetLocation());
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(Call<TestLocationBean> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
 }

@@ -5,17 +5,20 @@ import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
+import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.bean.PictureBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -99,9 +102,9 @@ public class PetInfoInstance {
         public String toString() {
             return year
                     + "-"
-                    + (month <10?("0"+month):month)
+                    + (month < 10 ? ("0" + month) : month)
                     + "-"
-                    + (day<10?("0"+day):day);
+                    + (day < 10 ? ("0" + day) : day);
         }
     }
 
@@ -277,6 +280,44 @@ public class PetInfoInstance {
             }
         });
 
+    }
+
+    //获取宠物状态
+    // pet_status : 0：正常 1：遛狗 2:寻狗
+    public void getPetStatus() {
+        ApiUtils.getApiService().getPetStatus(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
+                getPet_id()
+        ).enqueue(new XMQCallback<PetStatusBean>() {
+            @Override
+            public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (ret == HttpCode.EC_SUCCESS) {
+                    switch (message.pet_status) {
+                        case Constants.PET_STATUS_COMMON:
+                            setAtHome(true);
+                            SPUtil.putGPS_OPEN(false);
+                            break;
+                        case Constants.PET_STATUS_WALK:
+                            setAtHome(false);
+                            SPUtil.putGPS_OPEN(false);
+                            break;
+                        case Constants.PET_STATUS_FIND:
+                            SPUtil.putGPS_OPEN(true);
+                            MapInstance.getInstance().GPS_OPEN = true;
+                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                            break;
+                        default:
+                            setAtHome(true);
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+            }
+        });
     }
 
 

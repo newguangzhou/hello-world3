@@ -16,6 +16,15 @@ public class Constants {
     public static final int TO_SPORT_ACTIVITY_TYPE=1;
     //回家
     public static final int TO_HOME_ACTIVITY_TYPE=2;
+    /**
+     *     pet_status
+     *      0：正常 1：遛狗 2:寻狗
+     */
+    public static final int PET_STATUS_COMMON=0;
+    public static final int PET_STATUS_WALK=1;
+    public static final int PET_STATUS_FIND=2;
+
+
 
     public static class Url {
 //        public static String Host = "http://47.93.249.1:9100/";
@@ -82,7 +91,7 @@ public class Constants {
              * 获取宠物的状态
              * pet_status : 0：正常 1：遛狗 2:寻狗
              */
-            public static final String get_pet_stauts="pet/get_pet_stauts";
+            public static final String get_pet_stauts="pet/get_pet_status";
             /**
              * 更新宠物信息
              */
@@ -98,8 +107,6 @@ public class Constants {
 
 
 
-            //测试使用
-            public static final String location_test="pet/location_test";
 
         }
 
@@ -162,11 +169,6 @@ public class Constants {
              */
             public static final String toActivity ="pet/activity";
 
-            //<msg.get_msg url="http://120.24.152.121:9100/pet/activity?uid=%d&amp;token=%s" cache_mode="0"/>
-//            /**
-//             * 获取消息
-//             */
-//            public static final String getMsg=""
 
         }
     }

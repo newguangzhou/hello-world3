@@ -296,13 +296,13 @@ public interface ApiService {
     );
 
 
-    //测试使用
-    @GET(Constants.Url.Pet.location_test)
-    Call<TestLocationBean> getTestLocation(
-            @Query("uid") long uid,
-            @Query("token") String token,
-            @Query("pet_id") long petId
-    );
+//    //测试使用
+//    @GET(Constants.Url.Pet.location_test)
+//    Call<TestLocationBean> getTestLocation(
+//            @Query("uid") long uid,
+//            @Query("token") String token,
+//            @Query("pet_id") long petId
+//    );
 
     /**
      * 获取宠物的状态
@@ -363,7 +363,7 @@ public interface ApiService {
 
     //找狗模式
     @GET(Constants.Url.Action.findPet)
-    Call<BaseBean> findPet(
+    Call<PetStatusBean> findPet(
             @Query("uid") long uid,
             @Query("token") String token,
             @Query("pet_id") long pet_id,
