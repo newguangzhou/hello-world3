@@ -331,4 +331,34 @@ public class PetInfoActivity extends BaseActivity {
                 break;
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (!PetInfoInstance.getInstance().petInfoisChanged(modifyBean)) {
+            finish();
+            return;
+        }
+        DialogToast.createDialogWithTwoButton(PetInfoActivity.this, "确认重启设备？", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+
+                        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                            return;
+                        }
+                        if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+                            ToastUtil.showTost("信息需要完整");
+                            return;
+                        }
+                        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                    }
+                }
+        );
+
+
+    }
+
+
 }
