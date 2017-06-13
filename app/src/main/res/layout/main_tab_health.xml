@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                xmlns:android_custom="http://schemas.android.com/apk/res-auto">
+    xmlns:android_custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ptr_refresh"
@@ -21,108 +21,109 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="32dp"-->
-                <!--android:layout_marginRight="16dp"-->
-                <!--android:textSize="16sp"-->
-                <!--android:gravity="center"-->
-                <!--android:textColor="@color/total_color_7"-->
-                <!--android:text="今日活动"/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="今日活动"
+                android:textColor="@color/total_color_7"
+                android:textSize="16sp" />
 
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:layout_marginRight="16dp"-->
-                <!--android:layout_marginTop="14dp"-->
-                <!--android:background="@color/total_color_4"/>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="14dp"
+                android:background="@color/total_color_4" />
 
             <LinearLayout
+                android:id="@+id/btn_sport_index"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:id="@+id/btn_sport_index">
+                android:layout_height="180dp">
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <com.xiaomaoqiu.old.widgets.CircleProgressBar
+                        android:id="@+id/prog_target_done_percentage"
                         android:layout_width="141dp"
                         android:layout_height="141dp"
                         android:layout_centerInParent="true"
-                        android:id="@+id/prog_target_done_percentage"
-                        android_custom:prostyle="solid_line"
                         android_custom:draw_progress_text="true"
                         android_custom:progress_background_color="@color/white"
-                        android_custom:progress_start_color="@color/total_color_2"
                         android_custom:progress_end_color="@color/total_color_3"
+                        android_custom:progress_shader="sweep"
+                        android_custom:progress_start_color="@color/total_color_2"
                         android_custom:progress_stroke_width="11.5dp"
                         android_custom:progress_text_color="@color/total_color_7"
                         android_custom:progress_text_format_pattern="%d"
                         android_custom:progress_text_size="54.5sp"
                         android_custom:progress_text_translationy="6dp"
-                        android_custom:progress_shader="sweep"/>
+                        android_custom:prostyle="solid_line" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="%"
-                        android:translationX="37dp"
-                        android:translationY="-8dp"
                         android:textColor="@color/total_color_7"
                         android:textSize="18sp"
-                        />
+                        android:translationX="37dp"
+                        android:translationY="-8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="今日任务达成"
-                        android:textSize="11.5sp"
-                        android:textColor="@color/total_color_7"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="50dp"/>
+                        android:layout_marginTop="50dp"
+                        android:text="今日任务达成"
+                        android:textColor="@color/total_color_7"
+                        android:textSize="11.5sp" />
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/playing_dog"/>
+                        android:src="@drawable/playing_dog" />
 
                     <TextView
+                        android:id="@+id/tv_sport_done"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8.5dp"
-                        android:id="@+id/tv_sport_done"
+                        android:background="@drawable/tab_health_text_border"
                         android:maxLines="1"
-                        android:textSize="20sp"
-                        android:textColor="@color/total_color_1"
-                        android:text="@string/pet_sport_done"
                         android:paddingBottom="10dp"
                         android:paddingTop="2dp"
-                        android:background="@drawable/tab_health_text_border"/>
+                        android:text="@string/pet_sport_done"
+                        android:textColor="@color/total_color_1"
+                        android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/tv_sport_target"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/tv_sport_target"
+                        android:background="@drawable/tab_health_text_border"
                         android:maxLines="1"
-                        android:textSize="16sp"
-                        android:textColor="@color/total_color_7"
-                        android:text="@string/pet_sport_target"
                         android:paddingBottom="10dp"
                         android:paddingTop="2dp"
-                        android:background="@drawable/tab_health_text_border"/>
+                        android:text="@string/pet_sport_target"
+                        android:textColor="@color/total_color_7"
+                        android:textSize="16sp" />
 
 
                 </LinearLayout>
@@ -132,68 +133,70 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:background="@color/total_color_8"/>
+                android:background="@color/total_color_8" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:id="@+id/btn_sleep"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/tab_health_rest"/>
+                            android:src="@drawable/tab_health_rest" />
 
                         <TextView
                             android:id="@+id/tv_sleep_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"
-                            android:textSize="16sp"
-                            android:textColor="@color/total_color_7"
                             android:gravity="center"
-                            android:text="今日休息"/>
+                            android:text="今日休息"
+                            android:textColor="@color/total_color_7"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="4dp"
                         android:layout_height="match_parent"
-                        android:background="@color/total_color_8"/>
+                        android:background="@color/total_color_8" />
 
                     <LinearLayout
                         android:id="@+id/btn_health"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/tab_health_health"/>
+                            android:src="@drawable/tab_health_health" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"
-                            android:textSize="16sp"
+                            android:text="健康指数"
                             android:textColor="@color/total_color_7"
-                            android:text="健康指数"/>
+                            android:textSize="16sp" />
 
 
                     </LinearLayout>
@@ -203,37 +206,38 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
-                    android:background="@color/total_color_8"/>
+                    android:background="@color/total_color_8" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
+
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <LinearLayout
                             android:id="@+id/btn_sport"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/tab_health_sport"/>
+                                android:src="@drawable/tab_health_sport" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="14.5dp"
-                                android:textSize="16sp"
+                                android:text="去运动"
                                 android:textColor="@color/total_color_7"
-                                android:text="去运动"/>
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
@@ -241,22 +245,22 @@
                             android:id="@+id/btn_go_home"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:orientation="vertical"
-                            android:visibility="gone"
-                            android:gravity="center">
+                            android:visibility="gone">
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/tab_health_sport"/>
+                                android:src="@drawable/tab_health_sport" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="14.5dp"
-                                android:textSize="16sp"
+                                android:text="回家"
                                 android:textColor="@color/total_color_7"
-                                android:text="回家"/>
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
@@ -265,29 +269,29 @@
                     <View
                         android:layout_width="4dp"
                         android:layout_height="match_parent"
-                        android:background="@color/total_color_8"/>
+                        android:background="@color/total_color_8" />
 
                     <LinearLayout
                         android:id="@+id/btn_locate"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/tab_health_search"/>
+                            android:src="@drawable/tab_health_search" />
 
                         <TextView
                             android:id="@+id/tv_findpet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"
-                            android:textSize="16sp"
+                            android:text="紧急搜寻"
                             android:textColor="@color/total_color_7"
-                            android:text="紧急搜寻"/>
+                            android:textSize="16sp" />
 
 
                     </LinearLayout>
@@ -297,19 +301,19 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
-                    android:background="@color/total_color_8"/>
+                    android:background="@color/total_color_8" />
 
             </LinearLayout>
-            
+
         </LinearLayout>
     </com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>
 
     <!--<com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView-->
-        <!--android:id="@+id/tab_health_gosportview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android_custom:hide_dialogback="#59595757"-->
-     <!--/>-->
+    <!--android:id="@+id/tab_health_gosportview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android_custom:hide_dialogback="#59595757"-->
+    <!--/>-->
 
 
 </RelativeLayout>
