@@ -14,6 +14,7 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -145,6 +146,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 MapInstance.getInstance().startLoc();
                 break;
             case R.id.btn_pet_center:
+                MainActivity.getLocationTime=0;
                 //狗狗位置
                 PetInfoInstance.getInstance().getPetLocation();
                 break;

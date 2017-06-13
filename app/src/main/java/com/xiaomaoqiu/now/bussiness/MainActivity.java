@@ -271,7 +271,10 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     Thread locationThread;
+    //是否每一分钟都发送位置信息
     public static volatile boolean getLocationWithOneMinute;
+    //是否超过次数限制
+    public static volatile int getLocationTime;
 
     private void showFragment(int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -286,6 +289,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
                 getLocationWithOneMinute=false;
+                getLocationTime=0;
                 break;
             case 1:
                 include_header.setVisibility(View.INVISIBLE);
@@ -294,6 +298,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
                 }
                 getLocationWithOneMinute=true;
+                getLocationTime=0;
                 if(locationThread==null) {
                     locationThread = new Thread(new Runnable() {
                         @Override
@@ -304,7 +309,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                if(getLocationWithOneMinute) {
+                                if(getLocationWithOneMinute&&(getLocationTime++<=10)) {
                                     PetInfoInstance.getInstance().getPetLocation();
                                 }
                             }
@@ -324,6 +329,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
                 }
                 getLocationWithOneMinute=false;
+                getLocationTime=0;
                 transaction
                         .show(mMeFragment).commit();
                 mMeTabIcon.setSelected(true);
