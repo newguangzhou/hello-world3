@@ -267,6 +267,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mMeTabIcon.setSelected(false);
     }
 
+    Thread locationThread;
+    public static volatile boolean getLocationWithOneMinute;
+
     private void showFragment(int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideAllTabIcon(transaction);
@@ -278,12 +281,33 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 }
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
+                getLocationWithOneMinute=false;
                 break;
             case 1:
                 if (mLocateFragment == null) {
                     mLocateFragment = new LocateFragment();
                     transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
                 }
+                getLocationWithOneMinute=true;
+                if(locationThread==null) {
+                    locationThread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (true) {
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                if(getLocationWithOneMinute) {
+                                    PetInfoInstance.getInstance().getPetLocation();
+                                }
+                            }
+                        }
+                    });
+                    locationThread.start();
+                }
+
                 transaction
                         .show(mLocateFragment).commit();
                 mLocateTabIcon.setSelected(true);
@@ -293,6 +317,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     mMeFragment = new MeFrament();
                     transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
                 }
+                getLocationWithOneMinute=false;
                 transaction
                         .show(mMeFragment).commit();
                 mMeTabIcon.setSelected(true);

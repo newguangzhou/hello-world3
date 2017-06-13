@@ -89,7 +89,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         //未进入主页
         SPUtil.putHome(false);
 
-        setContentView(R.layout.me_pet_info);
+        setContentView(R.layout.add_pet_info);
         initView();
         EventBus.getDefault().register(this);
         loginPresenter=new LoginPresenter(this);

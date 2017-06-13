@@ -159,25 +159,10 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
     String wifi_ssid;//wifi名称
 
     private void initData() {
-//        //销毁
-//        WifiListBean wifiListBean = new WifiListBean();
-//        wifiListBean.data = new ArrayList<WifiBean>();
-//        for (int i = 0; i < 5; i++) {
-//            WifiBean wifiBean = new WifiBean();
-//            wifiBean.wifi_bssid = i + "----" + i;
-//            wifiBean.wifi_ssid = i + "----" + i;
-//            wifiListBean.data.add(wifiBean);
-//        }
-//        adapter.mdatas = wifiListBean.data;
-//
-//        adapter.notifyDataSetChanged();
-
         adapter.setOnItemClickListener(new CheckStateAdapter.OnItemClickListener() {
 
             @Override
             public void OnItemClick(View view, CheckStateAdapter.StateHolder holder, int position) {
-
-
                 synchronized (lock) {
                     if (position >= adapter.mdatas.size() || position < 0) {
                         return;
@@ -196,7 +181,6 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
                             }
                         }
                     }
-
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -210,12 +194,11 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
-            if(adapter.mdatas.size()==0){
+            if (adapter.mdatas.size() == 0) {
                 ToastUtil.showTost("当前没有扫描到wifi");
             }
             adapter.notifyDataSetChanged();
         }
-
         ptr_refresh.refreshComplete();
     }
 
@@ -225,6 +208,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 //        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
+
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
@@ -253,14 +237,12 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
     public void success() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//        getActivity().overridePendingTransition(0, 0);
         startActivity(intent);
     }
 
 
     @Override
     public void onBackPressed() {
-
         DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
 
                     @Override
