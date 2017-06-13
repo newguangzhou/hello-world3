@@ -286,7 +286,7 @@ public class PetInfoInstance {
     // pet_status : 0：正常 1：遛狗 2:寻狗
     public void getPetStatus() {
         ApiUtils.getApiService().getPetStatus(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                getPet_id()
+                SPUtil.getPetId()//使用用户的id避免为0
         ).enqueue(new XMQCallback<PetStatusBean>() {
             @Override
             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {

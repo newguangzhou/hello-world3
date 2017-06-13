@@ -41,35 +41,28 @@ import java.util.regex.Pattern;
 
 public class InitBindDeviceActivity extends BaseActivity  implements LogoutView {
 
+    View tv_logout;
+    View tv_next;
+
     public static final int REQUEST_SWEEP_CODE=0;
 
     private EditText inputImei;
     private Button sweepBt;
 
     LoginPresenter loginPresenter;
+
+    @Override
+    public int frameTemplate() {//没有标题栏
+        return 0;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //未进入主页
         SPUtil.putHome(false);
 
-
-        setTitle(getString(R.string.bind_device));
         setContentView(R.layout.activity_bind_device);
-        setNextView("下一步", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                    return;
-                }
-                if(inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())){
-                    showToast("请输入IMEI码！");
-                    return;
-                }
-                String imei=inputImei.getText().toString();
-                DeviceInfoInstance.getInstance().bindDevice(imei);
-            }
-        });
         initView();
         EventBus.getDefault().register(this);
         loginPresenter=new LoginPresenter(this);
@@ -77,8 +70,8 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     }
 
     private void initView(){
-        View btnGoBack = findViewById(R.id.btn_go_back);
-        btnGoBack.setOnClickListener(new View.OnClickListener(){
+        tv_logout=this.findViewById(R.id.tv_logout);
+        tv_logout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -92,6 +85,23 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
                 );
             }
         });
+        tv_next=this.findViewById(R.id.tv_next);
+        tv_next.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                    return;
+                }
+                if(inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())){
+                    showToast("请输入IMEI码！");
+                    return;
+                }
+                String imei=inputImei.getText().toString();
+                DeviceInfoInstance.getInstance().bindDevice(imei);
+            }
+        });
+
         inputImei=(EditText)findViewById(R.id.bind_device_input_imei);
         sweepBt=(Button)findViewById(R.id.bind_device_button);
         sweepBt.setOnClickListener(new View.OnClickListener() {

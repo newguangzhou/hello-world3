@@ -60,6 +60,11 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     private final int REQ_CODE_GET_PHOTO_FROM_GALLERY = 10;//从相册获取
     private final int REQ_CODE_GET_PHOTO_FROM_TAKEPHOTO = 11;//拍照完
 
+
+    View tv_logout;
+    View tv_next;
+
+
     SimpleDraweeView imgLogo;
     private ToggleButton chk_gender;
     private TextView txt_birthday;
@@ -74,15 +79,43 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
 
     @Override
+    public int frameTemplate() {//没有标题栏
+        return 0;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //未进入主页
         SPUtil.putHome(false);
 
-        setTitle(getString(R.string.pet_info));
         setContentView(R.layout.me_pet_info);
         initView();
-        setNextView("下一步", new View.OnClickListener() {
+        EventBus.getDefault().register(this);
+        loginPresenter=new LoginPresenter(this);
+
+    }
+
+
+    private void initView() {
+        tv_logout=this.findViewById(R.id.tv_logout);
+        tv_logout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                loginPresenter.logout();
+                            }
+                        }
+                );
+            }
+        });
+        tv_next=this.findViewById(R.id.tv_next);
+        tv_next.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
                 if (DoubleClickUtil.isFastMiniDoubleClick()) {
@@ -96,13 +129,8 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
                 PetInfoInstance.getInstance().addPetInfo(modifyBean);
             }
         });
-        EventBus.getDefault().register(this);
-        loginPresenter=new LoginPresenter(this);
-
-    }
 
 
-    private void initView() {
 
 
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
@@ -126,12 +154,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
             }
         });
 
-        /*findViewById(R.id.btn_modify_intro).setOnClickListener(now View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                modifyIntro();
-            }
-        });*/
 
         findViewById(R.id.btn_modify_name).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,22 +176,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     }
 
     private void initPetInfo() {
-        View btnGoBack = findViewById(R.id.btn_go_back);
-        btnGoBack.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                loginPresenter.logout();
-                            }
-                        }
-                );
-            }
-        });
-
 
         txt_pet_name = (TextView) findViewById(R.id.txt_pet_name);
         if (!TextUtils.isEmpty(modifyBean.nick)) {
@@ -202,7 +208,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         imgLogo = (SimpleDraweeView) findViewById(R.id.img_pet_avatar);
         Uri uri = Uri.parse(modifyBean.logo_url);
         imgLogo.setImageURI(uri);
-//        AsyncImageTask.INSTANCE.loadImage(imgLogo, petInfoBean.logo_url, this);
 
         ((TextView) findViewById(R.id.txt_variety)).setText(modifyBean.description);
 
@@ -210,7 +215,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         chk_gender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                PetInfoBean tmpBean = PetInfoInstance.getInstance().getPackBean();
                 if (isChecked) {
                     modifyBean.sex = Constants.Female;
                 } else {
@@ -224,12 +228,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     public void addPetInfoSuccess(EventManage.addPetInfoSuccess event) {
         EventBus.getDefault().unregister(this);
         Intent intent;
-//        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
-//            intent = new Intent(AddPetInfoActivity.this, InitBindDeviceActivity.class);
-//            startActivity(intent);
-//            finish();
-//            return;
-//        }
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent = new Intent(AddPetInfoActivity.this, InitWifiListActivity.class);
@@ -344,11 +342,8 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
             case REQ_CODE_INTRO:
                     modifyBean.description = PetUtil.getInstance().dogName;
                 modifyBean.pet_type_id=PetInfoInstance.getInstance().packBean.pet_type_id;
-//                    modifyBean.target_energy=PetUtil.getInstance().energyType;
                 modifyBean.target_energy=PetUtil.getInstance().calculateEnergy()+"";
-//                UserMgr.INSTANCE.updatePetInfo(petInfo, PetInfo.FieldMask_Desc);
                     txt_variety.setText(modifyBean.description);
-//                    PetInfoInstance.getInstance().updatePetInfo(modifyBean,param);
                 break;
             case REQ_CODE_PHOTO_SOURCE:
                 if(data!=null) {
@@ -363,7 +358,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
                     Bundle bundle = new Bundle();
                     // 选择图片后进入裁剪
-                    String path = data.getData().getPath();
                     Uri source = data.getData();
                     beginCrop(source, bundle);
                 }
@@ -397,7 +391,6 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     public void success() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-//        getActivity().overridePendingTransition(0, 0);
         startActivity(intent);
     }
 

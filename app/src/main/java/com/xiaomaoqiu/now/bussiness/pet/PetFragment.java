@@ -223,7 +223,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
         }
         Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
-        AsynImgDialog.asynImg.setImageURI(uri);
+        if(AsynImgDialog.asynImg!=null) {
+            AsynImgDialog.asynImg.setImageURI(uri);
+        }
     }
 
     //gps状态变化
