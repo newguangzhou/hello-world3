@@ -1,143 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:auto="http://schemas.android.com/apk/res-auto"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainView"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#f1f1f1"
-    android:orientation="vertical">
+    android:layout_height="fill_parent">
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:id="@+id/mainView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#f1f1f1"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/total_color_1">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/sdv_header"
-                android:layout_width="50dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:background="@color/total_color_1">
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="小毛球"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.xiaomaoqiu.now.view.BatteryView
+                    android:id="@+id/batteryView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:clickable="true"
+                    android:src="@drawable/battery100" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@color/total_color_1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/tab_health"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                fresco:actualImageScaleType="focusCrop"
-                fresco:fadeDuration="300"
+                android:orientation="vertical">
 
-                fresco:failureImage="@drawable/tab_health_head_defult"
-                fresco:failureImageScaleType="centerInside"
+                <ImageView
+                    android:id="@+id/main_tab_health"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:src="@drawable/main_bottombg_home" />
+            </LinearLayout>
 
-                fresco:placeholderImage="@drawable/tab_health_head_defult"
-                fresco:placeholderImageScaleType="fitCenter"
-                fresco:roundedCornerRadius="25dp" />
-            <TextView
-                android:id="@+id/tv_title"
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#fff" />
+
+            <LinearLayout
+                android:id="@+id/tab_locate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="小毛球"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <com.xiaomaoqiu.now.view.BatteryView
-                android:id="@+id/batteryView"
+                <ImageView
+                    android:id="@+id/main_tab_locate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:scaleType="matrix"
+                    android:src="@drawable/main_bottombg_pos" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#fff" />
+
+            <LinearLayout
+                android:id="@+id/tab_me"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:clickable="true"
-                android:src="@drawable/battery100" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/main_tab_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:scaleType="matrix"
+                    android:src="@drawable/main_bottombg_service" />
 
-        <LinearLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-        <!--<com.xiaomaoqiu.pet.widgets.ViewPagerEx
-            android:id="@+id/tabpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>-->
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:background="@color/total_color_1"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/tab_health"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_tab_health"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:src="@drawable/main_bottombg_home" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            />
-
-        <LinearLayout
-            android:id="@+id/tab_locate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_tab_locate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:scaleType="matrix"
-                android:src="@drawable/main_bottombg_pos" />
 
         </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            />
-        <LinearLayout
-            android:id="@+id/tab_me"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/main_tab_me"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:scaleType="matrix"
-                android:src="@drawable/main_bottombg_service" />
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
-</LinearLayout>
+    <include
+        android:id="@+id/include_header"
+        layout="@layout/view_main_header"></include>
+
+</FrameLayout>

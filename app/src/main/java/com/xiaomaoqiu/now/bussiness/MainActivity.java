@@ -57,6 +57,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private LocateFragment mLocateFragment;
     private MeFrament mMeFragment;
 
+    View include_header;
+
     SimpleDraweeView sdv_header;
     BatteryView batteryView;//右上角的电池
 
@@ -224,6 +226,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mHealthTabIcon = (ImageView) findViewById(R.id.main_tab_health);
         mLocateTabIcon = (ImageView) findViewById(R.id.main_tab_locate);
         mMeTabIcon = (ImageView) findViewById(R.id.main_tab_me);
+        include_header=findViewById(R.id.include_header);
         sdv_header = (SimpleDraweeView) findViewById(R.id.sdv_header);
         batteryView = (BatteryView) findViewById(R.id.batteryView);
 
@@ -275,6 +278,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         hideAllTabIcon(transaction);
         switch (index) {
             case 0:
+                include_header.setVisibility(View.VISIBLE);
                 if (mPetFragment == null) {
                     mPetFragment = new PetFragment();
                     transaction.add(R.id.fragment_container, mPetFragment, PetFragment.class.getName());
@@ -284,6 +288,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 getLocationWithOneMinute=false;
                 break;
             case 1:
+                include_header.setVisibility(View.INVISIBLE);
                 if (mLocateFragment == null) {
                     mLocateFragment = new LocateFragment();
                     transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
@@ -313,6 +318,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 mLocateTabIcon.setSelected(true);
                 break;
             case 2:
+                include_header.setVisibility(View.INVISIBLE);
                 if (mMeFragment == null) {
                     mMeFragment = new MeFrament();
                     transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
