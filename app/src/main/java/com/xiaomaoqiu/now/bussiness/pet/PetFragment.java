@@ -13,6 +13,7 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
@@ -331,6 +332,27 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MainActivity.getLocationWithOneMinute=true;
+                        MainActivity.getLocationTime=0;
+                        if(MainActivity.locationThread==null) {
+                            MainActivity.locationThread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while (true) {
+                                        try {
+                                            Thread.sleep(60000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if(MainActivity.getLocationWithOneMinute&&(MainActivity.getLocationTime++<=10)) {
+                                            PetInfoInstance.getInstance().getPetLocation();
+                                        }
+                                    }
+                                }
+                            });
+                            MainActivity.locationThread.start();
+                        }
+
                         PetInfoInstance.getInstance().setAtHome(false);
                         checkIndex.changeLocatefragment();
                     }
@@ -344,6 +366,27 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        MainActivity.getLocationWithOneMinute=true;
+                        MainActivity. getLocationTime=0;
+                        if(MainActivity.locationThread==null) {
+                            MainActivity.locationThread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while (true) {
+                                        try {
+                                            Thread.sleep(60000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if(MainActivity.getLocationWithOneMinute&&(MainActivity.getLocationTime++<=10)) {
+                                            PetInfoInstance.getInstance().getPetLocation();
+                                        }
+                                    }
+                                }
+                            });
+                            MainActivity.locationThread.start();
+                        }
+
                         PetInfoInstance.getInstance().setAtHome(true);
                         checkIndex.changeLocatefragment();
                     }

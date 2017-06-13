@@ -195,7 +195,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         //进入主页
         SPUtil.putHome(true);
 
-
         initView();
         if (savedInstanceState != null) {
             mPetFragment = (PetFragment) getSupportFragmentManager().findFragmentByTag(PetFragment.class.getName());
@@ -270,7 +269,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mMeTabIcon.setSelected(false);
     }
 
-    Thread locationThread;
+    public static Thread locationThread;
     //是否每一分钟都发送位置信息
     public static volatile boolean getLocationWithOneMinute;
     //是否超过次数限制
