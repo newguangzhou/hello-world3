@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.view.chart.TextAimView;
 import com.xiaomaoqiu.now.view.chart.ThreePartLineView;
+import com.xiaomaoqiu.now.view.chart.ThreePartLineViewWithTotal;
 import com.xiaomaoqiu.old.utils.ChartDataSetUtils;
 import com.xiaomaoqiu.pet.R;
 
@@ -32,8 +33,8 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     private TextView todayTip,weekTip,monthTip;
 
 
-    ThreePartLineView threePartLineView_sleep;
-    TextAimView textAimView_sleep;
+    ThreePartLineViewWithTotal threePartLineView_sleep;
+//    TextAimView textAimView_sleep;
 
     private SleepChartIndexPresenter presenter;
 
@@ -46,8 +47,8 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         initData();
     }
     private void initView(){
-        threePartLineView_sleep= (ThreePartLineView) findViewById(R.id.threePartLineView_sleep);
-        textAimView_sleep= (TextAimView) findViewById(R.id.textAimView_sleep);
+        threePartLineView_sleep= (ThreePartLineViewWithTotal) findViewById(R.id.threePartLineView_sleep);
+//        textAimView_sleep= (TextAimView) findViewById(R.id.textAimView_sleep);
         monthChartView=(CustomLineChart)findViewById(R.id.line_chart_month);
         weekChartView=(CustomBarChart)findViewById(R.id.bar_chart_week);
         todayTip=(TextView)findViewById(R.id.sleep_index_totay_tip);
@@ -108,9 +109,9 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     public void onSuccessGetWeight(double deep, double light) {
 //        light=10;
 //        deep=100;
-        threePartLineView_sleep.setData((int)(deep+light),(int)light);
+        threePartLineView_sleep.setData((int)(deep),(int)light);
         int totalWidth=threePartLineView_sleep.getWidth();
-        textAimView_sleep.setAim((int)light+"",(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
+//        textAimView_sleep.setAim((int)light+"",(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
         String tip="今日深度睡眠为"+deep+"小时，浅度睡眠为"+light+"小时。";
         todayTip.setText(tip);
     }

@@ -15,9 +15,6 @@ import com.xiaomaoqiu.pet.R;
  */
 
 public class BaseWebViewActivity extends BaseActivity {
-    public int frameTemplate(){
-        return 0;
-    }
     WebView wv_net;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

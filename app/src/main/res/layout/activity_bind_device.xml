@@ -86,8 +86,8 @@
                 android:text="@string/bind_device_sweep_code"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:src="@drawable/bind_device_sweep_guide"/>
 
             <TextView
@@ -124,8 +124,8 @@
                 android:hint="@string/bind_device_input_hint"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="41dp"
                 android:src="@drawable/bind_device_sweep_icon"/>
