@@ -67,6 +67,13 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         return 0;
     }
 
+    //宠物信息更新
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getActivityInfo(EventManage.notifyPetInfoChange event) {
+        Uri uri = Uri.parse(PetInfoInstance.getInstance().getPackBean().logo_url);
+        sdv_header.setImageURI(uri);
+    }
+
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
@@ -116,17 +123,17 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                                 switch (message.pet_status) {
                                     case Constants.PET_STATUS_COMMON:
-                                        if(!PetInfoInstance.getInstance().getAtHome()) {
+                                        if (!PetInfoInstance.getInstance().getAtHome()) {
                                             PetInfoInstance.getInstance().setAtHome(true);
                                         }
                                         break;
                                     case Constants.PET_STATUS_WALK:
-                                        if(PetInfoInstance.getInstance().getAtHome()) {
+                                        if (PetInfoInstance.getInstance().getAtHome()) {
                                             PetInfoInstance.getInstance().setAtHome(false);
                                         }
                                         break;
                                     default:
-                                        if(!PetInfoInstance.getInstance().getAtHome()) {
+                                        if (!PetInfoInstance.getInstance().getAtHome()) {
                                             PetInfoInstance.getInstance().setAtHome(true);
                                         }
                                         break;
@@ -139,8 +146,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                             }
                         });
-
-
 
 
                     }
@@ -225,7 +230,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mHealthTabIcon = (ImageView) findViewById(R.id.main_tab_health);
         mLocateTabIcon = (ImageView) findViewById(R.id.main_tab_locate);
         mMeTabIcon = (ImageView) findViewById(R.id.main_tab_me);
-        include_header=findViewById(R.id.include_header);
+        include_header = findViewById(R.id.include_header);
         sdv_header = (SimpleDraweeView) findViewById(R.id.sdv_header);
         batteryView = (BatteryView) findViewById(R.id.batteryView);
 
@@ -287,8 +292,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 }
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
-                getLocationWithOneMinute=false;
-                getLocationTime=0;
+                getLocationWithOneMinute = false;
+                getLocationTime = 0;
                 break;
             case 1:
                 include_header.setVisibility(View.INVISIBLE);
@@ -296,9 +301,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     mLocateFragment = new LocateFragment();
                     transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
                 }
-                getLocationWithOneMinute=true;
-                getLocationTime=0;
-                if(locationThread==null) {
+                getLocationWithOneMinute = true;
+                getLocationTime = 0;
+                if (locationThread == null) {
                     locationThread = new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -308,7 +313,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                if(getLocationWithOneMinute&&(getLocationTime++<=10)) {
+                                if (getLocationWithOneMinute && (getLocationTime++ <= 10)) {
                                     PetInfoInstance.getInstance().getPetLocation();
                                 }
                             }
@@ -327,8 +332,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     mMeFragment = new MeFrament();
                     transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
                 }
-                getLocationWithOneMinute=false;
-                getLocationTime=0;
+                getLocationWithOneMinute = false;
+                getLocationTime = 0;
                 transaction
                         .show(mMeFragment).commit();
                 mMeTabIcon.setSelected(true);

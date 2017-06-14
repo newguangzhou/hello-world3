@@ -182,7 +182,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         double allSleepTime = bean.deep_sleep + bean.light_sleep;
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
                         String sleepTimeString = df.format(allSleepTime);
-                        tv_sleep_time.setText("今日休息时间：" + sleepTimeString + "h");
+                        tv_sleep_time.setText("今日休息时间：" + sleepTimeString + "小时");
                     }
                 } else {
                     ToastUtil.showTost("获取当天数据失败");

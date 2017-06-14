@@ -138,7 +138,7 @@ public class PetInfoActivity extends BaseActivity {
                     finish();
                     return;
                 }
-                DialogToast.createDialogWithTwoButton(PetInfoActivity.this, "确认重启设备？", new View.OnClickListener() {
+                DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器","重启追踪器","放弃修改",new View.OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
@@ -152,6 +152,12 @@ public class PetInfoActivity extends BaseActivity {
                                     return;
                                 }
                                 PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                            }
+                        },
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
                             }
                         }
                 );
@@ -339,7 +345,7 @@ public class PetInfoActivity extends BaseActivity {
             finish();
             return;
         }
-        DialogToast.createDialogWithTwoButton(PetInfoActivity.this, "确认重启设备？", new View.OnClickListener() {
+        DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器", "重启追踪器", "放弃修改", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -354,9 +360,14 @@ public class PetInfoActivity extends BaseActivity {
                         }
                         PetInfoInstance.getInstance().updatePetInfo(modifyBean);
                     }
+                },
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
                 }
         );
-
 
     }
 

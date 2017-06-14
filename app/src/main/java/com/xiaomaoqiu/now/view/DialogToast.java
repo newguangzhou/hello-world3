@@ -74,6 +74,10 @@ public class DialogToast extends Dialog implements View.OnClickListener {
         return new DialogToast(context,content,okListener,null);
     }
 
+    public static DialogToast createDialogWithTwoButtonWithOKText(Context context, String content, String okText,String quitBenText, View.OnClickListener okListener,View.OnClickListener quitClickListener){
+        return new DialogToast(context,content,okText,quitBenText,okListener,quitClickListener,false);
+    }
+
     /**
      * 有两个按钮
      * @param context

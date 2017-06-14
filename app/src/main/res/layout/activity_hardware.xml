@@ -192,6 +192,18 @@
     <View android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/total_color_4"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        style="@style/hardware_text"
+        android:text="追踪器内嵌专用物联网sim卡，请通过小毛球官方渠道充值"/>
+
+
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="37.5dp"/>
