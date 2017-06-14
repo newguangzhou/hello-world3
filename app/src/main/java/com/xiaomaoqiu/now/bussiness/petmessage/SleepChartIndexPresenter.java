@@ -9,6 +9,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.AppDialog;
+import com.xiaomaoqiu.now.util.ToastUtil;
 
 
 import java.text.SimpleDateFormat;
@@ -78,6 +79,7 @@ public class SleepChartIndexPresenter {
     public void parseSleepInfo(PetSleepInfoBean message) {
         List<PetSleepInfoBean.SleepBean> sleepDatas = message.data;
         if (sleepDatas == null || sleepDatas.size() <= 0) {
+//            ToastUtil.showTost("当前睡眠数据为空");
             return;
         }
         //解析一天

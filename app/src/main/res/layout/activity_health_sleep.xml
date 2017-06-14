@@ -66,24 +66,82 @@
                 android:layout_marginTop="10dp"
                 android:text="小时" />
 
-            <com.xiaomaoqiu.now.view.chart.ThreePartLineView
+            <com.xiaomaoqiu.now.view.chart.ThreePartLineViewWithTotal
                 android:id="@+id/threePartLineView_sleep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/sleep_time_text"
                 android:layout_alignTop="@+id/sleep_time_text"
-                android:layout_toRightOf="@+id/sleep_time_text"></com.xiaomaoqiu.now.view.chart.ThreePartLineView>
+                android:layout_toRightOf="@+id/sleep_time_text"></com.xiaomaoqiu.now.view.chart.ThreePartLineViewWithTotal>
 
-            <com.xiaomaoqiu.now.view.chart.TextAimView
-                android:id="@+id/textAimView_sleep"
-                android:layout_width="wrap_content"
+            <!--<com.xiaomaoqiu.now.view.chart.TextAimView-->
+                <!--android:id="@+id/textAimView_sleep"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignLeft="@id/threePartLineView_sleep"-->
+                <!--android:layout_below="@+id/threePartLineView_sleep"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_toRightOf="@+id/tv_time_qianka">-->
+
+            <!--</com.xiaomaoqiu.now.view.chart.TextAimView>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/threePartLineView_sleep"
+                android:layout_toRightOf="@+id/sleep_time_text"
                 android:layout_below="@+id/threePartLineView_sleep"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/tv_time_qianka">
+                android:orientation="horizontal"
+                android:layout_marginTop="11dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="0h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="2h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="4h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="6h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="8h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="10h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="12h"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    style="@style/sleep_second_title_text"
+                    android:text="14h"/>
 
-            </com.xiaomaoqiu.now.view.chart.TextAimView>
+            </LinearLayout>
 
 
         </RelativeLayout>
