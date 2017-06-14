@@ -95,7 +95,8 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     public void onSuccessGetWeight(double targetSport, double edSport) {
         threePartLineView_sport.setData((int)(targetSport),(int)(edSport));
         int totalWidth=threePartLineView_sport.getWidth();
-        textAimView_sport.setAim((int)edSport+"",(int)targetSport+"", (int)((edSport*totalWidth)/targetSport));
+        int targetWidth=edSport>0.0?(int)((edSport*totalWidth)/targetSport):totalWidth;
+        textAimView_sport.setAim((int)edSport+"",targetSport+"", targetWidth);
         String tip="今日目标消耗为"+targetSport+"千卡，实际消耗为"+edSport+"千卡。";
         todayTip.setText(tip);
     }

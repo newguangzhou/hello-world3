@@ -110,7 +110,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 //        deep=100;
         threePartLineView_sleep.setData((int)(deep+light),(int)light);
         int totalWidth=threePartLineView_sleep.getWidth();
-        textAimView_sleep.setAim((int)light+"",(int)(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
+        textAimView_sleep.setAim((int)light+"",(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
         String tip="今日深度睡眠为"+deep+"小时，浅度睡眠为"+light+"小时。";
         todayTip.setText(tip);
     }
