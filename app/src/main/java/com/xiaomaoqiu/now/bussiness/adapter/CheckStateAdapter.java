@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiListBean;
 import com.xiaomaoqiu.pet.R;
@@ -40,6 +41,8 @@ public class CheckStateAdapter extends RecyclerView.Adapter<CheckStateAdapter.St
         holder.itemView.setSelected(bean.is_homewifi == 1);
         if (bean.is_homewifi == 1) {
             holder.ivSelected.setVisibility(View.VISIBLE);
+            MeWifiListActivity.wifi_bssid=bean.wifi_bssid;
+            MeWifiListActivity.wifi_ssid=bean.wifi_ssid;
         } else {
             holder.ivSelected.setVisibility(View.INVISIBLE);
         }

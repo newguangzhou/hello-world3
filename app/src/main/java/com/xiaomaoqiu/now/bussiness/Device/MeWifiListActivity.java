@@ -118,8 +118,8 @@ public class MeWifiListActivity extends BaseActivity {
         });
     }
 
-    String wifi_bssid;//homewifi   mac
-    String wifi_ssid;//wifi名称
+   public static String wifi_bssid;//homewifi   mac
+    public static String wifi_ssid;//wifi名称
 
     private void initData() {
 //        //销毁
