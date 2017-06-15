@@ -52,6 +52,7 @@ public class PushDataCenter {
 
     public static class Pet {
         public static final String LOCATIONCHANGE = "location-change";
+        public static final String NOT_HOME="not-home";//宠物离开家了
     }
 
     RemoteMessageBean formatBean;
@@ -158,6 +159,9 @@ public class PushDataCenter {
                 PetInfoInstance.getInstance().longitude = Double.valueOf((String)formatBean.data.get("longitude"));
                 PetInfoInstance.getInstance().radius = Double.valueOf((int)formatBean.data.get("radius"));
                 EventBus.getDefault().post(event);
+                break;
+            case Pet.NOT_HOME:
+                ToastUtil.showTost("宠物离开家了");
                 break;
         }
     }

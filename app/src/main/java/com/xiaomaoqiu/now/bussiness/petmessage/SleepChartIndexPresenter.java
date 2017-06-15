@@ -149,10 +149,10 @@ public class SleepChartIndexPresenter {
             axisLabels.add(date.getDate() + format);
 //            JSONObject jsday = (JSONObject)jsdata.opt(i);
             PetSleepInfoBean.SleepBean bean = timeEqualSleepBean(date,sleepDatas);
-            float deep = (float) bean.deep_sleep;
-            float light = (float) bean.light_sleep;
+//            float deep = (float) bean.deep_sleep;
+//            float light = (float) bean.light_sleep;
             deepList.add(new Entry(i - startIndex, (float) bean.deep_sleep));
-            lightList.add(new Entry(i - startIndex, light));
+            lightList.add(new Entry(i - startIndex, (float) bean.light_sleep));
 
         }
         callback.onSuccessGetAxis(axisLabels, true);

@@ -108,11 +108,11 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onSuccessGetMonthDataSet(ArrayList<Entry> deepList, ArrayList<Entry> lightList) {
-        LineDataSet deepDataset= ChartDataSetUtils.getDefaultBlueFillDataSet(this);
+        LineDataSet deepDataset= ChartDataSetUtils.getDefaultBlueHoleDataSet(this);
         deepDataset.setValues(deepList);
         monthChart.addData(deepDataset);
 
-        LineDataSet lightDataset=ChartDataSetUtils.getDefaultRedDataSetWithoutPoint(this);
+        LineDataSet lightDataset=ChartDataSetUtils.getDefaultRedDataSetWithPoint(this);
         lightDataset.setValues(lightList);
         monthChart.addData(lightDataset);
 
