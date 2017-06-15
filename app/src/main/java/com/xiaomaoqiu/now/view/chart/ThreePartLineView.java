@@ -47,8 +47,8 @@ public class ThreePartLineView extends View {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
-    int target;
-    int reality;
+    double target;
+    double reality;
 
 
     @Override
@@ -80,13 +80,13 @@ public class ThreePartLineView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int realityWidth=target==0?0:((reality*getMeasuredWidth())/target);
+        double realityWidth=target==0?0:((reality*getMeasuredWidth())/target);
 
 
         mPaint.setColor(getResources().getColor(R.color.total_color_3));
-        canvas.drawRect(realityWidth,0,getWidth(),getHeight(),mPaint);
+        canvas.drawRect((float)realityWidth,0,getWidth(),getHeight(),mPaint);
 
         mPaint.setColor(getResources().getColor(R.color.total_color_2));
-        canvas.drawRect(0,0,realityWidth,getHeight(),mPaint);
+        canvas.drawRect(0,0,(float)realityWidth,getHeight(),mPaint);
     }
 }

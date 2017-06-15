@@ -119,9 +119,6 @@ public class BatteryView extends ImageView {
             //如果正在充电，可以再次弹窗框
             DialogUtil.lowBatteryIsClosed=false;
             DialogUtil.superLowBatteryIsClosed=false;
-
-
-            
             setImageResource(charginRid);
             return;
         }

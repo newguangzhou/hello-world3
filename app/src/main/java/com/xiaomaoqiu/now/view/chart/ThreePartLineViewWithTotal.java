@@ -45,8 +45,8 @@ public class ThreePartLineViewWithTotal extends View {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
-    int deep;
-    int light;
+    double deep;
+    double light;
 
 
     @Override
@@ -68,7 +68,7 @@ public class ThreePartLineViewWithTotal extends View {
         largeLength = 20;
     }
 
-    public void setData(int deep, int light) {
+    public void setData(double deep, double light) {
         this.deep = deep;
         this.light = light;
         invalidate();
@@ -78,13 +78,13 @@ public class ThreePartLineViewWithTotal extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int lightWidth = ((light * getMeasuredWidth()) / 16);
-        int deepWidth = (((light + deep) * getMeasuredWidth()) / 16);
+        double lightWidth = ((light * getMeasuredWidth()) / 16);
+        double deepWidth = (((light + deep) * getMeasuredWidth()) / 16);
 
         mPaint.setColor(getResources().getColor(R.color.total_color_2));
-        canvas.drawRect(lightWidth, 0, deepWidth, getHeight(), mPaint);
+        canvas.drawRect((float)lightWidth, 0, (float)deepWidth, getHeight(), mPaint);
 
         mPaint.setColor(getResources().getColor(R.color.total_color_3));
-        canvas.drawRect(0, 0, lightWidth, getHeight(), mPaint);
+        canvas.drawRect(0, 0, (float)lightWidth, getHeight(), mPaint);
     }
 }

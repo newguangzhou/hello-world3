@@ -88,7 +88,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             batteryView.setDeviceOffline();
             return;
         }
-        batteryView.setBatteryLevel(DeviceInfoInstance.getInstance().battery_level,
+        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
                 DeviceInfoInstance.getInstance().lastGetTime);
     }
 

@@ -275,7 +275,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     private void modifyBirthday() {
         PetInfoInstance.MyDate mPetBirthDay = modifyBean.dateFormat_birthday;
         if (bottomCalenderView == null) {
-            bottomCalenderView = new BottomCalenderView(this, 2000, 1, 1, new BottomCalenderView.OnDatePickedListener() {
+            bottomCalenderView = new BottomCalenderView(this, mPetBirthDay.year, mPetBirthDay.month, mPetBirthDay.day, new BottomCalenderView.OnDatePickedListener() {
                 @Override
                 public void onDatePicked(int year, int month, int day) {
                     PetInfoInstance.MyDate tmpDateFormatBirthday = new PetInfoInstance.MyDate(year, month, day);
