@@ -3,31 +3,31 @@
     xmlns:auto="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="10dp"
+    android:orientation="vertical" android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_marginTop="43dp"
+    android:layout_centerHorizontal="true"
     >
+
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdv_header"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:gravity="center"
+        android:id="@+id/img_pet_avatar"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_gravity="center"
+        android:gravity="center"
         android:scaleType="fitXY"
-        fresco:actualImageScaleType="focusCrop"
         fresco:fadeDuration="300"
-
-        fresco:failureImage="@drawable/tab_health_head_defult"
-        fresco:failureImageScaleType="centerInside"
-
-
-        fresco:placeholderImage="@drawable/tab_health_head_defult"
+        fresco:actualImageScaleType="focusCrop"
+        fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="25dp" />
+        fresco:failureImage="@drawable/header_default_big"
+        fresco:failureImageScaleType="centerInside"
+        fresco:roundedCornerRadius="65dp"
+        ></com.facebook.drawee.view.SimpleDraweeView>
+
     <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:scaleType="fitXY"

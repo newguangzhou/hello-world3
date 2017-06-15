@@ -155,7 +155,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     //todo 小米推送正常电量
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-
     public void getCommonBattery(PushEventManage.commonBattery event) {
         EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
     }
@@ -233,7 +232,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         include_header = findViewById(R.id.include_header);
         sdv_header = (SimpleDraweeView) findViewById(R.id.sdv_header);
         batteryView = (BatteryView) findViewById(R.id.batteryView);
-
+        batteryView.setActivity(this);
         sdv_header.setOnClickListener(new View.OnClickListener() {
 
             @Override

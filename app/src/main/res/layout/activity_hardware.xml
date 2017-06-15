@@ -41,7 +41,7 @@
         <com.xiaomaoqiu.now.view.BatteryView
             android:id="@+id/batteryView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"

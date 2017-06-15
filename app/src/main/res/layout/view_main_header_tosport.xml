@@ -3,15 +3,13 @@
     xmlns:auto="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="10dp"
+    android:orientation="vertical" android:layout_width="80dp"
+    android:layout_height="80dp"
     >
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdv_header"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/asyn_dialog_imgview"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:scaleType="fitXY"
@@ -24,10 +22,10 @@
 
         fresco:placeholderImage="@drawable/tab_health_head_defult"
         fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="25dp" />
+        fresco:roundedCornerRadius="35dp" />
     <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:scaleType="fitXY"

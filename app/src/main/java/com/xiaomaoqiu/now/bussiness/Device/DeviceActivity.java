@@ -55,6 +55,7 @@ public class DeviceActivity extends BaseActivity {
             }
         });
         batteryView= (BatteryView) findViewById(R.id.batteryView);
+        batteryView.setActivity(this);
         batteryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,11 +1,13 @@
 package com.xiaomaoqiu.now.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.pet.R;
 
 /**
@@ -20,6 +22,8 @@ public class BatteryView extends ImageView {
     float mEmptyLevel = 0.05f;//电量超低警示
     private boolean charging;
     private int charginRid;
+
+    private Activity mactivity;
 
 
     public BatteryView(Context context) {
@@ -46,6 +50,10 @@ public class BatteryView extends ImageView {
     }
 
 
+    public void setActivity(Activity activity){
+        mactivity=activity;
+    }
+
     public void setDeviceOffline(){
         setImageResource(R.drawable.battery_bkgnd);
     }
@@ -54,7 +62,8 @@ public class BatteryView extends ImageView {
     {
         if(level <= mWarnLevel)
         {
-            new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+//            new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+            DialogUtil.showCommonBatteryNoticeDialog(mactivity,level,time,getContext().getResources().getString(R.string.tip_battery_null));
         }
         //如果超过1，说明在充电中……
         if(level>1.0f){
@@ -77,10 +86,12 @@ public class BatteryView extends ImageView {
         //如果超过1，说明在充电中……
         if(level>1.0f){
             setImageResource(charginRid);
-            new BatteryIngNoticeDialog(getContext());
+//            new BatteryIngNoticeDialog(getContext());
+            DialogUtil.showBatteryIngNoticeDialog(mactivity);
             return;
         }
-        new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+//        new BatteryNoticeDialog(getContext(),level,time,getContext().getResources().getString(R.string.tip_battery_null));
+        DialogUtil.showCommonBatteryNoticeDialog(mactivity,level,time,getContext().getResources().getString(R.string.tip_battery_null));
 
         for(int i=0; i<batteryLevels.length ;i++){
             if(level >= batteryLevels[i]){

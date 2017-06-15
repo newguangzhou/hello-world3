@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.view.BatteryIngNoticeDialog;
+import com.xiaomaoqiu.now.view.BatteryNoticeDialog;
 import com.xiaomaoqiu.now.view.CustomProgress;
 import com.xiaomaoqiu.pet.R;
 
@@ -48,6 +50,28 @@ public class DialogUtil {
     public static Dialog offlineDialog;//设备离线框
     public static Dialog lowBatteryDialog;//低电量弹窗
     public static Dialog superLowBatteryDialog;//超低电量
+
+    public static BatteryNoticeDialog commonBatteryNoticeDialog;//正常电量弹窗
+    public static BatteryIngNoticeDialog batteryIngNoticeDialog;//正在充电中
+
+
+    //正在充电中弹窗
+    public static void showBatteryIngNoticeDialog(Context context){
+        closeAllDialog();
+        if(batteryIngNoticeDialog==null){
+            batteryIngNoticeDialog=new BatteryIngNoticeDialog(context);
+        }
+        batteryIngNoticeDialog.show();
+    }
+
+    //正常电量弹窗
+    public static void showCommonBatteryNoticeDialog(Context context, float level, String time, String content){
+        closeAllDialog();
+        if(commonBatteryNoticeDialog==null){
+            commonBatteryNoticeDialog=new BatteryNoticeDialog(context,level,time,content);
+        }
+        commonBatteryNoticeDialog.show();
+    }
 
     //展示设备离线弹窗
     public static void showDeviceOfflineDialog(Context context) {
@@ -129,25 +153,45 @@ public class DialogUtil {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            offlineDialog = null;
+
         }
+        offlineDialog = null;
         if(lowBatteryDialog!=null&&lowBatteryDialog.isShowing()){
             try {
                 lowBatteryDialog.dismiss();
             }catch (Exception e){
                 e.printStackTrace();
             }
-            lowBatteryDialog=null;
+
         }
+        lowBatteryDialog=null;
         if(superLowBatteryDialog!=null&&superLowBatteryDialog.isShowing()){
             try {
                 superLowBatteryDialog.dismiss();
             }catch (Exception e){
                 e.printStackTrace();
             }
-            superLowBatteryDialog=null;
 
         }
+        superLowBatteryDialog=null;
+        if(commonBatteryNoticeDialog!=null&&commonBatteryNoticeDialog.isShowing()){
+            try {
+                commonBatteryNoticeDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        commonBatteryNoticeDialog=null;
+        if(batteryIngNoticeDialog!=null&&batteryIngNoticeDialog.isShowing()){
+            try{
+                batteryIngNoticeDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        batteryIngNoticeDialog=null;
     }
 
 
