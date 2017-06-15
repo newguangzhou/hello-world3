@@ -49,7 +49,9 @@ public class DialogUtil {
 
     public static Dialog offlineDialog;//设备离线框
     public static Dialog lowBatteryDialog;//低电量弹窗
+    public static boolean lowBatteryIsClosed=false;//低电量弹窗关闭过
     public static Dialog superLowBatteryDialog;//超低电量
+    public static boolean superLowBatteryIsClosed=false;//超低电量关闭过
 
     public static BatteryNoticeDialog commonBatteryNoticeDialog;//正常电量弹窗
     public static BatteryIngNoticeDialog batteryIngNoticeDialog;//正在充电中
@@ -123,7 +125,11 @@ public class DialogUtil {
             lowBatteryDialog.setCancelable(false);
             lowBatteryDialog.setCanceledOnTouchOutside(false);
         }
-        lowBatteryDialog.show();
+        if(!lowBatteryIsClosed) {//如果没有关闭过，再弹出来
+            lowBatteryDialog.show();
+            lowBatteryIsClosed=true;
+            superLowBatteryIsClosed=false;
+        }
     }
 
     //设备超低电量
@@ -141,7 +147,11 @@ public class DialogUtil {
             superLowBatteryDialog.setCancelable(false);
             superLowBatteryDialog.setCanceledOnTouchOutside(false);
         }
-        superLowBatteryDialog.show();
+        if(!superLowBatteryIsClosed) {
+            superLowBatteryDialog.show();
+            lowBatteryIsClosed=false;
+            superLowBatteryIsClosed=true;
+        }
     }
 
 
