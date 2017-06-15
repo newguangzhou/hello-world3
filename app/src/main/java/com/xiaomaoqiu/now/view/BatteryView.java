@@ -68,6 +68,9 @@ public class BatteryView extends ImageView {
         //如果超过1，说明在充电中……
         if(level>1.0f){
             setImageResource(charginRid);
+            //如果正在充电，可以再次弹窗框
+            DialogUtil.lowBatteryIsClosed=false;
+            DialogUtil.superLowBatteryIsClosed=false;
 //            new BatteryIngNoticeDialog(getContext());
             return;
         }
@@ -87,6 +90,11 @@ public class BatteryView extends ImageView {
         if(level>1.0f){
             setImageResource(charginRid);
 //            new BatteryIngNoticeDialog(getContext());
+
+            //如果正在充电，可以再次弹窗框
+            DialogUtil.lowBatteryIsClosed=false;
+            DialogUtil.superLowBatteryIsClosed=false;
+
             DialogUtil.showBatteryIngNoticeDialog(mactivity);
             return;
         }
@@ -106,6 +114,14 @@ public class BatteryView extends ImageView {
 
     public void showBatterylevel(float level,String time){
         if(level>1.0f){
+
+
+            //如果正在充电，可以再次弹窗框
+            DialogUtil.lowBatteryIsClosed=false;
+            DialogUtil.superLowBatteryIsClosed=false;
+
+
+            
             setImageResource(charginRid);
             return;
         }
