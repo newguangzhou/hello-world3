@@ -185,4 +185,16 @@
 
     <color name="gray_text_hint_l">#FFB4B4B4</color>
     <color name="gray_line_hint_l">#FFDDDDDD</color>
+
+
+
+
+
+    <!--通用-->
+    <color name="common_title">#F4B1B2</color>
+    <color name="common_line">#C8C8C9</color>
+    <color name="common_body">#141F40</color>
+    <color name="common_button_word">#FEFEFE</color>
+    <color name="common_button_background">#1E2D53</color>
+
 </resources>

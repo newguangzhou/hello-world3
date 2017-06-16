@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/shape_dialog_background">
+
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="39dp"
-    android:layout_marginRight="39dp"
-    android:background="@drawable/dialog_logout_bg"
-    >
-    <ImageView
-        android:layout_marginTop="48dp"
-        android:layout_width="61dp"
-        android:layout_height="61dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/logo_warning"
-        android:adjustViewBounds="true"
-        />
+    android:orientation="vertical"
+    android:minHeight="150dp"
+    android:layout_margin="30dp"
+    android:gravity="center">
     <TextView
-        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="27sp"
+        android:textColor="@color/common_title"
+        android:text="帐号异常" />
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_line"
+        ></View>
+
+    <TextView
+        android:id="@+id/tv_remote_login"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="帐号在其他设备登录"
-        android:textSize="16sp"
-        android:textColor="#555"
-        />
-    <TextView
-        android:id="@+id/tv_remote_login"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="您的小毛球账号已在其他设备登录。请尽量避免与其他用户共用帐号。（如密码泄露，请及时找回）"
-        android:textSize="14sp"
-        android:textColor="#888"
-        />
-    <View
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#ddd"/>
+        android:textSize="16sp"
+        android:textColor="@color/common_body"/>
 
-    <Button
-        android:id="@+id/logout_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:text="确 认"
-        android:background="@null"
-        android:textSize="18sp"
-        android:textColor="#FF5A5A"/>
+</LinearLayout>
+
+<Button
+    android:id="@+id/logout_confirm"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dp"
+    android:background="@drawable/login_loginbt_bg"
+    android:textSize="16sp"
+    android:textColor="@color/common_button_word"
+    android:layout_gravity="center_horizontal"
+    android:paddingTop="9dp"
+    android:paddingBottom="9dp"
+    android:paddingLeft="38dp"
+    android:paddingRight="38dp"
+    android:text="确认"/>
+
+
 </LinearLayout>

@@ -107,7 +107,7 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
 
         </activity>
         <activity

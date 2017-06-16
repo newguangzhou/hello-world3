@@ -7,21 +7,22 @@
               android:layout_height="wrap_content"
               android:paddingLeft="10dp"
               android:paddingRight="10dp"
-    android:background="@drawable/activity_corner_bg">
+    android:background="@drawable/shape_dialog_background">
     <TextView
         android:layout_marginTop="20dp"
         android:id="@+id/two_button_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textColor="#555"
+        android:textColor="@color/common_body"
         android:textSize="16sp"
         android:text="hahaha"/>
     <View
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#ddd"/>
+        android:layout_height="0.5dp"
+        android:background="@color/common_line"
+        ></View>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#888"
+            android:textColor="@color/common_button_word"
             android:textSize="16sp"
             android:text="取消"
             android:background="@drawable/btn_background_color_3"/>
@@ -48,9 +49,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#FF5A5A"
+            android:textColor="@color/common_button_word"
             android:textSize="16sp"
             android:text="确定"
-            android:background="@drawable/btn_background_color_2"/>
+            android:background="@drawable/btn_background_color_3"/>
     </LinearLayout>
 </LinearLayout>
