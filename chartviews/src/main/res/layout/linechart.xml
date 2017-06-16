@@ -49,6 +49,7 @@
         android:id="@+id/yaixs_container"
         android:gravity="left"
         android:paddingBottom="10dp"
+        android:visibility="gone"
         android:layout_alignBottom="@+id/combined_chart"/>
 
 </RelativeLayout>

@@ -173,11 +173,11 @@ public abstract class CustomCombineChart extends RelativeLayout {
         if(isYaxisShow && LINE_DOTTED == lineMode){
             yAxis.enableGridDashedLine(10,10,0);
         }
-        yAxis.setDrawAxisLine(false);//不绘制坐标线
+        yAxis.setDrawAxisLine(true);//不绘制坐标线
         yAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         yAxis.setLabelCount(yAxisLabelCount);
-        yAxis.setAxisMaximum(yAxisMaxValue);
-        yAxis.setDrawLabels(false);
+//        yAxis.setAxisMaximum(yAxisMaxValue);
+        yAxis.setDrawLabels(true);
         mChart.getAxisRight().setEnabled(false);
 
         //初始化数据
