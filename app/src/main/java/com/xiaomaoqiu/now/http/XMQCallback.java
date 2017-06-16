@@ -95,6 +95,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     onFail(call, null);
 
                     DeviceInfoInstance.getInstance().clearDeviceInfo();
+                    PetInfoInstance.getInstance().clearPetInfo();
 
                     Intent intent = new Intent(PetAppLike.mcontext, InitBindDeviceActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -108,7 +109,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     onFail(call, null);
 
                     PetInfoInstance.getInstance().clearPetInfo();
-                    DeviceInfoInstance.getInstance().clearDeviceInfo();
+//                    DeviceInfoInstance.getInstance().clearDeviceInfo();
 
 
                     Intent intent = new Intent(PetAppLike.mcontext, AddPetInfoActivity.class);

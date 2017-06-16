@@ -349,6 +349,7 @@ public class PetInfoInstance {
         SPUtil.putPetHeader("");
         packBean.pet_type_id = 0;
         SPUtil.putPetTypeId(0);
+        packBean.dateFormat_birthday=new PetInfoInstance.MyDate(2015, 1, 1);
         setDateFormat_birthday("");
     }
 

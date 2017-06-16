@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
@@ -44,7 +46,7 @@ import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
  * Created by long on 2017/4/12.
  */
 @SuppressLint("WrongConstant")
-public class InitWifiListActivity extends BaseActivity implements LogoutView {
+public class InitWifiListActivity extends BaseActivity {
 
     MaterialDesignPtrFrameLayout ptr_refresh;
     RecyclerView rv_wifilist;
@@ -65,7 +67,7 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
         initData();
 
         EventBus.getDefault().register(this);
-        loginPresenter = new LoginPresenter(this);
+//        loginPresenter = new LoginPresenter(this);
     }
 
     private void initView() {
@@ -74,14 +76,20 @@ public class InitWifiListActivity extends BaseActivity implements LogoutView {
 
             @Override
             public void onClick(View v) {
-                DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
+//                DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                loginPresenter.logout();
+//                            }
+//                        }
+//                );
 
-                            @Override
-                            public void onClick(View v) {
-                                loginPresenter.logout();
-                            }
-                        }
-                );
+//                PetInfoInstance.getInstance().clearPetInfo();
+                Intent intent = new Intent(PetAppLike.mcontext, AddPetInfoActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                PetAppLike.mcontext.startActivity(intent);
+
             }
         });
 

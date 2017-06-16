@@ -15,7 +15,10 @@ import android.widget.ToggleButton;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
@@ -48,7 +51,7 @@ import mbg.bottomcalender.BottomCalenderView;
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class AddPetInfoActivity extends BaseActivity implements LogoutView {
+public class AddPetInfoActivity extends BaseActivity  {
     private final int REQ_CODE_BIRTHDAY = 1;
     private final int REQ_CODE_WEIGHT = 2;
     private final int REQ_CODE_INTRO = 3;
@@ -61,7 +64,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     private final int REQ_CODE_GET_PHOTO_FROM_TAKEPHOTO = 11;//拍照完
 
 
-    View tv_logout;
+    View btn_go_back;
     View tv_next;
 
 
@@ -75,7 +78,7 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
 
     PetInfoBean modifyBean = PetInfoInstance.getInstance().packBean;
 
-    LoginPresenter loginPresenter;
+//    LoginPresenter loginPresenter;
 
 
     @Override
@@ -92,25 +95,26 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         setContentView(R.layout.add_pet_info);
         initView();
         EventBus.getDefault().register(this);
-        loginPresenter=new LoginPresenter(this);
+//        loginPresenter=new LoginPresenter(this);
 
     }
 
 
     private void initView() {
-        tv_logout=this.findViewById(R.id.tv_logout);
-        tv_logout.setOnClickListener(new View.OnClickListener(){
+        btn_go_back=this.findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                loginPresenter.logout();
-                            }
-                        }
-                );
+//                DialogToast.createDialogWithTwoButton(AddPetInfoActivity.this, "确认退出登录？", new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                loginPresenter.logout();
+//                            }
+//                        }
+//                );
+                DeviceInfoInstance.getInstance().unbindDevice();
             }
         });
         tv_next=this.findViewById(R.id.tv_next);
@@ -252,6 +256,15 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
         DialogUtil.showDeviceOfflineDialog(this);
     }
 
+    //解绑成功
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void unbindDeviceSuccess(EventManage.unbindDeviceSuccess event){
+        Intent intent = new Intent(PetAppLike.mcontext, InitBindDeviceActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        PetAppLike.mcontext.startActivity(intent);
+
+    }
+
 
     private void modifyVariety() {
         Intent intent = new Intent(this, SelectPetTypeActivity.class);
@@ -388,11 +401,11 @@ public class AddPetInfoActivity extends BaseActivity implements LogoutView {
     }
 
 
-    public void success() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
+//    public void success() {
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+//    }
 
     @Override
     public void onBackPressed() {
