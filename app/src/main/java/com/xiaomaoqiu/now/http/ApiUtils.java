@@ -75,7 +75,7 @@ public class ApiUtils {
                 Request.Builder requestBuilder = original.newBuilder()
                         .header("X-OS", "Android"+android.os.Build.VERSION.RELEASE)
                         .header("X-App-Version", Apputil.getVersionName(PetAppLike.mcontext))
-                        .header("X-OS-Name", URLEncoder.encode(android.os.Build.MODEL.replaceAll(" ", ""), "UTF-8"))
+                        .header("device_model", URLEncoder.encode(android.os.Build.MODEL.replaceAll(" ", ""), "UTF-8"))
 //                        .header("versionCode", "Android_" + DeviceUtil.getVersionCode())
 //                        .header("versionName", "Android_" + DeviceUtil.getVersionName(ChrApplication.getContext()))
 //                        .header("UMengChannel", Constants.UMengChannel)

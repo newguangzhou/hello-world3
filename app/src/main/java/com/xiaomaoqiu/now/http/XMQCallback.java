@@ -11,6 +11,7 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.bean.OtherLoginBean;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
@@ -83,6 +84,9 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
 //                    event.remote_login_time=remote_login_time;
 //                    event.X_OS_Name=X_OS_Name;
 
+                    OtherLoginBean tempbean=(OtherLoginBean)message;
+                    event.X_OS_Name=tempbean.device_model;
+                    event.remote_login_time=tempbean.date;
                     EventBus.getDefault().postSticky(event);
 
                     return;

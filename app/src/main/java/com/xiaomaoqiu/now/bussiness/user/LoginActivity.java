@@ -317,5 +317,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true,priority = 0)
     public void onKickOff(PushEventManage.otherLogin event){
         DialogUtil.showLogoutDialog(this,event.remote_login_time,event.X_OS_Name);
+        EventBus.getDefault().removeStickyEvent(PushEventManage.otherLogin.class);
     }
 }
