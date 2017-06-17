@@ -119,12 +119,20 @@ public class SportChartIndexPresenter {
             callback.onSuccessGetSecAxis(secondText, secondIndex, days);
         }
         int startIndex = 0;
+        boolean flag = false;
         for (int i = startIndex; i < days; i += intrval) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + format);
             PetSportBean.SportBean bean = timeEqualSportBean(date, sportDatas);
             deepList.add(new Entry(i - startIndex, (float) bean.target_amount));
             lightList.add(new Entry(i - startIndex, (float) bean.reality_amount ));
+
+            if ((bean.target_amount > 0)) {
+                flag = true;
+            }
+        }
+        if(!flag){
+            return;
         }
         callback.onSuccessGetAxis(axisLabels, isMonth);
         if (isMonth) {

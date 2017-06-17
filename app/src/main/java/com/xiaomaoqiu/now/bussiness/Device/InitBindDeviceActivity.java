@@ -39,12 +39,12 @@ import java.util.regex.Pattern;
  * Created by Administrator on 2016/12/31.
  */
 
-public class InitBindDeviceActivity extends BaseActivity  implements LogoutView {
+public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
     View tv_logout;
     View tv_next;
 
-    public static final int REQUEST_SWEEP_CODE=0;
+    public static final int REQUEST_SWEEP_CODE = 0;
 
     private EditText inputImei;
     private Button sweepBt;
@@ -65,13 +65,13 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
         setContentView(R.layout.activity_bind_device);
         initView();
         EventBus.getDefault().register(this);
-        loginPresenter=new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this);
 
     }
 
-    private void initView(){
-        tv_logout=this.findViewById(R.id.tv_logout);
-        tv_logout.setOnClickListener(new View.OnClickListener(){
+    private void initView() {
+        tv_logout = this.findViewById(R.id.tv_logout);
+        tv_logout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -85,29 +85,29 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
                 );
             }
         });
-        tv_next=this.findViewById(R.id.tv_next);
-        tv_next.setOnClickListener(new View.OnClickListener(){
+        tv_next = this.findViewById(R.id.tv_next);
+        tv_next.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (DoubleClickUtil.isFastMiniDoubleClick()) {
                     return;
                 }
-                if(inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())){
+                if (inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())) {
                     showToast("请输入IMEI码！");
                     return;
                 }
-                String imei=inputImei.getText().toString();
+                String imei = inputImei.getText().toString();
                 DeviceInfoInstance.getInstance().bindDevice(imei);
             }
         });
 
-        inputImei=(EditText)findViewById(R.id.bind_device_input_imei);
-        sweepBt=(Button)findViewById(R.id.bind_device_button);
+        inputImei = (EditText) findViewById(R.id.bind_device_input_imei);
+        sweepBt = (Button) findViewById(R.id.bind_device_button);
         sweepBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ZXingActivity.skipToAsResult(InitBindDeviceActivity.this,REQUEST_SWEEP_CODE);
+                ZXingActivity.skipToAsResult(InitBindDeviceActivity.this, REQUEST_SWEEP_CODE);
             }
         });
     }
@@ -115,25 +115,25 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(REQUEST_SWEEP_CODE == requestCode && RESULT_OK ==resultCode){
+        if (REQUEST_SWEEP_CODE == requestCode && RESULT_OK == resultCode) {
             parseSweepResult(data);
         }
     }
 
-    private void parseSweepResult(Intent data){
-        if(null == data){
+    private void parseSweepResult(Intent data) {
+        if (null == data) {
             return;
         }
-        Bundle bundle=data.getExtras();
-        if(null == bundle){
+        Bundle bundle = data.getExtras();
+        if (null == bundle) {
             return;
         }
-        if(bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS){
+        if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
             //解析成功
-            String Imei=bundle.getString(CodeUtils.RESULT_STRING);
-            if(isZXresultCorrect(Imei)) {
+            String Imei = bundle.getString(CodeUtils.RESULT_STRING);
+            if (isZXresultCorrect(Imei)) {
                 DeviceInfoInstance.getInstance().bindDevice(Imei);
-            }else{
+            } else {
                 showToast("IMEI码错误，请正确扫码！");
             }
         }
@@ -141,10 +141,11 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
 
     /**
      * 检查IMEI是否符合规范
+     *
      * @param result
      * @return
      */
-    private boolean isZXresultCorrect(String result){
+    private boolean isZXresultCorrect(String result) {
         String regex = "([a-zA-Z0-9]{15})";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(result);
@@ -152,36 +153,42 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public  void toDeviceActivity(EventManage.bindDeviceSuccess event){
+    public void deviceOffline(EventManage.DeviceOffline event) {
+        DialogUtil.showDeviceOpenOnline(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void toDeviceActivity(EventManage.bindDeviceSuccess event) {
         EventBus.getDefault().unregister(this);
         if (!(UserInstance.getInstance().pet_id > 0)) {
-            Intent intent=new Intent();
+            Intent intent = new Intent();
             intent.setClass(InitBindDeviceActivity.this, AddPetInfoActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-        if(TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
+        if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             Intent intent = new Intent(this, InitWifiListActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-        if(UserInstance.getInstance().has_reboot==0){
-            Intent intent=new Intent(this, RebootActivity.class);
+        if (UserInstance.getInstance().has_reboot == 0) {
+            Intent intent = new Intent(this, RebootActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-        Intent intent=new Intent(InitBindDeviceActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(InitBindDeviceActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         overridePendingTransition(0, 0);
         startActivity(intent);
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void deviceAlreadyBind(EventManage.deviceAlreadyBind event){
-        DialogUtil.showDeviceAlreadyBindedDialog(InitBindDeviceActivity.this,event.old_account);
+    public void deviceAlreadyBind(EventManage.deviceAlreadyBind event) {
+        DialogUtil.showDeviceAlreadyBindedDialog(InitBindDeviceActivity.this, event.old_account);
     }
 
     @Override
@@ -193,7 +200,7 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
 
     public void success() {
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -209,4 +216,4 @@ public class InitBindDeviceActivity extends BaseActivity  implements LogoutView 
         );
     }
 
-    }
+}

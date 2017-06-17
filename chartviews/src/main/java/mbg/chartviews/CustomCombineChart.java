@@ -147,6 +147,7 @@ public abstract class CustomCombineChart extends RelativeLayout {
         mChart.setScaleEnabled(false);
         mChart.getDescription().setEnabled(false);
         mChart.getLegend().setEnabled(false);
+        mChart.setNoDataText("无统计数据");
 
         /**
          * x轴

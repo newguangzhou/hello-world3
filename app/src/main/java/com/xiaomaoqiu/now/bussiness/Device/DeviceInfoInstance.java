@@ -204,6 +204,9 @@ public class DeviceInfoInstance {
                     case EC_INVALID_ARGS:
                         ToastUtil.showTost("设备不存在");
                         break;
+                    case EC_OFFLINE:
+                        EventBus.getDefault().post(new EventManage.DeviceOffline());
+                        break;
                 }
             }
 

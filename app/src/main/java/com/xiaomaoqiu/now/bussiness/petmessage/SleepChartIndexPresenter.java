@@ -51,27 +51,27 @@ public class SleepChartIndexPresenter {
 
         String strEnd = String.format("%s-%s-%s", endDate.getYear() + 1900, endDate.getMonth() + 1, endDate.getDate());
         String strStart = String.format("%s-%s-%s", startDate.getYear() + 1900, startDate.getMonth() + 1, startDate.getDate());
-            ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(),
-                    UserInstance.getInstance().getToken(),
-                    PetInfoInstance.getInstance().getPet_id(), strStart, strEnd
-            ).enqueue(new XMQCallback<PetSleepInfoBean>() {
-                @Override
-                public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
-                    HttpCode ret = HttpCode.valueOf(message.status);
-                    if (callback == null) {
-                        return;
-                    }
-                    if (ret != HttpCode.EC_SUCCESS) {
-                        return;
-                    }
-                    parseSleepInfo(message);
+        ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
+                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd
+        ).enqueue(new XMQCallback<PetSleepInfoBean>() {
+            @Override
+            public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                if (callback == null) {
+                    return;
                 }
-
-                @Override
-                public void onFail(Call<PetSleepInfoBean> call, Throwable t) {
-
+                if (ret != HttpCode.EC_SUCCESS) {
+                    return;
                 }
-            });
+                parseSleepInfo(message);
+            }
+
+            @Override
+            public void onFail(Call<PetSleepInfoBean> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -95,8 +95,8 @@ public class SleepChartIndexPresenter {
 
     //解析一天的睡眠数据
     void parseSleepToday(List<PetSleepInfoBean.SleepBean> sleepDatas) {
-        Date date=new Date();
-        PetSleepInfoBean.SleepBean todayBean =timeEqualSleepBean(date,sleepDatas);
+        Date date = new Date();
+        PetSleepInfoBean.SleepBean todayBean = timeEqualSleepBean(date, sleepDatas);
 
         todayDeep = todayBean.deep_sleep;
         todayLight = todayBean.light_sleep;
@@ -110,17 +110,25 @@ public class SleepChartIndexPresenter {
         ArrayList<BarEntry> sleepList = new ArrayList<>();
         ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(WEEK_LENGTH);
 
-        int startIndex =0;
+        int startIndex = 0;
+        boolean flag = false;
         for (int i = startIndex; i < WEEK_LENGTH; i++) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + "日");
 
-            PetSleepInfoBean.SleepBean bean =timeEqualSleepBean(date,sleepDatas);
+            PetSleepInfoBean.SleepBean bean = timeEqualSleepBean(date, sleepDatas);
             sleepList.add(new BarEntry(i - startIndex, new float[]{(float) bean.deep_sleep, (float) bean.light_sleep}));
+            if ((bean.deep_sleep > 0)) {
+                flag = true;
+            }
+        }
+        if(!flag){
+            return;
         }
         callback.onSuccessGetAxis(axisLabels, false);
         callback.onSuccessGetWeekDataSet(sleepList, null);
     }
+
     //获取bean
     public PetSleepInfoBean.SleepBean timeEqualSleepBean(Date date, List<PetSleepInfoBean.SleepBean> sleeptDatas) {
         for (PetSleepInfoBean.SleepBean bean : sleeptDatas) {
@@ -143,27 +151,35 @@ public class SleepChartIndexPresenter {
         String secondText = curDate.getMonth() + "月";
         int secondIndex = curDate.getDate();
         callback.onSuccessGetSecAxis(secondText, secondIndex, MONTH_LENGTH);
-        int startIndex =0;
+        int startIndex = 0;
+        boolean flag = false;
         for (int i = startIndex; i < MONTH_LENGTH; i += intrval) {
             Date date = dates.get(i - startIndex);
             axisLabels.add(date.getDate() + format);
 //            JSONObject jsday = (JSONObject)jsdata.opt(i);
-            PetSleepInfoBean.SleepBean bean = timeEqualSleepBean(date,sleepDatas);
+            PetSleepInfoBean.SleepBean bean = timeEqualSleepBean(date, sleepDatas);
 //            float deep = (float) bean.deep_sleep;
 //            float light = (float) bean.light_sleep;
             deepList.add(new Entry(i - startIndex, (float) bean.deep_sleep));
             lightList.add(new Entry(i - startIndex, (float) bean.light_sleep));
-
+            if ((bean.deep_sleep > 0)) {
+                flag = true;
+            }
+        }
+        if(!flag){
+            return;
         }
         callback.onSuccessGetAxis(axisLabels, true);
         callback.onSuccessGetMonthDataSet(deepList, lightList);
     }
+
     //只要日期对，就可以
     boolean equalDateDay(Date date1, String date2) {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
-        String changeResult=sdf.format(date1);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+        String changeResult = sdf.format(date1);
         return changeResult.equals(date2);
     }
+
     /**
      * 显示某一固定日期数据
      *
@@ -191,6 +207,7 @@ public class SleepChartIndexPresenter {
         Date date = AppDialog.DateUtil.getPastDate(index);
         return (date.getMonth() + 1) + "月";
     }
+
     public void release() {
         callback = null;
     }

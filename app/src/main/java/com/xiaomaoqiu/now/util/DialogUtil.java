@@ -305,4 +305,23 @@ public class DialogUtil {
         dialog.show();
     }
 
+
+    //设备确认开机
+    public static void showDeviceOpenOnline(Context context){
+        final Dialog dialog=new AppDialog(context,R.layout.dialog_device_show,-1,-2,0,Gravity.CENTER);
+        TextView tv_message= (TextView) dialog.findViewById(R.id.tv_message);
+        Button btn_ok= (Button) dialog.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+
 }
