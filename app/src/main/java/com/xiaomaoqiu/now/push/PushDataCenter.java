@@ -9,8 +9,11 @@ import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.map.main.MapInstance;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -53,13 +56,14 @@ public class PushDataCenter {
     public static class Pet {
         public static final String LOCATIONCHANGE = "location-change";
         public static final String NOT_HOME="not-home";//宠物离开家了
+        public static final String AT_HOME="home";//宠物在家了
     }
 
     RemoteMessageBean formatBean;
 
     public void notifyData(String message) {
 
-        if (!SPUtil.getHome()) {
+        if (!SPUtil.getHomePage()) {
             //如果不能进主页,直接不处理了
             return;
         }
@@ -161,7 +165,19 @@ public class PushDataCenter {
                 EventBus.getDefault().post(event);
                 break;
             case Pet.NOT_HOME:
-                ToastUtil.showTost("宠物离开家了");
+                if(PetInfoInstance.getInstance().getAtHome()) {
+                    PetInfoInstance.getInstance().setAtHome(false);
+                    ToastUtil.showTost("宠物离开家了");
+                    if(!MapInstance.GPS_OPEN){
+                        EventBus.getDefault().post(new PushEventManage.petNotHome());
+                    }
+                }
+                break;
+            case Pet.AT_HOME:
+                if(!PetInfoInstance.getInstance().getAtHome()) {
+                    PetInfoInstance.getInstance().setAtHome(true);
+                    ToastUtil.showTost("宠物到家了");
+                }
                 break;
         }
     }

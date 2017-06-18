@@ -111,7 +111,7 @@ public class SPUtil {
     public static final String GPS_OPEN="gps_open";
 
     //是否进入主页
-    public static final String HOME="home";
+    public static final String HOME_PAGE ="home";
 
 
     public static String getPhoneNumber() {
@@ -413,8 +413,8 @@ public class SPUtil {
      * 获取
      * @return
      */
-    public static boolean getHome(){
-        return getBoolean(HOME);
+    public static boolean getHomePage(){
+        return getBoolean(HOME_PAGE);
     }
 
     /**
@@ -422,7 +422,7 @@ public class SPUtil {
      * @return
      */
     public static void putHome(boolean isHome){
-        putBoolean(HOME,isHome);
+        putBoolean(HOME_PAGE,isHome);
     }
 
 

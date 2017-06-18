@@ -37,6 +37,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -143,10 +144,12 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_phone_center:
                 //手机位置
+                MapInstance.showPhoneCenter=true;
                 MapInstance.getInstance().startLoc();
                 break;
             case R.id.btn_pet_center:
                 MainActivity.getLocationTime=0;
+                MapInstance.showPhoneCenter=false;
                 //狗狗位置
                 PetInfoInstance.getInstance().getPetLocation();
                 break;
@@ -192,6 +195,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //todo 小米推送
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(PushEventManage.locationChange event) {
+        MapInstance.getInstance().showPhoneCenter=false;
         //手机位置
         MapInstance.getInstance().startLoc();
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);

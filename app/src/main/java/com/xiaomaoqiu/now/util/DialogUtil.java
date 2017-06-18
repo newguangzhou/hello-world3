@@ -49,28 +49,30 @@ public class DialogUtil {
 
     public static Dialog offlineDialog;//设备离线框
     public static Dialog lowBatteryDialog;//低电量弹窗
-    public static boolean lowBatteryIsClosed=false;//低电量弹窗关闭过
+    public static boolean lowBatteryIsClosed = false;//低电量弹窗关闭过
     public static Dialog superLowBatteryDialog;//超低电量
-    public static boolean superLowBatteryIsClosed=false;//超低电量关闭过
+    public static boolean superLowBatteryIsClosed = false;//超低电量关闭过
 
     public static BatteryNoticeDialog commonBatteryNoticeDialog;//正常电量弹窗
     public static BatteryIngNoticeDialog batteryIngNoticeDialog;//正在充电中
 
+    public static Dialog safeCautionDialog;//安全弹窗
+
 
     //正在充电中弹窗
-    public static void showBatteryIngNoticeDialog(Context context){
+    public static void showBatteryIngNoticeDialog(Context context) {
         closeAllDialog();
-        if(batteryIngNoticeDialog==null){
-            batteryIngNoticeDialog=new BatteryIngNoticeDialog(context);
+        if (batteryIngNoticeDialog == null) {
+            batteryIngNoticeDialog = new BatteryIngNoticeDialog(context);
         }
         batteryIngNoticeDialog.show();
     }
 
     //正常电量弹窗
-    public static void showCommonBatteryNoticeDialog(Context context, float level, String time, String content){
+    public static void showCommonBatteryNoticeDialog(Context context, float level, String time, String content) {
         closeAllDialog();
-        if(commonBatteryNoticeDialog==null){
-            commonBatteryNoticeDialog=new BatteryNoticeDialog(context,level,time,content);
+        if (commonBatteryNoticeDialog == null) {
+            commonBatteryNoticeDialog = new BatteryNoticeDialog(context, level, time, content);
         }
         commonBatteryNoticeDialog.show();
     }
@@ -110,10 +112,10 @@ public class DialogUtil {
     }
 
     //设备低电量弹窗
-    public static void showLowBatteryDialog(Context context){
+    public static void showLowBatteryDialog(Context context) {
         closeAllDialog();
-        if(lowBatteryDialog==null){
-            lowBatteryDialog=new AppDialog(context,R.layout.dialog_lowbattery,-1, -2, 0, Gravity.CENTER);
+        if (lowBatteryDialog == null) {
+            lowBatteryDialog = new AppDialog(context, R.layout.dialog_lowbattery, -1, -2, 0, Gravity.CENTER);
             Button btn_ok = (Button) lowBatteryDialog.findViewById(R.id.btn_ok);
             btn_ok.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,39 +127,44 @@ public class DialogUtil {
             lowBatteryDialog.setCancelable(false);
             lowBatteryDialog.setCanceledOnTouchOutside(false);
         }
-        if(!lowBatteryIsClosed) {//如果没有关闭过，再弹出来
+        if (!lowBatteryIsClosed) {//如果没有关闭过，再弹出来
             lowBatteryDialog.show();
-            lowBatteryIsClosed=true;
-            superLowBatteryIsClosed=false;
+            lowBatteryIsClosed = true;
+            superLowBatteryIsClosed = false;
         }
     }
 
     //设备超低电量
-    public static void showSuperLowBatteryDialog(Context context){
+    public static void showSuperLowBatteryDialog(Context context) {
         closeAllDialog();
-        if(superLowBatteryDialog==null){
-            superLowBatteryDialog=new AppDialog(context,R.layout.dialog_superlowbattery,-1, -2, 0, Gravity.CENTER);
+        if (superLowBatteryDialog == null) {
+            superLowBatteryDialog = new AppDialog(context, R.layout.dialog_superlowbattery, -1, -2, 0, Gravity.CENTER);
             Button btn_ok = (Button) superLowBatteryDialog.findViewById(R.id.btn_ok);
             btn_ok.setOnClickListener(new View.OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
-                                              superLowBatteryDialog.dismiss();
-                                          }
+                @Override
+                public void onClick(View v) {
+                    superLowBatteryDialog.dismiss();
+                }
             });
             superLowBatteryDialog.setCancelable(false);
             superLowBatteryDialog.setCanceledOnTouchOutside(false);
         }
-        if(!superLowBatteryIsClosed) {
+        if (!superLowBatteryIsClosed) {
             superLowBatteryDialog.show();
-            lowBatteryIsClosed=false;
-            superLowBatteryIsClosed=true;
+            lowBatteryIsClosed = false;
+            superLowBatteryIsClosed = true;
         }
+    }
+
+    //宠物安全提醒
+    public static void showSafeCautionDialog(Context context) {
+
     }
 
 
     //关闭所有弹窗
-    public static void closeAllDialog(){
-        if(offlineDialog != null && offlineDialog.isShowing()){
+    public static void closeAllDialog() {
+        if (offlineDialog != null && offlineDialog.isShowing()) {
             try {
                 offlineDialog.dismiss();
             } catch (Exception e) {
@@ -166,42 +173,113 @@ public class DialogUtil {
 
         }
         offlineDialog = null;
-        if(lowBatteryDialog!=null&&lowBatteryDialog.isShowing()){
+        if (lowBatteryDialog != null && lowBatteryDialog.isShowing()) {
             try {
                 lowBatteryDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        lowBatteryDialog=null;
-        if(superLowBatteryDialog!=null&&superLowBatteryDialog.isShowing()){
+        lowBatteryDialog = null;
+        if (superLowBatteryDialog != null && superLowBatteryDialog.isShowing()) {
             try {
                 superLowBatteryDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        superLowBatteryDialog=null;
-        if(commonBatteryNoticeDialog!=null&&commonBatteryNoticeDialog.isShowing()){
+        superLowBatteryDialog = null;
+        if (commonBatteryNoticeDialog != null && commonBatteryNoticeDialog.isShowing()) {
             try {
                 commonBatteryNoticeDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        commonBatteryNoticeDialog=null;
-        if(batteryIngNoticeDialog!=null&&batteryIngNoticeDialog.isShowing()){
-            try{
+        commonBatteryNoticeDialog = null;
+        if (batteryIngNoticeDialog != null && batteryIngNoticeDialog.isShowing()) {
+            try {
                 batteryIngNoticeDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        batteryIngNoticeDialog=null;
+        batteryIngNoticeDialog = null;
+//        if(safeCautionDialog!=null&&safeCautionDialog.isShowing()){
+//            try{
+//                safeCautionDialog.dismiss();
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//        safeCautionDialog=null;
+    }
+
+
+    //设备被绑定弹窗
+    public static void showDeviceAlreadyBindedDialog(Context context, String oldaccount) {
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_device_already_bind, -1, -2, 0, Gravity.CENTER);
+        TextView tv_old_account = (TextView) dialog.findViewById(R.id.tv_old_account);
+        if (oldaccount == null || "".equals(oldaccount) || "null".equals(oldaccount)) {
+            tv_old_account.setText("设备已被绑定");
+        } else {
+            tv_old_account.setText("设备已被账号 " + oldaccount + " 绑定\n" +
+                    "无法绑定到当前帐号");
+        }
+
+
+        Button already_bind_confirm = (Button) dialog.findViewById(R.id.already_bind_confirm);
+        already_bind_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+
+    //异地登录弹窗
+    public static void showLogoutDialog(Context context, String remoteTime, String osName) {
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_logout, -1, -2, 0, Gravity.CENTER);
+        TextView tv_remote_login = (TextView) dialog.findViewById(R.id.tv_remote_login);
+        if ((remoteTime != null) && (osName != null) && (!"".equals(remoteTime)) && !"".equals(osName)) {
+            tv_remote_login.setText(remoteTime + "\n" + "您的账户在" + osName + "手机上登录");
+        }
+        Button logout_confirm = (Button) dialog.findViewById(R.id.logout_confirm);
+        logout_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+
+    //设备确认开机
+    public static void showDeviceOpenOnline(Context context) {
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_device_show, -1, -2, 0, Gravity.CENTER);
+        TextView tv_message = (TextView) dialog.findViewById(R.id.tv_message);
+        Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
 
@@ -222,8 +300,19 @@ public class DialogUtil {
         return true;
     }
 
+    /**
+     * 两个按钮弹窗
+     *
+     * @param context
+     * @param charSequence
+     * @param cancleText
+     * @param confirmText
+     * @param onCancleClickListener
+     * @param onConfirmClickListener
+     */
     public static void showTwoButtonDialog(final Context context, CharSequence charSequence, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
+        closeAllDialog();
         final Dialog dialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         dialog.getWindow().setWindowAnimations(0);
         TextView two_button_message = (TextView) dialog.findViewById(R.id.two_button_message);
@@ -261,66 +350,66 @@ public class DialogUtil {
         dialog.show();
     }
 
-    //设备被绑定弹窗
-    public static void showDeviceAlreadyBindedDialog(Context context, String oldaccount) {
-        final Dialog dialog = new AppDialog(context, R.layout.dialog_device_already_bind, -1, -2, 0, Gravity.CENTER);
-        TextView tv_old_account = (TextView) dialog.findViewById(R.id.tv_old_account);
-        if (oldaccount == null || "".equals(oldaccount) || "null".equals(oldaccount)) {
-            tv_old_account.setText("设备已被绑定");
-        } else {
-            tv_old_account.setText("设备已被账号 " + oldaccount + " 绑定\n" +
-                    "无法绑定到当前帐号");
-        }
 
-
-        Button already_bind_confirm = (Button) dialog.findViewById(R.id.already_bind_confirm);
-        already_bind_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-    }
-
-
-    //异地登录弹窗
-    public static void showLogoutDialog(Context context,String remoteTime,String osName) {
-        final Dialog dialog = new AppDialog(context, R.layout.dialog_logout, -1, -2, 0, Gravity.CENTER);
-        TextView tv_remote_login= (TextView) dialog.findViewById(R.id.tv_remote_login);
-        if((remoteTime!=null)&&(osName!=null)&&(!"".equals(remoteTime))&&!"".equals(osName)){
-            tv_remote_login.setText(remoteTime+"\n"+"您的账户在"+osName+"手机上登录");
-        }
-        Button logout_confirm = (Button) dialog.findViewById(R.id.logout_confirm);
-        logout_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-    }
-
-
-    //设备确认开机
-    public static void showDeviceOpenOnline(Context context){
-        final Dialog dialog=new AppDialog(context,R.layout.dialog_device_show,-1,-2,0,Gravity.CENTER);
+    public static void showThreeButtonDialog(final Context context, String titleString, String bodyString,String test1, String test2, String test3,
+                                            final View.OnClickListener listener1, final View.OnClickListener listener2, final View.OnClickListener listener3) {
+        if (!canShowDialog(context)) return;
+        closeAllDialog();
+        final Dialog dialog=new AppDialog(context,R.layout.dialog_three_button, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        dialog.getWindow().setWindowAnimations(0);
+        TextView tv_title= (TextView) dialog.findViewById(R.id.tv_title);
         TextView tv_message= (TextView) dialog.findViewById(R.id.tv_message);
-        Button btn_ok= (Button) dialog.findViewById(R.id.btn_ok);
-        btn_ok.setOnClickListener(new View.OnClickListener(){
+        Button btn_three_one= (Button) dialog.findViewById(R.id.btn_three_one);
+        Button btn_three_two= (Button) dialog.findViewById(R.id.btn_three_two);
+        Button btn_three_three= (Button) dialog.findViewById(R.id.btn_three_three);
+
+        tv_title.setText(titleString);
+        tv_message.setText(bodyString);
+        btn_three_one.setText(test1);
+        btn_three_two.setText(test2);
+        btn_three_three.setText(test3);
+
+        btn_three_one.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(listener1!=null){
+                    listener1.onClick(v);
+                }
             }
         });
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        btn_three_two.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(listener2!=null){
+                    listener2.onClick(v);
+                }
+            }
+        });
+        btn_three_three.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(listener3!=null){
+                    listener3.onClick(v);
+                }
+            }
+        });
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.show();
+
     }
 
 

@@ -18,7 +18,7 @@ android:background="@drawable/shape_dialog_background">
             android:layout_height="wrap_content"
             android:text="电量提醒"
             android:textColor="@color/common_title"
-            android:textSize="27sp" />
+            android:textSize="@dimen/common_dialog_title" />
         <View
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@ android:background="@drawable/shape_dialog_background">
             android:layout_marginTop="10dp"
             android:text="低电量，请尽快充电"
             android:textColor="@color/common_body"
-            android:textSize="16sp" />
+            android:textSize="@dimen/common_dialog_message" />
 
     </LinearLayout>
 
@@ -44,7 +44,7 @@ android:background="@drawable/shape_dialog_background">
     android:layout_height="wrap_content"
     android:layout_marginBottom="50dp"
     android:background="@drawable/login_loginbt_bg"
-    android:textSize="16sp"
+    android:textSize="@dimen/common_dialog_button"
     android:textColor="@color/common_button_word"
     android:layout_gravity="center_horizontal"
     android:paddingTop="9dp"

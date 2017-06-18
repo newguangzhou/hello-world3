@@ -15,7 +15,7 @@ android:background="@drawable/shape_dialog_background">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="27sp"
+        android:textSize="@dimen/common_dialog_title"
         android:textColor="@color/common_title"
         android:text="绑定提示" />
     <View
@@ -31,9 +31,10 @@ android:background="@drawable/shape_dialog_background">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:text="设备已被账号 138*******1234 绑定
         无法绑定到当前帐号"
-        android:textSize="16sp"
+        android:textSize="@dimen/common_dialog_message"
         android:textColor="@color/common_body"/>
 
 </LinearLayout>
@@ -44,7 +45,7 @@ android:background="@drawable/shape_dialog_background">
     android:layout_height="wrap_content"
     android:layout_marginBottom="50dp"
     android:background="@drawable/login_loginbt_bg"
-    android:textSize="16sp"
+    android:textSize="@dimen/common_dialog_button"
     android:textColor="@color/common_button_word"
     android:layout_gravity="center_horizontal"
     android:paddingTop="9dp"

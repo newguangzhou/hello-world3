@@ -9,14 +9,29 @@
               android:paddingRight="10dp"
     android:background="@drawable/shape_dialog_background">
     <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/common_dialog_title"
+        android:textColor="@color/common_title"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="安全提醒" />
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_line"
+        ></View>
+    <TextView
         android:layout_marginTop="20dp"
-        android:id="@+id/two_button_message"
+        android:id="@+id/tv_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="@color/common_body"
         android:textSize="@dimen/common_dialog_message"
-        android:text="hahaha"/>
+        android:text="小毛球监测到XXX（宠物名字）安全存在风险"/>
     <View
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -28,14 +43,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/two_button_cancle"
+            android:id="@+id/btn_three_one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/common_button_word"
             android:textSize="@dimen/common_dialog_button"
-            android:text="取消"
+            android:text="确认安全"
             android:background="@drawable/btn_background_color_3"/>
         <View
             android:layout_width="1px"
@@ -44,14 +59,30 @@
             android:layout_marginBottom="11.5dp"
             android:background="#ddd"/>
         <Button
-            android:id="@+id/two_button_confirm"
+            android:id="@+id/btn_three_two"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textColor="@color/common_button_word"
             android:textSize="@dimen/common_dialog_button"
-            android:text="确定"
+            android:text="查看位置"
+            android:background="@drawable/btn_background_color_3"/>
+        <View
+            android:layout_width="1px"
+            android:layout_height="30dp"
+            android:layout_marginTop="11.5dp"
+            android:layout_marginBottom="11.5dp"
+            android:background="#ddd"/>
+        <Button
+            android:id="@+id/btn_three_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/common_button_word"
+            android:textSize="@dimen/common_dialog_button"
+            android:text="紧急搜索"
             android:background="@drawable/btn_background_color_3"/>
     </LinearLayout>
 </LinearLayout>

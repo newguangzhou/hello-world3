@@ -24,4 +24,11 @@
 
     <!--截图-->
     <dimen name="crop__bar_height">56dp</dimen>
+
+
+    <!--通用-->
+    <dimen name="common_dialog_title">45dp</dimen>
+    <dimen name="common_dialog_message">32dp</dimen>
+    <dimen name="common_dialog_button">20dp</dimen>
+
 </resources>

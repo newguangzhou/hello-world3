@@ -15,7 +15,7 @@ android:background="@drawable/shape_dialog_background">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="27sp"
+        android:textSize="@dimen/common_dialog_title"
         android:textColor="@color/common_title"
         android:text="帐号异常" />
     <View
@@ -31,8 +31,9 @@ android:background="@drawable/shape_dialog_background">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:text="您的小毛球账号已在其他设备登录。请尽量避免与其他用户共用帐号。（如密码泄露，请及时找回）"
-        android:textSize="16sp"
+        android:textSize="@dimen/common_dialog_message"
         android:textColor="@color/common_body"/>
 
 </LinearLayout>
@@ -43,7 +44,7 @@ android:background="@drawable/shape_dialog_background">
     android:layout_height="wrap_content"
     android:layout_marginBottom="50dp"
     android:background="@drawable/login_loginbt_bg"
-    android:textSize="16sp"
+    android:textSize="@dimen/common_dialog_button"
     android:textColor="@color/common_button_word"
     android:layout_gravity="center_horizontal"
     android:paddingTop="9dp"

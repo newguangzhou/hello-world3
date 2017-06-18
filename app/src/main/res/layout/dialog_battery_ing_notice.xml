@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="27sp"
+            android:textSize="@dimen/common_dialog_message"
             android:textColor="@color/common_title"
             android:text="电池正在充电中……"
             android:id="@+id/battery_notice_level"/>
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:background="@drawable/login_loginbt_bg"
-        android:textSize="16sp"
+        android:textSize="@dimen/common_dialog_button"
         android:textColor="@color/common_button_word"
         android:layout_gravity="center_horizontal"
         android:paddingTop="9dp"

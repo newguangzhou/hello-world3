@@ -323,13 +323,18 @@ public class MapInstance implements BDLocationListener {
     }
 
 
+    //是否以手机为中心
+    public static boolean showPhoneCenter=false;
+
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         phoneLatitude = bdLocation.getLatitude();
         phoneLongitude = bdLocation.getLongitude();
         SPUtil.putPhoneLatitude(phoneLatitude + "");
         SPUtil.putPhoneLongitude(phoneLongitude + "");
-        setPhonePos();
+        if(showPhoneCenter) {
+            setPhonePos();
+        }
         if (!PetInfoInstance.getInstance().getAtHome()) {
             //todo 如果不在家，就设置为另一个头像
 

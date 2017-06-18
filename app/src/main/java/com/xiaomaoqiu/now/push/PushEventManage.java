@@ -52,5 +52,11 @@ public class PushEventManage {
     public static class locationChange {
 
     }
+    /**
+     * 宠物离开家了
+     */
+    public static class petNotHome{
+
+    }
 
 }

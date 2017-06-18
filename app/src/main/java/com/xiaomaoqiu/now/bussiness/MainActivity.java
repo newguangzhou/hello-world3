@@ -37,6 +37,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -189,6 +191,59 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public void receivePushDeviceOnline(PushEventManage.deviceOnline event) {
         EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
         DialogUtil.closeDeviceOfflineDialog();
+    }
+
+    //todo 小米推送
+    //宠物离开家了
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void petNotHome(PushEventManage.petNotHome event) {
+        String name = PetInfoInstance.getInstance().getNick();
+        if("".equals(name)){
+            name="宠物";
+        }
+        DialogUtil.showThreeButtonDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        showFragment(1);
+                    }
+                },
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        if (!MapInstance.getInstance().GPS_OPEN) {
+                            MapInstance.getInstance().startFindPet();
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
+                                @Override
+                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    MapInstance.getInstance().setGPSState(true);
+                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                                    showFragment(1);
+                                }
+
+                                @Override
+                                public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                                }
+                            });
+                            PetInfoInstance.getInstance().getPetLocation();
+
+                        } else {
+                            showFragment(1);
+                        }
+
+                    }
+                }
+        );
     }
 
 
