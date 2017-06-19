@@ -26,12 +26,12 @@ public class AppDialog extends Dialog {
 
 	public AppDialog(Context context, int layout, int width, int height,
                      int animId, int gravity) {
-		this(context,R.style.AppDialog, layout, width, height,
+		this(context,R.style.MyDialogStyleTop, layout, width, height,
 		animId, gravity);
 	}
 	public AppDialog(Context context, int style, int layout, int width, int height,
                      int animId, int gravity) {
-		super(context,style);
+		super(context,R.style.MyDialogStyleTop);
 		setContentView(layout);
 		Window window = getWindow();
 		window.setWindowAnimations(animId);
@@ -45,7 +45,7 @@ public class AppDialog extends Dialog {
 	}
 
 	public AppDialog(Context context) {
-		super(context, R.style.AppDialog);
+		super(context, R.style.MyDialogStyleTop);
 	}
 
     @SuppressLint("WrongConstant")

@@ -172,7 +172,21 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void deviceOffline(EventManage.DeviceOffline event) {
-        DialogUtil.showDeviceOpenOnline(this);
+        DialogUtil.showDeviceOpenOnline(this,new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                    return;
+                }
+                if (inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())) {
+                    showToast("请输入IMEI码！");
+                    return;
+                }
+                String imei = inputImei.getText().toString();
+                DeviceInfoInstance.getInstance().bindDevice(imei);
+            }
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)

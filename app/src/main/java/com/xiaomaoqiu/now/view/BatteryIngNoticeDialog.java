@@ -23,7 +23,7 @@ public class BatteryIngNoticeDialog extends Dialog {
 
 
     public BatteryIngNoticeDialog(Context context){
-        super(context, R.style.MyDialogStyleBottom);
+        super(context, R.style.MyDialogStyleTop);
         initView();
         setCanceledOnTouchOutside(true);
         show();

@@ -30,7 +30,7 @@
             android:id="@+id/dialog_toast_ok"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:background="@drawable/btn_background_color_2"
+            android:background="@drawable/btn_background_color_3"
             android:padding="10dp"
             android:text="确定"/>
         <View

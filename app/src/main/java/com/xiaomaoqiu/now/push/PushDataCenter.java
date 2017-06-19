@@ -47,7 +47,7 @@ public class PushDataCenter {
     public static class Device {
         public static final String OFFLINE = "offline";
         public static final String ONLINE = "online";
-        public static final String COMMON_BATTERY="common-battery";
+        public static final String COMMON_BATTERY = "common-battery";
         public static final String LOW_BATTERY = "low-battery";
         public static final String ULTRA_LOW_BATTERY = "ultra-low-battery";
 
@@ -55,8 +55,8 @@ public class PushDataCenter {
 
     public static class Pet {
         public static final String LOCATIONCHANGE = "location-change";
-        public static final String NOT_HOME="not-home";//宠物离开家了
-        public static final String AT_HOME="home";//宠物在家了
+        public static final String NOT_HOME = "not-home";//宠物离开家了
+        public static final String AT_HOME = "home";//宠物在家了
     }
 
     RemoteMessageBean formatBean;
@@ -158,25 +158,26 @@ public class PushDataCenter {
         switch (formatBean.signal) {
             case Pet.LOCATIONCHANGE:
                 PushEventManage.locationChange event = new PushEventManage.locationChange();
-                PetInfoInstance.getInstance().latitude = Double.valueOf((String)formatBean.data.get("latitude"));
-                PetInfoInstance.getInstance().location_time = Long.valueOf((int)formatBean.data.get("location_time"));
-                PetInfoInstance.getInstance().longitude = Double.valueOf((String)formatBean.data.get("longitude"));
-                PetInfoInstance.getInstance().radius = Double.valueOf((int)formatBean.data.get("radius"));
+                PetInfoInstance.getInstance().latitude = Double.valueOf((String) formatBean.data.get("latitude"));
+                PetInfoInstance.getInstance().location_time = Long.valueOf((int) formatBean.data.get("location_time"));
+                PetInfoInstance.getInstance().longitude = Double.valueOf((String) formatBean.data.get("longitude"));
+                PetInfoInstance.getInstance().radius = Double.valueOf((int) formatBean.data.get("radius"));
                 EventBus.getDefault().post(event);
                 break;
             case Pet.NOT_HOME:
-                if(PetInfoInstance.getInstance().getAtHome()) {
+                if (PetInfoInstance.getInstance().getAtHome()) {
                     PetInfoInstance.getInstance().setAtHome(false);
-                    ToastUtil.showTost("宠物离开家了");
-                    if(!MapInstance.GPS_OPEN){
+//                    ToastUtil.showTost("宠物离开家了");
+                    if (!MapInstance.GPS_OPEN) {
                         EventBus.getDefault().post(new PushEventManage.petNotHome());
                     }
                 }
                 break;
             case Pet.AT_HOME:
-                if(!PetInfoInstance.getInstance().getAtHome()) {
-                    PetInfoInstance.getInstance().setAtHome(true);
-                    ToastUtil.showTost("宠物到家了");
+                if (!PetInfoInstance.getInstance().getAtHome()) {
+//                    ToastUtil.showTost("宠物到家了");
+                    EventBus.getDefault().post(new PushEventManage.petAtHome());
+
                 }
                 break;
         }

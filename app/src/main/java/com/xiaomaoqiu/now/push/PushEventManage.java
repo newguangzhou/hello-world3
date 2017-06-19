@@ -9,14 +9,14 @@ public class PushEventManage {
     异地登录
      */
     public static class otherLogin {
-       public String remote_login_time;
-      public  String X_OS_Name;
+        public String remote_login_time;
+        public String X_OS_Name;
     }
 
     /**
      * 普通电量
      */
-    public static class commonBattery{
+    public static class commonBattery {
 
     }
 
@@ -26,23 +26,25 @@ public class PushEventManage {
     public static class deviceOffline {
 
     }
+
     /**
      * 设备重新在线
      */
-    public static class deviceOnline{
+    public static class deviceOnline {
 
     }
 
     /**
      * 设备低电量
      */
-    public static class batteryLowLevel{
+    public static class batteryLowLevel {
 
     }
+
     /**
      * 设备超低电量
      */
-    public static class batterySuperLowLevel{
+    public static class batterySuperLowLevel {
 
     }
 
@@ -52,11 +54,18 @@ public class PushEventManage {
     public static class locationChange {
 
     }
+
     /**
      * 宠物离开家了
      */
-    public static class petNotHome{
+    public static class petNotHome {
 
+    }
+
+    /**
+     * 宠物回到家了
+     */
+    public static class petAtHome {
     }
 
 }

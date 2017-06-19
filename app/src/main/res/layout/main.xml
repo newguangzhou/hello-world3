@@ -6,6 +6,7 @@
     android:layout_height="fill_parent">
 
 
+
     <LinearLayout
         android:id="@+id/mainView"
         android:layout_width="fill_parent"
@@ -38,7 +39,7 @@
                 <com.xiaomaoqiu.now.view.BatteryView
                     android:id="@+id/batteryView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="16dp"

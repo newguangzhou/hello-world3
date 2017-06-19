@@ -25,7 +25,7 @@ public class BatteryNoticeDialog extends Dialog {
 
 
     public BatteryNoticeDialog(Context context, float level, String time, String content){
-        super(context, R.style.MyDialogStyleBottom);
+        super(context, R.style.MyDialogStyleTop);
         this.mContent=content;
         int intLevel= (int) (level*100);
         this.mLevel=String.format(context.getResources().getString(R.string.battery_notice_levelformat), intLevel)+"%";

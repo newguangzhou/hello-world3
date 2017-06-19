@@ -30,14 +30,11 @@ import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
-import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -105,14 +102,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     //位置很近
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void distanceCloseiInGPS(EventManage.distanceClose event) {
-        DialogUtil.showTwoButtonDialog(this, "已找到宠物?", "继续搜寻", "已经找到", new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                },
-                new View.OnClickListener() {
+        DialogUtil.showPetFindedDialog(this, "已找到宠物?", "已经找到", "继续搜寻", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -148,8 +138,14 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                             }
                         });
+                    }
+                },
+                new View.OnClickListener() {
 
-
+                    @Override
+                    public void onClick(View v) {
+                        showFragment(1);
+                        PetInfoInstance.getInstance().getPetLocation();
                     }
                 }
         );
@@ -198,8 +194,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void petNotHome(PushEventManage.petNotHome event) {
         String name = PetInfoInstance.getInstance().getNick();
-        if("".equals(name)){
-            name="宠物";
+        if ("".equals(name)) {
+            name = "宠物";
         }
         DialogUtil.showThreeButtonDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
                 new View.OnClickListener() {
@@ -243,6 +239,28 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     }
                 }
+        );
+    }
+
+    //todo 小米推送
+    //宠物到家了
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void PetAtHome(PushEventManage.petAtHome event) {
+        DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showFragment(1);
+                PetInfoInstance.getInstance().getPetLocation();
+            }
+        },
+        new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                PetInfoInstance.getInstance().setAtHome(true);
+            }
+        }
         );
     }
 
@@ -363,7 +381,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                         public void run() {
                             while (true) {
                                 try {
-                                    Thread.sleep(60000);
+                                    Thread.sleep(180000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -414,20 +432,20 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+        DialogUtil.showTwoButtonDialog(this, "确定要退出小毛球吗？", "取消", "确定", new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
 
-            }
-        },
-        new View.OnClickListener(){
+                    }
+                },
+                new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        }
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
         );
 
 //        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {

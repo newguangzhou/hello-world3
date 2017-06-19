@@ -60,6 +60,10 @@ public class DialogUtil {
 
     public static Dialog safeCautionDialog;//安全弹窗
 
+    public static Dialog petisFindedDialog;//宠物是否找到
+
+    public static Dialog petAtHomeDialog;//宠物是否到家
+
 
     //正在充电中弹窗
     public static void showBatteryIngNoticeDialog(Context context) {
@@ -259,7 +263,9 @@ public class DialogUtil {
         logout_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
             }
         });
         dialog.setCancelable(false);
@@ -269,7 +275,7 @@ public class DialogUtil {
 
 
     //设备确认开机
-    public static void showDeviceOpenOnline(Context context) {
+    public static void showDeviceOpenOnline(Context context,final View.OnClickListener listener) {
         final Dialog dialog = new AppDialog(context, R.layout.dialog_device_show, -1, -2, 0, Gravity.CENTER);
         TextView tv_message = (TextView) dialog.findViewById(R.id.tv_message);
         Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
@@ -277,7 +283,13 @@ public class DialogUtil {
 
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(listener!=null){
+                    listener.onClick(v);
+                }
+
             }
         });
         dialog.setCancelable(false);
@@ -316,11 +328,121 @@ public class DialogUtil {
 
             @Override
             public void onClick(View v) {
-                listener.onClick(v);
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(listener!=null) {
+                    listener.onClick(v);
+                }
             }
         });
 
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
     }
+
+    //已经找到宠物弹窗petisFindedDialog
+    public static void showPetFindedDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener){
+        if (!canShowDialog(context)) return;
+        if (petisFindedDialog != null && petisFindedDialog.isShowing()) {
+            try {
+                petisFindedDialog.dismiss();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        petisFindedDialog = null;
+        petisFindedDialog= new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        petisFindedDialog.getWindow().setWindowAnimations(0);
+        TextView two_button_message = (TextView) petisFindedDialog.findViewById(R.id.two_button_message);
+        Button two_button_cancle = (Button) petisFindedDialog.findViewById(R.id.two_button_cancle);
+        Button two_button_confirm = (Button) petisFindedDialog.findViewById(R.id.two_button_confirm);
+        two_button_cancle.setText(cancleText);
+        two_button_confirm.setText(confirmText);
+        two_button_message.setText(messageString);
+
+        two_button_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (petisFindedDialog.isShowing()) {
+                    petisFindedDialog.dismiss();
+                }
+                if (onCancleClickListener != null) {
+                    onCancleClickListener.onClick(v);
+                }
+            }
+        });
+        two_button_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (petisFindedDialog.isShowing()) {
+                    petisFindedDialog.dismiss();
+                }
+                if (onConfirmClickListener != null) {
+                    onConfirmClickListener.onClick(v);
+                }
+            }
+        });
+
+        petisFindedDialog.setCancelable(true);
+        petisFindedDialog.setCanceledOnTouchOutside(true);
+        petisFindedDialog.show();
+
+    }
+
+    //宠物是否到家  petAtHomeDialog
+    public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener){
+        if (!canShowDialog(context)) return;
+        if(petAtHomeDialog!=null&&petAtHomeDialog.isShowing()){
+            try {
+                petAtHomeDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        petAtHomeDialog=null;
+        petAtHomeDialog=new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        petAtHomeDialog.getWindow().setWindowAnimations(0);
+        TextView two_button_message = (TextView) petAtHomeDialog.findViewById(R.id.two_button_message);
+        Button two_button_cancle = (Button) petAtHomeDialog.findViewById(R.id.two_button_cancle);
+        Button two_button_confirm = (Button) petAtHomeDialog.findViewById(R.id.two_button_confirm);
+        two_button_cancle.setText(cancleText);
+        two_button_confirm.setText(confirmText);
+        two_button_message.setText(messageString);
+
+        two_button_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (petAtHomeDialog.isShowing()) {
+                    petAtHomeDialog.dismiss();
+                }
+                if (onCancleClickListener != null) {
+                    onCancleClickListener.onClick(v);
+                }
+            }
+        });
+        two_button_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (petAtHomeDialog.isShowing()) {
+                    petAtHomeDialog.dismiss();
+                }
+                if (onConfirmClickListener != null) {
+                    onConfirmClickListener.onClick(v);
+                }
+            }
+        });
+
+        petAtHomeDialog.setCancelable(true);
+        petAtHomeDialog.setCanceledOnTouchOutside(true);
+        petAtHomeDialog.show();
+
+    }
+
+
 
     /**
      * 两个按钮弹窗
@@ -334,7 +456,7 @@ public class DialogUtil {
      */
     public static void showTwoButtonDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
-        closeAllDialog();
+//        closeAllDialog();
         final Dialog dialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         dialog.getWindow().setWindowAnimations(0);
         TextView two_button_message = (TextView) dialog.findViewById(R.id.two_button_message);
