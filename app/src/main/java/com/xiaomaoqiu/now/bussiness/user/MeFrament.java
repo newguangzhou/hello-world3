@@ -14,6 +14,7 @@ import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
@@ -55,14 +56,31 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogToast.createDialogWithTwoButton(getActivity(), "确认退出登录？", new View.OnClickListener() {
+                DialogUtil.showTwoButtonDialog(getActivity(),"确认退出登录？","取消","确定",new View.OnClickListener(){
 
-                            @Override
-                            public void onClick(View v) {
-                                loginPresenter.logout();
-                            }
-                        }
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                }
                 );
+
+
+//                DialogToast.createDialogWithTwoButton(getActivity(), "确认退出登录？", new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                loginPresenter.logout();
+//                            }
+//                        }
+//                );
 
             }
         });

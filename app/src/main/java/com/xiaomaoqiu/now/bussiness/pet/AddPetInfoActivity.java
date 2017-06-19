@@ -279,7 +279,9 @@ public class AddPetInfoActivity extends BaseActivity  {
 
     private void modifyName() {
         Intent intent = new Intent(this, ModifyNameDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
+        if(!"旺财".equals(modifyBean.nick)) {
+            intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
+        }
         startActivityForResult(intent, REQ_CODE_NAME);
     }
 
@@ -409,7 +411,14 @@ public class AddPetInfoActivity extends BaseActivity  {
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
@@ -417,5 +426,13 @@ public class AddPetInfoActivity extends BaseActivity  {
                     }
                 }
         );
+//        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                }
+//        );
     }
 }

@@ -105,7 +105,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     //位置很近
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void distanceCloseiInGPS(EventManage.distanceClose event) {
-        DialogUtil.showTwoButtonDialog(this, "已找到宠物?", "NO", "YES", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(this, "已找到宠物?", "继续搜寻", "已经找到", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -414,14 +414,30 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
 
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }
+            @Override
+            public void onClick(View v) {
+
+            }
+        },
+        new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        }
         );
+
+//        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                }
+//        );
 
 
     }

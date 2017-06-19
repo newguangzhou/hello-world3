@@ -10,6 +10,7 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -161,25 +162,33 @@ public class DeviceActivity extends BaseActivity {
     }
 
     private void bindDeviceDialog() {
-        new DialogToast(this, "确认解除绑定？", "确认", new View.OnClickListener() {
+        DialogUtil.showOneButtonDialog(this,"确认解除绑定？",new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
-//                //解除设备绑定
-//                final PetInfo petInfo = UserMgr.INSTANCE.getPetInfo();
-//                HttpUtil.get2("device.remove_device_info",new JsonHttpResponseHandler(){
-//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                        Log.v("http", "device.remove_device_info:" + response.toString());
-//                        HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-//                        if (ret == HttpCode.EC_SUCCESS) {
-//                            //将设备信息置空
-//                            petInfo.getDevInfo().initFromNull();
-//                            finish();
-//                        }
-//                    }
-//                }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),petInfo.getDevInfo().getImei());
                 DeviceInfoInstance.getInstance().unbindDevice();
             }
         });
+//
+//        new DialogToast(this, "确认解除绑定？", "确认", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                //解除设备绑定
+////                final PetInfo petInfo = UserMgr.INSTANCE.getPetInfo();
+////                HttpUtil.get2("device.remove_device_info",new JsonHttpResponseHandler(){
+////                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+////                        Log.v("http", "device.remove_device_info:" + response.toString());
+////                        HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
+////                        if (ret == HttpCode.EC_SUCCESS) {
+////                            //将设备信息置空
+////                            petInfo.getDevInfo().initFromNull();
+////                            finish();
+////                        }
+////                    }
+////                }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),petInfo.getDevInfo().getImei());
+//                DeviceInfoInstance.getInstance().unbindDevice();
+//            }
+//        });
     }
 
     @Override

@@ -75,14 +75,32 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
             @Override
             public void onClick(View v) {
-                DialogToast.createDialogWithTwoButton(InitBindDeviceActivity.this, "确认退出登录？", new View.OnClickListener() {
+                DialogUtil.showTwoButtonDialog(InitBindDeviceActivity.this,"确认退出登录？","取消","确认",new View.OnClickListener(){
 
-                            @Override
-                            public void onClick(View v) {
-                                loginPresenter.logout();
-                            }
-                        }
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+
+                new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        loginPresenter.logout();
+                    }
+                }
                 );
+
+
+//                DialogToast.createDialogWithTwoButton(InitBindDeviceActivity.this, "确认退出登录？", new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                loginPresenter.logout();
+//                            }
+//                        }
+//                );
             }
         });
         tv_next = this.findViewById(R.id.tv_next);
@@ -206,7 +224,14 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
@@ -214,6 +239,14 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
                     }
                 }
         );
+//        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                }
+//        );
     }
 
 }

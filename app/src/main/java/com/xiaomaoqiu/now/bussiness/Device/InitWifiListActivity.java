@@ -251,7 +251,14 @@ public class InitWifiListActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
@@ -259,5 +266,13 @@ public class InitWifiListActivity extends BaseActivity {
                     }
                 }
         );
+//        DialogToast.createDialogWithTwoButton(this, "确定要退出小毛球吗？", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                }
+//        );
     }
 }

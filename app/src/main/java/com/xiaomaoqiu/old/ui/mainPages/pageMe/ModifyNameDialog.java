@@ -14,7 +14,7 @@ public class ModifyNameDialog extends InputDialog {
     @Override
     protected CharSequence getInputLabel()
     {
-        return "请输入狗狗名字";
+        return "填写宠物宝宝昵称";
     }
 
     @Override

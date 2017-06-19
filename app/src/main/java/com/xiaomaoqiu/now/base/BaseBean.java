@@ -8,4 +8,6 @@ import java.io.Serializable;
 
 public class BaseBean implements Serializable{
     public int status;
+    public String  date;
+    public String device_model;
 }

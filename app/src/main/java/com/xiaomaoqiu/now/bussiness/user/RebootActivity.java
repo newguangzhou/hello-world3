@@ -11,6 +11,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -75,7 +76,14 @@ public class RebootActivity extends BaseActivity implements LogoutView {
 
     @Override
     public void onBackPressed() {
-        DialogToast.createDialogWithTwoButton(RebootActivity.this, "确认退出登录？", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(RebootActivity.this,"确认退出登录？","取消","确定",new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                },
+                new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
@@ -83,5 +91,13 @@ public class RebootActivity extends BaseActivity implements LogoutView {
                     }
                 }
         );
+//        DialogToast.createDialogWithTwoButton(RebootActivity.this, "确认退出登录？", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        loginPresenter.logout();
+//                    }
+//                }
+//        );
     }
 }

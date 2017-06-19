@@ -56,6 +56,8 @@ public class DialogUtil {
     public static BatteryNoticeDialog commonBatteryNoticeDialog;//正常电量弹窗
     public static BatteryIngNoticeDialog batteryIngNoticeDialog;//正在充电中
 
+    public static Dialog unbindDialog;//确认解除绑定
+
     public static Dialog safeCautionDialog;//安全弹窗
 
 
@@ -155,6 +157,7 @@ public class DialogUtil {
             superLowBatteryIsClosed = true;
         }
     }
+
 
     //宠物安全提醒
     public static void showSafeCautionDialog(Context context) {
@@ -300,17 +303,36 @@ public class DialogUtil {
         return true;
     }
 
+
+    //确认解除绑定
+    public static void showOneButtonDialog(final Context context, String messageString, final View.OnClickListener listener) {
+        if (!canShowDialog(context)) return;
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_one_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        dialog.getWindow().setWindowAnimations(0);
+        TextView tv_one_button_message = (TextView) dialog.findViewById(R.id.tv_one_button_message);
+        tv_one_button_message.setText(messageString);
+        Button btn_one_button_confirm= (Button) dialog.findViewById(R.id.btn_one_button_confirm);
+        btn_one_button_confirm.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                listener.onClick(v);
+            }
+        });
+
+    }
+
     /**
      * 两个按钮弹窗
      *
      * @param context
-     * @param charSequence
+     * @param messageString
      * @param cancleText
      * @param confirmText
      * @param onCancleClickListener
      * @param onConfirmClickListener
      */
-    public static void showTwoButtonDialog(final Context context, CharSequence charSequence, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
+    public static void showTwoButtonDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
         closeAllDialog();
         final Dialog dialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
@@ -320,7 +342,7 @@ public class DialogUtil {
         Button two_button_confirm = (Button) dialog.findViewById(R.id.two_button_confirm);
         two_button_cancle.setText(cancleText);
         two_button_confirm.setText(confirmText);
-        two_button_message.setText(charSequence);
+        two_button_message.setText(messageString);
 
         two_button_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -351,18 +373,18 @@ public class DialogUtil {
     }
 
 
-    public static void showThreeButtonDialog(final Context context, String titleString, String bodyString,String test1, String test2, String test3,
-                                            final View.OnClickListener listener1, final View.OnClickListener listener2, final View.OnClickListener listener3) {
+    public static void showThreeButtonDialog(final Context context, String titleString, String bodyString, String test1, String test2, String test3,
+                                             final View.OnClickListener listener1, final View.OnClickListener listener2, final View.OnClickListener listener3) {
         if (!canShowDialog(context)) return;
         closeAllDialog();
-        final Dialog dialog=new AppDialog(context,R.layout.dialog_three_button, WindowManager.LayoutParams.MATCH_PARENT,
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_three_button, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         dialog.getWindow().setWindowAnimations(0);
-        TextView tv_title= (TextView) dialog.findViewById(R.id.tv_title);
-        TextView tv_message= (TextView) dialog.findViewById(R.id.tv_message);
-        Button btn_three_one= (Button) dialog.findViewById(R.id.btn_three_one);
-        Button btn_three_two= (Button) dialog.findViewById(R.id.btn_three_two);
-        Button btn_three_three= (Button) dialog.findViewById(R.id.btn_three_three);
+        TextView tv_title = (TextView) dialog.findViewById(R.id.tv_title);
+        TextView tv_message = (TextView) dialog.findViewById(R.id.tv_message);
+        Button btn_three_one = (Button) dialog.findViewById(R.id.btn_three_one);
+        Button btn_three_two = (Button) dialog.findViewById(R.id.btn_three_two);
+        Button btn_three_three = (Button) dialog.findViewById(R.id.btn_three_three);
 
         tv_title.setText(titleString);
         tv_message.setText(bodyString);
@@ -370,38 +392,38 @@ public class DialogUtil {
         btn_three_two.setText(test2);
         btn_three_three.setText(test3);
 
-        btn_three_one.setOnClickListener(new View.OnClickListener(){
+        btn_three_one.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(listener1!=null){
+                if (listener1 != null) {
                     listener1.onClick(v);
                 }
             }
         });
-        btn_three_two.setOnClickListener(new View.OnClickListener(){
+        btn_three_two.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(listener2!=null){
+                if (listener2 != null) {
                     listener2.onClick(v);
                 }
             }
         });
-        btn_three_three.setOnClickListener(new View.OnClickListener(){
+        btn_three_three.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(listener3!=null){
+                if (listener3 != null) {
                     listener3.onClick(v);
                 }
             }

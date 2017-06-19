@@ -17,6 +17,7 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
@@ -138,29 +139,52 @@ public class PetInfoActivity extends BaseActivity {
                     finish();
                     return;
                 }
-                DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器","重启追踪器","放弃修改",new View.OnClickListener() {
+                DialogUtil.showTwoButtonDialog(PetInfoActivity.this,"配置宠物信息将重启追踪器","放弃修改","重启追踪器",new View.OnClickListener(){
 
-                            @Override
-                            public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                },
+                new View.OnClickListener(){
 
-
-                                if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                                    return;
-                                }
-                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
-                                    ToastUtil.showTost("信息需要完整");
-                                    return;
-                                }
-                                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
-                            }
-                        },
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                finish();
-                            }
+                    @Override
+                    public void onClick(View v) {
+                        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                            return;
                         }
+                        if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+                            ToastUtil.showTost("信息需要完整");
+                            return;
+                        }
+                        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+                    }
+                }
                 );
+
+//                DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器","重启追踪器","放弃修改",new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//
+//
+//                                if (DoubleClickUtil.isFastMiniDoubleClick()) {
+//                                    return;
+//                                }
+//                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+//                                    ToastUtil.showTost("信息需要完整");
+//                                    return;
+//                                }
+//                                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//                            }
+//                        },
+//                        new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                finish();
+//                            }
+//                        }
+//                );
             }
         });
 
@@ -221,7 +245,9 @@ public class PetInfoActivity extends BaseActivity {
 
     private void modifyName() {
         Intent intent = new Intent(this, ModifyNameDialog.class);
-        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
+        if(!"旺财".equals(modifyBean.nick)) {
+            intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
+        }
         startActivityForResult(intent, REQ_CODE_NAME);
     }
 
@@ -345,12 +371,17 @@ public class PetInfoActivity extends BaseActivity {
             finish();
             return;
         }
-        DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器", "重启追踪器", "放弃修改", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(PetInfoActivity.this,"配置宠物信息将重启追踪器","放弃修改","重启追踪器",new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
+                        finish();
+                    }
+                },
+                new View.OnClickListener(){
 
-
+                    @Override
+                    public void onClick(View v) {
                         if (DoubleClickUtil.isFastMiniDoubleClick()) {
                             return;
                         }
@@ -360,14 +391,34 @@ public class PetInfoActivity extends BaseActivity {
                         }
                         PetInfoInstance.getInstance().updatePetInfo(modifyBean);
                     }
-                },
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
                 }
         );
+
+
+
+//        DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器", "重启追踪器", "放弃修改", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//
+//
+//                        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+//                            return;
+//                        }
+//                        if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+//                            ToastUtil.showTost("信息需要完整");
+//                            return;
+//                        }
+//                        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//                    }
+//                },
+//                new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                }
+//        );
 
     }
 

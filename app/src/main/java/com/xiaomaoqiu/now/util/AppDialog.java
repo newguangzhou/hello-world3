@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.xiaomaoqiu.old.utils.DensityUtil;
 import com.xiaomaoqiu.pet.R;
 
 import java.text.SimpleDateFormat;
@@ -36,7 +37,9 @@ public class AppDialog extends Dialog {
 		window.setWindowAnimations(animId);
 		window.setGravity(gravity);
 		WindowManager.LayoutParams params = window.getAttributes();
-		params.width = width;
+        //设置宽度
+        int margin=getContext().getResources().getDimensionPixelSize(R.dimen.dialog_service_margin)*2;
+		params.width = DensityUtil.getScreenWidth(getContext())-margin;
 		params.height = height;
 		window.setAttributes(params);
 	}
