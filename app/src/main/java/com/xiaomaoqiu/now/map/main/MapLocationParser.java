@@ -1,14 +1,11 @@
 package com.xiaomaoqiu.now.map.main;
 
-import android.util.Log;
-
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 
 /**
  * Created by Administrator on 2017/1/14.

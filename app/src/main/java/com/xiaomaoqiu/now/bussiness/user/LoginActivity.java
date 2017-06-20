@@ -23,7 +23,7 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
-import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;

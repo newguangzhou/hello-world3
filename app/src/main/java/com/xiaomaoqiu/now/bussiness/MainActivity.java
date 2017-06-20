@@ -18,7 +18,7 @@ import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.CheckIndex;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;

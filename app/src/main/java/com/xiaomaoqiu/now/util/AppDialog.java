@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.xiaomaoqiu.old.utils.DensityUtil;
 import com.xiaomaoqiu.pet.R;
 
 import java.text.SimpleDateFormat;

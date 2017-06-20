@@ -28,8 +28,7 @@ import com.xiaomaoqiu.now.map.tracer.PetTrancer;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStartTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStopTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onTracingListener;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
-import com.xiaomaoqiu.old.utils.CollectionUtil;
+import com.xiaomaoqiu.now.map.util.CollectionUtil;
 import com.xiaomaoqiu.pet.R;
 
 

@@ -18,8 +18,8 @@ import com.xiaomaoqiu.now.map.tracer.listeners.onStartTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onStopTracerListener;
 import com.xiaomaoqiu.now.map.tracer.listeners.onTracingListener;
 import com.xiaomaoqiu.now.util.SPUtil;
-import com.xiaomaoqiu.old.utils.CollectionUtil;
-import com.xiaomaoqiu.old.utils.JsonToObject;
+import com.xiaomaoqiu.now.map.util.CollectionUtil;
+import com.xiaomaoqiu.now.map.util.JsonToObject;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

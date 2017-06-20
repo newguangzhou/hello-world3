@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.old.utils.DensityUtil;
+import com.xiaomaoqiu.now.util.DensityUtil;
 
 /**
  * Created by long on 2017/5/27.

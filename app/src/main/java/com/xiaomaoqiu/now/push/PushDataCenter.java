@@ -10,10 +10,8 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.map.main.MapInstance;
-import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 
 import org.greenrobot.eventbus.EventBus;
 

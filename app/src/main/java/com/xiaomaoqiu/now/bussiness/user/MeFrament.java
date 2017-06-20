@@ -9,15 +9,11 @@ import android.view.ViewGroup;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
-import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
-import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
-import com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
-import com.xiaomaoqiu.now.view.DialogToast;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity;
 import com.xiaomaoqiu.pet.R;
 
 /**

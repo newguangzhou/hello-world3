@@ -13,7 +13,6 @@ import com.baidu.mapapi.map.MapView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseFragment;
-import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
@@ -22,14 +21,11 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
-import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
-import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
-import com.xiaomaoqiu.old.ui.dialog.AsynImgDialog;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
+import com.xiaomaoqiu.now.bussiness.pet.info.petdata.AsynImgDialog;
+import com.xiaomaoqiu.now.map.main.addressParseListener;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
-import com.xiaomaoqiu.old.ui.mainPages.pageMe.bean.PetInfo;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,7 +33,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;

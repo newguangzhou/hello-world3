@@ -18,7 +18,6 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
-import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.DistanceUtil;
@@ -27,7 +26,6 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
-import com.xiaomaoqiu.old.ui.mainPages.pageLocate.presenter.addressParseListener;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
 
 import org.greenrobot.eventbus.EventBus;

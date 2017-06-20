@@ -130,10 +130,10 @@
             android:id="@+id/btn_modify_name"
             android:gravity="center">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="旺财"
+                android:hint="填写宠物宝宝昵称"
                 android:textColor="@color/total_color_1"
                 android:textSize="20.5sp"
                 android:id="@+id/txt_pet_name"/>

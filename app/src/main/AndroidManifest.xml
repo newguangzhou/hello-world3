@@ -140,7 +140,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.now.bussiness.petmessage.HealthIndexActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.HealthIndexActivity"
             android:label="@string/title_activity_health_index"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -170,7 +170,7 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.hardware.ZXingActivity"
+            android:name="com.xiaomaoqiu.now.ZXing.ZXingActivity"
             android:label="@string/zxing"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -178,35 +178,28 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.now.bussiness.petmessage.SleepIndexActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.SleepIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyWeightDialog"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.ModifyWeightDialog"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysVisible"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.OUT___ModifyIntroDialog"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustResize"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            />
-        <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.ModifyNameDialog"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.ModifyNameDialog"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysVisible"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.SelectAvatarSourceDialog"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.SelectAvatarSourceDialog"
             android:theme="@style/MyDialogStyleBottom"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
@@ -233,21 +226,21 @@
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.now.bussiness.pet.PetInfoActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name="com.xiaomaoqiu.now.bussiness.petmessage.SportIndexActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.SportIndexActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"
@@ -255,14 +248,14 @@
             />
 
         <activity
-            android:name="com.xiaomaoqiu.old.ui.dialog.GoOutConfirmDialog_RAW_Activity"
+            android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.GoOutConfirmDialog_RAW_Activity"
             android:theme="@style/MyDialogStyleBottom"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
 
         <activity
-            android:name="com.xiaomaoqiu.old.ui.mainPages.pageMe.MessageActivity"
+            android:name="com.xiaomaoqiu.now.bussiness.user.MessageActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="keyboardHidden|orientation"

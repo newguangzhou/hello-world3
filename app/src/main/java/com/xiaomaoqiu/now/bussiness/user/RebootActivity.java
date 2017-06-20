@@ -3,18 +3,14 @@ package com.xiaomaoqiu.now.bussiness.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
-import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
-import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;

@@ -16,7 +16,7 @@
         android:layout_marginBottom="10dp"
         android:textColor="@color/total_color_2_back"
         />
-    <com.xiaomaoqiu.old.widgets.WheelView
+    <com.xiaomaoqiu.now.view.WheelView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/wv_number"/>

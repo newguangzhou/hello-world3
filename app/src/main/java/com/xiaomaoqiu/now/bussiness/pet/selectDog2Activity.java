@@ -1,7 +1,5 @@
 package com.xiaomaoqiu.now.bussiness.pet;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -12,16 +10,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.util.ToastUtil;
-import com.xiaomaoqiu.old.widgets.sortlistview.CharacterParser;
-import com.xiaomaoqiu.old.widgets.sortlistview.ClearEditText;
-import com.xiaomaoqiu.old.widgets.sortlistview.PinyinComparator;
-import com.xiaomaoqiu.old.widgets.sortlistview.SideBar;
-import com.xiaomaoqiu.old.widgets.sortlistview.SortAdapter;
-import com.xiaomaoqiu.old.widgets.sortlistview.SortModel;
+import com.xiaomaoqiu.now.view.sortlistview.CharacterParser;
+import com.xiaomaoqiu.now.view.sortlistview.ClearEditText;
+import com.xiaomaoqiu.now.view.sortlistview.PinyinComparator;
+import com.xiaomaoqiu.now.view.sortlistview.SideBar;
+import com.xiaomaoqiu.now.view.sortlistview.SortAdapter;
+import com.xiaomaoqiu.now.view.sortlistview.SortModel;
 import com.xiaomaoqiu.pet.R;
 
 import java.util.ArrayList;

@@ -15,7 +15,7 @@
             android:layout_height="6.5dp"
             android:background="@color/total_color_10" />
 
-        <com.xiaomaoqiu.old.widgets.SleepTitleView
+        <com.xiaomaoqiu.now.view.SleepTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
@@ -151,7 +151,7 @@
             android:layout_height="6.5dp"
             android:background="@color/total_color_8" />
 
-        <com.xiaomaoqiu.old.widgets.SleepTitleView
+        <com.xiaomaoqiu.now.view.SleepTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
@@ -200,7 +200,7 @@
             android:layout_height="6.5dp"
             android:background="@color/total_color_8" />
 
-        <com.xiaomaoqiu.old.widgets.SleepTitleView
+        <com.xiaomaoqiu.now.view.SleepTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"

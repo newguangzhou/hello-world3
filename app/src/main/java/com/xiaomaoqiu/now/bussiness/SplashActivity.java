@@ -6,17 +6,15 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.WindowManager;
 
-import com.baidu.mapapi.SDKInitializer;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
-import com.xiaomaoqiu.now.bussiness.pet.AddPetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
-import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.pet.R;
 

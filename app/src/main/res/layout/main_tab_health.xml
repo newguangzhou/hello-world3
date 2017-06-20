@@ -50,7 +50,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <com.xiaomaoqiu.old.widgets.CircleProgressBar
+                    <com.xiaomaoqiu.now.view.CircleProgressBar
                         android:id="@+id/prog_target_done_percentage"
                         android:layout_width="141dp"
                         android:layout_height="141dp"
