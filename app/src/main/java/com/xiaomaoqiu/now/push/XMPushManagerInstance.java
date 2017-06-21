@@ -37,6 +37,8 @@ public class XMPushManagerInstance {
         return instance;
     }
 
+    public static Context mcontext;
+
     /**
      * 。其中AppId和AppKey是客户端的身份标识，在客户端SDK初始化时使用；
      * AppSecret是服务器端的身份标识，在使用Server SDK向客户端发送消息时使用。
@@ -70,9 +72,11 @@ public class XMPushManagerInstance {
 
     public void init() {
         EventBus.getDefault().register(this);
+        mcontext=PetAppLike.mcontext;
         //初始化push推送服务
         if (shouldInit()) {
             MiPushClient.registerPush(PetAppLike.mcontext, APP_ID, APP_KEY);
+
         }
         openLogger();
     }
