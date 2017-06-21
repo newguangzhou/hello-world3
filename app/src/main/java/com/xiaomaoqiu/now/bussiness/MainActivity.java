@@ -191,7 +191,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     //todo 小米推送
     //宠物离开家了
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true,priority = 0)
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void petNotHome(PushEventManage.petNotHome event) {
         String name = PetInfoInstance.getInstance().getNick();
         if ("".equals(name)) {
@@ -463,7 +463,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().removeStickyEvent(PushEventManage.petNotHome.class);
         EventBus.getDefault().unregister(this);
     }
 

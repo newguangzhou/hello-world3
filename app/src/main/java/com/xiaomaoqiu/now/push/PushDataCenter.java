@@ -1,15 +1,11 @@
 package com.xiaomaoqiu.now.push;
 
-import android.app.ActivityManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 
 import com.alibaba.fastjson.JSON;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
-import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -18,8 +14,6 @@ import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.List;
 
 /**
  * Created by long on 2017/5/15.
@@ -173,13 +167,7 @@ public class PushDataCenter {
                     PetInfoInstance.getInstance().setAtHome(false);
 //                    ToastUtil.showTost("宠物离开家了");
                     if (!MapInstance.GPS_OPEN) {
-                        EventBus.getDefault().postSticky(new PushEventManage.petNotHome());
-
-                        Intent intent = new Intent(XMPushManagerInstance.mcontext, MainActivity.class);
-                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                        intent.setAction(Intent.ACTION_MAIN);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        XMPushManagerInstance.mcontext.startActivity(intent);
+                        EventBus.getDefault().post(new PushEventManage.petNotHome());
                     }
                 }
                 break;
@@ -198,26 +186,5 @@ public class PushDataCenter {
      */
     public void dealExtra() {
 
-    }
-
-
-    /**
-     * 判断当前应用程序处于前台还是后台
-     */
-    public static boolean isBackground(Context context) {
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-            if (appProcess.processName.equals(context.getPackageName())) {
-                if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-//                    Log.i("后台", appProcess.processName);
-                    return true;
-                } else {
-//                    Log.i("前台", appProcess.processName);
-                    return false;
-                }
-            }
-        }
-        return false;
     }
 }
