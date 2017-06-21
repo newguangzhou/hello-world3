@@ -178,7 +178,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
         batteryView.setDeviceOffline();
-        DialogUtil.showDeviceOfflineDialog(this);
+        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
     }
 
     //todo 小米推送

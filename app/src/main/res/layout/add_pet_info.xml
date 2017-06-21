@@ -133,10 +133,14 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:hint="填写宠物宝宝昵称"
                 android:textColor="@color/total_color_1"
                 android:textSize="20.5sp"
-                android:id="@+id/txt_pet_name"/>
+                android:id="@+id/txt_pet_name"
+                android:cursorVisible="false"
+                android:background="@null"
+                />
             <ImageView
                 android:id="@+id/img_pet_sex"
                 android:layout_width="wrap_content"

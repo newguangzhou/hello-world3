@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
@@ -48,42 +49,38 @@ public class InitWifiListActivity extends BaseActivity {
 
     MaterialDesignPtrFrameLayout ptr_refresh;
     RecyclerView rv_wifilist;
-    LoginPresenter loginPresenter;
 
 
     CheckStateAdapter adapter;
     public Object lock = new Object();
 
 
+    TextView tv_next;
+    View btn_go_back;
+
+
+    @Override
+    public int frameTemplate() {//没有标题栏
+        return 0;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.title_home_wifi));
         setContentView(R.layout.activity_wifilist);
         ptr_refresh = (MaterialDesignPtrFrameLayout) this.findViewById(R.id.ptr_refresh);
         initView();
         initData();
 
         EventBus.getDefault().register(this);
-//        loginPresenter = new LoginPresenter(this);
     }
 
     private void initView() {
-        View btnGoBack = findViewById(R.id.btn_go_back);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        btn_go_back = findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-//                DialogToast.createDialogWithTwoButton(InitWifiListActivity.this, "确认退出登录？", new View.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(View v) {
-//                                loginPresenter.logout();
-//                            }
-//                        }
-//                );
-
-//                PetInfoInstance.getInstance().clearPetInfo();
                 Intent intent = new Intent(PetAppLike.mcontext, AddPetInfoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 PetAppLike.mcontext.startActivity(intent);
@@ -91,20 +88,11 @@ public class InitWifiListActivity extends BaseActivity {
             }
         });
 
+        tv_next= (TextView) findViewById(R.id.tv_next);
+        tv_next.setOnClickListener(new View.OnClickListener(){
 
-        rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
-        setNextView("下一步", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-////
-//                Intent intent = new Intent(InitWifiListActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-////
-//                if (TextUtils.isEmpty(wifi_bssid)) {
-//                    ToastUtil.showTost("您必须选择一个homewifi");
-//                    return;
-//                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
@@ -141,10 +129,13 @@ public class InitWifiListActivity extends BaseActivity {
 
                     }
                 });
-
-
             }
         });
+        tv_next.setEnabled(false);
+        tv_next.setTextColor(getResources().getColor(R.color.black));
+
+
+        rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         rv_wifilist.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CheckStateAdapter(DeviceInfoInstance.getInstance().wiflist, this);
         rv_wifilist.setAdapter(adapter);
@@ -155,6 +146,9 @@ public class InitWifiListActivity extends BaseActivity {
         ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
+                getWifiTime=0;
+                tv_next.setEnabled(false);
+                tv_next.setTextColor(getResources().getColor(R.color.black));
                 DialogUtil.showProgress(InitWifiListActivity.this, "");
                 DeviceInfoInstance.getInstance().sendGetWifiListCmd();
             }
@@ -175,12 +169,15 @@ public class InitWifiListActivity extends BaseActivity {
                     }
                     wifi_bssid = "";
                     wifi_ssid = "";
+                    tv_next.setEnabled(false);
+                    tv_next.setTextColor(getResources().getColor(R.color.black));
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
 
                     if (adapter.mdatas.get(position).is_homewifi == 1) {
                         wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                         wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
-
+                        tv_next.setEnabled(true);
+                        tv_next.setTextColor(getResources().getColor(R.color.white));
                         for (WifiBean bean : adapter.mdatas) {
                             if (!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
                                 bean.is_homewifi = 0;
@@ -197,6 +194,8 @@ public class InitWifiListActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getWifiList(EventManage.wifiListSuccess event) {
         DialogUtil.closeProgress();
+//        tv_next.setEnabled(true);
+//        tv_next.setTextColor(getResources().getColor(R.color.white));
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
@@ -213,18 +212,30 @@ public class InitWifiListActivity extends BaseActivity {
         DialogUtil.closeProgress();
 //        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
+
+        if (getWifiTime++ < 3) {
+            DeviceInfoInstance.getInstance().sendGetWifiListCmd();
+        }else{
+            getWifiTime=0;
+            tv_next.setEnabled(true);
+            tv_next.setTextColor(getResources().getColor(R.color.white));
+        }
+
     }
 
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
-        DialogUtil.showDeviceOfflineDialog(this);
+        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
     }
+
+    public static int getWifiTime = 0;
 
     @Override
     protected void onResume() {
         super.onResume();
         DialogUtil.showProgress(this, "");
+        getWifiTime=0;
         DeviceInfoInstance.getInstance().sendGetWifiListCmd();
     }
 
@@ -240,23 +251,17 @@ public class InitWifiListActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    public void success() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+        DialogUtil.showTwoButtonDialog(this, "确定要退出小毛球吗？", "取消", "确定", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
 
                     }
                 },
-                new View.OnClickListener(){
+                new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {

@@ -283,7 +283,7 @@ public class DeviceInfoInstance {
                 switch (ret) {
                     case EC_SUCCESS:
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -294,6 +294,7 @@ public class DeviceInfoInstance {
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                         EventBus.getDefault().post(new EventManage.wifiListError());
                         break;
+
                 }
             }
 

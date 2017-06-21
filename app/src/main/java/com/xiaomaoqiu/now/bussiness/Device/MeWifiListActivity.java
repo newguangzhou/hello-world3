@@ -1,17 +1,23 @@
 package com.xiaomaoqiu.now.bussiness.Device;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -43,9 +49,16 @@ public class MeWifiListActivity extends BaseActivity {
     RecyclerView rv_wifilist;
 
 
-
     CheckStateAdapter adapter;
-    public Object lock=new Object();
+    public Object lock = new Object();
+
+    View btn_go_back;
+    TextView tv_next;
+
+    @Override
+    public int frameTemplate() {//没有标题栏
+        return 0;
+    }
 
 
     @Override
@@ -53,7 +66,7 @@ public class MeWifiListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.title_home_wifi));
         setContentView(R.layout.activity_wifilist);
-        ptr_refresh= (MaterialDesignPtrFrameLayout) this.findViewById(R.id.ptr_refresh);
+        ptr_refresh = (MaterialDesignPtrFrameLayout) this.findViewById(R.id.ptr_refresh);
         initView();
         initData();
 
@@ -61,17 +74,20 @@ public class MeWifiListActivity extends BaseActivity {
     }
 
     private void initView() {
+        btn_go_back = findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
 
-
-        rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
-        setNextView("保存", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+        tv_next = (TextView) findViewById(R.id.tv_next);
+        tv_next.setText("保存");
+        tv_next.setOnClickListener(new View.OnClickListener() {
 
-//                if (TextUtils.isEmpty(wifi_bssid)) {
-//                    ToastUtil.showTost("您必须选择一个homewifi");
-//                    return;
-//                }
+            @Override
+            public void onClick(View v) {
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
@@ -98,10 +114,51 @@ public class MeWifiListActivity extends BaseActivity {
 
                     }
                 });
-
-
             }
         });
+
+
+//        setNextView("保存", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+////                if (TextUtils.isEmpty(wifi_bssid)) {
+////                    ToastUtil.showTost("您必须选择一个homewifi");
+////                    return;
+////                }
+//                ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
+//                        UserInstance.getInstance().getToken(),
+//                        wifi_ssid,
+//                        wifi_bssid
+//                ).enqueue(new XMQCallback<BaseBean>() {
+//                    @Override
+//                    public void onSuccess(Response<BaseBean> response, BaseBean message) {
+//                        HttpCode ret = HttpCode.valueOf(message.status);
+//                        if (ret == EC_SUCCESS) {
+//                            PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
+//                            PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
+//                            UserInstance.getInstance().wifi_bssid = wifi_bssid;
+//                            UserInstance.getInstance().wifi_ssid = wifi_ssid;
+//                            SPUtil.putHomeWifiMac(wifi_bssid);
+//                            SPUtil.putHomeWifiSsid(wifi_ssid);
+//                            finish();
+//                        }
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onFail(Call<BaseBean> call, Throwable t) {
+//
+//                    }
+//                });
+//
+//
+//            }
+//        });
+
+
+        rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         rv_wifilist.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CheckStateAdapter(DeviceInfoInstance.getInstance().wiflist, this);
         rv_wifilist.setAdapter(adapter);
@@ -118,7 +175,7 @@ public class MeWifiListActivity extends BaseActivity {
         });
     }
 
-   public static String wifi_bssid;//homewifi   mac
+    public static String wifi_bssid;//homewifi   mac
     public static String wifi_ssid;//wifi名称
 
     private void initData() {
@@ -142,17 +199,20 @@ public class MeWifiListActivity extends BaseActivity {
 
 
                 synchronized (lock) {
-                    if(position>=adapter.mdatas.size()||position<0){
+                    if (position >= adapter.mdatas.size() || position < 0) {
                         return;
                     }
-                    wifi_bssid="";
-                    wifi_ssid="";
+                    wifi_bssid = "";
+                    wifi_ssid = "";
+                    tv_next.setEnabled(false);
+                    tv_next.setTextColor(getResources().getColor(R.color.black));
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
 
                     if (adapter.mdatas.get(position).is_homewifi == 1) {
                         wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                         wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
-
+                        tv_next.setEnabled(true);
+                        tv_next.setTextColor(getResources().getColor(R.color.white));
                         for (WifiBean bean : adapter.mdatas) {
                             if (!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
                                 bean.is_homewifi = 0;
@@ -173,7 +233,7 @@ public class MeWifiListActivity extends BaseActivity {
         synchronized (lock) {
             //刷新列表
             adapter.mdatas = DeviceInfoInstance.getInstance().wiflist.data;
-            if(adapter.mdatas.size()==0){
+            if (adapter.mdatas.size() == 0) {
                 ToastUtil.showTost("当前没有扫描到wifi");
             }
             adapter.notifyDataSetChanged();
@@ -188,10 +248,11 @@ public class MeWifiListActivity extends BaseActivity {
 //        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
     }
+
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
-        DialogUtil.showDeviceOfflineDialog(this);
+        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
     }
 
     @Override

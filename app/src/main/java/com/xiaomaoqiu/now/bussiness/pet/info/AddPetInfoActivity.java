@@ -279,7 +279,7 @@ public class AddPetInfoActivity extends BaseActivity  {
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
-        DialogUtil.showDeviceOfflineDialog(this);
+        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
     }
 
     //解绑成功

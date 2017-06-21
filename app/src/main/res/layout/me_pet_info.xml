@@ -73,6 +73,7 @@
                 android:textSize="20.5sp"
                 android:cursorVisible="false"
                 android:background="@null"
+                android:gravity="center"
                 android:id="@+id/txt_pet_name"/>
             <ImageView
                 android:id="@+id/img_pet_sex"

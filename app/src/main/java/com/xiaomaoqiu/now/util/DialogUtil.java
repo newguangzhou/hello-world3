@@ -84,10 +84,12 @@ public class DialogUtil {
     }
 
     //展示设备离线弹窗
-    public static void showDeviceOfflineDialog(Context context) {
+    public static void showDeviceOfflineDialog(Context context,String title) {
         closeAllDialog();
         if (offlineDialog == null) {
             offlineDialog = new AppDialog(context, R.layout.dialog_device_already_bind, -1, -2, 0, Gravity.CENTER);
+            TextView tv_title= (TextView) offlineDialog.findViewById(R.id.tv_title);
+            tv_title.setText(title);
             TextView tv_old_account = (TextView) offlineDialog.findViewById(R.id.tv_old_account);
             tv_old_account.setText("设备处于离线状态，请开机");
             Button already_bind_confirm = (Button) offlineDialog.findViewById(R.id.already_bind_confirm);
