@@ -145,7 +145,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_pet_center:
                 MainActivity.getLocationTime=0;
-                MapInstance.showPhoneCenter=false;
+//                MapInstance.showPhoneCenter=false;
                 //狗狗位置
                 PetInfoInstance.getInstance().getPetLocation();
                 break;
@@ -183,7 +183,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
-        MapInstance.showPhoneCenter=true;
+//        MapInstance.showPhoneCenter=true;
         MapInstance.getInstance().startLocListener(1000);
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
 
@@ -192,7 +192,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //todo 小米推送
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(PushEventManage.locationChange event) {
-        MapInstance.showPhoneCenter=false;
+//        MapInstance.showPhoneCenter=false;
         //手机位置
         MapInstance.getInstance().startLoc();
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);

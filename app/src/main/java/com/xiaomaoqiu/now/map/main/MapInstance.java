@@ -321,7 +321,7 @@ public class MapInstance implements BDLocationListener {
     }
 
 
-    //是否以手机为中心
+//    //是否以手机为中心
     public static boolean showPhoneCenter=true;
 
     @Override
@@ -332,6 +332,7 @@ public class MapInstance implements BDLocationListener {
         SPUtil.putPhoneLongitude(phoneLongitude + "");
         if(showPhoneCenter) {
             setPhonePos();
+            showPhoneCenter=false;
         }
         if (!PetInfoInstance.getInstance().getAtHome()) {
             //todo 如果不在家，就设置为另一个头像
