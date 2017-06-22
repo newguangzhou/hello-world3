@@ -167,14 +167,7 @@ public class DialogUtil {
             superLowBatteryIsClosed = true;
         }
     }
-
-
-    //宠物安全提醒
-    public static void showSafeCautionDialog(Context context) {
-
-    }
-
-
+    
     //关闭所有弹窗
     public static void closeAllDialog() {
         if (offlineDialog != null && offlineDialog.isShowing()) {
@@ -393,8 +386,8 @@ public class DialogUtil {
             }
         });
 
-        petisFindedDialog.setCancelable(true);
-        petisFindedDialog.setCanceledOnTouchOutside(true);
+        petisFindedDialog.setCancelable(false);
+        petisFindedDialog.setCanceledOnTouchOutside(false);
         petisFindedDialog.show();
 
     }
@@ -442,8 +435,8 @@ public class DialogUtil {
             }
         });
 
-        petAtHomeDialog.setCancelable(true);
-        petAtHomeDialog.setCanceledOnTouchOutside(true);
+        petAtHomeDialog.setCancelable(false);
+        petAtHomeDialog.setCanceledOnTouchOutside(false);
         petAtHomeDialog.show();
 
     }
@@ -513,8 +506,8 @@ public class DialogUtil {
                 }
             }
         });
-        safeCautionDialog.setCancelable(true);
-        safeCautionDialog.setCanceledOnTouchOutside(true);
+        safeCautionDialog.setCancelable(false);
+        safeCautionDialog.setCanceledOnTouchOutside(false);
         safeCautionDialog.show();
 
     }
