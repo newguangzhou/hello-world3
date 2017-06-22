@@ -116,7 +116,8 @@ public class MeWifiListActivity extends BaseActivity {
                 });
             }
         });
-
+        tv_next.setEnabled(false);
+        tv_next.setTextColor(getResources().getColor(R.color.black));
 
 //        setNextView("保存", new View.OnClickListener() {
 //            @Override

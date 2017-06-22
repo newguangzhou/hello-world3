@@ -197,7 +197,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         if ("".equals(name)) {
             name = "宠物";
         }
-        DialogUtil.showThreeButtonDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
+        DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
                 new View.OnClickListener() {
 
                     @Override

@@ -322,7 +322,7 @@ public class MapInstance implements BDLocationListener {
 
 
     //是否以手机为中心
-    public static boolean showPhoneCenter=false;
+    public static boolean showPhoneCenter=true;
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {

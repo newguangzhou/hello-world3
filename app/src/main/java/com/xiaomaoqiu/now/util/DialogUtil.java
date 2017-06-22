@@ -65,6 +65,10 @@ public class DialogUtil {
     public static Dialog petAtHomeDialog;//宠物是否到家
 
 
+    public static Dialog toSportDialog;//去运动弹窗
+    public static Dialog toHomeDialog;//回家弹窗
+
+
     //正在充电中弹窗
     public static void showBatteryIngNoticeDialog(Context context) {
         closeAllDialog();
@@ -443,6 +447,78 @@ public class DialogUtil {
         petAtHomeDialog.show();
 
     }
+
+    //宠物安全提醒
+    public static void showSafeCautionDialog(final Context context, String titleString, String bodyString, String test1, String test2, String test3,
+                                             final View.OnClickListener listener1, final View.OnClickListener listener2, final View.OnClickListener listener3) {
+        if (!canShowDialog(context)) return;
+        closeAllDialog();
+        if(safeCautionDialog!=null&&safeCautionDialog.isShowing()){
+            try {
+                safeCautionDialog.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        safeCautionDialog=null;
+        safeCautionDialog= new AppDialog(context, R.layout.dialog_three_button, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        safeCautionDialog.getWindow().setWindowAnimations(0);
+        TextView tv_title = (TextView) safeCautionDialog.findViewById(R.id.tv_title);
+        TextView tv_message = (TextView) safeCautionDialog.findViewById(R.id.tv_message);
+        Button btn_three_one = (Button) safeCautionDialog.findViewById(R.id.btn_three_one);
+        Button btn_three_two = (Button) safeCautionDialog.findViewById(R.id.btn_three_two);
+        Button btn_three_three = (Button) safeCautionDialog.findViewById(R.id.btn_three_three);
+
+        tv_title.setText(titleString);
+        tv_message.setText(bodyString);
+        btn_three_one.setText(test1);
+        btn_three_two.setText(test2);
+        btn_three_three.setText(test3);
+
+        btn_three_one.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (safeCautionDialog.isShowing()) {
+                    safeCautionDialog.dismiss();
+                }
+                if (listener1 != null) {
+                    listener1.onClick(v);
+                }
+            }
+        });
+        btn_three_two.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (safeCautionDialog.isShowing()) {
+                    safeCautionDialog.dismiss();
+                }
+                if (listener2 != null) {
+                    listener2.onClick(v);
+                }
+            }
+        });
+        btn_three_three.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (safeCautionDialog.isShowing()) {
+                    safeCautionDialog.dismiss();
+                }
+                if (listener3 != null) {
+                    listener3.onClick(v);
+                }
+            }
+        });
+        safeCautionDialog.setCancelable(true);
+        safeCautionDialog.setCanceledOnTouchOutside(true);
+        safeCautionDialog.show();
+
+    }
+
 
 
 

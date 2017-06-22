@@ -276,6 +276,11 @@
             android:screenOrientation="portrait"
             />
 
+        <activity android:name="com.xiaomaoqiu.now.bussiness.MapLocationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
+
         <!-- 小米推送开始-->
         <service
             android:enabled="true"

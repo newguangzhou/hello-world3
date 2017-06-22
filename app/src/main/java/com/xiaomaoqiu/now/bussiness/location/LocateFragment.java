@@ -123,7 +123,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             }
 
         }
-        MapInstance.getInstance().startLocListener(1000);
+
+//        MapInstance.getInstance().startLocListener(1000);
         PetInfoInstance.getInstance().getPetLocation();
     }
 
@@ -182,6 +183,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
+        MapInstance.showPhoneCenter=true;
         MapInstance.getInstance().startLocListener(1000);
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
 
@@ -190,7 +192,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //todo 小米推送
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(PushEventManage.locationChange event) {
-        MapInstance.getInstance().showPhoneCenter=false;
+        MapInstance.showPhoneCenter=false;
         //手机位置
         MapInstance.getInstance().startLoc();
         MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
