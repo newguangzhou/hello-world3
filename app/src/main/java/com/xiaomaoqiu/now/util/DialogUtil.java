@@ -167,7 +167,7 @@ public class DialogUtil {
             superLowBatteryIsClosed = true;
         }
     }
-    
+
     //关闭所有弹窗
     public static void closeAllDialog() {
         if (offlineDialog != null && offlineDialog.isShowing()) {

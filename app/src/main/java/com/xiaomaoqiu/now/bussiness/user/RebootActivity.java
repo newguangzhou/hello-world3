@@ -46,6 +46,7 @@ public class RebootActivity extends BaseActivity implements LogoutView {
             }
         });
         EventBus.getDefault().register(this);
+        loginPresenter = new LoginPresenter(this);
     }
 
     //设备重启指令发送
