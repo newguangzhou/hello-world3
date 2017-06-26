@@ -389,7 +389,7 @@ public class MapInstance implements BDLocationListener {
         LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
         LatLng petLatLng = new LatLng(petLatitude, petLongitude);
         //计算p1、p2两点之间的直线距离，单位：米
-        if(GPS_OPEN&&DistanceUtil.getDistance(phoneLatLng, petLatLng)<1000){
+        if(GPS_OPEN&&DistanceUtil.getDistance(phoneLatLng, petLatLng)<10){
             EventBus.getDefault().post(new EventManage.distanceClose());
         }
     }
