@@ -28,7 +28,7 @@
 
     <!--通用-->
     <dimen name="common_dialog_title">32dp</dimen>
-    <dimen name="common_dialog_message">20dp</dimen>
+    <dimen name="common_dialog_message">16dp</dimen>
     <dimen name="common_dialog_button">16dp</dimen>
     <dimen name="dialog_service_margin">50dp</dimen>
 
