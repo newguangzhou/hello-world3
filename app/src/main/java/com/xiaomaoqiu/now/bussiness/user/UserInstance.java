@@ -37,6 +37,9 @@ public class UserInstance {
             userInstance.wifi_ssid = SPUtil.getHomeWifiSsid();
             userInstance.has_reboot=SPUtil.getHasReboot();
 
+            userInstance.longitude=Double.valueOf(SPUtil.getHOME_LONGITUDE());
+            userInstance.latitude=Double.valueOf(SPUtil.getHOME_LATITUDE());
+
         }
         return userInstance;
     }
@@ -57,6 +60,10 @@ public class UserInstance {
     public String wifi_ssid;
 
     public int has_reboot;//更新数据后是否已经重启过设备，0：未重启，1：已重启
+
+    public double longitude;//home_longitude
+
+    public double latitude;//home_latitude
 
     //获取用户基本信息
     public void getUserInfo() {
@@ -104,6 +111,12 @@ public class UserInstance {
         SPUtil.putLoginStatus(false);
         SPUtil.putUid(m_uid);
         SPUtil.putToken("");
+
+        longitude=-1;
+        SPUtil.putHOME_LONGITUDE("-1");
+        latitude=-1;
+        SPUtil.putHOME_LATITUDE("-1");
+
     }
 
     public void saveUserInfo(UserBean userBean) {
@@ -117,6 +130,12 @@ public class UserInstance {
         SPUtil.putHomeWifiSsid(wifi_ssid);
         has_reboot = userBean.has_reboot;
         SPUtil.putHasReboot(has_reboot);
+
+        longitude=userBean.longitude;
+        SPUtil.putHOME_LONGITUDE(longitude+"");
+
+        latitude=userBean.latitude;
+        SPUtil.putHOME_LATITUDE(latitude+"");
 
 
     }

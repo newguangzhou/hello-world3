@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
@@ -225,6 +226,18 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             intent.setClass(LoginActivity.this, InitWifiListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if(equals(UserInstance.getInstance().latitude==-1)){
+            intent.setClass(LoginActivity.this, MapLocationActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if(UserInstance.getInstance().has_reboot==0){
+            intent.setClass(LoginActivity.this, RebootActivity.class);
             startActivity(intent);
             finish();
             return;

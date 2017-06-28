@@ -1,5 +1,7 @@
 package com.xiaomaoqiu.now.map;
 
+import android.util.Log;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -10,6 +12,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.map.main.addressParseListener;
 
 /**
@@ -139,9 +142,11 @@ public class HomelocationInstance implements BDLocationListener {
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
+        Log.e("longtianlove海拔",bdLocation.getAltitude()+"");
         phoneLatitude = bdLocation.getLatitude();
         phoneLongitude = bdLocation.getLongitude();
         LatLng postion = new LatLng(phoneLatitude, phoneLongitude);
+//        postion= MapInstance.converterLatLng(postion);
         float f = mBaiduMap.getMaxZoomLevel();//19.0
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
         mBaiduMap.animateMapStatus(u);
@@ -152,5 +157,22 @@ public class HomelocationInstance implements BDLocationListener {
     @Override
     public void onConnectHotSpotMessage(String s, int i) {
 
+    }
+
+
+
+    public static double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+    /**
+     * * 火星坐标系 (GCJ-02) 与百度坐标系 (BD-09) 的转换算法 * * 将 BD-09 坐标转换成GCJ-02 坐标 * * @param
+     * bd_lat * @param bd_lon * @return
+     */
+    public static double[] bd09_To_Gcj02(double lat, double lon) {
+        double x = lon - 0.0065, y = lat - 0.006;
+        double z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi);
+        double theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi);
+        double tempLon = z * Math.cos(theta);
+        double tempLat = z * Math.sin(theta);
+        double[] gps = {tempLat,tempLon};
+        return gps;
     }
 }

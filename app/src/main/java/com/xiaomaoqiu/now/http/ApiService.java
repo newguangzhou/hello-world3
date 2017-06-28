@@ -238,6 +238,17 @@ public interface ApiService {
     );
 
     /**
+     * 设置homelocation
+     */
+    @GET(Constants.Url.Device.set_home_location)
+    Call<BaseBean> setHomeLocation(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("longitude") double longitude,
+            @Query("latitude") double latitude
+    );
+
+    /**
      * 解除绑定
      * http://120.24.152.121:9100/device/remove_device_info?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&imei=357396080000293
      *

@@ -94,6 +94,11 @@ public class SPUtil {
     //home_wifi_ssid
     public static final String HOME_WIFI_SSID="home_wifi_ssid";
 
+    //home_longitude
+    public static final String HOME_LONGITUDE="home_longitude";
+    //home_latitude
+    public static final String HOME_LATITUDE="home_latitude";
+
     //是否重启
     public static final String HAS_REBOOT="has_reboot";
 
@@ -323,6 +328,19 @@ public class SPUtil {
 
     public static void putHomeWifiMac(String value) {
         putString(HOME_WIFI_MAC, value);
+    }
+
+    public static String getHOME_LONGITUDE(){
+        return getString(HOME_LONGITUDE,"-1");
+    }
+    public static void putHOME_LONGITUDE(String longitudeString){
+        putString(HOME_LONGITUDE,longitudeString);
+    }
+    public static String getHOME_LATITUDE(){
+        return getString(HOME_LATITUDE,"-1");
+    }
+    public static void putHOME_LATITUDE(String latitudeString){
+        putString(HOME_LATITUDE,latitudeString);
     }
 
     public static String getHomeWifiSsid(){

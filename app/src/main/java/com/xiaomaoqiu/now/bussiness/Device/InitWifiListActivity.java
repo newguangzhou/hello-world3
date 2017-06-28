@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
+import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
@@ -109,6 +110,13 @@ public class InitWifiListActivity extends BaseActivity {
                             SPUtil.putHomeWifiMac(wifi_bssid);
                             SPUtil.putHomeWifiSsid(wifi_ssid);
 
+                        }
+                        if(UserInstance.getInstance().latitude==-1){
+                            Intent intent = new Intent();
+                            intent.setClass(InitWifiListActivity.this, MapLocationActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return;
                         }
                         if (UserInstance.getInstance().has_reboot == 0) {
                             Intent intent = new Intent(InitWifiListActivity.this, RebootActivity.class);

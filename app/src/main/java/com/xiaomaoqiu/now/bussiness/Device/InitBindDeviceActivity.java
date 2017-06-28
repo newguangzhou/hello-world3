@@ -11,6 +11,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
@@ -196,6 +197,14 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
         }
         if (TextUtils.isEmpty(UserInstance.getInstance().wifi_bssid)) {
             Intent intent = new Intent(this, InitWifiListActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        if(UserInstance.getInstance().latitude==-1){
+            Intent intent = new Intent();
+            intent.setClass(this, MapLocationActivity.class);
             startActivity(intent);
             finish();
             return;

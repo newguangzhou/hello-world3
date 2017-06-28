@@ -245,7 +245,7 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
         }
         LatLng sourceLatLng=new LatLng(latitude,longitude);
 
-        LatLng desLatLng=converterLatLng(sourceLatLng);
+        LatLng desLatLng=converterLatLngFromBaidu(sourceLatLng);
 
 
         mPetMarker.setPosition(desLatLng);
@@ -607,7 +607,7 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
 
 
     //  // 将google地图、soso地图、aliyun地图、mapabc地图和amap地图// 所用坐标转换成百度坐标
-    public LatLng converterLatLng(LatLng sourceLatLng ) {
+    public static LatLng converterLatLngFromBaidu(LatLng sourceLatLng ) {
         CoordinateConverter converter = new CoordinateConverter();
         converter.from(CoordinateConverter.CoordType.COMMON);
 // sourceLatLng待转换坐标

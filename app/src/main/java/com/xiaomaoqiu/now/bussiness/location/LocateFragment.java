@@ -171,6 +171,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         } else {
             walkpetNoticeView.setVisibility(View.GONE);
             petLocContainer.setVisibility(View.VISIBLE);
+            MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
         }
         mapPetAvaterView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
 
@@ -185,7 +186,11 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
 //        MapInstance.showPhoneCenter=true;
         MapInstance.getInstance().startLocListener(1000);
-        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+        if(PetInfoInstance.getInstance().getAtHome()){
+            MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
+        }else {
+            MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+        }
 
     }
 

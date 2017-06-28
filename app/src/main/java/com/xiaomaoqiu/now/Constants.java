@@ -134,6 +134,10 @@ public class Constants {
              * 设置homewifi
              */
             public static final String set_home_wifi="user/set_home_wifi";
+            /**
+             * 设置homelocation
+             */
+            public static final String set_home_location="user/set_home_location";
 //            /**
 //             * 开关灯
 //             */

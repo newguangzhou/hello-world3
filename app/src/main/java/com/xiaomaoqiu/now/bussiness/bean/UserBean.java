@@ -19,4 +19,8 @@ public class UserBean extends BaseBean {
 
     public int has_reboot;
 
+    public double longitude;
+
+    public double latitude;
+
 }

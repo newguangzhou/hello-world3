@@ -3,7 +3,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/total_color_1"
+        >
 
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_logout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="退出登录"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--/>-->
+
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_width="70dp"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="常住地位置"
+            />
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"

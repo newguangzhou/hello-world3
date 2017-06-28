@@ -202,7 +202,7 @@ public class DeviceInfoInstance {
                         EventBus.getDefault().post(event);
                         break;
                     case EC_INVALID_ARGS:
-                        ToastUtil.showTost("设备不存在");
+                        ToastUtil.showTost("IMEI码有误");
                         break;
                     case EC_OFFLINE:
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
