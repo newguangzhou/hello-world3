@@ -109,7 +109,7 @@
     <!--电量提醒-->
     <string name="battery_notice_content">为了您的宠物的安全，请注意及时充电。</string>
     <string name="battery_notice_timeformat">(电量测量时间%s)</string>
-    <string name="battery_notice_levelformat">电池剩余电量：%d</string>
+    <string name="battery_notice_levelformat">剩余电量：%d</string>
     <!--绑定设备-->
     <string name="bind_device">绑定设备</string>
     <string name="zxing">扫一扫</string>

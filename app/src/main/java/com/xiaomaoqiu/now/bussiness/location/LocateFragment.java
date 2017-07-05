@@ -200,14 +200,18 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 //        MapInstance.showPhoneCenter=false;
         //手机位置
         MapInstance.getInstance().startLoc();
-        MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+        if(PetInfoInstance.getInstance().getAtHome()){
+            MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
+        }else {
+            MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+        }
     }
 
     //todo 小米推送
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
-        petLocation.setText(locationString+"设备目前已离线");
+        petLocation.setText(locationString+"(注意：设备目前已离线）");
     }
 
     //todo 小米推送

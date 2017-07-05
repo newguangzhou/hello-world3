@@ -12,8 +12,11 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.map.main.addressParseListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by long on 2017/6/22.
@@ -145,6 +148,10 @@ public class HomelocationInstance implements BDLocationListener {
         Log.e("longtianlove海拔",bdLocation.getAltitude()+"");
         phoneLatitude = bdLocation.getLatitude();
         phoneLongitude = bdLocation.getLongitude();
+        EventManage.bindingLocationChanged event=new EventManage.bindingLocationChanged();
+        event.latitude=phoneLatitude;
+        event.longitude=phoneLongitude;
+        EventBus.getDefault().post(event);
         LatLng postion = new LatLng(phoneLatitude, phoneLongitude);
 //        postion= MapInstance.converterLatLng(postion);
         float f = mBaiduMap.getMaxZoomLevel();//19.0

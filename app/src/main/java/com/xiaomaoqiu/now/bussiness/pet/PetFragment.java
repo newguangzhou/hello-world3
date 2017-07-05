@@ -248,7 +248,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.btn_sport_index:
-                intent.setClass(getActivity(), SportIndexActivity.class);
+                intent.setClass(getActivity(), HealthIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
@@ -398,7 +398,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                 break;
             case R.id.btn_health:
-                intent.setClass(getActivity(), HealthIndexActivity.class);
+                intent.setClass(getActivity(), SportIndexActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_sport:

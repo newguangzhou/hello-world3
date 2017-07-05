@@ -109,4 +109,10 @@ public class EventManage {
 
     }
 
+    //绑定流程中位置信息变更提醒
+    public static class bindingLocationChanged{
+        public double latitude;
+        public double longitude;
+    }
+
 }

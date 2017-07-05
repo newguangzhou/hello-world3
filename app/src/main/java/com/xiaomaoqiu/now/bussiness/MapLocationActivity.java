@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.bussiness;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,9 +14,11 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -28,6 +31,10 @@ import com.xiaomaoqiu.now.map.main.addressParseListener;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -51,8 +58,8 @@ public class MapLocationActivity extends Activity {
     private View btn_phone_center;
     private View iv_location;
 
-    private double longitude;
-    private double latitude;
+    public double longitude;
+    public double latitude;
 
 
     @Override
@@ -158,11 +165,33 @@ public class MapLocationActivity extends Activity {
             }
         });
         HomelocationInstance.getInstance().init(mMapView);
+        EventBus.getDefault().register(this);
+    }
+    //宠物信息更新
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void getActivityInfo(EventManage.bindingLocationChanged event) {
+        LatLng position=new LatLng(event.latitude,event.longitude);
+        MapLocationParser.queryLocationDesc(position, new addressParseListener() {
+            @Override
+            public void onAddressparsed(String address) {
+//                        Log.e("longtianlove","位置"+address);
+                tv_location.setText(address);
+            }
+        });
+        double[] temp=HomelocationInstance.bd09_To_Gcj02(position.latitude,position.longitude);
+        latitude = temp[0];
+        longitude = temp[1];
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 //        Log.e("longtianlove-point","width:"+(mMapView.getWidth() / 2)+"height:"+mMapView.getHeight() /2);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
