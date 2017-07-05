@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 // 依赖插件脚本
 apply from: 'tinker-support.gradle'
 
-apply plugin: 'com.growingio.android'
 
 
 
@@ -23,7 +22,7 @@ android {
         applicationId 'com.xiaomaoqiu.pet'
         minSdkVersion 18
         targetSdkVersion 22
-        versionCode 8
+        versionCode 9
         versionName '0.1.0.3'
         javaCompileOptions {
             annotationProcessorOptions {
@@ -31,8 +30,6 @@ android {
             }
         }
 
-        resValue("string", "growingio_project_id", "b4d9d83cc36e55f3")
-        resValue("string", "growingio_url_scheme", "growing.5f3af852366082b1")
     }
     buildTypes {
         release {
@@ -101,6 +98,4 @@ dependencies {
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/BaiduTraceSDK_v3_0_1.jar')
     compile files('libs/bos-android-sdk-1.0.2.jar')
-
-    compile 'com.growingio.android:vds-android-agent:0.9.104@aar'
 }

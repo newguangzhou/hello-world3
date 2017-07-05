@@ -31,7 +31,7 @@
         android:layout_marginRight="7.5dp"
         android:textSize="11.5sp"
         android:textColor="@color/total_color_3"
-        android:text="浅度睡眠"/>
+        android:text="休憩"/>
 
     <ImageView
         android:id="@+id/sleep_level_high"

@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.pet.R;
@@ -26,7 +30,8 @@ public class RebootActivity extends BaseActivity implements LogoutView {
         return 0;
     }
 
-    Button btn_reboot;
+    TextView btn_reboot;
+    View btn_go_back;
 
     LoginPresenter loginPresenter;
 
@@ -37,7 +42,17 @@ public class RebootActivity extends BaseActivity implements LogoutView {
         SPUtil.putHome(false);
 
         setContentView(R.layout.activity_reboot);
-        btn_reboot = (Button) this.findViewById(R.id.btn_reboot);
+        btn_go_back=findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PetAppLike.mcontext, MapLocationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                PetAppLike.mcontext.startActivity(intent);
+            }
+        });
+        btn_reboot = (TextView) this.findViewById(R.id.btn_reboot);
         btn_reboot.setOnClickListener(new View.OnClickListener() {
 
             @Override

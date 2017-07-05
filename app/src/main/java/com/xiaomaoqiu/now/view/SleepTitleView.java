@@ -44,7 +44,7 @@ public class SleepTitleView extends RelativeLayout {
             firstText="深度睡眠";
         }
         if(TextUtils.isEmpty(secondText)){
-            secondText="浅度睡眠";
+            secondText="休憩";
         }
         if(TextUtils.isEmpty(title)){
             title="今日睡眠";

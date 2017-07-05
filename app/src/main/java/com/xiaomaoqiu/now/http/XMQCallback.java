@@ -11,6 +11,7 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
@@ -46,6 +47,8 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 //如果token过期，直接跳转到登录页面
                 if (EC_INVALID_TOKEN == ret) {
+                    MainActivity.getLocationWithOneMinute=false;
+
                     //注销小米账号
                     XMPushManagerInstance.getInstance().stop();
                     ToastUtil.showTost("身份过期，请重新登录");
@@ -64,6 +67,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     return;
                 }
                 if(EC_LOGIN_IN_OTHER_PHONE==ret){
+                    MainActivity.getLocationWithOneMinute=false;
                     //注销小米账号
                     XMPushManagerInstance.getInstance().stop();
                     UserInstance.getInstance().clearLoginInfo();
@@ -94,6 +98,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
 
                 //如果设备不存在，直接退到绑定设备页面
                 if (EC_DEVICE_NOT_EXIST == ret) {
+                    MainActivity.getLocationWithOneMinute=false;
 //                    ToastUtil.showTost("请先填写您的宠物信息");
                     onFail(call, null);
 
@@ -108,6 +113,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                 }
                 //如果宠物不存在了，直接退到添加宠物页面
                 if (EC_PET_NOT_EXIST == ret) {
+                    MainActivity.getLocationWithOneMinute=false;
 //                    ToastUtil.showTost("请先填写您的宠物信息");
                     onFail(call, null);
 

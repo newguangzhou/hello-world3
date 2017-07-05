@@ -57,10 +57,6 @@ public class PetAppLike extends DefaultApplicationLike {
             //宠物能量运算工具初始化
             PetUtil.getInstance().init();
 
-            //添加growingio
-            GrowingIO.startWithConfiguration(getApplication(), new Configuration()
-                    .useID()
-                    .trackAllFragments());
         }
 
     }
