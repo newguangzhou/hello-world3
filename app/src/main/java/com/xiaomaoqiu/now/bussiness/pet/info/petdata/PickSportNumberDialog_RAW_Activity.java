@@ -37,7 +37,7 @@ public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.O
 
         mWvNumber = (WheelView) findViewById(R.id.wv_number);
 
-        for(int i=200;i<=1000;i+=50)
+        for(int i=1;i<=1000;i+=1)
             mItems.add(String.valueOf(i));
         mWvNumber.setItems(mItems);
 

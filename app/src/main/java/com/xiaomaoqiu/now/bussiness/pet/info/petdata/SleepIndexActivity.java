@@ -108,7 +108,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         threePartLineView_sleep.setData(deep,light);
         int totalWidth=threePartLineView_sleep.getWidth();
 //        textAimView_sleep.setAim((int)light+"",(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
-        String tip="今日深度睡眠为"+deep+"小时，浅度睡眠为"+light+"小时。";
+        String tip="今日深睡为"+deep+"小时，小憩为"+light+"小时。";
         todayTip.setText(tip);
     }
 
@@ -148,7 +148,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         if(values == null || values.size() <2){
             return;
         }
-        String tip=data+"深度睡眠为"+(values.get(0))+"小时，浅度睡眠为"+(values.get(1))+"小时。";
+        String tip=data+"深睡为"+(values.get(0))+"小时，小憩为"+(values.get(1))+"小时。";
         if(SleepChartIndexPresenter.FLAG_WEEK == flag){
             weekTip.setText(tip);
         }else{

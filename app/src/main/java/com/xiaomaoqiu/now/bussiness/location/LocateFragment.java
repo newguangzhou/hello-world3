@@ -340,7 +340,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 }
             });
         } else {
-            String conent = getContext().getResources().getString(R.string.map_is_findpet);
+            String content = getContext().getResources().getString(R.string.map_is_findpet);
 //            DialogUtil.showTwoButtonDialog(getContext(),conent,"取消","确定",new View.OnClickListener(){
 //
 //                @Override
@@ -371,7 +371,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 //            }
 //            );
 
-            DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
+            DialogToast.createDialogWithTwoButton(getContext(), content, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
