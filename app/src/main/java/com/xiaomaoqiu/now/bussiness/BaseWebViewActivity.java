@@ -3,9 +3,11 @@ package com.xiaomaoqiu.now.bussiness;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.pet.R;
@@ -15,11 +17,28 @@ import com.xiaomaoqiu.pet.R;
  */
 
 public class BaseWebViewActivity extends BaseActivity {
+
+    @Override
+    public int frameTemplate() {
+        return 0;
+    }
+
+    View btn_go_back;
+    TextView tv_title;
     WebView wv_net;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
+        btn_go_back=findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        tv_title= (TextView) findViewById(R.id.tv_title);
         wv_net= (WebView) findViewById(R.id.wv_net);
 
 
@@ -35,6 +54,7 @@ public class BaseWebViewActivity extends BaseActivity {
         //设置Web视图
         wv_net.setWebViewClient(new webViewClient ());
         Intent intent=getIntent();
+        String title=intent.getStringExtra("title");
        String urlString= intent.getStringExtra("web_url");
         //加载需要显示的网页
         wv_net.loadUrl(urlString);

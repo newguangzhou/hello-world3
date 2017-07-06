@@ -9,15 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
+import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
-import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
-import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -83,7 +81,7 @@ public class MeWifiListActivity extends BaseActivity {
             }
         });
         tv_next = (TextView) findViewById(R.id.tv_next);
-        tv_next.setText("保存");
+        tv_next.setText("下一步");
         tv_next.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -103,7 +101,9 @@ public class MeWifiListActivity extends BaseActivity {
                             UserInstance.getInstance().wifi_ssid = wifi_ssid;
                             SPUtil.putHomeWifiMac(wifi_bssid);
                             SPUtil.putHomeWifiSsid(wifi_ssid);
-                            finish();
+//                            finish();
+                            Intent intent=new Intent(MeWifiListActivity.this, MapLocationActivity.class);
+                            startActivity(intent);
                         }
 
 

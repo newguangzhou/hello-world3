@@ -21,8 +21,8 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
+import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
-import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.PetUtil;
@@ -269,7 +269,7 @@ public class AddPetInfoActivity extends BaseActivity  {
 
         if(UserInstance.getInstance().latitude==-1){
              intent = new Intent();
-            intent.setClass(this, MapLocationActivity.class);
+            intent.setClass(this, InitMapLocationActivity.class);
             startActivity(intent);
             finish();
             return;

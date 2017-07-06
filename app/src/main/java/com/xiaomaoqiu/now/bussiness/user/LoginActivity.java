@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
+import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
@@ -231,7 +231,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
             return;
         }
         if(equals(UserInstance.getInstance().latitude==-1)){
-            intent.setClass(LoginActivity.this, MapLocationActivity.class);
+            intent.setClass(LoginActivity.this, InitMapLocationActivity.class);
             startActivity(intent);
             finish();
             return;

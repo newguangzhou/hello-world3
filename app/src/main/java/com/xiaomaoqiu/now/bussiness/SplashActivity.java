@@ -98,7 +98,7 @@ public class SplashActivity extends BaseActivity {
             return;
         }
         if(UserInstance.getInstance().latitude==-1){
-            intent.setClass(SplashActivity.this, MapLocationActivity.class);
+            intent.setClass(SplashActivity.this, InitMapLocationActivity.class);
             startActivity(intent);
             finish();
             return;

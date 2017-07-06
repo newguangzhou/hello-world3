@@ -124,6 +124,7 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             >
 
         </activity>
@@ -277,11 +278,14 @@
             android:screenOrientation="portrait"
             />
 
+        <activity android:name="com.xiaomaoqiu.now.bussiness.InitMapLocationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
         <activity android:name="com.xiaomaoqiu.now.bussiness.MapLocationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
-
         <!-- 小米推送开始-->
         <service
             android:enabled="true"

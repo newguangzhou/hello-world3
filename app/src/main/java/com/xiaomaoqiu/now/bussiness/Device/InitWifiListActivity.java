@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
-import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
+import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
@@ -18,8 +18,6 @@ import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
-import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
-import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -113,7 +111,7 @@ public class InitWifiListActivity extends BaseActivity {
                         }
                         if(UserInstance.getInstance().latitude==-1){
                             Intent intent = new Intent();
-                            intent.setClass(InitWifiListActivity.this, MapLocationActivity.class);
+                            intent.setClass(InitWifiListActivity.this, InitMapLocationActivity.class);
                             startActivity(intent);
                             finish();
                             return;

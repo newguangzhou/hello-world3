@@ -10,8 +10,9 @@ import android.widget.EditText;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
+import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
-import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
@@ -118,6 +119,17 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
             }
         });
 
+        ll_help=this.findViewById(R.id.ll_help);
+        ll_help.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(InitBindDeviceActivity.this, BaseWebViewActivity.class);
+                intent.putExtra("web_url","http://www.xiaomaoqiu.com/supprot.html?nav=2");
+                startActivity(intent);
+            }
+        });
+
         inputImei = (EditText) findViewById(R.id.bind_device_input_imei);
         sweepBt = (Button) findViewById(R.id.bind_device_button);
         sweepBt.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +218,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
         if(UserInstance.getInstance().latitude==-1){
             Intent intent = new Intent();
-            intent.setClass(this, MapLocationActivity.class);
+            intent.setClass(this, InitMapLocationActivity.class);
             startActivity(intent);
             finish();
             return;

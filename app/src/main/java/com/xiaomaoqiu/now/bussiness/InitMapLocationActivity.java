@@ -42,11 +42,11 @@ import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
  * Created by long on 2017/6/22.
  */
 
-public class MapLocationActivity extends Activity {
+public class InitMapLocationActivity extends Activity {
 
 
     View btn_go_back;
-    TextView tv_next;
+    View tv_next;
 
     private TextureMapView mMapView;
     private TextView tv_location;
@@ -73,8 +73,7 @@ public class MapLocationActivity extends Activity {
                 PetAppLike.mcontext.startActivity(intent);
             }
         });
-        tv_next = (TextView) findViewById(R.id.tv_next);
-        tv_next.setText("保存");
+        tv_next = findViewById(R.id.tv_next);
         tv_next.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -97,12 +96,12 @@ public class MapLocationActivity extends Activity {
                             SPUtil.putHOME_LONGITUDE(longitude+"");
                         }
                         if (UserInstance.getInstance().has_reboot == 0) {
-                            Intent intent = new Intent(MapLocationActivity.this, RebootActivity.class);
+                            Intent intent = new Intent(InitMapLocationActivity.this, RebootActivity.class);
                             startActivity(intent);
                             finish();
                             return;
                         }
-                        Intent intent = new Intent(MapLocationActivity.this, MainActivity.class);
+                        Intent intent = new Intent(InitMapLocationActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
