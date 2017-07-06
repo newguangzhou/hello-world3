@@ -55,7 +55,7 @@
     <!--小米推送相关^结束-->
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    
+
 
     <application
         android:name="com.xiaomaoqiu.now.SampleApplication"

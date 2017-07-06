@@ -2,72 +2,6 @@
 <resources>
 
     <string-array name="alldog_name">
-        <item>古代长须牧羊犬</item>
-        <item>戈登雪达犬</item>
-        <item>古代英国牧羊犬</item>
-        <item>贵宾犬（玩具）</item>
-        <item>贵宾犬（迷你）</item>
-        <item>贵宾犬（标准）</item>
-        <item>刚毛指示格里芬犬</item>
-        <item>哈瓦那犬</item>
-        <item>湖畔梗</item>
-        <item>蝴蝶犬</item>
-        <item>哈士奇</item>
-        <item>荷兰毛狮犬</item>
-        <item>万能梗</item>
-        <item>维兹拉犬</item>
-        <item>威玛猎犬</item>
-        <item>威尔士柯基犬</item>
-        <item>威尔斯梗</item>
-        <item>吉娃娃</item>
-        <item>卷毛寻回犬</item>
-        <item>金毛寻回犬</item>
-        <item>杰克罗素梗</item>
-        <item>寻血猎犬</item>
-        <item>小狮子犬</item>
-        <item>迷你贝吉格里芬凡丁犬</item>
-        <item>西帕基犬</item>
-        <item>西施犬</item>
-        <item>西高地白梗</item>
-        <item>锡利哈姆梗</item>
-        <item>喜乐蒂牧羊犬</item>
-        <item>西藏猎犬</item>
-        <item>西藏梗</item>
-        <item>卡南犬</item>
-        <item>克伦伯猎犬</item>
-        <item>可卡犬（美国）</item>
-        <item>可卡犬（英国）</item>
-        <item>可蒙犬</item>
-        <item>凯利蓝梗</item>
-        <item>库瓦兹犬</item>
-        <item>依比沙猎犬</item>
-        <item>英国斗牛犬</item>
-        <item>英国雪达犬</item>
-        <item>英国玩具猎犬</item>
-        <item>约克夏</item>
-        <item>猎浣熊犬</item>
-        <item>猎狐梗</item>
-        <item>猎狐犬（美国）</item>
-        <item>猎狐犬（英国）</item>
-        <item>灵缇（灰狗）</item>
-        <item>灵缇（意大利）</item>
-        <item>腊肠犬</item>
-        <item>拉布拉多寻回犬</item>
-        <item>拉萨犬</item>
-        <item>挪威猎麋犬</item>
-        <item>罗得西亚脊背犬</item>
-        <item>罗威纳犬</item>
-        <item>美国爱斯基摩犬</item>
-        <item>美国斯塔福梗</item>
-        <item>美国水猎犬</item>
-        <item>玛尔济斯</item>
-        <item>曼彻斯特梗</item>
-        <item>马士提夫犬</item>
-        <item>小鹿犬</item>
-        <item>牛头梗（标准）</item>
-        <item>"牛头梗（迷你）</item>
-        <item>纽芬兰犬</item>
-        <item>诺维奇梗</item>
         <item>阿芬平嘉犬</item>
         <item>阿富汗猎犬</item>
         <item>阿拉斯加雪橇犬</item>
@@ -103,14 +37,8 @@
         <item>波兰低地牧羊犬</item>
         <item>博美犬</item>
         <item>波利犬</item>
-        <item>平毛寻回犬</item>
-        <item>普罗特猎犬</item>
-        <item>葡萄牙水犬</item>
         <item>查理士王小猎犬</item>
         <item>柴犬</item>
-        <item>秋田犬</item>
-        <item>拳狮犬</item>
-        <item>切萨皮克湾寻回猎犬</item>
         <item>大丹犬</item>
         <item>大白熊犬</item>
         <item>大瑞士山地犬</item>
@@ -120,6 +48,62 @@
         <item>德国牧羊犬</item>
         <item>德国短毛指示猎犬</item>
         <item>德国钢毛指示猎犬</item>
+        <item>弗兰德斯牧牛犬</item>
+        <item>芬兰猎犬</item>
+        <item>法国斗牛犬</item>
+        <item>法老王猎犬</item>
+        <item>古代长须牧羊犬</item>
+        <item>戈登雪达犬</item>
+        <item>古代英国牧羊犬</item>
+        <item>贵宾犬（玩具）</item>
+        <item>贵宾犬（迷你）</item>
+        <item>贵宾犬（标准）</item>
+        <item>刚毛指示格里芬犬</item>
+        <item>哈瓦那犬</item>
+        <item>湖畔梗</item>
+        <item>蝴蝶犬</item>
+        <item>哈士奇</item>
+        <item>荷兰毛狮犬</item>
+        <item>吉娃娃</item>
+        <item>卷毛寻回犬</item>
+        <item>金毛寻回犬</item>
+        <item>杰克罗素梗</item>
+        <item>卡南犬</item>
+        <item>克伦伯猎犬</item>
+        <item>可卡犬（美国）</item>
+        <item>可卡犬（英国）</item>
+        <item>可蒙犬</item>
+        <item>凯利蓝梗</item>
+        <item>库瓦兹犬</item>
+        <item>猎浣熊犬</item>
+        <item>猎狐梗</item>
+        <item>猎狐犬（美国）</item>
+        <item>猎狐犬（英国）</item>
+        <item>灵缇（灰狗）</item>
+        <item>灵缇（意大利）</item>
+        <item>腊肠犬</item>
+        <item>拉布拉多寻回犬</item>
+        <item>拉萨犬</item>
+        <item>罗得西亚脊背犬</item>
+        <item>罗威纳犬</item>
+        <item>美国爱斯基摩犬</item>
+        <item>美国斯塔福梗</item>
+        <item>美国水猎犬</item>
+        <item>玛尔济斯</item>
+        <item>曼彻斯特梗</item>
+        <item>迷你贝吉格里芬凡丁犬</item>
+        <item>马士提夫犬</item>
+        <item>牛头梗（标准）</item>
+        <item>牛头梗（迷你）</item>
+        <item>纽芬兰犬</item>
+        <item>诺维奇梗</item>
+        <item>挪威猎麋犬</item>
+        <item>平毛寻回犬</item>
+        <item>普罗特猎犬</item>
+        <item>葡萄牙水犬</item>
+        <item>秋田犬</item>
+        <item>拳狮犬</item>
+        <item>切萨皮克湾寻回猎犬</item>
         <item>日本狆</item>
         <item>苏俄猎狼犬</item>
         <item>沙皮犬</item>
@@ -140,11 +124,27 @@
         <item>史纳莎（标准）</item>
         <item>史纳莎（迷你）</item>
         <item>萨赛克斯猎犬</item>
-        <item>弗兰德斯牧牛犬</item>
-        <item>芬兰猎犬</item>
-        <item>法国斗牛犬</item>
-        <item>法老王猎犬</item>
         <item>田野猎犬</item>
+        <item>万能梗</item>
+        <item>维兹拉犬</item>
+        <item>威玛猎犬</item>
+        <item>威尔士柯基犬</item>
+        <item>威尔斯梗</item>
+        <item>依比沙猎犬</item>
+        <item>英国斗牛犬</item>
+        <item>英国雪达犬</item>
+        <item>英国玩具猎犬</item>
+        <item>约克夏</item>
+        <item>寻血猎犬</item>
+        <item>小狮子犬</item>
+        <item>西帕基犬</item>
+        <item>西施犬</item>
+        <item>西高地白梗</item>
+        <item>锡利哈姆梗</item>
+        <item>喜乐蒂牧羊犬</item>
+        <item>西藏猎犬</item>
+        <item>西藏梗</item>
+        <item>小鹿犬</item>
         <item>中国冠毛犬</item>
         <item>指示犬</item>
         <item>藏獒</item>

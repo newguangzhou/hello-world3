@@ -37,6 +37,8 @@ import java.util.regex.Pattern;
 
 public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
+    View ll_help;
+
     View tv_logout;
     View tv_next;
 

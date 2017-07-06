@@ -10,8 +10,6 @@ import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.growingio.android.sdk.collection.Configuration;
-import com.growingio.android.sdk.collection.GrowingIO;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;

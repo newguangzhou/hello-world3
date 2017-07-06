@@ -192,6 +192,7 @@ public class DeviceInfoInstance {
                     case EC_SUCCESS:
                         EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
                         UserInstance.getInstance().device_imei=imei;
+                        packBean.imei=imei;
                         SPUtil.putDeviceImei(imei);
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         break;

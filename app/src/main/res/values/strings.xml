@@ -113,7 +113,7 @@
     <!--绑定设备-->
     <string name="bind_device">绑定设备</string>
     <string name="zxing">扫一扫</string>
-    <string name="bind_device_sweep">扫一扫包装盒上的IMEI条形码</string>
+    <string name="bind_device_sweep">扫一扫包装盒上的\nIMEI条形码</string>
     <string name="bind_device_sweep_code">点击扫一扫</string>
     <string name="bind_device_input_text">请输入机器背面的15位IMEI码</string>
     <string name="bind_device_input_hint">请输入15位IMEI码</string>
