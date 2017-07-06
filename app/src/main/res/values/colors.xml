@@ -30,7 +30,7 @@
     <color name="near_title_search_color">#ec4f30</color>
     <color name="near_title_search_hint_text_color">#f9cec9</color>
 
-    <color name="background_color">#eeeeee</color>
+
     <color name="category_text_color">#373737</color>
     <color name="text_color">#212121</color>
     <color name="text_gray">#bdbdbd</color>
@@ -146,7 +146,7 @@
     <color name="item_tab">#b1b4c2</color>
     <color name="item_tab_red">#ff5c68</color>
 
-    <color name="total_color_1">#141e41</color>
+
     <color name="total_color_2">#f5b4b4</color>
     <color name="total_color_2_chart">#fef0f0</color>
     <color name="total_color_2_back">#f5a3a3</color>
@@ -196,5 +196,9 @@
     <color name="common_body">#141F40</color>
     <color name="common_button_word">#FEFEFE</color>
     <color name="common_button_background">#1E2D53</color>
+
+    <color name="total_color_1">#141e41</color>
+
+    <color name="background_color">#eeeeee</color>
 
 </resources>
