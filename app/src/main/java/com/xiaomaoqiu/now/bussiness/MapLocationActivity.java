@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -59,6 +61,9 @@ public class MapLocationActivity extends Activity {
     public double latitude;
 
 
+    TranslateAnimation translateAnimation;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,16 +96,12 @@ public class MapLocationActivity extends Activity {
                     public void onSuccess(Response<BaseBean> response, BaseBean message) {
                         HttpCode ret = HttpCode.valueOf(message.status);
                         if (ret == EC_SUCCESS) {
+                            EventManage.notifyPetLocationChange event = new EventManage.notifyPetLocationChange();
                             UserInstance.getInstance().latitude=latitude;
                             UserInstance.getInstance().longitude=longitude;
                             SPUtil.putHOME_LATITUDE(latitude+"");
                             SPUtil.putHOME_LONGITUDE(longitude+"");
-                        }
-                        if (UserInstance.getInstance().has_reboot == 0) {
-                            Intent intent = new Intent(MapLocationActivity.this, RebootActivity.class);
-                            startActivity(intent);
-                            finish();
-                            return;
+                            EventBus.getDefault().post(event);
                         }
                         Intent intent = new Intent(MapLocationActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -141,6 +142,8 @@ public class MapLocationActivity extends Activity {
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                iv_location.startAnimation(translateAnimation);
+
                 projection = mBaiduMap.getProjection();
                 LatLng position = projection.fromScreenLocation(mapStatus.targetScreen);
                 Log.e("longtianlove", "地图" + mapStatus.targetScreen.x + ":" + mapStatus.targetScreen.y);
@@ -153,7 +156,6 @@ public class MapLocationActivity extends Activity {
                     }
                 });
 
-
                 Log.e("longtianlove", position.toString());
                 double[] temp=HomelocationInstance.bd09_To_Gcj02(position.latitude,position.longitude);
                 latitude = temp[0];
@@ -163,7 +165,18 @@ public class MapLocationActivity extends Activity {
             }
         });
         HomelocationInstance.getInstance().init(mMapView);
+
+        initAnim();
+
+
         EventBus.getDefault().register(this);
+    }
+
+    public void initAnim(){
+        translateAnimation = new TranslateAnimation(0, 0, 0, -50);
+        translateAnimation.setDuration(500);
+        translateAnimation.setInterpolator(new AnticipateOvershootInterpolator());
+        iv_location.startAnimation(translateAnimation);
     }
     //宠物信息更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)

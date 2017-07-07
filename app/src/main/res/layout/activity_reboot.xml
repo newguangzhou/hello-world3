@@ -110,11 +110,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:gravity="center"
         android:lineSpacingExtra="3dp"
-        android:textColor="#000"
+        android:textSize="16sp"
         android:text="恭喜您完成了追踪器的绑定流程。\n点击右上角【完成】按钮后，\n追踪器将自动重启以生效配置信息。\n重启过程中追踪器会短暂离线，\n请稍候……" />
 
 </LinearLayout>

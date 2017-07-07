@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/shape_dialog_background">
+
+<TextView
+    android:layout_margin="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:gravity="center"
+    android:textColor="@color/total_color_1"
+    android:textSize="16sp"
+    android:text="注意：为防止用户隐私泄露，解除绑定将清除账户的宠物信息及历史数据"
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/two_button_message"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginRight="30dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginBottom="50dp">
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/two_button_confirm"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_background_color_3"
+        android:padding="10dp"
+        android:text="确定解绑"/>
+    <View
+        android:layout_width="24dp"
+        android:layout_height="0dp"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/two_button_cancle"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_background_color_3"
+        android:text="取消解绑"/>
+</LinearLayout>
+
+
+
+</LinearLayout>

@@ -162,11 +162,17 @@ public class DeviceActivity extends BaseActivity {
     }
 
     private void bindDeviceDialog() {
-        DialogUtil.showOneButtonDialog(this,"确认解除绑定？",new View.OnClickListener(){
+        DialogUtil.showUnBindDialog(this,new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 DeviceInfoInstance.getInstance().unbindDevice();
+            }
+        },new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
             }
         });
 //

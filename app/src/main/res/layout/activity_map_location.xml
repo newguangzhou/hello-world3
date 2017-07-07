@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -60,6 +64,14 @@
             />
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请移动地图以确定宠物常住地准确位置"
+        android:textSize="16sp"
+        android:layout_margin="10dp"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -72,10 +84,11 @@
 
         <ImageView
             android:id="@+id/iv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/map_location_phone" />
+            android:src="@drawable/home_nocycle"
+            />
 
         <ImageView
             android:id="@+id/btn_phone_center"
@@ -96,3 +109,4 @@
         android:textSize="20dp"
         />
 </LinearLayout>
+</ScrollView>

@@ -315,7 +315,46 @@ public class DialogUtil {
     }
 
 
+
+
     //确认解除绑定
+    public static void showUnBindDialog(final Context context,final View.OnClickListener okListener,final View.OnClickListener cancelListener){
+        if (!canShowDialog(context)) return;
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_unbind, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        dialog.getWindow().setWindowAnimations(0);
+        Button two_button_confirm= (Button) dialog.findViewById(R.id.two_button_confirm);
+        two_button_confirm.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(okListener!=null) {
+                    okListener.onClick(v);
+                }
+            }
+        });
+        Button two_button_cancle= (Button) dialog.findViewById(R.id.two_button_cancle);
+        two_button_cancle.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if(cancelListener!=null){
+                    cancelListener.onClick(v);
+                }
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+    }
+
     public static void showOneButtonDialog(final Context context, String messageString, final View.OnClickListener listener) {
         if (!canShowDialog(context)) return;
         final Dialog dialog = new AppDialog(context, R.layout.dialog_one_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
@@ -339,7 +378,6 @@ public class DialogUtil {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-
     }
 
     //已经找到宠物弹窗petisFindedDialog

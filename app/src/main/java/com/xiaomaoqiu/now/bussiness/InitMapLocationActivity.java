@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -57,6 +59,8 @@ public class InitMapLocationActivity extends Activity {
 
     public double longitude;
     public double latitude;
+
+    TranslateAnimation translateAnimation;
 
 
     @Override
@@ -140,6 +144,7 @@ public class InitMapLocationActivity extends Activity {
 
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                iv_location.startAnimation(translateAnimation);
                 projection = mBaiduMap.getProjection();
                 LatLng position = projection.fromScreenLocation(mapStatus.targetScreen);
                 Log.e("longtianlove", "地图" + mapStatus.targetScreen.x + ":" + mapStatus.targetScreen.y);
@@ -162,7 +167,16 @@ public class InitMapLocationActivity extends Activity {
             }
         });
         HomelocationInstance.getInstance().init(mMapView);
+
+        initAnim();
         EventBus.getDefault().register(this);
+    }
+
+    public void initAnim(){
+        translateAnimation = new TranslateAnimation(0, 0, 0, -50);
+        translateAnimation.setDuration(500);
+        translateAnimation.setInterpolator(new AnticipateOvershootInterpolator());
+        iv_location.startAnimation(translateAnimation);
     }
     //宠物信息更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
