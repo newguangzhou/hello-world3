@@ -194,7 +194,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14.5dp"
-                            android:text="健康指数"
+                            android:text="运动指数"
                             android:textColor="@color/total_color_7"
                             android:textSize="16sp" />
 

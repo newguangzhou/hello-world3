@@ -148,6 +148,7 @@ public abstract class CustomCombineChart extends RelativeLayout {
         mChart.getDescription().setEnabled(false);
         mChart.getLegend().setEnabled(false);
         mChart.setNoDataText("无统计数据");
+        mChart.setNoDataTextColor(Color.parseColor("#82cde6"));
 
         /**
          * x轴

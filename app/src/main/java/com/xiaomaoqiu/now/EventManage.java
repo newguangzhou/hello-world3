@@ -57,6 +57,7 @@ public class EventManage {
 
     //宠物信息更新回调
     public static class callbackUpdatePetInfo{
+        public boolean updateHeader=false;
 
     }
 

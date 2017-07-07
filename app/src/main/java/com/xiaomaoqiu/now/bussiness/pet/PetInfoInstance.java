@@ -40,6 +40,8 @@ import retrofit2.Response;
 @SuppressLint("WrongConstant")
 public class PetInfoInstance {
     private static PetInfoInstance instance;
+    public  static EventManage.callbackUpdatePetInfo  event=new EventManage.callbackUpdatePetInfo();
+
     public PetInfoBean packBean;
 
     //***********位置信息
@@ -52,6 +54,13 @@ public class PetInfoInstance {
     public double radius;
 
     public boolean petAtHome = true; //true - 宠物在家, false - 宠物活动中
+
+
+
+    public double percentage;
+
+    public double deep_sleep;
+    public double light_sleep;
 
 
     private PetInfoInstance() {
@@ -263,7 +272,7 @@ public class PetInfoInstance {
                     case EC_SUCCESS:
                         //                    ToastUtil.showTost("更新成功");
                         savePetInfo(petInfoBean);
-                        EventBus.getDefault().post(new EventManage.callbackUpdatePetInfo());
+                        EventBus.getDefault().post(event);
                         break;
                     case EC_OFFLINE:
                         ToastUtil.showTost("设备处于离线状态，请开机");
@@ -410,6 +419,7 @@ public class PetInfoInstance {
                                         SPUtil.putPetHeader(packBean.logo_url);
                                     }
                                     if (packBean.pet_id > 0) {
+                                        event.updateHeader=true;
                                         updatePetInfo(packBean);
                                     }
                                     EventBus.getDefault().post(new EventManage.uploadImageSuccess());

@@ -151,6 +151,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         PetSportBean.SportBean bean = message.data.get(0);
                         sportTarget = (int)bean.target_amount;
                         PetInfoInstance.getInstance().setTarget_step(sportTarget);
+                        PetInfoInstance.getInstance().packBean.reality_amount=bean.reality_amount;
+                        PetInfoInstance.getInstance().percentage=bean.percentage;
                         sportDone = bean.reality_amount;
                         percentage = bean.percentage;
                     } else {
@@ -179,9 +181,11 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     if (message.data.size() > 0) {
                         PetSleepInfoBean.SleepBean bean = message.data.get(0);
                         double allSleepTime = bean.deep_sleep + bean.light_sleep;
+                        PetInfoInstance.getInstance().deep_sleep=bean.deep_sleep;
+                        PetInfoInstance.getInstance().light_sleep=bean.light_sleep;
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
                         String sleepTimeString = df.format(allSleepTime);
-                        tv_sleep_time.setText("今日休息时间" + sleepTimeString + "小时");
+                        tv_sleep_time.setText("今日休息" + sleepTimeString + "小时");
                     }
                 } else {
                     ToastUtil.showTost("获取当天数据失败");

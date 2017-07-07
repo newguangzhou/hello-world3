@@ -18,11 +18,11 @@
         fresco:actualImageScaleType="focusCrop"
         fresco:fadeDuration="300"
 
-        fresco:failureImage="@drawable/tab_health_head_defult"
+        fresco:failureImage="@drawable/header_default_big"
         fresco:failureImageScaleType="centerInside"
 
 
-        fresco:placeholderImage="@drawable/tab_health_head_defult"
+        fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitCenter"
         fresco:roundedCornerRadius="25dp" />
     <com.facebook.drawee.view.SimpleDraweeView

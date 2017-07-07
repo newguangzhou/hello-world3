@@ -45,5 +45,7 @@ public class PetInfoBean extends BaseBean {
 
 
 
+    public int reality_amount;
+
 
 }

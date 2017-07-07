@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,10 @@ import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -30,110 +35,132 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 
     static int REQ_CODE_GO_OUT = 1;
 
-    private LinearLayout mBtSport,mBtExpert,mBtAdnust;
-    private TextView mTextSportSum,mTextSleepSum,mTextNotice;
+    TextView tv_date;
+    TextView tv_health_sport_ed;
+    TextView tv_health_sport_message;
+    Button bt_health_sport_message;
+    View tv_tosport;
+    View health_index_bt_change;
 
-    @SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled" })
+    TextView tv_health_sleep_deep;
+    TextView tv_health_sleep_light;
+    TextView tv_health_sleep_message;
+    Button bt_health_sleep_message;
+    View tv_tosleep;
+
+
+
+    @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.health_index));
-        setContentView(R.layout.activity_health_index);
+        setContentView(R.layout.activity_new_health_index);
         initView();
         initData();
     }
 
-    private void initView(){
-        mBtSport=(LinearLayout)findViewById(R.id.health_index_bt_sport);
-        mBtSport.setOnClickListener(this);
-        findViewById(R.id.health_index_bt_expert).setOnClickListener(this);
-        findViewById(R.id.health_index_bt_change).setOnClickListener(this);
-        mTextSportSum=(TextView)findViewById(R.id.health_index_sport_summary);
-        mTextSleepSum=(TextView)findViewById(R.id.health_index_sleep_summary);
-        mTextNotice=(TextView)findViewById(R.id.health_index_expert_summary);
-    }
-    private void initData()
-    {
-//        HttpUtil.get2("pet.health.summary", new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                //{"status": 0, "sleep_summary": "睡眠总结", "expert_remind": "专家提醒", "activity_summary": "活动总结"}
-//                Log.v("http", "pet.health.summary:" + response.toString());
-//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-//                if (ret == HttpCode.EC_SUCCESS) {
-//                    String tipSleep = response.optString("sleep_summary");
-//                    String tipSport = response.optString("activity_summary");
-//                    String tipSummary = response.optString("expert_remind");
-//                    mTextSportSum.setText(tipSport);
-//                    mTextSleepSum.setText(tipSleep);
-//                    mTextNotice.setText(tipSummary);
-//                }
-//            }
-//
-//        }, UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id());
-        ApiUtils.getApiService().getSummary(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<Summary>() {
-            @Override
-            public void onSuccess(Response<Summary> response, Summary message) {
-                HttpCode ret = HttpCode.valueOf(message.status);
-                switch (ret) {
-                    case EC_SUCCESS:
-                        mTextSportSum.setText(message.activity_summary);
-                        mTextSleepSum.setText(message.sleep_summary);
-                        mTextNotice.setText(message.activity_summary);
-                        break;
+    private void initView() {
+        health_index_bt_change = findViewById(R.id.health_index_bt_change);
+        health_index_bt_change.setOnClickListener(this);
+        tv_date = (TextView) this.findViewById(R.id.tv_date);
+        tv_health_sport_message = (TextView) this.findViewById(R.id.tv_health_sport_message);
+        bt_health_sport_message= (Button) this.findViewById(R.id.bt_health_sport_message);
 
-                }
-            }
+        tv_health_sport_ed = (TextView) this.findViewById(R.id.tv_health_sport_ed);
+        tv_tosport=this.findViewById(R.id.tv_tosport);
+
+
+        tv_tosport.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onFail(Call<Summary> call, Throwable t) {
-
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(HealthIndexActivity.this, SportIndexActivity.class);
+                startActivity(intent);
             }
         });
+
+
+
+        tv_health_sleep_deep= (TextView) findViewById(R.id.tv_health_sleep_deep);
+        tv_health_sleep_light= (TextView) findViewById(R.id.tv_health_sleep_light);
+        tv_health_sleep_message= (TextView) findViewById(R.id.tv_health_sleep_message);
+        bt_health_sleep_message= (Button) findViewById(R.id.bt_health_sleep_message);
+        tv_tosleep=findViewById(R.id.tv_tosleep);
+        tv_tosleep.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(HealthIndexActivity.this, SleepIndexActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void initData() {
+        Date today = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(today);
+        tv_date.setText(dateString);
+        tv_health_sport_ed.setText(PetInfoInstance.getInstance().percentage + "");
+        String text = "";
+        String sportMessage="";
+        if (PetInfoInstance.getInstance().percentage <= 100) {
+            text = PetInfoInstance.getInstance().getNick() + "今天运动消耗了"
+                    + PetInfoInstance.getInstance().packBean.reality_amount + "卡路里，离运动目标\n还有"
+                    + (100 - PetInfoInstance.getInstance().percentage) + "%的距离";
+            sportMessage="运动不足将会导致：肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为宠物的健康，请努力完成运动目标作息\n";
+
+        } else if(PetInfoInstance.getInstance().percentage<=110){
+            text = PetInfoInstance.getInstance().getNick() + "今天运动消耗了"
+                    + PetInfoInstance.getInstance().packBean.reality_amount + "卡路里，完美完成运动目标";
+            sportMessage="适当运动能让Ta更加健康，也让Ta得到足够的玩乐，帮助Ta发泄情绪。请好好奖励，并继续保持良好的运动习惯";
+        }else if(PetInfoInstance.getInstance().percentage<=115){
+            text="旺财今天运动消耗"+PetInfoInstance.getInstance().packBean.reality_amount+"卡里路，超额完成运动目标"+(PetInfoInstance.getInstance().percentage-100)+"%";
+            sportMessage="适当提高运动强度值得鼓励（是允许的）。但是过量的运动会让心脏、关节过度负荷，诱发疾病。建议密切观察旺财日常表现";
+        }else if(PetInfoInstance.getInstance().percentage>115){
+            text="旺财今天运动消耗"+PetInfoInstance.getInstance().packBean.reality_amount+"卡里路，超额完成运动目标"+(PetInfoInstance.getInstance().percentage-100)+"%";
+            sportMessage="过高的运动量或让心脏过度负荷、肌肉疲劳、关节劳损，产生心肺功能障碍、骨关节脱臼、骨折等问题。建议让兽医评估旺财身体情况后，再决定运动方案";
+        }
+        tv_health_sport_message.setText(text);
+        bt_health_sport_message.setText(sportMessage);
+
+
+        tv_health_sleep_deep.setText(PetInfoInstance.getInstance().deep_sleep+"");
+        tv_health_sleep_light.setText(PetInfoInstance.getInstance().light_sleep+"");
+
+
+        double sleepTime=PetInfoInstance.getInstance().deep_sleep+PetInfoInstance.getInstance().light_sleep;
+        DecimalFormat df = new DecimalFormat("0.00");//格式化
+        String sleepTimeString = df.format(sleepTime);
+        String sleepText="";
+        String sleepMessage="";
+        if(sleepTime<=2){
+            sleepText="休息严重不足";
+            sleepMessage="旺财今天休息"+sleepTimeString+"小时，休息时间严重不足。过度亢奋，提示Ta的情绪或者身体出现了异常，请尽快联系兽医";
+        }else  if(sleepTime<=4){
+            sleepText="休息过少";
+            sleepMessage="旺财今天休息"+sleepTimeString+"小时，休息时间不足。注意让Ta多点休息。避免内脏和关节的损伤";
+        }else if(sleepTime<=10){
+            sleepText="休息正常";
+            sleepMessage="旺财今天休息"+sleepTimeString+"小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧";
+        }else if(sleepTime>10){
+            sleepText="嗜睡";
+            sleepMessage="旺财今天休息"+sleepTimeString+"小时，休息时间过长。沉郁、活力减少提示身体出现异常，请尽快联系兽医";
+        }
+        tv_health_sleep_message.setText("数据解读："+sleepText);
+        bt_health_sleep_message.setText(sleepMessage);
+
+
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,Intent data)
-    {
-        if(resultCode == RESULT_OK && requestCode == REQ_CODE_GO_OUT)
-        {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQ_CODE_GO_OUT) {
             PetInfoInstance.getInstance().setAtHome(false);
-//            HttpUtil.get2("pet.activity", new JsonHttpResponseHandler() {
-//                @Override
-//                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                    Log.v("http", "pet.activity:" + response.toString());
-//                    HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-//                    if (ret == HttpCode.EC_SUCCESS) {
-//                        PetInfoInstance.getInstance().setAtHome(false);
-//                    }
-//                }
-//                @Override
-//                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-//                {
-//                    Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
-//                }
-//
-//            },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),1 );
-//            ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(),
-//                    UserInstance.getInstance().getToken(),
-//                    PetInfoInstance.getInstance().getPet_id(),
-//                    Constants.TO_SPORT_ACTIVITY_TYPE
-//            ).enqueue(new XMQCallback<BaseBean>() {
-//                @Override
-//                public void onSuccess(Response<BaseBean> response, BaseBean message) {
-//                    HttpCode ret = HttpCode.valueOf(message.status);
-//                    switch (ret) {
-//                        case EC_SUCCESS:
-//                            PetInfoInstance.getInstance().setAtHome(false);
-//                            break;
-//                    }
-//                }
-//
-//                @Override
-//                public void onFail(Call<BaseBean> call, Throwable t) {
-//
-//                }
-//            });
 
             finish();
         }
@@ -142,30 +169,14 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     @Override
     public void onConfirmNumber(final int number) {
         //设定运动目标
-//        HttpUtil.get2("pet.healthy.set_sport_info", new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                Log.v("http", "pet.healthy.set_sport_info:" + response.toString());
-//                HttpCode ret = HttpCode.valueOf(response.optInt("status", -1));
-//                if (ret == HttpCode.EC_SUCCESS) {
-//                    Toast.makeText(HealthIndexActivity.this,"设定运动量成功",Toast.LENGTH_LONG).show();
-//                }
-//            }
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse)
-//            {
-//                Toast.makeText(HealthIndexActivity.this,"网络连接失败",Toast.LENGTH_LONG).show();
-//            }
-//
-//        },UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number );
-        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),number,number+"").enqueue(new XMQCallback<BaseBean>() {
+        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), number, number + "").enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
                         ToastUtil.showTost("设定运动量成功");
-                        EventManage.targetSportData event= new EventManage.targetSportData();
+                        EventManage.targetSportData event = new EventManage.targetSportData();
                         PetInfoInstance.getInstance().setTarget_step(number);
                         EventBus.getDefault().post(event);
                         break;
@@ -183,21 +194,11 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.health_index_bt_sport:
-                if(PetInfoInstance.getInstance().getAtHome())
-                {
-                    Intent intent = new Intent(HealthIndexActivity.this,GoOutConfirmDialog_RAW_Activity.class);
-                    startActivityForResult(intent,REQ_CODE_GO_OUT );
-                }else
-                {
-                    Toast.makeText(v.getContext(), "宠物运动中", Toast.LENGTH_LONG).show();
-                }
-                break;
+        switch (v.getId()) {
             case R.id.health_index_bt_expert:
                 break;
             case R.id.health_index_bt_change:
-                PickSportNumberDialog_RAW_Activity dialog = new PickSportNumberDialog_RAW_Activity(HealthIndexActivity.this,R.style.MyDialogStyleBottom);
+                PickSportNumberDialog_RAW_Activity dialog = new PickSportNumberDialog_RAW_Activity(HealthIndexActivity.this, R.style.MyDialogStyleBottom);
                 dialog.setOnPickNumberListener(HealthIndexActivity.this);
                 dialog.show();
                 break;

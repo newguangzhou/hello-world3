@@ -68,7 +68,9 @@ public class PetInfoActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void oncallbackUpdatePetInfo(EventManage.callbackUpdatePetInfo event) {
-        finish();
+        if(!event.updateHeader) {
+            finish();
+        }
     }
 
     @Override
@@ -176,6 +178,7 @@ public class PetInfoActivity extends BaseActivity {
 //                                    ToastUtil.showTost("信息需要完整");
 //                                    return;
 //                                }
+                                PetInfoInstance.getInstance().event.updateHeader=false;
                                 PetInfoInstance.getInstance().updatePetInfo(modifyBean);
                             }
                         }
@@ -414,6 +417,7 @@ public class PetInfoActivity extends BaseActivity {
                             ToastUtil.showTost("信息需要完整");
                             return;
                         }
+                        PetInfoInstance.getInstance().event.updateHeader=false;
                         PetInfoInstance.getInstance().updatePetInfo(modifyBean);
                     }
                 }

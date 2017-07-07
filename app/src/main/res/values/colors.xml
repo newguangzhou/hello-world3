@@ -150,7 +150,7 @@
     <color name="total_color_2">#f5b4b4</color>
     <color name="total_color_2_chart">#fef0f0</color>
     <color name="total_color_2_back">#f5a3a3</color>
-    <color name="total_color_3">#82cde6</color>
+
     <color name="total_color_3_chart">#d9f0f6</color>
     <color name="total_color_4">#b4b4b4</color>
     <color name="total_color_5">#fff0f0</color>
@@ -200,5 +200,8 @@
     <color name="total_color_1">#141e41</color>
 
     <color name="background_color">#eeeeee</color>
+
+
+    <color name="total_color_3">#82cde6</color>
 
 </resources>
