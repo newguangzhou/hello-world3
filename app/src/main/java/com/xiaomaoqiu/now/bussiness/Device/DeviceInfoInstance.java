@@ -106,6 +106,11 @@ public class DeviceInfoInstance {
         packBean.imei = message.imei;
         SPUtil.putDeviceImei(packBean.imei);
         packBean.sim_deadline = message.sim_deadline;
+        if(!SPUtil.getSimDeadline().equals(packBean.sim_deadline)){
+            for(int i=-30;i<=30;i++){
+                SPUtil.putKey_Value(i+"",false);
+            }
+        }
         SPUtil.putSimDeadline(packBean.sim_deadline);
         packBean.hardware_version = message.hardware_version;
         SPUtil.putDeviceVersion(packBean.hardware_version);

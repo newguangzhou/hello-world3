@@ -74,7 +74,7 @@
                         android:text="%"
                         android:textColor="@color/total_color_7"
                         android:textSize="18sp"
-                        android:translationX="37dp"
+                        android:translationX="45dp"
                         android:translationY="-8dp" />
 
                     <TextView

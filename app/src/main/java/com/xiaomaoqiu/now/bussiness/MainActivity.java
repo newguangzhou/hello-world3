@@ -2,12 +2,17 @@ package com.xiaomaoqiu.now.bussiness;
 
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
@@ -26,6 +31,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
+import com.xiaomaoqiu.now.util.AppDialog;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -35,6 +41,10 @@ import com.xiaomaoqiu.pet.R;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -178,7 +188,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
         batteryView.setDeviceOffline();
-        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
+        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
     }
 
     //todo 小米推送
@@ -248,19 +258,19 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public void PetAtHome(PushEventManage.petAtHome event) {
         DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                showFragment(1);
-                PetInfoInstance.getInstance().getPetLocation();
-            }
-        },
-        new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        showFragment(1);
+                        PetInfoInstance.getInstance().getPetLocation();
+                    }
+                },
+                new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                PetInfoInstance.getInstance().setAtHome(true);
-            }
-        }
+                    @Override
+                    public void onClick(View v) {
+                        PetInfoInstance.getInstance().setAtHome(true);
+                    }
+                }
         );
     }
 
@@ -296,6 +306,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mHealthTabIcon.setSelected(true);
 
         EventBus.getDefault().register(this);
+
+        showDeadlineDialog();
     }
 
     private void initView() {
@@ -459,6 +471,79 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
 
     }
+
+    //展示sim卡过期弹窗
+    void showDeadlineDialog() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sim_deadline = DeviceInfoInstance.getInstance().packBean.sim_deadline;
+        try {
+            Date deadlineDate = sdf.parse(sim_deadline);
+            int deadlineYear = deadlineDate.getYear();
+            int deadlineMonth = deadlineDate.getMonth();
+            int deadlineDay = deadlineDate.getDay();
+            //当前时间
+            Date today = new Date();
+            int todayYear = today.getYear();
+            int todayMonth = today.getMonth();
+            int todayDay = today.getDay();
+            int result = ((deadlineYear - todayYear) * 12 + (deadlineMonth - todayMonth) )* 30 + deadlineDay - todayDay;
+
+            if (result < 0) {
+                if (!SPUtil.getKey_Value(result + "")) {
+                    showSimdeadedDialog(this, result);
+                }
+            } else  if (result <= 30) {
+                if (!SPUtil.getKey_Value(result + "")) {
+                    showSimdeadingDialog(this, result);
+                }
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //sim卡即将过期
+    public void showSimdeadingDialog(Context context, final int result) {
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_simdeadline, -1, -2, 0, Gravity.CENTER);
+        TextView tv_deadline_message = (TextView) dialog.findViewById(R.id.tv_deadline_message);
+        tv_deadline_message.setText("您的追踪器内置专用sim卡服务还有" + result + "天过期，为了您宠物的安全，请及时充值。");
+        Button bt_confirm = (Button) dialog.findViewById(R.id.bt_confirm);
+        bt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                SPUtil.putKey_Value(result + "", true);
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    //sim卡已经过期
+    public void showSimdeadedDialog(Context context, final int result) {
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_simdeadline, -1, -2, 0, Gravity.CENTER);
+        TextView tv_deadline_message = (TextView) dialog.findViewById(R.id.tv_deadline_message);
+        tv_deadline_message.setText("您的追踪器内置专用sim卡服务已过期，请马上充值，否则将被停机，停机后您的宠物将失去安全保护。");
+
+        Button bt_confirm = (Button) dialog.findViewById(R.id.bt_confirm);
+        bt_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                SPUtil.putKey_Value(result + "", true);
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
 
     @Override
     protected void onDestroy() {

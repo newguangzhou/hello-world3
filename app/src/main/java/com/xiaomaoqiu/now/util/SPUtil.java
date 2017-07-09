@@ -444,6 +444,22 @@ public class SPUtil {
     }
 
 
+    /**
+     * 任意key-value
+     * @return
+     */
+    public static void putKey_Value(String key,boolean value){
+        putBoolean(key,value);
+    }
+
+    /**
+     * 任意key-value
+     * @return
+     */
+    public static boolean getKey_Value(String key){
+        return getBoolean(key);
+    }
+
 
 
 

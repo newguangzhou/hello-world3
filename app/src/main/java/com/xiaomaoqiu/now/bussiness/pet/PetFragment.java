@@ -150,7 +150,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                     if (message.data.size() > 0) {
                         PetSportBean.SportBean bean = message.data.get(0);
-                        sportTarget = bean.target_amount+"";
+                        DecimalFormat df = new DecimalFormat("0.00");//格式化
+                        sportTarget = df.format(bean.target_amount);
                         PetInfoInstance.getInstance().setTarget_step((int)bean.target_amount);
                         PetInfoInstance.getInstance().packBean.reality_amount=bean.reality_amount;
                         PetInfoInstance.getInstance().percentage=bean.percentage;
@@ -159,6 +160,11 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     } else {
 //                        ToastUtil.showTost("当天尚无数据~");
 
+                    }
+                    if(percentage>100){
+                        prog.setMax(200);
+                    }else if(percentage<=100){
+                        prog.setMax(100);
                     }
                     prog.setProgress((int) percentage);
                     tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
@@ -206,6 +212,11 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         sportTarget = event.sportBean.target_amount+"";
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
+        if(percentage>100){
+            prog.setMax(200);
+        }else if(percentage<=100){
+            prog.setMax(100);
+        }
         prog.setProgress((int) percentage);
         tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
         tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
