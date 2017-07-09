@@ -38,6 +38,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -64,7 +65,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     String strStart;
     String strEnd;
 
-    int sportTarget = PetInfoInstance.getInstance().getTarget_step();
+    String sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
     int sportDone = 0;
     double percentage = 0;
 
@@ -138,8 +139,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
         PetInfoInstance.getInstance().getPetStatus();
         ptr_refresh.refreshComplete();
-        sportTarget = PetInfoInstance.getInstance().getTarget_step();
-        tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
+        sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
+        tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
@@ -149,8 +150,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                     if (message.data.size() > 0) {
                         PetSportBean.SportBean bean = message.data.get(0);
-                        sportTarget = (int)bean.target_amount;
-                        PetInfoInstance.getInstance().setTarget_step(sportTarget);
+                        sportTarget = bean.target_amount+"";
+                        PetInfoInstance.getInstance().setTarget_step((int)bean.target_amount);
                         PetInfoInstance.getInstance().packBean.reality_amount=bean.reality_amount;
                         PetInfoInstance.getInstance().percentage=bean.percentage;
                         sportDone = bean.reality_amount;
@@ -161,7 +162,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     }
                     prog.setProgress((int) percentage);
                     tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
-                    tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
+                    tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
                 } else {
                     ToastUtil.showTost("获取当天数据失败");
                 }
@@ -202,18 +203,18 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     //今日运动数据更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void todaySportData(EventManage.TodaySportData event) {
-        sportTarget = (int)event.sportBean.target_amount;
+        sportTarget = event.sportBean.target_amount+"";
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
         prog.setProgress((int) percentage);
         tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
-        tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
+        tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
     }
     //目标运动量发生变化
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void sportTargetDataChange(EventManage.targetSportData event) {
-        sportTarget= PetInfoInstance.getInstance().getTarget_step();
-        tvSportTarget.setText(String.format("目标消耗%d千卡", sportTarget));
+        sportTarget= PetInfoInstance.getInstance().packBean.target_energy;
+        tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
     }
 
     //更新去运动还是回家的view

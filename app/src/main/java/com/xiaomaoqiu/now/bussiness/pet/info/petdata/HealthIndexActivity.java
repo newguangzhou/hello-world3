@@ -178,6 +178,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                         ToastUtil.showTost("设定运动量成功");
                         EventManage.targetSportData event = new EventManage.targetSportData();
                         PetInfoInstance.getInstance().setTarget_step(number);
+                        PetInfoInstance.getInstance().packBean.target_energy=number+"";
                         EventBus.getDefault().post(event);
                         break;
 

@@ -37,6 +37,7 @@
     <!--/>-->
     <!--<include layout="@layout/view_main_header_location" />-->
     <FrameLayout
+        android:layout_marginTop="3dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"

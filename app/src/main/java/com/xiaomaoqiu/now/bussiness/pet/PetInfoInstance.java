@@ -205,6 +205,9 @@ public class PetInfoInstance {
                     case EC_SUCCESS:
                         savePetInfo(message);
                         EventBus.getDefault().post(new EventManage.addPetInfoSuccess());
+
+
+
                         break;
                     case EC_INVALID_ARGS:
                         ToastUtil.showTost("请填写完整信息");
@@ -272,6 +275,9 @@ public class PetInfoInstance {
                     case EC_SUCCESS:
                         //                    ToastUtil.showTost("更新成功");
                         savePetInfo(petInfoBean);
+                        EventBus.getDefault().post(event);
+
+                        EventManage.targetSportData event = new EventManage.targetSportData();
                         EventBus.getDefault().post(event);
                         break;
                     case EC_OFFLINE:
@@ -544,6 +550,7 @@ public class PetInfoInstance {
     }
 
 
+    //宠物信息变化
     public boolean petInfoisChanged(PetInfoBean bean) {
         if (!bean.nick.equals(SPUtil.getPeiNick())) {
             return true;
@@ -556,6 +563,9 @@ public class PetInfoInstance {
         if (!bean.birthday.equals(SPUtil.getBirthday())) {
             return true;
         }
+        if(!bean.weight.equals(SPUtil.getPetWeight())){
+            return true;
+        }
         if (!bean.description.equals(SPUtil.getPetDescription())) {
             return true;
         }
@@ -564,6 +574,16 @@ public class PetInfoInstance {
         }
 
 
+
+        return false;
+    }
+    public boolean petSexOrHeavyChanged(PetInfoBean bean){
+        if (bean.sex != SPUtil.getSex()) {
+            return true;
+        }
+        if(!bean.weight.equals(SPUtil.getPetWeight())){
+            return true;
+        }
         return false;
     }
 }

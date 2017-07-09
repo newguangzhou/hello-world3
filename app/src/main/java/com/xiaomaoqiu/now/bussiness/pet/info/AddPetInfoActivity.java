@@ -45,6 +45,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 import mbg.bottomcalender.BottomCalenderView;
 
@@ -52,7 +53,7 @@ import mbg.bottomcalender.BottomCalenderView;
 /**
  * Created by Administrator on 2015/6/12.
  */
-public class AddPetInfoActivity extends BaseActivity  {
+public class AddPetInfoActivity extends BaseActivity {
     private final int REQ_CODE_BIRTHDAY = 1;
     private final int REQ_CODE_WEIGHT = 2;
     private final int REQ_CODE_INTRO = 3;
@@ -102,8 +103,8 @@ public class AddPetInfoActivity extends BaseActivity  {
 
 
     private void initView() {
-        btn_go_back=this.findViewById(R.id.btn_go_back);
-        btn_go_back.setOnClickListener(new View.OnClickListener(){
+        btn_go_back = this.findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -118,27 +119,27 @@ public class AddPetInfoActivity extends BaseActivity  {
                 DeviceInfoInstance.getInstance().unbindDevice();
             }
         });
-        tv_next=this.findViewById(R.id.tv_next);
-        tv_next.setOnClickListener(new View.OnClickListener(){
+        tv_next = this.findViewById(R.id.tv_next);
+        tv_next.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (DoubleClickUtil.isFastMiniDoubleClick()) {
                     return;
                 }
-                if(TextUtils.isEmpty(modifyBean.nick)){
+                if (TextUtils.isEmpty(modifyBean.nick)) {
                     ToastUtil.showTost("请填写宠物名字");
                     return;
                 }
-                if(TextUtils.isEmpty(modifyBean.birthday)){
+                if (TextUtils.isEmpty(modifyBean.birthday)) {
                     ToastUtil.showTost("请选择宠物生日");
                     return;
                 }
-                if(TextUtils.isEmpty(modifyBean.weight)){
+                if (TextUtils.isEmpty(modifyBean.weight)) {
                     ToastUtil.showTost("请填写宠物体重");
                     return;
                 }
-                if(TextUtils.isEmpty(modifyBean.description)){
+                if (TextUtils.isEmpty(modifyBean.description)) {
                     ToastUtil.showTost("请选择宠物类别");
                     return;
                 }
@@ -150,8 +151,6 @@ public class AddPetInfoActivity extends BaseActivity  {
                 PetInfoInstance.getInstance().addPetInfo(modifyBean);
             }
         });
-
-
 
 
         findViewById(R.id.img_pet_avatar).setOnClickListener(new View.OnClickListener() {
@@ -203,7 +202,7 @@ public class AddPetInfoActivity extends BaseActivity  {
             (txt_pet_name).setText(modifyBean.nick);
         }
 
-        txt_pet_name.setOnClickListener(new View.OnClickListener(){
+        txt_pet_name.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -267,15 +266,15 @@ public class AddPetInfoActivity extends BaseActivity  {
             return;
         }
 
-        if(UserInstance.getInstance().latitude==-1){
-             intent = new Intent();
+        if (UserInstance.getInstance().latitude == -1) {
+            intent = new Intent();
             intent.setClass(this, InitMapLocationActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-        if(UserInstance.getInstance().has_reboot==0){
-             intent=new Intent(this, RebootActivity.class);
+        if (UserInstance.getInstance().has_reboot == 0) {
+            intent = new Intent(this, RebootActivity.class);
             startActivity(intent);
             finish();
             return;
@@ -285,15 +284,16 @@ public class AddPetInfoActivity extends BaseActivity  {
         finish();
 
     }
+
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
-        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
+        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
     }
 
     //解绑成功
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void unbindDeviceSuccess(EventManage.unbindDeviceSuccess event){
+    public void unbindDeviceSuccess(EventManage.unbindDeviceSuccess event) {
         Intent intent = new Intent(PetAppLike.mcontext, InitBindDeviceActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PetAppLike.mcontext.startActivity(intent);
@@ -314,7 +314,7 @@ public class AddPetInfoActivity extends BaseActivity  {
 
     private void modifyName() {
         Intent intent = new Intent(this, ModifyNameDialog.class);
-            intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
+        intent.putExtra(InputDialog.TAG_VALUE, modifyBean.nick);
         startActivityForResult(intent, REQ_CODE_NAME);
     }
 
@@ -388,13 +388,14 @@ public class AddPetInfoActivity extends BaseActivity  {
                 break;
             case REQ_CODE_VARIETY:
             case REQ_CODE_INTRO:
-                    modifyBean.description = PetUtil.getInstance().dogName;
-                modifyBean.pet_type_id=PetInfoInstance.getInstance().packBean.pet_type_id;
-                modifyBean.target_energy=PetUtil.getInstance().calculateEnergy()+"";
-                    txt_variety.setText(modifyBean.description);
+                modifyBean.description = PetUtil.getInstance().dogName;
+                modifyBean.pet_type_id = PetInfoInstance.getInstance().packBean.pet_type_id;
+                DecimalFormat df = new DecimalFormat("0.00");//格式化
+                modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
+                txt_variety.setText(modifyBean.description);
                 break;
             case REQ_CODE_PHOTO_SOURCE:
-                if(data!=null) {
+                if (data != null) {
                     int mode = data.getIntExtra(SelectAvatarSourceDialog.TAG_MODE, -1);
                     onPhotoSource(mode);
                 }
@@ -444,14 +445,14 @@ public class AddPetInfoActivity extends BaseActivity  {
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+        DialogUtil.showTwoButtonDialog(this, "确定要退出小毛球吗？", "取消", "确定", new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
 
                     }
                 },
-                new View.OnClickListener(){
+                new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
