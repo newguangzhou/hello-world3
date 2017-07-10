@@ -118,8 +118,8 @@ public class MeWifiListActivity extends BaseActivity {
                 });
             }
         });
-        tv_next.setEnabled(false);
-        tv_next.setTextColor(getResources().getColor(R.color.black));
+//        tv_next.setEnabled(false);
+//        tv_next.setTextColor(getResources().getColor(R.color.black));
 
 //        setNextView("保存", new View.OnClickListener() {
 //            @Override
@@ -207,15 +207,15 @@ public class MeWifiListActivity extends BaseActivity {
                     }
                     wifi_bssid = "";
                     wifi_ssid = "";
-                    tv_next.setEnabled(false);
-                    tv_next.setTextColor(getResources().getColor(R.color.black));
+//                    tv_next.setEnabled(false);
+//                    tv_next.setTextColor(getResources().getColor(R.color.black));
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
 
                     if (adapter.mdatas.get(position).is_homewifi == 1) {
                         wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                         wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
-                        tv_next.setEnabled(true);
-                        tv_next.setTextColor(getResources().getColor(R.color.white));
+//                        tv_next.setEnabled(true);
+//                        tv_next.setTextColor(getResources().getColor(R.color.white));
                         for (WifiBean bean : adapter.mdatas) {
                             if (!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
                                 bean.is_homewifi = 0;
