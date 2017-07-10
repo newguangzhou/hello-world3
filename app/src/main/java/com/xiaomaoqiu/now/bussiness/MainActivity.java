@@ -393,7 +393,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                         public void run() {
                             while (true) {
                                 try {
-                                    Thread.sleep(180000);
+                                    Thread.sleep(60000);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }

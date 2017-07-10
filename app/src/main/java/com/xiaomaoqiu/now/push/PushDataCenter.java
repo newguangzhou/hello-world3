@@ -137,12 +137,12 @@ public class PushDataCenter {
                 EventBus.getDefault().post(new PushEventManage.commonBattery());
                 break;
             case Device.LOW_BATTERY:
-                DeviceInfoInstance.getInstance().battery_level = (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().battery_level =((int)formatBean.data.get("battery_level")/100f);
                 DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
                 EventBus.getDefault().post(new PushEventManage.batteryLowLevel());
                 break;
             case Device.ULTRA_LOW_BATTERY:
-                DeviceInfoInstance.getInstance().battery_level = (float) formatBean.data.get("battery_level");
+                DeviceInfoInstance.getInstance().battery_level = ((int)formatBean.data.get("battery_level")/100f);
                 DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
                 EventBus.getDefault().post(new PushEventManage.batterySuperLowLevel());
                 break;
