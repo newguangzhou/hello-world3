@@ -18,9 +18,9 @@ import com.xiaomaoqiu.pet.R;
  */
 
 public class MapPetAvaterView extends LinearLayout {
-    private String avaterUrl;
-    private SimpleDraweeView avater;
-    private boolean isShowed = false;
+//    private String avaterUrl;
+//    private SimpleDraweeView avater;
+//    private boolean isShowed = false;
 
     public MapPetAvaterView(Context context) {
         this(context, null);
@@ -33,26 +33,26 @@ public class MapPetAvaterView extends LinearLayout {
     public MapPetAvaterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View rootView = LayoutInflater.from(context).inflate(R.layout.map_pet_locview, this, true);
-        avater = (SimpleDraweeView) rootView.findViewById(R.id.map_pet_loca_avater);
-        String url = PetInfoInstance.getInstance().packBean.logo_url;
-        setAvaterUrl(url);
+//        avater = (SimpleDraweeView) rootView.findViewById(R.id.map_pet_loca_avater);
+//        String url = PetInfoInstance.getInstance().packBean.logo_url;
+//        setAvaterUrl(url);
 
     }
 
-    public void setAvaterUrl(String url) {
-        if (TextUtils.isEmpty(url)) {
-            Log.e("longtianlove","url为空");
-            return;
-        }
-        Log.e("longtianlove",url);
-        avaterUrl = url;
-        if (null == avater) {
-            return;
-        }
-        Uri uri = Uri.parse(avaterUrl);
-        avater.setImageURI(uri);
-//        AsyncImageTask.INSTANCE.loadImage(avater, avaterUrl, this);
-    }
+//    public void setAvaterUrl(String url) {
+//        if (TextUtils.isEmpty(url)) {
+//            Log.e("longtianlove","url为空");
+//            return;
+//        }
+//        Log.e("longtianlove",url);
+//        avaterUrl = url;
+//        if (null == avater) {
+//            return;
+//        }
+//        Uri uri = Uri.parse(avaterUrl);
+//        avater.setImageURI(uri);
+////        AsyncImageTask.INSTANCE.loadImage(avater, avaterUrl, this);
+//    }
 
 
 }

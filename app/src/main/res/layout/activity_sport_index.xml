@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
-            app:first_text="已完成"
-            app:second_text="未完成"
+            app:first_text="实际"
+            app:second_text="目标"
             app:titletext="今日运动" />
 
         <View

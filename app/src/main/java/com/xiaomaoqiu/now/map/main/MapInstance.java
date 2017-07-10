@@ -25,6 +25,7 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
+import com.xiaomaoqiu.now.view.MapPetAtHomeView;
 import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
 
@@ -70,7 +71,8 @@ public class MapInstance implements BDLocationListener {
     public static boolean GPS_OPEN;//GPS是否开启
 
     private MapView mapView;
-    private MapPetAvaterView mapPetAvaterView;
+    public MapPetAvaterView mapPetAvaterView;
+    public MapPetAtHomeView petAtHomeView;
     private Marker mPetMarker, mPhoneMarker;//狗狗位置和手机位置
     private Polyline mFindPolyline;//找狗连线
 
@@ -87,7 +89,14 @@ public class MapInstance implements BDLocationListener {
     public void init(MapView mapView) {
         this.mapView = mapView;
         initMap();
-        petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
+        petAtHomeView = new MapPetAtHomeView(PetAppLike.mcontext);
+        petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        if(PetInfoInstance.getInstance().getAtHome()){
+            petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+        }else{
+            petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
+        }
+
         phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
         setPhonePos();
     }
@@ -147,6 +156,12 @@ public class MapInstance implements BDLocationListener {
      * 初始化宠物位置地图标识
      */
     private void initPetMarker() {
+
+        if(PetInfoInstance.getInstance().getAtHome()) {
+            petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+        }else {
+            petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
+        }
         OverlayOptions options = new MarkerOptions()
                 .icon(petbitmapDescriptor)
                 .draggable(true)
@@ -168,6 +183,7 @@ public class MapInstance implements BDLocationListener {
      * 初始化手机位置地图标识
      */
     private void initPhoneMarker() {
+        phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
         OverlayOptions options = new MarkerOptions()
                 .icon(phonebitmapDescriptor)
                 .draggable(true)
@@ -208,7 +224,9 @@ public class MapInstance implements BDLocationListener {
      */
     public void refreshMap() {
         mBaiduMap.clear();
-        initPhoneMarker();
+        if(PetInfoInstance.getInstance().getAtHome()||GPS_OPEN) {
+            initPhoneMarker();
+        }
         initPetMarker();
         if (desLatLng == null) {
             desLatLng = new LatLng(petLatitude, petLongitude);
@@ -321,8 +339,8 @@ public class MapInstance implements BDLocationListener {
     }
 
 
-//    //是否以手机为中心
-    public static boolean showPhoneCenter=true;
+    //    //是否以手机为中心
+    public static boolean showPhoneCenter = true;
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
@@ -330,9 +348,9 @@ public class MapInstance implements BDLocationListener {
         phoneLongitude = bdLocation.getLongitude();
         SPUtil.putPhoneLatitude(phoneLatitude + "");
         SPUtil.putPhoneLongitude(phoneLongitude + "");
-        if(showPhoneCenter) {
+        if (showPhoneCenter) {
             setPhonePos();
-            showPhoneCenter=false;
+            showPhoneCenter = false;
         }
         if (!PetInfoInstance.getInstance().getAtHome()) {
             //todo 如果不在家，就设置为另一个头像
@@ -389,7 +407,7 @@ public class MapInstance implements BDLocationListener {
         LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
         LatLng petLatLng = new LatLng(petLatitude, petLongitude);
         //计算p1、p2两点之间的直线距离，单位：米
-        if(GPS_OPEN&&DistanceUtil.getDistance(phoneLatLng, petLatLng)<10){
+        if (GPS_OPEN && DistanceUtil.getDistance(phoneLatLng, petLatLng) < 10) {
             EventBus.getDefault().post(new EventManage.distanceClose());
         }
     }
