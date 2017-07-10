@@ -137,6 +137,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
+        initProgress();
         PetInfoInstance.getInstance().getPetStatus();
         ptr_refresh.refreshComplete();
         sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
