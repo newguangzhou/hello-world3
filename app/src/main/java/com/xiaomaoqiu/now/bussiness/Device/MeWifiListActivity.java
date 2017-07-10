@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
-import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
@@ -52,6 +51,8 @@ public class MeWifiListActivity extends BaseActivity {
 
     View btn_go_back;
     TextView tv_next;
+
+    int request_code =10;//方便关闭当前activity
 
     @Override
     public int frameTemplate() {//没有标题栏
@@ -103,7 +104,8 @@ public class MeWifiListActivity extends BaseActivity {
                             SPUtil.putHomeWifiSsid(wifi_ssid);
 //                            finish();
                             Intent intent=new Intent(MeWifiListActivity.this, MapLocationActivity.class);
-                            startActivity(intent);
+
+                            startActivityForResult(intent, request_code);
                         }
 
 
@@ -270,8 +272,18 @@ public class MeWifiListActivity extends BaseActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==10){
+            finish();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+
 }

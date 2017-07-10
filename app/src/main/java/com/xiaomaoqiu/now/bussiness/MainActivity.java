@@ -496,7 +496,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 if (!SPUtil.getKey_Value(result + "")) {
                     showSimdeadingDialog(this, result);
                 }
-
             }
         } catch (ParseException e) {
             e.printStackTrace();

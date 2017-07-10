@@ -45,6 +45,8 @@ public class HomelocationInstance implements BDLocationListener {
     public static double phoneLatitude;
     public static double phoneLongitude;
 
+    public static String city;
+
     public void init(TextureMapView mapView) {
         this.mapView = mapView;
         initMap();
@@ -102,7 +104,7 @@ public class HomelocationInstance implements BDLocationListener {
      *
      * @param centerPoint
      */
-    private void setCenter(LatLng centerPoint, int delayMills) {
+    public void setCenter(LatLng centerPoint, int delayMills) {
         MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(centerPoint);
         mBaiduMap.animateMapStatus(mapStatusUpdate, delayMills);
     }
@@ -145,6 +147,7 @@ public class HomelocationInstance implements BDLocationListener {
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
+        city=bdLocation.getCity();
         Log.e("longtianlove海拔",bdLocation.getAltitude()+"");
         phoneLatitude = bdLocation.getLatitude();
         phoneLongitude = bdLocation.getLongitude();
@@ -159,6 +162,7 @@ public class HomelocationInstance implements BDLocationListener {
         mBaiduMap.animateMapStatus(u);
         setCenter(postion, 300);
         stopLocListener();
+
     }
 
     @Override
