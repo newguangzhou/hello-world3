@@ -87,6 +87,10 @@ public class MeWifiListActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                if("".equals(wifi_bssid)){
+                    ToastUtil.showTost("请选择wifi");
+                    return;
+                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,

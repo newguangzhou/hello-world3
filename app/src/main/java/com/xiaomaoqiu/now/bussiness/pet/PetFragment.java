@@ -316,7 +316,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                        }
 //                    });
 
-                    new DialogToast(getContext(), "是否关闭紧急追踪模式。", "确定", new View.OnClickListener() {
+//                    new DialogToast(getContext(), "是否关闭紧急追踪模式。", "确定", new View.OnClickListener() {
+                    DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             tv_findpet.setText("紧急搜寻");
