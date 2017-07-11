@@ -115,7 +115,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
                     return;
                 }
                 String imei = inputImei.getText().toString();
-                DeviceInfoInstance.getInstance().bindDevice(imei);
+                DeviceInfoInstance.getInstance().bindDevice(InitBindDeviceActivity.this,imei);
             }
         });
 
@@ -160,7 +160,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
             //解析成功
             String Imei = bundle.getString(CodeUtils.RESULT_STRING);
             if (isZXresultCorrect(Imei)) {
-                DeviceInfoInstance.getInstance().bindDevice(Imei);
+                DeviceInfoInstance.getInstance().bindDevice(InitBindDeviceActivity.this,Imei);
             } else {
                 showToast("IMEI码错误，请正确扫码！");
             }
@@ -180,23 +180,46 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
         return m.matches();
     }
 
+    int count=0;
+
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void deviceOffline(EventManage.DeviceOffline event) {
-        DialogUtil.showDeviceOpenOnline(this,new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                    return;
-                }
-                if (inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())) {
-                    showToast("请输入IMEI码！");
-                    return;
-                }
+        if(count++<3){
+            try {
+                Thread.sleep(1000);
                 String imei = inputImei.getText().toString();
-                DeviceInfoInstance.getInstance().bindDevice(imei);
+                DeviceInfoInstance.getInstance().bindDevice(InitBindDeviceActivity.this,imei);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
+        }else {
+            count=0;
+            DialogUtil.showDeviceOpenOnline(this, new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (DoubleClickUtil.isFastMiniDoubleClick()) {
+                        return;
+                    }
+                    if (inputImei == null || TextUtils.isEmpty(inputImei.getText().toString())) {
+                        showToast("请输入IMEI码！");
+                        return;
+                    }
+                    String imei = inputImei.getText().toString();
+                    DeviceInfoInstance.getInstance().bindDevice(InitBindDeviceActivity.this, imei);
+                }
+            },new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    DialogUtil.closeProgress();
+                    Intent intent=new Intent(InitBindDeviceActivity.this, BaseWebViewActivity.class);
+                    intent.putExtra("web_url","http://www.xiaomaoqiu.com/supprot.html?nav=2");
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)

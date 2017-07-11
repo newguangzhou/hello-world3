@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.now.bussiness.Device;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.util.AppDialog;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 
@@ -183,8 +185,8 @@ public class DeviceInfoInstance {
     }
 
     //绑定设备
-    public void bindDevice(final String imei) {
-
+    public void bindDevice(final Activity activity, final String imei) {
+        DialogUtil.showProgress(activity,"");
         ApiUtils.getApiService().addDeviceInfo(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
                 imei,
@@ -200,24 +202,31 @@ public class DeviceInfoInstance {
                         packBean.imei=imei;
                         SPUtil.putDeviceImei(imei);
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
+                        DialogUtil.closeProgress();
                         break;
                     case EC_ALREADY_FAV:
 //                        ToastUtil.showAtCenter("设备已被绑定");
                         EventManage.deviceAlreadyBind event = new EventManage.deviceAlreadyBind();
                         event.old_account = message.old_account;
                         EventBus.getDefault().post(event);
+                        DialogUtil.closeProgress();
                         break;
                     case EC_INVALID_ARGS:
                         ToastUtil.showTost("IMEI码有误");
+                        DialogUtil.closeProgress();
                         break;
                     case EC_OFFLINE:
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
+                        break;
+                    default:
+                        DialogUtil.closeProgress();
                         break;
                 }
             }
 
             @Override
             public void onFail(Call<AlreadyBindDeviceBean> call, Throwable t) {
+                DialogUtil.closeProgress();
             }
         });
     }
