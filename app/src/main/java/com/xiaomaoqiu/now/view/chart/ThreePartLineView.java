@@ -80,13 +80,22 @@ public class ThreePartLineView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        double realityWidth=target==0?0:((reality*getMeasuredWidth())/target);
+        if(target>=reality) {
+            double realityWidth = target == 0 ? 0 : ((reality * getMeasuredWidth()) / target);
 
+            mPaint.setColor(getResources().getColor(R.color.total_color_3));
+            canvas.drawRect((float) realityWidth, 0, getWidth(), getHeight(), mPaint);
 
-        mPaint.setColor(getResources().getColor(R.color.total_color_3));
-        canvas.drawRect((float)realityWidth,0,getWidth(),getHeight(),mPaint);
+            mPaint.setColor(getResources().getColor(R.color.total_color_2));
+            canvas.drawRect(0, 0, (float) realityWidth, getHeight(), mPaint);
+        }else {
+            double targetWidth = reality == 0 ? 0 : ((target * getMeasuredWidth()) / reality);
 
-        mPaint.setColor(getResources().getColor(R.color.total_color_2));
-        canvas.drawRect(0,0,(float)realityWidth,getHeight(),mPaint);
+            mPaint.setColor(getResources().getColor(R.color.total_color_2));
+            canvas.drawRect((float) targetWidth, 0, getWidth(), getHeight(), mPaint);
+
+            mPaint.setColor(getResources().getColor(R.color.total_color_3));
+            canvas.drawRect(0, 0, (float) targetWidth, getHeight(), mPaint);
+        }
     }
 }
