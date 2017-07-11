@@ -155,6 +155,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         showFragment(1);
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         PetInfoInstance.getInstance().getPetLocation();
                     }
                 }

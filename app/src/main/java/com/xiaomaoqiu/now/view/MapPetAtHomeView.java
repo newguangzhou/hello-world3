@@ -34,8 +34,8 @@ public class MapPetAtHomeView extends LinearLayout {
         super(context, attrs, defStyleAttr);
         View rootView = LayoutInflater.from(context).inflate(R.layout.map_pet_athomeview, this, true);
         avater = (SimpleDraweeView) rootView.findViewById(R.id.map_pet_athome_avater);
-        String url = PetInfoInstance.getInstance().packBean.logo_url;
-        setAvaterUrl(url);
+//        String url = PetInfoInstance.getInstance().packBean.logo_url;
+//        setAvaterUrl(url);
 
     }
 

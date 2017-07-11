@@ -167,9 +167,14 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     }
 
     @Override
-    public void onConfirmNumber(final int number) {
+    public void onConfirmNumber(final String numberString) {
+        int length=numberString.length();
+        double number=Double.valueOf(numberString.substring(0,length-1))/100f;
+        final int target_energyInt=(int)(number*Double.valueOf(PetInfoInstance.getInstance().packBean.target_energy));
+        final DecimalFormat df = new DecimalFormat("0.00");//格式化
+        final double target_energyDouble=number*Double.valueOf(PetInfoInstance.getInstance().packBean.target_energy);
         //设定运动目标
-        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), number, number + "").enqueue(new XMQCallback<BaseBean>() {
+        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), target_energyInt, df.format(target_energyDouble)).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -177,8 +182,8 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                     case EC_SUCCESS:
                         ToastUtil.showTost("设定运动量成功");
                         EventManage.targetSportData event = new EventManage.targetSportData();
-                        PetInfoInstance.getInstance().setTarget_step(number);
-                        PetInfoInstance.getInstance().packBean.target_energy=number+"";
+                        PetInfoInstance.getInstance().setTarget_step(target_energyInt);
+                        PetInfoInstance.getInstance().packBean.target_energy=df.format(target_energyDouble);
                         EventBus.getDefault().post(event);
                         break;
 

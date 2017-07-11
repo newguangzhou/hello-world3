@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -80,6 +81,9 @@ public class DeviceActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //sim充值
+                Intent intent=new Intent(DeviceActivity.this, BaseWebViewActivity.class);
+                intent.putExtra("web_url","http://www.xiaomaoqiu.com/wechat_shop.html");
+                startActivity(intent);
             }
         });
 

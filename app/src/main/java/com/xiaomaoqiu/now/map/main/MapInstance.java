@@ -227,7 +227,12 @@ public class MapInstance implements BDLocationListener {
         if(PetInfoInstance.getInstance().getAtHome()||GPS_OPEN) {
             initPhoneMarker();
         }
-        initPetMarker();
+        try {
+            initPetMarker();
+        }catch (Exception e){
+
+        }
+
         if (desLatLng == null) {
             desLatLng = new LatLng(petLatitude, petLongitude);
         }

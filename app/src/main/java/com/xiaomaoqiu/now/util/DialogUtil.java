@@ -256,7 +256,7 @@ public class DialogUtil {
         final Dialog dialog = new AppDialog(context, R.layout.dialog_logout, -1, -2, 0, Gravity.CENTER);
         TextView tv_remote_login = (TextView) dialog.findViewById(R.id.tv_remote_login);
         if ((remoteTime != null) && (osName != null) && (!"".equals(remoteTime)) && !"".equals(osName)) {
-            tv_remote_login.setText(remoteTime + "\n" + "您的账户在" + osName + "手机上登录");
+            tv_remote_login.setText(remoteTime + "\n" + "您的账户在另一台【" + osName + "】手机上登录");
         }
         Button logout_confirm = (Button) dialog.findViewById(R.id.logout_confirm);
         logout_confirm.setOnClickListener(new View.OnClickListener() {
