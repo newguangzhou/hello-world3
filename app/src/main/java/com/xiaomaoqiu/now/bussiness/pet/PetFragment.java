@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
@@ -121,7 +122,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     }
 
     void initData() {
-        checkIndex= (CheckIndex) getActivity();
+        checkIndex = (CheckIndex) getActivity();
         PetInfoInstance.getInstance().getPetInfo();
 
     }
@@ -141,7 +142,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         PetInfoInstance.getInstance().getPetStatus();
         ptr_refresh.refreshComplete();
         sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
-        tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
+        tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
@@ -153,23 +154,23 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         PetSportBean.SportBean bean = message.data.get(0);
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
                         sportTarget = df.format(bean.target_amount);
-                        PetInfoInstance.getInstance().setTarget_step((int)bean.target_amount);
-                        PetInfoInstance.getInstance().packBean.reality_amount=bean.reality_amount;
-                        PetInfoInstance.getInstance().percentage=bean.percentage;
+                        PetInfoInstance.getInstance().setTarget_step((int) bean.target_amount);
+                        PetInfoInstance.getInstance().packBean.reality_amount = bean.reality_amount;
+                        PetInfoInstance.getInstance().percentage = bean.percentage;
                         sportDone = bean.reality_amount;
                         percentage = bean.percentage;
                     } else {
 //                        ToastUtil.showTost("当天尚无数据~");
 
                     }
-                    if(percentage>100){
+                    if (percentage > 100) {
                         prog.setMax(200);
-                    }else if(percentage<=100){
+                    } else if (percentage <= 100) {
                         prog.setMax(100);
                     }
                     prog.setProgress((int) percentage);
                     tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
-                    tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
+                    tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                 } else {
                     ToastUtil.showTost("获取当天数据失败");
                 }
@@ -189,8 +190,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     if (message.data.size() > 0) {
                         PetSleepInfoBean.SleepBean bean = message.data.get(0);
                         double allSleepTime = bean.deep_sleep + bean.light_sleep;
-                        PetInfoInstance.getInstance().deep_sleep=bean.deep_sleep;
-                        PetInfoInstance.getInstance().light_sleep=bean.light_sleep;
+                        PetInfoInstance.getInstance().deep_sleep = bean.deep_sleep;
+                        PetInfoInstance.getInstance().light_sleep = bean.light_sleep;
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
                         String sleepTimeString = df.format(allSleepTime);
                         tv_sleep_time.setText("今日休息" + sleepTimeString + "小时");
@@ -210,23 +211,24 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     //今日运动数据更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void todaySportData(EventManage.TodaySportData event) {
-        sportTarget = event.sportBean.target_amount+"";
+        sportTarget = event.sportBean.target_amount + "";
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
-        if(percentage>100){
+        if (percentage > 100) {
             prog.setMax(200);
-        }else if(percentage<=100){
+        } else if (percentage <= 100) {
             prog.setMax(100);
         }
         prog.setProgress((int) percentage);
         tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
-        tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
+        tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
     }
+
     //目标运动量发生变化
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void sportTargetDataChange(EventManage.targetSportData event) {
-        sportTarget= PetInfoInstance.getInstance().packBean.target_energy;
-        tvSportTarget.setText(String.format("目标消耗"+sportTarget+"千卡"));
+        sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
+        tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
     }
 
     //更新去运动还是回家的view
@@ -240,7 +242,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
         }
         Uri uri = Uri.parse(PetInfoInstance.getInstance().packBean.logo_url);
-        if(AsynImgDialog.asynImg!=null) {
+        if (AsynImgDialog.asynImg != null) {
             AsynImgDialog.asynImg.setImageURI(uri);
         }
     }
@@ -251,7 +253,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         isopen = MapInstance.getInstance().GPS_OPEN;
         if (isopen) {
             tv_findpet.setText("关闭搜寻");
-        }else{
+        } else {
             tv_findpet.setText("紧急搜寻");
         }
     }
@@ -330,17 +332,17 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                                     switch (message.pet_status) {
                                         case Constants.PET_STATUS_COMMON:
-                                            if(!PetInfoInstance.getInstance().getAtHome()) {
+                                            if (!PetInfoInstance.getInstance().getAtHome()) {
                                                 PetInfoInstance.getInstance().setAtHome(true);
                                             }
                                             break;
                                         case Constants.PET_STATUS_WALK:
-                                            if(PetInfoInstance.getInstance().getAtHome()) {
+                                            if (PetInfoInstance.getInstance().getAtHome()) {
                                                 PetInfoInstance.getInstance().setAtHome(false);
                                             }
                                             break;
                                         default:
-                                            if(!PetInfoInstance.getInstance().getAtHome()) {
+                                            if (!PetInfoInstance.getInstance().getAtHome()) {
                                                 PetInfoInstance.getInstance().setAtHome(true);
                                             }
                                             break;
@@ -420,16 +422,28 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_sport:
-                if(MapInstance.getInstance().GPS_OPEN){
+                if (MapInstance.getInstance().GPS_OPEN) {
                     ToastUtil.showTost("紧急搜索模式下不能使用该功能");
                     return;
                 }
                 AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getLocationWithOneMinute=true;
-                        MainActivity.getLocationTime=0;
-                        if(MainActivity.locationThread==null) {
+                        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                            @Override
+                            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
+                            }
+
+                            @Override
+                            public void onFail(Call<BaseBean> call, Throwable t) {
+
+                            }
+                        });
+
+                        MainActivity.getLocationWithOneMinute = true;
+                        MainActivity.getLocationTime = 0;
+                        if (MainActivity.locationThread == null) {
                             MainActivity.locationThread = new Thread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -439,7 +453,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        if(MainActivity.getLocationWithOneMinute&&(MainActivity.getLocationTime++<=10)) {
+                                        if (MainActivity.getLocationWithOneMinute && (MainActivity.getLocationTime++ <= 10)) {
                                             PetInfoInstance.getInstance().getPetLocation();
                                         }
                                     }
@@ -454,16 +468,28 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 });
                 break;
             case R.id.btn_go_home:
-                if(MapInstance.getInstance().GPS_OPEN){
+                if (MapInstance.getInstance().GPS_OPEN) {
                     ToastUtil.showTost("紧急搜索模式下不能使用该功能");
                     return;
                 }
                 AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.getLocationWithOneMinute=true;
-                        MainActivity. getLocationTime=0;
-                        if(MainActivity.locationThread==null) {
+
+                        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                            @Override
+                            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
+                            }
+
+                            @Override
+                            public void onFail(Call<BaseBean> call, Throwable t) {
+
+                            }
+                        });
+                        MainActivity.getLocationWithOneMinute = true;
+                        MainActivity.getLocationTime = 0;
+                        if (MainActivity.locationThread == null) {
                             MainActivity.locationThread = new Thread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -473,7 +499,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        if(MainActivity.getLocationWithOneMinute&&(MainActivity.getLocationTime++<=10)) {
+                                        if (MainActivity.getLocationWithOneMinute && (MainActivity.getLocationTime++ <= 10)) {
                                             PetInfoInstance.getInstance().getPetLocation();
                                         }
                                     }

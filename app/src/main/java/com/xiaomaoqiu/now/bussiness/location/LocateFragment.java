@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.baidu.mapapi.map.MapView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
@@ -333,6 +334,17 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                        @Override
+                        public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
+                        }
+
+                        @Override
+                        public void onFail(Call<BaseBean> call, Throwable t) {
+
+                        }
+                    });
                     PetInfoInstance.getInstance().setAtHome(false);
                     mWalkPetView.setSelected(true);
                 }
@@ -341,6 +353,17 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                        @Override
+                        public void onSuccess(Response<BaseBean> response, BaseBean message) {
+
+                        }
+
+                        @Override
+                        public void onFail(Call<BaseBean> call, Throwable t) {
+
+                        }
+                    });
                     mWalkPetView.setSelected(false);
                     PetInfoInstance.getInstance().setAtHome(true);
 
