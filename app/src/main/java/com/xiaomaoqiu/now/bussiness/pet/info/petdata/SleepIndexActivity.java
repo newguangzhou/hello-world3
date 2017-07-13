@@ -120,10 +120,10 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     @Override
     public void onSuccessGetMonthDataSet(ArrayList<Entry> deepList, ArrayList<Entry> lightList) {
 
-        LineDataSet deepDataset= ChartDataSetUtils.getDefaultBlueHoleDataSet(this);
+        LineDataSet deepDataset= ChartDataSetUtils.getDefaultRedDataSetWithPoint(this);
         deepDataset.setValues(deepList);
         monthChartView.addData(deepDataset);
-        LineDataSet lightDataset=ChartDataSetUtils.getDefaultRedDataSetWithPoint(this);
+        LineDataSet lightDataset=ChartDataSetUtils.getDefaultBlueFillDataSet(this);
         lightDataset.setValues(lightList);
         monthChartView.addData(lightDataset);
 
