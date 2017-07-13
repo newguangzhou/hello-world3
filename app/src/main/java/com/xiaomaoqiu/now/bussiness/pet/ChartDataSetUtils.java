@@ -74,7 +74,7 @@ public class ChartDataSetUtils {
         int holeColor=Color.WHITE;
         float hightLightWidth=LINE_WIDTH_HIGHLIGHT_WIDE;
         int highLightcolor=context.getResources().getColor(R.color.chart_normal_select_color);
-        return getHoleLineDataSet(lineWidth,holeColor,circleColor,circleRadius,holeRadius,holeColor,hightLightWidth,highLightcolor);
+        return getHoleLineDataSet(lineWidth,circleColor,circleColor,circleRadius,holeRadius,holeColor,hightLightWidth,highLightcolor);
     }
 
     public static LineDataSet getDefaultBlueFillDataSet(Context context){
