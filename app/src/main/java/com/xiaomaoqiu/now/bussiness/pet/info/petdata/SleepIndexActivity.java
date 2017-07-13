@@ -123,7 +123,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         LineDataSet deepDataset= ChartDataSetUtils.getDefaultRedDataSetWithPoint(this);
         deepDataset.setValues(deepList);
         monthChartView.addData(deepDataset);
-        LineDataSet lightDataset=ChartDataSetUtils.getDefaultBlueFillDataSet(this);
+        LineDataSet lightDataset=ChartDataSetUtils.getDefaultBlueDataSetFill(this);
         lightDataset.setValues(lightList);
         monthChartView.addData(lightDataset);
 
@@ -148,7 +148,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         if(values == null || values.size() <2){
             return;
         }
-        String tip=data+"深睡为"+(values.get(0))+"小时，小憩为"+(values.get(1))+"小时。";
+        String tip=data+"深睡为"+(values.get(0)-values.get(1))+"小时，小憩为"+(values.get(1))+"小时。";
         if(SleepChartIndexPresenter.FLAG_WEEK == flag){
             weekTip.setText(tip);
         }else{

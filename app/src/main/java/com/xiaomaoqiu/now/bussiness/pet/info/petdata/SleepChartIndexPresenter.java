@@ -159,7 +159,7 @@ public class SleepChartIndexPresenter {
             PetSleepInfoBean.SleepBean bean = timeEqualSleepBean(date, sleepDatas);
 //            float deep = (float) bean.deep_sleep;
 //            float light = (float) bean.light_sleep;
-            deepList.add(new Entry(i - startIndex, (float) bean.deep_sleep));
+            deepList.add(new Entry(i - startIndex, (float) (bean.deep_sleep+bean.light_sleep)));
             lightList.add(new Entry(i - startIndex, (float) bean.light_sleep));
             if ((bean.deep_sleep > 0)) {
                 flag = true;

@@ -92,7 +92,7 @@ public class ChartDataSetUtils {
         int circleColor=context.getResources().getColor(R.color.total_color_3);
         float circleRadius=CIRCLE_RADIUS_FILL;
         float hightLightWidth=LINE_WIDTH_HIGHLIGHT_NARROW;
-        int highLightcolor=context.getResources().getColor(R.color.chart_fill_select_color);
+        int highLightcolor=context.getResources().getColor(R.color.chart_normal_select_color);
         return getFillLineDataSet(lineWidth,lineColor,circleColor,circleRadius,hightLightWidth,highLightcolor);
     }
 
