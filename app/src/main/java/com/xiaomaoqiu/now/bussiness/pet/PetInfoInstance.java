@@ -62,6 +62,11 @@ public class PetInfoInstance {
     public double deep_sleep;
     public double light_sleep;
 
+    public int PET_MODE=Constants.PET_STATUS_COMMON;
+    public void setPetMode(int mode){
+        PET_MODE=mode;
+        SPUtil.putPET_MODE(mode);
+    }
 
     private PetInfoInstance() {
 
@@ -87,6 +92,7 @@ public class PetInfoInstance {
             instance.setDateFormat_birthday(baseBean.birthday);
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
+            instance.PET_MODE=SPUtil.getPET_MODE();
         }
         return instance;
     }
@@ -309,22 +315,27 @@ public class PetInfoInstance {
                 if (ret == HttpCode.EC_SUCCESS) {
                     switch (message.pet_status) {
                         case Constants.PET_STATUS_COMMON:
-                            setAtHome(true);
-                            SPUtil.putGPS_OPEN(false);
+//                            setAtHome(true);
+                            PET_MODE=Constants.PET_STATUS_COMMON;
+//                            SPUtil.putGPS_OPEN(false);
                             break;
                         case Constants.PET_STATUS_WALK:
-                            setAtHome(false);
-                            SPUtil.putGPS_OPEN(false);
+//                            setAtHome(false);
+                            PET_MODE=Constants.PET_STATUS_WALK;
+//                            SPUtil.putGPS_OPEN(false);
                             break;
                         case Constants.PET_STATUS_FIND:
-                            SPUtil.putGPS_OPEN(true);
-                            MapInstance.getInstance().GPS_OPEN = true;
-                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                            PET_MODE=Constants.PET_STATUS_FIND;
+//                            SPUtil.putGPS_OPEN(true);
+//                            MapInstance.getInstance().GPS_OPEN = true;
+//                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                             break;
                         default:
-                            setAtHome(true);
+//                            setAtHome(true);
                             break;
                     }
+                    SPUtil.putPET_MODE(PET_MODE);
+                    EventBus.getDefault().post(new EventManage.petModeChanged());
                 }
             }
 
@@ -541,7 +552,7 @@ public class PetInfoInstance {
     public void setAtHome(boolean bAtHome) {
         this.petAtHome = bAtHome;
         SPUtil.putPetAtHome(bAtHome);
-        EventManage.atHomeOrtoSport event = new EventManage.atHomeOrtoSport();
+        EventManage.atHomeOrNotHome event = new EventManage.atHomeOrNotHome();
         EventBus.getDefault().post(event);
     }
 

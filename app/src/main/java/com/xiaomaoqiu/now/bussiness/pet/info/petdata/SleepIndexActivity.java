@@ -12,6 +12,7 @@ import com.xiaomaoqiu.now.view.chart.ThreePartLineViewWithTotal;
 import com.xiaomaoqiu.now.bussiness.pet.ChartDataSetUtils;
 import com.xiaomaoqiu.pet.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,7 +149,8 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         if(values == null || values.size() <2){
             return;
         }
-        String tip=data+"深睡为"+(values.get(0)-values.get(1))+"小时，小憩为"+(values.get(1))+"小时。";
+        DecimalFormat df = new DecimalFormat("0.00");//格式化
+        String tip=data+"深睡为"+df.format(values.get(0)-values.get(1))+"小时，小憩为"+(values.get(1))+"小时。";
         if(SleepChartIndexPresenter.FLAG_WEEK == flag){
             weekTip.setText(tip);
         }else{

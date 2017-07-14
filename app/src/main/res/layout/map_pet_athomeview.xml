@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_width="52dp"
+    android:layout_height="62dp"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:background="@drawable/map_location_petback"
+    >
 
     <!--<com.xiaomaoqiu.old.widgets.CircleImageView-->
     <!--android:id="@+id/map_pet_loca_avater"-->
@@ -33,26 +35,26 @@
     <!--/>-->
     <!--<include layout="@layout/view_main_header_location" />-->
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:scaleType="fitXY"
-        fresco:actualImageScaleType="focusCrop"
-        fresco:fadeDuration="300"
-        fresco:failureImage="@drawable/pet_athome"
-        fresco:failureImageScaleType="centerInside"
-        fresco:placeholderImage="@drawable/pet_athome"
-        fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="16dp" />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:gravity="center"-->
+        <!--android:scaleType="fitXY"-->
+        <!--fresco:actualImageScaleType="focusCrop"-->
+        <!--fresco:fadeDuration="300"-->
+        <!--fresco:failureImage="@drawable/pet_athome"-->
+        <!--fresco:failureImageScaleType="centerInside"-->
+        <!--fresco:placeholderImage="@drawable/pet_athome"-->
+        <!--fresco:placeholderImageScaleType="fitCenter"-->
+        <!--fresco:roundedCornerRadius="16dp" />-->
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/map_pet_athome_avater"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_gravity="top"
+        android:gravity="top"
         android:scaleType="fitXY"
         fresco:actualImageScaleType="focusCrop"
         fresco:fadeDuration="300"
@@ -61,7 +63,7 @@
         fresco:failureImageScaleType="centerInside"
 
         fresco:placeholderImage="@drawable/header_default_big"
-        fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="16dp" />
+        fresco:placeholderImageScaleType="fitStart"
+        fresco:roundedCornerRadius="26dp" />
 
-</FrameLayout>
+</LinearLayout>

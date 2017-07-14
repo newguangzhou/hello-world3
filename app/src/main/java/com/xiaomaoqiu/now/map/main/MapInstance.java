@@ -21,6 +21,7 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
@@ -50,7 +51,7 @@ public class MapInstance implements BDLocationListener {
             synchronized (MapInstance.class) {
                 if (instance == null) {
                     instance = new MapInstance();
-                    GPS_OPEN = SPUtil.getGPS_OPEN();
+//                    GPS_OPEN = SPUtil.getGPS_OPEN();
                     phoneLatitude = Double.valueOf(SPUtil.getPhoneLatitude());
                     phoneLongitude = Double.valueOf(SPUtil.getPhoneLongitude());
                     petLatitude = Double.valueOf(SPUtil.getPetLatitude());
@@ -68,7 +69,7 @@ public class MapInstance implements BDLocationListener {
     public static double petLongitude;
 
     //    public static String mode_map;//地图模式
-    public static boolean GPS_OPEN;//GPS是否开启
+//    public static boolean GPS_OPEN;//GPS是否开启
 
     private MapView mapView;
     public MapPetAvaterView mapPetAvaterView;
@@ -91,9 +92,9 @@ public class MapInstance implements BDLocationListener {
         initMap();
         petAtHomeView = new MapPetAtHomeView(PetAppLike.mcontext);
         petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
-        if(PetInfoInstance.getInstance().getAtHome()){
+        if (PetInfoInstance.getInstance().getAtHome()) {
             petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
-        }else{
+        } else {
             petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
         }
 
@@ -158,9 +159,9 @@ public class MapInstance implements BDLocationListener {
      */
     private void initPetMarker() {
 
-        if(PetInfoInstance.getInstance().getAtHome()) {
+        if (PetInfoInstance.getInstance().getAtHome()) {
             petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
-        }else {
+        } else {
             petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
         }
         OverlayOptions options = new MarkerOptions()
@@ -225,14 +226,6 @@ public class MapInstance implements BDLocationListener {
      */
     public void refreshMap() {
         mBaiduMap.clear();
-        if(PetInfoInstance.getInstance().getAtHome()||GPS_OPEN) {
-            initPhoneMarker();
-        }
-        try {
-            initPetMarker();
-        }catch (Exception e){
-
-        }
 
         if (desLatLng == null) {
             desLatLng = new LatLng(petLatitude, petLongitude);
@@ -244,23 +237,87 @@ public class MapInstance implements BDLocationListener {
 //                .stroke(new Stroke(2, Color.parseColor("#ffffff"))) // 设置边框 Stroke 参数 宽度单位像素默认5px 颜色
                 .fillColor(Color.parseColor("#1B2e68AA")); // 设置圆的填充颜色
         mBaiduMap.addOverlay(mCircleOptions);
-        if (GPS_OPEN) {
-            ArrayList<LatLng> points = new ArrayList<>();
-            points.add(mPhoneMarker.getPosition());
-            points.add(mPetMarker.getPosition());
-            PolylineOptions options = new PolylineOptions()
-                    .points(points)
-                    .color(Color.rgb(250, 90, 95))
-                    .width(7)
-                    .visible(true);
-            mFindPolyline = (Polyline) (mBaiduMap.addOverlay(options));
-        } else {
-            if (mFindPolyline != null) {
-                mFindPolyline.remove();
-            }
-        }
 
+        switch (PetInfoInstance.getInstance().PET_MODE) {
+            case Constants.PET_STATUS_FIND:
+                initPhoneMarker();
+                petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                OverlayOptions findoptions = new MarkerOptions()
+                        .icon(petbitmapDescriptor)
+                        .draggable(true)
+                        .position(new LatLng(petLatitude, petLongitude))
+                        .visible(true);
+                mPetMarker = (Marker) (mBaiduMap.addOverlay(findoptions));
+
+                ArrayList<LatLng> linepoints = new ArrayList<>();
+                linepoints.add(mPhoneMarker.getPosition());
+                linepoints.add(mPetMarker.getPosition());
+                PolylineOptions options = new PolylineOptions()
+                        .points(linepoints)
+                        .color(Color.rgb(250, 90, 95))
+                        .width(7)
+                        .visible(true);
+                mFindPolyline = (Polyline) (mBaiduMap.addOverlay(options));
+                break;
+            case Constants.PET_STATUS_WALK:
+
+                if (mFindPolyline != null) {
+                    mFindPolyline.remove();
+                }
+                petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
+                OverlayOptions petoptions = new MarkerOptions()
+                        .icon(petbitmapDescriptor)
+                        .draggable(true)
+                        .position(new LatLng(petLatitude, petLongitude))
+                        .visible(true);
+                mPetMarker = (Marker) (mBaiduMap.addOverlay(petoptions));
+                break;
+            case Constants.PET_STATUS_COMMON:
+                initPhoneMarker();
+                if (mFindPolyline != null) {
+                    mFindPolyline.remove();
+                }
+                petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                OverlayOptions commonoptions = new MarkerOptions()
+                        .icon(petbitmapDescriptor)
+                        .draggable(true)
+                        .position(new LatLng(petLatitude, petLongitude))
+                        .visible(true);
+                mPetMarker = (Marker) (mBaiduMap.addOverlay(commonoptions));
+                break;
+        }
         calculateDistance();
+
+//        if(PetInfoInstance.getInstance().getAtHome()||PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
+//            initPhoneMarker();
+//        }else{
+//            if (mFindPolyline != null) {
+//                mFindPolyline.remove();
+//            }
+//        }
+//        try {
+//            initPetMarker();
+//        }catch (Exception e){
+//
+//        }
+//
+//
+//        if (PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
+//            ArrayList<LatLng> points = new ArrayList<>();
+//            points.add(mPhoneMarker.getPosition());
+//            points.add(mPetMarker.getPosition());
+//            PolylineOptions options = new PolylineOptions()
+//                    .points(points)
+//                    .color(Color.rgb(250, 90, 95))
+//                    .width(7)
+//                    .visible(true);
+//            mFindPolyline = (Polyline) (mBaiduMap.addOverlay(options));
+//        } else {
+//            if (mFindPolyline != null) {
+//                mFindPolyline.remove();
+//            }
+//        }
+
     }
 
     /**
@@ -291,7 +348,7 @@ public class MapInstance implements BDLocationListener {
      * 开始找宠物
      */
     public void startFindPet() {
-        setGPSState(true);
+//        setGPSState(true);
         startLocListener(1000);
     }
 
@@ -303,7 +360,7 @@ public class MapInstance implements BDLocationListener {
         float f = mBaiduMap.getMaxZoomLevel();//19.0
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
         mBaiduMap.animateMapStatus(u);
-        if (!GPS_OPEN) {
+        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
             setCenter(postion, 300);
         }
         refreshMap();
@@ -332,10 +389,10 @@ public class MapInstance implements BDLocationListener {
 
 
     public void setGPSState(boolean flag) {
-        GPS_OPEN = flag;
-        SPUtil.putGPS_OPEN(GPS_OPEN);
+//        GPS_OPEN = flag;
+//        SPUtil.putGPS_OPEN(GPS_OPEN);
 
-        if (!GPS_OPEN) {
+        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
             if (mFindPolyline != null) {
                 mFindPolyline.remove();
             }
@@ -413,7 +470,8 @@ public class MapInstance implements BDLocationListener {
         LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
         LatLng petLatLng = new LatLng(petLatitude, petLongitude);
         //计算p1、p2两点之间的直线距离，单位：米
-        if (GPS_OPEN && DistanceUtil.getDistance(phoneLatLng, petLatLng) < 10) {
+
+        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND && DistanceUtil.getDistance(phoneLatLng, petLatLng) < 10) {
             EventBus.getDefault().post(new EventManage.distanceClose());
         }
     }

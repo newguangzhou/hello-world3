@@ -115,6 +115,8 @@ public class SPUtil {
     //gps是否开启
     public static final String GPS_OPEN="gps_open";
 
+    public static final String PET_MODE="PET_MODE";
+
     //是否进入主页
     public static final String HOME_PAGE ="home";
 
@@ -403,6 +405,13 @@ public class SPUtil {
     }
     public static void putGPS_OPEN(boolean value){
         putBoolean(GPS_OPEN,value);
+    }
+
+    public static int getPET_MODE(){
+        return getInt(PET_MODE);
+    }
+    public static void putPET_MODE(int value){
+        putInt(PET_MODE,value);
     }
 
     /**

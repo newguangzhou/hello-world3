@@ -77,7 +77,11 @@ public class EventManage {
 
     }
 
-    public static class atHomeOrtoSport{
+    public static class atHomeOrNotHome {
+    }
+
+    public static class petModeChanged{
+       public  int pet_mode;
     }
 
     //wifi列表获取成功
@@ -100,10 +104,10 @@ public class EventManage {
     //上传头像成功
     public static class uploadImageSuccess{}
 
-    //GPS变化
-    public static class GPS_CHANGE{
-
-    }
+//    //GPS变化
+//    public static class GPS_CHANGE{
+//
+//    }
 
     //手机和设备距离很近
     public static  class distanceClose{

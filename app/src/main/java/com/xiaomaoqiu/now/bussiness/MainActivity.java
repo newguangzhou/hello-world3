@@ -119,27 +119,28 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                         ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                             @Override
                             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                                MapInstance.getInstance().setGPSState(false);
-                                EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+//                                MapInstance.getInstance().setGPSState(false);
+//                                EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                                PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                EventBus.getDefault().post(new EventManage.petModeChanged());
 
-
-                                switch (message.pet_status) {
-                                    case Constants.PET_STATUS_COMMON:
-                                        if (!PetInfoInstance.getInstance().getAtHome()) {
-                                            PetInfoInstance.getInstance().setAtHome(true);
-                                        }
-                                        break;
-                                    case Constants.PET_STATUS_WALK:
-                                        if (PetInfoInstance.getInstance().getAtHome()) {
-                                            PetInfoInstance.getInstance().setAtHome(false);
-                                        }
-                                        break;
-                                    default:
-                                        if (!PetInfoInstance.getInstance().getAtHome()) {
-                                            PetInfoInstance.getInstance().setAtHome(true);
-                                        }
-                                        break;
-                                }
+//                                switch (message.pet_status) {
+//                                    case Constants.PET_STATUS_COMMON:
+//                                        if (!PetInfoInstance.getInstance().getAtHome()) {
+//                                            PetInfoInstance.getInstance().setAtHome(true);
+//                                        }
+//                                        break;
+//                                    case Constants.PET_STATUS_WALK:
+//                                        if (PetInfoInstance.getInstance().getAtHome()) {
+//                                            PetInfoInstance.getInstance().setAtHome(false);
+//                                        }
+//                                        break;
+//                                    default:
+//                                        if (!PetInfoInstance.getInstance().getAtHome()) {
+//                                            PetInfoInstance.getInstance().setAtHome(true);
+//                                        }
+//                                        break;
+//                                }
 
                             }
 
@@ -231,13 +232,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        if (!MapInstance.getInstance().GPS_OPEN) {
+                        if (PetInfoInstance.getInstance().PET_MODE!=Constants.PET_STATUS_FIND) {
                             MapInstance.getInstance().startFindPet();
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                                    MapInstance.getInstance().setGPSState(true);
-                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+//                                    MapInstance.getInstance().setGPSState(true);
+//                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                                    PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                    EventBus.getDefault().post(new EventManage.petModeChanged());
                                     showFragment(1);
                                 }
 
@@ -265,8 +268,10 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
+                        PetInfoInstance.getInstance().setAtHome(false);
                         showFragment(1);
                         PetInfoInstance.getInstance().getPetLocation();
+
                     }
                 },
                 new View.OnClickListener() {

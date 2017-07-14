@@ -157,14 +157,14 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == REQ_CODE_GO_OUT) {
-            PetInfoInstance.getInstance().setAtHome(false);
-
-            finish();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+////        if (resultCode == RESULT_OK && requestCode == REQ_CODE_GO_OUT) {
+////            PetInfoInstance.getInstance().setAtHome(false);
+////
+////            finish();
+////        }
+//    }
 
     @Override
     public void onConfirmNumber(final String numberString) {

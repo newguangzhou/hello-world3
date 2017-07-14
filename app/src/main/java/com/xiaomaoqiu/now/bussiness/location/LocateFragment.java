@@ -104,29 +104,94 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         EventBus.getDefault().register(this);
         MapInstance.getInstance().setPetAvaterView(mapPetAvaterView);
         MapInstance.getInstance().init(mapView);
-        isOpen = MapInstance.getInstance().GPS_OPEN;
-        if (isOpen) {
-            mWalkPetView.setVisibility(View.GONE);
-            mFindPetView.setSelected(true);
-            walkpetNoticeView.setVisibility(View.GONE);
-            petLocContainer.setVisibility(View.VISIBLE);
-        } else {
-            mWalkPetView.setVisibility(View.VISIBLE);
-            mFindPetView.setSelected(false);
-            if (!PetInfoInstance.getInstance().getAtHome()) {
-                mWalkPetView.setSelected(true);
-                walkpetNoticeView.setVisibility(View.VISIBLE);
-                petLocContainer.setVisibility(View.GONE);
-            } else {
+//        isOpen = MapInstance.getInstance().GPS_OPEN;
+//        if (isOpen) {
+//            mWalkPetView.setVisibility(View.GONE);
+//            mFindPetView.setSelected(true);
+//            walkpetNoticeView.setVisibility(View.GONE);
+//            petLocContainer.setVisibility(View.VISIBLE);
+//        } else {
+//            mWalkPetView.setVisibility(View.VISIBLE);
+//            mFindPetView.setSelected(false);
+//            if (!PetInfoInstance.getInstance().getAtHome()) {
+//                mWalkPetView.setSelected(true);
+//                walkpetNoticeView.setVisibility(View.VISIBLE);
+//                petLocContainer.setVisibility(View.GONE);
+//            } else {
+//                mWalkPetView.setSelected(false);
+//                walkpetNoticeView.setVisibility(View.GONE);
+//                petLocContainer.setVisibility(View.VISIBLE);
+//            }
+//
+//        }
+
+        switch (PetInfoInstance.getInstance().PET_MODE){
+            case Constants.PET_STATUS_COMMON:
+                mWalkPetView.setVisibility(View.VISIBLE);
+                mFindPetView.setSelected(false);
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
-            }
-
+                break;
+            case Constants.PET_STATUS_WALK:
+                mWalkPetView.setVisibility(View.VISIBLE);
+                mFindPetView.setSelected(false);
+                mWalkPetView.setSelected(true);
+                walkpetNoticeView.setVisibility(View.VISIBLE);
+                petLocContainer.setVisibility(View.GONE);
+                break;
+            case Constants.PET_STATUS_FIND:
+                mWalkPetView.setVisibility(View.GONE);
+                mFindPetView.setSelected(true);
+                walkpetNoticeView.setVisibility(View.GONE);
+                petLocContainer.setVisibility(View.VISIBLE);
+                break;
+            default:
+                mWalkPetView.setVisibility(View.VISIBLE);
+                mFindPetView.setSelected(false);
+                mWalkPetView.setSelected(false);
+                walkpetNoticeView.setVisibility(View.GONE);
+                petLocContainer.setVisibility(View.VISIBLE);
+                break;
         }
 
 //        MapInstance.getInstance().startLocListener(1000);
         PetInfoInstance.getInstance().getPetLocation();
+    }
+
+    //更新去运动还是回家的view
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void updateActivityView(EventManage.petModeChanged event) {
+        switch (PetInfoInstance.getInstance().PET_MODE){
+            case Constants.PET_STATUS_COMMON:
+                mWalkPetView.setVisibility(View.VISIBLE);
+                mFindPetView.setSelected(false);
+                mWalkPetView.setSelected(false);
+                walkpetNoticeView.setVisibility(View.GONE);
+                petLocContainer.setVisibility(View.VISIBLE);
+                break;
+            case Constants.PET_STATUS_WALK:
+                mWalkPetView.setVisibility(View.VISIBLE);
+                mFindPetView.setSelected(false);
+                mWalkPetView.setSelected(true);
+                walkpetNoticeView.setVisibility(View.VISIBLE);
+                petLocContainer.setVisibility(View.GONE);
+                break;
+            case Constants.PET_STATUS_FIND:
+                mWalkPetView.setVisibility(View.GONE);
+                mFindPetView.setSelected(true);
+                walkpetNoticeView.setVisibility(View.GONE);
+                petLocContainer.setVisibility(View.VISIBLE);
+                break;
+            default:
+                mWalkPetView.setVisibility(View.VISIBLE);
+                mFindPetView.setSelected(false);
+                mWalkPetView.setSelected(false);
+                walkpetNoticeView.setVisibility(View.GONE);
+                petLocContainer.setVisibility(View.VISIBLE);
+                break;
+        }
+        MapInstance.getInstance().refreshMap();
     }
 
     @Override
@@ -160,19 +225,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     //是回家还是在运动
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void onPetInfoChanged(EventManage.atHomeOrtoSport event) {
+    public void onPetInfoChanged(EventManage.atHomeOrNotHome event) {
 
-        if (null != mWalkPetView) {
-            mWalkPetView.setSelected(!PetInfoInstance.getInstance().getAtHome());
-        }
+//        if (null != mWalkPetView) {
+//            mWalkPetView.setSelected(!PetInfoInstance.getInstance().getAtHome());
+//        }
 
         if (!PetInfoInstance.getInstance().getAtHome()) {
-            walkpetNoticeView.setVisibility(View.VISIBLE);
-            petLocContainer.setVisibility(View.GONE);
+//            walkpetNoticeView.setVisibility(View.VISIBLE);
+//            petLocContainer.setVisibility(View.GONE);
             PetInfoInstance.getInstance().getPetLocation();
         } else {
-            walkpetNoticeView.setVisibility(View.GONE);
-            petLocContainer.setVisibility(View.VISIBLE);
+//            walkpetNoticeView.setVisibility(View.GONE);
+//            petLocContainer.setVisibility(View.VISIBLE);
             MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
         }
         MapInstance.getInstance().petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
@@ -225,37 +290,38 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         petLocation.setText(locationString);
     }
 
-    //gps状态变化
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void updateGPSState(EventManage.GPS_CHANGE event) {
-        isOpen = MapInstance.getInstance().GPS_OPEN;
-        if (isOpen) {
-            mWalkPetView.setVisibility(View.GONE);
-            mFindPetView.setSelected(true);
-            walkpetNoticeView.setVisibility(View.GONE);
-            petLocContainer.setVisibility(View.VISIBLE);
-        } else {
-            mWalkPetView.setVisibility(View.VISIBLE);
-            mFindPetView.setSelected(false);
-            if (!PetInfoInstance.getInstance().getAtHome()) {
-                mWalkPetView.setSelected(true);
-                walkpetNoticeView.setVisibility(View.VISIBLE);
-                petLocContainer.setVisibility(View.GONE);
-            } else {
-                mWalkPetView.setSelected(false);
-                walkpetNoticeView.setVisibility(View.GONE);
-                petLocContainer.setVisibility(View.VISIBLE);
-            }
-        }
-
-    }
+//    //gps状态变化
+//    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+//    public void updateGPSState(EventManage.GPS_CHANGE event) {
+//        isOpen = MapInstance.getInstance().GPS_OPEN;
+//        if (isOpen) {
+//            mWalkPetView.setVisibility(View.GONE);
+//            mFindPetView.setSelected(true);
+//            walkpetNoticeView.setVisibility(View.GONE);
+//            petLocContainer.setVisibility(View.VISIBLE);
+//        } else {
+//            mWalkPetView.setVisibility(View.VISIBLE);
+//            mFindPetView.setSelected(false);
+//            if (!PetInfoInstance.getInstance().getAtHome()) {
+//                mWalkPetView.setSelected(true);
+//                walkpetNoticeView.setVisibility(View.VISIBLE);
+//                petLocContainer.setVisibility(View.GONE);
+//            } else {
+//                mWalkPetView.setSelected(false);
+//                walkpetNoticeView.setVisibility(View.GONE);
+//                petLocContainer.setVisibility(View.VISIBLE);
+//            }
+//        }
+//
+//        MapInstance.getInstance().refreshMap();
+//    }
 
     /**
      * 狗丢了对话框
      */
     private void showFindpetDialog() {
-        isOpen = MapInstance.getInstance().GPS_OPEN;
-        if (isOpen) {
+//        isOpen = MapInstance.getInstance().GPS_OPEN;
+        if (PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
             DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {
 
                 @Override
@@ -263,28 +329,30 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                            MapInstance.getInstance().setGPSState(false);
+//                            MapInstance.getInstance().setGPSState(false);
                             mFindPetView.setSelected(false);
-                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+//                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                            EventBus.getDefault().post(new EventManage.petModeChanged());
 
 
-                            switch (message.pet_status) {
-                                case Constants.PET_STATUS_COMMON:
-                                    if(!PetInfoInstance.getInstance().getAtHome()) {
-                                        PetInfoInstance.getInstance().setAtHome(true);
-                                    }
-                                    break;
-                                case Constants.PET_STATUS_WALK:
-                                    if(PetInfoInstance.getInstance().getAtHome()) {
-                                        PetInfoInstance.getInstance().setAtHome(false);
-                                    }
-                                    break;
-                                default:
-                                    if(!PetInfoInstance.getInstance().getAtHome()) {
-                                        PetInfoInstance.getInstance().setAtHome(true);
-                                    }
-                                    break;
-                            }
+//                            switch (message.pet_status) {
+//                                case Constants.PET_STATUS_COMMON:
+//                                    if(!PetInfoInstance.getInstance().getAtHome()) {
+//                                        PetInfoInstance.getInstance().setAtHome(true);
+//                                    }
+//                                    break;
+//                                case Constants.PET_STATUS_WALK:
+//                                    if(PetInfoInstance.getInstance().getAtHome()) {
+//                                        PetInfoInstance.getInstance().setAtHome(false);
+//                                    }
+//                                    break;
+//                                default:
+//                                    if(!PetInfoInstance.getInstance().getAtHome()) {
+//                                        PetInfoInstance.getInstance().setAtHome(true);
+//                                    }
+//                                    break;
+//                            }
 
                         }
 
@@ -308,8 +376,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                             mFindPetView.setSelected(true);
-                            MapInstance.getInstance().setGPSState(true);
-                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+//                            MapInstance.getInstance().setGPSState(true);
+//                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                            EventBus.getDefault().post(new EventManage.petModeChanged());
                         }
 
                         @Override
@@ -337,7 +407,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                         @Override
                         public void onSuccess(Response<BaseBean> response, BaseBean message) {
-
+                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_WALK);
+                            EventManage.petModeChanged event=new EventManage.petModeChanged();
+                            event.pet_mode=Constants.PET_STATUS_WALK;
+                            EventBus.getDefault().post(event);
                         }
 
                         @Override
@@ -345,7 +418,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
                         }
                     });
-                    PetInfoInstance.getInstance().setAtHome(false);
+//                    PetInfoInstance.getInstance().setAtHome(false);
                     mWalkPetView.setSelected(true);
                 }
             });
@@ -356,7 +429,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                         @Override
                         public void onSuccess(Response<BaseBean> response, BaseBean message) {
-
+                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                            EventManage.petModeChanged event=new EventManage.petModeChanged();
+                            event.pet_mode=Constants.PET_STATUS_COMMON;
+                            EventBus.getDefault().post(event);
                         }
 
                         @Override
@@ -365,7 +441,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                         }
                     });
                     mWalkPetView.setSelected(false);
-                    PetInfoInstance.getInstance().setAtHome(true);
+//                    PetInfoInstance.getInstance().setAtHome(true);
 
                 }
             });
