@@ -337,6 +337,8 @@ public class PetInfoActivity extends BaseActivity {
                     modifyBean.dateFormat_birthday = tmpDateFormatBirthday;
                     modifyBean.birthday = tmpDateFormatBirthday.toString();
                     txt_birthday.setText(modifyBean.birthday);
+                    DecimalFormat df = new DecimalFormat("0.00");//格式化
+                    modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
                 }
             }, null);
         }
@@ -391,6 +393,8 @@ public class PetInfoActivity extends BaseActivity {
                 if (data != null) {
                     modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
                     txt_weight.setText(modifyBean.weight + "kg");
+                    DecimalFormat df = new DecimalFormat("0.00");//格式化
+                    modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
                 }
                 break;
             case REQ_CODE_VARIETY:

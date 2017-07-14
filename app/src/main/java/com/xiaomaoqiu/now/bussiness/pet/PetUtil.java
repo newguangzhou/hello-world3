@@ -100,7 +100,7 @@ public class PetUtil {
         PetInfoInstance.MyDate dateFormat_birthday = PetInfoInstance.getInstance().packBean.dateFormat_birthday;
         int petYear = dateFormat_birthday.year;
         int petMonth = dateFormat_birthday.month;
-        int result = (todayYear+1990 - petYear) * 12 + (todayMonth+1 - petMonth);
+        int result = (todayYear+1900 - petYear) * 12 + (todayMonth+1 - petMonth);
         if (result <= 4) {
             method1Energy = method1 * 0.6;
             method2Energy = method2 * 0.6;
