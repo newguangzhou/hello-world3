@@ -163,21 +163,21 @@ public class PushDataCenter {
                 EventBus.getDefault().post(event);
                 break;
             case Pet.NOT_HOME:
-//                if (PetInfoInstance.getInstance().getAtHome()) {
+                if (PetInfoInstance.getInstance().getAtHome()) {
                     PetInfoInstance.getInstance().setAtHome(false);
 //                    ToastUtil.showTost("宠物离开家了");
 //                    if (!MapInstance.GPS_OPEN) {
                         EventBus.getDefault().post(new PushEventManage.petNotHome());
 //                    }
-//                }
+                }
                 break;
             case Pet.AT_HOME:
-//                if (!PetInfoInstance.getInstance().getAtHome()) {
+                if (!PetInfoInstance.getInstance().getAtHome()) {
 //                    ToastUtil.showTost("宠物到家了");
 //                PetInfoInstance.getInstance().setAtHome(true);
                 EventBus.getDefault().post(new PushEventManage.petAtHome());
 
-//                }
+                }
                 break;
         }
     }

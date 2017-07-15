@@ -157,11 +157,23 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     public void onClick(View v) {
                         showFragment(1);
                         try {
-                            Thread.sleep(900000);
-                        } catch (InterruptedException e) {
+                            Thread thread=new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Thread.sleep(900000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    PetInfoInstance.getInstance().getPetLocation();
+                                }
+                            });
+                            thread.start();
+
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        PetInfoInstance.getInstance().getPetLocation();
+
                     }
                 }
         );
