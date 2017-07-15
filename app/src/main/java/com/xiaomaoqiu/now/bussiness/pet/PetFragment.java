@@ -484,7 +484,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         });
 
                         MainActivity.getLocationWithOneMinute = true;
-                        MainActivity.getLocationTime = 0;
+//                        MainActivity.getLocationTime = 0;
                         if (MainActivity.locationThread == null) {
                             MainActivity.locationThread = new Thread(new Runnable() {
                                 @Override
@@ -495,7 +495,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        if (MainActivity.getLocationWithOneMinute && (MainActivity.getLocationTime++ <= 10)) {
+                                        if (MainActivity.getLocationWithOneMinute) {
                                             PetInfoInstance.getInstance().getPetLocation();
                                         }
                                     }
@@ -594,7 +594,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
 
                         MainActivity.getLocationWithOneMinute = true;
-                        MainActivity.getLocationTime = 0;
+//                        MainActivity.getLocationTime = 0;
                         if (MainActivity.locationThread == null) {
                             MainActivity.locationThread = new Thread(new Runnable() {
                                 @Override
@@ -605,7 +605,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        if (MainActivity.getLocationWithOneMinute && (MainActivity.getLocationTime++ <= 10)) {
+                                        if (MainActivity.getLocationWithOneMinute) {
                                             PetInfoInstance.getInstance().getPetLocation();
                                         }
                                     }

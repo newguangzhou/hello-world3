@@ -217,10 +217,16 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 MapInstance.getInstance().startLoc();
                 break;
             case R.id.btn_pet_center:
-                MainActivity.getLocationTime=0;
+//                MainActivity.getLocationTime=0;
 //                MapInstance.showPhoneCenter=false;
                 //狗狗位置
-                PetInfoInstance.getInstance().getPetLocation();
+//                PetInfoInstance.getInstance().getPetLocation();
+                MapInstance.getInstance().startLocListener(1000);
+                if(PetInfoInstance.getInstance().getAtHome()){
+                    MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
+                }else {
+                    MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+                }
                 break;
             case R.id.btn_playing_pet:
                 //去运动

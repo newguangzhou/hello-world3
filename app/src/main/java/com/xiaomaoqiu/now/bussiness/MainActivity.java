@@ -157,7 +157,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     public void onClick(View v) {
                         showFragment(1);
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(900000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -371,8 +371,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public static Thread locationThread;
     //是否每一分钟都发送位置信息
     public static volatile boolean getLocationWithOneMinute;
-    //是否超过次数限制
-    public static volatile int getLocationTime;
+//    //是否超过次数限制
+//    public static volatile int getLocationTime;
+    public static int select_index;
 
     private void showFragment(int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -387,7 +388,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
                 getLocationWithOneMinute = false;
-                getLocationTime = 0;
+                select_index=0;
+//                getLocationTime = 0;
                 break;
             case 1:
                 include_header.setVisibility(View.INVISIBLE);
@@ -396,7 +398,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
                 }
                 getLocationWithOneMinute = true;
-                getLocationTime = 0;
+//                getLocationTime = 0;
+                select_index=1;
                 if (locationThread == null) {
                     locationThread = new Thread(new Runnable() {
                         @Override
@@ -407,7 +410,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                if (getLocationWithOneMinute && (getLocationTime++ <= 10)) {
+                                if (getLocationWithOneMinute) {
                                     PetInfoInstance.getInstance().getPetLocation();
                                 }
                             }
@@ -427,7 +430,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
                 }
                 getLocationWithOneMinute = false;
-                getLocationTime = 0;
+//                getLocationTime = 0;
+                select_index=2;
                 transaction
                         .show(mMeFragment).commit();
                 mMeTabIcon.setSelected(true);
@@ -563,6 +567,22 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     public void changeLocatefragment() {
         showFragment(1);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(select_index==1){
+            getLocationWithOneMinute = true;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(select_index==1){
+            getLocationWithOneMinute = false;
+        }
     }
 }
     
