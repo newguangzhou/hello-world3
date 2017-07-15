@@ -18,6 +18,7 @@
             android:textSize="@dimen/common_dialog_title"
             android:textColor="@color/common_title"
             android:text="@string/battery_notice_levelformat"
+            android:singleLine="true"
             android:id="@+id/battery_notice_level"/>
 
         <TextView

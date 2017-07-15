@@ -26,6 +26,11 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener{
     private View.OnClickListener okClickListener,quitClickListner;
     private int innerpadding=0;
 
+    public static double startSalary=0;
+    public static double stopSalary=0;
+    public static long startTime=0;
+    public static long stopTime=0;
+
 
     public static AsynImgDialog createGoSportDialig(Context context, View.OnClickListener okClickListener){
         String url="";

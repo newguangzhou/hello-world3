@@ -15,14 +15,19 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
+import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.bussiness.pet.info.petdata.AsynImgDialog;
 import com.xiaomaoqiu.now.map.main.addressParseListener;
@@ -33,7 +38,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -404,6 +411,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             AsynImgDialog.createGoSportDialig(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AsynImgDialog.startSalary = PetFragment.sportDone;
+                    AsynImgDialog.startTime = (new Date()).getTime();
                     ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                         @Override
                         public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -429,6 +438,57 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                         @Override
                         public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                            long msEnd = System.currentTimeMillis();
+                            Date today = new Date(msEnd);
+                            String strStart;
+                            String strEnd;
+                            strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
+                            strStart = strEnd;
+                            ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
+                                    PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                                @Override
+                                public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    if (ret == HttpCode.EC_SUCCESS) {
+
+                                        if (message.data.size() > 0) {
+                                            PetSportBean.SportBean bean = message.data.get(0);
+                                            PetInfoInstance.getInstance().setTarget_step((int) bean.target_amount);
+                                            PetInfoInstance.getInstance().packBean.reality_amount = bean.reality_amount;
+                                            PetInfoInstance.getInstance().percentage = bean.percentage;
+                                            PetFragment.sportDone = bean.reality_amount;
+                                            AsynImgDialog.stopSalary = PetFragment.sportDone;
+                                            AsynImgDialog.stopTime = (new Date()).getTime();
+                                            if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0) {
+                                                long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 600000;
+                                                String salaryText = PetInfoInstance.getInstance().getNick() + "刚才运动了" + sporttime + "分钟，消耗了" + (AsynImgDialog.stopSalary - AsynImgDialog.startSalary) + "卡路里";
+                                                DialogUtil.showOneButtonDialog(getActivity(), salaryText, new View.OnClickListener() {
+
+                                                    @Override
+                                                    public void onClick(View v) {
+
+                                                    }
+                                                });
+                                            }
+
+                                        } else {
+//                        ToastUtil.showTost("当天尚无数据~");
+
+                                        }
+                                    } else {
+                                        ToastUtil.showTost("获取当天数据失败");
+                                    }
+                                }
+
+                                @Override
+                                public void onFail(Call<PetSportBean> call, Throwable t) {
+                                    ToastUtil.showTost("获取当天数据失败");
+                                }
+                            });
+
+
+
+
                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                             EventManage.petModeChanged event=new EventManage.petModeChanged();
                             event.pet_mode=Constants.PET_STATUS_COMMON;
