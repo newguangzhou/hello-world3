@@ -264,6 +264,7 @@ public class MapInstance implements BDLocationListener {
                 if (mFindPolyline != null) {
                     mFindPolyline.remove();
                 }
+                try {
                 petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
                 OverlayOptions petoptions = new MarkerOptions()
                         .icon(petbitmapDescriptor)
@@ -271,19 +272,27 @@ public class MapInstance implements BDLocationListener {
                         .position(new LatLng(petLatitude, petLongitude))
                         .visible(true);
                 mPetMarker = (Marker) (mBaiduMap.addOverlay(petoptions));
+                }catch (Exception e){
+
+                }
                 break;
             case Constants.PET_STATUS_COMMON:
                 initPhoneMarker();
                 if (mFindPolyline != null) {
                     mFindPolyline.remove();
                 }
-                petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
-                OverlayOptions commonoptions = new MarkerOptions()
-                        .icon(petbitmapDescriptor)
-                        .draggable(true)
-                        .position(new LatLng(petLatitude, petLongitude))
-                        .visible(true);
-                mPetMarker = (Marker) (mBaiduMap.addOverlay(commonoptions));
+                try {
+                    petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                    OverlayOptions commonoptions = new MarkerOptions()
+                            .icon(petbitmapDescriptor)
+                            .draggable(true)
+                            .position(new LatLng(petLatitude, petLongitude))
+                            .visible(true);
+                    mPetMarker = (Marker) (mBaiduMap.addOverlay(commonoptions));
+                }catch (Exception e){
+
+                }
+
                 break;
         }
         calculateDistance();

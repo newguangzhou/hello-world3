@@ -174,7 +174,7 @@ public class PushDataCenter {
             case Pet.AT_HOME:
                 if (!PetInfoInstance.getInstance().getAtHome()) {
 //                    ToastUtil.showTost("宠物到家了");
-//                PetInfoInstance.getInstance().setAtHome(true);
+                PetInfoInstance.getInstance().setAtHome(true);
                 EventBus.getDefault().post(new PushEventManage.petAtHome());
 
                 }

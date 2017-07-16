@@ -225,6 +225,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         if ("".equals(name)) {
             name = "宠物";
         }
+//        PetInfoInstance.getInstance().setAtHome(false);
         DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
                 new View.OnClickListener() {
 
@@ -280,7 +281,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        PetInfoInstance.getInstance().setAtHome(false);
+//                        PetInfoInstance.getInstance().setAtHome(false);
                         showFragment(1);
                         PetInfoInstance.getInstance().getPetLocation();
 
@@ -290,7 +291,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        PetInfoInstance.getInstance().setAtHome(true);
+//                        PetInfoInstance.getInstance().setAtHome(true);
                     }
                 }
         );
