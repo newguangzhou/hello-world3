@@ -342,11 +342,14 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-//                            MapInstance.getInstance().setGPSState(false);
-                            mFindPetView.setSelected(false);
+                            HttpCode ret = HttpCode.valueOf(message.status);
+                            switch (ret) {
+                                case EC_SUCCESS:
+                                    //                            MapInstance.getInstance().setGPSState(false);
+                                    mFindPetView.setSelected(false);
 //                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                    PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                    EventBus.getDefault().post(new EventManage.petModeChanged());
 
 
 //                            switch (message.pet_status) {
@@ -366,6 +369,12 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 //                                    }
 //                                    break;
 //                            }
+                                    break;
+                                case EC_OFFLINE:
+                                    EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                    break;
+                            }
+
 
                         }
 
@@ -388,11 +397,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                            mFindPetView.setSelected(true);
+                            HttpCode ret = HttpCode.valueOf(message.status);
+                            switch (ret) {
+                                case EC_SUCCESS:
+                                    mFindPetView.setSelected(true);
 //                            MapInstance.getInstance().setGPSState(true);
 //                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
-                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                    PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                    EventBus.getDefault().post(new EventManage.petModeChanged());
+                                    break;
+                                case EC_OFFLINE:
+                                    EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                    break;
+                            }
                         }
 
                         @Override

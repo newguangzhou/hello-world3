@@ -19,6 +19,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -40,7 +41,7 @@ import retrofit2.Response;
 @SuppressLint("WrongConstant")
 public class PetInfoInstance {
     private static PetInfoInstance instance;
-    public  static EventManage.callbackUpdatePetInfo  event=new EventManage.callbackUpdatePetInfo();
+    public static EventManage.callbackUpdatePetInfo event = new EventManage.callbackUpdatePetInfo();
 
     public PetInfoBean packBean;
 
@@ -56,15 +57,15 @@ public class PetInfoInstance {
     public boolean petAtHome = true; //true - 宠物在家, false - 宠物活动中
 
 
-
     public double percentage;
 
     public double deep_sleep;
     public double light_sleep;
 
-    public int PET_MODE=Constants.PET_STATUS_COMMON;
-    public void setPetMode(int mode){
-        PET_MODE=mode;
+    public int PET_MODE = Constants.PET_STATUS_COMMON;
+
+    public void setPetMode(int mode) {
+        PET_MODE = mode;
         SPUtil.putPET_MODE(mode);
     }
 
@@ -92,7 +93,7 @@ public class PetInfoInstance {
             instance.setDateFormat_birthday(baseBean.birthday);
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
-            instance.PET_MODE=SPUtil.getPET_MODE();
+            instance.PET_MODE = SPUtil.getPET_MODE();
         }
         return instance;
     }
@@ -213,7 +214,6 @@ public class PetInfoInstance {
                         EventBus.getDefault().post(new EventManage.addPetInfoSuccess());
 
 
-
                         break;
                     case EC_INVALID_ARGS:
                         ToastUtil.showTost("请填写完整信息");
@@ -316,16 +316,16 @@ public class PetInfoInstance {
                     switch (message.pet_status) {
                         case Constants.PET_STATUS_COMMON:
 //                            setAtHome(true);
-                            PET_MODE=Constants.PET_STATUS_COMMON;
+                            PET_MODE = Constants.PET_STATUS_COMMON;
 //                            SPUtil.putGPS_OPEN(false);
                             break;
                         case Constants.PET_STATUS_WALK:
 //                            setAtHome(false);
-                            PET_MODE=Constants.PET_STATUS_WALK;
+                            PET_MODE = Constants.PET_STATUS_WALK;
 //                            SPUtil.putGPS_OPEN(false);
                             break;
                         case Constants.PET_STATUS_FIND:
-                            PET_MODE=Constants.PET_STATUS_FIND;
+                            PET_MODE = Constants.PET_STATUS_FIND;
 //                            SPUtil.putGPS_OPEN(true);
 //                            MapInstance.getInstance().GPS_OPEN = true;
 //                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
@@ -336,6 +336,21 @@ public class PetInfoInstance {
                     }
                     SPUtil.putPET_MODE(PET_MODE);
                     EventBus.getDefault().post(new EventManage.petModeChanged());
+
+                    switch (message.pet_is_in_home) {
+                        case Constants.PET_AT_HOME:
+                            if(!PetInfoInstance.getInstance().getAtHome()){
+                                PetInfoInstance.getInstance().setAtHome(true);
+                                EventBus.getDefault().post(new PushEventManage.petNotHome());
+                            }
+                            break;
+                        case Constants.PET_OUT_HOME:
+                            if(PetInfoInstance.getInstance().getAtHome()){
+                                PetInfoInstance.getInstance().setAtHome(false);
+                                EventBus.getDefault().post(new PushEventManage.petAtHome());
+                            }
+                            break;
+                    }
                 }
             }
 
@@ -375,7 +390,7 @@ public class PetInfoInstance {
         SPUtil.putPetHeader("");
         packBean.pet_type_id = 0;
         SPUtil.putPetTypeId(0);
-        packBean.dateFormat_birthday=new PetInfoInstance.MyDate(2015, 1, 1);
+        packBean.dateFormat_birthday = new PetInfoInstance.MyDate(2015, 1, 1);
         setDateFormat_birthday("");
     }
 
@@ -436,7 +451,7 @@ public class PetInfoInstance {
                                         SPUtil.putPetHeader(packBean.logo_url);
                                     }
                                     if (packBean.pet_id > 0) {
-                                        event.updateHeader=true;
+                                        event.updateHeader = true;
                                         updatePetInfo(packBean);
                                     }
                                     EventBus.getDefault().post(new EventManage.uploadImageSuccess());
@@ -574,7 +589,7 @@ public class PetInfoInstance {
         if (!bean.birthday.equals(SPUtil.getBirthday())) {
             return true;
         }
-        if(!bean.weight.equals(SPUtil.getPetWeight())){
+        if (!bean.weight.equals(SPUtil.getPetWeight())) {
             return true;
         }
         if (!bean.description.equals(SPUtil.getPetDescription())) {
@@ -585,14 +600,14 @@ public class PetInfoInstance {
         }
 
 
-
         return false;
     }
-    public boolean petSexOrHeavyChanged(PetInfoBean bean){
+
+    public boolean petSexOrHeavyChanged(PetInfoBean bean) {
         if (bean.sex != SPUtil.getSex()) {
             return true;
         }
-        if(!bean.weight.equals(SPUtil.getPetWeight())){
+        if (!bean.weight.equals(SPUtil.getPetWeight())) {
             return true;
         }
         return false;

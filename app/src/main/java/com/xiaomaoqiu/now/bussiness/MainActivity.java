@@ -28,6 +28,7 @@ import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
@@ -119,6 +120,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                         ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                             @Override
                             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                HttpCode ret = HttpCode.valueOf(message.status);
+                                switch (ret) {
+                                    case EC_SUCCESS:
 //                                MapInstance.getInstance().setGPSState(false);
 //                                EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                                 PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
@@ -141,6 +145,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 //                                        }
 //                                        break;
 //                                }
+                                        break;
+                                    case EC_OFFLINE:
+                                        EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                        break;
+                                }
 
                             }
 
@@ -156,23 +165,23 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         showFragment(1);
-                        try {
-                            Thread thread=new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        Thread.sleep(900000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
+//                        try {
+//                            Thread thread=new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    try {
+//                                        Thread.sleep(900000);
+//                                    } catch (InterruptedException e) {
+//                                        e.printStackTrace();
+//                                    }
                                     PetInfoInstance.getInstance().getPetLocation();
-                                }
-                            });
-                            thread.start();
+//                                }
+//                            });
+//                            thread.start();
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
 
                     }
                 }
@@ -250,11 +259,21 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
 //                                    MapInstance.getInstance().setGPSState(true);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+
                                     PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                     EventBus.getDefault().post(new EventManage.petModeChanged());
                                     showFragment(1);
+                                            break;
+                                        case EC_OFFLINE:
+                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                            break;
+                                    }
+
                                 }
 
                                 @Override

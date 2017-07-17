@@ -8,4 +8,5 @@ import com.xiaomaoqiu.now.base.BaseBean;
 
 public class PetStatusBean extends BaseBean {
     public int pet_status;
+    public int pet_is_in_home;//1 在家  0 不在家
 }

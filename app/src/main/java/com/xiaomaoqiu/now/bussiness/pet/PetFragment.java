@@ -357,10 +357,13 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
 //                                    MapInstance.getInstance().setGPSState(false);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-                                    PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                                    EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                            EventBus.getDefault().post(new EventManage.petModeChanged());
 
 
 //                                    switch (message.pet_status) {
@@ -380,6 +383,12 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                                            }
 //                                            break;
 //                                    }
+                                            break;
+                                        case EC_OFFLINE:
+                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                            break;
+                                    }
+
 
                                 }
 
@@ -434,11 +443,19 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
 //                                    MapInstance.getInstance().setGPSState(true);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                                     PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                     EventBus.getDefault().post(new EventManage.petModeChanged());
                                     checkIndex.changeLocatefragment();
+                                            break;
+                                        case EC_OFFLINE:
+                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                            break;
+                                    }
                                 }
 
                                 @Override

@@ -24,6 +24,12 @@ public class Constants {
     public static final int PET_STATUS_WALK=1;
     public static final int PET_STATUS_FIND=2;
 
+    /**
+     * # 1 在家  0 不在家
+     */
+    public static final int PET_AT_HOME=1;
+    public static final int PET_OUT_HOME=0;
+
 
 
     public static class Url {

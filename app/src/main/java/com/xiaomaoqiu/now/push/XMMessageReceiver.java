@@ -65,6 +65,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
         } else if(!TextUtils.isEmpty(message.getUserAccount())) {
             mUserAccount=message.getUserAccount();
         }
+        PushDataCenter.getInstance().notifyData(mMessage);
 //        String url = getTargetUrl();
 //        com.chinahr.android.common.instance.UrlManager.getInstance().filterPushUrl(context, url, false);
     }
