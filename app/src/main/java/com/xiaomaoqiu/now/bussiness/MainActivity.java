@@ -88,6 +88,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
         batteryView.setDeviceOffline();
+        DeviceInfoInstance.getInstance().battery_level=-1;
     }
 
     //设备状态更新
@@ -117,6 +118,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
+                        MapInstance.getInstance().openTime=1;
                         ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                             @Override
                             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -256,6 +258,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     public void onClick(View v) {
                         if (PetInfoInstance.getInstance().PET_MODE!=Constants.PET_STATUS_FIND) {
                             MapInstance.getInstance().startFindPet();
+                            MapInstance.getInstance().openTime=1;
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {

@@ -433,7 +433,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                                }
 //                            });
 
-
+                    MapInstance.getInstance().openTime=1;
                     String conent = getContext().getResources().getString(R.string.map_is_findpet);
                     DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                         @Override

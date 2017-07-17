@@ -242,6 +242,8 @@ public class MapInstance implements BDLocationListener {
             case Constants.PET_STATUS_FIND:
                 initPhoneMarker();
                 petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                if(petbitmapDescriptor==null)
+                    return;
                 OverlayOptions findoptions = new MarkerOptions()
                         .icon(petbitmapDescriptor)
                         .draggable(true)
@@ -266,6 +268,8 @@ public class MapInstance implements BDLocationListener {
                 }
                 try {
                 petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
+                    if(petbitmapDescriptor==null)
+                        return;
                 OverlayOptions petoptions = new MarkerOptions()
                         .icon(petbitmapDescriptor)
                         .draggable(true)
@@ -283,6 +287,8 @@ public class MapInstance implements BDLocationListener {
                 }
                 try {
                     petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                    if(petbitmapDescriptor==null)
+                        return;
                     OverlayOptions commonoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
@@ -474,14 +480,47 @@ public class MapInstance implements BDLocationListener {
     }
 
 
+
+    public static int openTime=1;
+    Thread thread;
     //计算距离,根据用户指定的两个坐标点，计算这两个点的实际地理距离
     public void calculateDistance() {
-        LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
-        LatLng petLatLng = new LatLng(petLatitude, petLongitude);
-        //计算p1、p2两点之间的直线距离，单位：米
+        if (openTime == 1) {
+            openTime=0;
+            LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
+            LatLng petLatLng = new LatLng(petLatitude, petLongitude);
+            if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND && DistanceUtil.getDistance(phoneLatLng, petLatLng) < 10) {
+                EventBus.getDefault().post(new EventManage.distanceClose());
+            }
+        } else {
+            if (thread == null) {
+                //计算p1、p2两点之间的直线距离，单位：米
+                try {
+                    thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(900000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+//                    PetInfoInstance.getInstance().getPetLocation();
+                            LatLng phoneLatLng = new LatLng(phoneLatitude, phoneLongitude);
+                            LatLng petLatLng = new LatLng(petLatitude, petLongitude);
+                            if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND && DistanceUtil.getDistance(phoneLatLng, petLatLng) < 10) {
+                                EventBus.getDefault().post(new EventManage.distanceClose());
+                            }
+                            thread = null;
 
-        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND && DistanceUtil.getDistance(phoneLatLng, petLatLng) < 10) {
-            EventBus.getDefault().post(new EventManage.distanceClose());
+                        }
+                    });
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                thread.start();
+            }
         }
     }
 
