@@ -21,7 +21,6 @@ import com.xiaomaoqiu.pet.R;
  */
 public class MeFrament extends BaseFragment implements LogoutView{
 
-    static int REQ_EXIT = 1;
     LoginPresenter loginPresenter;
 
 
@@ -67,17 +66,6 @@ public class MeFrament extends BaseFragment implements LogoutView{
                     }
                 }
                 );
-
-
-//                DialogToast.createDialogWithTwoButton(getActivity(), "确认退出登录？", new View.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(View v) {
-//                                loginPresenter.logout();
-//                            }
-//                        }
-//                );
-
             }
         });
 
@@ -117,14 +105,8 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_hardware).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (DeviceInfoInstance.getInstance().isDeviceExist) {
                     Intent intent = new Intent(getActivity(), DeviceActivity.class);
                     startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(getActivity(), InitBindDeviceActivity.class);
-//                    startActivity(intent);
-//                }
-
             }
         });
 

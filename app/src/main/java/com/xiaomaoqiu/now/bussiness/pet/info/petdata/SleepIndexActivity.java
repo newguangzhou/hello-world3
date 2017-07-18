@@ -31,8 +31,6 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
 
     ThreePartLineViewWithTotal threePartLineView_sleep;
-//    TextAimView textAimView_sleep;
-
     private SleepChartIndexPresenter presenter;
 
     @Override
@@ -45,7 +43,6 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     }
     private void initView(){
         threePartLineView_sleep= (ThreePartLineViewWithTotal) findViewById(R.id.threePartLineView_sleep);
-//        textAimView_sleep= (TextAimView) findViewById(R.id.textAimView_sleep);
         monthChartView=(CustomLineChart)findViewById(R.id.line_chart_month);
         weekChartView=(CustomBarChart)findViewById(R.id.bar_chart_week);
         todayTip=(TextView)findViewById(R.id.sleep_index_totay_tip);
@@ -104,11 +101,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
 
     @Override
     public void onSuccessGetWeight(double deep, double light) {
-//        light=10;
-//        deep=100;
         threePartLineView_sleep.setData(deep,light);
-        int totalWidth=threePartLineView_sleep.getWidth();
-//        textAimView_sleep.setAim((int)light+"",(deep+light)+"", (int)((light*totalWidth)/(deep+light)));
         String tip="今日深睡为"+deep+"小时，小憩为"+light+"小时。";
         todayTip.setText(tip);
     }

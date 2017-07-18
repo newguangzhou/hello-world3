@@ -127,49 +127,6 @@ public class MeWifiListActivity extends BaseActivity {
                 });
             }
         });
-//        tv_next.setEnabled(false);
-//        tv_next.setTextColor(getResources().getColor(R.color.black));
-
-//        setNextView("保存", new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-////                if (TextUtils.isEmpty(wifi_bssid)) {
-////                    ToastUtil.showTost("您必须选择一个homewifi");
-////                    return;
-////                }
-//                ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
-//                        UserInstance.getInstance().getToken(),
-//                        wifi_ssid,
-//                        wifi_bssid
-//                ).enqueue(new XMQCallback<BaseBean>() {
-//                    @Override
-//                    public void onSuccess(Response<BaseBean> response, BaseBean message) {
-//                        HttpCode ret = HttpCode.valueOf(message.status);
-//                        if (ret == EC_SUCCESS) {
-//                            PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
-//                            PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
-//                            UserInstance.getInstance().wifi_bssid = wifi_bssid;
-//                            UserInstance.getInstance().wifi_ssid = wifi_ssid;
-//                            SPUtil.putHomeWifiMac(wifi_bssid);
-//                            SPUtil.putHomeWifiSsid(wifi_ssid);
-//                            finish();
-//                        }
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onFail(Call<BaseBean> call, Throwable t) {
-//
-//                    }
-//                });
-//
-//
-//            }
-//        });
-
-
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
         rv_wifilist.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CheckStateAdapter(DeviceInfoInstance.getInstance().wiflist, this);
@@ -191,19 +148,6 @@ public class MeWifiListActivity extends BaseActivity {
     public static String wifi_ssid;//wifi名称
 
     private void initData() {
-//        //销毁
-//        WifiListBean wifiListBean = new WifiListBean();
-//        wifiListBean.data = new ArrayList<WifiBean>();
-//        for (int i = 0; i < 5; i++) {
-//            WifiBean wifiBean = new WifiBean();
-//            wifiBean.wifi_bssid = i + "----" + i;
-//            wifiBean.wifi_ssid = i + "----" + i;
-//            wifiListBean.data.add(wifiBean);
-//        }
-//        adapter.mdatas = wifiListBean.data;
-//
-//        adapter.notifyDataSetChanged();
-
         adapter.setOnItemClickListener(new CheckStateAdapter.OnItemClickListener() {
 
             @Override
@@ -216,15 +160,11 @@ public class MeWifiListActivity extends BaseActivity {
                     }
                     wifi_bssid = "";
                     wifi_ssid = "";
-//                    tv_next.setEnabled(false);
-//                    tv_next.setTextColor(getResources().getColor(R.color.black));
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
 
                     if (adapter.mdatas.get(position).is_homewifi == 1) {
                         wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                         wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
-//                        tv_next.setEnabled(true);
-//                        tv_next.setTextColor(getResources().getColor(R.color.white));
                         for (WifiBean bean : adapter.mdatas) {
                             if (!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
                                 bean.is_homewifi = 0;

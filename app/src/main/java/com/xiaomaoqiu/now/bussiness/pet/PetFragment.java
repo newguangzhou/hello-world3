@@ -57,7 +57,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
     MaterialDesignPtrFrameLayout ptr_refresh;
 
-    //    private HealthGoSportView mGoSportView;
     CircleProgressBar prog;
     TextView tvSportDone;
     TextView tvSportTarget;
@@ -74,7 +73,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     CheckIndex checkIndex;
 
 
-    boolean isopen;//gps是否打开
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,14 +105,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         });
 
         initProgress();
-
-//        isopen = MapInstance.getInstance().GPS_OPEN;
-//        if (isopen) {
-//        if (PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
-//            tv_findpet.setText("关闭搜寻");
-//        } else {
-//            tv_findpet.setText("紧急搜寻");
-//        }
         switch (PetInfoInstance.getInstance().PET_MODE) {
             case Constants.PET_STATUS_COMMON:
                 rootView.findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
@@ -277,18 +267,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-//    //gps状态变化
-//    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-//    public void updateGPSState(EventManage.GPS_CHANGE event) {
-//        isopen = MapInstance.getInstance().GPS_OPEN;
-//        if (isopen) {
-//            tv_findpet.setText("关闭搜寻");
-//        } else {
-//            tv_findpet.setText("紧急搜寻");
-//        }
-//    }
-
-
     @Override
     public void onClick(View v) {
         if (DoubleClickUtil.isFastMiniDoubleClick()) {
@@ -301,55 +279,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_locate:
-//                isopen = MapInstance.getInstance().GPS_OPEN;
-//                if (isopen) {
-//                    String conent = "是否关闭紧急追踪模式";
-//                    DialogUtil.showTwoButtonDialog(getContext(),conent,"取消","确定",new View.OnClickListener(){
-//
-//                        @Override
-//                        public void onClick(View v) {
-//
-//                        }
-//                    },new View.OnClickListener(){
-//
-//                        @Override
-//                        public void onClick(View v) {
-//                            tv_findpet.setText("紧急搜寻");
-//                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
-//                                @Override
-//                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-//                                    MapInstance.getInstance().setGPSState(false);
-//                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-//
-//                                    switch (message.pet_status) {
-//                                        case Constants.PET_STATUS_COMMON:
-//                                            if(!PetInfoInstance.getInstance().getAtHome()) {
-//                                                PetInfoInstance.getInstance().setAtHome(true);
-//                                            }
-//                                            break;
-//                                        case Constants.PET_STATUS_WALK:
-//                                            if(PetInfoInstance.getInstance().getAtHome()) {
-//                                                PetInfoInstance.getInstance().setAtHome(false);
-//                                            }
-//                                            break;
-//                                        default:
-//                                            if(!PetInfoInstance.getInstance().getAtHome()) {
-//                                                PetInfoInstance.getInstance().setAtHome(true);
-//                                            }
-//                                            break;
-//                                    }
-//
-//                                }
-//
-//                                @Override
-//                                public void onFail(Call<PetStatusBean> call, Throwable t) {
-//
-//                                }
-//                            });
-//                        }
-//                    });
-
-//                    new DialogToast(getContext(), "是否关闭紧急追踪模式。", "确定", new View.OnClickListener() {
                 if(!DeviceInfoInstance.getInstance().online){
                     ToastUtil.showTost("设备已离线，此功能暂时无法使用");
                     return;
@@ -365,29 +294,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                     HttpCode ret = HttpCode.valueOf(message.status);
                                     switch (ret) {
                                         case EC_SUCCESS:
-//                                    MapInstance.getInstance().setGPSState(false);
-//                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
-
-
-//                                    switch (message.pet_status) {
-//                                        case Constants.PET_STATUS_COMMON:
-//                                            if (!PetInfoInstance.getInstance().getAtHome()) {
-//                                                PetInfoInstance.getInstance().setAtHome(true);
-//                                            }
-//                                            break;
-//                                        case Constants.PET_STATUS_WALK:
-//                                            if (PetInfoInstance.getInstance().getAtHome()) {
-//                                                PetInfoInstance.getInstance().setAtHome(false);
-//                                            }
-//                                            break;
-//                                        default:
-//                                            if (!PetInfoInstance.getInstance().getAtHome()) {
-//                                                PetInfoInstance.getInstance().setAtHome(true);
-//                                            }
-//                                            break;
-//                                    }
                                             break;
                                         case EC_OFFLINE:
                                             EventBus.getDefault().post(new EventManage.DeviceOffline());
@@ -406,38 +314,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         }
                     });
                 } else {
-
-//                    String conent = getContext().getResources().getString(R.string.map_is_findpet);
-//                    DialogUtil.showTwoButtonDialog(getContext(),conent,"取消","确定",new View.OnClickListener(){
-//
-//                                @Override
-//                                public void onClick(View v) {
-//
-//                                }
-//                            },
-//                            new View.OnClickListener() {
-//
-//                                @Override
-//                                public void onClick(View v) {
-//                                    tv_findpet.setText("关闭搜寻");
-//                                    MapInstance.getInstance().startFindPet();
-//                                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
-//                                        @Override
-//                                        public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-//                                            MapInstance.getInstance().setGPSState(true);
-//                                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-//                                            checkIndex.changeLocatefragment();
-//                                        }
-//
-//                                        @Override
-//                                        public void onFail(Call<PetStatusBean> call, Throwable t) {
-//
-//                                        }
-//                                    });
-//                                    PetInfoInstance.getInstance().getPetLocation();
-//                                }
-//                            });
-
                     MapInstance.getInstance().openTime = 1;
                     String conent = getContext().getResources().getString(R.string.map_is_findpet);
                     DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
@@ -480,7 +356,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_sport:
-//                if (MapInstance.getInstance().GPS_OPEN) {
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                     ToastUtil.showTost("紧急搜索模式下不能使用该功能");
                     return;
@@ -530,8 +405,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                             });
                             MainActivity.locationThread.start();
                         }
-
-//                        PetInfoInstance.getInstance().setAtHome(false);
                         checkIndex.changeLocatefragment();
                     }
                 });
@@ -621,7 +494,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
 
                         MainActivity.getLocationWithOneMinute = true;
-//                        MainActivity.getLocationTime = 0;
                         if (MainActivity.locationThread == null) {
                             MainActivity.locationThread = new Thread(new Runnable() {
                                 @Override
@@ -640,9 +512,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                             });
                             MainActivity.locationThread.start();
                         }
-
-//                        PetInfoInstance.getInstance().setAtHome(true);
-//                        checkIndex.changeLocatefragment();
                     }
                 });
                 break;

@@ -107,9 +107,6 @@ public class MapLocationActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(PetAppLike.mcontext, MeWifiListActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                PetAppLike.mcontext.startActivity(intent);
                 finish();
             }
         });
@@ -138,8 +135,6 @@ public class MapLocationActivity extends Activity {
                             SPUtil.putHOME_LONGITUDE(longitude + "");
                             EventBus.getDefault().post(event);
                         }
-//                        Intent intent = new Intent(MapLocationActivity.this, MainActivity.class);
-//                        startActivity(intent);
                         ToastUtil.showTost("地址保存成功");
                         finish();
 
@@ -218,7 +213,6 @@ public class MapLocationActivity extends Activity {
                 if (poiInfos != null && poiInfos.size() > position) {
                     PoiInfo bean = poiInfos.get(position);
                     double[] temp = HomelocationInstance.bd09_To_Gcj02(bean.location.latitude, bean.location.longitude);
-//                    HomelocationInstance.getInstance().setCenter(poiInfos.get(0).location, 1000);
                     latitude = temp[0];
                     longitude = temp[1];
                 }
@@ -262,16 +256,7 @@ public class MapLocationActivity extends Activity {
                 MapLocationParser.queryLocationDesc(position, new addressParseListener() {
                     @Override
                     public void onAddressparsed(String address) {
-//                        Log.e("longtianlove","位置"+address);
                         tv_location.setText(address);
-//                        if(nearbySearchOption==null||position==null){
-//                            return;
-//                        }
-//                        mPoiSearch.searchNearby((nearbySearchOption)
-//                                .location(position)
-//                                .keyword("")
-//                                .radius(2000)
-//                                .pageNum(10));
                         String[] tempStrings = address.split("市");
                         if (tempStrings.length < 2) {
                             return;
@@ -284,10 +269,6 @@ public class MapLocationActivity extends Activity {
                                 .city(HomelocationInstance.getInstance().city)
                                 .keyword(temp)
                                 .pageNum(10));
-//                        mGeoSearch. geocode(new GeoCodeOption()
-//                                .city(HomelocationInstance.getInstance().city)
-//                                .address(address));
-
                     }
                 });
 
@@ -326,15 +307,6 @@ public class MapLocationActivity extends Activity {
                 poiInfos = (ArrayList<PoiInfo>) result.getAllPoi();
                 adapter.mdatas = poiInfos;
                 adapter.notifyDataSetChanged();
-
-//                if(poiInfos!=null&&poiInfos.size()>1) {
-//                    PoiInfo bean = poiInfos.get(0);
-//                    double[] temp = HomelocationInstance.bd09_To_Gcj02(bean.location.latitude, bean.location.longitude);
-////                    HomelocationInstance.getInstance().setCenter(poiInfos.get(0).location, 1000);
-//                    latitude = temp[0];
-//                    longitude = temp[1];
-//                }
-
             }
 
             public void onGetPoiDetailResult(PoiDetailResult result) {
@@ -346,30 +318,7 @@ public class MapLocationActivity extends Activity {
             }
         };
         mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
-
-
         nearbySearchOption = new PoiNearbySearchOption();
-
-//        mGeoSearch= GeoCoder.newInstance();
-//        OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
-//            public void onGetGeoCodeResult(GeoCodeResult result) {
-//                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-//                    //没有检索到结果
-//                }
-//                //获取地理编码结果
-//
-//            }
-//
-//            @Override
-//            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
-//                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-//                    //没有找到检索结果
-//                }
-//                //获取反向地理编码结果
-//            }
-//        };
-//        mGeoSearch.setOnGetGeoCodeResultListener(listener);
-
     }
 
     //宠物信息更新
@@ -379,19 +328,7 @@ public class MapLocationActivity extends Activity {
         MapLocationParser.queryLocationDesc(position, new addressParseListener() {
             @Override
             public void onAddressparsed(String address) {
-//                        Log.e("longtianlove","位置"+address);
                 tv_location.setText(address);
-//                mGeoSearch. geocode(new GeoCodeOption()
-//                        .city(HomelocationInstance.getInstance().city)
-//                        .address(address));
-//                if(nearbySearchOption==null||position==null){
-//                    return;
-//                }
-//                mPoiSearch.searchNearby((nearbySearchOption)
-//                        .location(position)
-//                        .keyword("")
-//                        .radius(2000)
-//                        .pageNum(10));
                 String[] tempStrings = address.split("市");
                 if (tempStrings.length < 2) {
                     return;
