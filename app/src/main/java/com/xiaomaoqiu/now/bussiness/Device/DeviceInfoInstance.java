@@ -99,6 +99,9 @@ public class DeviceInfoInstance {
     //wifi列表
     public WifiListBean wiflist = new WifiListBean();
 
+    //设备是否离线
+    public boolean online=true;
+
     //保存设备信息
     public void saveDeviceInfo(DeviceInfoBean message) {
         instance.battery_level = message.battery_level / 100f;

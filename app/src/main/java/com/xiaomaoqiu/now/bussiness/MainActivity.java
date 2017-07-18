@@ -88,13 +88,12 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
         batteryView.setDeviceOffline();
-        DeviceInfoInstance.getInstance().battery_level = -1;
     }
 
     //设备状态更新
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
-        if (DeviceInfoInstance.getInstance().battery_level < 0) {
+        if (!DeviceInfoInstance.getInstance().online) {
             ToastUtil.showTost("您的设备尚未开机！");
             batteryView.setDeviceOffline();
             return;
@@ -386,7 +385,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
             @Override
             public void onClick(View view) {
-                if (DeviceInfoInstance.getInstance().battery_level < 0) {
+                if (!DeviceInfoInstance.getInstance().online) {
                     ToastUtil.showTost("您的设备尚未开机！");
                     return;
                 }

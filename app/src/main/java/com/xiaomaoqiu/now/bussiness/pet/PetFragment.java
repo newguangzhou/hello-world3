@@ -13,6 +13,7 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
@@ -349,6 +350,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                    });
 
 //                    new DialogToast(getContext(), "是否关闭紧急追踪模式。", "确定", new View.OnClickListener() {
+                if(!DeviceInfoInstance.getInstance().online){
+                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    return;
+                }
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                     DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {
                         @Override
@@ -478,6 +483,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                if (MapInstance.getInstance().GPS_OPEN) {
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                     ToastUtil.showTost("紧急搜索模式下不能使用该功能");
+                    return;
+                }
+                if(!DeviceInfoInstance.getInstance().online){
+                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
                     return;
                 }
 

@@ -123,10 +123,12 @@ public class PushDataCenter {
     public void dealDevice() {
         switch (formatBean.signal) {
             case Device.OFFLINE:
+                DeviceInfoInstance.getInstance().online=false;
                 EventBus.getDefault().post(new PushEventManage.deviceOffline());
                 EventBus.getDefault().post(new EventManage.DeviceOffline());
                 break;
             case Device.ONLINE:
+                DeviceInfoInstance.getInstance().online=true;
                 DeviceInfoInstance.getInstance().battery_level = ((int) formatBean.data.get("battery_level")) / 100f;
                 DeviceInfoInstance.getInstance().lastGetTime = (String) formatBean.data.get("datetime");
                 EventBus.getDefault().post(new PushEventManage.deviceOnline());

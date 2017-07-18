@@ -14,7 +14,9 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
@@ -102,7 +104,11 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     textString += d;
                 }
                 locationString=textString;
-                petLocation.setText(textString);
+                if(DeviceInfoInstance.getInstance().online) {
+                    petLocation.setText(textString);
+                }else{
+                    petLocation.setText(locationString+"(注意：设备目前已离线）");
+                }
             }
         });
     }
@@ -229,6 +235,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 }
                 break;
             case R.id.btn_playing_pet:
+                if(!DeviceInfoInstance.getInstance().online){
+                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    return;
+                }
                 //去运动
                 showWalkPetDialog(!mWalkPetView.isSelected());
                 break;
@@ -333,6 +343,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
      * 狗丢了对话框
      */
     private void showFindpetDialog() {
+        if(!DeviceInfoInstance.getInstance().online){
+            ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+            return;
+        }
 //        isOpen = MapInstance.getInstance().GPS_OPEN;
         if (PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
             DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {

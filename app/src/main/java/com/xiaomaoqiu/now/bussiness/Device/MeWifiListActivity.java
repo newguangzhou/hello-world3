@@ -107,6 +107,11 @@ public class MeWifiListActivity extends BaseActivity {
                             SPUtil.putHomeWifiMac(wifi_bssid);
                             SPUtil.putHomeWifiSsid(wifi_ssid);
 //                            finish();
+                            if(!DeviceInfoInstance.getInstance().online){
+                                ToastUtil.showTost("设备已离线，修改常住地功能暂时无法使用");
+                                finish();
+                                return;
+                            }
                             Intent intent=new Intent(MeWifiListActivity.this, MapLocationActivity.class);
 
                             startActivityForResult(intent, request_code);
