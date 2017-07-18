@@ -407,6 +407,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 //                            EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                                     PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                     EventBus.getDefault().post(new EventManage.petModeChanged());
+                                    PetInfoInstance.getInstance().getPetLocation();
                                     break;
                                 case EC_OFFLINE:
                                     EventBus.getDefault().post(new EventManage.DeviceOffline());
@@ -419,7 +420,6 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
                         }
                     });
-                    PetInfoInstance.getInstance().getPetLocation();
                 }
             });
         }

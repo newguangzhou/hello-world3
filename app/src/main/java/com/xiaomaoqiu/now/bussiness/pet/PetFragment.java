@@ -433,7 +433,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                                }
 //                            });
 
-                    MapInstance.getInstance().openTime=1;
+                    MapInstance.getInstance().openTime = 1;
                     String conent = getContext().getResources().getString(R.string.map_is_findpet);
                     DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                         @Override
@@ -448,9 +448,11 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         case EC_SUCCESS:
 //                                    MapInstance.getInstance().setGPSState(true);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-                                    PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
-                                    EventBus.getDefault().post(new EventManage.petModeChanged());
-                                    checkIndex.changeLocatefragment();
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            checkIndex.changeLocatefragment();
+                                            PetInfoInstance.getInstance().getPetLocation();
+
                                             break;
                                         case EC_OFFLINE:
                                             EventBus.getDefault().post(new EventManage.DeviceOffline());
@@ -463,7 +465,6 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                                 }
                             });
-                            PetInfoInstance.getInstance().getPetLocation();
                         }
                     });
                 }

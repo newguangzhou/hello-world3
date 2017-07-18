@@ -88,7 +88,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
         batteryView.setDeviceOffline();
-        DeviceInfoInstance.getInstance().battery_level=-1;
+        DeviceInfoInstance.getInstance().battery_level = -1;
     }
 
     //设备状态更新
@@ -118,7 +118,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        MapInstance.getInstance().openTime=1;
+                        MapInstance.getInstance().openTime = 1;
                         ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
                             @Override
                             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -127,8 +127,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                     case EC_SUCCESS:
 //                                MapInstance.getInstance().setGPSState(false);
 //                                EventBus.getDefault().post(new EventManage.GPS_CHANGE());
-                                PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                                EventBus.getDefault().post(new EventManage.petModeChanged());
+                                        PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                        EventBus.getDefault().post(new EventManage.petModeChanged());
 
 //                                switch (message.pet_status) {
 //                                    case Constants.PET_STATUS_COMMON:
@@ -176,7 +176,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 //                                    } catch (InterruptedException e) {
 //                                        e.printStackTrace();
 //                                    }
-                                    PetInfoInstance.getInstance().getPetLocation();
+                        PetInfoInstance.getInstance().getPetLocation();
 //                                }
 //                            });
 //                            thread.start();
@@ -256,9 +256,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        if (PetInfoInstance.getInstance().PET_MODE!=Constants.PET_STATUS_FIND) {
+                        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
                             MapInstance.getInstance().startFindPet();
-                            MapInstance.getInstance().openTime=1;
+                            MapInstance.getInstance().openTime = 1;
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -268,9 +268,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 //                                    MapInstance.getInstance().setGPSState(true);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
 
-                                    PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
-                                    EventBus.getDefault().post(new EventManage.petModeChanged());
-                                    showFragment(1);
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            PetInfoInstance.getInstance().getPetLocation();
+
+                                            showFragment(1);
                                             break;
                                         case EC_OFFLINE:
                                             EventBus.getDefault().post(new EventManage.DeviceOffline());
@@ -284,7 +286,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                                 }
                             });
-                            PetInfoInstance.getInstance().getPetLocation();
 
                         } else {
                             showFragment(1);
@@ -406,7 +407,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     public static Thread locationThread;
     //是否每一分钟都发送位置信息
     public static volatile boolean getLocationWithOneMinute;
-//    //是否超过次数限制
+    //    //是否超过次数限制
 //    public static volatile int getLocationTime;
     public static int select_index;
 
@@ -423,7 +424,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
                 getLocationWithOneMinute = false;
-                select_index=0;
+                select_index = 0;
 //                getLocationTime = 0;
                 break;
             case 1:
@@ -434,7 +435,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 }
                 getLocationWithOneMinute = true;
 //                getLocationTime = 0;
-                select_index=1;
+                select_index = 1;
                 if (locationThread == null) {
                     locationThread = new Thread(new Runnable() {
                         @Override
@@ -466,7 +467,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 }
                 getLocationWithOneMinute = false;
 //                getLocationTime = 0;
-                select_index=2;
+                select_index = 2;
                 transaction
                         .show(mMeFragment).commit();
                 mMeTabIcon.setSelected(true);
@@ -535,13 +536,13 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             int todayYear = today.getYear();
             int todayMonth = today.getMonth();
             int todayDay = today.getDay();
-            int result = ((deadlineYear - todayYear) * 12 + (deadlineMonth - todayMonth) )* 30 + deadlineDay - todayDay;
+            int result = ((deadlineYear - todayYear) * 12 + (deadlineMonth - todayMonth)) * 30 + deadlineDay - todayDay;
 
             if (result < 0) {
                 if (!SPUtil.getKey_Value(result + "")) {
                     showSimdeadedDialog(this, result);
                 }
-            } else  if (result <= 30) {
+            } else if (result <= 30) {
                 if (!SPUtil.getKey_Value(result + "")) {
                     showSimdeadingDialog(this, result);
                 }
@@ -607,7 +608,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if(select_index==1){
+        if (select_index == 1) {
             getLocationWithOneMinute = true;
         }
     }
@@ -615,7 +616,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void onPause() {
         super.onPause();
-        if(select_index==1){
+        if (select_index == 1) {
             getLocationWithOneMinute = false;
         }
     }
