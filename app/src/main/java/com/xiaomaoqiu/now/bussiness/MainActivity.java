@@ -88,6 +88,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
         batteryView.setDeviceOffline();
+        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
     }
 
     //设备状态更新
