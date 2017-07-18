@@ -23,6 +23,7 @@ import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -294,10 +295,15 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                     HttpCode ret = HttpCode.valueOf(message.status);
                                     switch (ret) {
                                         case EC_SUCCESS:
+                                            if(DeviceInfoInstance.getInstance().online!=true) {
+                                                DeviceInfoInstance.getInstance().online = true;
+                                                EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                            }
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
                                             break;
                                         case EC_OFFLINE:
+                                            DeviceInfoInstance.getInstance().online=false;
                                             EventBus.getDefault().post(new EventManage.DeviceOffline());
                                             break;
                                     }
@@ -327,6 +333,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                     HttpCode ret = HttpCode.valueOf(message.status);
                                     switch (ret) {
                                         case EC_SUCCESS:
+                                            if(DeviceInfoInstance.getInstance().online!=true) {
+                                                DeviceInfoInstance.getInstance().online = true;
+                                                EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                            }
 //                                    MapInstance.getInstance().setGPSState(true);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
@@ -336,6 +346,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 
                                             break;
                                         case EC_OFFLINE:
+                                            DeviceInfoInstance.getInstance().online=false;
                                             EventBus.getDefault().post(new EventManage.DeviceOffline());
                                             break;
                                     }

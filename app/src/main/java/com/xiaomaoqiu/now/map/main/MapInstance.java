@@ -249,7 +249,11 @@ public class MapInstance implements BDLocationListener {
         switch (PetInfoInstance.getInstance().PET_MODE) {
             case Constants.PET_STATUS_FIND:
                 initPhoneMarker();
+                if (PetInfoInstance.getInstance().getAtHome()) {
                 petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                } else {
+                    petbitmapDescriptor = BitmapDescriptorFactory.fromView(petCommonNotAtHomeView);
+                }
                 if(petbitmapDescriptor==null)
                     return;
                 OverlayOptions findoptions = new MarkerOptions()

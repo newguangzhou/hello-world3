@@ -211,6 +211,10 @@ public class PetInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
+                        if(DeviceInfoInstance.getInstance().online!=true) {
+                            DeviceInfoInstance.getInstance().online = true;
+                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                        }
                         savePetInfo(message);
                         EventBus.getDefault().post(new EventManage.addPetInfoSuccess());
 
@@ -220,6 +224,7 @@ public class PetInfoInstance {
                         ToastUtil.showTost("请填写完整信息");
                         break;
                     case EC_OFFLINE:
+                        DeviceInfoInstance.getInstance().online=false;
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                         break;
 //                    case EC_ALREADY_FAV:
@@ -281,6 +286,10 @@ public class PetInfoInstance {
                 switch (ret) {
                     case EC_SUCCESS:
                         //                    ToastUtil.showTost("更新成功");
+                        if(DeviceInfoInstance.getInstance().online!=true) {
+                            DeviceInfoInstance.getInstance().online = true;
+                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                        }
                         savePetInfo(petInfoBean);
                         EventBus.getDefault().post(event);
 
@@ -288,6 +297,7 @@ public class PetInfoInstance {
                         EventBus.getDefault().post(event);
                         break;
                     case EC_OFFLINE:
+                        DeviceInfoInstance.getInstance().online=false;
                         ToastUtil.showTost("设备处于离线状态，请开机");
                         break;
                     default:

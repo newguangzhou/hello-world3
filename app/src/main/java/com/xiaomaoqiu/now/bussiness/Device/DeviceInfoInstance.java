@@ -18,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.AppDialog;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
@@ -198,14 +199,20 @@ public class DeviceInfoInstance {
             @Override
             public void onSuccess(Response<AlreadyBindDeviceBean> response, AlreadyBindDeviceBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
+
                 switch (ret) {
                     case EC_SUCCESS:
+                        if(DeviceInfoInstance.getInstance().online!=true) {
+                            DeviceInfoInstance.getInstance().online = true;
+                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                        }
                         EventBus.getDefault().post(new EventManage.bindDeviceSuccess());
                         UserInstance.getInstance().device_imei=imei;
                         packBean.imei=imei;
                         SPUtil.putDeviceImei(imei);
                         Toast.makeText(PetAppLike.mcontext, "绑定成功", Toast.LENGTH_SHORT).show();
                         DialogUtil.closeProgress();
+
                         break;
                     case EC_ALREADY_FAV:
 //                        ToastUtil.showAtCenter("设备已被绑定");
@@ -219,6 +226,7 @@ public class DeviceInfoInstance {
                         DialogUtil.closeProgress();
                         break;
                     case EC_OFFLINE:
+                        DeviceInfoInstance.getInstance().online=false;
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                         break;
                     default:
@@ -300,6 +308,10 @@ public class DeviceInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
+                        if(DeviceInfoInstance.getInstance().online!=true) {
+                            DeviceInfoInstance.getInstance().online = true;
+                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                        }
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -309,6 +321,7 @@ public class DeviceInfoInstance {
                         getWifiList();
                         break;
                     case EC_OFFLINE:
+                        online=false;
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                         EventBus.getDefault().post(new EventManage.wifiListError());
                         break;

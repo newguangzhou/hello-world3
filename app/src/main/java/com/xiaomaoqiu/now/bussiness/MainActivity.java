@@ -124,10 +124,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 HttpCode ret = HttpCode.valueOf(message.status);
                                 switch (ret) {
                                     case EC_SUCCESS:
+                                        if(DeviceInfoInstance.getInstance().online!=true) {
+                                            DeviceInfoInstance.getInstance().online = true;
+                                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                        }
                                         PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                         EventBus.getDefault().post(new EventManage.petModeChanged());
                                         break;
                                     case EC_OFFLINE:
+                                        DeviceInfoInstance.getInstance().online=false;
                                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                                         break;
                                 }
@@ -227,12 +232,17 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                         HttpCode ret = HttpCode.valueOf(message.status);
                                         switch (ret) {
                                             case EC_SUCCESS:
+                                                if(DeviceInfoInstance.getInstance().online!=true) {
+                                                    DeviceInfoInstance.getInstance().online = true;
+                                                    EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                                }
                                                 PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                                 EventBus.getDefault().post(new EventManage.petModeChanged());
                                                 PetInfoInstance.getInstance().getPetLocation();
                                                 showFragment(1);
                                                 break;
                                             case EC_OFFLINE:
+                                                DeviceInfoInstance.getInstance().online=false;
                                                 EventBus.getDefault().post(new EventManage.DeviceOffline());
                                                 break;
                                         }
