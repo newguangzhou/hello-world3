@@ -27,6 +27,7 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.MapPetAtHomeView;
+import com.xiaomaoqiu.now.view.MapPetCommonNotAtHomeView;
 import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
 
@@ -74,6 +75,7 @@ public class MapInstance implements BDLocationListener {
     private MapView mapView;
     public MapPetAvaterView mapPetAvaterView;
     public MapPetAtHomeView petAtHomeView;
+    public MapPetCommonNotAtHomeView petCommonNotAtHomeView;
     private Marker mPetMarker, mPhoneMarker;//狗狗位置和手机位置
     private Polyline mFindPolyline;//找狗连线
 
@@ -92,9 +94,15 @@ public class MapInstance implements BDLocationListener {
         initMap();
         petAtHomeView = new MapPetAtHomeView(PetAppLike.mcontext);
         petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
-        if (PetInfoInstance.getInstance().getAtHome()) {
-            petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
-        } else {
+        petCommonNotAtHomeView=new MapPetCommonNotAtHomeView(PetAppLike.mcontext);
+        petCommonNotAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        if(PetInfoInstance.getInstance().PET_MODE!=Constants.PET_STATUS_WALK) {
+            if (PetInfoInstance.getInstance().getAtHome()) {
+                petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+            } else {
+                petbitmapDescriptor = BitmapDescriptorFactory.fromView(petCommonNotAtHomeView);
+            }
+        }else{
             petbitmapDescriptor = BitmapDescriptorFactory.fromView(mapPetAvaterView);
         }
 
@@ -286,7 +294,12 @@ public class MapInstance implements BDLocationListener {
                     mFindPolyline.remove();
                 }
                 try {
-                    petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                    if (PetInfoInstance.getInstance().getAtHome()) {
+                        petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
+                    } else {
+                        petbitmapDescriptor = BitmapDescriptorFactory.fromView(petCommonNotAtHomeView);
+                    }
+//                    petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
                     if(petbitmapDescriptor==null)
                         return;
                     OverlayOptions commonoptions = new MarkerOptions()

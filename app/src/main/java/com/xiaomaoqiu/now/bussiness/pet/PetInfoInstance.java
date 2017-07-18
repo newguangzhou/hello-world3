@@ -3,6 +3,7 @@ package com.xiaomaoqiu.now.bussiness.pet;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.xiaomaoqiu.now.Constants;
@@ -313,6 +314,11 @@ public class PetInfoInstance {
             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
+                    boolean changed=false;
+                    if(PET_MODE!=message.pet_status){
+                        changed= true;
+                    }
+
                     switch (message.pet_status) {
                         case Constants.PET_STATUS_COMMON:
 //                            setAtHome(true);
@@ -334,20 +340,22 @@ public class PetInfoInstance {
 //                            setAtHome(true);
                             break;
                     }
-                    SPUtil.putPET_MODE(PET_MODE);
-                    EventBus.getDefault().post(new EventManage.petModeChanged());
+                    if(changed) {
+                        SPUtil.putPET_MODE(PET_MODE);
+                        EventBus.getDefault().post(new EventManage.petModeChanged());
+                    }
 
                     switch (message.pet_is_in_home) {
                         case Constants.PET_AT_HOME:
                             if(!PetInfoInstance.getInstance().getAtHome()){
                                 PetInfoInstance.getInstance().setAtHome(true);
-                                EventBus.getDefault().post(new PushEventManage.petNotHome());
+                                EventBus.getDefault().post(new PushEventManage.petAtHome());
                             }
                             break;
                         case Constants.PET_OUT_HOME:
                             if(PetInfoInstance.getInstance().getAtHome()){
                                 PetInfoInstance.getInstance().setAtHome(false);
-                                EventBus.getDefault().post(new PushEventManage.petAtHome());
+                                EventBus.getDefault().post(new PushEventManage.petNotHome());
                             }
                             break;
                     }
