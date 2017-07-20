@@ -101,9 +101,10 @@ public class XMPushManagerInstance {
     }
 
     public void stop() {
-        MiPushClient.pausePush(PetAppLike.mcontext, null);
+//        MiPushClient.pausePush(PetAppLike.mcontext, null);
         String uid = UserInstance.getInstance().getUid() + "";
             MiPushClient.unsetAlias(PetAppLike.mcontext, uid, null);
+        MiPushClient.unregisterPush(PetAppLike.mcontext);
         EventBus.getDefault().unregister(this);
     }
 

@@ -53,9 +53,12 @@
             android:layout_weight="1"
             android:background="@drawable/btn_background_color_3"
             android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="确认安全"
             android:textColor="@color/common_button_word"
-            android:padding="10dp"
             android:textSize="@dimen/common_dialog_button" />
 
         <Button
@@ -63,10 +66,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
-            android:padding="10dp"
             android:layout_weight="1"
             android:background="@drawable/btn_background_color_3"
             android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="查看位置"
             android:textColor="@color/common_button_word"
             android:textSize="@dimen/common_dialog_button" />
@@ -75,10 +81,13 @@
             android:id="@+id/btn_three_three"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:padding="10dp"
             android:layout_weight="1"
             android:background="@drawable/btn_background_color_3"
             android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="紧急搜索"
             android:textColor="@color/common_button_word"
             android:textSize="@dimen/common_dialog_button" />
