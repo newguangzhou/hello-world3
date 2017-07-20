@@ -43,8 +43,8 @@ public class XMPushManagerInstance {
      * 。其中AppId和AppKey是客户端的身份标识，在客户端SDK初始化时使用；
      * AppSecret是服务器端的身份标识，在使用Server SDK向客户端发送消息时使用。
      */
-    private static final String APP_ID = "2882303761517572476";
-    private static final String APP_KEY = "5411757212476";
+    public static final String APP_ID = "2882303761517572476";
+    public static final String APP_KEY = "5411757212476";
     private static final String APP_SECRET = "aQLLX8h129sPKm3NeY9lcA==";
 
 

@@ -21,6 +21,8 @@ import java.util.Set;
  */
 public class SPUtil {
 
+   public static final String APP_VERSION="app_version";
+
 
     public static final String CRASHTIME = "crashTime";
     public static final String LAST_START_WALK_TIME="last_walk_pet_time";
@@ -365,6 +367,13 @@ public class SPUtil {
     }
     public static void putWifiList(WifiListBean wifiListBean) {
         putSerializable(DEVICE_WIFI_LIST, wifiListBean);
+    }
+
+    public static String getAPP_VERSION(){
+        return getString(APP_VERSION,0+"");
+    }
+    public static void putAPP_VERSION(String value){
+        putString(APP_VERSION,value);
     }
 
 //    public static String getMode_Map(){

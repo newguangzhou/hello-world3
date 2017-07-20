@@ -15,8 +15,11 @@ import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.push.XMPushManagerInstance;
+import com.xiaomaoqiu.now.util.Apputil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.pet.R;
+import com.xiaomi.mipush.sdk.MiPushClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -48,7 +51,7 @@ public class SplashActivity extends BaseActivity {
     //判断跳转逻辑
     void toWhere() {
         if (!SPUtil.getLoginStatus()) {
-
+            SPUtil.putAPP_VERSION(Apputil.getVersionCode()+"");
             PetAppLike.mainHandler = new Handler(getMainLooper());
             PetAppLike.mainHandler.postDelayed(new Runnable() {
                 @Override
@@ -61,6 +64,10 @@ public class SplashActivity extends BaseActivity {
             }, 1000);
 
         }else {
+            if(!SPUtil.getAPP_VERSION().equals(Apputil.getVersionCode()+"")){
+                MiPushClient.registerPush(PetAppLike.mcontext, XMPushManagerInstance.APP_ID, XMPushManagerInstance.APP_KEY);
+                SPUtil.putAPP_VERSION(Apputil.getVersionCode()+"");
+            }
             EventBus.getDefault().register(this);
             //获取基本信息
             UserInstance.getInstance().getUserInfo();
