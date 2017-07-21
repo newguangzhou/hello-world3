@@ -16,6 +16,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener{
     TextView tv_versionname;
     TextView tv_help;
     TextView tv_policy;
+    View tv_suggest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,11 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener{
         tv_help= (TextView) findViewById(R.id.tv_help);
         tv_policy= (TextView) findViewById(R.id.tv_policy);
         tv_versionname.setText("版本信息：小毛球 " + Apputil.getVersionName(this));
+        tv_suggest=findViewById(R.id.tv_suggest);
 
         tv_help.setOnClickListener(this);
         tv_policy.setOnClickListener(this);
+        tv_suggest.setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +45,10 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener{
             case R.id.tv_policy:
                 intent.putExtra("web_url","http://www.xiaomaoqiu.com/proto_user.html");
                 startActivity(intent);
+                break;
+            case R.id.tv_suggest:
+                Intent intent1=new Intent(this,SuggestActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

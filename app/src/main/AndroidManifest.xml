@@ -142,6 +142,12 @@
             android:screenOrientation="portrait"
             />
         <activity
+            android:name="com.xiaomaoqiu.now.bussiness.SuggestActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name="com.xiaomaoqiu.now.bussiness.pet.info.petdata.HealthIndexActivity"
             android:label="@string/title_activity_health_index"
             android:theme="@android:style/Theme.NoTitleBar"
