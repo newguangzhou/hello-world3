@@ -447,10 +447,6 @@ public class MapInstance implements BDLocationListener {
             setPhonePos();
             showPhoneCenter = false;
         }
-        if (!PetInfoInstance.getInstance().getAtHome()) {
-            //todo 如果不在家，就设置为另一个头像
-
-        }
         stopLocListener();
     }
 

@@ -199,6 +199,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 MapInstance.getInstance().startLoc();
                 break;
             case R.id.btn_pet_center:
+                MapInstance.showPhoneCenter=false;
                 MapInstance.getInstance().startLocListener(1000);
                 if(PetInfoInstance.getInstance().getAtHome()){
                     MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;

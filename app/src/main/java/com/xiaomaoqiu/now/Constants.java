@@ -62,6 +62,11 @@ public class Constants {
              */
             public static final String register = "user/register";
 
+            /**
+             * 提交建议
+             */
+            public static final String suggest="user/suggest";
+
 
         }
 

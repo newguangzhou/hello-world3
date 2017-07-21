@@ -325,6 +325,7 @@ public interface ApiService {
             @Query("token") String token,
             @Query("pet_id") long petId
     );
+
     /**
      * 去运动或者回家
      * http://120.24.152.121:9100/pet/activity?uid=1462772127&token=a6468ef317503ac2f85221c013327040fe8ca1a3&pet_id=1462786482&activity_type=1
@@ -379,6 +380,16 @@ public interface ApiService {
             @Query("token") String token,
             @Query("pet_id") long pet_id,
             @Query("find_status") int status
+    );
+
+
+    //上传建议
+    @GET(Constants.Url.User.suggest)
+    Call<BaseBean> suggest(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("message") String message,
+            @Query("call_path") String call_path
     );
 
 }

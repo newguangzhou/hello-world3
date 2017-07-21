@@ -24,6 +24,7 @@
             android:paddingLeft="7dp"
             android:paddingRight="7dp">
             <com.xiaomaoqiu.now.view.ContainsEmojiEditText
+                android:background="@null"
                 android:id="@+id/feedback_opinion_ed"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
@@ -80,6 +81,7 @@
         android:paddingBottom="7dp"
         >
         <com.xiaomaoqiu.now.view.ContainsEmojiEditText
+            android:background="@null"
             android:id="@+id/feedback_mobile_ed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -100,7 +102,7 @@
             android:layout_height="wrap_content"
             android:textColor="#FF888888"
             android:textSize="13sp"
-            android:text="如有疑问，欢迎联系英才客服:  "
+            android:text="如有疑问，欢迎联系小毛球客服:  "
             android:layout_gravity="bottom" />
         <TextView
             android:id="@+id/feedback_mobile_service"
