@@ -12,23 +12,23 @@ import com.xiaomaoqiu.pet.R;
 
 
 /**
- * 睡眠指数页标题view
+ * 运动指数页标题view
  * Created by long on 2016/12/11.
  */
 
-public class SleepTitleView extends RelativeLayout {
+public class SportTitleView extends RelativeLayout {
     private String title;
     private String firstText;
     private String secondText;
-    public SleepTitleView(Context context) {
+    public SportTitleView(Context context) {
         this(context,null);
     }
 
-    public SleepTitleView(Context context, AttributeSet attrs) {
+    public SportTitleView(Context context, AttributeSet attrs) {
         this(context, attrs,-1);
     }
 
-    public SleepTitleView(Context context, AttributeSet attrs, int defStyle) {
+    public SportTitleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         TypedArray a= context.obtainStyledAttributes(attrs, R.styleable.SleepTitleView);
         title=a.getString(R.styleable.SleepTitleView_titletext);
@@ -36,7 +36,7 @@ public class SleepTitleView extends RelativeLayout {
         secondText=a.getString(R.styleable.SleepTitleView_second_text);
         a.recycle();
         initText();
-        LayoutInflater.from(context).inflate(R.layout.sleep_title_view,this,true);
+        LayoutInflater.from(context).inflate(R.layout.sport_title_view,this,true);
     }
 
     private void initText(){

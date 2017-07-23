@@ -14,7 +14,7 @@
             android:background="@color/total_color_10" />
 
         <!--今日运动-->
-        <com.xiaomaoqiu.now.view.SleepTitleView
+        <com.xiaomaoqiu.now.view.SportTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
@@ -93,7 +93,7 @@
 
 
         <!--七天运动-->
-        <com.xiaomaoqiu.now.view.SleepTitleView
+        <com.xiaomaoqiu.now.view.SportTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
@@ -144,7 +144,7 @@
             android:background="@color/total_color_8" />
 
         <!--30天运动-->
-        <com.xiaomaoqiu.now.view.SleepTitleView
+        <com.xiaomaoqiu.now.view.SportTitleView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="13dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="11.5dp">
+
+    <TextView
+        android:id="@+id/sleep_title_view_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        style="@style/sleep_title_text"
+        android:text="今日睡眠"/>
+    <ImageView
+        android:id="@+id/sleep_level_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/sport_level_low_icon"/>
+    <TextView
+        android:id="@+id/sleep_level_low_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/sleep_level_low"
+        android:layout_marginRight="7.5dp"
+        android:textSize="11.5sp"
+        android:textColor="@color/total_color_3"
+        android:text="小憩"/>
+
+    <ImageView
+        android:id="@+id/sleep_level_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/sleep_level_low_text"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/sport_level_high_icon"/>
+
+    <TextView
+        android:id="@+id/sleep_level_high_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/sleep_level_high"
+        android:layout_marginRight="7.5dp"
+        android:textSize="11.5sp"
+        android:textColor="@color/total_color_2"
+        android:text="深睡"/>
+</RelativeLayout>
