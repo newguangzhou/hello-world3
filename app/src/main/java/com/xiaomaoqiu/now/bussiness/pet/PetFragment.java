@@ -68,7 +68,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     String strEnd;
 
     String sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
-    public static int sportDone = 0;
+    public static double sportDone = 0.0;
     double percentage = 0;
 
     CheckIndex checkIndex;
@@ -179,7 +179,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         prog.setMax(100);
                     }
                     prog.setProgress((int) percentage);
-                    tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
+                    tvSportDone.setText("已消耗"+ sportDone+"千卡");
                     tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                 } else {
                     ToastUtil.showTost("获取当天数据失败");
@@ -230,7 +230,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             prog.setMax(100);
         }
         prog.setProgress((int) percentage);
-        tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
+        tvSportDone.setText("已消耗"+sportDone+"千卡");
         tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
     }
 
@@ -478,7 +478,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                                 prog.setMax(100);
                                             }
                                             prog.setProgress((int) percentage);
-                                            tvSportDone.setText(String.format("已消耗%d千卡", sportDone));
+                                            tvSportDone.setText("已消耗"+sportDone+"千卡");
                                             tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                                         } else {
                                             ToastUtil.showTost("获取当天数据失败");

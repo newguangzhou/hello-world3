@@ -16,7 +16,7 @@ public class PetSportBean extends BaseBean {
     public static class SportBean {
         public String date;
         public double target_amount;
-        public int reality_amount;
+        public double reality_amount;
         public double percentage;
     }
 
