@@ -88,7 +88,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceOffline(EventManage.DeviceOffline event) {
         batteryView.setDeviceOffline();
-        DialogUtil.showDeviceOfflineDialog(this,"离线通知");
+        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
     }
 
     //设备状态更新
@@ -125,7 +125,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 HttpCode ret = HttpCode.valueOf(message.status);
                                 switch (ret) {
                                     case EC_SUCCESS:
-                                        if(DeviceInfoInstance.getInstance().online!=true) {
+                                        if (DeviceInfoInstance.getInstance().online != true) {
                                             DeviceInfoInstance.getInstance().online = true;
                                             EventBus.getDefault().post(new PushEventManage.deviceOnline());
                                         }
@@ -133,7 +133,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                         EventBus.getDefault().post(new EventManage.petModeChanged());
                                         break;
                                     case EC_OFFLINE:
-                                        DeviceInfoInstance.getInstance().online=false;
+                                        DeviceInfoInstance.getInstance().online = false;
                                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                                         break;
                                 }
@@ -161,7 +161,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     //todo 小米推送正常电量
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getCommonBattery(PushEventManage.commonBattery event) {
-       DialogUtil.lowBatteryIsClosed = false;
+        DialogUtil.lowBatteryIsClosed = false;
         DialogUtil.superLowBatteryIsClosed = false;
         DialogUtil.closeAllDialog();
         EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
@@ -208,64 +208,64 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             name = "宠物";
         }
 //        if(PetInfoInstance.getInstance().PET_MODE!=Constants.PET_STATUS_FIND) {
-            DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
-                    new View.OnClickListener() {
+        DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
+                new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
 
-                        }
-                    },
-                    new View.OnClickListener() {
+                    }
+                },
+                new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
+                        showFragment(1);
+                    }
+                },
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
+                            MapInstance.getInstance().startFindPet();
+                            MapInstance.getInstance().openTime = 1;
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
+                                @Override
+                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
+                                            if (DeviceInfoInstance.getInstance().online != true) {
+                                                DeviceInfoInstance.getInstance().online = true;
+                                                EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                            }
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            PetInfoInstance.getInstance().getPetLocation();
+                                            showFragment(1);
+                                            break;
+                                        case EC_OFFLINE:
+                                            DeviceInfoInstance.getInstance().online = false;
+                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                            break;
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                                }
+                            });
+
+                        } else {
                             showFragment(1);
                         }
-                    },
-                    new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
-                                MapInstance.getInstance().startFindPet();
-                                MapInstance.getInstance().openTime = 1;
-                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
-                                    @Override
-                                    public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                                        HttpCode ret = HttpCode.valueOf(message.status);
-                                        switch (ret) {
-                                            case EC_SUCCESS:
-                                                if(DeviceInfoInstance.getInstance().online!=true) {
-                                                    DeviceInfoInstance.getInstance().online = true;
-                                                    EventBus.getDefault().post(new PushEventManage.deviceOnline());
-                                                }
-                                                PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
-                                                EventBus.getDefault().post(new EventManage.petModeChanged());
-                                                PetInfoInstance.getInstance().getPetLocation();
-                                                showFragment(1);
-                                                break;
-                                            case EC_OFFLINE:
-                                                DeviceInfoInstance.getInstance().online=false;
-                                                EventBus.getDefault().post(new EventManage.DeviceOffline());
-                                                break;
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onFail(Call<PetStatusBean> call, Throwable t) {
-
-                                    }
-                                });
-
-                            } else {
-                                showFragment(1);
-                            }
-
-                        }
                     }
-            );
+                }
+        );
 //        }
     }
 
@@ -274,24 +274,24 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void PetAtHome(PushEventManage.petAtHome event) {
 //        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
-            DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
+        DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            showFragment(1);
-                            PetInfoInstance.getInstance().getPetLocation();
+                    @Override
+                    public void onClick(View v) {
+                        showFragment(1);
+                        PetInfoInstance.getInstance().getPetLocation();
 
-                        }
-                    },
-                    new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                            EventBus.getDefault().post(new EventManage.petModeChanged());
-                        }
                     }
-            );
+                },
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                        EventBus.getDefault().post(new EventManage.petModeChanged());
+                    }
+                }
+        );
 //        }
 
     }
@@ -330,6 +330,25 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         EventBus.getDefault().register(this);
 
         showDeadlineDialog();
+
+        //每三分钟调用一次
+
+        if (sportThread == null) {
+            sportThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            Thread.sleep(60000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
+                    }
+                }
+            });
+            sportThread.start();
+        }
     }
 
     private void initView() {
@@ -381,6 +400,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     public static Thread locationThread;
+    public static Thread sportThread;
     //是否每一分钟都发送位置信息
     public static volatile boolean getLocationWithOneMinute;
     public static int select_index;
