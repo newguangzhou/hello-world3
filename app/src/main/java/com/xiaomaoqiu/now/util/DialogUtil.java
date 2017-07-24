@@ -85,6 +85,8 @@ public class DialogUtil {
             commonBatteryNoticeDialog = new BatteryNoticeDialog(context, level, time, content);
         }
         commonBatteryNoticeDialog.show();
+        lowBatteryIsClosed = false;
+        superLowBatteryIsClosed = false;
     }
 
     //展示设备离线弹窗
@@ -447,6 +449,14 @@ public class DialogUtil {
     //宠物是否到家  petAtHomeDialog
     public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener){
         if (!canShowDialog(context)) return;
+        if(safeCautionDialog!=null&&safeCautionDialog.isShowing()){
+            try {
+                safeCautionDialog.dismiss();
+            }catch (Exception e){
+
+            }
+        }
+
         if(petAtHomeDialog!=null&&petAtHomeDialog.isShowing()){
             try {
                 petAtHomeDialog.dismiss();
@@ -498,6 +508,13 @@ public class DialogUtil {
                                              final View.OnClickListener listener1, final View.OnClickListener listener2, final View.OnClickListener listener3) {
         if (!canShowDialog(context)) return;
         closeAllDialog();
+        if(petAtHomeDialog!=null&&petAtHomeDialog.isShowing()){
+            try {
+                petAtHomeDialog.dismiss();
+            }catch (Exception e){
+
+            }
+        }
         if(safeCautionDialog!=null&&safeCautionDialog.isShowing()){
             try {
                 safeCautionDialog.dismiss();
