@@ -4,7 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import com.xiaomaoqiu.now.bussiness.pet.PetInfo;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.view.WheelView;
 import com.xiaomaoqiu.pet.R;
 
@@ -20,6 +23,8 @@ public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.O
     List<String> mItems = new ArrayList<String>();
 
 
+    TextView tv_suggest;
+
     public interface OnPickNumberListener {
         void onConfirmNumber(String number);
     }
@@ -34,11 +39,17 @@ public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.O
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.dialog_pick_sport_number);
+        tv_suggest= (TextView) this.findViewById(R.id.tv_suggest);
+        tv_suggest.setText("小毛球推荐卡路里"+PetInfoInstance.getInstance().getSuggest_energy());
 
         mWvNumber = (WheelView) findViewById(R.id.wv_number);
-//        DecimalFormat df = new DecimalFormat("0.00");//格式化
+
+        final DecimalFormat df = new DecimalFormat("0.00");//格式化
+
+        double target_energy=Double.valueOf(PetInfoInstance.getInstance().packBean.target_energy);
+
         for (int i = 80; i <= 125; i += 5)
-            mItems.add(i+"%");
+            mItems.add(df.format((i/100f)*target_energy));
         mWvNumber.setItems(mItems);
 
         findViewById(R.id.btn_ok).setOnClickListener(this);

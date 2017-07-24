@@ -414,6 +414,7 @@ public class PetInfoActivity extends BaseActivity {
 //                modifyBean.target_energy = PetUtil.getInstance().energyType;
 //                modifyBean.target_energy = PetUtil.getInstance().calculateEnergy() + "";
                 DecimalFormat df = new DecimalFormat("0.00");//格式化
+                PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
                 modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
                 txt_variety.setText(modifyBean.description);
                 break;

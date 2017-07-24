@@ -54,6 +54,8 @@ public class SPUtil {
     public static final String DEVICE_IMEI = "deviceImei";
     //target_step
     public static final String PET_TARGET_STEP = "targetStep";
+    //推荐卡路里
+    public static final String SUGGEST_ENERGY="suggest_energy";
     //性别
     public static final String SEX = "sex";
     //昵称
@@ -207,6 +209,13 @@ public class SPUtil {
 
     public static void putPetTargetStep(int targetStep) {
         putInt(PET_TARGET_STEP, targetStep);
+    }
+
+    public static String getSuggestEnergy(){
+        return getString(SUGGEST_ENERGY);
+    }
+    public static void putSuggestEnergy(String energy){
+        putString(SUGGEST_ENERGY,energy);
     }
 
     public static int getSex() {

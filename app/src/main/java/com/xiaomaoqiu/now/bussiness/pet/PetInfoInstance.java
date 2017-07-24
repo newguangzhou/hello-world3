@@ -65,6 +65,8 @@ public class PetInfoInstance {
 
     public int PET_MODE = Constants.PET_STATUS_COMMON;
 
+    private String suggest_energy;//小毛球推荐卡路里
+
     public void setPetMode(int mode) {
         PET_MODE = mode;
         SPUtil.putPET_MODE(mode);
@@ -95,6 +97,7 @@ public class PetInfoInstance {
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
             instance.PET_MODE = SPUtil.getPET_MODE();
+            instance.suggest_energy=SPUtil.getSuggestEnergy();
         }
         return instance;
     }
@@ -591,6 +594,14 @@ public class PetInfoInstance {
 
     public boolean getAtHome() {
         return petAtHome;
+    }
+
+    public void setSuggest_energy(String suggest_energy){
+        this.suggest_energy=suggest_energy;
+        SPUtil.putSuggestEnergy(suggest_energy);
+    }
+    public String getSuggest_energy(){
+        return suggest_energy;
     }
 
 

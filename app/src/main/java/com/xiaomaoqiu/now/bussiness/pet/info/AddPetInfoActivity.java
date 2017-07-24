@@ -391,6 +391,7 @@ public class AddPetInfoActivity extends BaseActivity {
                 modifyBean.description = PetUtil.getInstance().dogName;
                 modifyBean.pet_type_id = PetInfoInstance.getInstance().packBean.pet_type_id;
                 DecimalFormat df = new DecimalFormat("0.00");//格式化
+                PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
                 modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
                 txt_variety.setText(modifyBean.description);
                 break;

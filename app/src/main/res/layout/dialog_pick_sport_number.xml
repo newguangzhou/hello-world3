@@ -11,8 +11,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="推荐卡路里百分比"
+        android:text="修改目标运动量"
         android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/total_color_2_back"
+        />
+    <TextView
+        android:id="@+id/tv_suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="推荐卡路里"
+        android:textSize="16sp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/total_color_2_back"
         />
