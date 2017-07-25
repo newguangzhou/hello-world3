@@ -127,7 +127,10 @@
                 android:id="@+id/tv_health_sport_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
                 android:text="宠物今天消耗了很多哦"
                 android:textColor="@color/common_body"
                 android:textSize="@dimen/common_dialog_message" />
@@ -140,6 +143,7 @@
                 android:padding="10dp"
                 android:text="运动不足将会导致：肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为了你家宠物的健康，请努力完成运动目标。"
                 android:textColor="@color/common_body"
+                android:gravity="left|center"
                 android:textSize="@dimen/common_dialog_message" />
 
             <LinearLayout
@@ -156,6 +160,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/health_sport_background"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:gravity="center"
                     android:text="调整运动目标"
                     android:textColor="#fff"
@@ -168,7 +174,9 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/health_sport_background"
                     android:gravity="center"
-                    android:text="历史数据"
+                    android:text="查看历史数据"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textColor="#fff"
                     android:textSize="@dimen/common_dialog_message" />
 
@@ -225,6 +233,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -246,17 +255,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="right"
                         android:src="@drawable/health_sleep_dot1" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/health_sleep_dot1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/health_sleep_dot1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -291,17 +292,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="right"
                         android:src="@drawable/health_sleep_dot1" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/health_sleep_dot1" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/health_sleep_dot1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -326,7 +319,10 @@
                 android:id="@+id/tv_health_sleep_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="数据解读：休息正常"
                 android:textColor="@color/common_body"
                 android:textSize="@dimen/common_dialog_message" />
@@ -337,6 +333,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/health_sport_message"
                 android:padding="10dp"
+                android:gravity="left|center"
                 android:text="旺财今天休息XX小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧。"
                 android:textColor="@color/common_body"
                 android:textSize="@dimen/common_dialog_message" />
@@ -355,7 +352,9 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/health_sleep_background"
                     android:gravity="center"
-                    android:text="历史数据"
+                    android:text="查看历史数据"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textColor="#fff"
                     android:textSize="@dimen/common_dialog_message" />
 

@@ -110,7 +110,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
         String sportMessage="";
         if (PetInfoInstance.getInstance().percentage <= 100) {
             text = PetInfoInstance.getInstance().getNick() + "今天运动消耗了"
-                    + PetInfoInstance.getInstance().packBean.reality_amount + "卡路里，离运动目标\n还有"
+                    + PetInfoInstance.getInstance().packBean.reality_amount + "卡路里，离运动目标还有"
                     + (100 - PetInfoInstance.getInstance().percentage) + "%的距离";
             sportMessage="运动不足将会导致：肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为宠物的健康，请努力完成运动目标作息\n";
 

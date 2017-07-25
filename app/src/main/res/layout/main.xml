@@ -34,7 +34,7 @@
                     android:text="小毛球"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                     />
 
                 <com.xiaomaoqiu.now.view.BatteryView
                     android:id="@+id/batteryView"

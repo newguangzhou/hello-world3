@@ -207,7 +207,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         if ("".equals(name)) {
             name = "宠物";
         }
-//        if(PetInfoInstance.getInstance().PET_MODE!=Constants.PET_STATUS_FIND) {
+        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_COMMON) {
         DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
                 new View.OnClickListener() {
 
@@ -266,14 +266,14 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     }
                 }
         );
-//        }
+        }
     }
 
     //todo 小米推送
     //宠物到家了
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void PetAtHome(PushEventManage.petAtHome event) {
-//        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
+        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
         DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
 
                     @Override
@@ -292,7 +292,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     }
                 }
         );
-//        }
+        }
 
     }
 

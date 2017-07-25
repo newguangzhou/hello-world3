@@ -160,7 +160,7 @@ public abstract class CustomCombineChart extends RelativeLayout {
         xAxis.setDrawAxisLine(false);//不显示坐标线
         xAxis.setDrawGridLines(isXaxisShow);
         if(isXaxisShow && lineMode == LINE_DOTTED){
-            xAxis.enableGridDashedLine(10,10,0);
+            xAxis.enableGridDashedLine(5,5,0);
         }
         xAxis.setDrawLabels(false);
         xAxis.setAxisMinimum(0f);//留待考察
@@ -173,7 +173,7 @@ public abstract class CustomCombineChart extends RelativeLayout {
         yAxis.setGridColor(axisColor);
         yAxis.setDrawGridLines(isYaxisShow);//是否绘制
         if(isYaxisShow && LINE_DOTTED == lineMode){
-            yAxis.enableGridDashedLine(10,10,0);
+            yAxis.enableGridDashedLine(5,5,0);
         }
         yAxis.setDrawAxisLine(true);//不绘制坐标线
         yAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)

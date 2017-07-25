@@ -17,27 +17,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#fff"
+        android:gravity="center"
         >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/setting" />
 
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/setting" />
-
-    <TextView
+        <TextView
         android:id="@+id/tv_versionname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="1.0.0"
         android:textSize="@dimen/common_dialog_message"
-        android:layout_marginBottom="10dp"
-        />
+            android:layout_marginBottom="20dp"
+
+            />
     </LinearLayout>
 
     <TextView
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:gravity="center"
-        android:background="@drawable/login_button_disabled"
+        android:background="@drawable/about_provicy"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="使用条款及隐私政策"
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:gravity="center"
-        android:background="@drawable/hardware_unbind_back"
+        android:background="@drawable/about_provicy"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="意见反馈"

@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:background="@color/total_color_1"
-        >
+        android:background="@color/total_color_1">
 
 
         <!--<TextView-->
@@ -24,61 +24,77 @@
 
         <LinearLayout
             android:id="@+id/btn_go_back"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
             android:layout_width="70dp"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
             <ImageView
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/img_return"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_title"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
             android:text="常住地WIFI"
-            />
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/tv_next"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:gravity="center_vertical"
             android:padding="5dp"
             android:text="下一步"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_marginRight="10dp"
-            />
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
-    <com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ptr_refresh"
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
-
-        cube_ptr:ptr_duration_to_close="300"
-        cube_ptr:ptr_duration_to_close_header="2000"
-        cube_ptr:ptr_keep_header_when_refresh="true"
-        cube_ptr:ptr_pull_to_fresh="false"
-        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_wifilist"
+        android:layout_height="wrap_content"
+        android:background="#f1f1f1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableRight="@drawable/wifi_loading"
+            android:gravity="left"
+            android:textColor="@color/common_body"
+            android:text="请选择宠物常住地chang常用wifi……"
+            android:textSize="@dimen/common_dialog_message" />
+        <com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ptr_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#ffff0000"
-            android:dividerHeight="10dp" />
-    </com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>
+            cube_ptr:ptr_duration_to_close="300"
+            cube_ptr:ptr_duration_to_close_header="2000"
+            cube_ptr:ptr_keep_header_when_refresh="true"
+            cube_ptr:ptr_pull_to_fresh="false"
+            cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+            cube_ptr:ptr_resistance="1.7">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_wifilist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="#ffff0000"
+                android:dividerHeight="2dp" />
+        </com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>
+    </LinearLayout>
 </LinearLayout>

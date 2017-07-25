@@ -47,7 +47,7 @@
             android:text="宠物常住地位置"
             android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="bold" />
+           />
 
         <TextView
             android:id="@+id/tv_next"
@@ -113,12 +113,18 @@
             android:layout_height="wrap_content"
             android:text="请移动地图以确定宠物常住地准确位置" />
 
-        <ImageView
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_location"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/pet_athome" />-->
+        <com.xiaomaoqiu.now.view.MapPetAtHomeView
             android:id="@+id/iv_location"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/home_nocycle" />
+            ></com.xiaomaoqiu.now.view.MapPetAtHomeView>
 
         <ImageView
             android:id="@+id/btn_phone_center"

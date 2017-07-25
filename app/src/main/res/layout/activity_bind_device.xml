@@ -51,13 +51,15 @@
         android:background="#fff">
 
         <LinearLayout
-            android:id="@+id/ll_help"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -166,8 +168,8 @@
                 android:textSize="13sp" />
 
             <ImageView
-                android:layout_width="160dp"
-                android:layout_height="100dp"
+                android:layout_width="200dp"
+                android:layout_height="125dp"
                 android:layout_marginBottom="41dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/bind_device_sweep_icon" />
