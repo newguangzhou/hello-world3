@@ -15,7 +15,7 @@ public class Constants {
     //去运动
     public static final int TO_SPORT_ACTIVITY_TYPE=1;
     //回家
-    public static final int TO_HOME_ACTIVITY_TYPE=2;
+    public static final int TO_HOME_ACTIVITY_TYPE=0;
     /**
      *     pet_status
      *      0：正常 1：遛狗 2:寻狗
