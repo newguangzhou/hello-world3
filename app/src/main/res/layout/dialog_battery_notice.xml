@@ -19,6 +19,8 @@
             android:textColor="@color/common_title"
             android:text="@string/battery_notice_levelformat"
             android:singleLine="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dp"
             android:id="@+id/battery_notice_level"/>
 
         <TextView

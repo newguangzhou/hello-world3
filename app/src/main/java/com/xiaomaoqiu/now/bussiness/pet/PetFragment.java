@@ -457,8 +457,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                                 AsynImgDialog.stopSalary = sportDone;
                                                 AsynImgDialog.stopTime = (new Date()).getTime();
                                                 if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0) {
-                                                    long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 600000;
-                                                    String salaryText = PetInfoInstance.getInstance().getNick() + "刚才运动了" + sporttime + "分钟，消耗了" + (AsynImgDialog.stopSalary - AsynImgDialog.startSalary) + "卡路里";
+                                                    long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
+                                                    double salary=(AsynImgDialog.stopSalary - AsynImgDialog.startSalary);
+                                                    String salaryText2= df.format(salary);
+                                                    String salaryText = PetInfoInstance.getInstance().getNick() + "刚才运动了" + sporttime + "分钟，消耗了" + salaryText2+ "卡路里";
                                                     DialogUtil.showOneButtonDialog(getActivity(), salaryText, new View.OnClickListener() {
 
                                                         @Override

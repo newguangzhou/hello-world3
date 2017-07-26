@@ -70,7 +70,7 @@ public class DeviceActivity extends BaseActivity {
             }
         });
         if (!DeviceInfoInstance.getInstance().online) {
-            ToastUtil.showTost("您的设备尚未开机！");
+//            ToastUtil.showTost("您的设备尚未开机！");
             batteryView.setDeviceOffline();
         }else{
             batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
@@ -103,7 +103,7 @@ public class DeviceActivity extends BaseActivity {
         showMessageOnUI();
         batteryView = (BatteryView) findViewById(R.id.batteryView);
         if (!DeviceInfoInstance.getInstance().online) {
-            ToastUtil.showTost("您的设备尚未开机！");
+//            ToastUtil.showTost("您的设备尚未开机！");
             batteryView.setDeviceOffline();
             return;
         }
