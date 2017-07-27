@@ -8,7 +8,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.view.BatteryIngNoticeDialog;
 import com.xiaomaoqiu.now.view.BatteryNoticeDialog;
 import com.xiaomaoqiu.now.view.CustomProgress;
@@ -90,11 +92,11 @@ public class DialogUtil {
     }
 
     //展示设备离线弹窗
-    public static void showDeviceOfflineDialog(Context context,String title) {
+    public static void showDeviceOfflineDialog(Context context, String title) {
         closeAllDialog();
         if (offlineDialog == null) {
             offlineDialog = new AppDialog(context, R.layout.dialog_device_already_bind, -1, -2, 0, Gravity.CENTER);
-            TextView tv_title= (TextView) offlineDialog.findViewById(R.id.tv_title);
+            TextView tv_title = (TextView) offlineDialog.findViewById(R.id.tv_title);
             tv_title.setText(title);
             TextView tv_old_account = (TextView) offlineDialog.findViewById(R.id.tv_old_account);
             tv_old_account.setText("设备处于离线状态，请开机");
@@ -276,7 +278,7 @@ public class DialogUtil {
 
 
     //设备确认开机
-    public static void showDeviceOpenOnline(Context context,final View.OnClickListener oklistener,final View.OnClickListener cancellistener) {
+    public static void showDeviceOpenOnline(Context context, final View.OnClickListener oklistener, final View.OnClickListener cancellistener) {
         final Dialog dialog = new AppDialog(context, R.layout.dialog_device_show, -1, -2, 0, Gravity.CENTER);
         TextView tv_message = (TextView) dialog.findViewById(R.id.tv_message);
         Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
@@ -287,7 +289,7 @@ public class DialogUtil {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(oklistener!=null){
+                if (oklistener != null) {
                     oklistener.onClick(v);
                 }
 
@@ -301,7 +303,7 @@ public class DialogUtil {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(cancellistener!=null){
+                if (cancellistener != null) {
                     cancellistener.onClick(v);
                 }
 
@@ -331,35 +333,33 @@ public class DialogUtil {
     }
 
 
-
-
     //确认解除绑定
-    public static void showUnBindDialog(final Context context,final View.OnClickListener okListener,final View.OnClickListener cancelListener){
+    public static void showUnBindDialog(final Context context, final View.OnClickListener okListener, final View.OnClickListener cancelListener) {
         if (!canShowDialog(context)) return;
         final Dialog dialog = new AppDialog(context, R.layout.dialog_unbind, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         dialog.getWindow().setWindowAnimations(0);
-        Button two_button_confirm= (Button) dialog.findViewById(R.id.two_button_confirm);
-        two_button_confirm.setOnClickListener(new View.OnClickListener(){
+        Button two_button_confirm = (Button) dialog.findViewById(R.id.two_button_confirm);
+        two_button_confirm.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(okListener!=null) {
+                if (okListener != null) {
                     okListener.onClick(v);
                 }
             }
         });
-        Button two_button_cancle= (Button) dialog.findViewById(R.id.two_button_cancle);
-        two_button_cancle.setOnClickListener(new View.OnClickListener(){
+        Button two_button_cancle = (Button) dialog.findViewById(R.id.two_button_cancle);
+        two_button_cancle.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(cancelListener!=null){
+                if (cancelListener != null) {
                     cancelListener.onClick(v);
                 }
             }
@@ -377,15 +377,15 @@ public class DialogUtil {
         dialog.getWindow().setWindowAnimations(0);
         TextView tv_one_button_message = (TextView) dialog.findViewById(R.id.tv_one_button_message);
         tv_one_button_message.setText(messageString);
-        Button btn_one_button_confirm= (Button) dialog.findViewById(R.id.btn_one_button_confirm);
-        btn_one_button_confirm.setOnClickListener(new View.OnClickListener(){
+        Button btn_one_button_confirm = (Button) dialog.findViewById(R.id.btn_one_button_confirm);
+        btn_one_button_confirm.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                if(listener!=null) {
+                if (listener != null) {
                     listener.onClick(v);
                 }
             }
@@ -396,8 +396,11 @@ public class DialogUtil {
         dialog.show();
     }
 
+
+    public static Thread noresponsethread;
+
     //已经找到宠物弹窗petisFindedDialog
-    public static void showPetFindedDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener){
+    public static void showPetFindedDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
         if (petisFindedDialog != null && petisFindedDialog.isShowing()) {
             try {
@@ -408,7 +411,7 @@ public class DialogUtil {
 
         }
         petisFindedDialog = null;
-        petisFindedDialog= new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        petisFindedDialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petisFindedDialog.getWindow().setWindowAnimations(0);
         TextView two_button_message = (TextView) petisFindedDialog.findViewById(R.id.two_button_message);
         Button two_button_cancle = (Button) petisFindedDialog.findViewById(R.id.two_button_cancle);
@@ -444,28 +447,51 @@ public class DialogUtil {
         petisFindedDialog.setCanceledOnTouchOutside(false);
         petisFindedDialog.show();
 
+        if (noresponsethread == null) {
+            try {
+                noresponsethread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(600000);
+                        } catch (Exception e) {
+
+                        }
+                        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+
+                        }
+
+                        noresponsethread = null;
+                    }
+                });
+            } catch (Exception e) {
+
+            }
+            noresponsethread.start();
+        }
+
     }
 
     //宠物是否到家  petAtHomeDialog
-    public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener){
+    public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
-        if(safeCautionDialog!=null&&safeCautionDialog.isShowing()){
+        if (safeCautionDialog != null && safeCautionDialog.isShowing()) {
             try {
                 safeCautionDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
 
-        if(petAtHomeDialog!=null&&petAtHomeDialog.isShowing()){
+        if (petAtHomeDialog != null && petAtHomeDialog.isShowing()) {
             try {
                 petAtHomeDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        petAtHomeDialog=null;
-        petAtHomeDialog=new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        petAtHomeDialog = null;
+        petAtHomeDialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petAtHomeDialog.getWindow().setWindowAnimations(0);
         TextView two_button_message = (TextView) petAtHomeDialog.findViewById(R.id.two_button_message);
         Button two_button_cancle = (Button) petAtHomeDialog.findViewById(R.id.two_button_cancle);
@@ -508,23 +534,23 @@ public class DialogUtil {
                                              final View.OnClickListener listener1, final View.OnClickListener listener2, final View.OnClickListener listener3) {
         if (!canShowDialog(context)) return;
         closeAllDialog();
-        if(petAtHomeDialog!=null&&petAtHomeDialog.isShowing()){
+        if (petAtHomeDialog != null && petAtHomeDialog.isShowing()) {
             try {
                 petAtHomeDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
-        if(safeCautionDialog!=null&&safeCautionDialog.isShowing()){
+        if (safeCautionDialog != null && safeCautionDialog.isShowing()) {
             try {
                 safeCautionDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-        safeCautionDialog=null;
-        safeCautionDialog= new AppDialog(context, R.layout.dialog_three_button, WindowManager.LayoutParams.MATCH_PARENT,
+        safeCautionDialog = null;
+        safeCautionDialog = new AppDialog(context, R.layout.dialog_three_button, WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         safeCautionDialog.getWindow().setWindowAnimations(0);
         TextView tv_title = (TextView) safeCautionDialog.findViewById(R.id.tv_title);
@@ -580,8 +606,6 @@ public class DialogUtil {
         safeCautionDialog.show();
 
     }
-
-
 
 
     /**

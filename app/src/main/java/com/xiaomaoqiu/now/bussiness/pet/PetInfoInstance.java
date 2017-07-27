@@ -372,6 +372,19 @@ public class PetInfoInstance {
                             }
                             break;
                     }
+
+                    //设备离线逻辑
+                    if(message.device_status==0){
+                        if(DeviceInfoInstance.getInstance().online) {
+                            DeviceInfoInstance.getInstance().online=false;
+                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                        }
+                    }else if(message.device_status==1){
+                        if(!DeviceInfoInstance.getInstance().online) {
+                            DeviceInfoInstance.getInstance().online=true;
+                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                        }
+                    }
                 }
             }
 

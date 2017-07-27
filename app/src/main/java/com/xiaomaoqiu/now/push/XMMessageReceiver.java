@@ -93,6 +93,7 @@ public class XMMessageReceiver extends PushMessageReceiver {
             mUserAccount = message.getUserAccount();
         }
 //        setRedPoint(context);
+
     }
 
     //命令结果
