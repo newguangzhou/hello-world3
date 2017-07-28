@@ -23,6 +23,9 @@ public class DeviceInfoBean extends BaseBean {
     public long battery_last_get_time;
 
 
+    public int battery_status;
+
+
     //固件版本号
     public String firmware_version;
 

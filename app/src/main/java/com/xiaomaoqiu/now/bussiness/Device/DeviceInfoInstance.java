@@ -51,6 +51,7 @@ public class DeviceInfoInstance {
             instance = new DeviceInfoInstance();
             DeviceInfoBean bean = new DeviceInfoBean();
             instance.battery_level = SPUtil.getBatteryLevel();
+            instance.battery_status=SPUtil.getBatteryStatus();
             bean.imei = SPUtil.getDeviceImei();
             bean.firmware_version = SPUtil.getFirmwareVersion();
             bean.device_name = SPUtil.getDeviceName();
@@ -79,6 +80,8 @@ public class DeviceInfoInstance {
 
     //todo 这个东西比较特殊,没有包含到bean里面
     public float battery_level;
+
+    public int battery_status;//电量级别
 //
 //    //固件版本
 //    public String firmware_version;
@@ -107,6 +110,8 @@ public class DeviceInfoInstance {
     public void saveDeviceInfo(DeviceInfoBean message) {
         instance.battery_level = message.battery_level / 100f;
         SPUtil.putBatteryLevel(battery_level);
+        instance.battery_status=message.battery_status;
+        SPUtil.putBatteryStatus(message.battery_status);
         packBean.firmware_version = message.firmware_version;
         SPUtil.putFirmwareVersion(packBean.firmware_version);
         packBean.imei = message.imei;
@@ -139,6 +144,8 @@ public class DeviceInfoInstance {
     public void clearDeviceInfo() {
         battery_level = 0.0f;
         SPUtil.putBatteryLevel(0);
+        battery_status=0;
+        SPUtil.putBatteryStatus(0);
         packBean.firmware_version = "";
         SPUtil.putFirmwareVersion("");
         packBean.imei = "";

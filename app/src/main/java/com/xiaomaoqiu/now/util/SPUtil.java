@@ -73,6 +73,8 @@ public class SPUtil {
 
     //设备电量级别
     public static final String BATTERY_LEVEL = "battery_level";
+    //设备电量报警级别
+    public static final String BATTERY_STATUS="battery_status";
     //设备电量获取时间
     public static final String BATTERY_LAST_GET_TIME="battery_last_get_time";
 
@@ -272,6 +274,13 @@ public class SPUtil {
 
     public static void putBatteryLevel(float level) {
         putFloat(BATTERY_LEVEL, level);
+    }
+
+    public static int getBatteryStatus(){
+        return getInt(BATTERY_STATUS);
+    }
+    public static void putBatteryStatus(int battery_status){
+        putInt(BATTERY_STATUS,battery_status);
     }
 
     public static float getBatteryLastGetTime(){

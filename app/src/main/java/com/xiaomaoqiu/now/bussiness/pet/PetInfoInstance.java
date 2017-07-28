@@ -21,6 +21,7 @@ import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
+import com.xiaomaoqiu.now.util.AppDialog;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -97,7 +98,7 @@ public class PetInfoInstance {
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
             instance.PET_MODE = SPUtil.getPET_MODE();
-            instance.suggest_energy=SPUtil.getSuggestEnergy();
+            instance.suggest_energy = SPUtil.getSuggestEnergy();
         }
         return instance;
     }
@@ -171,8 +172,8 @@ public class PetInfoInstance {
             packBean.logo_url = message.logo_url;
             SPUtil.putPetHeader(packBean.logo_url);
         }
-        if(!TextUtils.isEmpty(message.recommend_energy)){
-            packBean.recommend_energy=message.recommend_energy;
+        if (!TextUtils.isEmpty(message.recommend_energy)) {
+            packBean.recommend_energy = message.recommend_energy;
             SPUtil.putSuggestEnergy(message.recommend_energy);
         }
         packBean.pet_type_id = message.pet_type_id;
@@ -211,14 +212,14 @@ public class PetInfoInstance {
     public void addPetInfo(PetInfoBean petInfoBean) {
         ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick,
-                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy,getSuggest_energy(), petInfoBean.logo_url, DeviceInfoInstance.getInstance().packBean.imei
+                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy, getSuggest_energy(), petInfoBean.logo_url, DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<PetInfoBean>() {
             @Override
             public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
-                        if(DeviceInfoInstance.getInstance().online!=true) {
+                        if (DeviceInfoInstance.getInstance().online != true) {
                             DeviceInfoInstance.getInstance().online = true;
                             EventBus.getDefault().post(new PushEventManage.deviceOnline());
                         }
@@ -231,7 +232,7 @@ public class PetInfoInstance {
                         ToastUtil.showTost("请填写完整信息");
                         break;
                     case EC_OFFLINE:
-                        DeviceInfoInstance.getInstance().online=false;
+                        DeviceInfoInstance.getInstance().online = false;
                         EventBus.getDefault().post(new EventManage.DeviceOffline());
                         break;
 //                    case EC_ALREADY_FAV:
@@ -285,7 +286,7 @@ public class PetInfoInstance {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.pet_id, petInfoBean.description,
                 petInfoBean.weight, petInfoBean.sex, petInfoBean.nick, petInfoBean.birthday,
-                petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy, getSuggest_energy(),DeviceInfoInstance.getInstance().packBean.imei
+                petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy, getSuggest_energy(), DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -293,7 +294,7 @@ public class PetInfoInstance {
                 switch (ret) {
                     case EC_SUCCESS:
                         //                    ToastUtil.showTost("更新成功");
-                        if(DeviceInfoInstance.getInstance().online!=true) {
+                        if (DeviceInfoInstance.getInstance().online != true) {
                             DeviceInfoInstance.getInstance().online = true;
                             EventBus.getDefault().post(new PushEventManage.deviceOnline());
                         }
@@ -304,7 +305,7 @@ public class PetInfoInstance {
                         EventBus.getDefault().post(event);
                         break;
                     case EC_OFFLINE:
-                        DeviceInfoInstance.getInstance().online=false;
+                        DeviceInfoInstance.getInstance().online = false;
                         ToastUtil.showTost("设备处于离线状态，请开机");
                         break;
                     default:
@@ -331,9 +332,9 @@ public class PetInfoInstance {
             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
-                    boolean changed=false;
-                    if(PET_MODE!=message.pet_status){
-                        changed= true;
+                    boolean changed = false;
+                    if (PET_MODE != message.pet_status) {
+                        changed = true;
                     }
 
                     switch (message.pet_status) {
@@ -357,20 +358,20 @@ public class PetInfoInstance {
 //                            setAtHome(true);
                             break;
                     }
-                    if(changed) {
+                    if (changed) {
                         SPUtil.putPET_MODE(PET_MODE);
                         EventBus.getDefault().post(new EventManage.petModeChanged());
                     }
 
                     switch (message.pet_is_in_home) {
                         case Constants.PET_AT_HOME:
-                            if(!PetInfoInstance.getInstance().getAtHome()){
+                            if (!PetInfoInstance.getInstance().getAtHome()) {
                                 PetInfoInstance.getInstance().setAtHome(true);
                                 EventBus.getDefault().post(new PushEventManage.petAtHome());
                             }
                             break;
                         case Constants.PET_OUT_HOME:
-                            if(PetInfoInstance.getInstance().getAtHome()){
+                            if (PetInfoInstance.getInstance().getAtHome()) {
                                 PetInfoInstance.getInstance().setAtHome(false);
                                 EventBus.getDefault().post(new PushEventManage.petNotHome());
                             }
@@ -378,16 +379,33 @@ public class PetInfoInstance {
                     }
 
                     //设备离线逻辑
-                    if(message.device_status==0){
-                        if(DeviceInfoInstance.getInstance().online) {
-                            DeviceInfoInstance.getInstance().online=false;
+                    if (message.device_status == 0) {
+                        if (DeviceInfoInstance.getInstance().online) {
+                            DeviceInfoInstance.getInstance().online = false;
                             EventBus.getDefault().post(new EventManage.DeviceOffline());
                         }
-                    }else if(message.device_status==1){
-                        if(!DeviceInfoInstance.getInstance().online) {
-                            DeviceInfoInstance.getInstance().online=true;
+                    } else if (message.device_status == 1) {
+                        if (!DeviceInfoInstance.getInstance().online) {
+                            DeviceInfoInstance.getInstance().online = true;
                             EventBus.getDefault().post(new PushEventManage.deviceOnline());
                         }
+                    }
+                    if (((message.battery_level / 100f) != DeviceInfoInstance.getInstance().battery_level)
+                            || (DeviceInfoInstance.getInstance().packBean.battery_last_get_time != message.battery_last_get_time)
+                            || (DeviceInfoInstance.getInstance().battery_status!=message.battery_status)
+                            ) {
+                        //电量更新
+                        DeviceInfoInstance.getInstance().battery_level = message.battery_level / 100f;
+                        SPUtil.putBatteryLevel(DeviceInfoInstance.getInstance().battery_level);
+
+                        //电量时间
+                        DeviceInfoInstance.getInstance().packBean.battery_last_get_time = message.battery_last_get_time;
+                        SPUtil.putBatteryLastGetTime(DeviceInfoInstance.getInstance().packBean.battery_last_get_time);
+                        DeviceInfoInstance.getInstance().lastGetTime = AppDialog.DateUtil.deviceInfoTime(DeviceInfoInstance.getInstance().packBean.battery_last_get_time);
+
+                        //电量级别
+                        DeviceInfoInstance.getInstance().battery_status=message.battery_status;
+                        EventBus.getDefault().post(new EventManage.notifyDeviceStateChange());
                     }
                 }
             }
@@ -613,11 +631,12 @@ public class PetInfoInstance {
         return petAtHome;
     }
 
-    public void setSuggest_energy(String suggest_energy){
-        this.suggest_energy=suggest_energy;
+    public void setSuggest_energy(String suggest_energy) {
+        this.suggest_energy = suggest_energy;
         SPUtil.putSuggestEnergy(suggest_energy);
     }
-    public String getSuggest_energy(){
+
+    public String getSuggest_energy() {
         return suggest_energy;
     }
 
