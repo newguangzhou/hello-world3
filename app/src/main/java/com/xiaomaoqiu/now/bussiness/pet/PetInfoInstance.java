@@ -171,6 +171,10 @@ public class PetInfoInstance {
             packBean.logo_url = message.logo_url;
             SPUtil.putPetHeader(packBean.logo_url);
         }
+        if(!TextUtils.isEmpty(message.recommend_energy)){
+            packBean.recommend_energy=message.recommend_energy;
+            SPUtil.putSuggestEnergy(message.recommend_energy);
+        }
         packBean.pet_type_id = message.pet_type_id;
         SPUtil.putPetTypeId(packBean.pet_type_id);
         packBean.target_energy = message.target_energy;
@@ -207,7 +211,7 @@ public class PetInfoInstance {
     public void addPetInfo(PetInfoBean petInfoBean) {
         ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick,
-                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy, petInfoBean.logo_url, DeviceInfoInstance.getInstance().packBean.imei
+                petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy,getSuggest_energy(), petInfoBean.logo_url, DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<PetInfoBean>() {
             @Override
             public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
@@ -281,7 +285,7 @@ public class PetInfoInstance {
         ApiUtils.getApiService().updatePetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.pet_id, petInfoBean.description,
                 petInfoBean.weight, petInfoBean.sex, petInfoBean.nick, petInfoBean.birthday,
-                petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy, DeviceInfoInstance.getInstance().packBean.imei
+                petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy, getSuggest_energy(),DeviceInfoInstance.getInstance().packBean.imei
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {

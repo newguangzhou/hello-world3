@@ -21,7 +21,7 @@ import java.util.List;
 public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.OnClickListener {
     WheelView mWvNumber;
     List<String> mItems = new ArrayList<String>();
-
+    List<String> energylist=new ArrayList<>();
 
     TextView tv_suggest;
 
@@ -40,16 +40,18 @@ public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.O
         super.onCreate(bundle);
         setContentView(R.layout.dialog_pick_sport_number);
         tv_suggest= (TextView) this.findViewById(R.id.tv_suggest);
-        tv_suggest.setText("小毛球推荐卡路里"+PetInfoInstance.getInstance().getSuggest_energy());
+        tv_suggest.setText("小毛球推荐卡路里"+PetInfoInstance.getInstance().getSuggest_energy()+"千卡");
 
         mWvNumber = (WheelView) findViewById(R.id.wv_number);
 
         final DecimalFormat df = new DecimalFormat("0.00");//格式化
 
-        double target_energy=Double.valueOf(PetInfoInstance.getInstance().packBean.target_energy);
-
-        for (int i = 80; i <= 125; i += 5)
-            mItems.add(df.format((i/100f)*target_energy));
+        double recommend_energy=Double.valueOf(PetInfoInstance.getInstance().getSuggest_energy());
+        energylist.clear();
+        for (int i = 80; i <= 130; i += 5) {
+            energylist.add(df.format((i / 100f) * recommend_energy));
+            mItems.add(i+"%推荐运动量("+df.format((i / 100f) * recommend_energy)+"千卡)");
+        }
         mWvNumber.setItems(mItems);
 
         findViewById(R.id.btn_ok).setOnClickListener(this);
@@ -62,7 +64,7 @@ public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.O
     @Override
     public void onClick(View v) {
         if (mOnPickNumberListener != null) {
-            String str = mItems.get(mWvNumber.getSeletedIndex());
+            String str = energylist.get(mWvNumber.getSeletedIndex());
             mOnPickNumberListener.onConfirmNumber(str);
         }
         dismiss();

@@ -119,11 +119,11 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                     + PetInfoInstance.getInstance().packBean.reality_amount + "卡路里，完美完成运动目标";
             sportMessage="适当运动能让Ta更加健康，也让Ta得到足够的玩乐，帮助Ta发泄情绪。请好好奖励，并继续保持良好的运动习惯";
         }else if(PetInfoInstance.getInstance().percentage<=115){
-            text="旺财今天运动消耗"+PetInfoInstance.getInstance().packBean.reality_amount+"卡里路，超额完成运动目标"+(PetInfoInstance.getInstance().percentage-100)+"%";
-            sportMessage="适当提高运动强度值得鼓励（是允许的）。但是过量的运动会让心脏、关节过度负荷，诱发疾病。建议密切观察旺财日常表现";
+            text=PetInfoInstance.getInstance().getNick()+"今天运动消耗"+PetInfoInstance.getInstance().packBean.reality_amount+"卡里路，超额完成运动目标"+(PetInfoInstance.getInstance().percentage-100)+"%";
+            sportMessage="适当提高运动强度值得鼓励（是允许的）。但是过量的运动会让心脏、关节过度负荷，诱发疾病。建议密切观察"+PetInfoInstance.getInstance().getNick()+"日常表现";
         }else if(PetInfoInstance.getInstance().percentage>115){
-            text="旺财今天运动消耗"+PetInfoInstance.getInstance().packBean.reality_amount+"卡里路，超额完成运动目标"+(PetInfoInstance.getInstance().percentage-100)+"%";
-            sportMessage="过高的运动量或让心脏过度负荷、肌肉疲劳、关节劳损，产生心肺功能障碍、骨关节脱臼、骨折等问题。建议让兽医评估旺财身体情况后，再决定运动方案";
+            text=PetInfoInstance.getInstance().getNick()+"今天运动消耗"+PetInfoInstance.getInstance().packBean.reality_amount+"卡里路，超额完成运动目标"+(PetInfoInstance.getInstance().percentage-100)+"%";
+            sportMessage="过高的运动量或让心脏过度负荷、肌肉疲劳、关节劳损，产生心肺功能障碍、骨关节脱臼、骨折等问题。建议让兽医评估"+PetInfoInstance.getInstance().getNick()+"身体情况后，再决定运动方案";
         }
         tv_health_sport_message.setText(text);
         bt_health_sport_message.setText(sportMessage);
@@ -140,16 +140,16 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
         String sleepMessage="";
         if(sleepTime<=2){
             sleepText="休息严重不足";
-            sleepMessage="旺财今天休息"+sleepTimeString+"小时，休息时间严重不足。过度亢奋，提示Ta的情绪或者身体出现了异常，请尽快联系兽医";
+            sleepMessage=PetInfoInstance.getInstance().getNick()+"今天休息"+sleepTimeString+"小时，休息时间严重不足。过度亢奋，提示Ta的情绪或者身体出现了异常，请尽快联系兽医";
         }else  if(sleepTime<=4){
             sleepText="休息过少";
-            sleepMessage="旺财今天休息"+sleepTimeString+"小时，休息时间不足。注意让Ta多点休息。避免内脏和关节的损伤";
+            sleepMessage=PetInfoInstance.getInstance().getNick()+"今天休息"+sleepTimeString+"小时，休息时间不足。注意让Ta多点休息。避免内脏和关节的损伤";
         }else if(sleepTime<=10){
             sleepText="休息正常";
-            sleepMessage="旺财今天休息"+sleepTimeString+"小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧";
+            sleepMessage=PetInfoInstance.getInstance().getNick()+"今天休息"+sleepTimeString+"小时，与90%同类犬（猫）休息时长相当。"+PetInfoInstance.getInstance().getNick()+"活力充足，放心带Ta去做运动吧";
         }else if(sleepTime>10){
             sleepText="嗜睡";
-            sleepMessage="旺财今天休息"+sleepTimeString+"小时，休息时间过长。沉郁、活力减少提示身体出现异常，请尽快联系兽医";
+            sleepMessage=PetInfoInstance.getInstance().getNick()+"今天休息"+sleepTimeString+"小时，休息时间过长。沉郁、活力减少提示身体出现异常，请尽快联系兽医";
         }
         tv_health_sleep_message.setText("数据解读："+sleepText);
         bt_health_sleep_message.setText(sleepMessage);

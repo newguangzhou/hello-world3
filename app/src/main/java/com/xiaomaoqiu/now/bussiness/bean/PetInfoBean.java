@@ -34,6 +34,8 @@ public class PetInfoBean extends BaseBean {
 
     public String target_energy;
 
+    public String recommend_energy;
+
 
     //wifi 名称
     public String wifi_ssid;

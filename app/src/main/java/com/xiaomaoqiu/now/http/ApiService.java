@@ -94,6 +94,7 @@ public interface ApiService {
             @Query("birthday") String birthday,
             @Query("pet_type_id") int pet_type_id,
             @Query("target_energy") String target_energy,
+            @Query("recommend_energy") String recommend_energy,
             @Query("logo_url") String logo_url,
             @Query("imei") String imei
 
@@ -370,6 +371,7 @@ public interface ApiService {
             @Query("logo_url") String logo_url,
             @Query("pet_type_id") int pet_type_id,
             @Query("target_energy") String target_energy,
+            @Query("recommend_energy") String recommend_energy,
             @Query("imei") String imei
     );
 
