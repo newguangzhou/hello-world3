@@ -153,6 +153,12 @@ public class DeviceInfoInstance {
         SPUtil.putDeviceImei("");
         packBean.device_name = "";
 
+
+        UserInstance.getInstance().latitude=-1;
+        UserInstance.getInstance().longitude=-1;
+        SPUtil.putHOME_LONGITUDE("-1");
+        SPUtil.putHOME_LATITUDE("-1");
+
         UserInstance.getInstance().device_imei = "";
 
         UserInstance.getInstance().has_reboot = 0;
@@ -292,6 +298,7 @@ public class DeviceInfoInstance {
                     clearDeviceInfo();
                     //清空宠物信息
                     PetInfoInstance.getInstance().clearPetInfo();
+
                     EventBus.getDefault().post(new EventManage.unbindDeviceSuccess());
                 }
             }
