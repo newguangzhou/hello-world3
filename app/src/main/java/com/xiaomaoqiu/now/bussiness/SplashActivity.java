@@ -64,10 +64,10 @@ public class SplashActivity extends BaseActivity {
             }, 1000);
 
         }else {
-            if(!SPUtil.getAPP_VERSION().equals(Apputil.getVersionCode()+"")){
+//            if(!SPUtil.getAPP_VERSION().equals(Apputil.getVersionCode()+"")){
                 MiPushClient.registerPush(PetAppLike.mcontext, XMPushManagerInstance.APP_ID, XMPushManagerInstance.APP_KEY);
                 SPUtil.putAPP_VERSION(Apputil.getVersionCode()+"");
-            }
+//            }
             EventBus.getDefault().register(this);
             //获取基本信息
             UserInstance.getInstance().getUserInfo();
