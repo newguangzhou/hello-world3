@@ -378,6 +378,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     ToastUtil.showTost("您的设备尚未开机！");
                     return;
                 }
+                if(DeviceInfoInstance.getInstance().battery_level>1.0f){
+                    PetInfoInstance.getInstance().getPetLocation();
+                }
                 batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
                         DeviceInfoInstance.getInstance().lastGetTime);
             }
