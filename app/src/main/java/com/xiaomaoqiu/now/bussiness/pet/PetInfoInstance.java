@@ -56,6 +56,14 @@ public class PetInfoInstance {
 
     public double radius;
 
+
+//    LOCATOR_STATUS_GPS = 0  # GPS定位成功
+//            LOCATOR_STATUS_FAILED = 1  # 定位失败
+//            LOCATOR_STATUS_STATION = 2  # 基站地位
+//#LOCATOR_STATUS_WIFI = 3  # WIFI定位
+//            LOCATOR_STATUS_MIXED = 5  # 混合定位
+    public int device_locator_status=5;
+
     public boolean petAtHome = true; //true - 宠物在家, false - 宠物活动中
 
 
@@ -67,6 +75,20 @@ public class PetInfoInstance {
     public int PET_MODE = Constants.PET_STATUS_COMMON;
 
     private String suggest_energy;//小毛球推荐卡路里
+
+
+    /**
+     * 昨天数据
+     */
+    public double yesterday_deep_sleep;
+    public double yesterday_light_sleep;
+
+    public double yesterday_target_amount;
+    public double yesterday_reality_amount;
+    public double yesterday_percentage;
+
+
+
 
     public void setPetMode(int mode) {
         PET_MODE = mode;
@@ -94,11 +116,13 @@ public class PetInfoInstance {
             baseBean.logo_url = SPUtil.getPetHeader();
             baseBean.pet_type_id = SPUtil.getPetTypeId();
             baseBean.target_energy = SPUtil.getTargetEnergy();
+
             instance.setDateFormat_birthday(baseBean.birthday);
             instance.petAtHome = SPUtil.getPetAtHome();
             instance.packBean = baseBean;
             instance.PET_MODE = SPUtil.getPET_MODE();
             instance.suggest_energy = SPUtil.getSuggestEnergy();
+            instance.device_locator_status=SPUtil.getDeviceLocatorStatus();
         }
         return instance;
     }
@@ -448,6 +472,7 @@ public class PetInfoInstance {
         SPUtil.putPetTypeId(0);
         packBean.dateFormat_birthday = new PetInfoInstance.MyDate(2015, 1, 1);
         setDateFormat_birthday("");
+
     }
 
     public void getPetLocation() {
@@ -466,6 +491,7 @@ public class PetInfoInstance {
                             location_time = message.location_time;
                             longitude = message.longitude;
                             radius = message.radius;
+                            device_locator_status=message.locator_status;
                             EventBus.getDefault().post(event);
                         } else {
                             ToastUtil.showTost("位置获取失败！");

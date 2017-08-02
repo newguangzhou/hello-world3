@@ -110,6 +110,8 @@ public class SPUtil {
 
     //地图定位模式
     public static final String MAP_MODE="map_mode";
+    //设备定位状态
+    public static final String DEVICE_LOCATION_STATUS="locator_status";
 
     //纬度
     public static final String PHONE_LATITUDE ="phone_latitude";
@@ -214,7 +216,7 @@ public class SPUtil {
     }
 
     public static String getSuggestEnergy(){
-        return getString(SUGGEST_ENERGY);
+        return getString(SUGGEST_ENERGY,"0");
     }
     public static void putSuggestEnergy(String energy){
         putString(SUGGEST_ENERGY,energy);
@@ -377,6 +379,13 @@ public class SPUtil {
     }
     public static int getHasReboot(){
         return getInt(HAS_REBOOT);
+    }
+
+    public static void putDeviceLocatorStatus(int locator_status){
+        putInt(DEVICE_LOCATION_STATUS,locator_status);
+    }
+    public static int getDeviceLocatorStatus(){
+        return getInt(DEVICE_LOCATION_STATUS);
     }
 
 

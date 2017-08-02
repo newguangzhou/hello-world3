@@ -59,6 +59,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     private ImageView mFindPetView, mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
     private TextView petLocation, walkpetNoticeView;
+    private TextView tv_location_state;
     private LinearLayout petLocContainer;
 
     private String locationString;
@@ -88,14 +89,15 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         petLocation.setText("");
         petLocContainer = (LinearLayout) root.findViewById(R.id.locate_addr_conotainer);
         walkpetNoticeView = (TextView) root.findViewById(R.id.locate_walk_notice);
+        tv_location_state= (TextView) root.findViewById(R.id.tv_location_state);
     }
 
     void initListener() {
         MapInstance.getInstance().setAddressParseListener(new addressParseListener() {
             @Override
             public void onAddressparsed(String address) {
-                String textString = address;
-
+//                String textString = address;
+                String textString = PetInfoInstance.getInstance().getNick()+"位置获取时间：";
                 if (PetInfoInstance.getInstance().location_time != 0) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String d = format.format(PetInfoInstance.getInstance().location_time * 1000);//unix时间戳转化为java的毫秒，然后转成时间
@@ -122,6 +124,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
+                tv_location_state.setVisibility(View.GONE);
                 break;
             case Constants.PET_STATUS_WALK:
                 mWalkPetView.setVisibility(View.VISIBLE);
@@ -129,12 +132,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.VISIBLE);
                 petLocContainer.setVisibility(View.GONE);
+                tv_location_state.setVisibility(View.GONE);
                 break;
             case Constants.PET_STATUS_FIND:
                 mWalkPetView.setVisibility(View.GONE);
                 mFindPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
+                if(PetInfoInstance.getInstance().device_locator_status==2){
+                    tv_location_state.setVisibility(View.VISIBLE);
+                }else{
+                    tv_location_state.setVisibility(View.GONE);
+                }
+
                 break;
             default:
                 mWalkPetView.setVisibility(View.VISIBLE);
@@ -142,6 +152,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
+                tv_location_state.setVisibility(View.GONE);
                 break;
         }
 
@@ -171,6 +182,11 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mFindPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
+                if(PetInfoInstance.getInstance().device_locator_status==2){
+                    tv_location_state.setVisibility(View.VISIBLE);
+                }else{
+                    tv_location_state.setVisibility(View.GONE);
+                }
                 break;
             default:
                 mWalkPetView.setVisibility(View.VISIBLE);
@@ -245,6 +261,16 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
         }else {
             MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
+        }
+
+        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
+            if (PetInfoInstance.getInstance().device_locator_status == 2) {
+                tv_location_state.setVisibility(View.VISIBLE);
+            } else {
+                tv_location_state.setVisibility(View.GONE);
+            }
+        }else {
+            tv_location_state.setVisibility(View.GONE);
         }
 
     }

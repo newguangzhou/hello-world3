@@ -16,4 +16,6 @@ public class PetLocationBean extends BaseBean {
     public double longitude;
 
     public double radius;
+
+    public int locator_status;
 }

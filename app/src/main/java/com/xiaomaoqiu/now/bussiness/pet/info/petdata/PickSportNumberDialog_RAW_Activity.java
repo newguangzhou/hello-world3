@@ -53,6 +53,7 @@ public class PickSportNumberDialog_RAW_Activity extends Dialog implements View.O
             mItems.add(i+"%推荐运动量("+df.format((i / 100f) * recommend_energy)+"千卡)");
         }
         mWvNumber.setItems(mItems);
+        mWvNumber.setSeletion(4);
 
         findViewById(R.id.btn_ok).setOnClickListener(this);
     }

@@ -408,7 +408,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        if (MainActivity.getLocationWithOneMinute) {
+                                        if (MainActivity.getLocationWithOneMinute&&DeviceInfoInstance.getInstance().online) {
                                             PetInfoInstance.getInstance().getPetLocation();
                                         }
                                     }
@@ -517,7 +517,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        if (MainActivity.getLocationWithOneMinute) {
+                                        if (MainActivity.getLocationWithOneMinute&&DeviceInfoInstance.getInstance().online) {
                                             PetInfoInstance.getInstance().getPetLocation();
                                         }
                                     }

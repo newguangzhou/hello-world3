@@ -441,7 +441,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                                if (getLocationWithOneMinute) {
+                                if (getLocationWithOneMinute&&DeviceInfoInstance.getInstance().online) {
                                     PetInfoInstance.getInstance().getPetLocation();
                                 }
                             }
