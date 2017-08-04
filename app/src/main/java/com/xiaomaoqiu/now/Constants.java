@@ -25,6 +25,13 @@ public class Constants {
     public static final int PET_STATUS_FIND=2;
 
     /**
+     * 关闭紧急搜索  2
+     * 开启紧急搜索  1
+     */
+    public static final int GPS_OPEN=1;
+    public static final int GPS_CLOSE=2;
+
+    /**
      * # 1 在家  0 不在家
      */
     public static final int PET_AT_HOME=1;

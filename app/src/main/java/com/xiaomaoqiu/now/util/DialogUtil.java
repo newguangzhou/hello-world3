@@ -9,12 +9,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.Constants;
+import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
+import com.xiaomaoqiu.now.http.ApiUtils;
+import com.xiaomaoqiu.now.http.HttpCode;
+import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.view.BatteryIngNoticeDialog;
 import com.xiaomaoqiu.now.view.BatteryNoticeDialog;
 import com.xiaomaoqiu.now.view.CustomProgress;
 import com.xiaomaoqiu.pet.R;
+
+import org.greenrobot.eventbus.EventBus;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Created by long on 2017/4/25.
@@ -458,7 +471,32 @@ public class DialogUtil {
 
                         }
                         if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                                @Override
+                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
+                                            if (DeviceInfoInstance.getInstance().online != true) {
+                                                DeviceInfoInstance.getInstance().online = true;
+                                                EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                            }
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            break;
+                                        case EC_OFFLINE:
+                                            DeviceInfoInstance.getInstance().online = false;
+                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                            break;
+                                    }
 
+                                }
+
+                                @Override
+                                public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                                }
+                            });
                         }
 
                         noresponsethread = null;

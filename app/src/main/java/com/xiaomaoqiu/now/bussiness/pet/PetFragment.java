@@ -289,7 +289,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         @Override
                         public void onClick(View v) {
                             tv_findpet.setText("紧急搜寻");
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 2).enqueue(new XMQCallback<PetStatusBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);
@@ -327,7 +327,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         public void onClick(View v) {
                             tv_findpet.setText("关闭搜寻");
                             MapInstance.getInstance().startFindPet();
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), 1).enqueue(new XMQCallback<PetStatusBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);
