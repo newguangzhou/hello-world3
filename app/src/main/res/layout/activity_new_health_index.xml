@@ -54,6 +54,7 @@
 
         <!--运动-->
         <LinearLayout
+            android:id="@+id/ll_sport_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
@@ -131,7 +132,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="宠物今天消耗了很多哦"
+                android:text="宠物昨天消耗了很多哦"
                 android:textColor="@color/common_body"
                 android:textSize="@dimen/common_dialog_message" />
 
@@ -187,6 +188,7 @@
 
         <!--睡眠-->
         <LinearLayout
+            android:id="@+id/ll_sleep_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -334,7 +336,7 @@
                 android:background="@drawable/health_sport_message"
                 android:padding="10dp"
                 android:gravity="left|center"
-                android:text="旺财今天休息XX小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧。"
+                android:text="旺财昨天休息XX小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧。"
                 android:textColor="@color/common_body"
                 android:textSize="@dimen/common_dialog_message" />
 
@@ -359,6 +361,24 @@
                     android:textSize="@dimen/common_dialog_message" />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <!--nodata-->
+        <LinearLayout
+            android:id="@+id/ll_nodata"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当天尚无数据"
+                />
 
         </LinearLayout>
     </LinearLayout>
