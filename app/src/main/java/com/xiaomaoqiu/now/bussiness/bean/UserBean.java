@@ -23,4 +23,6 @@ public class UserBean extends BaseBean {
 
     public double latitude;
 
+    public int agree_policy;
+
 }

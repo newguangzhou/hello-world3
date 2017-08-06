@@ -74,6 +74,11 @@ public class Constants {
              */
             public static final String suggest="user/suggest";
 
+            /**
+             * 是否同意用户协议
+             */
+            public static final String agree_policy="user/agree_policy";
+
 
         }
 
@@ -190,6 +195,8 @@ public class Constants {
              * d宠物动作，去运动还是回家
              */
             public static final String toActivity ="pet/activity";
+
+
 
 
         }

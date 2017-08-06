@@ -1,8 +1,11 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
 import com.xiaomaoqiu.now.bussiness.bean.UserBean;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
@@ -35,7 +38,7 @@ public class UserInstance {
             userInstance.device_imei = SPUtil.getDeviceImei();
             userInstance.wifi_bssid = SPUtil.getHomeWifiMac();
             userInstance.wifi_ssid = SPUtil.getHomeWifiSsid();
-            userInstance.has_reboot=SPUtil.getHasReboot();
+            userInstance.agree_policy =SPUtil.getAgreePolicy();
 
             userInstance.longitude=Double.valueOf(SPUtil.getHOME_LONGITUDE());
             userInstance.latitude=Double.valueOf(SPUtil.getHOME_LATITUDE());
@@ -59,11 +62,43 @@ public class UserInstance {
 
     public String wifi_ssid;
 
-    public int has_reboot;//更新数据后是否已经重启过设备，0：未重启，1：已重启
+    public int agree_policy;//是否同意用户协议0是不同意，1是同意
 
     public double longitude;//home_longitude
 
     public double latitude;//home_latitude
+
+
+    //同意用户基本协议
+    public void agreePolicy() {
+        ApiUtils.getApiService().agreePolicy(UserInstance.getInstance().getUid(),
+                UserInstance.getInstance().getToken(),
+                DeviceInfoInstance.getInstance().packBean.imei,
+                PetInfoInstance.getInstance().getPet_id()
+        ).enqueue(new XMQCallback<BaseBean>() {
+            @Override
+            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                HttpCode ret = HttpCode.valueOf(message.status);
+                switch (ret) {
+                    case EC_SUCCESS:
+                        //是否同意用户协议 0是不同意，1是同意
+                        UserInstance.getInstance().agree_policy =1;
+                        SPUtil.putAgreePolicy(1);
+                        EventBus.getDefault().post(new EventManage.deviceReboot());
+                        break;
+                    case EC_ALREADY_FAV:
+
+                        break;
+                }
+            }
+
+            @Override
+            public void onFail(Call<BaseBean> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     //获取用户基本信息
     public void getUserInfo() {
@@ -104,6 +139,8 @@ public class UserInstance {
     }
 
 
+
+
     public void clearLoginInfo() {
         m_bLogin = false;
         m_uid = -1;
@@ -128,8 +165,8 @@ public class UserInstance {
         SPUtil.putHomeWifiMac(wifi_bssid);
         wifi_ssid = userBean.wifi_ssid;
         SPUtil.putHomeWifiSsid(wifi_ssid);
-        has_reboot = userBean.has_reboot;
-        SPUtil.putHasReboot(has_reboot);
+        agree_policy = userBean.agree_policy;
+        SPUtil.putAgreePolicy(agree_policy);
 
         longitude=userBean.longitude;
         SPUtil.putHOME_LONGITUDE(longitude+"");

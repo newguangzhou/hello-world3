@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.tencent.bugly.crashreport.biz.UserInfoBean;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
@@ -161,8 +160,8 @@ public class DeviceInfoInstance {
 
         UserInstance.getInstance().device_imei = "";
 
-        UserInstance.getInstance().has_reboot = 0;
-        SPUtil.putHasReboot(0);
+        UserInstance.getInstance().agree_policy = 0;
+        SPUtil.putAgreePolicy(0);
 
         wiflist.data.clear();
         UserInstance.getInstance().wifi_ssid = "";
@@ -268,8 +267,8 @@ public class DeviceInfoInstance {
                 switch (ret) {
                     case EC_SUCCESS:
                         //更新数据后是否已经重启过设备，0：未重启，1：已重启
-                        UserInstance.getInstance().has_reboot=1;
-                        SPUtil.putHasReboot(1);
+                        UserInstance.getInstance().agree_policy =1;
+                        SPUtil.putAgreePolicy(1);
                         EventBus.getDefault().post(new EventManage.deviceReboot());
                         break;
                     case EC_ALREADY_FAV:

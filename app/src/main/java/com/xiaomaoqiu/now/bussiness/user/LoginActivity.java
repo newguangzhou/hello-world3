@@ -236,7 +236,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
             finish();
             return;
         }
-        if(UserInstance.getInstance().has_reboot==0){
+        if(UserInstance.getInstance().agree_policy ==0){
             intent.setClass(LoginActivity.this, RebootActivity.class);
             startActivity(intent);
             finish();

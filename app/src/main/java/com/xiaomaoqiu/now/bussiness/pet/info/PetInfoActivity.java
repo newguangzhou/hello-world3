@@ -150,90 +150,92 @@ public class PetInfoActivity extends BaseActivity {
                     finish();
                     return;
                 }
-                if(!PetInfoInstance.getInstance().petSexOrHeavyChanged(modifyBean)){
-
-
-                    DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "修改宠物信息", "放弃", "确定", new View.OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    finish();
-                                }
-                            },
-                            new View.OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                                        return;
-                                    }
-                                    if(TextUtils.isEmpty(modifyBean.nick)){
-                                        ToastUtil.showTost("请填写宠物名字");
-                                        return;
-                                    }
-                                    if(TextUtils.isEmpty(modifyBean.birthday)){
-                                        ToastUtil.showTost("请选择宠物生日");
-                                        return;
-                                    }
-                                    if(TextUtils.isEmpty(modifyBean.weight)){
-                                        ToastUtil.showTost("请填写宠物体重");
-                                        return;
-                                    }
-                                    if(TextUtils.isEmpty(modifyBean.description)){
-                                        ToastUtil.showTost("请选择宠物类别");
-                                        return;
-                                    }
-//                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
-//                                    ToastUtil.showTost("信息需要完整");
+                PetInfoInstance.getInstance().event.updateHeader=false;
+                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//                if(!PetInfoInstance.getInstance().petSexOrHeavyChanged(modifyBean)){
+//
+//
+//                    DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "修改宠物信息", "放弃", "确定", new View.OnClickListener() {
+//
+//                                @Override
+//                                public void onClick(View v) {
+//                                    finish();
+//                                }
+//                            },
+//                            new View.OnClickListener() {
+//
+//                                @Override
+//                                public void onClick(View v) {
+//                                    if (DoubleClickUtil.isFastMiniDoubleClick()) {
+//                                        return;
+//                                    }
+//                                    if(TextUtils.isEmpty(modifyBean.nick)){
+//                                        ToastUtil.showTost("请填写宠物名字");
+//                                        return;
+//                                    }
+//                                    if(TextUtils.isEmpty(modifyBean.birthday)){
+//                                        ToastUtil.showTost("请选择宠物生日");
+//                                        return;
+//                                    }
+//                                    if(TextUtils.isEmpty(modifyBean.weight)){
+//                                        ToastUtil.showTost("请填写宠物体重");
+//                                        return;
+//                                    }
+//                                    if(TextUtils.isEmpty(modifyBean.description)){
+//                                        ToastUtil.showTost("请选择宠物类别");
+//                                        return;
+//                                    }
+////                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+////                                    ToastUtil.showTost("信息需要完整");
+////                                    return;
+////                                }
+//                                    PetInfoInstance.getInstance().event.updateHeader=false;
+//                                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//                                }
+//                            }
+//                    );
+//                    return;
+//                }
+//
+//                DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "配置宠物信息将重启追踪器", "放弃修改", "重启追踪器", new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                finish();
+//                            }
+//                        },
+//                        new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                if (DoubleClickUtil.isFastMiniDoubleClick()) {
 //                                    return;
 //                                }
-                                    PetInfoInstance.getInstance().event.updateHeader=false;
-                                    PetInfoInstance.getInstance().updatePetInfo(modifyBean);
-                                }
-                            }
-                    );
-                    return;
-                }
-
-                DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "配置宠物信息将重启追踪器", "放弃修改", "重启追踪器", new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                finish();
-                            }
-                        },
-                        new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                                    return;
-                                }
-                                if(TextUtils.isEmpty(modifyBean.nick)){
-                                    ToastUtil.showTost("请填写宠物名字");
-                                    return;
-                                }
-                                if(TextUtils.isEmpty(modifyBean.birthday)){
-                                    ToastUtil.showTost("请选择宠物生日");
-                                    return;
-                                }
-                                if(TextUtils.isEmpty(modifyBean.weight)){
-                                    ToastUtil.showTost("请填写宠物体重");
-                                    return;
-                                }
-                                if(TextUtils.isEmpty(modifyBean.description)){
-                                    ToastUtil.showTost("请选择宠物类别");
-                                    return;
-                                }
-//                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
-//                                    ToastUtil.showTost("信息需要完整");
+//                                if(TextUtils.isEmpty(modifyBean.nick)){
+//                                    ToastUtil.showTost("请填写宠物名字");
 //                                    return;
 //                                }
-                                PetInfoInstance.getInstance().event.updateHeader=false;
-                                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
-                            }
-                        }
-                );
+//                                if(TextUtils.isEmpty(modifyBean.birthday)){
+//                                    ToastUtil.showTost("请选择宠物生日");
+//                                    return;
+//                                }
+//                                if(TextUtils.isEmpty(modifyBean.weight)){
+//                                    ToastUtil.showTost("请填写宠物体重");
+//                                    return;
+//                                }
+//                                if(TextUtils.isEmpty(modifyBean.description)){
+//                                    ToastUtil.showTost("请选择宠物类别");
+//                                    return;
+//                                }
+////                                if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+////                                    ToastUtil.showTost("信息需要完整");
+////                                    return;
+////                                }
+//                                PetInfoInstance.getInstance().event.updateHeader=false;
+//                                PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//                            }
+//                        }
+//                );
 
 //                DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器","重启追踪器","放弃修改",new View.OnClickListener() {
 //

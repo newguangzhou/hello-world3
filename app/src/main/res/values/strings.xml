@@ -129,4 +129,7 @@
 
     <string name="crop__done">ACCEPTAR</string>
     <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL·LAR</string>
+
+    <!--用户协议-->
+    <string name="user_book"><u>《用户协议与隐私政策》</u></string>
 </resources>

@@ -205,6 +205,13 @@ public interface ApiService {
             @Query("imei") String imei,
             @Query("pet_id") long petId
     );
+    @GET(Constants.Url.User.agree_policy)
+    Call<BaseBean> agreePolicy(
+            @Query("uid") long uid,
+            @Query("token") String token,
+            @Query("imei") String imei,
+            @Query("pet_id") long petId
+    );
 
     /**
      * 发送获取wifi列表的指令

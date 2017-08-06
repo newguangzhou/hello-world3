@@ -3,16 +3,19 @@ package com.xiaomaoqiu.now.bussiness.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
+import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.SPUtil;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +33,9 @@ public class RebootActivity extends BaseActivity implements LogoutView {
 
     TextView btn_reboot;
     View btn_go_back;
+
+    CheckBox cb_usebook;
+    View tv_userbook;
 
     LoginPresenter loginPresenter;
 
@@ -55,9 +61,28 @@ public class RebootActivity extends BaseActivity implements LogoutView {
 
             @Override
             public void onClick(View v) {
-                DeviceInfoInstance.getInstance().rebootDevice();
+                boolean isCheckd=cb_usebook.isChecked();
+                if(!isCheckd){
+                    ToastUtil.showTost("请阅读并同意《用户协议与隐私政策》");
+                    return;
+                }
+//                DeviceInfoInstance.getInstance().rebootDevice();
+                UserInstance.getInstance().agreePolicy();
             }
         });
+        cb_usebook= (CheckBox) findViewById(R.id.cb_usebook);
+        tv_userbook=findViewById(R.id.tv_userbook);
+        tv_userbook.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                //跳转到用户协议
+                Intent intent=new Intent(RebootActivity.this, BaseWebViewActivity.class);
+                intent.putExtra("web_url","http://www.xiaomaoqiu.com/proto_user.html");
+                startActivity(intent);
+            }
+        });
+
         EventBus.getDefault().register(this);
         loginPresenter = new LoginPresenter(this);
     }

@@ -35,7 +35,6 @@ import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
-import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.AddressAdapter;
 import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -134,7 +133,7 @@ public class InitMapLocationActivity extends Activity {
                             SPUtil.putHOME_LATITUDE(latitude+"");
                             SPUtil.putHOME_LONGITUDE(longitude+"");
                         }
-                        if (UserInstance.getInstance().has_reboot == 0) {
+                        if (UserInstance.getInstance().agree_policy == 0) {
                             Intent intent = new Intent(InitMapLocationActivity.this, RebootActivity.class);
                             startActivity(intent);
                             finish();

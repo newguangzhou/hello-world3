@@ -105,8 +105,8 @@ public class SPUtil {
     //home_latitude
     public static final String HOME_LATITUDE="home_latitude";
 
-    //是否重启
-    public static final String HAS_REBOOT="has_reboot";
+    //是否同意用户协议
+    public static final String AGREE_POLICY ="agree_policy";
 
     //地图定位模式
     public static final String MAP_MODE="map_mode";
@@ -374,11 +374,11 @@ public class SPUtil {
         putString(HOME_WIFI_SSID,ssid);
     }
 
-    public static void putHasReboot(int hasreboot){
-        putInt(HAS_REBOOT,hasreboot);
+    public static void putAgreePolicy(int agree_policy){
+        putInt(AGREE_POLICY,agree_policy);
     }
-    public static int getHasReboot(){
-        return getInt(HAS_REBOOT);
+    public static int getAgreePolicy(){
+        return getInt(AGREE_POLICY);
     }
 
     public static void putDeviceLocatorStatus(int locator_status){
