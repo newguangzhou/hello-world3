@@ -174,12 +174,18 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                     }
                 } else {
 //                    ToastUtil.showTost("获取昨天数据失败");
+                    ll_sport_all.setVisibility(View.GONE);
+                    ll_sleep_all.setVisibility(View.GONE);
+                    ll_nodata.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFail(Call<PetSportBean> call, Throwable t) {
                 ToastUtil.showTost("获取昨天数据失败");
+                ll_sport_all.setVisibility(View.GONE);
+                ll_sleep_all.setVisibility(View.GONE);
+                ll_nodata.setVisibility(View.VISIBLE);
             }
         });
 
