@@ -464,29 +464,38 @@ public class PetInfoActivity extends BaseActivity {
             finish();
             return;
         }
-        DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "配置宠物信息将重启追踪器", "放弃修改", "重启追踪器", new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                },
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        if (DoubleClickUtil.isFastMiniDoubleClick()) {
-                            return;
-                        }
-                        if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
-                            ToastUtil.showTost("信息需要完整");
-                            return;
-                        }
-                        PetInfoInstance.getInstance().event.updateHeader=false;
-                        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
-                    }
-                }
-        );
+        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+            return;
+        }
+        if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+            ToastUtil.showTost("信息需要完整");
+            return;
+        }
+        PetInfoInstance.getInstance().event.updateHeader=false;
+        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//        DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "配置宠物信息将重启追踪器", "放弃修改", "重启追踪器", new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        finish();
+//                    }
+//                },
+//                new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (DoubleClickUtil.isFastMiniDoubleClick()) {
+//                            return;
+//                        }
+//                        if (TextUtils.isEmpty(modifyBean.birthday) || TextUtils.isEmpty(modifyBean.nick) || TextUtils.isEmpty(modifyBean.weight)) {
+//                            ToastUtil.showTost("信息需要完整");
+//                            return;
+//                        }
+//                        PetInfoInstance.getInstance().event.updateHeader=false;
+//                        PetInfoInstance.getInstance().updatePetInfo(modifyBean);
+//                    }
+//                }
+//        );
 
 
 //        DialogToast.createDialogWithTwoButtonWithOKText(PetInfoActivity.this, "配置宠物信息将重启追踪器", "重启追踪器", "放弃修改", new View.OnClickListener() {

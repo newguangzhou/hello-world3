@@ -23,22 +23,22 @@
         >
         <ImageView
             android:id="@+id/iv_pettype_dog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/pettype_dog"
             android:layout_marginBottom="20dp"
             />
         <ImageView
             android:id="@+id/iv_pettype_cat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/pettype_cat"
             android:layout_marginBottom="20dp"
             />
         <ImageView
             android:id="@+id/iv_pettype_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/pettype_other"
             />
 

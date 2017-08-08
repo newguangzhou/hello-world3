@@ -287,8 +287,33 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                     @Override
                     public void onClick(View v) {
-                        PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                        EventBus.getDefault().post(new EventManage.petModeChanged());
+
+                        ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                            @Override
+                            public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                HttpCode ret = HttpCode.valueOf(message.status);
+                                switch (ret) {
+                                    case EC_SUCCESS:
+                                        if(DeviceInfoInstance.getInstance().online!=true) {
+                                            DeviceInfoInstance.getInstance().online = true;
+                                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                        }
+                                        PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                        EventBus.getDefault().post(new EventManage.petModeChanged());
+                                        break;
+                                    case EC_OFFLINE:
+                                        DeviceInfoInstance.getInstance().online=false;
+                                        EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                            }
+                        });
+
                     }
                 }
         );

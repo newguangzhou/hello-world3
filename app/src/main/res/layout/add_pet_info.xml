@@ -187,8 +187,8 @@
 
                 <ImageView
                     android:id="@+id/pet_info_birth_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/btn_birthday_selector" />
 
                 <TextView
@@ -237,8 +237,8 @@
 
                 <ImageView
                     android:id="@+id/pet_info_weight_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/btn_weight_selector" />
 
                 <TextView
@@ -286,8 +286,8 @@
 
                 <ImageView
                     android:id="@+id/pet_info_variety_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/btn_variety_selector" />
 
                 <TextView

@@ -8,8 +8,8 @@
     >
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/asyn_dialog_imgview"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:scaleType="fitXY"
@@ -22,7 +22,7 @@
 
         fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="35dp" />
+        fresco:roundedCornerRadius="39dp" />
     <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="80dp"
         android:layout_height="80dp"

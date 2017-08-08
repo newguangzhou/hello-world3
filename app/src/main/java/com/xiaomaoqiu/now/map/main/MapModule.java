@@ -190,7 +190,7 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
 
 //float m = mBaiduMap.getMinZoomLevel();//3.0
 
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f-2);
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
 
         mBaiduMap.animateMapStatus(u);
 
@@ -198,7 +198,11 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
         if (MODE_FINDING_PET != mMode) {
             setCenter(postion, 300);
         }
-        mPhoneMarker.setPosition(postion);
+        try {
+            mPhoneMarker.setPosition(postion);
+        } catch (Exception e) {
+
+        }
 //        if (MODE_FINDED_PET >= mMode) {
         mPhoneMarker.setVisible(true);
 //        } else {
@@ -243,22 +247,25 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
         if (null == mPetMarker) {
             initPetMarker();
         }
-        LatLng sourceLatLng=new LatLng(latitude,longitude);
+        LatLng sourceLatLng = new LatLng(latitude, longitude);
 
-        LatLng desLatLng=converterLatLngFromBaidu(sourceLatLng);
+        LatLng desLatLng = converterLatLngFromBaidu(sourceLatLng);
 
+        try {
+            mPetMarker.setPosition(desLatLng);
+        }catch (Exception e){
 
-        mPetMarker.setPosition(desLatLng);
-        if(MODE_FINDED_PET >= mMode) {
+        }
+        if (MODE_FINDED_PET >= mMode) {
             mPetMarker.setVisible(true);
-        }else{
+        } else {
             mPetMarker.setVisible(false);
         }
-        MapLocationParser.queryLocationDesc(desLatLng,addressListener);
-        if(MODE_FINDING_PET ==  mMode){
+        MapLocationParser.queryLocationDesc(desLatLng, addressListener);
+        if (MODE_FINDING_PET == mMode) {
             setPetPosWithFindMode();
         }
-        setCenter(desLatLng,300);
+        setCenter(desLatLng, 300);
 
     }
 
@@ -435,7 +442,11 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
                     .position(position);
             mWalkStartMarker = (Marker) (mBaiduMap.addOverlay(options));
         } else {
-            mWalkStartMarker.setPosition(position);
+            try {
+                mWalkStartMarker.setPosition(position);
+            } catch (Exception e) {
+
+            }
         }
         mWalkStartMarker.setVisible(false);
         stopLocListener();
@@ -459,7 +470,11 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
                     .position(pos);
             mWalkStopMarker = (Marker) (mBaiduMap.addOverlay(options));
         } else {
-            mWalkStopMarker.setPosition(pos);
+            try {
+                mWalkStopMarker.setPosition(pos);
+            } catch (Exception e) {
+
+            }
         }
         mWalkStopMarker.setVisible(false);
         stopLocListener();
@@ -602,12 +617,8 @@ public class MapModule implements BDLocationListener, onTracingListener, onStart
     }
 
 
-
-
-
-
     //  // 将google地图、soso地图、aliyun地图、mapabc地图和amap地图// 所用坐标转换成百度坐标
-    public static LatLng converterLatLngFromBaidu(LatLng sourceLatLng ) {
+    public static LatLng converterLatLngFromBaidu(LatLng sourceLatLng) {
         CoordinateConverter converter = new CoordinateConverter();
         converter.from(CoordinateConverter.CoordType.COMMON);
 // sourceLatLng待转换坐标
