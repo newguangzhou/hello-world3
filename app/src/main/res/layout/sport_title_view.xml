@@ -17,8 +17,8 @@
         android:text="今日睡眠"/>
     <ImageView
         android:id="@+id/sleep_level_low"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/sport_level_low_icon"/>
@@ -35,8 +35,8 @@
 
     <ImageView
         android:id="@+id/sleep_level_high"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/sleep_level_low_text"
         android:layout_marginRight="15dp"
