@@ -56,7 +56,7 @@ import retrofit2.Response;
 public class PetFragment extends BaseFragment implements View.OnClickListener {
 
 
-    MaterialDesignPtrFrameLayout ptr_refresh;
+//    MaterialDesignPtrFrameLayout ptr_refresh;
 
     CircleProgressBar prog;
     TextView tvSportDone;
@@ -80,7 +80,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.main_tab_health, container, false);
-        ptr_refresh = (MaterialDesignPtrFrameLayout) rootView.findViewById(R.id.ptr_refresh);
+//        ptr_refresh = (MaterialDesignPtrFrameLayout) rootView.findViewById(R.id.ptr_refresh);
         prog = (CircleProgressBar) rootView.findViewById(R.id.prog_target_done_percentage);
         tvSportDone = (TextView) rootView.findViewById(R.id.tv_sport_done);
         tvSportTarget = (TextView) rootView.findViewById(R.id.tv_sport_target);
@@ -95,15 +95,15 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.btn_go_home).setOnClickListener(this);
         rootView.findViewById(R.id.btn_sleep).setOnClickListener(this);
 
-        /**
-         * 下拉刷新
-         */
-        ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                PetInfoInstance.getInstance().getPetInfo();
-            }
-        });
+//        /**
+//         * 下拉刷新
+//         */
+//        ptr_refresh.setPtrHandler(new PtrDefaultHandler() {
+//            @Override
+//            public void onRefreshBegin(PtrFrameLayout frame) {
+//                PetInfoInstance.getInstance().getPetInfo();
+//            }
+//        });
 
         initProgress();
         switch (PetInfoInstance.getInstance().PET_MODE) {
@@ -150,7 +150,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     public void getActivityInfo(EventManage.notifyPetInfoChange event) {
         initProgress();
         PetInfoInstance.getInstance().getPetStatus();
-        ptr_refresh.refreshComplete();
+//        ptr_refresh.refreshComplete();
         sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
         tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
@@ -435,7 +435,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                             public void onSuccess(Response<BaseBean> response, BaseBean message) {
 
                                 initProgress();
-                                ptr_refresh.refreshComplete();
+//                                ptr_refresh.refreshComplete();
                                 sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
                                 tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                                 ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),

@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ptr_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        cube_ptr:ptr_duration_to_close="300"
-        cube_ptr:ptr_duration_to_close_header="2000"
-        cube_ptr:ptr_keep_header_when_refresh="true"
-        cube_ptr:ptr_pull_to_fresh="false"
-        cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-        cube_ptr:ptr_resistance="1.7">
+    <!--<com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/ptr_refresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--cube_ptr:ptr_duration_to_close="300"-->
+        <!--cube_ptr:ptr_duration_to_close_header="2000"-->
+        <!--cube_ptr:ptr_keep_header_when_refresh="true"-->
+        <!--cube_ptr:ptr_pull_to_fresh="false"-->
+        <!--cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"-->
+        <!--cube_ptr:ptr_resistance="1.7">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,8 +95,8 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="52dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/playing_dog" />
 
                     <TextView
@@ -104,12 +104,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8.5dp"
-                        android:background="@drawable/tab_health_text_border"
                         android:maxLines="1"
                         android:paddingBottom="10dp"
                         android:paddingTop="2dp"
                         android:text="@string/pet_sport_done"
-                        android:textColor="@color/total_color_1"
+                        android:textColor="@color/total_color_7"
                         android:textSize="20sp" />
 
                     <TextView
@@ -117,7 +116,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/tab_health_text_border"
                         android:maxLines="1"
                         android:paddingBottom="10dp"
                         android:paddingTop="2dp"
@@ -156,15 +154,15 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="52dp"
+                            android:layout_height="40dp"
                             android:src="@drawable/tab_health_rest" />
 
                         <TextView
                             android:id="@+id/tv_sleep_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14.5dp"
+                            android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="今日休息"
                             android:textColor="@color/total_color_7"
@@ -186,14 +184,14 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="52dp"
+                            android:layout_height="40dp"
                             android:src="@drawable/tab_health_health" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14.5dp"
+                            android:layout_marginTop="10dp"
                             android:text="运动指数"
                             android:textColor="@color/total_color_7"
                             android:textSize="16sp" />
@@ -227,14 +225,14 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="52dp"
+                                android:layout_height="40dp"
                                 android:src="@drawable/tab_health_sport" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="14.5dp"
+                                android:layout_marginTop="10dp"
                                 android:text="去运动"
                                 android:textColor="@color/total_color_7"
                                 android:textSize="16sp" />
@@ -280,15 +278,15 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="52dp"
+                            android:layout_height="40dp"
                             android:src="@drawable/tab_health_search" />
 
                         <TextView
                             android:id="@+id/tv_findpet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14.5dp"
+                            android:layout_marginTop="10dp"
                             android:text="紧急搜寻"
                             android:textColor="@color/total_color_7"
                             android:textSize="16sp" />
@@ -306,7 +304,7 @@
             </LinearLayout>
 
         </LinearLayout>
-    </com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>
+    <!--</com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout>-->
 
     <!--<com.xiaomaoqiu.old.ui.mainPages.pageHealth.health.HealthGoSportView-->
     <!--android:id="@+id/tab_health_gosportview"-->

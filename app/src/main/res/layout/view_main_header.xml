@@ -10,8 +10,8 @@
     >
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv_header"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:scaleType="fitXY"
@@ -24,7 +24,7 @@
 
         fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="25dp" />
+        fresco:roundedCornerRadius="29dp" />
     <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="60dp"
         android:layout_height="60dp"

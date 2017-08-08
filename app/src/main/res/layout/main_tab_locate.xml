@@ -93,16 +93,16 @@
 
         <ImageView
             android:id="@+id/btn_phone_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:src="@drawable/btn_location_phone_selector" />
 
         <ImageView
             android:id="@+id/btn_pet_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_above="@id/btn_phone_center"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="30dp"
@@ -111,8 +111,8 @@
 
         <ImageView
             android:id="@+id/btn_find_pet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="10dp"
@@ -122,8 +122,8 @@
 
         <ImageView
             android:id="@+id/btn_playing_pet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
