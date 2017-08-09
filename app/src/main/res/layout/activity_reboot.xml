@@ -129,11 +129,33 @@
         android:layout_marginTop="20dp"
         >
 
-        <CheckBox
-            android:id="@+id/cb_usebook"
+        <!--<CheckBox-->
+            <!--android:id="@+id/cb_usebook"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:checked="false" />-->
+        <FrameLayout
+            android:id="@+id/fl_click"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false" />
+            android:padding="10dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"
+                android:layout_gravity="center"
+                />
+            <ImageView
+                android:id="@+id/iv_ischecked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_yes"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
+        </FrameLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

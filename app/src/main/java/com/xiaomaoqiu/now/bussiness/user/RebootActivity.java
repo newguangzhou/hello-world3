@@ -34,10 +34,13 @@ public class RebootActivity extends BaseActivity implements LogoutView {
     TextView btn_reboot;
     View btn_go_back;
 
-    CheckBox cb_usebook;
+//    CheckBox cb_usebook;
     View tv_userbook;
+    View fl_click;
+    View iv_ischecked;
 
     LoginPresenter loginPresenter;
+    boolean isCheckd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,8 @@ public class RebootActivity extends BaseActivity implements LogoutView {
 
             @Override
             public void onClick(View v) {
-                boolean isCheckd=cb_usebook.isChecked();
+//                boolean isCheckd=cb_usebook.isChecked();
+                isCheckd=iv_ischecked.isShown();
                 if(!isCheckd){
                     ToastUtil.showTost("请阅读并同意《用户协议与隐私政策》");
                     return;
@@ -70,7 +74,23 @@ public class RebootActivity extends BaseActivity implements LogoutView {
                 UserInstance.getInstance().agreePolicy();
             }
         });
-        cb_usebook= (CheckBox) findViewById(R.id.cb_usebook);
+//        cb_usebook= (CheckBox) findViewById(R.id.cb_usebook);
+        fl_click=findViewById(R.id.fl_click);
+        fl_click.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (isCheckd){
+                    iv_ischecked.setVisibility(View.GONE);
+                    isCheckd=false;
+                }else{
+                    isCheckd=true;
+                    iv_ischecked.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+        iv_ischecked=findViewById(R.id.iv_ischecked);
         tv_userbook=findViewById(R.id.tv_userbook);
         tv_userbook.setOnClickListener(new View.OnClickListener(){
 
@@ -83,6 +103,8 @@ public class RebootActivity extends BaseActivity implements LogoutView {
             }
         });
 
+        isCheckd=false;
+        iv_ischecked.setVisibility(View.GONE);
         EventBus.getDefault().register(this);
         loginPresenter = new LoginPresenter(this);
     }
