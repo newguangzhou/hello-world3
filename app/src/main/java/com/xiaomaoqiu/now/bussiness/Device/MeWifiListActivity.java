@@ -2,10 +2,12 @@ package com.xiaomaoqiu.now.bussiness.Device;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
@@ -232,6 +234,13 @@ public class MeWifiListActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        ImageView imageView = (ImageView) findViewById(R.id.imageView9);
+        AnimationDrawable spinner = (AnimationDrawable) imageView.getBackground();
+        assert spinner != null;
+        spinner.start();
     }
 
 

@@ -72,7 +72,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     void initView() {
-        setTitle(getResources().getString(R.string.login));
+//        setTitle(getResources().getString(R.string.login));
 
         setContentView(R.layout.activity_login);
 
