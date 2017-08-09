@@ -26,6 +26,7 @@ import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
+import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout;
@@ -381,6 +382,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     public void onClick(View v) {
                         AsynImgDialog.startSalary = sportDone;
                         AsynImgDialog.startTime = (new Date()).getTime();
+                        SPUtil.putSportStartTime(AsynImgDialog.startTime);
                         ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                             @Override
                             public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -457,6 +459,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                                 AsynImgDialog.stopSalary = sportDone;
                                                 AsynImgDialog.stopTime = (new Date()).getTime();
                                                 if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0) {
+                                                    AsynImgDialog.startTime=SPUtil.getSportStartTime();
                                                     long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
                                                     double salary=(AsynImgDialog.stopSalary - AsynImgDialog.startSalary);
                                                     String salaryText2= df.format(salary);

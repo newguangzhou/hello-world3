@@ -70,6 +70,12 @@ public class SPUtil {
     public static final String SPORT_TARGET="sport_target";
 
 
+    //运动开始时间
+    public static final String SPORT_START_TIME="sport_start_time";
+    //运动结束时间
+    public static final String SPORT_STOP_TIME="sport_stop_time";
+
+
 
     //设备电量级别
     public static final String BATTERY_LEVEL = "battery_level";
@@ -448,6 +454,14 @@ public class SPUtil {
     }
     public static void putPET_MODE(int value){
         putInt(PET_MODE,value);
+    }
+
+
+    public static long getSportStartTime(){
+        return getLong(SPORT_START_TIME,0);
+    }
+    public static void putSportStartTime(long sport_start_time){
+        putLong(SPORT_START_TIME,sport_start_time);
     }
 
     /**
