@@ -57,7 +57,7 @@ public class InputDialog extends BaseActivity {
 
     }
 
-    private void changeValue(){
+    public void changeValue(){
         EditText editText = (EditText) findViewById(R.id.edit_value);
         String name=editText.getText().toString();
         if(TextUtils.isEmpty(name)){
