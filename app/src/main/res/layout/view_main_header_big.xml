@@ -32,7 +32,7 @@
         android:layout_gravity="center"
         android:scaleType="fitXY"
         fresco:actualImageScaleType="focusCrop"
-        fresco:placeholderImage="@drawable/header_circle"
+        fresco:placeholderImage="@drawable/circle_big"
         fresco:placeholderImageScaleType="fitCenter"
         ></com.facebook.drawee.view.SimpleDraweeView>
 

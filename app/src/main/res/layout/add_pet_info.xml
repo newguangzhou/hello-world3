@@ -104,22 +104,24 @@
                     android:layout_marginTop="115dp"
                     android:src="@drawable/petinfo_pointer_right" />
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/img_pet_avatar"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="43dp"
-                    android:gravity="center"
-                    android:scaleType="fitXY"
-                    fresco:actualImageScaleType="focusCrop"
-                    fresco:fadeDuration="300"
-                    fresco:failureImage="@drawable/header_default_big"
-                    fresco:failureImageScaleType="centerInside"
-                    fresco:placeholderImage="@drawable/header_default_big"
-                    fresco:placeholderImageScaleType="fitCenter"
-                    fresco:roundedCornerRadius="75dp" />
+                <!--<com.facebook.drawee.view.SimpleDraweeView-->
+                    <!--android:id="@+id/img_pet_avatar"-->
+                    <!--android:layout_width="150dp"-->
+                    <!--android:layout_height="150dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginTop="43dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--fresco:actualImageScaleType="focusCrop"-->
+                    <!--fresco:fadeDuration="300"-->
+                    <!--fresco:failureImage="@drawable/header_default_big"-->
+                    <!--fresco:failureImageScaleType="centerInside"-->
+                    <!--fresco:placeholderImage="@drawable/header_default_big"-->
+                    <!--fresco:placeholderImageScaleType="fitCenter"-->
+                    <!--fresco:roundedCornerRadius="75dp" />-->
+                <include
+                    layout="@layout/view_main_header_big"/>
             </RelativeLayout>
 
             <LinearLayout

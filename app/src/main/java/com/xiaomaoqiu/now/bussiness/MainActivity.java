@@ -207,30 +207,88 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         if ("".equals(name)) {
             name = "宠物";
         }
-        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_COMMON) {
-        DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
-                new View.OnClickListener() {
+        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_COMMON) {
+            DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
+                    new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
+                        @Override
+                        public void onClick(View v) {
 
+                        }
+                    },
+                    new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            showFragment(1);
+                        }
+                    },
+                    new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
+                                MapInstance.getInstance().startFindPet();
+                                MapInstance.getInstance().openTime = 1;
+                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
+                                    @Override
+                                    public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                        HttpCode ret = HttpCode.valueOf(message.status);
+                                        switch (ret) {
+                                            case EC_SUCCESS:
+                                                if (DeviceInfoInstance.getInstance().online != true) {
+                                                    DeviceInfoInstance.getInstance().online = true;
+                                                    EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                                }
+                                                PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                                EventBus.getDefault().post(new EventManage.petModeChanged());
+                                                PetInfoInstance.getInstance().getPetLocation();
+                                                showFragment(1);
+                                                break;
+                                            case EC_OFFLINE:
+                                                DeviceInfoInstance.getInstance().online = false;
+                                                EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                                break;
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                                    }
+                                });
+
+                            } else {
+                                showFragment(1);
+                            }
+
+                        }
                     }
-                },
-                new View.OnClickListener() {
+            );
+        }
+    }
 
-                    @Override
-                    public void onClick(View v) {
-                        showFragment(1);
-                    }
-                },
-                new View.OnClickListener() {
+    //todo 小米推送
+    //宠物到家了
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void PetAtHome(PushEventManage.petAtHome event) {
+        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
+            DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
-                            MapInstance.getInstance().startFindPet();
-                            MapInstance.getInstance().openTime = 1;
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
+                        @Override
+                        public void onClick(View v) {
+                            showFragment(1);
+                            PetInfoInstance.getInstance().getPetLocation();
+
+                        }
+                    },
+                    new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);
@@ -240,17 +298,14 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                                 DeviceInfoInstance.getInstance().online = true;
                                                 EventBus.getDefault().post(new PushEventManage.deviceOnline());
                                             }
-                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
-                                            PetInfoInstance.getInstance().getPetLocation();
-                                            showFragment(1);
                                             break;
                                         case EC_OFFLINE:
                                             DeviceInfoInstance.getInstance().online = false;
                                             EventBus.getDefault().post(new EventManage.DeviceOffline());
                                             break;
                                     }
-
                                 }
 
                                 @Override
@@ -259,64 +314,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                 }
                             });
 
-                        } else {
-                            showFragment(1);
                         }
-
                     }
-                }
-        );
-        }
-    }
-
-    //todo 小米推送
-    //宠物到家了
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
-    public void PetAtHome(PushEventManage.petAtHome event) {
-        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
-        DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        showFragment(1);
-                        PetInfoInstance.getInstance().getPetLocation();
-
-                    }
-                },
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
-                            @Override
-                            public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                                HttpCode ret = HttpCode.valueOf(message.status);
-                                switch (ret) {
-                                    case EC_SUCCESS:
-                                        if(DeviceInfoInstance.getInstance().online!=true) {
-                                            DeviceInfoInstance.getInstance().online = true;
-                                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
-                                        }
-                                        PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                                        EventBus.getDefault().post(new EventManage.petModeChanged());
-                                        break;
-                                    case EC_OFFLINE:
-                                        DeviceInfoInstance.getInstance().online=false;
-                                        EventBus.getDefault().post(new EventManage.DeviceOffline());
-                                        break;
-                                }
-                            }
-
-                            @Override
-                            public void onFail(Call<PetStatusBean> call, Throwable t) {
-
-                            }
-                        });
-
-                    }
-                }
-        );
+            );
         }
 
     }
@@ -374,6 +374,26 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             });
             sportThread.start();
         }
+        //每分钟调用一次
+        getLocationWithOneMinute = true;
+        if (locationThread == null) {
+            locationThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            Thread.sleep(60000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        if (getLocationWithOneMinute && DeviceInfoInstance.getInstance().online) {
+                            PetInfoInstance.getInstance().getPetLocation();
+                        }
+                    }
+                }
+            });
+            locationThread.start();
+        }
     }
 
     private void initView() {
@@ -403,7 +423,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     ToastUtil.showTost("您的设备尚未开机！");
                     return;
                 }
-                if(DeviceInfoInstance.getInstance().battery_level>1.0f){
+                if (DeviceInfoInstance.getInstance().battery_level > 1.0f) {
                     PetInfoInstance.getInstance().getPetLocation();
                 }
                 batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
@@ -445,7 +465,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 }
                 transaction.show(mPetFragment).commit();
                 mHealthTabIcon.setSelected(true);
-                getLocationWithOneMinute = false;
+//                getLocationWithOneMinute = false;
                 select_index = 0;
                 break;
             case 1:
@@ -454,26 +474,26 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     mLocateFragment = new LocateFragment();
                     transaction.add(R.id.fragment_container, mLocateFragment, LocateFragment.class.getName());
                 }
-                getLocationWithOneMinute = true;
+//                getLocationWithOneMinute = true;
                 select_index = 1;
-                if (locationThread == null) {
-                    locationThread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            while (true) {
-                                try {
-                                    Thread.sleep(60000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                if (getLocationWithOneMinute&&DeviceInfoInstance.getInstance().online) {
-                                    PetInfoInstance.getInstance().getPetLocation();
-                                }
-                            }
-                        }
-                    });
-                    locationThread.start();
-                }
+//                if (locationThread == null) {
+//                    locationThread = new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            while (true) {
+//                                try {
+//                                    Thread.sleep(60000);
+//                                } catch (InterruptedException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                if (getLocationWithOneMinute&&DeviceInfoInstance.getInstance().online) {
+//                                    PetInfoInstance.getInstance().getPetLocation();
+//                                }
+//                            }
+//                        }
+//                    });
+//                    locationThread.start();
+//                }
 
                 transaction
                         .show(mLocateFragment).commit();
@@ -485,7 +505,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     mMeFragment = new MeFrament();
                     transaction.add(R.id.fragment_container, mMeFragment, MeFrament.class.getName());
                 }
-                getLocationWithOneMinute = false;
+//                getLocationWithOneMinute = false;
                 select_index = 2;
                 transaction
                         .show(mMeFragment).commit();

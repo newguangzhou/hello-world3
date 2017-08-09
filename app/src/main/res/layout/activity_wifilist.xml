@@ -76,7 +76,7 @@
             android:drawableRight="@drawable/wifi_loading"
             android:gravity="left"
             android:textColor="@color/common_body"
-            android:text="请选择宠物常住地chang常用wifi……"
+            android:text="请选择宠物常住地常用wifi……"
             android:textSize="@dimen/common_dialog_message" />
         <com.xiaomaoqiu.now.view.refresh.MaterialDesignPtrFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
             android:id="@+id/ptr_refresh"

@@ -28,6 +28,8 @@ import org.greenrobot.eventbus.EventBus;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static com.xiaomaoqiu.now.bussiness.MainActivity.getLocationWithOneMinute;
+
 /**
  * Created by long on 17/4/9.
  */
@@ -294,6 +296,7 @@ public class DeviceInfoInstance {
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
+                    getLocationWithOneMinute=false;
                     clearDeviceInfo();
                     //清空宠物信息
                     PetInfoInstance.getInstance().clearPetInfo();
