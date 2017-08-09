@@ -346,7 +346,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         } else {
 
             MapInstance.getInstance().openTime=1;
-            String content = getContext().getResources().getString(R.string.map_is_findpet);
+            String content = getContext().getResources().getString(R.string.open_find_tip);
 
             DialogToast.createDialogWithTwoButton(getContext(), content, new View.OnClickListener() {
                 @Override

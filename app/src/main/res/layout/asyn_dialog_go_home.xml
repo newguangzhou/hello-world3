@@ -54,7 +54,7 @@
     android:textSize="16sp"
     android:textColor="@color/total_color_1"
     android:gravity="center"
-    android:text="@string/go_sport_backtext"
+    android:text="@string/tohome_message"
     android:layout_marginBottom="36dp"/>
 
 <LinearLayout
@@ -68,13 +68,13 @@
         android:layout_height="wrap_content"
         style="@style/go_spoert_back_bt_style"
         android:layout_marginRight="25dp"
-        android:text="已安全到家"/>
+        android:text="@string/tohome_tab1"/>
     <Button
         android:id="@+id/asyn_dialog_quit"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         style="@style/go_spoert_back_bt_style"
-        android:text="还没到家哟"/>
+        android:text="@string/tohome_tab2"/>
 </LinearLayout>
 </LinearLayout>

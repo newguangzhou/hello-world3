@@ -16,7 +16,7 @@ android:background="@drawable/shape_dialog_background">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="电量提醒"
+            android:text="@string/dialog_battery_title"
             android:textColor="@color/common_title"
             android:textSize="@dimen/common_dialog_title" />
         <View
@@ -32,7 +32,7 @@ android:background="@drawable/shape_dialog_background">
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="低电量，请尽快充电"
+            android:text="@string/dialog_battery_low_message"
             android:textColor="@color/common_body"
             android:textSize="@dimen/common_dialog_message" />
 

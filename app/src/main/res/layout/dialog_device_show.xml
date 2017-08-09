@@ -17,7 +17,7 @@ android:background="@drawable/shape_dialog_background">
         android:layout_height="wrap_content"
         android:textSize="27sp"
         android:textColor="@color/common_title"
-        android:text="绑定提示" />
+        android:text="@string/dialog_device_online_title" />
     <View
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@ android:background="@drawable/shape_dialog_background">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="您的设备未开机\n请先确认设备开机状态以完成绑定流程。"
+        android:text="@string/dialog_device_online_message"
         android:textSize="16sp"
         android:gravity="center"
         android:textColor="@color/common_body"/>
@@ -72,9 +72,9 @@ android:background="@drawable/shape_dialog_background">
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="9dp"
-            android:text="如何开机"
-            android:textColor="@color/common_button_word"
             android:singleLine="true"
+            android:text="@string/dialog_device_online_tab2"
+            android:textColor="@color/common_button_word"
             android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

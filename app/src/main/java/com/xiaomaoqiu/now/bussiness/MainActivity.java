@@ -114,7 +114,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     //位置很近
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void distanceCloseiInGPS(EventManage.distanceClose event) {
-        DialogUtil.showPetFindedDialog(this, "已找到宠物?", "已经找到", "继续搜寻", new View.OnClickListener() {
+        DialogUtil.showPetFindedDialog(this, getString(R.string.dialog_isfinded_title), getString(R.string.dialog_isfinded_tab1), getString(R.string.dialog_isfinded_tab2), new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -208,7 +208,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             name = "宠物";
         }
         if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_COMMON) {
-            DialogUtil.showSafeCautionDialog(this, "安全提醒", "小毛球监测到" + name + "安全存在风险", "确认安全", "查看位置", "紧急搜索",
+            DialogUtil.showSafeCautionDialog(this,getString(R.string.dialog_outhome_title), "小毛球监测到" + name + "安全存在风险", getString(R.string.dialog_outhome_tab1), getString(R.string.dialog_outhome_tab2),getString(R.string.dialog_outhome_tab3),
                     new View.OnClickListener() {
 
                         @Override
@@ -274,7 +274,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void PetAtHome(PushEventManage.petAtHome event) {
         if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
-            DialogUtil.showPetAtHomeDialog(this, "请确认宠物是否回到家？", "NO", "YES", new View.OnClickListener() {
+            DialogUtil.showPetAtHomeDialog(this, getString(R.string.dialog_inhome_title),  getString(R.string.dialog_inhome_tab1), getString(R.string.dialog_inhome_tab2), new View.OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
@@ -533,7 +533,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(this, "确定要退出小毛球吗？", "取消", "确定", new View.OnClickListener() {
+        DialogUtil.showTwoButtonDialog(this, getString(R.string.dialog_exit_app_title), getString(R.string.dialog_exit_app_tab1), getString(R.string.dialog_exit_app_tab2), new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {

@@ -65,7 +65,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("健康报告");
+        setTitle(getString(R.string.health_title));
         setContentView(R.layout.activity_new_health_index);
         initView();
         initData();

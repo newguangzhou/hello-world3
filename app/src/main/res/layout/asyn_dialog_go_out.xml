@@ -60,7 +60,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="23dp"
-            android:text="@string/go_sport_ggspeak_text"
+            android:text="@string/tosport_dog_chat"
             android:textColor="@color/total_color_7"
             android:textSize="16sp" />
 
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="25dp"
                     android:layout_weight="1"
-                    android:text="嗯！出去玩啦！" />
+                    android:text="@string/tosport_tab1" />
 
                 <Button
                     android:id="@+id/asyn_dialog_quit"
@@ -104,7 +104,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="暂不出门哟~" />
+                    android:text="@string/tosport_tab2" />
             </LinearLayout>
 
             <View
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/go_sport_sport_btask_info"
+                android:text="@string/tosport_tip1"
                 android:textColor="@color/total_color_7"
                 android:textSize="16sp" />
 
@@ -133,7 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/go_sport_sport_btquit_info"
+                android:text="@string/tosport_tip2"
                 android:textColor="@color/total_color_7"
                 android:textSize="16sp" />
 

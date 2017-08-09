@@ -112,7 +112,7 @@ public class DialogUtil {
             TextView tv_title = (TextView) offlineDialog.findViewById(R.id.tv_title);
             tv_title.setText(title);
             TextView tv_old_account = (TextView) offlineDialog.findViewById(R.id.tv_old_account);
-            tv_old_account.setText("设备处于离线状态，请开机");
+            tv_old_account.setText(context.getString(R.string.dialog_offline_message));
             Button already_bind_confirm = (Button) offlineDialog.findViewById(R.id.already_bind_confirm);
             already_bind_confirm.setOnClickListener(new View.OnClickListener() {
                 @Override

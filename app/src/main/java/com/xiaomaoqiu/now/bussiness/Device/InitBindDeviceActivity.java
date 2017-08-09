@@ -74,7 +74,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
             @Override
             public void onClick(View v) {
-                DialogUtil.showTwoButtonDialog(InitBindDeviceActivity.this,"确认退出登录？","取消","确认",new View.OnClickListener(){
+                DialogUtil.showTwoButtonDialog(InitBindDeviceActivity.this,getString(R.string.dialog_exit_login_title),getString(R.string.dialog_exit_login_tab1),getString(R.string.dialog_exit_login_tab2),new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {
@@ -279,7 +279,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(this,"确定要退出小毛球吗？","取消","确定",new View.OnClickListener(){
+        DialogUtil.showTwoButtonDialog(this,getString(R.string.dialog_exit_app_title),getString(R.string.dialog_exit_app_tab1),getString(R.string.dialog_exit_login_tab2),new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {

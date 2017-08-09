@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="left"
-            android:text="@string/map_walkpet_notice"
+            android:text="@string/locate_sport_message"
             android:textColor="@color/total_color_7"
             android:textSize="14sp"
             android:visibility="gone" />

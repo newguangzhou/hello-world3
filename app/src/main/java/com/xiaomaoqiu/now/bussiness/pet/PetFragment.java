@@ -110,12 +110,12 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             case Constants.PET_STATUS_COMMON:
                 rootView.findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
                 rootView.findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
-                tv_findpet.setText("紧急搜寻");
+                tv_findpet.setText(getString(R.string.to_find));
                 break;
             case Constants.PET_STATUS_WALK:
                 rootView.findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
                 rootView.findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
-                tv_findpet.setText("紧急搜寻");
+                tv_findpet.setText(getString(R.string.to_find));
                 break;
             case Constants.PET_STATUS_FIND:
                 tv_findpet.setText("关闭搜寻");
@@ -248,12 +248,12 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             case Constants.PET_STATUS_COMMON:
                 getView().findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.INVISIBLE);
-                tv_findpet.setText("紧急搜寻");
+                tv_findpet.setText(getString(R.string.to_find));
                 break;
             case Constants.PET_STATUS_WALK:
                 getView().findViewById(R.id.btn_sport).setVisibility(View.INVISIBLE);
                 getView().findViewById(R.id.btn_go_home).setVisibility(View.VISIBLE);
-                tv_findpet.setText("紧急搜寻");
+                tv_findpet.setText(getString(R.string.to_find));
                 break;
             case Constants.PET_STATUS_FIND:
                 tv_findpet.setText("关闭搜寻");
@@ -288,7 +288,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            tv_findpet.setText("紧急搜寻");
+                            tv_findpet.setText(getString(R.string.to_find));
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -321,7 +321,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     });
                 } else {
                     MapInstance.getInstance().openTime = 1;
-                    String conent = getContext().getResources().getString(R.string.map_is_findpet);
+                    String conent = getContext().getResources().getString(R.string.open_find_tip);
                     DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

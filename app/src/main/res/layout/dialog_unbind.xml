@@ -13,7 +13,7 @@ android:background="@drawable/shape_dialog_background">
     android:gravity="center"
     android:textColor="@color/total_color_1"
     android:textSize="16sp"
-    android:text="注意：为防止用户隐私泄露，解除绑定将清除账户的宠物信息及历史数据"
+    android:text="@string/dialog_unbind_message"
     android:layout_gravity="center_horizontal"
     android:id="@+id/two_button_message"/>
 <LinearLayout
@@ -32,7 +32,7 @@ android:background="@drawable/shape_dialog_background">
         android:textColor="@color/white"
         android:background="@drawable/btn_background_color_3"
         android:padding="10dp"
-        android:text="确定解绑"/>
+        android:text="@string/dialog_unbind_tab1"/>
     <View
         android:layout_width="24dp"
         android:layout_height="0dp"/>
@@ -46,7 +46,7 @@ android:background="@drawable/shape_dialog_background">
         android:textSize="16sp"
         android:textColor="@color/white"
         android:background="@drawable/btn_background_color_3"
-        android:text="取消解绑"/>
+        android:text="@string/dialog_unbind_tab2"/>
 </LinearLayout>
 
 

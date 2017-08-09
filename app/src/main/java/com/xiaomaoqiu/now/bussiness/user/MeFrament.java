@@ -51,7 +51,7 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogUtil.showTwoButtonDialog(getActivity(),"确认退出登录？","取消","确定",new View.OnClickListener(){
+                DialogUtil.showTwoButtonDialog(getActivity(),getString(R.string.dialog_exit_login_title),getString(R.string.dialog_exit_login_tab1),getString(R.string.dialog_exit_login_tab2),new View.OnClickListener(){
 
                     @Override
                     public void onClick(View v) {

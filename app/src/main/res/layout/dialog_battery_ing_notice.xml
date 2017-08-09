@@ -20,7 +20,7 @@
             android:singleLine="true"
             android:text="电池正在充电中……"
             android:textColor="@color/common_title"
-            android:textSize="@dimen/common_dialog_title" />
+            android:textSize="25dp" />
 
     </LinearLayout>
 
