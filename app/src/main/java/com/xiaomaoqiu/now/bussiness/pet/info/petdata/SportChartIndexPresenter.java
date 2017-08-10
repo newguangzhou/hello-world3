@@ -112,12 +112,7 @@ public class SportChartIndexPresenter {
 
         ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(days);
 
-        if (isMonth) {
-            Date curDate = AppDialog.DateUtil.getFirstDataOfCurMonth();
-            String secondText = curDate.getMonth() + "月";
-            int secondIndex = curDate.getDate();
-            callback.onSuccessGetSecAxis(secondText, secondIndex, days);
-        }
+
         int startIndex = 0;
         boolean flag = false;
         for (int i = startIndex; i < days; i += intrval) {
@@ -133,6 +128,12 @@ public class SportChartIndexPresenter {
         }
         if(!flag){
             return;
+        }
+        if (isMonth) {
+            Date curDate = AppDialog.DateUtil.getFirstDataOfCurMonth();
+            String secondText = curDate.getMonth() + "月";
+            int secondIndex = curDate.getDate();
+            callback.onSuccessGetSecAxis(secondText, secondIndex, days);
         }
         callback.onSuccessGetAxis(axisLabels, isMonth);
         if (isMonth) {

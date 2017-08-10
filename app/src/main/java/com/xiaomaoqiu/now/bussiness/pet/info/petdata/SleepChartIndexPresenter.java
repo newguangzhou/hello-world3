@@ -149,7 +149,6 @@ public class SleepChartIndexPresenter {
         Date curDate = AppDialog.DateUtil.getFirstDataOfCurMonth();
         String secondText = curDate.getMonth() + "月";
         int secondIndex = curDate.getDate();
-        callback.onSuccessGetSecAxis(secondText, secondIndex, MONTH_LENGTH);
         int startIndex = 0;
         boolean flag = false;
         for (int i = startIndex; i < MONTH_LENGTH; i += intrval) {
@@ -168,6 +167,7 @@ public class SleepChartIndexPresenter {
         if(!flag){
             return;
         }
+        callback.onSuccessGetSecAxis(secondText, secondIndex, MONTH_LENGTH);
         callback.onSuccessGetAxis(axisLabels, true);
         callback.onSuccessGetMonthDataSet(deepList, lightList);
     }
