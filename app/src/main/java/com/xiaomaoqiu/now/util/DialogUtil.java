@@ -424,7 +424,7 @@ public class DialogUtil {
 
         }
         petisFindedDialog = null;
-        petisFindedDialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        petisFindedDialog = new AppDialog(context, R.layout.dialog_intelligent_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petisFindedDialog.getWindow().setWindowAnimations(0);
         TextView two_button_message = (TextView) petisFindedDialog.findViewById(R.id.two_button_message);
         Button two_button_cancle = (Button) petisFindedDialog.findViewById(R.id.two_button_cancle);
@@ -529,7 +529,7 @@ public class DialogUtil {
             }
         }
         petAtHomeDialog = null;
-        petAtHomeDialog = new AppDialog(context, R.layout.dialog_two_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        petAtHomeDialog = new AppDialog(context, R.layout.dialog_intelligent_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petAtHomeDialog.getWindow().setWindowAnimations(0);
         TextView two_button_message = (TextView) petAtHomeDialog.findViewById(R.id.two_button_message);
         Button two_button_cancle = (Button) petAtHomeDialog.findViewById(R.id.two_button_cancle);
