@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="绑定设备"
+            android:text="绑定追踪器"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -76,7 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请确认设备已开机（点击查看追踪器使用帮助）"
+                    android:text="请确认追踪器已开机（点击查看追踪器使用帮助）"
                     android:textColor="#fff" />
 
 

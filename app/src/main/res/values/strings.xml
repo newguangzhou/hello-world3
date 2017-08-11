@@ -73,40 +73,40 @@
     <string name="dialog_isfinded_tab1">已经找到</string>
     <string name="dialog_isfinded_tab2">继续搜寻</string>
     <!--4.解除绑定-->
-    <string name="dialog_unbind_message">注意：为防止用户隐私泄露，解除绑定将清除账户的宠物信息及历史数据</string>
-    <string name="dialog_unbind_tab1">确定解绑</string>
-    <string name="dialog_unbind_tab2">取消解绑</string>
+    <string name="dialog_unbind_message">注意：为防止用户隐私泄露，解除绑定将清除账号的宠物信息及历史数据</string>
+    <string name="dialog_unbind_tab1">是</string>
+    <string name="dialog_unbind_tab2">否</string>
     <!--5.确认设备是否开机-->
     <string name="dialog_device_online_title">绑定提示</string>
-    <string name="dialog_device_online_message">您的设备未开机\n请先确认设备开机状态以完成绑定流程。</string>
+    <string name="dialog_device_online_message">您的追踪器未开机\n请先确认追踪器已开机以完成绑定流程。</string>
     <string name="dialog_device_online_tab1">已开机</string>
     <string name="dialog_device_online_tab2">如何开机</string>
     <!--6.异地登录-->
     <string name="dialog_otherlogin_title">帐号异常</string>
-    <string name="dialog_otherlogin_message">您的小毛球账号已在其他设备登录。请尽量避免与其他用户共用帐号。（如密码泄露，请及时找回）</string>
+    <string name="dialog_otherlogin_message">您的小毛球账号已在其他追踪器登录。请尽量避免与其他用户共用帐号。</string>
     <string name="dialog_otherlogin_tab1">确认</string>
     <!--7.设备已绑定-->
     <string name="dialog_already_bind_title">绑定提示</string>
-    <string name="dialog_already_bind_message">设备已被账号 138*******1234 绑定
+    <string name="dialog_already_bind_message">追踪器已被账号 138*******1234 绑定
         无法绑定到当前帐号</string>
-    <string name="dialog_already_bind_tab1">确认</string>
+    <string name="dialog_already_bind_tab1">是</string>
     <!--8.电量提醒-->
     <string name="dialog_battery_title">电量提醒</string>
     <string name="dialog_battery_low_message">低电量，请尽快充电</string>
     <string name="dialog_battery_superlow_message">超低电量，请尽快充电</string>
     <!--9.设备离线-->
-    <string name="dialog_offline_message">设备处于离线状态，请开机</string>
+    <string name="dialog_offline_message">追踪器处于离线状态，请开机</string>
 
 
     <!--退出登录-->
-    <string name="dialog_exit_login_title">确定退出登录？</string>
-    <string name="dialog_exit_login_tab1">取消</string>
-    <string name="dialog_exit_login_tab2">确定</string>
+    <string name="dialog_exit_login_title">请确定是否退出登录？</string>
+    <string name="dialog_exit_login_tab1">否</string>
+    <string name="dialog_exit_login_tab2">是</string>
 
     <!--退出app-->
     <string name="dialog_exit_app_title">确定要退出小毛球吗？</string>
-    <string name="dialog_exit_app_tab1">取消</string>
-    <string name="dialog_exit_app_tab2">确定</string>
+    <string name="dialog_exit_app_tab1">否</string>
+    <string name="dialog_exit_app_tab2">是</string>
 
 
 
@@ -155,8 +155,8 @@
     <string name="error_fav_shop">服务器掉链子，收藏失败,请稍后再试</string>
     <string name="error_data_not_ready">服务器掉链子，数据还没准备好</string>
     <string name="login_failed">登陆失败,错误码:%d</string>
-    <string name="btn_ok">确定</string>
-    <string name="btn_cancel">取消</string>
+    <string name="btn_ok">是</string>
+    <string name="btn_cancel">否</string>
     <string name="all">全部</string>
 
     <string name="pet_info">宠物信息</string>
@@ -210,7 +210,7 @@
     <string name="battery_notice_timeformat">(电量测量时间%s)</string>
     <string name="battery_notice_levelformat">剩余电量：%d</string>
     <!--绑定设备-->
-    <string name="bind_device">绑定设备</string>
+    <string name="bind_device">绑定追踪器</string>
     <string name="zxing">扫一扫</string>
     <string name="bind_device_sweep">扫一扫包装盒上的\nIMEI条形码</string>
     <string name="bind_device_sweep_code">点击扫一扫</string>

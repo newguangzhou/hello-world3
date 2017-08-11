@@ -110,7 +110,7 @@ public class MeWifiListActivity extends BaseActivity {
                             SPUtil.putHomeWifiSsid(wifi_ssid);
 //                            finish();
                             if(!DeviceInfoInstance.getInstance().online){
-                                ToastUtil.showTost("设备已离线，修改常住地功能暂时无法使用");
+                                ToastUtil.showTost("追踪器已离线，修改常住地功能暂时无法使用");
                                 finish();
                                 return;
                             }

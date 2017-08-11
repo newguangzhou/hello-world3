@@ -282,7 +282,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_locate:
                 if(!DeviceInfoInstance.getInstance().online){
-                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     return;
                 }
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
@@ -373,7 +373,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     return;
                 }
                 if(!DeviceInfoInstance.getInstance().online){
-                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     return;
                 }
 

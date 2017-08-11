@@ -62,7 +62,7 @@ public class DeviceActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (DeviceInfoInstance.getInstance().battery_level < 0) {
-                    ToastUtil.showTost("您的设备尚未开机！");
+                    ToastUtil.showTost("追踪器离线");
                     return;
                 }
                 batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
@@ -144,7 +144,7 @@ public class DeviceActivity extends BaseActivity {
         if (!TextUtils.isEmpty(bean.imei))
             tv.setText(bean.imei);
         else {
-            tv.setText("未绑定设备");
+            tv.setText("未绑定追踪器");
         }
 
         tv = (TextView) findViewById(R.id.tv_hardware_version);
@@ -156,7 +156,7 @@ public class DeviceActivity extends BaseActivity {
                 tv.setText(bean.firmware_version);
             }
         } else {
-            tv.setText("未绑定设备");
+            tv.setText("未绑定追踪器");
         }
 
 

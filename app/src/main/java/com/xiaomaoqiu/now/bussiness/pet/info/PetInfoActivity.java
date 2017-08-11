@@ -106,7 +106,7 @@ public class PetInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(!DeviceInfoInstance.getInstance().online){
-                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     return;
                 }
                 modifyWeight();
@@ -306,7 +306,7 @@ public class PetInfoActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!DeviceInfoInstance.getInstance().online){
-                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     chk_gender.setChecked(!isChecked);
                     return;
                 }

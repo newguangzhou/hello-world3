@@ -111,7 +111,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 if(DeviceInfoInstance.getInstance().online) {
                     petLocation.setText(textString);
                 }else{
-                    petLocation.setText(locationString+"(注意：设备目前已离线）");
+                    petLocation.setText(locationString+"(注意：追踪器目前已离线）");
                 }
             }
         });
@@ -229,7 +229,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_playing_pet:
                 if(!DeviceInfoInstance.getInstance().online){
-                    ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     return;
                 }
                 //去运动
@@ -295,7 +295,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
-        petLocation.setText(locationString+"(注意：设备目前已离线）");
+        petLocation.setText(locationString+"(注意：追踪器目前已离线）");
     }
 
     //todo 小米推送
@@ -310,7 +310,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
      */
     private void showFindpetDialog() {
         if(!DeviceInfoInstance.getInstance().online){
-            ToastUtil.showTost("设备已离线，此功能暂时无法使用");
+            ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
             return;
         }
         if (PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {

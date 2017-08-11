@@ -55,7 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:text="设备信息"
+            android:text="追踪器信息"
             android:paddingLeft="16dp"
             android:gravity="center_vertical"
             android:textColor="@color/total_color_1"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/hardware_text"
-                android:text="设备名称:"/>
+                android:text="追踪器名称:"/>
             <View android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
@@ -174,7 +174,7 @@
         android:paddingLeft="16dp"
         android:textSize="16sp"
         android:textColor="@color/total_color_1"
-        android:text="设备内置SIM卡信息"/>
+        android:text="追踪器内置SIM卡信息"/>
     <View android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/sep_line"/>

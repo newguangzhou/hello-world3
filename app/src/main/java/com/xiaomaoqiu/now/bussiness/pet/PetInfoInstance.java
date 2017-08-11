@@ -330,7 +330,7 @@ public class PetInfoInstance {
                         break;
                     case EC_OFFLINE:
                         DeviceInfoInstance.getInstance().online = false;
-                        ToastUtil.showTost("设备处于离线状态，请开机");
+                        ToastUtil.showTost("追踪器处于离线状态，请开机");
                         break;
                     default:
                         ToastUtil.showTost("更新失败");

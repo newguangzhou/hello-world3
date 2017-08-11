@@ -248,9 +248,9 @@ public class DialogUtil {
         final Dialog dialog = new AppDialog(context, R.layout.dialog_device_already_bind, -1, -2, 0, Gravity.CENTER);
         TextView tv_old_account = (TextView) dialog.findViewById(R.id.tv_old_account);
         if (oldaccount == null || "".equals(oldaccount) || "null".equals(oldaccount)) {
-            tv_old_account.setText("设备已被绑定");
+            tv_old_account.setText("追踪器已被绑定");
         } else {
-            tv_old_account.setText("设备已被账号 " + oldaccount + " 绑定\n" +
+            tv_old_account.setText("追踪器已被账号 " + oldaccount + " 绑定\n" +
                     "无法绑定到当前帐号");
         }
 
@@ -273,7 +273,7 @@ public class DialogUtil {
         final Dialog dialog = new AppDialog(context, R.layout.dialog_logout, -1, -2, 0, Gravity.CENTER);
         TextView tv_remote_login = (TextView) dialog.findViewById(R.id.tv_remote_login);
         if ((remoteTime != null) && (osName != null) && (!"".equals(remoteTime)) && !"".equals(osName)) {
-            tv_remote_login.setText(remoteTime + "\n" + "您的账户在另一台【" + osName + "】手机上登录");
+            tv_remote_login.setText(remoteTime + "\n" + "您的账号在另一台【" + osName + "】手机上登录");
         }
         Button logout_confirm = (Button) dialog.findViewById(R.id.logout_confirm);
         logout_confirm.setOnClickListener(new View.OnClickListener() {

@@ -426,7 +426,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 if (!DeviceInfoInstance.getInstance().online) {
-                    ToastUtil.showTost("您的设备尚未开机！");
+                    ToastUtil.showTost("追踪器离线");
                     return;
                 }
                 if (DeviceInfoInstance.getInstance().battery_level > 1.0f) {
