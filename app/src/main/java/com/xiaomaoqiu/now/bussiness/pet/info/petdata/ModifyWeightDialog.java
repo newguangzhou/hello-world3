@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.xiaomaoqiu.now.base.InputDialog;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.pet.R;
 
 public class ModifyWeightDialog extends InputDialog {
@@ -33,16 +34,16 @@ public class ModifyWeightDialog extends InputDialog {
         EditText editText = (EditText) findViewById(R.id.edit_value);
         String name=editText.getText().toString();
         if(TextUtils.isEmpty(name)){
-            showToast("输入不能为空，请输入！");
+            ToastUtil.showTost("输入不能为空，请输入！");
             return;
         }
         double temp=Double.valueOf(name);
         if(!(temp>0)){
-            showToast("体重要大于0");
+            ToastUtil.showTost("体重要大于0");
             return;
         }
         if(temp>200){
-            showToast("体重不能大于200");
+            ToastUtil.showTost("体重不能大于200");
             return;
         }
         //数据是使用Intent返回
