@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:gravity="center"
+        android:gravity="left"
         android:orientation="horizontal">
 
         <!--<com.xiaomaoqiu.old.widgets.CircleImageView-->
@@ -50,10 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/go_sport_top_dialog_back" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_dialog_background"
             android:paddingBottom="23dp"
@@ -62,6 +63,7 @@
             android:paddingTop="23dp"
             android:text="@string/tosport_dog_chat"
             android:textColor="@color/total_color_7"
+            android:layout_gravity="center_vertical"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -79,7 +81,7 @@
             android:layout_weight="1"
             android:background="@drawable/shape_dialog_background"
             android:orientation="vertical"
-            android:paddingBottom="39dp"
+            android:paddingBottom="37dp"
             android:paddingLeft="17.5dp"
             android:paddingRight="17.5dp"
             android:paddingTop="37dp">
@@ -115,6 +117,7 @@
                 android:background="@color/total_color_4" />
 
             <TextView
+                android:id="@+id/tv_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -127,6 +130,7 @@
                 android:layout_height="0.5dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
+                android:visibility="gone"
                 android:background="@color/total_color_4" />
 
             <TextView
@@ -135,6 +139,7 @@
                 android:gravity="center"
                 android:text="@string/tosport_tip2"
                 android:textColor="@color/total_color_7"
+                android:visibility="gone"
                 android:textSize="16sp" />
 
 

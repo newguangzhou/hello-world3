@@ -18,37 +18,53 @@ import com.xiaomaoqiu.pet.R;
 
 public class BatteryNoticeDialog extends Dialog {
 
-    private String mContent,mLevel="",mTime;
+    private String mContent, mLevel = "", mTime;
 
-    private TextView mContentText,mTimeText,mLevelText;
+    private TextView mContentText, mTimeText, mLevelText;
     private Button mButton;
 
 
-    public BatteryNoticeDialog(Context context, float level, String time, String content){
+    public BatteryNoticeDialog(Context context, float level, String time, String content) {
         super(context, R.style.MyDialogStyleTop);
-        this.mContent=content;
-        int intLevel= (int) (level*100);
-        this.mLevel=String.format(context.getResources().getString(R.string.battery_notice_levelformat), intLevel)+"%";
-        this.mTime=String.format(context.getResources().getString(R.string.battery_notice_timeformat), time);
+        this.mContent = content;
+        int intLevel = (int) (level * 100);
+//
+//        50%以上显示：电量充足，请放心使用
+//        25%-50%显示：请关注电量变化
+//        10-25%：电量低，请及时充电
+//        10%以下：马上面临自动关机，请火速充电
+        if (intLevel >= 50) {
+            this.mContent = "电量充足，请放心使用";
+        }else if(intLevel>=25){
+            this.mContent = "请关注电量变化";
+        }else if(intLevel>=10){
+            this.mContent = "电量低，请及时充电";
+        }else {
+            this.mContent = "马上面临自动关机，请火速充电";
+        }
+
+
+        this.mLevel = String.format(context.getResources().getString(R.string.battery_notice_levelformat), intLevel) + "%";
+        this.mTime = String.format(context.getResources().getString(R.string.battery_notice_timeformat), time);
         initView();
         setCanceledOnTouchOutside(true);
         show();
     }
 
 
-    private void initView(){
+    private void initView() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.dialog_battery_notice, null);
         setContentView(view);
         initParams();
 
-        mContentText=(TextView)findViewById(R.id.battery_notice_content);
+        mContentText = (TextView) findViewById(R.id.battery_notice_content);
         mContentText.setText(mContent);
-        mTimeText=(TextView)findViewById(R.id.battery_notice_gettime);
+        mTimeText = (TextView) findViewById(R.id.battery_notice_gettime);
         mTimeText.setText(mTime);
-        mLevelText=(TextView)findViewById(R.id.battery_notice_level);
+        mLevelText = (TextView) findViewById(R.id.battery_notice_level);
         mLevelText.setText(mLevel);
-        mButton=(Button)findViewById(R.id.battery_notice_bt);
+        mButton = (Button) findViewById(R.id.battery_notice_bt);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,14 +72,15 @@ public class BatteryNoticeDialog extends Dialog {
             }
         });
     }
-    private void initParams(){
+
+    private void initParams() {
         //获取到当前Activity的Window
         Window dialog_window = getWindow();
         //获取到LayoutParams
         WindowManager.LayoutParams dialog_window_attributes = dialog_window.getAttributes();
         //设置宽度
-        int margin=getContext().getResources().getDimensionPixelSize(R.dimen.dialog_service_margin)*2;
-        dialog_window_attributes.width= DensityUtil.getScreenWidth(getContext())-margin;
+        int margin = getContext().getResources().getDimensionPixelSize(R.dimen.dialog_service_margin) * 2;
+        dialog_window_attributes.width = DensityUtil.getScreenWidth(getContext()) - margin;
         dialog_window.setAttributes(dialog_window_attributes);
     }
 

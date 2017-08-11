@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.baidu.mapapi.map.Text;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.util.DensityUtil;
@@ -22,6 +24,7 @@ import com.xiaomaoqiu.pet.R;
 public class AsynImgDialog extends Dialog implements View.OnClickListener{
 
     private Button mOkBtn,mQuitBtn;
+    private TextView tv_message;
     public static SimpleDraweeView asynImg;
     private View.OnClickListener okClickListener,quitClickListner;
     private int innerpadding=0;
@@ -31,6 +34,8 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener{
     public static long startTime=0;
     public static long stopTime=0;
 
+    public  static String message;
+
 
     public static AsynImgDialog createGoSportDialig(Context context, View.OnClickListener okClickListener){
         String url="";
@@ -39,6 +44,7 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener{
 //            url=petInfo.getHeaderImg();
 //        }
         url= PetInfoInstance.getInstance().packBean.logo_url;
+        message=context.getString(R.string.tosport_tip1);
         return new AsynImgDialog(context,R.layout.asyn_dialog_go_out,okClickListener,null,url,true,0);
     }
 
@@ -50,6 +56,7 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener{
 //        }
         url= PetInfoInstance.getInstance().packBean.logo_url;
         int margin=context.getResources().getDimensionPixelSize(R.dimen.dialog_service_margin)*2;
+        message="亲爱的铲屎官，请确认"+PetInfoInstance.getInstance().getNick()+"跟您一块儿安全到家哦！";
         return new AsynImgDialog(context,R.layout.asyn_dialog_go_home,okClickListener,null,url,true,margin);
     }
 
@@ -72,6 +79,8 @@ public class AsynImgDialog extends Dialog implements View.OnClickListener{
         mOkBtn=(Button) findViewById(R.id.asyn_dialog_ok);
         mQuitBtn=(Button)findViewById(R.id.asyn_dialog_quit);
         asynImg= (SimpleDraweeView) findViewById(R.id.asyn_dialog_imgview);
+        tv_message= (TextView) findViewById(R.id.tv_message);
+        tv_message.setText(message);
         mOkBtn.setOnClickListener(this);
         mQuitBtn.setOnClickListener(this);
         if(!TextUtils.isEmpty(url)){

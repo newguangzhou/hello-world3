@@ -13,7 +13,7 @@
     <string name="sport_index">运动指数</string>
     <string name="sleep_index">今日休息</string>
     <string name="to_sport">去运动</string>
-    <string name="to_home">回家</string>
+    <string name="to_home">已回家</string>
 
     <string name="to_find">紧急搜寻</string>
     <string name="close_find">关闭搜寻</string>
@@ -31,26 +31,26 @@
 
 
     <!--切换运动模式-->
-    <string name="tosport_dog_chat">亲爱的铲屎官，你真的要带我出去玩吗？~^o^~</string>
+    <string name="tosport_dog_chat">去玩吗？</string>
     <string name="tosport_tab1">嗯！出去玩啦！</string>
-    <string name="tosport_tab2">暂不出门哟~</string>
-    <string name="tosport_tip1">带狗狗出门时，按下此按钮通知小毛球APP，可避免小毛球误判狗狗溜走哦！</string>
+    <string name="tosport_tab2">不！逗你玩儿！</string>
+    <string name="tosport_tip1">进入运动模式，将开启本次运动消耗统计，同时关闭小毛球智能提醒功能；运动结束后请及时切换以获得更准确的统计，同时小毛球将继续开启智能守护!</string>
     <string name="tosport_tip2">玩结束后回到家也请按下“回到家”按钮告知小毛球哦。</string>
 
     <!--切换默认模式-->
-    <string name="tohome_message">亲爱的铲屎官，请确认昂狗狗跟你一块儿安全回到家了哦！</string>
+    <string name="tohome_message">亲爱的铲屎官，请确认宠物跟您一块儿安全到家哦！</string>
     <string name="tohome_tab1">已安全到家</string>
     <string name="tohome_tab2">还没到家哟</string>
 
     <!--未同步-->
     <!--开启紧急搜索模式提示-->
-    <string name="open_find_tip">紧急搜寻模式将启动所有定位模块，小毛球追踪器的功耗将被开至最大。\n省电提示：找到狗狗后记得关闭紧急搜寻模式哦！</string>
+    <string name="open_find_tip">紧急搜寻模式将启动所有定位模块，追踪器的功耗将被开至最大。</string>
 
     <!--地图页，默认模式与紧急搜索模式下,底部地址栏-->
-    <string name="locate_common_message">旺财位置获取时间：2017-08-09 16：57：16</string>
+    <string name="locate_common_message">位置获取时间：2017-08-09 16：57：16</string>
 
     <!--地图页，运动模式下，底部地址栏-->
-    <string name="locate_sport_message">注意：当前在遛狗模式，若狗狗离开视线，请点击打开找狗模式定位狗狗精确位置。</string>
+    <string name="locate_sport_message">注意：当前为运动模式，若爱宠离开视线，请开启紧急搜寻！</string>
 
 
 
