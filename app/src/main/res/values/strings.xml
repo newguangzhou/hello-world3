@@ -15,8 +15,8 @@
     <string name="to_sport">去运动</string>
     <string name="to_home">回家</string>
 
-    <string name="to_find">紧急搜索</string>
-    <string name="close_find">关闭搜索</string>
+    <string name="to_find">紧急搜寻</string>
+    <string name="close_find">关闭搜寻</string>
 
 
 
@@ -62,12 +62,12 @@
     <string name="dialog_outhome_title">安全提醒</string>
     <string name="dialog_outhome_tab1">确认安全</string>
     <string name="dialog_outhome_tab2">查看位置</string>
-    <string name="dialog_outhome_tab3">紧急搜索</string>
+    <string name="dialog_outhome_tab3">紧急搜寻</string>
 
     <!--2.宠物到家-->
     <string name="dialog_inhome_title">请确认宠物是否回到家？</string>
-    <string name="dialog_inhome_tab1">NO</string>
-    <string name="dialog_inhome_tab2">YES</string>
+    <string name="dialog_inhome_tab1">否</string>
+    <string name="dialog_inhome_tab2">是</string>
     <!--3.位置很近，已经招到宠物-->
     <string name="dialog_isfinded_title">已找到宠物?</string>
     <string name="dialog_isfinded_tab1">已经找到</string>

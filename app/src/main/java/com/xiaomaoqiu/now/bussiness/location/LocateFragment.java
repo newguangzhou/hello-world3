@@ -98,11 +98,14 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onAddressparsed(String address) {
 //                String textString = address;
-                String textString = PetInfoInstance.getInstance().getNick()+"位置获取时间：";
+                String textString = "位置获取时间：";
                 if (PetInfoInstance.getInstance().location_time != 0) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String d = format.format(PetInfoInstance.getInstance().location_time * 1000);//unix时间戳转化为java的毫秒，然后转成时间
                     textString += d;
+                }
+                if(PetInfoInstance.getInstance().getAtHome()){
+                    textString+="\n"+PetInfoInstance.getInstance().getNick()+"乖乖在家哦~";
                 }
                 locationString=textString;
                 if(DeviceInfoInstance.getInstance().online) {

@@ -19,7 +19,7 @@ public class ModifyWeightDialog extends InputDialog {
     @Override
     protected CharSequence getInputLabel()
     {
-        return "请输入狗狗体重(kg)";
+        return "请输入宠物体重(kg)";
     }
 
     @Override
@@ -39,6 +39,10 @@ public class ModifyWeightDialog extends InputDialog {
         double temp=Double.valueOf(name);
         if(!(temp>0)){
             showToast("体重要大于0");
+            return;
+        }
+        if(temp>200){
+            showToast("体重不能大于200");
             return;
         }
         //数据是使用Intent返回

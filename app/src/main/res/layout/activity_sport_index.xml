@@ -99,7 +99,7 @@
             android:layout_marginBottom="7dp"
             app:first_text="实际"
             app:second_text="目标"
-            app:titletext="7天运动" />
+            app:titletext="7日运动" />
 
         <View
             android:layout_width="match_parent"
@@ -150,7 +150,7 @@
             android:layout_marginBottom="7dp"
             app:first_text="实际"
             app:second_text="目标"
-            app:titletext="30天运动" />
+            app:titletext="30日运动" />
 
         <View
             android:layout_width="match_parent"

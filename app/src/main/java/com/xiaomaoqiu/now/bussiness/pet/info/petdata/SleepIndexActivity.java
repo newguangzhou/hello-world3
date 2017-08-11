@@ -36,7 +36,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.sleep_index));
+        setTitle("休息统计");
         setContentView(R.layout.activity_health_sleep);
         initView();
         initData();

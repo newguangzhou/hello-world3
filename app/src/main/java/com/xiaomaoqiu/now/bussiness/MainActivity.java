@@ -69,6 +69,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     View include_header;
 
+
+    TextView tv_title;
     SimpleDraweeView sdv_header;
     BatteryView batteryView;//右上角的电池
 
@@ -114,6 +116,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     //位置很近
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void distanceCloseiInGPS(EventManage.distanceClose event) {
+        String dialog_isfinded_title="找到"+PetInfoInstance.getInstance().getNick()+"了吗？";
         DialogUtil.showPetFindedDialog(this, getString(R.string.dialog_isfinded_title), getString(R.string.dialog_isfinded_tab1), getString(R.string.dialog_isfinded_tab2), new View.OnClickListener() {
 
                     @Override
@@ -356,7 +359,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
         showDeadlineDialog();
 
-        //每三分钟调用一次
+        //每1分钟调用一次
 
         if (sportThread == null) {
             sportThread = new Thread(new Runnable() {
@@ -402,6 +405,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         mMeTabIcon = (ImageView) findViewById(R.id.main_tab_me);
         include_header = findViewById(R.id.include_header);
         sdv_header = (SimpleDraweeView) findViewById(R.id.sdv_header);
+
+        tv_title= (TextView) findViewById(R.id.tv_title);
+
         batteryView = (BatteryView) findViewById(R.id.batteryView);
         batteryView.setActivity(this);
         sdv_header.setOnClickListener(new View.OnClickListener() {
@@ -458,6 +464,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         hideAllTabIcon(transaction);
         switch (index) {
             case 0:
+//                setTitle("小毛球");
+                tv_title.setText("小毛球");
                 include_header.setVisibility(View.VISIBLE);
                 if (mPetFragment == null) {
                     mPetFragment = new PetFragment();
@@ -469,6 +477,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 select_index = 0;
                 break;
             case 1:
+//                setTitle("小毛球");
+                tv_title.setText("小毛球");
                 include_header.setVisibility(View.INVISIBLE);
                 if (mLocateFragment == null) {
                     mLocateFragment = new LocateFragment();
@@ -500,6 +510,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 mLocateTabIcon.setSelected(true);
                 break;
             case 2:
+//                setTitle("我");
+                tv_title.setText("我");
                 include_header.setVisibility(View.INVISIBLE);
                 if (mMeFragment == null) {
                     mMeFragment = new MeFrament();

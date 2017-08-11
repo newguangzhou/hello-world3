@@ -48,7 +48,7 @@ public class DeviceActivity extends BaseActivity {
             }
         });
         tv_sim_deadline= (TextView) findViewById(R.id.tv_sim_deadline);
-        tv_sim_deadline.setText("当前sim卡已经充值到"+DeviceInfoInstance.getInstance().packBean.sim_deadline);
+
         showMessageOnUI();
         findViewById(R.id.tv_unbind).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,8 +158,16 @@ public class DeviceActivity extends BaseActivity {
         } else {
             tv.setText("未绑定设备");
         }
+
+
+        String deadline="";
+        try{
+            deadline=((DeviceInfoInstance.getInstance().packBean.sim_deadline).split(" "))[0];
+        }catch (Exception e){
+            deadline=   DeviceInfoInstance.getInstance().packBean.sim_deadline;
+        }
         if(DeviceInfoInstance.getInstance().packBean.sim_deadline!=null&&!"".equals(DeviceInfoInstance.getInstance().packBean.sim_deadline)){
-            tv_sim_deadline.setText("当前sim卡已经充值到"+DeviceInfoInstance.getInstance().packBean.sim_deadline);
+            tv_sim_deadline.setText("当前sim卡已经充值到"+deadline);
         }else{
             tv_sim_deadline.setText("请注意sim卡充值");
         }

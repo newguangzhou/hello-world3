@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:text="安全提醒" />
+        android:text="小毛球智能提醒" />
     <View
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -88,7 +88,7 @@
             android:paddingBottom="10dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="紧急搜索"
+            android:text="紧急搜寻"
             android:textColor="@color/common_button_word"
             android:textSize="@dimen/common_dialog_button" />
     </LinearLayout>

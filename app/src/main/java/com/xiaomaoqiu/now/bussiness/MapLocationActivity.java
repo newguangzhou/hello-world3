@@ -135,7 +135,7 @@ public class MapLocationActivity extends Activity {
                             SPUtil.putHOME_LONGITUDE(longitude + "");
                             EventBus.getDefault().post(event);
                         }
-                        ToastUtil.showTost("地址保存成功");
+//                        ToastUtil.showTost("地址保存成功");
                         finish();
 
                     }
