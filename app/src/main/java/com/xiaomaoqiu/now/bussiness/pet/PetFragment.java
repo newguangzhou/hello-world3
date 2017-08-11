@@ -238,6 +238,18 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     //目标运动量发生变化
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void sportTargetDataChange(EventManage.targetSportData event) {
+        double tmp=Double.valueOf(PetInfoInstance.getInstance().packBean.target_energy);
+        if(!(tmp>0)){
+            return;
+        }
+        percentage =sportDone*100/tmp;
+        if (percentage > 100) {
+            prog.setMax(200);
+        } else if (percentage <= 100) {
+            prog.setMax(100);
+        }
+        prog.setProgress((int) percentage);
+
         sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
         tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
     }

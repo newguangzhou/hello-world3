@@ -59,9 +59,13 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     MapView mapView;
     private ImageView mFindPetView, mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
+
     private TextView petLocation, walkpetNoticeView;
-    private TextView tv_location_state;
+    private View tv_offline;//设备已离线
+    private TextView tv_location_state;//当前位置信号不佳
+    private TextView tv_at_home;//%%（宠物名）乖乖在家哦！
     private LinearLayout petLocContainer;
+
 
     private String locationString;
 
@@ -86,11 +90,14 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mWalkPetView.setOnClickListener(this);
 
         mapPetAvaterView = new MapPetAvaterView(root.getContext());
+        tv_offline=root.findViewById(R.id.tv_offline);
         petLocation = (TextView) root.findViewById(R.id.tv_location);
         petLocation.setText("");
         petLocContainer = (LinearLayout) root.findViewById(R.id.locate_addr_conotainer);
         walkpetNoticeView = (TextView) root.findViewById(R.id.locate_walk_notice);
         tv_location_state= (TextView) root.findViewById(R.id.tv_location_state);
+        tv_at_home= (TextView) root.findViewById(R.id.tv_at_home);
+        tv_at_home.setText(PetInfoInstance.getInstance().getNick()+"乖乖在家哦~");
     }
 
     void initListener() {
@@ -104,15 +111,16 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     String d = format.format(PetInfoInstance.getInstance().location_time * 1000);//unix时间戳转化为java的毫秒，然后转成时间
                     textString += d;
                 }
-                if(PetInfoInstance.getInstance().getAtHome()){
-                    textString+="\n"+PetInfoInstance.getInstance().getNick()+"乖乖在家哦~";
-                }
-                locationString=textString;
-                if(DeviceInfoInstance.getInstance().online) {
-                    petLocation.setText(textString);
-                }else{
-                    petLocation.setText(locationString+"(注意：追踪器目前已离线）");
-                }
+                petLocation.setText(textString);
+//                if(PetInfoInstance.getInstance().getAtHome()){
+//                    textString+="\n"+PetInfoInstance.getInstance().getNick()+"乖乖在家哦~";
+//                }
+//                locationString=textString;
+//                if(DeviceInfoInstance.getInstance().online) {
+//                    petLocation.setText(textString);
+//                }else{
+//                    petLocation.setText(locationString+"(注意：追踪器目前已离线）");
+//                }
             }
         });
     }
@@ -128,7 +136,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
-                tv_location_state.setVisibility(View.GONE);
+                updateDownSecondText();
+//                tv_location_state.setVisibility(View.GONE);
                 break;
             case Constants.PET_STATUS_WALK:
                 mWalkPetView.setVisibility(View.VISIBLE);
@@ -136,18 +145,19 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.VISIBLE);
                 petLocContainer.setVisibility(View.GONE);
-                tv_location_state.setVisibility(View.GONE);
+//                tv_location_state.setVisibility(View.GONE);
                 break;
             case Constants.PET_STATUS_FIND:
                 mWalkPetView.setVisibility(View.GONE);
                 mFindPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
-                if(PetInfoInstance.getInstance().device_locator_status==2){
-                    tv_location_state.setVisibility(View.VISIBLE);
-                }else{
-                    tv_location_state.setVisibility(View.GONE);
-                }
+                updateDownSecondText();
+//                if(PetInfoInstance.getInstance().device_locator_status==2){
+//                    tv_location_state.setVisibility(View.VISIBLE);
+//                }else{
+//                    tv_location_state.setVisibility(View.GONE);
+//                }
 
                 break;
             default:
@@ -156,7 +166,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
-                tv_location_state.setVisibility(View.GONE);
+                updateDownSecondText();
+//                tv_location_state.setVisibility(View.GONE);
                 break;
         }
 
@@ -173,6 +184,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
+                updateDownSecondText();
                 break;
             case Constants.PET_STATUS_WALK:
                 mWalkPetView.setVisibility(View.VISIBLE);
@@ -186,11 +198,12 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mFindPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
-                if(PetInfoInstance.getInstance().device_locator_status==2){
-                    tv_location_state.setVisibility(View.VISIBLE);
-                }else{
-                    tv_location_state.setVisibility(View.GONE);
-                }
+                updateDownSecondText();
+//                if(PetInfoInstance.getInstance().device_locator_status==2){
+//                    tv_location_state.setVisibility(View.VISIBLE);
+//                }else{
+//                    tv_location_state.setVisibility(View.GONE);
+//                }
                 break;
             default:
                 mWalkPetView.setVisibility(View.VISIBLE);
@@ -198,6 +211,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
+                updateDownSecondText();
                 break;
         }
         MapInstance.getInstance().refreshMap();
@@ -267,15 +281,16 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             MapInstance.getInstance().setPetLocation(PetInfoInstance.getInstance().latitude, PetInfoInstance.getInstance().longitude, PetInfoInstance.getInstance().radius);
         }
 
-        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
-            if (PetInfoInstance.getInstance().device_locator_status == 2) {
-                tv_location_state.setVisibility(View.VISIBLE);
-            } else {
-                tv_location_state.setVisibility(View.GONE);
-            }
-        }else {
-            tv_location_state.setVisibility(View.GONE);
-        }
+//        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
+//            if (PetInfoInstance.getInstance().device_locator_status == 2) {
+//                tv_location_state.setVisibility(View.VISIBLE);
+//            } else {
+//                tv_location_state.setVisibility(View.GONE);
+//            }
+//        }else {
+//            tv_location_state.setVisibility(View.GONE);
+//        }
+        updateDownSecondText();
 
     }
 
@@ -295,14 +310,51 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //设备离线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
-        petLocation.setText(locationString+"(注意：追踪器目前已离线）");
+        updateDownSecondText();
+////        petLocation.setText(locationString+"(注意：追踪器目前已离线）");
+//        if(DeviceInfoInstance.getInstance().online){
+//            tv_offline.setVisibility(View.GONE);//设备已离线
+//            if(PetInfoInstance.getInstance().device_locator_status==2&&PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
+//                tv_location_state.setVisibility(View.VISIBLE);
+//                tv_at_home.setVisibility(View.GONE);
+//            }else{
+//                tv_location_state.setVisibility(View.GONE);
+//                tv_at_home.setVisibility(View.VISIBLE);
+//            }
+//        }else{
+//            tv_offline.setVisibility(View.VISIBLE);//设备已离线
+//            tv_location_state.setVisibility(View.GONE);//当前位置信号不佳
+//            tv_at_home.setVisibility(View.GONE);//%%（宠物名）乖乖在家哦！
+//        }
+
     }
 
     //todo 小米推送
     //设备重新在线
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void receivePushDeviceOnline(PushEventManage.deviceOnline event) {
-        petLocation.setText(locationString);
+//        petLocation.setText(locationString);
+        updateDownSecondText();
+    }
+
+    //刷新下面地址栏第二个text
+    void updateDownSecondText(){
+        if(DeviceInfoInstance.getInstance().online){
+            tv_offline.setVisibility(View.GONE);//设备已离线
+            if(PetInfoInstance.getInstance().device_locator_status==2&&PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
+                tv_location_state.setVisibility(View.VISIBLE);
+                tv_at_home.setVisibility(View.GONE);
+            }else{
+                tv_location_state.setVisibility(View.GONE);
+                if(PetInfoInstance.getInstance().getAtHome()) {
+                    tv_at_home.setVisibility(View.VISIBLE);
+                }
+            }
+        }else{
+            tv_offline.setVisibility(View.VISIBLE);//设备已离线
+            tv_location_state.setVisibility(View.GONE);//当前位置信号不佳
+            tv_at_home.setVisibility(View.GONE);//%%（宠物名）乖乖在家哦！
+        }
     }
 
     /**

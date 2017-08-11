@@ -128,7 +128,7 @@ public class DeviceActivity extends BaseActivity {
         if (!TextUtils.isEmpty(bean.device_name))
             tv.setText(bean.device_name);
         else {
-            tv.setText("小毛球1号");
+            tv.setText("小毛球宠物追踪器");
         }
         if(!TextUtils.isEmpty(bean.hardware_version)){
             String[] a=bean.hardware_version.split("_");

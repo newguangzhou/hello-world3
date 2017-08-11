@@ -296,7 +296,7 @@ public class MapInstance implements BDLocationListener {
                 }
                 break;
             case Constants.PET_STATUS_COMMON:
-                initPhoneMarker();
+//                initPhoneMarker();
                 if (mFindPolyline != null) {
                     mFindPolyline.remove();
                 }
