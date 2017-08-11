@@ -371,7 +371,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
+                        if(getLocationWithOneMinute) {
+                            EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
+                        }
                     }
                 }
             });

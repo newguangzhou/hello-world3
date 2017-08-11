@@ -80,7 +80,7 @@
                 android:background="@drawable/edit_login_back"
                 android:hint="输入验证码"
                 android:inputType="number"
-                android:maxEms="6"
+                android:maxLength="6"
                 android:maxLines="1"
                 android:paddingLeft="10dp"
                 android:textColor="@color/total_color_7"

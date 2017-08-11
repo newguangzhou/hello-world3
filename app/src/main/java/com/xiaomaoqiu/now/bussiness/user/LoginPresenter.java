@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
 import com.xiaomaoqiu.now.bussiness.bean.MessageBean;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
@@ -143,6 +144,7 @@ public class LoginPresenter {
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {//退出登陆成功
+                    MainActivity.getLocationWithOneMinute=false;
                     XMPushManagerInstance.getInstance().stop();
                     UserInstance.getInstance().clearLoginInfo();
                     PetInfoInstance.getInstance().clearPetInfo();

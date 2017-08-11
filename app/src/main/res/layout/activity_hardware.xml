@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 style="@style/hardware_text"
                 android:id="@+id/tv_device_name"
-                android:text="小毛球1号"/>
+                android:text="小毛球宠物追踪器"/>
         </LinearLayout>
         <View android:layout_width="match_parent"
             android:layout_height="0.5dp"
