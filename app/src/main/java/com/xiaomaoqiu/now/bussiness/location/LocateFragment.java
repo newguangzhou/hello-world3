@@ -348,6 +348,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 tv_location_state.setVisibility(View.GONE);
                 if(PetInfoInstance.getInstance().getAtHome()) {
                     tv_at_home.setVisibility(View.VISIBLE);
+                }else {
+                    tv_at_home.setVisibility(View.GONE);
                 }
             }
         }else{
