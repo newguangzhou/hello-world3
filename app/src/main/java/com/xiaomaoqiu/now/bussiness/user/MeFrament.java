@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
+import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.ContactServiceDialog;
 import com.xiaomaoqiu.pet.R;
 
@@ -113,6 +115,10 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_me_home_wifi).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!DeviceInfoInstance.getInstance().online){
+                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
+                    return;
+                }
                 Intent intent=new Intent();
                 intent.setClass(getActivity(), MeWifiListActivity.class);
                 startActivity(intent);
