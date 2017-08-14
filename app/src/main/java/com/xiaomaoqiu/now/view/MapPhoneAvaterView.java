@@ -32,7 +32,7 @@ public class MapPhoneAvaterView extends LinearLayout {
     public MapPhoneAvaterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View rootView = LayoutInflater.from(context).inflate(R.layout.map_phone_locview, this, true);
-        avater = (SimpleDraweeView) rootView.findViewById(R.id.map_phone_loca_avater);
+//        avater = (SimpleDraweeView) rootView.findViewById(R.id.map_phone_loca_avater);
     }
 
 

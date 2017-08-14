@@ -1,6 +1,7 @@
 package com.xiaomaoqiu.now.map.main;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -25,11 +26,14 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.view.MapPetAtHomeView;
 import com.xiaomaoqiu.now.view.MapPetCommonNotAtHomeView;
+import com.xiaomaoqiu.now.view.MapPetRotateView;
 import com.xiaomaoqiu.now.view.MapPhoneAvaterView;
 import com.xiaomaoqiu.now.view.MapPetAvaterView;
+import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -77,7 +81,7 @@ public class MapInstance implements BDLocationListener {
     public MapPetAtHomeView petAtHomeView;
     public MapPetCommonNotAtHomeView petCommonNotAtHomeView;
     private Marker mPetMarker, mPhoneMarker;//狗狗位置和手机位置
-    private Polyline mFindPolyline;//找狗连线
+    private Marker mFindPolyline;//找狗连线
 
     private BaiduMap mBaiduMap;
 
@@ -88,14 +92,23 @@ public class MapInstance implements BDLocationListener {
 
     BitmapDescriptor petbitmapDescriptor;
     BitmapDescriptor phonebitmapDescriptor;
+    BitmapDescriptor ancherBitmapDescriptor;
 
     public void init(MapView mapView) {
         this.mapView = mapView;
         initMap();
         petAtHomeView = new MapPetAtHomeView(PetAppLike.mcontext);
-        petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        try {
+            petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        }catch (Exception e){
+
+        }
         petCommonNotAtHomeView = new MapPetCommonNotAtHomeView(PetAppLike.mcontext);
-        petCommonNotAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        try {
+            petCommonNotAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        }catch (Exception e){
+
+        }
         if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_WALK) {
             if (PetInfoInstance.getInstance().getAtHome()) {
                 petbitmapDescriptor = BitmapDescriptorFactory.fromView(petAtHomeView);
@@ -107,6 +120,7 @@ public class MapInstance implements BDLocationListener {
         }
 
         phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
+        ancherBitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPetRotateView(PetAppLike.mcontext));
         initPhoneMarker();
         setPhonePos();
     }
@@ -189,15 +203,20 @@ public class MapInstance implements BDLocationListener {
     }
 
 
+
+
+    LatLng commonphoneLatlng;
     /**
      * 初始化手机位置地图标识
      */
     private void initPhoneMarker() {
+        commonphoneLatlng=  new LatLng(phoneLatitude, phoneLongitude);
         phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
         OverlayOptions options = new MarkerOptions()
+                .anchor(0.5f,0.5f)
                 .icon(phonebitmapDescriptor)
                 .draggable(true)
-                .position(new LatLng(phoneLatitude, phoneLongitude))
+                .position(commonphoneLatlng)
                 .visible(true);
         mPhoneMarker = (Marker) (mBaiduMap.addOverlay(options));
 
@@ -266,15 +285,23 @@ public class MapInstance implements BDLocationListener {
                         .visible(true);
                 mPetMarker = (Marker) (mBaiduMap.addOverlay(findoptions));
 
-                ArrayList<LatLng> linepoints = new ArrayList<>();
-                linepoints.add(mPhoneMarker.getPosition());
-                linepoints.add(mPetMarker.getPosition());
-                PolylineOptions options = new PolylineOptions()
-                        .points(linepoints)
-                        .color(Color.rgb(250, 90, 95))
-                        .width(7)
+//                ArrayList<LatLng> linepoints = new ArrayList<>();
+//                linepoints.add(mPhoneMarker.getPosition());
+//                linepoints.add(mPetMarker.getPosition());
+//                PolylineOptions options = new PolylineOptions()
+//                        .points(linepoints)
+//                        .color(Color.rgb(250, 90, 95))
+//                        .width(7)
+//                        .visible(true);
+                OverlayOptions ancheroptions = new MarkerOptions()
+                        .icon(ancherBitmapDescriptor)
+                        .draggable(true)
+                        .anchor(0.5f,0.5f)
+                        .position(commonphoneLatlng)
                         .visible(true);
-                mFindPolyline = (Polyline) (mBaiduMap.addOverlay(options));
+                mFindPolyline = (Marker) (mBaiduMap.addOverlay(ancheroptions));
+                mFindPolyline.setRotate(calculateRotate());
+//                mFindPolyline.setRotate(180);
                 break;
             case Constants.PET_STATUS_WALK:
 
@@ -542,6 +569,32 @@ public class MapInstance implements BDLocationListener {
                 thread.start();
             }
         }
+    }
+
+
+    //计算旋转角度
+    float calculateRotate() {
+        double lon = petLongitude-phoneLongitude;
+        double lat =petLatitude- phoneLatitude;
+//        Log.e("longtianlove-location",lon+"*"+lat+"*");
+//        Log.e("longtianlove-location",phoneLongitude+"*"+petLongitude);
+//        Log.e("longtianlove-location",phoneLatitude+"*"+petLatitude);
+//        Log.e("longtianlove-anchor-pet",mPetMarker.getRotate()+"");
+//        Log.e("longtianlove-anchor-pho",mPhoneMarker.getRotate()+"");
+        double rawRotate = Math.atan(lat/lon);
+        float result = (float) (rawRotate/Math.PI*180);
+
+        if(petLongitude>=phoneLongitude&&petLatitude>=phoneLatitude){//第一象限
+            result=180+result;
+        }else if(petLongitude>=phoneLongitude&&petLatitude<phoneLatitude){//第四象限
+            result=180+result;
+        }else if(petLongitude<phoneLongitude&&petLatitude>=phoneLatitude){//第二象限
+            result=360+result;
+        }else if(petLongitude<phoneLongitude&&petLatitude>phoneLatitude){//第三象限
+            result=result;
+        }
+        Log.e("longtianlove-rotate",result+"***"+rawRotate);
+        return result;
     }
 
 }
