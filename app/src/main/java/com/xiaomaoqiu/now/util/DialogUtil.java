@@ -470,6 +470,14 @@ public class DialogUtil {
                         } catch (Exception e) {
 
                         }
+                        if (petisFindedDialog != null && petisFindedDialog.isShowing()) {
+                            try {
+                                petisFindedDialog.dismiss();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
                         if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
@@ -510,6 +518,8 @@ public class DialogUtil {
 
     }
 
+
+    public static Thread petathome_noresponsethread;
     //宠物是否到家  petAtHomeDialog
     public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
@@ -564,6 +574,64 @@ public class DialogUtil {
         petAtHomeDialog.setCancelable(false);
         petAtHomeDialog.setCanceledOnTouchOutside(false);
         petAtHomeDialog.show();
+
+
+        if (petathome_noresponsethread == null) {
+            try {
+                petathome_noresponsethread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(600000);
+                        } catch (Exception e) {
+
+                        }
+                        if (petisFindedDialog != null && petisFindedDialog.isShowing()) {
+                            try {
+                                petisFindedDialog.dismiss();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                                @Override
+                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    switch (ret) {
+                                        case EC_SUCCESS:
+                                            if (DeviceInfoInstance.getInstance().online != true) {
+                                                DeviceInfoInstance.getInstance().online = true;
+                                                EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                            }
+                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                            EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            break;
+                                        case EC_OFFLINE:
+                                            DeviceInfoInstance.getInstance().online = false;
+                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                            break;
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFail(Call<PetStatusBean> call, Throwable t) {
+
+                                }
+                            });
+                        }
+
+                        petathome_noresponsethread = null;
+                    }
+                });
+            } catch (Exception e) {
+
+            }
+            petathome_noresponsethread.start();
+        }
+
 
     }
 
