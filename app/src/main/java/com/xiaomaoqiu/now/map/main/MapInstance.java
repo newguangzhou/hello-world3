@@ -19,6 +19,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
+import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.baidu.mapapi.utils.DistanceUtil;
@@ -150,6 +151,8 @@ public class MapInstance implements BDLocationListener {
 //        mBaiduMap.setIndoorEnable(true);//设置是否显示室内图, 默认室内图不显示
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
+        UiSettings  UiSettings =mBaiduMap.getUiSettings();
+        UiSettings.setRotateGesturesEnabled(false);//屏蔽旋转
 
         initLocation();
     }

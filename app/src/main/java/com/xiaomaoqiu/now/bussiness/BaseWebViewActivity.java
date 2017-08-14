@@ -64,10 +64,10 @@ public class BaseWebViewActivity extends BaseActivity {
     //设置回退
     //覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv_net.canGoBack()) {
-            wv_net.goBack(); //goBack()表示返回WebView的上一页面
-            return true;
-        }
+//        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv_net.canGoBack()) {
+//            wv_net.goBack(); //goBack()表示返回WebView的上一页面
+//            return true;
+//        }
         finish();//结束退出程序
         return false;
     }
