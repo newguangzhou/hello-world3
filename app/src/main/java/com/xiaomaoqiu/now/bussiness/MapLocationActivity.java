@@ -237,6 +237,7 @@ public class MapLocationActivity extends Activity {
         mBaiduMap = mMapView.getMap();
         UiSettings UiSettings =mBaiduMap.getUiSettings();
         UiSettings.setRotateGesturesEnabled(true);//打开旋转
+        UiSettings.setScrollGesturesEnabled(true);
         mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
@@ -251,7 +252,6 @@ public class MapLocationActivity extends Activity {
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 iv_location.startAnimation(translateAnimation);
-
                 projection = mBaiduMap.getProjection();
                 final LatLng position = projection.fromScreenLocation(mapStatus.targetScreen);
                 Log.e("longtianlove", "地图" + mapStatus.targetScreen.x + ":" + mapStatus.targetScreen.y);
@@ -394,6 +394,7 @@ public class MapLocationActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mBaiduMap.clear();
         EventBus.getDefault().unregister(this);
     }
 }

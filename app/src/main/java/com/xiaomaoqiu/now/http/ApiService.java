@@ -241,7 +241,8 @@ public interface ApiService {
             @Query("uid") long uid,
             @Query("token") String token,
             @Query("wifi_ssid") String wifi_ssid,
-            @Query("wifi_bssid") String wifi_bssid
+            @Query("wifi_bssid") String wifi_bssid,
+            @Query("common_wifi") String common_wifi
 
     );
 

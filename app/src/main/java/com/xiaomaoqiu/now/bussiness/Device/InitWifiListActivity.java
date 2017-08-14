@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
@@ -94,10 +95,17 @@ public class InitWifiListActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                String common_wifi="";
+                try {
+                    common_wifi  = JSON.toJSONString(adapter.mdatas);
+                }catch (Exception e){
+
+                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
-                        wifi_bssid
+                        wifi_bssid,
+                        common_wifi
                 ).enqueue(new XMQCallback<BaseBean>() {
                     @Override
                     public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -221,7 +229,7 @@ public class InitWifiListActivity extends BaseActivity {
 //        ToastUtil.showTost("获取最新wifi失败，请重新刷新");
         ptr_refresh.refreshComplete();
 
-        if (getWifiTime++ < 3) {
+        if (getWifiTime++ < 10) {
             DeviceInfoInstance.getInstance().sendGetWifiListCmd();
         }else{
             getWifiTime=0;

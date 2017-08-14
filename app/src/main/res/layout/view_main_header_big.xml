@@ -11,8 +11,8 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/img_pet_avatar"
-        android:layout_width="148dp"
-        android:layout_height="148dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:scaleType="fitXY"
@@ -22,7 +22,7 @@
         fresco:placeholderImageScaleType="fitCenter"
         fresco:failureImage="@drawable/header_default_big"
         fresco:failureImageScaleType="centerInside"
-        fresco:roundedCornerRadius="74dp"
+        fresco:roundedCornerRadius="65dp"
         ></com.facebook.drawee.view.SimpleDraweeView>
 
     <com.facebook.drawee.view.SimpleDraweeView

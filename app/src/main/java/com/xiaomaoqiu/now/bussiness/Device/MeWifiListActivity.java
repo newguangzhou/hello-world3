@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.bussiness.MapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
@@ -93,10 +94,17 @@ public class MeWifiListActivity extends BaseActivity {
                     ToastUtil.showTost("请选择wifi");
                     return;
                 }
+                String common_wifi="";
+                try {
+                    common_wifi  = JSON.toJSONString(adapter.mdatas);
+                }catch (Exception e){
+
+                }
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
-                        wifi_bssid
+                        wifi_bssid,
+                        common_wifi
                 ).enqueue(new XMQCallback<BaseBean>() {
                     @Override
                     public void onSuccess(Response<BaseBean> response, BaseBean message) {
