@@ -49,9 +49,10 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/map_pet_athome_avater"
-        android:layout_width="43dp"
-        android:layout_height="42dp"
-        android:layout_gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="19dp"
         android:gravity="center"
         android:scaleType="fitXY"
         fresco:actualImageScaleType="focusCrop"

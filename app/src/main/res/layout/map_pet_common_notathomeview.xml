@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_width="52dp"
-    android:layout_height="62dp"
+    android:layout_width="60dp"
+    android:layout_height="80dp"
     android:gravity="top"
     android:orientation="vertical"
     android:background="@drawable/map_location_petback"
@@ -51,19 +51,29 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/map_pet_athome_avater"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_gravity="top"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|center_horizontal"
         android:gravity="top"
-        android:scaleType="fitXY"
         fresco:actualImageScaleType="focusCrop"
         fresco:fadeDuration="300"
 
         fresco:failureImage="@drawable/header_default_big"
         fresco:failureImageScaleType="centerInside"
+        android:layout_marginTop="8dp"
 
         fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitStart"
         fresco:roundedCornerRadius="26dp" />
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:layout_gravity="top|center_horizontal"
+        fresco:actualImageScaleType="focusCrop"
+        fresco:placeholderImage="@drawable/header_circle"
+        android:layout_marginTop="5dp"
+        fresco:placeholderImageScaleType="fitCenter"
+        ></com.facebook.drawee.view.SimpleDraweeView>
 
-</LinearLayout>
+</FrameLayout>
