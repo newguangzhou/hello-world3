@@ -47,6 +47,17 @@
             android:src="@drawable/battery100"/>
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -209,7 +220,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:gravity="center"
-        android:background="@drawable/hardware_unbind_back"
+        android:background="@drawable/hardware_charge_back"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="解除绑定"
@@ -223,11 +234,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/hardware_charge_back"
         android:text="我要充值SIM卡"
+        android:background="@drawable/hardware_unbind_back"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:id="@+id/tv_sim_recharge"
         />
+
+    </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

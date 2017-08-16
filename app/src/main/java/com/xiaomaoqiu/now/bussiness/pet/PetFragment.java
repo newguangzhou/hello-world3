@@ -381,7 +381,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.btn_sport:
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
-                    ToastUtil.showTost("紧急搜寻模式下不能使用该功能");
+                    ToastUtil.showTost("紧急搜寻模式下，无法使用该功能");
                     return;
                 }
                 if(!DeviceInfoInstance.getInstance().online){
@@ -437,7 +437,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             case R.id.btn_go_home:
 //                if (MapInstance.getInstance().GPS_OPEN) {
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
-                    ToastUtil.showTost("紧急搜寻模式下不能使用该功能");
+                    ToastUtil.showTost("紧急搜寻模式下，无法使用该功能");
                     return;
                 }
                 AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {

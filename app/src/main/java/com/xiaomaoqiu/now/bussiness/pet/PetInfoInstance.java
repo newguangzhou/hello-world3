@@ -243,10 +243,10 @@ public class PetInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
-                        if (DeviceInfoInstance.getInstance().online != true) {
-                            DeviceInfoInstance.getInstance().online = true;
-                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
-                        }
+//                        if (DeviceInfoInstance.getInstance().online != true) {
+//                            DeviceInfoInstance.getInstance().online = true;
+//                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+//                        }
                         savePetInfo(message);
                         EventBus.getDefault().post(new EventManage.addPetInfoSuccess());
 
@@ -318,10 +318,10 @@ public class PetInfoInstance {
                 switch (ret) {
                     case EC_SUCCESS:
                         //                    ToastUtil.showTost("更新成功");
-                        if (DeviceInfoInstance.getInstance().online != true) {
-                            DeviceInfoInstance.getInstance().online = true;
-                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
-                        }
+//                        if (DeviceInfoInstance.getInstance().online != true) {
+//                            DeviceInfoInstance.getInstance().online = true;
+//                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+//                        }
                         savePetInfo(petInfoBean);
                         EventBus.getDefault().post(event);
 
