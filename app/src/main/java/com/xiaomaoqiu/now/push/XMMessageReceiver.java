@@ -7,8 +7,10 @@ import android.util.Log;
 
 
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.util.Apputil;
+import com.xiaomaoqiu.now.util.DeviceUtils;
 import com.xiaomaoqiu.now.util.LogUtil;
 import com.xiaomi.mipush.sdk.ErrorCode;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -93,7 +95,13 @@ public class XMMessageReceiver extends PushMessageReceiver {
             mUserAccount = message.getUserAccount();
         }
 //        setRedPoint(context);
+        try {
+        DeviceUtils.vibrate(PetAppLike.mcontext, 500);             //让手机振动500ms
+        if(DeviceUtils.isScreenLocked(PetAppLike.mcontext))            //判断手机是否处于屏幕关闭状态
+            DeviceUtils.wakeScreen(PetAppLike.mcontext);           //如果处于关闭屏幕状态则唤醒屏幕
+        }catch (Exception e){
 
+        }
     }
 
     //命令结果

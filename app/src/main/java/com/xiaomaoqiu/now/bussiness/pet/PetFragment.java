@@ -183,13 +183,13 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     tvSportDone.setText("已消耗"+ sportDone+"千卡");
                     tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                 } else {
-                    ToastUtil.showTost("获取当天数据失败");
+//                    ToastUtil.showTost("获取当天数据失败");
                 }
             }
 
             @Override
             public void onFail(Call<PetSportBean> call, Throwable t) {
-                ToastUtil.showTost("获取当天数据失败");
+//                ToastUtil.showTost("获取当天数据失败");
             }
         });
         ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
@@ -206,9 +206,13 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
                         String sleepTimeString = df.format(allSleepTime);
                         tv_sleep_time.setText("今日休息" + sleepTimeString + "小时");
+                    }else{
+                        PetInfoInstance.getInstance().deep_sleep = 0;
+                        PetInfoInstance.getInstance().light_sleep = 0;
+                        tv_sleep_time.setText("今日休息" + 0 + "小时");
                     }
                 } else {
-                    ToastUtil.showTost("获取当天数据失败");
+//                    ToastUtil.showTost("获取当天数据失败");
                 }
             }
 

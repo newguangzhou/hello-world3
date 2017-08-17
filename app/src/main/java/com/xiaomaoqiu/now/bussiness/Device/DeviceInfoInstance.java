@@ -324,10 +324,10 @@ public class DeviceInfoInstance {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
-                        if(DeviceInfoInstance.getInstance().online!=true) {
-                            DeviceInfoInstance.getInstance().online = true;
-                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
-                        }
+//                        if(DeviceInfoInstance.getInstance().online!=true) {
+//                            DeviceInfoInstance.getInstance().online = true;
+//                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
+//                        }
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -336,11 +336,11 @@ public class DeviceInfoInstance {
 
                         getWifiList();
                         break;
-                    case EC_OFFLINE:
-                        online=false;
-                        EventBus.getDefault().post(new EventManage.DeviceOffline());
-                        EventBus.getDefault().post(new EventManage.wifiListError());
-                        break;
+//                    case EC_OFFLINE:
+//                        online=false;
+//                        EventBus.getDefault().post(new EventManage.DeviceOffline());
+//                        EventBus.getDefault().post(new EventManage.wifiListError());
+//                        break;
 
                 }
             }
