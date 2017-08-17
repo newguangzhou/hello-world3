@@ -58,6 +58,9 @@ public class BaseWebViewActivity extends BaseActivity {
        String urlString= intent.getStringExtra("web_url");
         //加载需要显示的网页
         wv_net.loadUrl(urlString);
+        if(!"".equals(title)){
+            tv_title.setText(title);
+        }
 
     }
 

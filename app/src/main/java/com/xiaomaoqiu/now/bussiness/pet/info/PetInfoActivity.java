@@ -22,9 +22,11 @@ import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.pet.PetUtil;
 import com.xiaomaoqiu.now.bussiness.pet.SelectPetTypeActivity;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.DoubleClickUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.now.view.crop.Crop;
 import com.xiaomaoqiu.now.base.InputDialog;
 import com.xiaomaoqiu.now.bussiness.pet.info.petdata.ModifyNameDialog;
@@ -63,7 +65,10 @@ public class PetInfoActivity extends BaseActivity {
     private TextView txt_weight;
     private EditText txt_pet_name;
     private TextView txt_variety;
+    private View btn_go_back;
 
+
+    private BatteryView batteryView;//右上角的电池
 
     PetInfoBean modifyBean;
 
@@ -75,13 +80,48 @@ public class PetInfoActivity extends BaseActivity {
         }
     }
 
+
+
+
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceOffline(EventManage.DeviceOffline event) {
+        batteryView.setDeviceOffline();
+//        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
+    }
+
+    //设备状态更新
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
+        if (!DeviceInfoInstance.getInstance().online) {
+//            ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
+            return;
+        }
+        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                DeviceInfoInstance.getInstance().lastGetTime);
+    }
+
+    //todo 小米推送
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
+        batteryView.setDeviceOffline();
+//        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
+    }
+
+
+    @Override
+    public int frameTemplate() {//没有标题栏
+        return 0;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.pet_info));
+//        setTitle(getString(R.string.pet_info));
         setContentView(R.layout.me_pet_info);
         modifyBean = PetInfoInstance.getInstance().packBean;
-        ;
         initView();
         EventBus.getDefault().register(this);
     }
@@ -137,12 +177,40 @@ public class PetInfoActivity extends BaseActivity {
         chk_gender = (ToggleButton) findViewById(R.id.chk_gender);
 
         modifyBean = PetInfoInstance.getInstance().packBean;
+
+        batteryView = (BatteryView) findViewById(R.id.batteryView);
+        batteryView.setActivity(this);
+
+        //点击弹出电池
+        batteryView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (!DeviceInfoInstance.getInstance().online) {
+                    ToastUtil.showTost("追踪器离线");
+                    return;
+                }
+                if (DeviceInfoInstance.getInstance().battery_level > 1.0f) {
+                    PetInfoInstance.getInstance().getPetLocation();
+                }
+                batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
+                        DeviceInfoInstance.getInstance().lastGetTime);
+            }
+        });
+
+        if (!DeviceInfoInstance.getInstance().online) {
+//            ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
+            return;
+        }
+        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                DeviceInfoInstance.getInstance().lastGetTime);
         initPetInfo();
     }
 
     private void initPetInfo() {
-        View btnGoBack = findViewById(R.id.btn_go_back);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        btn_go_back = findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -457,6 +525,11 @@ public class PetInfoActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public void onBackPressed() {

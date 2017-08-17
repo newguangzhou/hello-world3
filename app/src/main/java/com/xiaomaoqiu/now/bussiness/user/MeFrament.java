@@ -100,6 +100,7 @@ public class MeFrament extends BaseFragment implements LogoutView{
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), BaseWebViewActivity.class);
                 intent.putExtra("web_url","http://www.xiaomaoqiu.com/wechat_shop.html");
+                intent.putExtra("title","小毛球商城");
                 startActivity(intent);
             }
         });

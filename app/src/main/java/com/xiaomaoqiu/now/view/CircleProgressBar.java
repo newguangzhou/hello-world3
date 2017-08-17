@@ -242,14 +242,22 @@ public class CircleProgressBar extends ProgressBar {
         }
     }
 
+
+    public static boolean over100=false;
+
     private void drawProgressText(Canvas canvas) {
         if (!mDrawProgressText) {
             return;
         }
+        String progressText;
+        if(over100){
+            progressText="已达成";
+            mProgressTextPaint.setTextSize( DensityUtil.dip2px(getContext(), 25f) );
+        }else {
+            progressText   = String.format(mProgressTextFormatPattern, getProgress());
+            mProgressTextPaint.setTextSize(mProgressTextSize);
+        }
 
-        String progressText = String.format(mProgressTextFormatPattern, getProgress());
-
-        mProgressTextPaint.setTextSize(mProgressTextSize);
         mProgressTextPaint.setColor(mProgressTextColor);
         mProgressTextPaint.getTextBounds(progressText, 0, progressText.length(), mProgressTextRect);
         canvas.drawText(progressText, mCenterX+mProgressTextTranslationX, mCenterY + mProgressTextRect.height() / 2+mProgressTextTranslationY, mProgressTextPaint);

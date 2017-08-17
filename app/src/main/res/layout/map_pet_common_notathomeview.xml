@@ -60,7 +60,7 @@
 
         fresco:failureImage="@drawable/header_default_big"
         fresco:failureImageScaleType="centerInside"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
 
         fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitStart"
@@ -72,7 +72,7 @@
         android:layout_gravity="top|center_horizontal"
         fresco:actualImageScaleType="focusCrop"
         fresco:placeholderImage="@drawable/header_circle"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         fresco:placeholderImageScaleType="fitCenter"
         ></com.facebook.drawee.view.SimpleDraweeView>
 

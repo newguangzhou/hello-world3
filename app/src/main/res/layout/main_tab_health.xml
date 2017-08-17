@@ -68,6 +68,7 @@
                         android_custom:prostyle="solid_line" />
 
                     <TextView
+                        android:id="@+id/label1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -82,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="50dp"
-                        android:text="今日任务达成"
+                        android:text="完成度"
                         android:textColor="@color/total_color_7"
                         android:textSize="11.5sp" />
                 </RelativeLayout>

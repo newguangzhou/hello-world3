@@ -75,6 +75,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
     CheckIndex checkIndex;
 
 
+    View label1;//百分号显示还是不显示
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +90,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         tvSportTarget = (TextView) rootView.findViewById(R.id.tv_sport_target);
         tv_sleep_time = (TextView) rootView.findViewById(R.id.tv_sleep_time);
         tv_findpet = (TextView) rootView.findViewById(R.id.tv_findpet);
+        label1=rootView.findViewById(R.id.label1);
 
         rootView.setOnClickListener(this);
         rootView.findViewById(R.id.btn_sport_index).setOnClickListener(this);
@@ -143,6 +147,8 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         Date today = new Date(msEnd);
         strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
         strStart = strEnd;
+        prog.over100=false;
+        label1.setVisibility(View.VISIBLE);
         prog.setProgress(0);
     }
 
@@ -174,10 +180,14 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                        ToastUtil.showTost("当天尚无数据~");
 
                     }
-                    if (percentage > 100) {
-                        prog.setMax(200);
-                    } else if (percentage <= 100) {
-                        prog.setMax(100);
+                    if (percentage >=100) {
+                        prog.over100=true;
+                        label1.setVisibility(View.GONE);
+//                        prog.setMax(200);
+                    } else if (percentage <100) {
+//                        prog.setMax(100);
+                        prog.over100=false;
+                        label1.setVisibility(View.VISIBLE);
                     }
                     prog.setProgress((int) percentage);
                     tvSportDone.setText("已消耗"+ sportDone+"千卡");
@@ -229,10 +239,14 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         sportTarget = event.sportBean.target_amount + "";
         sportDone = event.sportBean.reality_amount;
         percentage = event.sportBean.percentage;
-        if (percentage > 100) {
-            prog.setMax(200);
-        } else if (percentage <= 100) {
-            prog.setMax(100);
+        if (percentage >= 100) {
+            prog.over100=true;
+            label1.setVisibility(View.GONE);
+//            prog.setMax(200);
+        } else if (percentage <100) {
+            prog.over100=false;
+            label1.setVisibility(View.VISIBLE);
+//            prog.setMax(100);
         }
         prog.setProgress((int) percentage);
         tvSportDone.setText("已消耗"+sportDone+"千卡");
@@ -247,10 +261,14 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             return;
         }
         percentage =sportDone*100/tmp;
-        if (percentage > 100) {
-            prog.setMax(200);
-        } else if (percentage <= 100) {
-            prog.setMax(100);
+        if (percentage >= 100) {
+            prog.over100=true;
+            label1.setVisibility(View.GONE);
+//            prog.setMax(200);
+        } else if (percentage <100) {
+            prog.over100=false;
+            label1.setVisibility(View.VISIBLE);
+//            prog.setMax(100);
         }
         prog.setProgress((int) percentage);
 
@@ -493,10 +511,14 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //                        ToastUtil.showTost("当天尚无数据~");
 
                                             }
-                                            if (percentage > 100) {
-                                                prog.setMax(200);
-                                            } else if (percentage <= 100) {
-                                                prog.setMax(100);
+                                            if (percentage >=100) {
+                                                prog.over100=true;
+                                                label1.setVisibility(View.GONE);
+//                                                prog.setMax(200);
+                                            } else if (percentage < 100) {
+                                                prog.over100=false;
+                                                label1.setVisibility(View.VISIBLE);
+//                                                prog.setMax(100);
                                             }
                                             prog.setProgress((int) percentage);
                                             tvSportDone.setText("已消耗"+sportDone+"千卡");

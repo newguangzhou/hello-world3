@@ -60,12 +60,15 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     private ImageView mFindPetView, mWalkPetView;
     private MapPetAvaterView mapPetAvaterView;
 
+
+
     private TextView petLocation, walkpetNoticeView;
     private View tv_offline;//设备已离线
     private TextView tv_location_state;//当前位置信号不佳
     private TextView tv_at_home;//%%（宠物名）乖乖在家哦！
     private LinearLayout petLocContainer;
 
+    View btn_phone_center;//手机图标
 
     private String locationString;
 
@@ -83,7 +86,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         mapView = (MapView) root.findViewById(R.id.bmapView);
         mFindPetView = (ImageView) root.findViewById(R.id.btn_find_pet);
         mFindPetView.setOnClickListener(this);
-        root.findViewById(R.id.btn_phone_center).setOnClickListener(this);
+        btn_phone_center=root.findViewById(R.id.btn_phone_center);
+        btn_phone_center.setOnClickListener(this);
         root.findViewById(R.id.btn_pet_center).setOnClickListener(this);
         mWalkPetView = (ImageView) root.findViewById(R.id.btn_playing_pet);
 
@@ -132,15 +136,18 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         switch (PetInfoInstance.getInstance().PET_MODE){
             case Constants.PET_STATUS_COMMON:
                 mWalkPetView.setVisibility(View.VISIBLE);
+                btn_phone_center.setVisibility(View.GONE);
                 mFindPetView.setSelected(false);
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
                 updateDownSecondText();
+
 //                tv_location_state.setVisibility(View.GONE);
                 break;
             case Constants.PET_STATUS_WALK:
                 mWalkPetView.setVisibility(View.VISIBLE);
+                btn_phone_center.setVisibility(View.GONE);
                 mFindPetView.setSelected(false);
                 mWalkPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.VISIBLE);
@@ -149,6 +156,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case Constants.PET_STATUS_FIND:
                 mWalkPetView.setVisibility(View.GONE);
+                btn_phone_center.setVisibility(View.VISIBLE);
                 mFindPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
@@ -180,6 +188,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
         switch (PetInfoInstance.getInstance().PET_MODE){
             case Constants.PET_STATUS_COMMON:
                 mWalkPetView.setVisibility(View.VISIBLE);
+                btn_phone_center.setVisibility(View.GONE);
                 mFindPetView.setSelected(false);
                 mWalkPetView.setSelected(false);
                 walkpetNoticeView.setVisibility(View.GONE);
@@ -188,6 +197,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case Constants.PET_STATUS_WALK:
                 mWalkPetView.setVisibility(View.VISIBLE);
+                btn_phone_center.setVisibility(View.GONE);
                 mFindPetView.setSelected(false);
                 mWalkPetView.setSelected(true);
                 walkpetNoticeView.setVisibility(View.VISIBLE);
@@ -196,6 +206,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             case Constants.PET_STATUS_FIND:
                 mWalkPetView.setVisibility(View.GONE);
                 mFindPetView.setSelected(true);
+                btn_phone_center.setVisibility(View.VISIBLE);
                 walkpetNoticeView.setVisibility(View.GONE);
                 petLocContainer.setVisibility(View.VISIBLE);
                 updateDownSecondText();

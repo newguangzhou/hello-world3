@@ -3,246 +3,293 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/total_color_8"
+    android:orientation="vertical"
     tools:context="com.xiaomaoqiu.now.bussiness.Device.DeviceActivity">
+
     <RelativeLayout
         android:id="@+id/ll_title"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:background="@color/total_color_1"
-        >
+        android:background="@color/total_color_1">
 
 
         <LinearLayout
             android:id="@+id/btn_go_back"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
             android:layout_width="70dp"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
             <ImageView
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/img_return"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_title"
             android:layout_centerInParent="true"
-            android:textSize="20sp"
-            android:textColor="#ffffff"
             android:text="宠物追踪器"
-            />
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
         <com.xiaomaoqiu.now.view.BatteryView
             android:id="@+id/batteryView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:src="@drawable/battery100"/>
+            android:src="@drawable/battery100" />
 
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@color/total_color_8">
 
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:text="追踪器信息"
-            android:paddingLeft="16dp"
-            android:gravity="center_vertical"
-            android:textColor="@color/total_color_1"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:background="@color/total_color_8"/>
-        <View android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/total_color_4"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/total_color_8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/hardware_text"
-                android:text="追踪器名称:"/>
-            <View android:layout_width="0dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@color/total_color_8"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="5dp"
+                    android:text="追踪器信息"
+                    android:textColor="@color/total_color_1"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/total_color_4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="追踪器名称:"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_device_name"
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="小毛球宠物追踪器"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@color/total_color_4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IMEI码:"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_imei"
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="111111111"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="硬件版本:" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_newhardware"
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.0.0.1" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@color/total_color_4"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="固件版本:" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_hardware_version"
+                        style="@style/hardware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1.0.0.1" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/total_color_4" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="41.5dp"
+                android:background="@color/total_color_8"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="追踪器内置SIM卡信息"
+                android:textColor="@color/total_color_1"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_weight="1"/>
+                android:background="@color/sep_line" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/tv_sim_deadline"
                 style="@style/hardware_text"
-                android:id="@+id/tv_device_name"
-                android:text="小毛球宠物追踪器"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:text="当前sim卡已经充值到2017.7.1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/hardware_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingBottom="10dp"
+                android:paddingRight="10dp"
+                android:paddingStart="10dp"
+                android:text="@string/sim_tip1"
+                android:textSize="14sp" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/total_color_8" />
+
+            <Button
+                android:id="@+id/tv_unbind"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/hardware_charge_back"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="解除绑定"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/total_color_8" />
+
+            <TextView
+                android:id="@+id/tv_sim_recharge"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/hardware_unbind_back"
+                android:gravity="center"
+                android:text="我要充值SIM卡"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
         </LinearLayout>
-        <View android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="16dp"
-            android:background="@color/total_color_4"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/hardware_text"
-                android:text="IMEI码:"/>
-            <View android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/hardware_text"
-                android:id="@+id/tv_imei"
-                android:text="111111111"/>
-        </LinearLayout>
-        <View android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="16dp"
-            android:background="@color/total_color_4"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/hardware_text"
-                android:text="硬件版本:"/>
-            <View android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_newhardware"
-                style="@style/hardware_text"
-                android:text="1.0.0.1"/>
-        </LinearLayout>
-        <View android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginLeft="16dp"
-            android:background="@color/total_color_4"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/hardware_text"
-                android:text="固件版本:"/>
-            <View android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_hardware_version"
-                style="@style/hardware_text"
-                android:text="1.0.0.1"/>
-        </LinearLayout>
-
-        <View android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/total_color_4"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="41.5dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:textSize="16sp"
-        android:textColor="@color/total_color_1"
-        android:text="追踪器内置SIM卡信息"/>
-    <View android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/sep_line"/>
-    <TextView
-        android:id="@+id/tv_sim_deadline"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        style="@style/hardware_text"
-        android:background="@color/white"
-        android:text="当前sim卡已经充值到2017.7.1"/>
-
-    <View android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/total_color_4"/>
-
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/hardware_text"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="@string/sim_tip1" />
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="37.5dp"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:gravity="center"
-        android:background="@drawable/hardware_charge_back"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:text="解除绑定"
-        android:id="@+id/tv_unbind"
-        android:textSize="16sp"
-        android:textColor="@color/white"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="24dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="我要充值SIM卡"
-        android:background="@drawable/hardware_unbind_back"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:id="@+id/tv_sim_recharge"
-        />
-
-    </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

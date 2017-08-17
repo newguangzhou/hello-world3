@@ -24,7 +24,7 @@
     <string name="health_title">健康报告</string>
 
     <!--sim卡提示-->
-    <string name="sim_tip1">追踪器内嵌专用物联网sim卡，请通过小毛球官方渠道充值</string>
+    <string name="sim_tip1">(追踪器内嵌专用物联网sim卡，请通过小毛球官方渠道充值)</string>
 
 
 
@@ -34,7 +34,7 @@
     <string name="tosport_dog_chat">去玩吗？</string>
     <string name="tosport_tab1">嗯！出去玩啦！</string>
     <string name="tosport_tab2">不！逗你玩儿！</string>
-    <string name="tosport_tip1">进入运动模式，将开启本次运动消耗统计，同时关闭小毛球智能提醒功能；运动结束后请及时切换以获得更准确的统计，同时小毛球将继续开启智能守护!</string>
+    <string name="tosport_tip1">进入运动模式将开启运动时间和卡路里消耗的统计，加油哦！</string>
     <string name="tosport_tip2">玩结束后回到家也请按下“回到家”按钮告知小毛球哦。</string>
 
     <!--切换默认模式-->
@@ -50,7 +50,7 @@
     <string name="locate_common_message">位置获取时间：2017-08-09 16：57：16</string>
 
     <!--地图页，运动模式下，底部地址栏-->
-    <string name="locate_sport_message">注意：当前为运动模式，若爱宠离开视线，请开启紧急搜寻！</string>
+    <string name="locate_sport_message">运动模式中，智能提醒已关闭，寻宠请主动开启紧急搜寻。</string>
 
 
 
@@ -166,8 +166,8 @@
     <string name="variety">品种</string>
     <string name="intro">介绍</string>
     <string name="title_activity_health_index">HealthIndex</string>
-    <string name="pet_sport_done">已消耗%d千卡</string>
-    <string name="pet_sport_target">目标消耗%d千卡</string>
+    <string name="pet_sport_done">已消耗0千卡</string>
+    <string name="pet_sport_target">目标消耗0千卡</string>
     <string name="go_out_title">小毛球温馨提示</string>
     <string name="go_out_tip">带狗狗出门时按下此按钮，通知小毛球APP，可避免小毛球误判狗狗溜走哦，玩结束后回到家也请按下“回到家”告知小毛球</string>
     <string name="go_out_confirm">嗯，出去玩</string>
