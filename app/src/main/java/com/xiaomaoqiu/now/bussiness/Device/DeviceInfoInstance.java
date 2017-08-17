@@ -336,11 +336,11 @@ public class DeviceInfoInstance {
 
                         getWifiList();
                         break;
-//                    case EC_OFFLINE:
+                    case EC_OFFLINE:
 //                        online=false;
 //                        EventBus.getDefault().post(new EventManage.DeviceOffline());
-//                        EventBus.getDefault().post(new EventManage.wifiListError());
-//                        break;
+                        EventBus.getDefault().post(new EventManage.wifiListError());
+                        break;
 
                 }
             }

@@ -34,6 +34,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -100,11 +101,13 @@ public class MeWifiListActivity extends BaseActivity {
                 }catch (Exception e){
 
                 }
+                RequestBody common_wifi_body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),common_wifi);
                 ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
                         wifi_bssid,
-                        common_wifi
+                        PetInfoInstance.getInstance().getPet_id(),
+                        common_wifi_body
                 ).enqueue(new XMQCallback<BaseBean>() {
                     @Override
                     public void onSuccess(Response<BaseBean> response, BaseBean message) {

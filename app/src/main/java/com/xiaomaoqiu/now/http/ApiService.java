@@ -19,7 +19,11 @@ import com.xiaomaoqiu.now.bussiness.bean.WifiListBean;
 import com.xiaomaoqiu.now.test.TestLocationBean;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -236,13 +240,14 @@ public interface ApiService {
     /**
      * 设置homewifi
      */
-    @GET(Constants.Url.Device.set_home_wifi)
+    @POST(Constants.Url.Device.set_home_wifi)
     Call<BaseBean> setHomeWifi(
             @Query("uid") long uid,
             @Query("token") String token,
             @Query("wifi_ssid") String wifi_ssid,
             @Query("wifi_bssid") String wifi_bssid,
-            @Query("common_wifi") String common_wifi
+            @Query("pet_id") long petId,
+            @Body RequestBody common_wifi
 
     );
 

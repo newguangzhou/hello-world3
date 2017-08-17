@@ -494,7 +494,7 @@ public class PetInfoInstance {
                             device_locator_status=message.locator_status;
                             EventBus.getDefault().post(event);
                         } else {
-                            ToastUtil.showTost("位置获取失败！");
+//                            ToastUtil.showTost("位置获取失败！");
                         }
                         break;
                     case EC_NODATA:
@@ -506,7 +506,7 @@ public class PetInfoInstance {
 
             @Override
             public void onFail(Call<PetLocationBean> call, Throwable t) {
-                Toast.makeText(PetAppLike.mcontext, "位置获取失败~", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(PetAppLike.mcontext, "位置获取失败~", Toast.LENGTH_SHORT).show();
             }
         });
     }
