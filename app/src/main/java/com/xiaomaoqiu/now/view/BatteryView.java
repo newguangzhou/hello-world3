@@ -37,7 +37,7 @@ public class BatteryView extends ImageView {
     public BatteryView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         charging=false;
-        batteryLevels=new float[]{1.0f,0.75f,0.5f,0.25f,0.1f};
+        batteryLevels=new float[]{0.75f,0.5f,0.25f,0.15f,0f};
         batteryLevelRes=new int[5];
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BatteryView);
         batteryLevelRes[0]=a.getResourceId(R.styleable.BatteryView_fullRid,R.drawable.battery100);
@@ -75,7 +75,7 @@ public class BatteryView extends ImageView {
             return;
         }
         for(int i=0; i<batteryLevels.length ;i++){
-            if(level >= batteryLevels[i]){
+            if(level > batteryLevels[i]){
                 setImageResource(batteryLevelRes[i]);
                 break;
             }
@@ -102,7 +102,7 @@ public class BatteryView extends ImageView {
         DialogUtil.showCommonBatteryNoticeDialog(mactivity,level,time,getContext().getResources().getString(R.string.tip_battery_null));
 
         for(int i=0; i<batteryLevels.length ;i++){
-            if(level >= batteryLevels[i]){
+            if(level > batteryLevels[i]){
                 setImageResource(batteryLevelRes[i]);
                 break;
             }
@@ -123,7 +123,7 @@ public class BatteryView extends ImageView {
             return;
         }
         for(int i=0; i<batteryLevels.length ;i++){
-            if(level >= batteryLevels[i]){
+            if(level > batteryLevels[i]){
                 setImageResource(batteryLevelRes[i]);
                 break;
             }

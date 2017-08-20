@@ -145,11 +145,7 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/go_sport_bottom_dialog_back" />
+
     </LinearLayout>
 
 </LinearLayout>
