@@ -440,7 +440,7 @@ public class MapInstance implements BDLocationListener {
     /**
      * 停止位置监听
      */
-    private void stopLocListener() {
+    public  void stopLocListener() {
         if (null != mLocationClient && mLocationClient.isStarted()) {
             mLocationClient.stop();
         }
@@ -484,7 +484,8 @@ public class MapInstance implements BDLocationListener {
             setPhonePos();
             showPhoneCenter = false;
         }
-        stopLocListener();
+//        stopLocListener();
+        refreshMap();
     }
 
     @Override

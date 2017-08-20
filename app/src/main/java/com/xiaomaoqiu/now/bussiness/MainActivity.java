@@ -639,6 +639,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        MapInstance.getInstance().stopLocListener();
         EventBus.getDefault().unregister(this);
     }
 
