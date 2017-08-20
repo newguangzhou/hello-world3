@@ -185,7 +185,7 @@ public class MapLocationActivity extends Activity {
         });
 
         iv_location = (MapPetAtHomeView) findViewById(R.id.iv_location);
-        iv_location.setAvaterUrl(PetInfoInstance.getInstance().getLogo_url())
+        iv_location.setAvaterUrl(PetInfoInstance.getInstance().getLogo_url());
         ll_noname_address = findViewById(R.id.ll_noname_address);
         ll_noname_address.setOnClickListener(new View.OnClickListener() {
 
