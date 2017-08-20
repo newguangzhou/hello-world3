@@ -38,6 +38,7 @@ import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.AddressAdapter;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
@@ -47,6 +48,7 @@ import com.xiaomaoqiu.now.map.main.MapLocationParser;
 import com.xiaomaoqiu.now.map.main.addressParseListener;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.MapPetAtHomeView;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -81,7 +83,7 @@ public class MapLocationActivity extends Activity {
     private BaiduMap mBaiduMap;
     private Projection projection;
     private View btn_phone_center;
-    private View iv_location;
+    private MapPetAtHomeView iv_location;
 
     public static double longitude;
     public static double latitude;
@@ -182,7 +184,8 @@ public class MapLocationActivity extends Activity {
             }
         });
 
-        iv_location = findViewById(R.id.iv_location);
+        iv_location = (MapPetAtHomeView) findViewById(R.id.iv_location);
+        iv_location.setAvaterUrl(PetInfoInstance.getInstance().getLogo_url())
         ll_noname_address = findViewById(R.id.ll_noname_address);
         ll_noname_address.setOnClickListener(new View.OnClickListener() {
 
