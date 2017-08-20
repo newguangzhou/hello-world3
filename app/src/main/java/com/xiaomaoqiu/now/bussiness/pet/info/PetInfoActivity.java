@@ -520,6 +520,9 @@ public class PetInfoActivity extends BaseActivity {
             case Crop.REQUEST_CROP:
                 modifyBean.logo_url = PetInfoInstance.getInstance().getPackBean().logo_url;
                 Uri uri = Uri.parse(modifyBean.logo_url);
+                if(imgLogo==null){
+                    return;
+                }
                 imgLogo.setImageURI(uri);
                 break;
         }
