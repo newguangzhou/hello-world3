@@ -101,13 +101,13 @@ public class MapInstance implements BDLocationListener {
         petAtHomeView = new MapPetAtHomeView(PetAppLike.mcontext);
         try {
             petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         petCommonNotAtHomeView = new MapPetCommonNotAtHomeView(PetAppLike.mcontext);
         try {
             petCommonNotAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_WALK) {
@@ -151,7 +151,7 @@ public class MapInstance implements BDLocationListener {
 //        mBaiduMap.setIndoorEnable(true);//设置是否显示室内图, 默认室内图不显示
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
-        UiSettings  UiSettings =mBaiduMap.getUiSettings();
+        UiSettings UiSettings = mBaiduMap.getUiSettings();
         UiSettings.setRotateGesturesEnabled(false);//屏蔽旋转
 
         initLocation();
@@ -192,7 +192,7 @@ public class MapInstance implements BDLocationListener {
         OverlayOptions options = new MarkerOptions()
                 .icon(petbitmapDescriptor)
                 .draggable(true)
-                .anchor(0.5f,0.5f)
+                .anchor(0.5f, 0.5f)
                 .position(new LatLng(petLatitude, petLongitude))
                 .visible(true);
         mPetMarker = (Marker) (mBaiduMap.addOverlay(options));
@@ -207,17 +207,16 @@ public class MapInstance implements BDLocationListener {
     }
 
 
-
-
     LatLng commonphoneLatlng;
+
     /**
      * 初始化手机位置地图标识
      */
     private void initPhoneMarker() {
-        commonphoneLatlng=  new LatLng(phoneLatitude, phoneLongitude);
+        commonphoneLatlng = new LatLng(phoneLatitude, phoneLongitude);
         phonebitmapDescriptor = BitmapDescriptorFactory.fromView(new MapPhoneAvaterView(PetAppLike.mcontext));
         OverlayOptions options = new MarkerOptions()
-                .anchor(0.5f,0.5f)
+                .anchor(0.5f, 0.5f)
                 .icon(phonebitmapDescriptor)
                 .draggable(true)
                 .position(commonphoneLatlng)
@@ -262,13 +261,13 @@ public class MapInstance implements BDLocationListener {
         mBaiduMap.clear();
 
 //        if (desLatLng == null) {
-            if(petLatitude<=0||petLongitude<=0){
-                petLatitude=phoneLatitude;
-                petLongitude=phoneLongitude;
-                desLatLng=new LatLng(phoneLatitude, phoneLongitude);
-            }else {
-                desLatLng = new LatLng(petLatitude, petLongitude);
-            }
+        if (petLatitude <= 0 || petLongitude <= 0) {
+            petLatitude = phoneLatitude;
+            petLongitude = phoneLongitude;
+            desLatLng = new LatLng(phoneLatitude, phoneLongitude);
+        } else {
+            desLatLng = new LatLng(petLatitude, petLongitude);
+        }
 //        }
         mCircleOptions = new CircleOptions()
                 .center(desLatLng) // 圆心坐标
@@ -277,7 +276,6 @@ public class MapInstance implements BDLocationListener {
 //                .stroke(new Stroke(2, Color.parseColor("#ffffff"))) // 设置边框 Stroke 参数 宽度单位像素默认5px 颜色
                 .fillColor(Color.parseColor("#1B2e68AA")); // 设置圆的填充颜色
         mBaiduMap.addOverlay(mCircleOptions);
-
 
 
         switch (PetInfoInstance.getInstance().PET_MODE) {
@@ -293,7 +291,7 @@ public class MapInstance implements BDLocationListener {
                 OverlayOptions findoptions = new MarkerOptions()
                         .icon(petbitmapDescriptor)
                         .draggable(true)
-                        .anchor(0.5f,0.5f)
+                        .anchor(0.5f, 0.5f)
                         .position(new LatLng(petLatitude, petLongitude))
                         .visible(true);
                 mPetMarker = (Marker) (mBaiduMap.addOverlay(findoptions));
@@ -309,7 +307,7 @@ public class MapInstance implements BDLocationListener {
                 OverlayOptions ancheroptions = new MarkerOptions()
                         .icon(ancherBitmapDescriptor)
                         .draggable(true)
-                        .anchor(0.5f,0.5f)
+                        .anchor(0.5f, 0.5f)
                         .position(commonphoneLatlng)
                         .visible(true);
                 mFindPolyline = (Marker) (mBaiduMap.addOverlay(ancheroptions));
@@ -330,7 +328,7 @@ public class MapInstance implements BDLocationListener {
                     OverlayOptions petoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
-                            .anchor(0.5f,0.5f)
+                            .anchor(0.5f, 0.5f)
                             .position(new LatLng(petLatitude, petLongitude))
                             .visible(true);
                     mPetMarker = (Marker) (mBaiduMap.addOverlay(petoptions));
@@ -356,7 +354,7 @@ public class MapInstance implements BDLocationListener {
                     OverlayOptions commonoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
-                            .anchor(0.5f,0.5f)
+                            .anchor(0.5f, 0.5f)
                             .position(new LatLng(petLatitude, petLongitude))
                             .visible(true);
                     mPetMarker = (Marker) (mBaiduMap.addOverlay(commonoptions));
@@ -455,7 +453,7 @@ public class MapInstance implements BDLocationListener {
     /**
      * 停止位置监听
      */
-    public  void stopLocListener() {
+    public void stopLocListener() {
         if (null != mLocationClient && mLocationClient.isStarted()) {
             mLocationClient.stop();
         }
@@ -500,7 +498,9 @@ public class MapInstance implements BDLocationListener {
             showPhoneCenter = false;
         }
 //        stopLocListener();
-        refreshMap();
+        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+            refreshMap();
+        }
     }
 
     @Override
@@ -593,26 +593,26 @@ public class MapInstance implements BDLocationListener {
 
     //计算旋转角度
     float calculateRotate() {
-        double lon = petLongitude-phoneLongitude;
-        double lat =petLatitude- phoneLatitude;
+        double lon = petLongitude - phoneLongitude;
+        double lat = petLatitude - phoneLatitude;
 //        Log.e("longtianlove-location",lon+"*"+lat+"*");
 //        Log.e("longtianlove-location",phoneLongitude+"*"+petLongitude);
 //        Log.e("longtianlove-location",phoneLatitude+"*"+petLatitude);
 //        Log.e("longtianlove-anchor-pet",mPetMarker.getRotate()+"");
 //        Log.e("longtianlove-anchor-pho",mPhoneMarker.getRotate()+"");
-        double rawRotate = Math.atan(lat/lon);
-        float result = (float) (rawRotate/Math.PI*180);
+        double rawRotate = Math.atan(lat / lon);
+        float result = (float) (rawRotate / Math.PI * 180);
 
-        if(petLongitude>=phoneLongitude&&petLatitude>=phoneLatitude){//第一象限
-            result=180+result;
-        }else if(petLongitude>=phoneLongitude&&petLatitude<phoneLatitude){//第四象限
-            result=180+result;
-        }else if(petLongitude<phoneLongitude&&petLatitude>=phoneLatitude){//第二象限
-            result=360+result;
-        }else if(petLongitude<phoneLongitude&&petLatitude>phoneLatitude){//第三象限
-            result=result;
+        if (petLongitude >= phoneLongitude && petLatitude >= phoneLatitude) {//第一象限
+            result = 180 + result;
+        } else if (petLongitude >= phoneLongitude && petLatitude < phoneLatitude) {//第四象限
+            result = 180 + result;
+        } else if (petLongitude < phoneLongitude && petLatitude >= phoneLatitude) {//第二象限
+            result = 360 + result;
+        } else if (petLongitude < phoneLongitude && petLatitude > phoneLatitude) {//第三象限
+            result = result;
         }
-        Log.e("longtianlove-rotate",result+"***"+rawRotate);
+        Log.e("longtianlove-rotate", result + "***" + rawRotate);
         return result;
     }
 
