@@ -1,105 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/total_color_8"
-    tools:context="com.xiaomaoqiu.now.bussiness.pet.info.petdata.HealthIndexActivity">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/total_color_1">
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_logout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="退出登录"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--/>-->
+
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/batteryView"
+            android:layout_centerHorizontal="true"
+            android:text="健康报告"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.xiaomaoqiu.now.view.BatteryView
+            android:id="@+id/batteryView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:src="@drawable/battery100" />
+
+    </RelativeLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:background="@color/total_color_8">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="45dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/health_index_icon" />
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="宠物健康日记"
-                    android:textColor="@color/common_body"
-                    android:textSize="@dimen/common_dialog_message" />
-
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="昨天"
-                    android:textColor="@color/common_body"
-                    android:textSize="@dimen/common_dialog_message" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--运动-->
-        <LinearLayout
-            android:id="@+id/ll_sport_all"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/health_sport_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/health_sport_logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="运动"
-                    android:textColor="#fff"
-                    android:textSize="@dimen/common_dialog_message" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_health_sport_ed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="0.0"
-                    android:textColor="@color/common_title"
-                    android:textSize="60sp"
-                    android:textStyle="italic" />
+                    android:layout_width="60dp"
+                    android:layout_height="45dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/health_index_icon" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -108,282 +94,357 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="%完成度"
-                        android:textColor="@color/common_title"
+                        android:text="宠物健康日记"
+                        android:textColor="@color/common_body"
                         android:textSize="@dimen/common_dialog_message" />
 
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="昨天"
+                        android:textColor="@color/common_body"
+                        android:textSize="@dimen/common_dialog_message" />
 
                 </LinearLayout>
-
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="20dp"
-                android:background="#000" />
-
-            <TextView
-                android:id="@+id/tv_health_sport_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:text="宠物昨天消耗了很多哦"
-                android:textColor="@color/common_body"
-                android:textSize="@dimen/common_dialog_message" />
-
-            <Button
-                android:id="@+id/bt_health_sport_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/health_sport_message"
-                android:padding="10dp"
-                android:text="运动不足将会导致：肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为了你家宠物的健康，请努力完成运动目标。"
-                android:textColor="@color/common_body"
-                android:gravity="left|center"
-                android:textSize="@dimen/common_dialog_message" />
-
+            <!--运动-->
             <LinearLayout
+                android:id="@+id/ll_sport_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/health_index_bt_change"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/health_sport_background"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:gravity="center"
-                    android:text="调整运动目标"
-                    android:textColor="#fff"
-                    android:textSize="@dimen/common_dialog_message" />
-
-                <TextView
-                    android:id="@+id/tv_tosport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/health_sport_background"
-                    android:gravity="center"
-                    android:text="查看历史数据"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:textColor="#fff"
-                    android:textSize="@dimen/common_dialog_message" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <!--睡眠-->
-        <LinearLayout
-            android:id="@+id/ll_sleep_all"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="#fff"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="10dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:background="#fff"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/health_sleep_background"
+                    android:background="@drawable/health_sport_background"
                     android:gravity="center"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/health_sleep_logo" />
+                        android:src="@drawable/health_sport_logo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
-                        android:text="休息"
+                        android:text="运动"
                         android:textColor="#fff"
                         android:textSize="@dimen/common_dialog_message" />
+
                 </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/health_sleep_dot" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_health_sleep_deep"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="6"
-                    android:textColor="@color/total_color_3"
-                    android:textSize="60sp"
-                    android:textStyle="italic" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/health_sleep_dot1" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="H深睡"
-                        android:textColor="@color/total_color_3"
-                        android:textSize="@dimen/common_dialog_message" />
-
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/tv_health_sleep_light"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="3"
-                    android:textColor="@color/common_title"
-                    android:textSize="60sp"
-                    android:textStyle="italic" />
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:src="@drawable/health_sleep_dot1" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="H小憩"
-                        android:textColor="@color/common_title"
-                        android:textSize="@dimen/common_dialog_message" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="20dp"
-                android:background="#000" />
-
-            <TextView
-                android:id="@+id/tv_health_sleep_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="数据解读：休息正常"
-                android:textColor="@color/common_body"
-                android:textSize="@dimen/common_dialog_message" />
-
-            <Button
-                android:id="@+id/bt_health_sleep_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/health_sport_message"
-                android:padding="10dp"
-                android:gravity="left|center"
-                android:text="旺财昨天休息XX小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧。"
-                android:textColor="@color/common_body"
-                android:textSize="@dimen/common_dialog_message" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_tosleep"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/health_sleep_background"
                     android:gravity="center"
-                    android:text="查看历史数据"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:textColor="#fff"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_health_sport_ed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="0.0"
+                        android:textColor="@color/common_title"
+                        android:textSize="60sp"
+                        android:textStyle="italic" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%完成度"
+                            android:textColor="@color/common_title"
+                            android:textSize="@dimen/common_dialog_message" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="20dp"
+                    android:background="#000" />
+
+                <TextView
+                    android:id="@+id/tv_health_sport_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="宠物昨天消耗了很多哦"
+                    android:textColor="@color/common_body"
                     android:textSize="@dimen/common_dialog_message" />
 
+                <Button
+                    android:id="@+id/bt_health_sport_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/health_sport_message"
+                    android:gravity="left|center"
+                    android:padding="10dp"
+                    android:text="运动不足将会导致：肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为了你家宠物的健康，请努力完成运动目标。"
+                    android:textColor="@color/common_body"
+                    android:textSize="@dimen/common_dialog_message" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/health_index_bt_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/health_sport_background"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="调整运动目标"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/common_dialog_message" />
+
+                    <TextView
+                        android:id="@+id/tv_tosport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/health_sport_background"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="查看历史数据"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/common_dialog_message" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
 
-        <!--nodata-->
-        <LinearLayout
-            android:id="@+id/ll_nodata"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="wrap_content"
+            <!--睡眠-->
+            <LinearLayout
+                android:id="@+id/ll_sleep_all"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="当天尚无数据"
-                />
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/health_sleep_background"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/health_sleep_logo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            android:text="休息"
+                            android:textColor="#fff"
+                            android:textSize="@dimen/common_dialog_message" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/health_sleep_dot" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_health_sleep_deep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="6"
+                        android:textColor="@color/total_color_3"
+                        android:textSize="60sp"
+                        android:textStyle="italic" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:src="@drawable/health_sleep_dot1" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:text="H深睡"
+                            android:textColor="@color/total_color_3"
+                            android:textSize="@dimen/common_dialog_message" />
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/tv_health_sleep_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="3"
+                        android:textColor="@color/common_title"
+                        android:textSize="60sp"
+                        android:textStyle="italic" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:src="@drawable/health_sleep_dot1" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:text="H小憩"
+                            android:textColor="@color/common_title"
+                            android:textSize="@dimen/common_dialog_message" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="20dp"
+                    android:background="#000" />
+
+                <TextView
+                    android:id="@+id/tv_health_sleep_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="数据解读：休息正常"
+                    android:textColor="@color/common_body"
+                    android:textSize="@dimen/common_dialog_message" />
+
+                <Button
+                    android:id="@+id/bt_health_sleep_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/health_sport_message"
+                    android:gravity="left|center"
+                    android:padding="10dp"
+                    android:text="旺财昨天休息XX小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧。"
+                    android:textColor="@color/common_body"
+                    android:textSize="@dimen/common_dialog_message" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_tosleep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/health_sleep_background"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="查看历史数据"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/common_dialog_message" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--nodata-->
+            <LinearLayout
+                android:id="@+id/ll_nodata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当天尚无数据" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
 
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

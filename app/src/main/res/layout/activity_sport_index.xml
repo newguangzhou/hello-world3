@@ -1,204 +1,267 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/total_color_1">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="6.5dp"
-            android:background="@color/total_color_10" />
 
-        <!--今日运动-->
-        <com.xiaomaoqiu.now.view.SportTitleView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            app:first_text="实际"
-            app:second_text="目标"
-            app:titletext="今日运动" />
+        <!--<TextView-->
+        <!--android:id="@+id/tv_logout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="退出登录"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--/>-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="13dp"
-            android:layout_marginRight="15dp"
-            android:background="@color/total_color_8" />
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/sport_index_totay_tip"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运动统计"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/batteryView"
+            android:layout_centerHorizontal="true" />
+
+        <com.xiaomaoqiu.now.view.BatteryView
+            android:id="@+id/batteryView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:src="@drawable/battery100" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
-            android:gravity="right"
-            android:textColor="@color/total_color_4"
-            android:textSize="11.5sp" />
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="17.5dp"
-            android:layout_marginLeft="19dp"
-            android:layout_marginRight="16sp"
-            android:layout_marginTop="17dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6.5dp"
+                android:background="@color/total_color_10" />
 
-            <TextView
-                android:id="@+id/sleep_time_text"
-                style="@style/sleep_second_title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="23dp"
-                android:text="运动量" />
-
-            <TextView
-                style="@style/sleep_second_title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/sleep_time_text"
-                android:layout_alignRight="@+id/sleep_time_text"
-                android:layout_below="@+id/sleep_time_text"
-                android:layout_marginTop="10dp"
-                android:text="千  卡"
-                android:id="@+id/tv_time_qianka"
-                />
-            <com.xiaomaoqiu.now.view.chart.ThreePartLineView
-                android:id="@+id/threePartLineView_sport"
+            <!--今日运动-->
+            <com.xiaomaoqiu.now.view.SportTitleView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/sleep_time_text"
-                android:layout_alignTop="@+id/sleep_time_text"
-                android:layout_toRightOf="@+id/sleep_time_text"></com.xiaomaoqiu.now.view.chart.ThreePartLineView>
-            <com.xiaomaoqiu.now.view.chart.TextAimView
-                android:id="@+id/textAimView_sport"
-                android:layout_width="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:first_text="实际"
+                app:second_text="目标"
+                app:titletext="今日运动" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/total_color_8" />
+
+            <TextView
+                android:id="@+id/sport_index_totay_tip"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/threePartLineView_sport"
-                android:layout_toRightOf="@+id/tv_time_qianka"
-                android:layout_alignLeft="@id/threePartLineView_sport"
-                >
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="4dp"
+                android:gravity="right"
+                android:textColor="@color/total_color_4"
+                android:textSize="11.5sp" />
 
-            </com.xiaomaoqiu.now.view.chart.TextAimView>
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="17.5dp"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="16sp"
+                android:layout_marginTop="17dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="6.5dp"
-            android:background="@color/total_color_8" />
+                <TextView
+                    android:id="@+id/sleep_time_text"
+                    style="@style/sleep_second_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="23dp"
+                    android:text="运动量" />
+
+                <TextView
+                    android:id="@+id/tv_time_qianka"
+                    style="@style/sleep_second_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/sleep_time_text"
+                    android:layout_alignRight="@+id/sleep_time_text"
+                    android:layout_below="@+id/sleep_time_text"
+                    android:layout_marginTop="10dp"
+                    android:text="千  卡" />
+
+                <com.xiaomaoqiu.now.view.chart.ThreePartLineView
+                    android:id="@+id/threePartLineView_sport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/sleep_time_text"
+                    android:layout_alignTop="@+id/sleep_time_text"
+                    android:layout_toRightOf="@+id/sleep_time_text"></com.xiaomaoqiu.now.view.chart.ThreePartLineView>
+
+                <com.xiaomaoqiu.now.view.chart.TextAimView
+                    android:id="@+id/textAimView_sport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/threePartLineView_sport"
+                    android:layout_below="@+id/threePartLineView_sport"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/tv_time_qianka">
+
+                </com.xiaomaoqiu.now.view.chart.TextAimView>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6.5dp"
+                android:background="@color/total_color_8" />
 
 
-        <!--七天运动-->
-        <com.xiaomaoqiu.now.view.SportTitleView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            app:first_text="实际"
-            app:second_text="目标"
-            app:titletext="7日运动" />
+            <!--七天运动-->
+            <com.xiaomaoqiu.now.view.SportTitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:first_text="实际"
+                app:second_text="目标"
+                app:titletext="7日运动" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="13dp"
-            android:layout_marginRight="15dp"
-            android:background="@color/total_color_8" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/total_color_8" />
 
-        <TextView
-            android:id="@+id/sport_index_week_tip"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right|top"
-            android:paddingTop="3dp"
-            android:textColor="@color/total_color_4"
-            android:textSize="11.5sp" />
+            <TextView
+                android:id="@+id/sport_index_week_tip"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right|top"
+                android:paddingTop="3dp"
+                android:textColor="@color/total_color_4"
+                android:textSize="11.5sp" />
 
-        <mbg.chartviews.CustomLineChart
-            android:id="@+id/line_chart_week"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginBottom="16dp"
-            app:innerPaddingLeftValue="0.5"
-            app:innerPaddingRightValue="0.5"
-            app:line_mode="dotted"
-            app:isFill="false"
-            app:xAxis_show="false"
-            app:xAxis_textColor="@color/total_color_7"
-            app:xAxis_textSize="11sp"
-            app:yAxis_format="/Kcal"
-            app:yAxis_format_only_top="true"
-            app:yAxis_maxValue="1500"
-            app:yAxis_show="true"
-            app:yAxis_textColor="@color/total_color_7"
-            app:yAxis_textSize="11sp"
-            app:yAxis_width="20dp" />
+            <mbg.chartviews.CustomLineChart
+                android:id="@+id/line_chart_week"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="16dp"
+                app:innerPaddingLeftValue="0.5"
+                app:innerPaddingRightValue="0.5"
+                app:isFill="false"
+                app:line_mode="dotted"
+                app:xAxis_show="false"
+                app:xAxis_textColor="@color/total_color_7"
+                app:xAxis_textSize="11sp"
+                app:yAxis_format="/Kcal"
+                app:yAxis_format_only_top="true"
+                app:yAxis_maxValue="1500"
+                app:yAxis_show="true"
+                app:yAxis_textColor="@color/total_color_7"
+                app:yAxis_textSize="11sp"
+                app:yAxis_width="20dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="6.5dp"
-            android:background="@color/total_color_8" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6.5dp"
+                android:background="@color/total_color_8" />
 
-        <!--30天运动-->
-        <com.xiaomaoqiu.now.view.SportTitleView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            app:first_text="实际"
-            app:second_text="目标"
-            app:titletext="30日运动" />
+            <!--30天运动-->
+            <com.xiaomaoqiu.now.view.SportTitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:first_text="实际"
+                app:second_text="目标"
+                app:titletext="30日运动" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="13dp"
-            android:layout_marginRight="15dp"
-            android:background="@color/total_color_8" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/total_color_8" />
 
-        <TextView
-            android:id="@+id/sport_index_month_tip"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right|top"
-            android:paddingTop="3dp"
-            android:textColor="@color/total_color_4"
-            android:textSize="11.5sp" />
+            <TextView
+                android:id="@+id/sport_index_month_tip"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right|top"
+                android:paddingTop="3dp"
+                android:textColor="@color/total_color_4"
+                android:textSize="11.5sp" />
 
-        <mbg.chartviews.CustomLineChart
-            android:id="@+id/line_chart_month"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginBottom="16dp"
-            app:axisColor="#e1e1e1"
-            app:axis_width="0.2dp"
-            app:innerPaddingLeftValue="1"
-            app:innerPaddingRightValue="1"
-            app:isFill="false"
-            app:line_mode="dotted"
-            app:xAxis_inner_padding="3dp"
-            app:xAxis_sec_textColor="@color/total_color_1"
-            app:xAxis_sec_textSize="11.5sp"
-            app:xAxis_show="false"
-            app:xAxis_textColor="@color/total_color_7"
-            app:xAxis_textSize="11sp"
-            app:yAxis_format="/Kcal"
-            app:yAxis_format_only_top="true"
-            app:yAxis_maxValue="1500"
-            app:yAxis_show="true"
-            app:yAxis_textColor="@color/total_color_7"
-            app:yAxis_textSize="11sp"
-            app:yAxis_width="15dp" />
+            <mbg.chartviews.CustomLineChart
+                android:id="@+id/line_chart_month"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="16dp"
+                app:axisColor="#e1e1e1"
+                app:axis_width="0.2dp"
+                app:innerPaddingLeftValue="1"
+                app:innerPaddingRightValue="1"
+                app:isFill="false"
+                app:line_mode="dotted"
+                app:xAxis_inner_padding="3dp"
+                app:xAxis_sec_textColor="@color/total_color_1"
+                app:xAxis_sec_textSize="11.5sp"
+                app:xAxis_show="false"
+                app:xAxis_textColor="@color/total_color_7"
+                app:xAxis_textSize="11sp"
+                app:yAxis_format="/Kcal"
+                app:yAxis_format_only_top="true"
+                app:yAxis_maxValue="1500"
+                app:yAxis_show="true"
+                app:yAxis_textColor="@color/total_color_7"
+                app:yAxis_textSize="11sp"
+                app:yAxis_width="15dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="6.5dp"
-            android:background="@color/total_color_10" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6.5dp"
+                android:background="@color/total_color_10" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

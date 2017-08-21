@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.Summary;
@@ -21,10 +22,14 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.util.ToastUtil;
+import com.xiaomaoqiu.now.view.BatteryView;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -36,6 +41,9 @@ import retrofit2.Response;
 
 @SuppressLint("WrongConstant")
 public class HealthIndexActivity extends BaseActivity implements PickSportNumberDialog_RAW_Activity.OnPickNumberListener, View.OnClickListener {
+
+    private View btn_go_back;
+    public BatteryView batteryView;
 
     static int REQ_CODE_GO_OUT = 1;
     TextView tv_name;
@@ -57,9 +65,39 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     View ll_nodata;
 
 
+    String petName = PetInfoInstance.getInstance().getNick();
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceOffline(EventManage.DeviceOffline event) {
+        batteryView.setDeviceOffline();
+//        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
+    }
 
-    String petName= PetInfoInstance.getInstance().getNick();
+    //设备状态更新
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void onDeviceInfoChanged(EventManage.notifyDeviceStateChange event) {
+        if (!DeviceInfoInstance.getInstance().online) {
+//            ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
+            return;
+        }
+        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                DeviceInfoInstance.getInstance().lastGetTime);
+    }
 
+    //todo 小米推送
+    //设备离线
+    @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
+    public void receivePushDeviceOffline(PushEventManage.deviceOffline event) {
+        batteryView.setDeviceOffline();
+//        DialogUtil.showDeviceOfflineDialog(this, "离线通知");
+    }
+
+
+    @Override
+    public int frameTemplate() {//没有标题栏
+        return 0;
+    }
 
     @SuppressLint({"JavascriptInterface", "SetJavaScriptEnabled"})
     @Override
@@ -72,13 +110,22 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
     }
 
     private void initView() {
-        ll_sport_all=findViewById(R.id.ll_sport_all);
-        ll_sleep_all=findViewById(R.id.ll_sleep_all);
-        ll_nodata=findViewById(R.id.ll_nodata);
+
+        btn_go_back = findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        ll_sport_all = findViewById(R.id.ll_sport_all);
+        ll_sleep_all = findViewById(R.id.ll_sleep_all);
+        ll_nodata = findViewById(R.id.ll_nodata);
         health_index_bt_change = findViewById(R.id.health_index_bt_change);
         health_index_bt_change.setOnClickListener(this);
-        tv_name= (TextView) this.findViewById(R.id.tv_name);
-        tv_name.setText(petName+"健康日记");
+        tv_name = (TextView) this.findViewById(R.id.tv_name);
+        tv_name.setText(petName + "健康日记");
         tv_date = (TextView) this.findViewById(R.id.tv_date);
         tv_health_sport_message = (TextView) this.findViewById(R.id.tv_health_sport_message);
         bt_health_sport_message = (Button) this.findViewById(R.id.bt_health_sport_message);
@@ -113,6 +160,36 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
             }
         });
 
+
+        batteryView = (BatteryView) findViewById(R.id.batteryView);
+        batteryView.setActivity(this);
+
+        //点击弹出电池
+        batteryView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (!DeviceInfoInstance.getInstance().online) {
+                    ToastUtil.showTost("追踪器离线");
+                    return;
+                }
+                if (DeviceInfoInstance.getInstance().battery_level > 1.0f) {
+                    PetInfoInstance.getInstance().getPetLocation();
+                }
+                batteryView.pushBatteryDialog(DeviceInfoInstance.getInstance().battery_level,
+                        DeviceInfoInstance.getInstance().lastGetTime);
+            }
+        });
+
+        if (!DeviceInfoInstance.getInstance().online) {
+//            ToastUtil.showTost("您的设备尚未开机！");
+            batteryView.setDeviceOffline();
+        } else {
+            batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                    DeviceInfoInstance.getInstance().lastGetTime);
+        }
+        EventBus.getDefault().register(this);
+
     }
 
     private void initData() {
@@ -140,7 +217,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                         PetSportBean.SportBean bean = message.data.get(0);
                         DecimalFormat df = new DecimalFormat("0.00");//格式化
 //                        sportTarget = df.format(bean.target_amount);
-                        PetInfoInstance.getInstance().yesterday_target_amount=(int) bean.target_amount;
+                        PetInfoInstance.getInstance().yesterday_target_amount = (int) bean.target_amount;
                         PetInfoInstance.getInstance().yesterday_reality_amount = bean.reality_amount;
                         PetInfoInstance.getInstance().yesterday_percentage = bean.percentage;
 
@@ -151,15 +228,15 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                             text = PetInfoInstance.getInstance().getNick() + "昨天运动消耗了"
                                     + PetInfoInstance.getInstance().yesterday_reality_amount + "卡路里，离运动目标还有"
                                     + (100 - PetInfoInstance.getInstance().yesterday_percentage) + "%的距离";
-                            sportMessage = "运动不足将会导致"+PetInfoInstance.getInstance().getNick()+"肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为ta的健康，请努力完成运动目标。";
+                            sportMessage = "运动不足将会导致" + PetInfoInstance.getInstance().getNick() + "肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为ta的健康，请努力完成运动目标。";
 
                         } else if (PetInfoInstance.getInstance().yesterday_percentage <= 110) {
                             text = PetInfoInstance.getInstance().getNick() + "昨天运动消耗了"
                                     + PetInfoInstance.getInstance().yesterday_reality_amount + "卡路里，完美完成运动目标";
-                            sportMessage = "适当运动能保持"+PetInfoInstance.getInstance().getNick()+"健康，也让Ta得到足够的玩乐，帮助Ta发泄情绪。请继续保持良好的运动习惯。";
+                            sportMessage = "适当运动能保持" + PetInfoInstance.getInstance().getNick() + "健康，也让Ta得到足够的玩乐，帮助Ta发泄情绪。请继续保持良好的运动习惯。";
                         } else if (PetInfoInstance.getInstance().yesterday_percentage <= 115) {
                             text = PetInfoInstance.getInstance().getNick() + "昨天运动消耗" + PetInfoInstance.getInstance().yesterday_reality_amount + "卡里路，超额完成运动目标" + (PetInfoInstance.getInstance().yesterday_percentage - 100) + "%";
-                            sportMessage = "适当提高运动强度值得鼓励的。但是过量的运动会让"+ PetInfoInstance.getInstance().getNick() + "心脏、关节过度负荷，诱发疾病。建议密切观察ta日常表现。";
+                            sportMessage = "适当提高运动强度值得鼓励的。但是过量的运动会让" + PetInfoInstance.getInstance().getNick() + "心脏、关节过度负荷，诱发疾病。建议密切观察ta日常表现。";
                         } else if (PetInfoInstance.getInstance().yesterday_percentage > 115) {
                             text = PetInfoInstance.getInstance().getNick() + "昨天运动消耗" + PetInfoInstance.getInstance().yesterday_reality_amount + "卡里路，超额完成运动目标" + (PetInfoInstance.getInstance().yesterday_percentage - 100) + "%";
                             sportMessage = "过高的运动量或让心脏过度负荷、肌肉疲劳、关节劳损，产生心肺功能障碍、骨关节脱臼、骨折等问题。建议让兽医评估" + PetInfoInstance.getInstance().getNick() + "身体情况后，再决定运动方案。";
@@ -188,7 +265,6 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 ll_nodata.setVisibility(View.VISIBLE);
             }
         });
-
 
 
         ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
@@ -228,7 +304,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                         }
                         tv_health_sleep_message.setText("数据解读：" + sleepText);
                         bt_health_sleep_message.setText(sleepMessage);
-                    }else{
+                    } else {
                         ll_sport_all.setVisibility(View.GONE);
                         ll_sleep_all.setVisibility(View.GONE);
                         ll_nodata.setVisibility(View.VISIBLE);
@@ -245,11 +321,9 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
         });
 
 
-
-
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(dBefore);
-        tv_date.setText(dateString+"(昨天)");
+        tv_date.setText(dateString + "(昨天)");
 
     }
 
@@ -297,6 +371,13 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
                 dialog.show();
                 break;
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
 }

@@ -111,10 +111,10 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         if (!DeviceInfoInstance.getInstance().online) {
 //            ToastUtil.showTost("您的设备尚未开机！");
             batteryView.setDeviceOffline();
-            return;
+        }else {
+            batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                    DeviceInfoInstance.getInstance().lastGetTime);
         }
-        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
-                DeviceInfoInstance.getInstance().lastGetTime);
 
         EventBus.getDefault().register(this);
 

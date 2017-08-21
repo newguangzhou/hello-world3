@@ -75,12 +75,10 @@ public class PetInfoActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void oncallbackUpdatePetInfo(EventManage.callbackUpdatePetInfo event) {
-        if(!event.updateHeader) {
+        if (!event.updateHeader) {
             finish();
         }
     }
-
-
 
 
     //设备离线
@@ -145,7 +143,7 @@ public class PetInfoActivity extends BaseActivity {
         findViewById(R.id.btn_modify_weight).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!DeviceInfoInstance.getInstance().online){
+                if (!DeviceInfoInstance.getInstance().online) {
                     ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     return;
                 }
@@ -201,10 +199,10 @@ public class PetInfoActivity extends BaseActivity {
         if (!DeviceInfoInstance.getInstance().online) {
 //            ToastUtil.showTost("您的设备尚未开机！");
             batteryView.setDeviceOffline();
-            return;
+        } else {
+            batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
+                    DeviceInfoInstance.getInstance().lastGetTime);
         }
-        batteryView.showBatterylevel(DeviceInfoInstance.getInstance().battery_level,
-                DeviceInfoInstance.getInstance().lastGetTime);
         initPetInfo();
     }
 
@@ -218,7 +216,7 @@ public class PetInfoActivity extends BaseActivity {
                     finish();
                     return;
                 }
-                PetInfoInstance.getInstance().event.updateHeader=false;
+                PetInfoInstance.getInstance().event.updateHeader = false;
                 PetInfoInstance.getInstance().updatePetInfo(modifyBean);
 //                if(!PetInfoInstance.getInstance().petSexOrHeavyChanged(modifyBean)){
 //
@@ -335,7 +333,7 @@ public class PetInfoActivity extends BaseActivity {
         if (!TextUtils.isEmpty(modifyBean.nick)) {
             (txt_pet_name).setText(modifyBean.nick);
         }
-        txt_pet_name.setOnClickListener(new View.OnClickListener(){
+        txt_pet_name.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -373,7 +371,7 @@ public class PetInfoActivity extends BaseActivity {
         chk_gender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!DeviceInfoInstance.getInstance().online){
+                if (!DeviceInfoInstance.getInstance().online) {
                     ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
                     chk_gender.setChecked(!isChecked);
                     return;
@@ -418,7 +416,7 @@ public class PetInfoActivity extends BaseActivity {
                     modifyBean.birthday = tmpDateFormatBirthday.toString();
                     txt_birthday.setText(modifyBean.birthday);
                     DecimalFormat df = new DecimalFormat("0.00");//格式化
-                    modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
+                    modifyBean.target_energy = df.format(PetUtil.getInstance().calculateEnergy());
                 }
             }, null);
         }
@@ -474,7 +472,7 @@ public class PetInfoActivity extends BaseActivity {
                     modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
                     txt_weight.setText(modifyBean.weight + "kg");
                     DecimalFormat df = new DecimalFormat("0.00");//格式化
-                    modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
+                    modifyBean.target_energy = df.format(PetUtil.getInstance().calculateEnergy());
                 }
                 break;
             case REQ_CODE_VARIETY:
@@ -485,7 +483,7 @@ public class PetInfoActivity extends BaseActivity {
 //                modifyBean.target_energy = PetUtil.getInstance().calculateEnergy() + "";
                 DecimalFormat df = new DecimalFormat("0.00");//格式化
                 PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
-                modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
+                modifyBean.target_energy = df.format(PetUtil.getInstance().calculateEnergy());
                 txt_variety.setText(modifyBean.description);
                 break;
             case REQ_CODE_PHOTO_SOURCE:
@@ -520,7 +518,7 @@ public class PetInfoActivity extends BaseActivity {
             case Crop.REQUEST_CROP:
                 modifyBean.logo_url = PetInfoInstance.getInstance().getPackBean().logo_url;
                 Uri uri = Uri.parse(modifyBean.logo_url);
-                if(imgLogo==null){
+                if (imgLogo == null) {
                     return;
                 }
                 imgLogo.setImageURI(uri);
@@ -547,7 +545,7 @@ public class PetInfoActivity extends BaseActivity {
             ToastUtil.showTost("信息需要完整");
             return;
         }
-        PetInfoInstance.getInstance().event.updateHeader=false;
+        PetInfoInstance.getInstance().event.updateHeader = false;
         PetInfoInstance.getInstance().updatePetInfo(modifyBean);
 //        DialogUtil.showTwoButtonDialog(PetInfoActivity.this, "配置宠物信息将重启追踪器", "放弃修改", "重启追踪器", new View.OnClickListener() {
 //
