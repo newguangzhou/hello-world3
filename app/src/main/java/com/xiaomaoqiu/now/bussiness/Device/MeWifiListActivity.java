@@ -58,6 +58,8 @@ public class MeWifiListActivity extends BaseActivity {
 
     int request_code =10;//方便关闭当前activity
 
+    public static RequestBody common_wifi_body;
+
     @Override
     public int frameTemplate() {//没有标题栏
         return 0;
@@ -95,49 +97,20 @@ public class MeWifiListActivity extends BaseActivity {
                     ToastUtil.showTost("请选择wifi");
                     return;
                 }
+
                 String common_wifi="";
                 try {
                     common_wifi  = JSON.toJSONString(adapter.mdatas);
                 }catch (Exception e){
 
                 }
-                RequestBody common_wifi_body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),common_wifi);
-                ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
-                        UserInstance.getInstance().getToken(),
-                        wifi_ssid,
-                        wifi_bssid,
-                        PetInfoInstance.getInstance().getPet_id(),
-                        common_wifi_body
-                ).enqueue(new XMQCallback<BaseBean>() {
-                    @Override
-                    public void onSuccess(Response<BaseBean> response, BaseBean message) {
-                        HttpCode ret = HttpCode.valueOf(message.status);
-                        if (ret == EC_SUCCESS) {
-                            PetInfoInstance.getInstance().getPackBean().wifi_bssid = wifi_bssid;
-                            PetInfoInstance.getInstance().getPackBean().wifi_ssid = wifi_ssid;
-                            UserInstance.getInstance().wifi_bssid = wifi_bssid;
-                            UserInstance.getInstance().wifi_ssid = wifi_ssid;
-                            SPUtil.putHomeWifiMac(wifi_bssid);
-                            SPUtil.putHomeWifiSsid(wifi_ssid);
-//                            finish();
-                            if(!DeviceInfoInstance.getInstance().online){
-                                ToastUtil.showTost("追踪器已离线，修改常住地功能暂时无法使用");
-                                finish();
-                                return;
-                            }
-                            Intent intent=new Intent(MeWifiListActivity.this, MapLocationActivity.class);
+                common_wifi_body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),common_wifi);
 
-                            startActivityForResult(intent, request_code);
-                        }
+                Intent intent=new Intent(MeWifiListActivity.this, MapLocationActivity.class);
+
+                startActivityForResult(intent, request_code);
 
 
-                    }
-
-                    @Override
-                    public void onFail(Call<BaseBean> call, Throwable t) {
-
-                    }
-                });
             }
         });
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);

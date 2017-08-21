@@ -35,6 +35,7 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.AddressAdapter;
@@ -137,9 +138,35 @@ public class MapLocationActivity extends Activity {
                             SPUtil.putHOME_LATITUDE(latitude + "");
                             SPUtil.putHOME_LONGITUDE(longitude + "");
                             EventBus.getDefault().post(event);
+
+                            ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
+                                    UserInstance.getInstance().getToken(),
+                                    MeWifiListActivity.wifi_ssid,
+                                    MeWifiListActivity. wifi_bssid,
+                                    PetInfoInstance.getInstance().getPet_id(),
+                                    MeWifiListActivity.common_wifi_body
+                            ).enqueue(new XMQCallback<BaseBean>() {
+                                @Override
+                                public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                                    HttpCode ret = HttpCode.valueOf(message.status);
+                                    if (ret == EC_SUCCESS) {
+                                        PetInfoInstance.getInstance().getPackBean().wifi_bssid = MeWifiListActivity.wifi_bssid;
+                                        PetInfoInstance.getInstance().getPackBean().wifi_ssid = MeWifiListActivity.wifi_ssid;
+                                        UserInstance.getInstance().wifi_bssid = MeWifiListActivity.wifi_bssid;
+                                        UserInstance.getInstance().wifi_ssid =MeWifiListActivity. wifi_ssid;
+                                        SPUtil.putHomeWifiMac(MeWifiListActivity.wifi_bssid);
+                                        SPUtil.putHomeWifiSsid(MeWifiListActivity.wifi_ssid);
+                                        finish();
+                                    }
+                                }
+
+                                @Override
+                                public void onFail(Call<BaseBean> call, Throwable t) {
+
+                                }
+                            });
+
                         }
-//                        ToastUtil.showTost("地址保存成功");
-                        finish();
 
                     }
 
