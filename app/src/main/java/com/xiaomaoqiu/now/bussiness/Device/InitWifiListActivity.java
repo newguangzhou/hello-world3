@@ -96,6 +96,11 @@ public class InitWifiListActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                if("".equals(wifi_bssid)){
+                    ToastUtil.showTost("请选择wifi");
+                    return;
+                }
+
                 String common_wifi="";
                 try {
                     common_wifi  = JSON.toJSONString(adapter.mdatas);
@@ -151,8 +156,8 @@ public class InitWifiListActivity extends BaseActivity {
                 });
             }
         });
-        tv_next.setEnabled(false);
-        tv_next.setTextColor(getResources().getColor(R.color.black));
+//        tv_next.setEnabled(false);
+//        tv_next.setTextColor(getResources().getColor(R.color.black));
 
 
         rv_wifilist = (RecyclerView) findViewById(R.id.rv_wifilist);
@@ -167,8 +172,8 @@ public class InitWifiListActivity extends BaseActivity {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 getWifiTime=0;
-                tv_next.setEnabled(false);
-                tv_next.setTextColor(getResources().getColor(R.color.black));
+//                tv_next.setEnabled(false);
+//                tv_next.setTextColor(getResources().getColor(R.color.black));
                 DialogUtil.showProgress(InitWifiListActivity.this, "");
                 DeviceInfoInstance.getInstance().sendGetWifiListCmd();
             }
@@ -189,15 +194,15 @@ public class InitWifiListActivity extends BaseActivity {
                     }
                     wifi_bssid = "";
                     wifi_ssid = "";
-                    tv_next.setEnabled(false);
-                    tv_next.setTextColor(getResources().getColor(R.color.black));
+//                    tv_next.setEnabled(false);
+//                    tv_next.setTextColor(getResources().getColor(R.color.black));
                     adapter.mdatas.get(position).is_homewifi = adapter.mdatas.get(position).is_homewifi == 0 ? 1 : 0;
 
                     if (adapter.mdatas.get(position).is_homewifi == 1) {
                         wifi_bssid = adapter.mdatas.get(position).wifi_bssid;
                         wifi_ssid = adapter.mdatas.get(position).wifi_ssid;
-                        tv_next.setEnabled(true);
-                        tv_next.setTextColor(getResources().getColor(R.color.white));
+//                        tv_next.setEnabled(true);
+//                        tv_next.setTextColor(getResources().getColor(R.color.white));
                         for (WifiBean bean : adapter.mdatas) {
                             if (!bean.wifi_bssid.equals(adapter.mdatas.get(position).wifi_bssid)) {
                                 bean.is_homewifi = 0;
@@ -237,8 +242,8 @@ public class InitWifiListActivity extends BaseActivity {
             DeviceInfoInstance.getInstance().sendGetWifiListCmd();
         }else{
             getWifiTime=0;
-            tv_next.setEnabled(true);
-            tv_next.setTextColor(getResources().getColor(R.color.white));
+//            tv_next.setEnabled(true);
+//            tv_next.setTextColor(getResources().getColor(R.color.white));
         }
 
     }

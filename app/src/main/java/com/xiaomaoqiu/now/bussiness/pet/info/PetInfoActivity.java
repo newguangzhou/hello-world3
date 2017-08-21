@@ -143,10 +143,10 @@ public class PetInfoActivity extends BaseActivity {
         findViewById(R.id.btn_modify_weight).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!DeviceInfoInstance.getInstance().online) {
-                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
-                    return;
-                }
+//                if (!DeviceInfoInstance.getInstance().online) {
+//                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
+//                    return;
+//                }
                 modifyWeight();
             }
         });
@@ -371,11 +371,11 @@ public class PetInfoActivity extends BaseActivity {
         chk_gender.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!DeviceInfoInstance.getInstance().online) {
-                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
-                    chk_gender.setChecked(!isChecked);
-                    return;
-                }
+//                if (!DeviceInfoInstance.getInstance().online) {
+//                    ToastUtil.showTost("追踪器已离线，此功能暂时无法使用");
+//                    chk_gender.setChecked(!isChecked);
+//                    return;
+//                }
                 if (isChecked) {
                     modifyBean.sex = Constants.Female;
                 } else {

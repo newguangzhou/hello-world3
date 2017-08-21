@@ -192,6 +192,7 @@ public class MapInstance implements BDLocationListener {
         OverlayOptions options = new MarkerOptions()
                 .icon(petbitmapDescriptor)
                 .draggable(true)
+                .anchor(0.5f,0.5f)
                 .position(new LatLng(petLatitude, petLongitude))
                 .visible(true);
         mPetMarker = (Marker) (mBaiduMap.addOverlay(options));
@@ -260,9 +261,15 @@ public class MapInstance implements BDLocationListener {
     public void refreshMap() {
         mBaiduMap.clear();
 
-        if (desLatLng == null) {
-            desLatLng = new LatLng(petLatitude, petLongitude);
-        }
+//        if (desLatLng == null) {
+            if(petLatitude<=0||petLongitude<=0){
+                petLatitude=phoneLatitude;
+                petLongitude=phoneLongitude;
+                desLatLng=new LatLng(phoneLatitude, phoneLongitude);
+            }else {
+                desLatLng = new LatLng(petLatitude, petLongitude);
+            }
+//        }
         mCircleOptions = new CircleOptions()
                 .center(desLatLng) // 圆心坐标
                 .radius((int) radius) // 半径 单位 米
@@ -270,6 +277,8 @@ public class MapInstance implements BDLocationListener {
 //                .stroke(new Stroke(2, Color.parseColor("#ffffff"))) // 设置边框 Stroke 参数 宽度单位像素默认5px 颜色
                 .fillColor(Color.parseColor("#1B2e68AA")); // 设置圆的填充颜色
         mBaiduMap.addOverlay(mCircleOptions);
+
+
 
         switch (PetInfoInstance.getInstance().PET_MODE) {
             case Constants.PET_STATUS_FIND:
@@ -284,6 +293,7 @@ public class MapInstance implements BDLocationListener {
                 OverlayOptions findoptions = new MarkerOptions()
                         .icon(petbitmapDescriptor)
                         .draggable(true)
+                        .anchor(0.5f,0.5f)
                         .position(new LatLng(petLatitude, petLongitude))
                         .visible(true);
                 mPetMarker = (Marker) (mBaiduMap.addOverlay(findoptions));
@@ -304,7 +314,9 @@ public class MapInstance implements BDLocationListener {
                         .visible(true);
                 mFindPolyline = (Marker) (mBaiduMap.addOverlay(ancheroptions));
                 mFindPolyline.setRotate(calculateRotate());
+                calculateDistance();
 //                mFindPolyline.setRotate(180);
+
                 break;
             case Constants.PET_STATUS_WALK:
 
@@ -318,12 +330,14 @@ public class MapInstance implements BDLocationListener {
                     OverlayOptions petoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
+                            .anchor(0.5f,0.5f)
                             .position(new LatLng(petLatitude, petLongitude))
                             .visible(true);
                     mPetMarker = (Marker) (mBaiduMap.addOverlay(petoptions));
                 } catch (Exception e) {
 
                 }
+                setCenter(desLatLng, 300);
                 break;
             case Constants.PET_STATUS_COMMON:
 //                initPhoneMarker();
@@ -342,16 +356,17 @@ public class MapInstance implements BDLocationListener {
                     OverlayOptions commonoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
+                            .anchor(0.5f,0.5f)
                             .position(new LatLng(petLatitude, petLongitude))
                             .visible(true);
                     mPetMarker = (Marker) (mBaiduMap.addOverlay(commonoptions));
                 } catch (Exception e) {
 
                 }
-
+                setCenter(desLatLng, 300);
                 break;
         }
-        calculateDistance();
+
 
 //        if(PetInfoInstance.getInstance().getAtHome()||PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
 //            initPhoneMarker();
@@ -425,9 +440,9 @@ public class MapInstance implements BDLocationListener {
         float f = mBaiduMap.getMaxZoomLevel();//19.0
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
         mBaiduMap.animateMapStatus(u);
-        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
-            setCenter(postion, 300);
-        }
+//        if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
+//            setCenter(postion, 300);
+//        }
         refreshMap();
         try {
             mPhoneMarker.setPosition(postion);

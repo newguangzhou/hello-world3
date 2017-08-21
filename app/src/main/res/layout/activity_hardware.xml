@@ -218,7 +218,7 @@
                 android:layout_height="41.5dp"
                 android:background="@color/total_color_8"
                 android:gravity="center_vertical"
-                android:paddingLeft="16dp"
+                android:layout_marginLeft="16dp"
                 android:text="追踪器内置SIM卡信息"
                 android:textColor="@color/total_color_1"
                 android:textSize="16sp" />
@@ -234,10 +234,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingLeft="16dp"
+                android:gravity="left"
+                android:layout_marginLeft="16dp"
                 android:paddingRight="10dp"
-                android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:text="当前sim卡已经充值到2017.7.1"
                 android:textSize="14sp" />
@@ -251,7 +250,7 @@
                 android:gravity="center_vertical"
                 android:paddingBottom="10dp"
                 android:paddingRight="10dp"
-                android:paddingStart="10dp"
+                android:layout_marginLeft="16dp"
                 android:text="@string/sim_tip1"
                 android:textSize="14sp" />
 

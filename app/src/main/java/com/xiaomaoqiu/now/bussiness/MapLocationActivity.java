@@ -185,15 +185,19 @@ public class MapLocationActivity extends Activity {
         });
 
         iv_location = (MapPetAtHomeView) findViewById(R.id.iv_location);
-        iv_location.setAvaterUrl(PetInfoInstance.getInstance().getLogo_url());
+        try {
+            iv_location.setAvaterUrl(PetInfoInstance.getInstance().getLogo_url());
+        } catch (Exception e) {
+
+        }
         ll_noname_address = findViewById(R.id.ll_noname_address);
         ll_noname_address.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                HomelocationInstance.getInstance().setCenter(new LatLng(touch_latitude,touch_longitude), 1000);
-                latitude=touch_latitude;
-                longitude=touch_longitude;
+                HomelocationInstance.getInstance().setCenter(new LatLng(touch_latitude, touch_longitude), 1000);
+                latitude = touch_latitude;
+                longitude = touch_longitude;
                 iv_selected.setVisibility(View.VISIBLE);
                 adapter.mposition = -1;
                 adapter.notifyDataSetChanged();
@@ -238,9 +242,9 @@ public class MapLocationActivity extends Activity {
         });
         mMapView = (TextureMapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
-        UiSettings UiSettings =mBaiduMap.getUiSettings();
-        UiSettings.setRotateGesturesEnabled(true);//打开旋转
-        UiSettings.setScrollGesturesEnabled(true);
+//        UiSettings UiSettings = mBaiduMap.getUiSettings();
+//        UiSettings.setRotateGesturesEnabled(true);//打开旋转
+//        UiSettings.setScrollGesturesEnabled(true);
         mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
@@ -279,9 +283,9 @@ public class MapLocationActivity extends Activity {
                 });
 
                 Log.e("longtianlove", position.toString());
-                touch_latitude=position.latitude;
-                touch_longitude=position.longitude;
-                if (iv_selected.getVisibility() == View.VISIBLE){
+                touch_latitude = position.latitude;
+                touch_longitude = position.longitude;
+                if (iv_selected.getVisibility() == View.VISIBLE) {
                     double[] temp = HomelocationInstance.bd09_To_Gcj02(position.latitude, position.longitude);
                     latitude = temp[0];
                     longitude = temp[1];

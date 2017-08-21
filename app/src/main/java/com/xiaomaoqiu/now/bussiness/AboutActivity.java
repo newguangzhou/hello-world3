@@ -129,10 +129,12 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         Intent intent = new Intent(this, BaseWebViewActivity.class);
         switch (v.getId()) {
             case R.id.tv_help:
+                intent.putExtra("title","使用帮助");
                 intent.putExtra("web_url", "http://www.xiaomaoqiu.com/support.html?nav=2");
                 startActivity(intent);
                 break;
             case R.id.tv_policy:
+                intent.putExtra("title","用户协议与隐私政策");
                 intent.putExtra("web_url", "http://www.xiaomaoqiu.com/proto_user.html");
                 startActivity(intent);
                 break;

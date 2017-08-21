@@ -98,6 +98,7 @@ public class RebootActivity extends BaseActivity implements LogoutView {
             public void onClick(View v) {
                 //跳转到用户协议
                 Intent intent=new Intent(RebootActivity.this, BaseWebViewActivity.class);
+                intent.putExtra("title","用户协议与隐私政策");
                 intent.putExtra("web_url","http://www.xiaomaoqiu.com/proto_user.html");
                 startActivity(intent);
             }
