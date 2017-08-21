@@ -45,10 +45,9 @@
         <!--fresco:failureImageScaleType="centerInside"-->
         <!--fresco:roundedCornerRadius="35dp"-->
         <!--/>-->
-    <include
-        layout="@layout/view_main_header_tosport"/>
+    <include layout="@layout/view_main_header_tosport" />
 
-<TextView
+    <TextView
     android:id="@+id/tv_message"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
