@@ -78,6 +78,17 @@ public class HomelocationInstance implements BDLocationListener {
         initLocation();
     }
 
+
+    //设置中心
+    public void setHomeCenter(){
+        LatLng postion = new LatLng(phoneLatitude, phoneLongitude);
+//        postion= MapInstance.converterLatLng(postion);
+        float f = mBaiduMap.getMaxZoomLevel();//19.0
+        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f);
+        mBaiduMap.animateMapStatus(u);
+        setCenter(postion, 300);
+    }
+
     /**
      * 初始化定位
      */
@@ -155,15 +166,12 @@ public class HomelocationInstance implements BDLocationListener {
         event.latitude=phoneLatitude;
         event.longitude=phoneLongitude;
         EventBus.getDefault().post(event);
-        LatLng postion = new LatLng(phoneLatitude, phoneLongitude);
-//        postion= MapInstance.converterLatLng(postion);
-        float f = mBaiduMap.getMaxZoomLevel();//19.0
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(postion, f - 2);
-        mBaiduMap.animateMapStatus(u);
-        setCenter(postion, 300);
+        setHomeCenter();
         stopLocListener();
-
     }
+
+
+
 
     @Override
     public void onConnectHotSpotMessage(String s, int i) {

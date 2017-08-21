@@ -46,7 +46,7 @@ public class ModifyNameDialog extends InputDialog {
                 int byteLength = editable.toString().getBytes().length;
                 int charLenght = editable.toString().length();
 
-                if (byteLength >= 16) {
+                if (byteLength >16) {
                     editable.delete(charLenght-1,charLenght);
                 }
             }

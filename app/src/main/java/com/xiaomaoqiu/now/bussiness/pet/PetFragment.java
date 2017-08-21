@@ -15,6 +15,7 @@ import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.ThreadUtil;
 import com.xiaomaoqiu.now.bussiness.bean.PetSleepInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
@@ -334,6 +335,11 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                                 DeviceInfoInstance.getInstance().online = true;
                                                 EventBus.getDefault().post(new PushEventManage.deviceOnline());
                                             }
+
+
+
+                                            //关闭地图位置刷新
+                                            MapInstance.getInstance().stopLocListener();
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
                                             break;
@@ -374,6 +380,10 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                             }
 //                                    MapInstance.getInstance().setGPSState(true);
 //                                    EventBus.getDefault().post(new EventManage.GPS_CHANGE());
+                                            //五分钟之内不去判断
+                                            ThreadUtil.open_gps_donot_check_Thread();
+                                            //开启地图位置刷新
+                                            MapInstance.getInstance().startLoc();
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
                                             checkIndex.changeLocatefragment();

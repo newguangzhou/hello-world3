@@ -236,6 +236,7 @@ public class MapLocationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 HomelocationInstance.getInstance().startPosition();
+
                 Log.e("longtianlove", "图标" + iv_location.getX() + ":" + iv_location.getY() + ":" + iv_location.getWidth() + ":" + iv_location.getHeight());
 
             }

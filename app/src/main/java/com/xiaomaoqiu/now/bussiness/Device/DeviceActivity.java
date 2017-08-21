@@ -82,6 +82,7 @@ public class DeviceActivity extends BaseActivity {
             public void onClick(View v) {
                 //sim充值
                 Intent intent=new Intent(DeviceActivity.this, BaseWebViewActivity.class);
+                intent.putExtra("title","小毛球商城");
                 intent.putExtra("web_url","http://www.xiaomaoqiu.com/wechat_shop.html");
                 startActivity(intent);
             }

@@ -16,6 +16,7 @@ import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
+import com.xiaomaoqiu.now.bussiness.ThreadUtil;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
@@ -383,6 +384,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
                 @Override
                 public void onClick(View v) {
+
+
                     ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -394,6 +397,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                                         EventBus.getDefault().post(new PushEventManage.deviceOnline());
                                     }
                                     mFindPetView.setSelected(false);
+
+                                    //关闭地图位置刷新
+                                    MapInstance.getInstance().stopLocListener();
                                     PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                     EventBus.getDefault().post(new EventManage.petModeChanged());
                                     break;
@@ -417,6 +423,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             MapInstance.getInstance().openTime=1;
             String content = getContext().getResources().getString(R.string.open_find_tip);
 
+
             DialogToast.createDialogWithTwoButton(getContext(), content, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -433,6 +440,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                                         EventBus.getDefault().post(new PushEventManage.deviceOnline());
                                     }
                                     mFindPetView.setSelected(true);
+                                    //五分钟之内不去判断
+                                    ThreadUtil.open_gps_donot_check_Thread();
+                                    //开启地图位置刷新
+                                    MapInstance.getInstance().startLoc();
                                     PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                     EventBus.getDefault().post(new EventManage.petModeChanged());
                                     PetInfoInstance.getInstance().getPetLocation();
