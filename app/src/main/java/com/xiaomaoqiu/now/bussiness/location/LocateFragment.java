@@ -545,13 +545,13 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
                                         }
                                     } else {
-                                        ToastUtil.showTost("获取当天数据失败");
+//                                        ToastUtil.showTost("获取当天数据失败");
                                     }
                                 }
 
                                 @Override
                                 public void onFail(Call<PetSportBean> call, Throwable t) {
-                                    ToastUtil.showTost("获取当天数据失败");
+//                                    ToastUtil.showTost("获取当天数据失败");
                                 }
                             });
 

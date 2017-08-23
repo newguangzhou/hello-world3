@@ -237,6 +237,16 @@ public class SportIndexActivity extends BaseActivity implements IChartCallback {
     }
 
     @Override
+    public void onShowWeekDataTip(String data, List<Float> values, int flag) {
+
+    }
+
+    @Override
+    public void onShowMonthDataTip(String data, List<Float> values, int flag) {
+
+    }
+
+    @Override
     public void onHideDataTip(int flag) {
         if (SportChartIndexPresenter.FLAG_WEEK == flag) {
             WeekTip.setText("");

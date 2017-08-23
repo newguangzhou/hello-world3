@@ -145,7 +145,7 @@ public class SleepChartIndexPresenter {
         ArrayList<String> axisLabels = new ArrayList<>();
         ArrayList<Entry> deepList = new ArrayList<>();
         ArrayList<Entry> lightList = new ArrayList<>();
-        ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(MONTH_LENGTH);
+        ArrayList<Date> dates = AppDialog.DateUtil.getPastDates(29);
         Date curDate = AppDialog.DateUtil.getFirstDataOfCurMonth();
         String secondText = curDate.getMonth() + "月";
         int secondIndex = curDate.getDate();
@@ -180,20 +180,36 @@ public class SleepChartIndexPresenter {
     }
 
     /**
-     * 显示某一固定日期数据
+     * 显示某一固定日期数据---周
      *
      * @param index
      * @param xaixsLabel
      * @param values
      * @param flag
      */
-    public void showDatas(int index, String xaixsLabel, List<Float> values, int flag) {
+    public void showWeekDatas(int index, String xaixsLabel, List<Float> values, int flag) {
         if (null == callback) {
             return;
         }
         String month = getMonth(index, FLAG_MONTH == flag);
         xaixsLabel = xaixsLabel.replace("日", "");
-        callback.onShowDataTip(month + xaixsLabel + "日", values, flag);
+        callback.onShowWeekDataTip(month + xaixsLabel + "日", values, flag);
+    }
+    /**
+     * 显示某一固定日期数据---月
+     *
+     * @param index
+     * @param xaixsLabel
+     * @param values
+     * @param flag
+     */
+    public void showMonthDatas(int index, String xaixsLabel, List<Float> values, int flag) {
+        if (null == callback) {
+            return;
+        }
+        String month = getMonth(index, FLAG_MONTH == flag);
+        xaixsLabel = xaixsLabel.replace("日", "");
+        callback.onShowMonthDataTip(month + xaixsLabel + "日", values, flag);
     }
 
     public String getMonth(int index, boolean isMonth) {

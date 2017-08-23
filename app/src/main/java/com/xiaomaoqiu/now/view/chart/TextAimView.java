@@ -55,11 +55,11 @@ public class TextAimView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawText("0",0,40,mPaint);
+
         if(TextUtils.isEmpty(aimString)||TextUtils.isEmpty(totalString)||("0".equals(totalString))){
             return;
         }
-
+        canvas.drawText("0",0,40,mPaint);
         canvas.drawText(aimString,aim,40,mPaint);
         canvas.drawText(totalString,getWidth()-100,40,mPaint);
     }

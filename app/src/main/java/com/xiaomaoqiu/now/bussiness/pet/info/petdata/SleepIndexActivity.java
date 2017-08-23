@@ -108,7 +108,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         monthChartView.setOnChartValueSelectListener(new onChartValueSelectListener() {
             @Override
             public void onChartValueSelect(int index, String xLabel, List<Float> values) {
-                presenter.showDatas(index, xLabel, values, SleepChartIndexPresenter.FLAG_MONTH);
+                presenter.showMonthDatas(index, xLabel, values, SleepChartIndexPresenter.FLAG_MONTH);
             }
 
             @Override
@@ -119,7 +119,7 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
         weekChartView.setOnChartValueSelectListener(new onChartValueSelectListener() {
             @Override
             public void onChartValueSelect(int index, String xLabel, List<Float> values) {
-                presenter.showDatas(index, xLabel, values, SleepChartIndexPresenter.FLAG_WEEK);
+                presenter.showWeekDatas(index, xLabel, values, SleepChartIndexPresenter.FLAG_WEEK);
             }
 
             @Override
@@ -231,7 +231,35 @@ public class SleepIndexActivity extends BaseActivity implements IChartCallback {
             return;
         }
         DecimalFormat df = new DecimalFormat("0.00");//格式化
-        String tip = data + "深睡为" + df.format(values.get(0) - values.get(1)) + "小时，小憩为" + (values.get(1)) + "小时。";
+        String tip = data + "深睡为" + df.format(values.get(0)) + "小时，小憩为" + (values.get(1)) + "小时。";
+        if (SleepChartIndexPresenter.FLAG_WEEK == flag) {
+            weekTip.setText(tip);
+        } else {
+            monthTip.setText(tip);
+        }
+    }
+
+    @Override
+    public void onShowWeekDataTip(String data, List<Float> values, int flag) {
+        if (values == null || values.size() < 2) {
+            return;
+        }
+        DecimalFormat df = new DecimalFormat("0.00");//格式化
+        String tip = data + "深睡为" + df.format(values.get(0)) + "小时，小憩为" + (values.get(1)) + "小时。";
+        if (SleepChartIndexPresenter.FLAG_WEEK == flag) {
+            weekTip.setText(tip);
+        } else {
+            monthTip.setText(tip);
+        }
+    }
+
+    @Override
+    public void onShowMonthDataTip(String data, List<Float> values, int flag) {
+        if (values == null || values.size() < 2) {
+            return;
+        }
+        DecimalFormat df = new DecimalFormat("0.00");//格式化
+        String tip = data + "深睡为" + df.format(values.get(0)-values.get(1)) + "小时，小憩为" + (values.get(1)) + "小时。";
         if (SleepChartIndexPresenter.FLAG_WEEK == flag) {
             weekTip.setText(tip);
         } else {

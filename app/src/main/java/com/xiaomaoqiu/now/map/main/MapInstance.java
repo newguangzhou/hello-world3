@@ -291,7 +291,7 @@ public class MapInstance implements BDLocationListener {
                 OverlayOptions findoptions = new MarkerOptions()
                         .icon(petbitmapDescriptor)
                         .draggable(true)
-                        .anchor(0.5f, 0.5f)
+                        .anchor(0.5f, 1f)
                         .position(new LatLng(petLatitude, petLongitude))
                         .visible(true);
                 mPetMarker = (Marker) (mBaiduMap.addOverlay(findoptions));
@@ -328,7 +328,7 @@ public class MapInstance implements BDLocationListener {
                     OverlayOptions petoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
-                            .anchor(0.5f, 0.5f)
+                            .anchor(0.5f, 1f)
                             .position(new LatLng(petLatitude, petLongitude))
                             .visible(true);
                     mPetMarker = (Marker) (mBaiduMap.addOverlay(petoptions));
@@ -354,7 +354,7 @@ public class MapInstance implements BDLocationListener {
                     OverlayOptions commonoptions = new MarkerOptions()
                             .icon(petbitmapDescriptor)
                             .draggable(true)
-                            .anchor(0.5f, 0.5f)
+                            .anchor(0.5f, 1f)
                             .position(new LatLng(petLatitude, petLongitude))
                             .visible(true);
                     mPetMarker = (Marker) (mBaiduMap.addOverlay(commonoptions));

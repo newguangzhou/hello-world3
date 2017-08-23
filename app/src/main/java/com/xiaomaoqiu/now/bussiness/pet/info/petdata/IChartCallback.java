@@ -17,5 +17,7 @@ public interface IChartCallback {
     public void onSuccessGetWeekDataSet(ArrayList<? extends Entry> deepList,ArrayList<Entry> lightList);
     public void onFail(String msg);
     public void onShowDataTip(String data, List<Float> values, int flag);//点击时提示数据
+    public void onShowWeekDataTip(String data, List<Float> values, int flag);//点击周提示数据
+    public void onShowMonthDataTip(String data, List<Float> values, int flag);//点击月提示数据
     public void onHideDataTip(int flag);
 }

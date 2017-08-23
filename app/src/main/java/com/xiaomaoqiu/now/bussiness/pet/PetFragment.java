@@ -534,13 +534,13 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                             tvSportDone.setText("已消耗"+sportDone+"千卡");
                                             tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                                         } else {
-                                            ToastUtil.showTost("获取当天数据失败");
+//                                            ToastUtil.showTost("获取当天数据失败");
                                         }
                                     }
 
                                     @Override
                                     public void onFail(Call<PetSportBean> call, Throwable t) {
-                                        ToastUtil.showTost("获取当天数据失败");
+//                                        ToastUtil.showTost("获取当天数据失败");
                                     }
                                 });
 

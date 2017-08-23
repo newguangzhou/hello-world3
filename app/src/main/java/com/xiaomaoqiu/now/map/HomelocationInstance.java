@@ -11,6 +11,7 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.TextureMapView;
+import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.map.main.MapInstance;
@@ -74,6 +75,9 @@ public class HomelocationInstance implements BDLocationListener {
 //        mBaiduMap.setIndoorEnable(true);//设置是否显示室内图, 默认室内图不显示
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
+        UiSettings UiSettings =mBaiduMap.getUiSettings();
+        UiSettings.setAllGesturesEnabled(true);
+        UiSettings.setScrollGesturesEnabled(true);
 
         initLocation();
     }
@@ -193,5 +197,14 @@ public class HomelocationInstance implements BDLocationListener {
         double tempLat = z * Math.sin(theta);
         double[] gps = {tempLat,tempLon};
         return gps;
+    }
+
+    public void Destroy(){
+        this.mapView.onDestroy();
+        this.mBaiduMap.clear();
+        this.mBaiduMap=null;
+        this.mLocationClient.stop();
+        this.mLocationClient=null;
+        this.mapView=null;
     }
 }

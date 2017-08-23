@@ -164,21 +164,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="2h" />
-
-                    <TextView
-                        style="@style/sleep_second_title_text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="4h" />
-
-                    <TextView
-                        style="@style/sleep_second_title_text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="6h" />
 
                     <TextView
                         style="@style/sleep_second_title_text"
@@ -192,13 +178,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="10h" />
-
-                    <TextView
-                        style="@style/sleep_second_title_text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="12h" />
 
                     <TextView
@@ -206,7 +185,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="14h" />
+                        android:text="16h" />
+
+                    <TextView
+                        style="@style/sleep_second_title_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="20h" />
+
 
                 </LinearLayout>
 

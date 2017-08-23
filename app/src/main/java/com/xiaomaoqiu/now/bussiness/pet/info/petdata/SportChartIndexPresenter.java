@@ -29,7 +29,7 @@ public class SportChartIndexPresenter {
     public static final int FLAG_WEEK = 0;
     public static final int FLAG_MONTH = 1;
     public static final int WEEK_LENGTH = 7;
-    public static final int MONTH_LENGTH = 30;
+    public static final int MONTH_LENGTH = 29;
 
     private IChartCallback callback;
 
@@ -67,7 +67,7 @@ public class SportChartIndexPresenter {
 
                 @Override
                 public void onFail(Call<PetSportBean> call, Throwable t) {
-                    ToastUtil.showTost("获取当天数据失败");
+//                    ToastUtil.showTost("获取当天数据失败");
                 }
             });
 

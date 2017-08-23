@@ -240,8 +240,8 @@ public class InitMapLocationActivity extends Activity {
         });
         mMapView = (TextureMapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
-        UiSettings UiSettings =mBaiduMap.getUiSettings();
-        UiSettings.setRotateGesturesEnabled(true);//打开旋转
+//        UiSettings UiSettings =mBaiduMap.getUiSettings();
+//        UiSettings.setRotateGesturesEnabled(true);//打开旋转
         mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
@@ -413,6 +413,12 @@ public class InitMapLocationActivity extends Activity {
         longitude = temp[1];
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+//        Log.e("longtianlove-point","width:"+(mMapView.getWidth() / 2)+"height:"+mMapView.getHeight() /2);
+        HomelocationInstance.getInstance().setHomeCenter();
+    }
 
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -456,6 +462,11 @@ public class InitMapLocationActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        HomelocationInstance.getInstance().Destroy();
+        if(mBaiduMap!=null) {
+            mBaiduMap.clear();
+            mBaiduMap = null;
+        }
         EventBus.getDefault().unregister(this);
     }
 }

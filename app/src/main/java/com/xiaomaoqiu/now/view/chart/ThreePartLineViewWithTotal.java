@@ -78,8 +78,8 @@ public class ThreePartLineViewWithTotal extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        double lightWidth = ((light * getMeasuredWidth()) / 16);
-        double deepWidth = (((light + deep) * getMeasuredWidth()) / 16);
+        double lightWidth = ((light * getMeasuredWidth()) / 24);
+        double deepWidth = (((light + deep) * getMeasuredWidth()) / 24);
 
         mPaint.setColor(getResources().getColor(R.color.total_color_2));
         canvas.drawRect((float)lightWidth, 0, (float)deepWidth, getHeight(), mPaint);

@@ -3,6 +3,7 @@ package com.xiaomaoqiu.now.bussiness;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -288,7 +289,12 @@ public class MapLocationActivity extends Activity {
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 iv_location.startAnimation(translateAnimation);
                 projection = mBaiduMap.getProjection();
-                final LatLng position = projection.fromScreenLocation(mapStatus.targetScreen);
+                if(projection==null){
+                    return;
+                }
+                int indexy=(int)(iv_location.getY()/2);
+                Point aimPoint=new Point(mapStatus.targetScreen.x,mapStatus.targetScreen.y+indexy);
+                final LatLng position = projection.fromScreenLocation(aimPoint);
                 Log.e("longtianlove", "地图" + mapStatus.targetScreen.x + ":" + mapStatus.targetScreen.y);
 
                 MapLocationParser.queryLocationDesc(position, new addressParseListener() {
@@ -324,6 +330,8 @@ public class MapLocationActivity extends Activity {
 
         initAnim();
         initData();
+//        HomelocationInstance.getInstance().startPosition();
+
 
         EventBus.getDefault().register(this);
     }
@@ -357,6 +365,7 @@ public class MapLocationActivity extends Activity {
         };
         mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
         nearbySearchOption = new PoiNearbySearchOption();
+
     }
 
     //宠物信息更新
@@ -427,9 +436,21 @@ public class MapLocationActivity extends Activity {
     }
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+//        Log.e("longtianlove-point","width:"+(mMapView.getWidth() / 2)+"height:"+mMapView.getHeight() /2);
+        HomelocationInstance.getInstance().setHomeCenter();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        mBaiduMap.clear();
+
+        HomelocationInstance.getInstance().Destroy();
+        if(mBaiduMap!=null) {
+            mBaiduMap.clear();
+            mBaiduMap = null;
+        }
         EventBus.getDefault().unregister(this);
     }
 }
