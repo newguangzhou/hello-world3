@@ -262,8 +262,8 @@ public class DialogUtil {
                 dialog.dismiss();
             }
         });
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.show();
     }
 
@@ -324,6 +324,42 @@ public class DialogUtil {
         });
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+    //设备确认开机
+    public static void showDeviceOpenOnlineCanclose(Context context, final View.OnClickListener oklistener, final View.OnClickListener cancellistener) {
+        final Dialog dialog = new AppDialog(context, R.layout.dialog_device_show, -1, -2, 0, Gravity.CENTER);
+        TextView tv_message = (TextView) dialog.findViewById(R.id.tv_message);
+        Button btn_ok = (Button) dialog.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if (oklistener != null) {
+                    oklistener.onClick(v);
+                }
+
+            }
+        });
+        Button btn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                if (cancellistener != null) {
+                    cancellistener.onClick(v);
+                }
+
+            }
+        });
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.show();
     }
 

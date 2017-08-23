@@ -160,6 +160,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
         if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
             //解析成功
             String Imei = bundle.getString(CodeUtils.RESULT_STRING);
+            inputImei.setText(Imei);
             if (isZXresultCorrect(Imei)) {
                 DeviceInfoInstance.getInstance().bindDevice(InitBindDeviceActivity.this,Imei);
             } else {
@@ -196,7 +197,8 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
             }
         }else {
             count=0;
-            DialogUtil.showDeviceOpenOnline(this, new View.OnClickListener() {
+            DialogUtil.closeProgress();
+            DialogUtil.showDeviceOpenOnlineCanclose(this, new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -216,6 +218,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
                 public void onClick(View v) {
                     DialogUtil.closeProgress();
                     Intent intent=new Intent(InitBindDeviceActivity.this, BaseWebViewActivity.class);
+                    intent.putExtra("title","使用帮助");
                     intent.putExtra("web_url","http://www.xiaomaoqiu.com/support.html?nav=2");
                     startActivity(intent);
                 }
