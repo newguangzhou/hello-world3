@@ -32,4 +32,10 @@
     <dimen name="common_dialog_button">16dp</dimen>
     <dimen name="dialog_service_margin">30dp</dimen>
 
+
+    <dimen name="corner">2dp</dimen>
+
+    <!--44号字体-->
+    <dimen name="after_word_size">15sp</dimen>
+
 </resources>

@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:minHeight="50dp"
         android:gravity="center"
-        android:textColor="@color/total_color_1"
-        android:textSize="16sp"
+        android:textColor="@color/new_color_word"
+        android:textSize="@dimen/after_word_size"
         android:text="12231231332"
         android:layout_gravity="center_horizontal"
         android:id="@+id/two_button_message"/>
@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/two_button_confirm"
-            android:textSize="16sp"
+            android:textSize="@dimen/after_word_size"
             android:textColor="@color/white"
             android:background="@drawable/btn_background_color_3"
             android:padding="10dp"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/two_button_cancle"
             android:padding="10dp"
-            android:textSize="16sp"
+            android:textSize="@dimen/after_word_size"
             android:textColor="@color/white"
             android:background="@drawable/btn_background_color_3"
             android:text="取消"/>

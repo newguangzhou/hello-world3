@@ -7,30 +7,24 @@
 
     <com.xiaomaoqiu.now.view.sortlistview.ClearEditText
         android:id="@+id/filter_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@drawable/shape_select_pet_search"
-        android:padding="7dp"
         android:drawableLeft="@drawable/search_bar_icon_normal"
         android:hint="请输入关键字"
         android:maxLines="1"
-        android:textSize="16sp" />
+        android:padding="7dp"
+        android:textColor="#b4b4b4"
+        android:textSize="@dimen/after_word_size" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
-        <ListView
-            android:id="@+id/country_lvcountry"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:divider="@null"/>
 
         <TextView
             android:id="@+id/dialog"
@@ -50,42 +44,46 @@
             android:layout_height="match_parent"
             app:textSize="11.5sp"
             android:layout_gravity="right|center" />
+
+        <ListView
+            android:id="@+id/country_lvcountry"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:divider="@null" />
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/total_color_1"
-        android:padding="7dp"
         android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
+        android:background="@color/total_color_1"
+        android:orientation="horizontal"
+        android:padding="7dp">
 
         <EditText
             android:id="@+id/edit_add_dog"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="11dp"
             android:layout_marginRight="16dp"
-            android:textColorHint="@color/white"
-            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:background="@drawable/shape_add_pet"
             android:hint="其他狗狗，请输入"
-            android:textSize="16sp"
-            android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:background="@drawable/shape_add_pet"/>
+            android:paddingTop="10dp"
+            android:textColor="#b4b4b4"
+            android:textColorHint="#b4b4b4"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/bt_add_dog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="14dp"
-            android:src="@drawable/search_pet_add_bt"/>
-
-
-
+            android:src="@drawable/search_pet_add_bt" />
 
 
     </LinearLayout>

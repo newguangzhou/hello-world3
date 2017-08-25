@@ -72,6 +72,7 @@
         android:layout_height="wrap_content"
         android:text="版本"
         android:textSize="@dimen/common_dialog_message"
+        android:textColor="@color/new_color_word"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,6 +97,7 @@
         android:gravity="center"
         android:text="1.0.0"
         android:textSize="@dimen/common_dialog_message"
+android:textColor="#8c8c8c"
             android:layout_marginBottom="20dp"
 
             />
@@ -119,7 +121,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:gravity="center"
-        android:background="@drawable/about_provicy"
+        android:background="@color/bind_color"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="使用条款和隐私政策"
@@ -131,7 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:gravity="center"
-        android:background="@drawable/about_provicy"
+        android:background="@color/bind_color"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="意见反馈"

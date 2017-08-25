@@ -480,7 +480,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 break;
             case 1:
 //                setTitle("小毛球");
-                tv_title.setText("小毛球");
+                tv_title.setText("位置");
                 include_header.setVisibility(View.INVISIBLE);
                 if (mLocateFragment == null) {
                     mLocateFragment = new LocateFragment();

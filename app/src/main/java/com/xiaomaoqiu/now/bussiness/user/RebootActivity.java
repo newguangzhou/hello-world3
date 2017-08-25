@@ -34,7 +34,7 @@ public class RebootActivity extends BaseActivity implements LogoutView {
     TextView btn_reboot;
     View btn_go_back;
 
-//    CheckBox cb_usebook;
+    //    CheckBox cb_usebook;
     View tv_userbook;
     View fl_click;
     View iv_ischecked;
@@ -49,8 +49,8 @@ public class RebootActivity extends BaseActivity implements LogoutView {
         SPUtil.putHome(false);
 
         setContentView(R.layout.activity_reboot);
-        btn_go_back=findViewById(R.id.btn_go_back);
-        btn_go_back.setOnClickListener(new View.OnClickListener(){
+        btn_go_back = findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -65,8 +65,8 @@ public class RebootActivity extends BaseActivity implements LogoutView {
             @Override
             public void onClick(View v) {
 //                boolean isCheckd=cb_usebook.isChecked();
-                isCheckd=iv_ischecked.isShown();
-                if(!isCheckd){
+                isCheckd = iv_ischecked.isShown();
+                if (!isCheckd) {
                     ToastUtil.showTost("请阅读并同意《用户协议与隐私政策》");
                     return;
                 }
@@ -75,36 +75,36 @@ public class RebootActivity extends BaseActivity implements LogoutView {
             }
         });
 //        cb_usebook= (CheckBox) findViewById(R.id.cb_usebook);
-        fl_click=findViewById(R.id.fl_click);
-        fl_click.setOnClickListener(new View.OnClickListener(){
+        fl_click = findViewById(R.id.fl_click);
+        fl_click.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (isCheckd){
+                if (isCheckd) {
                     iv_ischecked.setVisibility(View.GONE);
-                    isCheckd=false;
-                }else{
-                    isCheckd=true;
+                    isCheckd = false;
+                } else {
+                    isCheckd = true;
                     iv_ischecked.setVisibility(View.VISIBLE);
 
                 }
             }
         });
-        iv_ischecked=findViewById(R.id.iv_ischecked);
-        tv_userbook=findViewById(R.id.tv_userbook);
-        tv_userbook.setOnClickListener(new View.OnClickListener(){
+        iv_ischecked = findViewById(R.id.iv_ischecked);
+        tv_userbook = findViewById(R.id.tv_userbook);
+        tv_userbook.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 //跳转到用户协议
-                Intent intent=new Intent(RebootActivity.this, BaseWebViewActivity.class);
-                intent.putExtra("title","用户协议与隐私政策");
-                intent.putExtra("web_url","http://www.xiaomaoqiu.com/proto_user.html");
+                Intent intent = new Intent(RebootActivity.this, BaseWebViewActivity.class);
+                intent.putExtra("title", "用户协议与隐私政策");
+                intent.putExtra("web_url", "https://www.xiaomaoqiu.com/proto_user.html");
                 startActivity(intent);
             }
         });
 
-        isCheckd=false;
+        isCheckd = false;
         iv_ischecked.setVisibility(View.GONE);
         EventBus.getDefault().register(this);
         loginPresenter = new LoginPresenter(this);
@@ -114,7 +114,7 @@ public class RebootActivity extends BaseActivity implements LogoutView {
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onDeviceReboot(EventManage.deviceReboot event) {
 
-        Intent intent=new Intent(RebootActivity.this, MainActivity.class);
+        Intent intent = new Intent(RebootActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -127,21 +127,21 @@ public class RebootActivity extends BaseActivity implements LogoutView {
 
     public void success() {
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 //        getActivity().overridePendingTransition(0, 0);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showTwoButtonDialog(RebootActivity.this,getString(R.string.dialog_exit_login_title),getString(R.string.dialog_exit_login_tab1),getString(R.string.dialog_exit_login_tab2),new View.OnClickListener(){
+        DialogUtil.showTwoButtonDialog(RebootActivity.this, getString(R.string.dialog_exit_login_title), getString(R.string.dialog_exit_login_tab1), getString(R.string.dialog_exit_login_tab2), new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
 
                     }
                 },
-                new View.OnClickListener(){
+                new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-<RelativeLayout
-    android:id="@+id/ll_title"
-    android:layout_width="fill_parent"
-    android:layout_height="50dp"
-    android:background="@color/total_color_1"
-    >
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/total_color_1">
 
 
-    <!--<TextView-->
+        <!--<TextView-->
         <!--android:id="@+id/tv_logout"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="match_parent"-->
@@ -26,44 +24,44 @@
         <!--android:layout_marginLeft="10dp"-->
         <!--/>-->
 
-    <LinearLayout
-        android:id="@+id/btn_go_back"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:layout_width="70dp"
-        android:layout_height="40dp">
-        <ImageView
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/img_return"
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="宠物信息"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_title"
-        android:layout_centerInParent="true"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:text="宠物信息"
-        />
-    <TextView
-        android:id="@+id/tv_next"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:gravity="center_vertical"
-        android:padding="5dp"
-        android:text="下一步"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:layout_marginRight="10dp"
-        />
-
-</RelativeLayout>
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -105,23 +103,22 @@
                     android:src="@drawable/petinfo_pointer_right" />
 
                 <!--<com.facebook.drawee.view.SimpleDraweeView-->
-                    <!--android:id="@+id/img_pet_avatar"-->
-                    <!--android:layout_width="150dp"-->
-                    <!--android:layout_height="150dp"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_marginTop="43dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--fresco:actualImageScaleType="focusCrop"-->
-                    <!--fresco:fadeDuration="300"-->
-                    <!--fresco:failureImage="@drawable/header_default_big"-->
-                    <!--fresco:failureImageScaleType="centerInside"-->
-                    <!--fresco:placeholderImage="@drawable/header_default_big"-->
-                    <!--fresco:placeholderImageScaleType="fitCenter"-->
-                    <!--fresco:roundedCornerRadius="75dp" />-->
-                <include
-                    layout="@layout/view_main_header_big"/>
+                <!--android:id="@+id/img_pet_avatar"-->
+                <!--android:layout_width="150dp"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="43dp"-->
+                <!--android:gravity="center"-->
+                <!--android:scaleType="fitXY"-->
+                <!--fresco:actualImageScaleType="focusCrop"-->
+                <!--fresco:fadeDuration="300"-->
+                <!--fresco:failureImage="@drawable/header_default_big"-->
+                <!--fresco:failureImageScaleType="centerInside"-->
+                <!--fresco:placeholderImage="@drawable/header_default_big"-->
+                <!--fresco:placeholderImageScaleType="fitCenter"-->
+                <!--fresco:roundedCornerRadius="75dp" />-->
+                <include layout="@layout/view_main_header_big" />
             </RelativeLayout>
 
             <LinearLayout
@@ -189,8 +186,8 @@
 
                 <ImageView
                     android:id="@+id/pet_info_birth_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/btn_birthday_selector" />
 
                 <TextView
@@ -199,7 +196,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/pet_info_birth_icon"
-                    android:text="@string/birthday" />
+                    android:text="@string/birthday"
+                    android:textColor="@color/new_color_word"
+                    android:textSize="@dimen/after_word_size" />
 
                 <ImageView
                     android:id="@+id/pet_info__arrow_icon"
@@ -213,16 +212,17 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/pet_info__arrow_icon"
-                    android:text="2010/6/1" />
+                    android:text="2010/6/1"
+                    android:textColor="#8c8c8c" />
 
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.6dp"
+                android:layout_height="1dp"
                 android:layout_marginLeft="33dp"
                 android:layout_marginRight="33dp"
-                android:background="@color/total_color_10" />
+                android:background="@color/bind_color" />
 
 
             <RelativeLayout
@@ -239,8 +239,8 @@
 
                 <ImageView
                     android:id="@+id/pet_info_weight_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/btn_weight_selector" />
 
                 <TextView
@@ -249,7 +249,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/pet_info_weight_icon"
-                    android:text="@string/weight" />
+                    android:text="@string/weight"
+                    android:textColor="@color/new_color_word"
+                    android:textSize="@dimen/after_word_size" />
 
                 <ImageView
                     android:id="@+id/pet_info_weight_arrow_icon"
@@ -263,16 +265,18 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/pet_info_weight_arrow_icon"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="#8c8c8c"
+                    android:textSize="@dimen/after_word_size" />
 
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.6dp"
+                android:layout_height="1dp"
                 android:layout_marginLeft="33dp"
                 android:layout_marginRight="33dp"
-                android:background="@color/total_color_10" />
+                android:background="@color/bind_color" />
 
             <RelativeLayout
                 android:id="@+id/btn_modify_variety"
@@ -288,8 +292,8 @@
 
                 <ImageView
                     android:id="@+id/pet_info_variety_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/btn_variety_selector" />
 
                 <TextView
@@ -299,7 +303,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/pet_info_variety_icon"
-                    android:text="@string/variety" />
+                    android:text="@string/variety"
+                    android:textColor="@color/new_color_word"
+                    android:textSize="@dimen/after_word_size" />
 
                 <ImageView
                     android:id="@+id/pet_info_variety_arrow_icon"
@@ -313,16 +319,18 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/pet_info_variety_arrow_icon"
-                    android:text="fool" />
+                    android:text="fool"
+                    android:textColor="#8c8c8c"
+                    android:textSize="@dimen/after_word_size" />
 
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.6dp"
+                android:layout_height="1dp"
                 android:layout_marginLeft="33dp"
                 android:layout_marginRight="33dp"
-                android:background="@color/total_color_10" />
+                android:background="@color/bind_color" />
 
 
         </LinearLayout>

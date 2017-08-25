@@ -15,8 +15,8 @@
         android:paddingRight="56dp">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="85dp"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
             android:layout_marginTop="60dp"
             android:src="@drawable/logo" />
 
@@ -28,8 +28,9 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="16dp"
+                android:id="@+id/imageView11"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
                 android:src="@drawable/login_point" />
 
             <TextView
@@ -43,8 +44,8 @@
                 android:textSize="18sp" />
 
             <ImageView
-                android:layout_width="55dp"
-                android:layout_height="16dp"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
                 android:src="@drawable/login_point" />
 
         </LinearLayout>
@@ -61,10 +62,10 @@
             android:inputType="phone"
             android:maxLines="1"
             android:paddingLeft="10dp"
-            android:textColor="@color/total_color_7"
+            android:textColor="#000"
             android:textColorHint="@color/total_color_7"
             android:textCursorDrawable="@null"
-            android:textSize="13sp" />
+            android:textSize="@dimen/after_word_size"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,9 +84,9 @@
                 android:maxLength="6"
                 android:maxLines="1"
                 android:paddingLeft="10dp"
-                android:textColor="@color/total_color_7"
+                android:textColor="#000"
                 android:textColorHint="@color/total_color_7"
-                android:textSize="12sp" />
+                android:textSize="@dimen/after_word_size" />
 
             <Button
                 android:id="@+id/login_btn_sendVerify"
@@ -100,7 +101,7 @@
                 android:paddingTop="13dp"
                 android:text="发送验证码"
                 android:textColor="@color/white"
-                android:textSize="13.5sp" />
+                android:textSize="@dimen/after_word_size" />
 
         </LinearLayout>
 
@@ -113,23 +114,24 @@
             android:enabled="false"
             android:gravity="center"
             android:padding="13dp"
-            android:text="登录"
+            android:text="登 录"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/after_word_size" />
 
         <LinearLayout
             android:id="@+id/btn_contact_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
+            android:layout_marginTop="100dp"
+            android:gravity="bottom"
             android:orientation="horizontal"
             android:padding="5dp">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="16dp"
+                android:id="@+id/iv_service_icon"
+                android:layout_width="27dp"
+                android:layout_height="24dp"
                 android:src="@drawable/login_service_icon" />
 
             <TextView
@@ -138,7 +140,7 @@
                 android:layout_marginLeft="4dp"
                 android:text="联系客服"
                 android:textColor="@color/total_color_1"
-                android:textSize="16sp" />
+                android:textSize="@dimen/after_word_size" />
 
         </LinearLayout>
 
@@ -148,7 +150,7 @@
             android:layout_marginTop="6dp"
             android:text="www.xiaomaoqiu.com"
             android:textColor="@color/total_color_7"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 </ScrollView>

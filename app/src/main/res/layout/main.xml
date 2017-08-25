@@ -78,10 +78,10 @@
                     android:src="@drawable/main_bottombg_home" />
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#fff" />
+            <!--<View-->
+                <!--android:layout_width="1dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="#fff" />-->
 
             <LinearLayout
                 android:id="@+id/tab_locate"
@@ -100,10 +100,10 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#fff" />
+            <!--<View-->
+                <!--android:layout_width="1dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="#fff" />-->
 
             <LinearLayout
                 android:id="@+id/tab_me"

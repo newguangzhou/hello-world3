@@ -102,7 +102,12 @@ public class EventManage {
     }
 
     //上传头像成功
-    public static class uploadImageSuccess{}
+    public static class uploadImageSuccess{
+      public  String path;
+        public uploadImageSuccess(String path){
+            this.path=path;
+        }
+    }
 
 //    //GPS变化
 //    public static class GPS_CHANGE{

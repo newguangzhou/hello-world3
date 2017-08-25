@@ -861,6 +861,39 @@ public class DialogUtil {
         dialog.show();
 
     }
+    public static Dialog openGPSDialog;
+    //开启紧急搜索弹窗
+    public static void openGPSDialog(final Context context, final View.OnClickListener onConfirmClickListener){
+        if (!canShowDialog(context)) return;
+        openGPSDialog = new AppDialog(context, R.layout.dialog_open_gpsn, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        openGPSDialog.getWindow().setWindowAnimations(0);
+        Button two_button_cancle = (Button) openGPSDialog.findViewById(R.id.two_button_cancle);
+        Button two_button_confirm = (Button) openGPSDialog.findViewById(R.id.two_button_confirm);
+
+        two_button_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (openGPSDialog.isShowing()) {
+                    openGPSDialog.dismiss();
+                }
+            }
+        });
+        two_button_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (openGPSDialog.isShowing()) {
+                    openGPSDialog.dismiss();
+                }
+                if (onConfirmClickListener != null) {
+                    onConfirmClickListener.onClick(v);
+                }
+            }
+        });
+
+        openGPSDialog.setCancelable(false);
+        openGPSDialog.setCanceledOnTouchOutside(false);
+        openGPSDialog.show();
+    }
 
 
 }

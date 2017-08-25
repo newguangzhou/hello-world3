@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/total_color_7"
         android:textSize="16sp"
-        android:text="400-991-2900"
+        android:text="@string/number"
         android:layout_marginTop="6dp"/>
 
     <TextView
@@ -65,7 +65,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/after_word_size"
         android:id="@+id/btn_ok"
         android:background="@drawable/shape_dialog_bt_back"
         android:text="确定"/>

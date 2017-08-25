@@ -79,10 +79,12 @@
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="60dp"
+                    android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/health_index_icon" />
@@ -107,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:text="昨天"
                         android:textColor="@color/common_body"
-                        android:textSize="@dimen/common_dialog_message" />
+                        android:textSize="@dimen/after_word_size" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -183,7 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_marginTop="20dp"
-                    android:background="#000" />
+                    android:background="#b4b4b4" />
 
                 <TextView
                     android:id="@+id/tv_health_sport_message"
@@ -191,11 +193,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
+                    android:paddingRight="20dp"
                     android:text="宠物昨天消耗了很多哦"
-                    android:textColor="@color/common_body"
-                    android:textSize="@dimen/common_dialog_message" />
+                    android:textColor="@color/new_color_word"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="@dimen/after_word_size" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="5dp"
+                    android:background="#b4b4b4" />
 
                 <Button
                     android:id="@+id/bt_health_sport_message"
@@ -205,8 +214,9 @@
                     android:gravity="left|center"
                     android:padding="10dp"
                     android:text="运动不足将会导致：肥胖、心肺功能不足、沉郁、焦躁不安、啃咬家具、吠叫甚至攻击行为。为了你家宠物的健康，请努力完成运动目标。"
-                    android:textColor="@color/common_body"
-                    android:textSize="@dimen/common_dialog_message" />
+                    android:textColor="@color/new_color_word"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="@dimen/after_word_size" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -284,12 +294,6 @@
                             android:textColor="#fff"
                             android:textSize="@dimen/common_dialog_message" />
                     </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/health_sleep_dot" />
 
                 </RelativeLayout>
 
@@ -377,7 +381,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_marginTop="20dp"
-                    android:background="#000" />
+                    android:background="#b4b4b4" />
 
                 <TextView
                     android:id="@+id/tv_health_sleep_message"
@@ -388,8 +392,9 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:text="数据解读：休息正常"
-                    android:textColor="@color/common_body"
-                    android:textSize="@dimen/common_dialog_message" />
+                    android:lineSpacingExtra="3dp"
+                    android:textColor="@color/new_color_word"
+                    android:textSize="@dimen/after_word_size" />
 
                 <Button
                     android:id="@+id/bt_health_sleep_message"
@@ -398,9 +403,10 @@
                     android:background="@drawable/health_sport_message"
                     android:gravity="left|center"
                     android:padding="10dp"
+                    android:lineSpacingExtra="3dp"
                     android:text="旺财昨天休息XX小时，与90%同类犬（猫）休息时长相当。旺财活力充足，放心带Ta去做运动吧。"
-                    android:textColor="@color/common_body"
-                    android:textSize="@dimen/common_dialog_message" />
+                    android:textColor="@color/new_color_word"
+                    android:textSize="@dimen/after_word_size" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -447,4 +453,62 @@
 
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/total_color_1">
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_logout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="退出登录"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--/>-->
+
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/batteryView"
+            android:layout_centerHorizontal="true"
+            android:text="健康报告"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.xiaomaoqiu.now.view.BatteryView
+            android:id="@+id/batteryView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:src="@drawable/battery100" />
+
+    </RelativeLayout>
+
 </LinearLayout>

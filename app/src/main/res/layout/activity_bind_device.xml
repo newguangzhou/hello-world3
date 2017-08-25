@@ -164,7 +164,7 @@
                 android:textColor="@color/total_color_7"
                 android:textColorHint="@color/total_color_7"
                 android:textCursorDrawable="@null"
-                android:textSize="13sp" />
+                android:textSize="@dimen/after_word_size" />
 
             <ImageView
                 android:layout_width="200dp"

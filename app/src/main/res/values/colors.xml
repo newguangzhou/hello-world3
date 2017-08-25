@@ -204,4 +204,14 @@
 
     <color name="total_color_3">#82cde6</color>
 
+
+    <!--短信hint-->
+    <color name="total_color_7_hiny">#d2d2d2</color>
+
+
+    <color name="new_color_word">#141e41</color>
+
+
+    <color name="bind_color">#b4b4b4</color>
+
 </resources>

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:gravity="center"
-        android:minHeight="150dp"
+        android:minHeight="120dp"
         android:orientation="vertical">
 
         <TextView
@@ -31,19 +31,12 @@
             android:layout_marginTop="3dp"
             android:text="@string/battery_notice_timeformat"
             android:textColor="@color/common_body"
-            android:textSize="13.5sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/common_line"></View>
-
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/battery_notice_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="@string/battery_notice_content"
             android:textColor="@color/common_body"
             android:textSize="@dimen/common_dialog_message" />
@@ -54,16 +47,16 @@
         android:id="@+id/battery_notice_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="50dp"
         android:background="@drawable/login_loginbt_bg"
-        android:textSize="@dimen/common_dialog_button"
-        android:textColor="@color/common_button_word"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="9dp"
         android:paddingBottom="9dp"
         android:paddingLeft="38dp"
         android:paddingRight="38dp"
-        android:text="关闭"/>
+        android:paddingTop="9dp"
+        android:text="关闭"
+        android:textColor="@color/common_button_word"
+        android:textSize="@dimen/after_word_size" />
 
 
 </LinearLayout>

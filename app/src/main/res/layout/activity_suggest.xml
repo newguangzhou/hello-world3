@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/after_word_size"
                     android:text="/200"
                     android:layout_marginBottom="5dp"
                     android:gravity="bottom"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/feedback_maxnumber"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/after_word_size"
                     android:textColor="#FFFF5A5A"
                     android:text="0"
                     android:gravity="bottom"
@@ -101,16 +101,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF888888"
-            android:textSize="13sp"
+            android:textSize="@dimen/after_word_size"
             android:text="如有疑问，欢迎联系小毛球客服:  "
             android:layout_gravity="bottom" />
         <TextView
             android:id="@+id/feedback_mobile_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="@dimen/after_word_size"
             android:textColor="#2E85E9"
-            android:text="400-991-2900"
+            android:text="@string/number"
             android:layout_gravity="bottom" />
     </LinearLayout>
 </RelativeLayout>

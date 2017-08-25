@@ -41,6 +41,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/title_hardware" />
 
             </LinearLayout>
@@ -62,6 +63,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/pet_info" />
 
             </LinearLayout>
@@ -83,6 +85,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/title_mall" />
 
             </LinearLayout>
@@ -104,6 +107,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/title_about" />
 
             </LinearLayout>
@@ -136,6 +140,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="常住地" />
 
             </LinearLayout>
@@ -157,6 +162,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/title_message" />
 
             </LinearLayout>
@@ -178,6 +184,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/title_contact" />
 
             </LinearLayout>
@@ -199,6 +206,7 @@
                     style="@style/main_tab_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#141e41"
                     android:text="@string/title_exit" />
 
             </LinearLayout>

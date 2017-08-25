@@ -9,9 +9,9 @@
         android:id="@+id/tv_one_button_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="hahaha"
+        android:layout_margin="30dp"
         android:textColor="@color/common_body"
         android:textSize="@dimen/common_dialog_message" />
 

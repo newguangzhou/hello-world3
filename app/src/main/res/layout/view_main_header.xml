@@ -10,8 +10,8 @@
     >
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv_header"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:scaleType="fitXY"
@@ -24,16 +24,17 @@
 
         fresco:placeholderImage="@drawable/header_default_big"
         fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundedCornerRadius="27dp" />
+        fresco:roundedCornerRadius="25dp" />
+
     <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/simpleDraweeView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
         android:scaleType="fitXY"
         fresco:actualImageScaleType="focusCrop"
         fresco:placeholderImage="@drawable/header_circle"
-        fresco:placeholderImageScaleType="fitCenter"
-        ></com.facebook.drawee.view.SimpleDraweeView>
+        fresco:placeholderImageScaleType="fitCenter"></com.facebook.drawee.view.SimpleDraweeView>
 
 </FrameLayout>

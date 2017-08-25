@@ -2,6 +2,7 @@ package com.xiaomaoqiu.now.bussiness.location;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -281,6 +282,11 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void getActivityInfo(EventManage.uploadImageSuccess event) {
         MapInstance.getInstance().petAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+        MapInstance.getInstance().petCommonNotAtHomeView.setAvaterUrl(PetInfoInstance.getInstance().packBean.logo_url);
+//        MapInstance.getInstance().petAtHomeView.setAvaterUrl("file://com.xiaomaoqiu.pet"+event.path);
+        Log.e("longtianlove",event.path);
+        MapInstance.getInstance().refreshMap();
+        MapInstance.getInstance().refreshMap();
         MapInstance.getInstance().refreshMap();
     }
 
@@ -380,7 +386,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             return;
         }
         if (PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
-            DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {
+            DialogToast.createDialogWithTwoButton(getContext(), "确认关闭紧急搜寻？", new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -424,7 +430,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             String content = getContext().getResources().getString(R.string.open_find_tip);
 
 
-            DialogToast.createDialogWithTwoButton(getContext(), content, new View.OnClickListener() {
+            DialogUtil.openGPSDialog(getContext(),  new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

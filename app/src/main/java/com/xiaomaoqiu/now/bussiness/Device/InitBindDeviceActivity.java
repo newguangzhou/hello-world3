@@ -126,7 +126,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
             public void onClick(View v) {
                 Intent intent=new Intent(InitBindDeviceActivity.this, BaseWebViewActivity.class);
                 intent.putExtra("title","使用帮助");
-                intent.putExtra("web_url","http://www.xiaomaoqiu.com/support.html?nav=2");
+                intent.putExtra("web_url","https://www.xiaomaoqiu.com/support.html?nav=2");
                 startActivity(intent);
             }
         });
@@ -219,7 +219,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
                     DialogUtil.closeProgress();
                     Intent intent=new Intent(InitBindDeviceActivity.this, BaseWebViewActivity.class);
                     intent.putExtra("title","使用帮助");
-                    intent.putExtra("web_url","http://www.xiaomaoqiu.com/support.html?nav=2");
+                    intent.putExtra("web_url","https://www.xiaomaoqiu.com/support.html?nav=2");
                     startActivity(intent);
                 }
             });

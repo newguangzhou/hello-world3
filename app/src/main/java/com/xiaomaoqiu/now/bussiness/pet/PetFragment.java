@@ -321,7 +321,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     return;
                 }
                 if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
-                    DialogToast.createDialogWithTwoButton(getContext(), "是否关闭紧急追踪模式。", new View.OnClickListener() {
+                    DialogToast.createDialogWithTwoButton(getContext(), "确认关闭紧急搜寻？", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             tv_findpet.setText(getString(R.string.to_find));
@@ -363,7 +363,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                 } else {
                     MapInstance.getInstance().openTime = 1;
                     String conent = getContext().getResources().getString(R.string.open_find_tip);
-                    DialogToast.createDialogWithTwoButton(getContext(), conent, new View.OnClickListener() {
+                    DialogUtil.openGPSDialog(getContext(),  new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             tv_findpet.setText("关闭搜寻");

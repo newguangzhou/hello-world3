@@ -512,7 +512,7 @@ public class PetInfoInstance {
     }
 
     //上传头像信息
-    public void uploadImage(String path) {
+    public void uploadImage(final String path) {
         try {
 
             //把Bitmap保存到sd卡中
@@ -536,7 +536,7 @@ public class PetInfoInstance {
                                         event.updateHeader = true;
                                         updatePetInfo(packBean);
                                     }
-                                    EventBus.getDefault().post(new EventManage.uploadImageSuccess());
+                                    EventBus.getDefault().post(new EventManage.uploadImageSuccess(path));
                                     break;
 
                             }
