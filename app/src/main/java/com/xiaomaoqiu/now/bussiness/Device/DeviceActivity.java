@@ -9,12 +9,11 @@ import android.widget.TextView;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
-import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
+import com.xiaomaoqiu.now.bussiness.BaseWebViewHasBatteryViewActivity;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
-import com.xiaomaoqiu.now.view.DialogToast;
 import com.xiaomaoqiu.pet.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -81,7 +80,7 @@ public class DeviceActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //sim充值
-                Intent intent=new Intent(DeviceActivity.this, BaseWebViewActivity.class);
+                Intent intent=new Intent(DeviceActivity.this, BaseWebViewHasBatteryViewActivity.class);
                 intent.putExtra("title","小毛球商城");
                 intent.putExtra("web_url","https://www.xiaomaoqiu.com/wechat_shop.html");
                 startActivity(intent);

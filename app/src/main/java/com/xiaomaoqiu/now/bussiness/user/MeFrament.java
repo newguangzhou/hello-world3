@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 
 import com.xiaomaoqiu.now.base.BaseFragment;
 import com.xiaomaoqiu.now.bussiness.AboutActivity;
+import com.xiaomaoqiu.now.bussiness.BaseWebViewHasBatteryViewActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
-import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
@@ -98,7 +98,7 @@ public class MeFrament extends BaseFragment implements LogoutView{
         root.findViewById(R.id.btn_mall).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), BaseWebViewActivity.class);
+                Intent intent=new Intent(getActivity(), BaseWebViewHasBatteryViewActivity.class);
                 intent.putExtra("web_url","https://www.xiaomaoqiu.com/wechat_shop.html");
                 intent.putExtra("title","小毛球商城");
                 startActivity(intent);

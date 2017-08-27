@@ -279,6 +279,10 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             />
+        <activity android:name="com.xiaomaoqiu.now.bussiness.BaseWebViewHasBatteryViewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            />
 
         <activity android:name="com.xiaomaoqiu.now.view.crop.CropImageActivity"
             android:configChanges="keyboardHidden|orientation"

@@ -126,7 +126,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     }
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, BaseWebViewActivity.class);
+        Intent intent = new Intent(this, BaseWebViewHasBatteryViewActivity.class);
         switch (v.getId()) {
             case R.id.tv_help:
                 intent.putExtra("title","使用帮助");
