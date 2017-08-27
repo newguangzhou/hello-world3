@@ -447,6 +447,7 @@ public class DialogUtil {
 
 
     public static Thread noresponsethread;
+    public static boolean findedResponsed=false;
 
     //已经找到宠物弹窗petisFindedDialog
     public static void showPetFindedDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
@@ -459,6 +460,7 @@ public class DialogUtil {
             }
 
         }
+        findedResponsed=false;
         petisFindedDialog = null;
         petisFindedDialog = new AppDialog(context, R.layout.dialog_intelligent_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petisFindedDialog.getWindow().setWindowAnimations(0);
@@ -478,6 +480,7 @@ public class DialogUtil {
                 if (onCancleClickListener != null) {
                     onCancleClickListener.onClick(v);
                 }
+                findedResponsed=true;
             }
         });
         two_button_confirm.setOnClickListener(new View.OnClickListener() {
@@ -489,6 +492,7 @@ public class DialogUtil {
                 if (onConfirmClickListener != null) {
                     onConfirmClickListener.onClick(v);
                 }
+                findedResponsed=true;
             }
         });
 
@@ -514,7 +518,7 @@ public class DialogUtil {
                             }
 
                         }
-                        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+                        if ((!findedResponsed)&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -556,6 +560,7 @@ public class DialogUtil {
 
 
     public static Thread petathome_noresponsethread;
+    public static boolean athomeRespnsed=false;
     //宠物是否到家  petAtHomeDialog
     public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
@@ -574,6 +579,7 @@ public class DialogUtil {
                 e.printStackTrace();
             }
         }
+        athomeRespnsed=false;
         petAtHomeDialog = null;
         petAtHomeDialog = new AppDialog(context, R.layout.dialog_intelligent_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petAtHomeDialog.getWindow().setWindowAnimations(0);
@@ -593,6 +599,8 @@ public class DialogUtil {
                 if (onCancleClickListener != null) {
                     onCancleClickListener.onClick(v);
                 }
+                athomeRespnsed=true;
+
             }
         });
         two_button_confirm.setOnClickListener(new View.OnClickListener() {
@@ -604,6 +612,7 @@ public class DialogUtil {
                 if (onConfirmClickListener != null) {
                     onConfirmClickListener.onClick(v);
                 }
+                athomeRespnsed=true;
             }
         });
 
@@ -630,7 +639,7 @@ public class DialogUtil {
                             }
 
                         }
-                        if (PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+                        if (!athomeRespnsed&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
