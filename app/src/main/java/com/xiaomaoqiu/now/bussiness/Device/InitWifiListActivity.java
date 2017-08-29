@@ -96,7 +96,7 @@ public class InitWifiListActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                if("".equals(wifi_bssid)){
+                if(wifi_bssid==null||"".equals(wifi_bssid)){
                     ToastUtil.showTost("请选择wifi");
                     return;
                 }
