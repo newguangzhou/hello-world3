@@ -629,8 +629,11 @@ public class DialogUtil {
 
         petAtHomeDialog.setCancelable(false);
         petAtHomeDialog.setCanceledOnTouchOutside(false);
-        petAtHomeDialog.show();
+        try {
+            petAtHomeDialog.show();
+        }catch (Exception e){
 
+        }
 
         if (petathome_noresponsethread == null) {
             try {

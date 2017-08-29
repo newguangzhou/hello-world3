@@ -63,7 +63,11 @@ public class CustomProgress extends Dialog {
         WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
         lp.dimAmount = 0.2f;
         dialog.getWindow().setAttributes(lp);
+        try{
         dialog.show();
+        }catch (Exception e){
+
+        }
         return dialog;
     }
 }
