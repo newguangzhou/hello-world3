@@ -130,6 +130,8 @@ public class BaseWebViewHasBatteryViewActivity extends BaseActivity {
         webSettings.setAllowFileAccess(true);
         //设置支持缩放
         webSettings.setBuiltInZoomControls(true);
+        //不能加载http与https混合内容的问题
+        webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         //设置Web视图
         wv_net.setWebViewClient(new webViewClient ());
