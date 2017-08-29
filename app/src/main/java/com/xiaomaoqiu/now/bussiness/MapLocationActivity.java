@@ -3,6 +3,7 @@ package com.xiaomaoqiu.now.bussiness;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.map.UiSettings;
@@ -48,6 +50,7 @@ import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.HomelocationInstance;
 import com.xiaomaoqiu.now.map.main.MapLocationParser;
 import com.xiaomaoqiu.now.map.main.addressParseListener;
+import com.xiaomaoqiu.now.util.MIUIUtils;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.MapPetAtHomeView;
@@ -77,7 +80,7 @@ public class MapLocationActivity extends Activity {
     EditText et_search;
     View btn_cancel;
 
-    private TextureMapView mMapView;
+    private MapView mMapView;
     private RecyclerView rv_addresslist;
     private View ll_noname_address;
     private TextView tv_location;
@@ -269,7 +272,11 @@ public class MapLocationActivity extends Activity {
 
             }
         });
-        mMapView = (TextureMapView) findViewById(R.id.bmapView);
+        mMapView = (MapView) findViewById(R.id.bmapView);
+//        if(MIUIUtils.isMIUI()){
+//            mMapView. setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+//            mMapView.setBackgroundColor(Color.parseColor("#ffffff"));
+//        }
         mBaiduMap = mMapView.getMap();
 //        UiSettings UiSettings = mBaiduMap.getUiSettings();
 //        UiSettings.setRotateGesturesEnabled(true);//打开旋转

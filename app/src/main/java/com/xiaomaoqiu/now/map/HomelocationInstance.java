@@ -40,7 +40,7 @@ public class HomelocationInstance implements BDLocationListener {
 
 
     private BaiduMap mBaiduMap;
-    private TextureMapView mapView;
+    private MapView mapView;
     private LocationClient mLocationClient;
 
     public static double phoneLatitude;
@@ -48,7 +48,7 @@ public class HomelocationInstance implements BDLocationListener {
 
     public static String city;
 
-    public void init(TextureMapView mapView) {
+    public void init(MapView mapView) {
         this.mapView = mapView;
         initMap();
         startLocListener(1000);
