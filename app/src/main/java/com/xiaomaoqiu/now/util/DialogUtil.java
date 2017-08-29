@@ -18,6 +18,7 @@ import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
 import com.xiaomaoqiu.now.http.HttpCode;
 import com.xiaomaoqiu.now.http.XMQCallback;
+import com.xiaomaoqiu.now.map.main.MapInstance;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.view.BatteryIngNoticeDialog;
 import com.xiaomaoqiu.now.view.BatteryNoticeDialog;
@@ -531,6 +532,7 @@ public class DialogUtil {
                                             }
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            MapInstance.getInstance().stopLocListener();
                                             break;
                                         case EC_OFFLINE:
                                             DeviceInfoInstance.getInstance().online = false;
@@ -652,6 +654,7 @@ public class DialogUtil {
                                             }
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            MapInstance.getInstance().stopLocListener();
                                             break;
                                         case EC_OFFLINE:
                                             DeviceInfoInstance.getInstance().online = false;

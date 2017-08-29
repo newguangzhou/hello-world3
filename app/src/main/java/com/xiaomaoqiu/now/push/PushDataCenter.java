@@ -157,12 +157,12 @@ public class PushDataCenter {
     public void dealPet() {
         switch (formatBean.signal) {
             case Pet.LOCATIONCHANGE:
-                PushEventManage.locationChange event = new PushEventManage.locationChange();
-                PetInfoInstance.getInstance().latitude = Double.valueOf((String) formatBean.data.get("latitude"));
-                PetInfoInstance.getInstance().location_time = Long.valueOf((int) formatBean.data.get("location_time"));
-                PetInfoInstance.getInstance().longitude = Double.valueOf((String) formatBean.data.get("longitude"));
-                PetInfoInstance.getInstance().radius = Double.valueOf((int) formatBean.data.get("radius"));
-                EventBus.getDefault().post(event);
+//                PushEventManage.locationChange event = new PushEventManage.locationChange();
+//                PetInfoInstance.getInstance().latitude = Double.valueOf((String) formatBean.data.get("latitude"));
+//                PetInfoInstance.getInstance().location_time = Long.valueOf((int) formatBean.data.get("location_time"));
+//                PetInfoInstance.getInstance().longitude = Double.valueOf((String) formatBean.data.get("longitude"));
+//                PetInfoInstance.getInstance().radius = Double.valueOf((int) formatBean.data.get("radius"));
+//                EventBus.getDefault().post(event);
                 break;
             case Pet.NOT_HOME:
                 if (PetInfoInstance.getInstance().getAtHome()) {

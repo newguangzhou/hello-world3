@@ -134,6 +134,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                         }
                                         PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                         EventBus.getDefault().post(new EventManage.petModeChanged());
+                                        MapInstance.getInstance().stopLocListener();
                                         break;
                                     case EC_OFFLINE:
                                         DeviceInfoInstance.getInstance().online = false;
@@ -303,6 +304,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                             }
                                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
                                             EventBus.getDefault().post(new EventManage.petModeChanged());
+                                            MapInstance.getInstance().stopLocListener();
                                             break;
                                         case EC_OFFLINE:
                                             DeviceInfoInstance.getInstance().online = false;
