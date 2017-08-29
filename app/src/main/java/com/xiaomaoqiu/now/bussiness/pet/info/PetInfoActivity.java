@@ -121,7 +121,6 @@ public class PetInfoActivity extends BaseActivity {
         setContentView(R.layout.me_pet_info);
         modifyBean = PetInfoInstance.getInstance().packBean;
         initView();
-        EventBus.getDefault().register(this);
     }
 
 

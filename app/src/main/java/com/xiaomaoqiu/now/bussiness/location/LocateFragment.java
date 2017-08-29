@@ -22,6 +22,7 @@ import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfo;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -247,7 +248,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.btn_pet_center:
                 MapInstance.showPhoneCenter=false;
-                MapInstance.getInstance().startLocListener(1000);
+                if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
+                    MapInstance.getInstance().startLocListener(1000);
+                }
                 if(PetInfoInstance.getInstance().getAtHome()){
                     MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
                 }else {
@@ -292,7 +295,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(EventManage.notifyPetLocationChange event) {
-        MapInstance.getInstance().startLocListener(1000);
+        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
+            MapInstance.getInstance().startLocListener(1000);
+        }
         if(PetInfoInstance.getInstance().getAtHome()){
             MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
         }else {
@@ -315,8 +320,12 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     //todo 小米推送
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void onLocateResult(PushEventManage.locationChange event) {
-        //手机位置
-        MapInstance.getInstance().startLoc();
+
+
+        if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
+            //手机位置
+            MapInstance.getInstance().startLoc();
+        }
         if(PetInfoInstance.getInstance().getAtHome()){
             MapInstance.getInstance().setPetLocation(UserInstance.getInstance().latitude,UserInstance.getInstance().longitude,0) ;
         }else {

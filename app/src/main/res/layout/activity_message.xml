@@ -3,13 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.xiaomaoqiu.now.bussiness.user.MessageActivity">
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/total_color_1">
 
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_logout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="退出登录"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--/>-->
+
+        <LinearLayout
+            android:id="@+id/btn_go_back"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/img_return" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="消息哔哔哔"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.xiaomaoqiu.now.view.BatteryView
+            android:id="@+id/batteryView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:src="@drawable/battery100" />
+
+    </RelativeLayout>
     <ListView android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#fff"
         android:id="@+id/lv_message"/>
 </LinearLayout>

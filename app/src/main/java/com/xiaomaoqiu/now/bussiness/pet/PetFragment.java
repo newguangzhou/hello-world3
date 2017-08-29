@@ -112,6 +112,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
 //        });
 
         initProgress();
+        prog.setProgress(0);
         switch (PetInfoInstance.getInstance().PET_MODE) {
             case Constants.PET_STATUS_COMMON:
                 rootView.findViewById(R.id.btn_sport).setVisibility(View.VISIBLE);
@@ -150,7 +151,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         strStart = strEnd;
         prog.over100=false;
         label1.setVisibility(View.VISIBLE);
-        prog.setProgress(0);
+
     }
 
 
