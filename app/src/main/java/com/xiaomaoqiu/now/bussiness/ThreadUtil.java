@@ -27,14 +27,15 @@ public class ThreadUtil {
 
 
 
-    public static void open_gps_donot_check_Thread() {
+    public static void open_gps_donot_check_Thread(final long time) {
         if (open_gps_donot_check_Thread == null) {
             try {
                 open_gps_donot_check_Thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(300000);
+                            Thread.sleep(time);
+//                            Thread.sleep(1000);
                         } catch (Exception e) {
 
                         }

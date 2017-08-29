@@ -12,6 +12,7 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.ThreadUtil;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
@@ -573,6 +574,13 @@ public class DialogUtil {
 
             }
         }
+        if(petisFindedDialog!=null&&petisFindedDialog.isShowing()){
+            try {
+                petisFindedDialog.dismiss();
+            }catch (Exception e){
+
+            }
+        }
 
         if (petAtHomeDialog != null && petAtHomeDialog.isShowing()) {
             try {
@@ -602,7 +610,8 @@ public class DialogUtil {
                     onCancleClickListener.onClick(v);
                 }
                 athomeRespnsed=true;
-
+                ThreadUtil.open_gps_donot_check_Thread(9000000);
+//                ThreadUtil.open_gps_donot_check_Thread(1000);
             }
         });
         two_button_confirm.setOnClickListener(new View.OnClickListener() {
@@ -630,6 +639,7 @@ public class DialogUtil {
                     public void run() {
                         try {
                             Thread.sleep(600000);
+//                            Thread.sleep(1000);
                         } catch (Exception e) {
 
                         }
@@ -640,6 +650,13 @@ public class DialogUtil {
                                 e.printStackTrace();
                             }
 
+                        }
+                        if(petAtHomeDialog!=null && petAtHomeDialog.isShowing()){
+                            try {
+                                petAtHomeDialog.dismiss();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         if (!athomeRespnsed&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {

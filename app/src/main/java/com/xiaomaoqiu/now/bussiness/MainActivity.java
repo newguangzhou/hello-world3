@@ -244,6 +244,10 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                                     DeviceInfoInstance.getInstance().online = true;
                                                     EventBus.getDefault().post(new PushEventManage.deviceOnline());
                                                 }
+
+                                                //五分钟之内不去判断
+                                                ThreadUtil.open_gps_donot_check_Thread(300000);
+
                                                 PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
                                                 EventBus.getDefault().post(new EventManage.petModeChanged());
                                                 PetInfoInstance.getInstance().getPetLocation();

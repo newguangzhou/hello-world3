@@ -456,7 +456,8 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                                     }
                                     mFindPetView.setSelected(true);
                                     //五分钟之内不去判断
-                                    ThreadUtil.open_gps_donot_check_Thread();
+                                    ThreadUtil.open_gps_donot_check_Thread(300000);
+//                                    ThreadUtil.open_gps_donot_check_Thread(1000);
 //                                    //开启地图位置刷新
 //                                    MapInstance.getInstance().startLoc();
                                     PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_FIND);
