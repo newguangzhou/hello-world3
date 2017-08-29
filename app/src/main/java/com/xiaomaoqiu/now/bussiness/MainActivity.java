@@ -659,6 +659,9 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
         super.onResume();
         if (select_index == 1) {
             getLocationWithOneMinute = true;
+            if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
+                MapInstance.getInstance().startLoc();
+            }
         }
     }
 
