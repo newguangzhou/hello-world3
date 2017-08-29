@@ -106,10 +106,13 @@ public class MapLocationActivity extends Activity {
     PoiNearbySearchOption nearbySearchOption;
 
 
+    public static boolean isFirst = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_location);
+        isFirst = true;
         btn_go_back = findViewById(R.id.btn_go_back);
         btn_go_back.setOnClickListener(new View.OnClickListener() {
 
@@ -146,7 +149,7 @@ public class MapLocationActivity extends Activity {
                             ApiUtils.getApiService().setHomeWifi(UserInstance.getInstance().getUid(),
                                     UserInstance.getInstance().getToken(),
                                     MeWifiListActivity.wifi_ssid,
-                                    MeWifiListActivity. wifi_bssid,
+                                    MeWifiListActivity.wifi_bssid,
                                     PetInfoInstance.getInstance().getPet_id(),
                                     MeWifiListActivity.common_wifi_body
                             ).enqueue(new XMQCallback<BaseBean>() {
@@ -157,7 +160,7 @@ public class MapLocationActivity extends Activity {
                                         PetInfoInstance.getInstance().getPackBean().wifi_bssid = MeWifiListActivity.wifi_bssid;
                                         PetInfoInstance.getInstance().getPackBean().wifi_ssid = MeWifiListActivity.wifi_ssid;
                                         UserInstance.getInstance().wifi_bssid = MeWifiListActivity.wifi_bssid;
-                                        UserInstance.getInstance().wifi_ssid =MeWifiListActivity. wifi_ssid;
+                                        UserInstance.getInstance().wifi_ssid = MeWifiListActivity.wifi_ssid;
                                         SPUtil.putHomeWifiMac(MeWifiListActivity.wifi_bssid);
                                         SPUtil.putHomeWifiSsid(MeWifiListActivity.wifi_ssid);
                                         finish();
@@ -296,11 +299,11 @@ public class MapLocationActivity extends Activity {
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 iv_location.startAnimation(translateAnimation);
                 projection = mBaiduMap.getProjection();
-                if(projection==null){
+                if (projection == null) {
                     return;
                 }
-                int indexy=(int)(iv_location.getY()/2);
-                Point aimPoint=new Point(mapStatus.targetScreen.x,mapStatus.targetScreen.y+indexy);
+                int indexy = (int) (iv_location.getY() / 2);
+                Point aimPoint = new Point(mapStatus.targetScreen.x, mapStatus.targetScreen.y + indexy);
                 final LatLng position = projection.fromScreenLocation(aimPoint);
                 Log.e("longtianlove", "地图" + mapStatus.targetScreen.x + ":" + mapStatus.targetScreen.y);
 
@@ -446,7 +449,10 @@ public class MapLocationActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 //        Log.e("longtianlove-point","width:"+(mMapView.getWidth() / 2)+"height:"+mMapView.getHeight() /2);
-        HomelocationInstance.getInstance().setHomeCenter();
+        if (isFirst) {
+            HomelocationInstance.getInstance().setHomeCenter();
+            isFirst=false;
+        }
     }
 
     @Override
@@ -454,7 +460,7 @@ public class MapLocationActivity extends Activity {
         super.onDestroy();
 
         HomelocationInstance.getInstance().Destroy();
-        if(mBaiduMap!=null) {
+        if (mBaiduMap != null) {
             mBaiduMap.clear();
             mBaiduMap = null;
         }

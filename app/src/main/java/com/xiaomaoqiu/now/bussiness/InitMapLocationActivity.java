@@ -69,6 +69,10 @@ import static com.xiaomaoqiu.now.http.HttpCode.EC_SUCCESS;
 
 public class InitMapLocationActivity extends Activity {
 
+
+    public static boolean isFirst = true;
+
+
     View btn_go_back;
     TextView tv_next;
 
@@ -105,6 +109,7 @@ public class InitMapLocationActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_location);
+        isFirst = true;
         btn_go_back = findViewById(R.id.btn_go_back);
         btn_go_back.setOnClickListener(new View.OnClickListener() {
 
@@ -132,10 +137,10 @@ public class InitMapLocationActivity extends Activity {
                     public void onSuccess(Response<BaseBean> response, BaseBean message) {
                         HttpCode ret = HttpCode.valueOf(message.status);
                         if (ret == EC_SUCCESS) {
-                            UserInstance.getInstance().latitude=latitude;
-                            UserInstance.getInstance().longitude=longitude;
-                            SPUtil.putHOME_LATITUDE(latitude+"");
-                            SPUtil.putHOME_LONGITUDE(longitude+"");
+                            UserInstance.getInstance().latitude = latitude;
+                            UserInstance.getInstance().longitude = longitude;
+                            SPUtil.putHOME_LATITUDE(latitude + "");
+                            SPUtil.putHOME_LONGITUDE(longitude + "");
                         }
                         if (UserInstance.getInstance().agree_policy == 0) {
                             Intent intent = new Intent(InitMapLocationActivity.this, RebootActivity.class);
@@ -195,9 +200,9 @@ public class InitMapLocationActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                HomelocationInstance.getInstance().setCenter(new LatLng(touch_latitude,touch_longitude), 1000);
-                latitude=touch_latitude;
-                longitude=touch_longitude;
+                HomelocationInstance.getInstance().setCenter(new LatLng(touch_latitude, touch_longitude), 1000);
+                latitude = touch_latitude;
+                longitude = touch_longitude;
                 iv_selected.setVisibility(View.VISIBLE);
                 adapter.mposition = -1;
                 adapter.notifyDataSetChanged();
@@ -300,9 +305,9 @@ public class InitMapLocationActivity extends Activity {
                 });
 
                 Log.e("longtianlove", position.toString());
-                touch_latitude=position.latitude;
-                touch_longitude=position.longitude;
-                if (iv_selected.getVisibility() == View.VISIBLE){
+                touch_latitude = position.latitude;
+                touch_longitude = position.longitude;
+                if (iv_selected.getVisibility() == View.VISIBLE) {
                     double[] temp = HomelocationInstance.bd09_To_Gcj02(position.latitude, position.longitude);
                     latitude = temp[0];
                     longitude = temp[1];
@@ -423,7 +428,9 @@ public class InitMapLocationActivity extends Activity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 //        Log.e("longtianlove-point","width:"+(mMapView.getWidth() / 2)+"height:"+mMapView.getHeight() /2);
-        HomelocationInstance.getInstance().setHomeCenter();
+        if (isFirst) {
+            HomelocationInstance.getInstance().setHomeCenter();
+        }
     }
 
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -469,7 +476,7 @@ public class InitMapLocationActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         HomelocationInstance.getInstance().Destroy();
-        if(mBaiduMap!=null) {
+        if (mBaiduMap != null) {
             mBaiduMap.clear();
             mBaiduMap = null;
         }
