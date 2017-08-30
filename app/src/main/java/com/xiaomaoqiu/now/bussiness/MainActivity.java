@@ -664,20 +664,20 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if (select_index == 1) {
+//        if (select_index == 1) {
             getLocationWithOneMinute = true;
             if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
                 MapInstance.getInstance().startLoc();
             }
-        }
+//        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (select_index == 1) {
+//        if (select_index == 1) {
             getLocationWithOneMinute = false;
-        }
+//        }
     }
 }
     
