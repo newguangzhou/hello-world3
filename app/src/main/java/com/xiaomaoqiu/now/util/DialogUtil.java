@@ -252,7 +252,7 @@ public class DialogUtil {
         if (oldaccount == null || "".equals(oldaccount) || "null".equals(oldaccount)) {
             tv_old_account.setText("追踪器已被绑定");
         } else {
-            tv_old_account.setText("追踪器已被账号 " + oldaccount + " 绑定\n" +
+            tv_old_account.setText("此追踪器已被 " + oldaccount + " 绑定\n" +
                     "无法绑定到当前帐号");
         }
 

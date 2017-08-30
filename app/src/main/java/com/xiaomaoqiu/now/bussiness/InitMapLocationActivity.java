@@ -430,6 +430,7 @@ public class InitMapLocationActivity extends Activity {
 //        Log.e("longtianlove-point","width:"+(mMapView.getWidth() / 2)+"height:"+mMapView.getHeight() /2);
         if (isFirst) {
             HomelocationInstance.getInstance().setHomeCenter();
+            isFirst=false;
         }
     }
 

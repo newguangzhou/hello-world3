@@ -23,6 +23,7 @@ import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.CheckIndex;
 import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
+import com.xiaomaoqiu.now.bussiness.pet.PetInfo;
 import com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
@@ -117,7 +118,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void distanceCloseiInGPS(EventManage.distanceClose event) {
         String dialog_isfinded_title="找到"+PetInfoInstance.getInstance().getNick()+"了吗？";
-        DialogUtil.showPetFindedDialog(this, getString(R.string.dialog_isfinded_title), getString(R.string.dialog_isfinded_tab1), getString(R.string.dialog_isfinded_tab2), new View.OnClickListener() {
+        DialogUtil.showPetFindedDialog(this, dialog_isfinded_title, getString(R.string.dialog_isfinded_tab1), getString(R.string.dialog_isfinded_tab2), new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -282,7 +283,13 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void PetAtHome(PushEventManage.petAtHome event) {
         if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_COMMON) {
-            DialogUtil.showPetAtHomeDialog(this, getString(R.string.dialog_inhome_title),  getString(R.string.dialog_inhome_tab1), getString(R.string.dialog_inhome_tab2), new View.OnClickListener() {
+            String message="";
+            if(!"".equals(PetInfoInstance.getInstance().getNick())){
+                message="请确认"+ PetInfoInstance.getInstance().getNick()+"是否回到家？";
+            }else{
+                message="请确认宠物是否回到家？";
+            }
+            DialogUtil.showPetAtHomeDialog(this,message,  getString(R.string.dialog_inhome_tab1), getString(R.string.dialog_inhome_tab2), new View.OnClickListener() {
 
                         @Override
                         public void onClick(View v) {

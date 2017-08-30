@@ -120,9 +120,9 @@
         <item>丝毛梗</item>
         <item>斯凯梗</item>
         <item>斯坦福斗牛梗</item>
-        <item>史纳莎（巨型）</item>
-        <item>史纳莎（标准）</item>
-        <item>史纳莎（迷你）</item>
+        <item>雪纳瑞（巨型）</item>
+        <item>雪纳瑞（标准）</item>
+        <item>雪纳瑞（迷你）</item>
         <item>萨赛克斯猎犬</item>
         <item>田野猎犬</item>
         <item>万能梗</item>
@@ -148,6 +148,7 @@
         <item>中国冠毛犬</item>
         <item>指示犬</item>
         <item>藏獒</item>
+        <item>中华田园犬</item>
     </string-array>
 
 
@@ -299,6 +300,7 @@
         <item>2</item>
         <item>3</item>
         <item>3</item>
+        <item>2</item>
     </string-array>
 
 
@@ -307,10 +309,10 @@
         <item>边境牧羊犬</item>
         <item>比熊</item>
         <item>博美</item>
-        <item>串串(混血)</item>
+
         <item>柴犬</item>
         <item>德国牧羊犬</item>
-        <item>贵宾犬</item>
+        <item>贵宾犬（玩具）</item>
         <item>哈士奇</item>
         <item>金毛寻回犬</item>
         <item>吉娃娃</item>
@@ -319,8 +321,8 @@
         <item>萨摩耶</item>
         <item>苏格兰牧羊犬</item>
         <item>比格</item>
-        <item>史纳瑞(迷你)</item>
-        <item>斗牛</item>
+        <item>雪纳瑞（迷你）</item>
+        <item>英国斗牛犬</item>
         <item>法国斗牛犬</item>
         <item>英国古代牧羊犬</item>
         <item>可卡犬</item>
@@ -330,20 +332,20 @@
         <item>牛头梗</item>
         <item>沙皮犬</item>
         <item>松狮犬</item>
-        <item>史宾格</item>
+        <item>史宾格（威尔士）</item>
         <item>威尔士柯基</item>
         <item>约克夏</item>
         <item>西施犬</item>
         <item>西高地白梗</item>
         <item>喜乐蒂牧羊犬</item>
-
+        <item>中华田园犬</item>
     </string-array>
     <integer-array name="petlist_img">
         <item>@drawable/pet_variety_1</item>
         <item>@drawable/pet_variety_2</item>
         <item>@drawable/pet_variety_3</item>
         <item>@drawable/pet_variety_4</item>
-        <item>@drawable/pet_variety_5</item>
+
         <item>@drawable/pet_variety_6</item>
         <item>@drawable/pet_variety_7</item>
         <item>@drawable/pet_variety_8</item>
@@ -372,6 +374,7 @@
         <item>@drawable/pet_variety_31</item>
         <item>@drawable/pet_variety_32</item>
         <item>@drawable/pet_variety_33</item>
+        <item>@drawable/pet_variety_5</item>
     </integer-array>
 
     <integer-array name="google_colors">
