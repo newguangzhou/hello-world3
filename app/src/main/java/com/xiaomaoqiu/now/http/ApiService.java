@@ -247,6 +247,8 @@ public interface ApiService {
             @Query("wifi_ssid") String wifi_ssid,
             @Query("wifi_bssid") String wifi_bssid,
             @Query("pet_id") long petId,
+            @Query("imei") String imei,
+            @Query("get_wifi_list_time") long get_wifi_list_time,
             @Body RequestBody common_wifi
 
     );

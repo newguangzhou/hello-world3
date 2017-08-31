@@ -42,6 +42,7 @@ import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.Device.MeWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.AddressAdapter;
+import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -151,6 +152,8 @@ public class MapLocationActivity extends Activity {
                                     MeWifiListActivity.wifi_ssid,
                                     MeWifiListActivity.wifi_bssid,
                                     PetInfoInstance.getInstance().getPet_id(),
+                                    UserInstance.getInstance().device_imei,
+                                    DeviceInfoInstance.getInstance().GET_WIFI_LIST_TIME,
                                     MeWifiListActivity.common_wifi_body
                             ).enqueue(new XMQCallback<BaseBean>() {
                                 @Override

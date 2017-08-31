@@ -353,6 +353,8 @@ public class DeviceInfoInstance {
     }
 
 
+
+    public static long GET_WIFI_LIST_TIME=System.currentTimeMillis()/1000;;
     //获取wifi列表
     public void getWifiList() {
         ApiUtils.getApiService().getWifiList(UserInstance.getInstance().getUid(),
@@ -363,6 +365,7 @@ public class DeviceInfoInstance {
             public void onSuccess(Response<WifiListBean> response, WifiListBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 if (ret == HttpCode.EC_SUCCESS) {
+                    GET_WIFI_LIST_TIME=message.get_wifi_list_time;
                     if (message.data != null && message.data.size() >= 0) {
                         wiflist.data = message.data;
                         EventBus.getDefault().post(new EventManage.wifiListSuccess());

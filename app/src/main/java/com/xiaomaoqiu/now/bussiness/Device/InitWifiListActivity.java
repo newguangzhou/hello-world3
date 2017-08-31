@@ -17,6 +17,7 @@ import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.adapter.CheckStateAdapter;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.WifiBean;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
@@ -114,6 +115,8 @@ public class InitWifiListActivity extends BaseActivity {
                         wifi_ssid,
                         wifi_bssid,
                         PetInfoInstance.getInstance().getPet_id(),
+                        UserInstance.getInstance().device_imei,
+                        DeviceInfoInstance.getInstance().GET_WIFI_LIST_TIME,
                         common_wifi_body
                 ).enqueue(new XMQCallback<BaseBean>() {
                     @Override
