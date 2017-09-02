@@ -669,6 +669,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
             if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
                 MapInstance.getInstance().startLoc();
             }
+            PetInfoInstance.getInstance().getPetLocation();
 //        }
     }
 

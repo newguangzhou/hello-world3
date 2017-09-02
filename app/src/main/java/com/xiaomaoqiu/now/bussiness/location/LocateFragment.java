@@ -51,6 +51,8 @@ import java.util.Date;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static com.xiaomaoqiu.now.bussiness.MainActivity.getLocationWithOneMinute;
+
 
 /**
  * Created by long on 2017/1/14.
@@ -322,6 +324,9 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
     public void onLocateResult(PushEventManage.locationChange event) {
 
 
+        if(!getLocationWithOneMinute){
+            return;
+        }
         if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND){
             //手机位置
             MapInstance.getInstance().startLoc();
