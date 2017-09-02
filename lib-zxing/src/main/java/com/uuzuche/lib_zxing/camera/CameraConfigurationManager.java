@@ -26,6 +26,8 @@ import android.view.WindowManager;
 
 import java.util.regex.Pattern;
 
+import static android.hardware.Camera.Parameters.EFFECT_NONE;
+
 final class CameraConfigurationManager {
 
     private static final String TAG = CameraConfigurationManager.class.getSimpleName();
@@ -50,6 +52,9 @@ final class CameraConfigurationManager {
      */
     void initFromCameraParameters(Camera camera) {
         Camera.Parameters parameters = camera.getParameters();
+        parameters.setSceneMode(Camera.Parameters.SCENE_MODE_SNOW);
+        parameters.setColorEffect(Camera.Parameters.EFFECT_WHITEBOARD);
+        parameters.setWhiteBalance(Camera.Parameters.WHITE_BALANCE_DAYLIGHT);
         previewFormat = parameters.getPreviewFormat();
         previewFormatString = parameters.get("preview-format");
         Log.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
@@ -68,7 +73,10 @@ final class CameraConfigurationManager {
         }
         Log.i("#########", "screenX:" + screenResolutionForCamera.x + "   screenY:" + screenResolutionForCamera.y);
         cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
-
+        if (parameters.isZoomSupported()) {
+            // 设置成最大倍数的1/10，基本符合远近需求
+            parameters.setZoom(parameters.getMaxZoom() / 10);
+        }
         // cameraResolution = getCameraResolution(parameters, screenResolution);
         Log.d(TAG, "Camera resolution: " + screenResolution);
     }
