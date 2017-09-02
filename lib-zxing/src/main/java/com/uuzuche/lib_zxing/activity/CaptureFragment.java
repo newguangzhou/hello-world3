@@ -208,7 +208,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
             mediaPlayer.setOnCompletionListener(beepListener);
 
             AssetFileDescriptor file = getResources().openRawResourceFd(
-                    R.raw.beep);
+                    R.raw.deal);
             try {
                 mediaPlayer.setDataSource(file.getFileDescriptor(),
                         file.getStartOffset(), file.getLength());

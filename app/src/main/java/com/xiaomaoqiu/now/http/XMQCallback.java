@@ -134,7 +134,7 @@ public abstract class XMQCallback<T extends BaseBean> implements Callback<T> {
                     } catch (Exception e) {
                         DialogUtil.closeProgress();
                         CrashReport.postCatchedException(e);
-                        Toast.makeText(PetAppLike.mcontext, "**服务器小哥去看片了，稍等一下**", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PetAppLike.mcontext, "系统错误，请稍后……", Toast.LENGTH_SHORT).show();
                         Log.e(PetAppLike.TAG, "callback出错了" + e.getMessage());
                     }
                 } else {
