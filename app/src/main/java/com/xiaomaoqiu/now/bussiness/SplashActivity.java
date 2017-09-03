@@ -12,8 +12,8 @@ import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitWifiListActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.user.ConfirmBatteryActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
-import com.xiaomaoqiu.now.bussiness.user.RebootActivity;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.push.XMPushManagerInstance;
 import com.xiaomaoqiu.now.util.Apputil;
@@ -84,7 +84,13 @@ public class SplashActivity extends BaseActivity {
 
         }
         Intent intent = new Intent();
-        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
+        if(UserInstance.getInstance().agree_policy ==0){
+            intent.setClass(SplashActivity.this, ConfirmBatteryActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)||"-1".equals(UserInstance.getInstance().device_imei)) {
             intent.setClass(SplashActivity.this, InitBindDeviceActivity.class);
             startActivity(intent);
             finish();
@@ -110,12 +116,7 @@ public class SplashActivity extends BaseActivity {
             finish();
             return;
         }
-        if(UserInstance.getInstance().agree_policy ==0){
-            intent.setClass(SplashActivity.this, RebootActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+
         intent.setClass(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

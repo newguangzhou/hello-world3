@@ -84,7 +84,7 @@ public class UserInstance {
                         //是否同意用户协议 0是不同意，1是同意
                         UserInstance.getInstance().agree_policy =1;
                         SPUtil.putAgreePolicy(1);
-                        EventBus.getDefault().post(new EventManage.deviceReboot());
+                        EventBus.getDefault().post(new EventManage.PolicyAgree());
                         break;
                     case EC_ALREADY_FAV:
 

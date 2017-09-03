@@ -138,12 +138,12 @@ public class InitWifiListActivity extends BaseActivity {
                             finish();
                             return;
                         }
-                        if (UserInstance.getInstance().agree_policy == 0) {
-                            Intent intent = new Intent(InitWifiListActivity.this, RebootActivity.class);
-                            startActivity(intent);
-                            finish();
-                            return;
-                        }
+//                        if (UserInstance.getInstance().agree_policy == 0) {
+//                            Intent intent = new Intent(InitWifiListActivity.this, RebootActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                            return;
+//                        }
 
                         Intent intent = new Intent(InitWifiListActivity.this, MainActivity.class);
                         startActivity(intent);

@@ -142,12 +142,12 @@ public class InitMapLocationActivity extends Activity {
                             SPUtil.putHOME_LATITUDE(latitude + "");
                             SPUtil.putHOME_LONGITUDE(longitude + "");
                         }
-                        if (UserInstance.getInstance().agree_policy == 0) {
-                            Intent intent = new Intent(InitMapLocationActivity.this, RebootActivity.class);
-                            startActivity(intent);
-                            finish();
-                            return;
-                        }
+//                        if (UserInstance.getInstance().agree_policy == 0) {
+//                            Intent intent = new Intent(InitMapLocationActivity.this, RebootActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                            return;
+//                        }
                         Intent intent = new Intent(InitMapLocationActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

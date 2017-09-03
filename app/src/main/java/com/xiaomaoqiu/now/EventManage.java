@@ -20,6 +20,11 @@ public class EventManage {
 
     }
 
+    //同意协议
+    public static class PolicyAgree{
+
+    }
+
     //设备离线
     public static  class DeviceOffline{
 
@@ -36,6 +41,7 @@ public class EventManage {
     public static class deviceReboot{
 
     }
+
     //解除绑定之后
     public static class unbindDeviceSuccess{
 

@@ -273,12 +273,12 @@ public class AddPetInfoActivity extends BaseActivity {
             finish();
             return;
         }
-        if (UserInstance.getInstance().agree_policy == 0) {
-            intent = new Intent(this, RebootActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+//        if (UserInstance.getInstance().agree_policy == 0) {
+//            intent = new Intent(this, RebootActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
         intent = new Intent(AddPetInfoActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

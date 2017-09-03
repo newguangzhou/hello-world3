@@ -250,12 +250,12 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
             finish();
             return;
         }
-        if (UserInstance.getInstance().agree_policy == 0) {
-            Intent intent = new Intent(this, RebootActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+//        if (UserInstance.getInstance().agree_policy == 0) {
+//            Intent intent = new Intent(this, RebootActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
         Intent intent = new Intent(InitBindDeviceActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         overridePendingTransition(0, 0);

@@ -236,7 +236,7 @@ public class DeviceInfoInstance {
                         DialogUtil.closeProgress();
                         break;
                     case EC_INVALID_ARGS:
-//                        ToastUtil.showTost("IMEI码有误");
+                        ToastUtil.showTost("IMEI码有误");
                         DialogUtil.closeProgress();
                         break;
                     case EC_OFFLINE:

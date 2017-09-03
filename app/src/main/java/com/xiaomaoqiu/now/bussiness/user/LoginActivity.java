@@ -210,7 +210,13 @@ public class LoginActivity extends BaseActivity implements LoginView {
     public void next(EventManage.getUserInfoEvent event) {
         dismissDialog();//隐藏加载中动画
         Intent intent = new Intent();
-        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)) {
+        if(UserInstance.getInstance().agree_policy ==0){
+            intent.setClass(LoginActivity.this, ConfirmBatteryActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)||"-1".equals(UserInstance.getInstance().device_imei)) {
             intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
             startActivity(intent);
             finish();
@@ -236,12 +242,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
             finish();
             return;
         }
-        if(UserInstance.getInstance().agree_policy ==0){
-            intent.setClass(LoginActivity.this, RebootActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+//        if(UserInstance.getInstance().agree_policy ==0){
+//            intent.setClass(LoginActivity.this, RebootActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
         intent.setClass(LoginActivity.this,MainActivity.class);
         startActivity(intent);
         finish();
