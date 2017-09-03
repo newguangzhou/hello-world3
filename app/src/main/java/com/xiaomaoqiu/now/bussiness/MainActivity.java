@@ -17,8 +17,10 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.base.BaseBean;
 import com.xiaomaoqiu.now.base.BaseFragmentActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.location.LocateFragment;
 import com.xiaomaoqiu.now.bussiness.pet.CheckIndex;
@@ -26,6 +28,7 @@ import com.xiaomaoqiu.now.bussiness.pet.PetFragment;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfo;
 import com.xiaomaoqiu.now.bussiness.pet.info.PetInfoActivity;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
+import com.xiaomaoqiu.now.bussiness.pet.info.petdata.AsynImgDialog;
 import com.xiaomaoqiu.now.bussiness.user.MeFrament;
 import com.xiaomaoqiu.now.bussiness.user.UserInstance;
 import com.xiaomaoqiu.now.http.ApiUtils;
@@ -44,6 +47,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -302,33 +306,106 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
                         @Override
                         public void onClick(View v) {
+                            if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
 
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
-                                @Override
-                                public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
-                                    HttpCode ret = HttpCode.valueOf(message.status);
-                                    switch (ret) {
-                                        case EC_SUCCESS:
-                                            if (DeviceInfoInstance.getInstance().online != true) {
-                                                DeviceInfoInstance.getInstance().online = true;
-                                                EventBus.getDefault().post(new PushEventManage.deviceOnline());
-                                            }
-                                            PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
-                                            EventBus.getDefault().post(new EventManage.petModeChanged());
-                                            MapInstance.getInstance().stopLocListener();
-                                            break;
-                                        case EC_OFFLINE:
-                                            DeviceInfoInstance.getInstance().online = false;
-                                            EventBus.getDefault().post(new EventManage.DeviceOffline());
-                                            break;
+                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                                    @Override
+                                    public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
+                                        HttpCode ret = HttpCode.valueOf(message.status);
+                                        switch (ret) {
+                                            case EC_SUCCESS:
+                                                if (DeviceInfoInstance.getInstance().online != true) {
+                                                    DeviceInfoInstance.getInstance().online = true;
+                                                    EventBus.getDefault().post(new PushEventManage.deviceOnline());
+                                                }
+                                                PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                                EventBus.getDefault().post(new EventManage.petModeChanged());
+                                                MapInstance.getInstance().stopLocListener();
+                                                break;
+                                            case EC_OFFLINE:
+                                                DeviceInfoInstance.getInstance().online = false;
+                                                EventBus.getDefault().post(new EventManage.DeviceOffline());
+                                                break;
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onFail(Call<PetStatusBean> call, Throwable t) {
+                                    @Override
+                                    public void onFail(Call<PetStatusBean> call, Throwable t) {
 
-                                }
-                            });
+                                    }
+                                });
+                            }else if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_WALK){
+                                ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                                    @Override
+                                    public void onSuccess(Response<BaseBean> response, BaseBean message) {
+                                        long msEnd = System.currentTimeMillis();
+                                        Date today = new Date(msEnd);
+                                        String strStart;
+                                        String strEnd;
+                                        strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
+                                        strStart = strEnd;
+                                        ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
+                                                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                                            @Override
+                                            public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
+                                                HttpCode ret = HttpCode.valueOf(message.status);
+                                                if (ret == HttpCode.EC_SUCCESS) {
+
+                                                    if (message.data.size() > 0) {
+                                                        PetSportBean.SportBean bean = message.data.get(0);
+                                                        PetInfoInstance.getInstance().setTarget_step((int) bean.target_amount);
+                                                        PetInfoInstance.getInstance().packBean.reality_amount = bean.reality_amount;
+                                                        PetInfoInstance.getInstance().percentage = bean.percentage;
+                                                        PetFragment.sportDone = bean.reality_amount;
+                                                        AsynImgDialog.stopSalary = PetFragment.sportDone;
+                                                        AsynImgDialog.stopTime = (new Date()).getTime();
+                                                        AsynImgDialog.startTime=SPUtil.getSportStartTime();
+                                                        long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
+                                                        if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0&&sporttime>0) {
+                                                            double salary=(AsynImgDialog.stopSalary - AsynImgDialog.startSalary);
+                                                            DecimalFormat df = new DecimalFormat("0.00");//格式化
+                                                            String salaryText2= df.format(salary);
+                                                            String salaryText = PetInfoInstance.getInstance().getNick() + "刚才运动了" + sporttime + "分钟，消耗了" + salaryText2 + "卡路里";
+                                                            DialogUtil.showOneButtonDialog(MainActivity.this, salaryText, new View.OnClickListener() {
+
+                                                                @Override
+                                                                public void onClick(View v) {
+
+                                                                }
+                                                            });
+                                                        }
+
+                                                    } else {
+//                        ToastUtil.showTost("当天尚无数据~");
+
+                                                    }
+                                                } else {
+//                                        ToastUtil.showTost("获取当天数据失败");
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFail(Call<PetSportBean> call, Throwable t) {
+//                                    ToastUtil.showTost("获取当天数据失败");
+                                            }
+                                        });
+
+
+
+
+                                        PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_COMMON);
+                                        EventManage.petModeChanged event=new EventManage.petModeChanged();
+                                        event.pet_mode=Constants.PET_STATUS_COMMON;
+                                        EventBus.getDefault().post(event);
+                                    }
+
+                                    @Override
+                                    public void onFail(Call<BaseBean> call, Throwable t) {
+
+                                    }
+                                });
+
+                            }
 
                         }
                     }

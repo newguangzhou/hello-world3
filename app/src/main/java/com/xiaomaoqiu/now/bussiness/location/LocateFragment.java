@@ -545,9 +545,10 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                                             PetFragment.sportDone = bean.reality_amount;
                                             AsynImgDialog.stopSalary = PetFragment.sportDone;
                                             AsynImgDialog.stopTime = (new Date()).getTime();
-                                            if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0) {
-                                                AsynImgDialog.startTime=SPUtil.getSportStartTime();
-                                                long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
+                                            AsynImgDialog.startTime=SPUtil.getSportStartTime();
+                                            long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
+                                            if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0&&sporttime>0) {
+
                                                 double salary=(AsynImgDialog.stopSalary - AsynImgDialog.startSalary);
                                                 DecimalFormat df = new DecimalFormat("0.00");//格式化
                                                 String salaryText2= df.format(salary);

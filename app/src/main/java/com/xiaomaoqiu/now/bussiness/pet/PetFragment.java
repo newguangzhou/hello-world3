@@ -503,9 +503,9 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                                 percentage = bean.percentage;
                                                 AsynImgDialog.stopSalary = sportDone;
                                                 AsynImgDialog.stopTime = (new Date()).getTime();
-                                                if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0) {
-                                                    AsynImgDialog.startTime=SPUtil.getSportStartTime();
-                                                    long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
+                                                AsynImgDialog.startTime=SPUtil.getSportStartTime();
+                                                long sporttime = (AsynImgDialog.stopTime - AsynImgDialog.startTime) / 60000;
+                                                if ((AsynImgDialog.stopSalary - AsynImgDialog.startSalary) > 0&&sporttime>0) {
                                                     double salary=(AsynImgDialog.stopSalary - AsynImgDialog.startSalary);
                                                     String salaryText2= df.format(salary);
                                                     String salaryText = PetInfoInstance.getInstance().getNick() + "刚才运动了" + sporttime + "分钟，消耗了" + salaryText2+ "卡路里";
