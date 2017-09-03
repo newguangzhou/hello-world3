@@ -42,6 +42,9 @@ public class DialogUtil {
      * 显示带文本的加载进度对话框
      */
     public static void showProgress(Context context, String str) {
+        if("".equals(str)){
+            str="请稍等";
+        }
         if (mCustomProgress == null) {
             mCustomProgress = CustomProgress.show(context, str, false, null);
         } else {

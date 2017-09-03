@@ -22,7 +22,7 @@ android {
         applicationId 'com.xiaomaoqiu.pet'
         minSdkVersion 18
         targetSdkVersion 22
-        versionCode 9
+        versionCode 80
         versionName '0.1.0.3'
         javaCompileOptions {
             annotationProcessorOptions {

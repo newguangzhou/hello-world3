@@ -204,7 +204,7 @@ public class DeviceInfoInstance {
 
     //绑定设备
     public void bindDevice(final Activity activity, final String imei) {
-        DialogUtil.showProgress(activity,"");
+        DialogUtil.showProgress(activity,"正在搜索追踪器…");
         ApiUtils.getApiService().addDeviceInfo(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
                 imei,

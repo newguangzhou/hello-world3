@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_background_color_3"
             android:padding="10dp"
-            android:text="是"
+            android:text="确定"
             android:textColor="@color/white"
             android:textSize="@dimen/after_word_size" />
 
@@ -48,7 +48,7 @@
             android:textSize="@dimen/after_word_size"
             android:textColor="@color/white"
             android:background="@drawable/btn_background_color_3"
-            android:text="否"/>
+            android:text="取消"/>
     </LinearLayout>
 
 
