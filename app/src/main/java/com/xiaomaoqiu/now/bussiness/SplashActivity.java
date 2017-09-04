@@ -91,7 +91,8 @@ public class SplashActivity extends BaseActivity {
             return;
         }
         if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)||"-1".equals(UserInstance.getInstance().device_imei)) {
-            intent.setClass(SplashActivity.this, InitBindDeviceActivity.class);
+//            intent.setClass(SplashActivity.this, InitBindDeviceActivity.class);
+            intent.setClass(SplashActivity.this, ConfirmBatteryActivity.class);
             startActivity(intent);
             finish();
             return;

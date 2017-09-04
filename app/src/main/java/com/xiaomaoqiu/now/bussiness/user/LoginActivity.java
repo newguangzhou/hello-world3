@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
+import com.xiaomaoqiu.now.bussiness.SplashActivity;
 import com.xiaomaoqiu.now.push.PushEventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.InitBindDeviceActivity;
@@ -217,7 +218,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
             return;
         }
         if (TextUtils.isEmpty(UserInstance.getInstance().device_imei)||"-1".equals(UserInstance.getInstance().device_imei)) {
-            intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
+//            intent.setClass(LoginActivity.this, InitBindDeviceActivity.class);
+            intent.setClass(LoginActivity.this, ConfirmBatteryActivity.class);
             startActivity(intent);
             finish();
             return;

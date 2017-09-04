@@ -42,8 +42,8 @@ public class DialogUtil {
      * 显示带文本的加载进度对话框
      */
     public static void showProgress(Context context, String str) {
-        if("".equals(str)){
-            str="请稍等";
+        if ("".equals(str)) {
+            str = "请稍等";
         }
         if (mCustomProgress == null) {
             mCustomProgress = CustomProgress.show(context, str, false, null);
@@ -331,6 +331,7 @@ public class DialogUtil {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
+
     //设备确认开机
     public static void showDeviceOpenOnlineCanclose(Context context, final View.OnClickListener oklistener, final View.OnClickListener cancellistener) {
         final Dialog dialog = new AppDialog(context, R.layout.dialog_device_show, -1, -2, 0, Gravity.CENTER);
@@ -452,7 +453,7 @@ public class DialogUtil {
 
 
     public static Thread noresponsethread;
-    public static boolean findedResponsed=false;
+    public static boolean findedResponsed = false;
 
     //已经找到宠物弹窗petisFindedDialog
     public static void showPetFindedDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
@@ -465,7 +466,7 @@ public class DialogUtil {
             }
 
         }
-        findedResponsed=false;
+        findedResponsed = false;
         petisFindedDialog = null;
         petisFindedDialog = new AppDialog(context, R.layout.dialog_intelligent_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petisFindedDialog.getWindow().setWindowAnimations(0);
@@ -485,7 +486,7 @@ public class DialogUtil {
                 if (onCancleClickListener != null) {
                     onCancleClickListener.onClick(v);
                 }
-                findedResponsed=true;
+                findedResponsed = true;
             }
         });
         two_button_confirm.setOnClickListener(new View.OnClickListener() {
@@ -497,7 +498,7 @@ public class DialogUtil {
                 if (onConfirmClickListener != null) {
                     onConfirmClickListener.onClick(v);
                 }
-                findedResponsed=true;
+                findedResponsed = true;
             }
         });
 
@@ -523,7 +524,7 @@ public class DialogUtil {
                             }
 
                         }
-                        if ((!findedResponsed)&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+                        if ((!findedResponsed) && PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -566,7 +567,8 @@ public class DialogUtil {
 
 
     public static Thread petathome_noresponsethread;
-    public static boolean athomeRespnsed=false;
+    public static boolean athomeRespnsed = false;
+
     //宠物是否到家  petAtHomeDialog
     public static void showPetAtHomeDialog(final Context context, String messageString, String cancleText, String confirmText, final View.OnClickListener onCancleClickListener, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
@@ -577,10 +579,10 @@ public class DialogUtil {
 
             }
         }
-        if(petisFindedDialog!=null&&petisFindedDialog.isShowing()){
+        if (petisFindedDialog != null && petisFindedDialog.isShowing()) {
             try {
                 petisFindedDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -592,7 +594,7 @@ public class DialogUtil {
                 e.printStackTrace();
             }
         }
-        athomeRespnsed=false;
+        athomeRespnsed = false;
         petAtHomeDialog = null;
         petAtHomeDialog = new AppDialog(context, R.layout.dialog_intelligent_button, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         petAtHomeDialog.getWindow().setWindowAnimations(0);
@@ -612,7 +614,7 @@ public class DialogUtil {
                 if (onCancleClickListener != null) {
                     onCancleClickListener.onClick(v);
                 }
-                athomeRespnsed=true;
+                athomeRespnsed = true;
                 ThreadUtil.open_gps_donot_check_Thread(9000000);
 //                ThreadUtil.open_gps_donot_check_Thread(1000);
             }
@@ -626,7 +628,7 @@ public class DialogUtil {
                 if (onConfirmClickListener != null) {
                     onConfirmClickListener.onClick(v);
                 }
-                athomeRespnsed=true;
+                athomeRespnsed = true;
             }
         });
 
@@ -634,7 +636,7 @@ public class DialogUtil {
         petAtHomeDialog.setCanceledOnTouchOutside(false);
         try {
             petAtHomeDialog.show();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -657,14 +659,14 @@ public class DialogUtil {
                             }
 
                         }
-                        if(petAtHomeDialog!=null && petAtHomeDialog.isShowing()){
+                        if (petAtHomeDialog != null && petAtHomeDialog.isShowing()) {
                             try {
                                 petAtHomeDialog.dismiss();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
-                        if (!athomeRespnsed&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
+                        if (!athomeRespnsed && PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
                             ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
@@ -896,9 +898,11 @@ public class DialogUtil {
         dialog.show();
 
     }
+
     public static Dialog openGPSDialog;
+
     //开启紧急搜索弹窗
-    public static void openGPSDialog(final Context context, final View.OnClickListener onConfirmClickListener){
+    public static void openGPSDialog(final Context context, final View.OnClickListener onConfirmClickListener) {
         if (!canShowDialog(context)) return;
         openGPSDialog = new AppDialog(context, R.layout.dialog_open_gpsn, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         openGPSDialog.getWindow().setWindowAnimations(0);
@@ -928,6 +932,39 @@ public class DialogUtil {
         openGPSDialog.setCancelable(false);
         openGPSDialog.setCanceledOnTouchOutside(false);
         openGPSDialog.show();
+    }
+
+
+    public static Dialog completeDialog;
+
+    //绑定成功，正在初始化数据，请稍候……
+    public static void showComplete(final Context context) {
+        if (!canShowDialog(context)) return;
+        completeDialog=new AppDialog(context,R.layout.dialog_complete, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
+        completeDialog.getWindow().setWindowAnimations(0);
+        try {
+
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(2000);
+                        if(completeDialog!=null&&completeDialog.isShowing()){
+                            completeDialog.dismiss();
+                        }
+                    } catch (Exception e) {
+
+                    }
+                }
+            });
+            thread.start();
+        }catch (Exception e){
+
+        }
+        completeDialog.setCancelable(false);
+        completeDialog.setCanceledOnTouchOutside(false);
+        completeDialog.show();
     }
 
 

@@ -11,6 +11,7 @@ import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.BaseWebViewHasBatteryViewActivity;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
+import com.xiaomaoqiu.now.bussiness.user.ConfirmBatteryActivity;
 import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
 import com.xiaomaoqiu.now.view.BatteryView;
@@ -114,7 +115,7 @@ public class DeviceActivity extends BaseActivity {
     //解绑成功
     @Subscribe(threadMode = ThreadMode.MAIN, priority = 0)
     public void unbindDeviceSuccess(EventManage.unbindDeviceSuccess event){
-        Intent intent = new Intent(PetAppLike.mcontext, InitBindDeviceActivity.class);
+        Intent intent = new Intent(PetAppLike.mcontext, ConfirmBatteryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PetAppLike.mcontext.startActivity(intent);
 

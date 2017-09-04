@@ -47,6 +47,7 @@ import com.xiaomaoqiu.now.http.XMQCallback;
 import com.xiaomaoqiu.now.map.HomelocationInstance;
 import com.xiaomaoqiu.now.map.main.MapLocationParser;
 import com.xiaomaoqiu.now.map.main.addressParseListener;
+import com.xiaomaoqiu.now.util.DialogUtil;
 import com.xiaomaoqiu.now.util.MIUIUtils;
 import com.xiaomaoqiu.now.util.SPUtil;
 import com.xiaomaoqiu.now.util.ToastUtil;
