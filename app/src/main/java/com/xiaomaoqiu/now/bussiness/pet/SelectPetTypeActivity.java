@@ -57,7 +57,7 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.iv_pettype_cat:
 
                 PetUtil.getInstance().dogName=("猫");
-                PetUtil.getInstance().energyType="2";
+                PetUtil.getInstance().energyType="1";
                 pet_type_id=2;
                 finish();
                 break;
@@ -65,7 +65,7 @@ public class SelectPetTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.iv_pettype_other:
 
                 PetUtil.getInstance().dogName=("其他");
-                PetUtil.getInstance().energyType="2";
+                PetUtil.getInstance().energyType="1";
                 pet_type_id=-1;
                 finish();
                 break;

@@ -130,10 +130,10 @@ public class PetUtil {
 
         //        RER
         RER = calculateRER();
-        method1 = RER * 0.04;
-        method2 = RER * 0.05;
-        method3 = RER * 0.06;
-        method4 = RER * 0.09;
+        method1 = RER * 0.07;
+        method2 = RER * 0.08;
+        method3 = RER * 0.09;
+        method4 = RER * 0.10;
 
         calculateAllEnergy();
 

@@ -153,9 +153,11 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tv_battery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="追踪器已充电至蓝灯常亮（充满）"
+                    android:textColor="@color/new_color_word"
                     android:textSize="@dimen/common_dialog_message" />
             </LinearLayout>
 
@@ -195,9 +197,11 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tv_power"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="追踪器已开机"
+                    android:textColor="@color/new_color_word"
                     android:textSize="@dimen/common_dialog_message" />
             </LinearLayout>
 
@@ -237,9 +241,11 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tv_at_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 追踪器在宠物常住地"
+                    android:textColor="@color/new_color_word"
                     android:textSize="@dimen/common_dialog_message" />
             </LinearLayout>
 
@@ -279,9 +285,11 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tv_provicy_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我已阅读并同意"
+                    android:textColor="@color/new_color_word"
                     android:textSize="@dimen/common_dialog_message" />
 
                 <TextView
@@ -289,8 +297,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/user_book"
+                    android:textColor="@color/new_color_word"
                     android:textSize="@dimen/common_dialog_message"
-
                     />
             </LinearLayout>
         </LinearLayout>

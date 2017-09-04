@@ -155,6 +155,8 @@ public class PetInfoInstance {
 
 
     public void savePetInfo(PetInfoBean message) {
+        packBean.target_energy = message.target_energy;
+        SPUtil.putEnergyType(packBean.target_energy);
         if (message.pet_id > 0) {
             packBean.pet_id = message.pet_id;
             SPUtil.putPetId(packBean.pet_id);
@@ -199,11 +201,13 @@ public class PetInfoInstance {
         if (!TextUtils.isEmpty(message.recommend_energy)) {
             packBean.recommend_energy = message.recommend_energy;
             SPUtil.putSuggestEnergy(message.recommend_energy);
+            setSuggest_energy(message.recommend_energy);
+            packBean.target_energy=message.recommend_energy;
+            SPUtil.putEnergyType(packBean.target_energy);
         }
         packBean.pet_type_id = message.pet_type_id;
         SPUtil.putPetTypeId(packBean.pet_type_id);
-        packBean.target_energy = message.target_energy;
-        SPUtil.putEnergyType(packBean.target_energy);
+
         setDateFormat_birthday(packBean.birthday);
 
 

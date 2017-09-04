@@ -305,10 +305,10 @@
 
 
     <string-array name="petlist_name">
-        <item>阿拉斯加雪撬犬</item>
+        <item>阿拉斯加雪橇犬</item>
         <item>边境牧羊犬</item>
         <item>比熊</item>
-        <item>博美</item>
+        <item>博美犬</item>
 
         <item>柴犬</item>
         <item>德国牧羊犬</item>
@@ -317,14 +317,14 @@
         <item>金毛寻回犬</item>
         <item>吉娃娃</item>
         <item>拉布拉多寻回犬</item>
-        <item>秋田</item>
-        <item>萨摩耶</item>
+        <item>秋田犬</item>
+        <item>萨摩耶犬</item>
         <item>苏格兰牧羊犬</item>
         <item>比格</item>
         <item>雪纳瑞（迷你）</item>
         <item>英国斗牛犬</item>
         <item>法国斗牛犬</item>
-        <item>英国古代牧羊犬</item>
+        <item>古代英国牧羊犬</item>
         <item>可卡犬</item>
         <item>罗威纳犬</item>
         <item>玛尔济斯</item>

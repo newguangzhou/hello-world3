@@ -1,9 +1,11 @@
 package com.xiaomaoqiu.now.bussiness.user;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
@@ -36,24 +38,28 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
     View fl_click_battery_full;
     View iv_ischecked_battery_none;
     View iv_ischecked_battery_full;
+    TextView tv_battery;
     boolean check_battery = false;
     //开机
     View fl_click_power_on;
     View iv_ischecked_power_off;
     View iv_ischecked_power_on;
+    TextView tv_power;
     boolean check_poweron = false;
     //是否在家
     View fl_click_at_home;
     View iv_ischecked_at_home_not;
     View iv_ischecked_at_home;
+    TextView tv_at_home;
     boolean check_athome = false;
     //用户协议
     View fl_click_provicy;
     View iv_ischecked_provicy_not;
     View iv_ischecked_provicy;
+    TextView tv_provicy_1;
     boolean check_provicy = false;
 
-    View tv_userbook_provicy;
+    TextView tv_userbook_provicy;
 
 
     LoginPresenter loginPresenter;
@@ -154,7 +160,7 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
                 if (check_battery && check_poweron && check_athome && check_provicy) {
                     //todo 需要进行判断
                     UserInstance.getInstance().agreePolicy();
-                }else{
+                } else {
                     ToastUtil.showAtCenter("请确定以下内容");
                 }
             }
@@ -177,15 +183,18 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
                     check_battery = false;
                     iv_ischecked_battery_none.setVisibility(View.VISIBLE);
                     iv_ischecked_battery_full.setVisibility(View.GONE);
+                    tv_battery.setTextColor(Color.parseColor("#141e41"));
                 } else {
                     check_battery = true;
                     iv_ischecked_battery_none.setVisibility(View.GONE);
                     iv_ischecked_battery_full.setVisibility(View.VISIBLE);
+                    tv_battery.setTextColor(Color.parseColor("#f9cec9"));
                 }
             }
         });
         iv_ischecked_battery_none = this.findViewById(R.id.iv_ischecked_battery_none);
         iv_ischecked_battery_full = this.findViewById(R.id.iv_ischecked_battery_full);
+        tv_battery= (TextView) this.findViewById(R.id.tv_battery);
 
         //-------------
         fl_click_power_on = this.findViewById(R.id.fl_click_power_on);
@@ -197,15 +206,18 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
                     check_poweron = false;
                     iv_ischecked_power_off.setVisibility(View.VISIBLE);
                     iv_ischecked_power_on.setVisibility(View.GONE);
+                    tv_power.setTextColor(Color.parseColor("#141e41"));
                 } else {
                     check_poweron = true;
                     iv_ischecked_power_off.setVisibility(View.GONE);
                     iv_ischecked_power_on.setVisibility(View.VISIBLE);
+                    tv_power.setTextColor(Color.parseColor("#f9cec9"));
                 }
             }
         });
         iv_ischecked_power_off = this.findViewById(R.id.iv_ischecked_power_off);
         iv_ischecked_power_on = this.findViewById(R.id.iv_ischecked_power_on);
+        tv_power= (TextView) this.findViewById(R.id.tv_power);
 
         //-------------
         fl_click_at_home = this.findViewById(R.id.fl_click_at_home);
@@ -217,16 +229,18 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
                     check_athome = false;
                     iv_ischecked_at_home_not.setVisibility(View.VISIBLE);
                     iv_ischecked_at_home.setVisibility(View.GONE);
+                    tv_at_home.setTextColor(Color.parseColor("#141e41"));
                 } else {
                     check_athome = true;
                     iv_ischecked_at_home_not.setVisibility(View.GONE);
                     iv_ischecked_at_home.setVisibility(View.VISIBLE);
+                    tv_at_home.setTextColor(Color.parseColor("#f9cec9"));
                 }
             }
         });
         iv_ischecked_at_home_not = this.findViewById(R.id.iv_ischecked_at_home_not);
         iv_ischecked_at_home = this.findViewById(R.id.iv_ischecked_at_home);
-
+        tv_at_home= (TextView) this.findViewById(R.id.tv_at_home);
 
         fl_click_provicy = this.findViewById(R.id.fl_click_provicy);
         fl_click_provicy.setOnClickListener(new View.OnClickListener() {
@@ -237,26 +251,31 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
                     check_provicy = false;
                     iv_ischecked_provicy_not.setVisibility(View.VISIBLE);
                     iv_ischecked_provicy.setVisibility(View.GONE);
+                    tv_provicy_1.setTextColor(Color.parseColor("#141e41"));
+                    tv_userbook_provicy.setTextColor(Color.parseColor("#141e41"));
                 } else {
                     check_provicy = true;
                     iv_ischecked_provicy_not.setVisibility(View.GONE);
                     iv_ischecked_provicy.setVisibility(View.VISIBLE);
+                    tv_provicy_1.setTextColor(Color.parseColor("#f9cec9"));
+                    tv_userbook_provicy.setTextColor(Color.parseColor("#f9cec9"));
                 }
             }
         });
         iv_ischecked_provicy_not = this.findViewById(R.id.iv_ischecked_provicy_not);
         iv_ischecked_provicy = this.findViewById(R.id.iv_ischecked_provicy);
-        tv_userbook_provicy=this.findViewById(R.id.tv_userbook_provicy);
-        tv_userbook_provicy.setOnClickListener(new View.OnClickListener(){
+        tv_userbook_provicy = (TextView) this.findViewById(R.id.tv_userbook_provicy);
+        tv_userbook_provicy.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ConfirmBatteryActivity.this, BaseWebViewActivity.class);
-                intent.putExtra("title","用户协议与隐私政策");
+                intent.putExtra("title", "用户协议与隐私政策");
                 intent.putExtra("web_url", "https://www.xiaomaoqiu.com/proto_user.html");
                 startActivity(intent);
             }
         });
+        tv_provicy_1= (TextView) this.findViewById(R.id.tv_provicy_1);
     }
 
     public void success() {
