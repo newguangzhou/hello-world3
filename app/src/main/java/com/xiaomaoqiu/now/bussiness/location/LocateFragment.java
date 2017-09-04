@@ -406,7 +406,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 public void onClick(View v) {
 
 
-                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                             HttpCode ret = HttpCode.valueOf(message.status);
@@ -449,7 +449,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                 public void onClick(View v) {
 
                     MapInstance.getInstance().startFindPet();
-                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
+                    ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
                         @Override
                         public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                             HttpCode ret = HttpCode.valueOf(message.status);
@@ -500,7 +500,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                     AsynImgDialog.startSalary = PetFragment.sportDone;
                     AsynImgDialog.startTime = (new Date()).getTime();
                     SPUtil.putSportStartTime(AsynImgDialog.startTime);
-                    ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                    ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),UserInstance.getInstance().pet_id,Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                         @Override
                         public void onSuccess(Response<BaseBean> response, BaseBean message) {
                             PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_WALK);
@@ -521,7 +521,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
             AsynImgDialog.createGoHomeDialog(getContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                    ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),UserInstance.getInstance().pet_id,Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                         @Override
                         public void onSuccess(Response<BaseBean> response, BaseBean message) {
                             long msEnd = System.currentTimeMillis();
@@ -531,7 +531,7 @@ public class LocateFragment extends BaseFragment implements View.OnClickListener
                             strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
                             strStart = strEnd;
                             ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                                    PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                                    UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
                                 @Override
                                 public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);

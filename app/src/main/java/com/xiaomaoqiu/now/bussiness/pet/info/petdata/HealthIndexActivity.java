@@ -204,7 +204,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
         String strStart = strEnd;
 
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
             public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -268,7 +268,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
 
 
         ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
+                UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
             @Override
             public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -336,7 +336,7 @@ public class HealthIndexActivity extends BaseActivity implements PickSportNumber
         final DecimalFormat df = new DecimalFormat("0.00");//格式化
         final double target_energyDouble = Double.valueOf(numberString);
         //设定运动目标
-        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), (int) target_energyDouble, df.format(target_energyDouble)).enqueue(new XMQCallback<BaseBean>() {
+        ApiUtils.getApiService().setSportInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, (int) target_energyDouble, df.format(target_energyDouble)).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);

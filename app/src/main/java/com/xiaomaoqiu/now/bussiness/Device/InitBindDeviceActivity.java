@@ -9,11 +9,13 @@ import android.widget.EditText;
 
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xiaomaoqiu.now.EventManage;
+import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.BaseWebViewActivity;
 import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
 import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.pet.info.AddPetInfoActivity;
+import com.xiaomaoqiu.now.bussiness.user.ConfirmBatteryActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginActivity;
 import com.xiaomaoqiu.now.bussiness.user.LoginPresenter;
 import com.xiaomaoqiu.now.bussiness.user.LogoutView;
@@ -40,6 +42,7 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
 
     View ll_help;
 
+    View btn_go_back;
     View tv_logout;
     View tv_next;
 
@@ -69,6 +72,16 @@ public class InitBindDeviceActivity extends BaseActivity implements LogoutView {
     }
 
     private void initView() {
+        btn_go_back=this.findViewById(R.id.btn_go_back);
+        btn_go_back.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PetAppLike.mcontext, ConfirmBatteryActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                PetAppLike.mcontext.startActivity(intent);
+            }
+        });
         tv_logout = this.findViewById(R.id.tv_logout);
         tv_logout.setOnClickListener(new View.OnClickListener() {
 

@@ -478,7 +478,8 @@ public class PetInfoInstance {
     public void getPetLocation() {
         ApiUtils.getApiService().getPetLocation(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id()
+//                PetInfoInstance.getInstance().getPet_id()
+                UserInstance.getInstance().pet_id
         ).enqueue(new XMQCallback<PetLocationBean>() {
             @Override
             public void onSuccess(Response<PetLocationBean> response, PetLocationBean message) {

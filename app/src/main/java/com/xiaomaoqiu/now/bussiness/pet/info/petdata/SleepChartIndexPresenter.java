@@ -52,7 +52,7 @@ public class SleepChartIndexPresenter {
         String strStart = String.format("%s-%s-%s", startDate.getYear() + 1900, startDate.getMonth() + 1, startDate.getDate());
         ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd
+                UserInstance.getInstance().pet_id, strStart, strEnd
         ).enqueue(new XMQCallback<PetSleepInfoBean>() {
             @Override
             public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {

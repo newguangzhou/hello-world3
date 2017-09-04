@@ -524,7 +524,7 @@ public class DialogUtil {
 
                         }
                         if ((!findedResponsed)&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);
@@ -665,7 +665,7 @@ public class DialogUtil {
                             }
                         }
                         if (!athomeRespnsed&&PetInfoInstance.getInstance().PET_MODE == Constants.PET_STATUS_FIND) {
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);

@@ -127,7 +127,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     @Override
                     public void onClick(View v) {
                         MapInstance.getInstance().openTime = 1;
-                        ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                        ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                             @Override
                             public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -239,7 +239,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                             if (PetInfoInstance.getInstance().PET_MODE != Constants.PET_STATUS_FIND) {
                                 MapInstance.getInstance().startFindPet();
                                 MapInstance.getInstance().openTime = 1;
-                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
+                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
                                     @Override
                                     public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                         HttpCode ret = HttpCode.valueOf(message.status);
@@ -308,7 +308,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                         public void onClick(View v) {
                             if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_FIND) {
 
-                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                                ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                     @Override
                                     public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                         HttpCode ret = HttpCode.valueOf(message.status);
@@ -335,7 +335,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                     }
                                 });
                             }else if(PetInfoInstance.getInstance().PET_MODE==Constants.PET_STATUS_WALK){
-                                ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),PetInfoInstance.getInstance().getPet_id(),Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                                ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),UserInstance.getInstance().pet_id,Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                                     @Override
                                     public void onSuccess(Response<BaseBean> response, BaseBean message) {
                                         long msEnd = System.currentTimeMillis();
@@ -345,7 +345,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                                         strEnd = String.format("%s-%s-%s", today.getYear() + 1900, today.getMonth() + 1, today.getDate());
                                         strStart = strEnd;
                                         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                                                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                                                UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
                                             @Override
                                             public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                                                 HttpCode ret = HttpCode.valueOf(message.status);

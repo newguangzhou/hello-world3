@@ -163,7 +163,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
         sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
         tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
         ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
             @Override
             public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -205,7 +205,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
             }
         });
         ApiUtils.getApiService().getSleepInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
+                UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSleepInfoBean>() {
             @Override
             public void onSuccess(Response<PetSleepInfoBean> response, PetSleepInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -326,7 +326,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         @Override
                         public void onClick(View v) {
                             tv_findpet.setText(getString(R.string.to_find));
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_CLOSE).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);
@@ -369,7 +369,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         public void onClick(View v) {
                             tv_findpet.setText("关闭搜寻");
                             MapInstance.getInstance().startFindPet();
-                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
+                            ApiUtils.getApiService().findPet(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.GPS_OPEN).enqueue(new XMQCallback<PetStatusBean>() {
                                 @Override
                                 public void onSuccess(Response<PetStatusBean> response, PetStatusBean message) {
                                     HttpCode ret = HttpCode.valueOf(message.status);
@@ -428,7 +428,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                         AsynImgDialog.startSalary = sportDone;
                         AsynImgDialog.startTime = (new Date()).getTime();
                         SPUtil.putSportStartTime(AsynImgDialog.startTime);
-                        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.TO_SPORT_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                             @Override
                             public void onSuccess(Response<BaseBean> response, BaseBean message) {
                                 PetInfoInstance.getInstance().setPetMode(Constants.PET_STATUS_WALK);
@@ -477,7 +477,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void onClick(View v) {
 
-                        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id(), Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
+                        ApiUtils.getApiService().toActivity(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id, Constants.TO_HOME_ACTIVITY_TYPE).enqueue(new XMQCallback<BaseBean>() {
                             @Override
                             public void onSuccess(Response<BaseBean> response, BaseBean message) {
 
@@ -486,7 +486,7 @@ public class PetFragment extends BaseFragment implements View.OnClickListener {
                                 sportTarget = PetInfoInstance.getInstance().packBean.target_energy;
                                 tvSportTarget.setText(String.format("目标消耗" + sportTarget + "千卡"));
                                 ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                                        PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                                        UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
                                     @Override
                                     public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                                         HttpCode ret = HttpCode.valueOf(message.status);

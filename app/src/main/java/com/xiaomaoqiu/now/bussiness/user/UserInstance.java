@@ -74,7 +74,8 @@ public class UserInstance {
         ApiUtils.getApiService().agreePolicy(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
                 DeviceInfoInstance.getInstance().packBean.imei,
-                PetInfoInstance.getInstance().getPet_id()
+//                PetInfoInstance.getInstance().getPet_id()
+                UserInstance.getInstance().pet_id
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {

@@ -181,7 +181,7 @@ public class DeviceInfoInstance {
 
     //获取设备信息
     public void getDeviceInfo() {
-        ApiUtils.getApiService().getDeviceInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), PetInfoInstance.getInstance().getPet_id()).enqueue(new XMQCallback<DeviceInfoBean>() {
+        ApiUtils.getApiService().getDeviceInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(), UserInstance.getInstance().pet_id).enqueue(new XMQCallback<DeviceInfoBean>() {
             @Override
             public void onSuccess(Response<DeviceInfoBean> response, DeviceInfoBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
@@ -260,8 +260,10 @@ public class DeviceInfoInstance {
     public void rebootDevice() {
         ApiUtils.getApiService().rebootDevice(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
-                DeviceInfoInstance.getInstance().packBean.imei,
-                PetInfoInstance.getInstance().getPet_id()
+//                DeviceInfoInstance.getInstance().packBean.imei,
+                UserInstance.getInstance().device_imei,
+//                PetInfoInstance.getInstance().getPet_id()
+                UserInstance.getInstance().pet_id
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -317,7 +319,8 @@ public class DeviceInfoInstance {
         ApiUtils.getApiService().sendGetWifiListCmd(
                 UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id()
+//                PetInfoInstance.getInstance().getPet_id()
+                UserInstance.getInstance().pet_id
         ).enqueue(new XMQCallback<BaseBean>() {
             @Override
             public void onSuccess(Response<BaseBean> response, BaseBean message) {
@@ -359,7 +362,8 @@ public class DeviceInfoInstance {
     public void getWifiList() {
         ApiUtils.getApiService().getWifiList(UserInstance.getInstance().getUid(),
                 UserInstance.getInstance().getToken(),
-                PetInfoInstance.getInstance().getPet_id()
+//                PetInfoInstance.getInstance().getPet_id()
+                UserInstance.getInstance().pet_id
         ).enqueue(new XMQCallback<WifiListBean>() {
             @Override
             public void onSuccess(Response<WifiListBean> response, WifiListBean message) {

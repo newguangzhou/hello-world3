@@ -151,7 +151,8 @@ public class MapLocationActivity extends Activity {
                                     UserInstance.getInstance().getToken(),
                                     MeWifiListActivity.wifi_ssid,
                                     MeWifiListActivity.wifi_bssid,
-                                    PetInfoInstance.getInstance().getPet_id(),
+//                                    PetInfoInstance.getInstance().getPet_id(),
+                                    UserInstance.getInstance().pet_id,
                                     UserInstance.getInstance().device_imei,
                                     DeviceInfoInstance.getInstance().GET_WIFI_LIST_TIME,
                                     MeWifiListActivity.common_wifi_body

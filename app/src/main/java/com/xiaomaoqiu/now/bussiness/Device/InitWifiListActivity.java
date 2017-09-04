@@ -114,7 +114,8 @@ public class InitWifiListActivity extends BaseActivity {
                         UserInstance.getInstance().getToken(),
                         wifi_ssid,
                         wifi_bssid,
-                        PetInfoInstance.getInstance().getPet_id(),
+//                        PetInfoInstance.getInstance().getPet_id(),
+                        UserInstance.getInstance().pet_id,
                         UserInstance.getInstance().device_imei,
                         DeviceInfoInstance.getInstance().GET_WIFI_LIST_TIME,
                         common_wifi_body

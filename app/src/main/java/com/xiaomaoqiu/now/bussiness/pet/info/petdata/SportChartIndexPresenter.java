@@ -52,7 +52,7 @@ public class SportChartIndexPresenter {
         String strStart = String.format("%s-%s-%s", startDate.getYear() + 1900, startDate.getMonth() + 1, startDate.getDate());
 
             ApiUtils.getApiService().getActivityInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
-                    PetInfoInstance.getInstance().getPet_id(), strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
+                    UserInstance.getInstance().pet_id, strStart, strEnd).enqueue(new XMQCallback<PetSportBean>() {
                 @Override
                 public void onSuccess(Response<PetSportBean> response, PetSportBean message) {
                     HttpCode ret = HttpCode.valueOf(message.status);
