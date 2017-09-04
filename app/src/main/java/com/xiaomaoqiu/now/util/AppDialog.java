@@ -133,7 +133,10 @@ public class AppDialog extends Dialog {
             int curDay = c.get(Calendar.DATE);
             int curHour=c.get(Calendar.HOUR_OF_DAY);
             int curMinute = c.get(Calendar.MINUTE);
-            return String.format("%s年%s月%s日%s:%s", curYear, curMon, curDay,curHour,curMinute);
+//            return String.format("%s年%s月%s日%s:%s", curYear, curMon, curDay,curHour,curMinute);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date=new Date(timemills);
+            return simpleDateFormat.format(date);
         }
 
         public static Date getFirstDataOfCurMonth(){
