@@ -328,8 +328,12 @@ public class AddPetInfoActivity extends BaseActivity {
                 public void onDatePicked(int year, int month, int day) {
                     PetInfoInstance.MyDate tmpDateFormatBirthday = new PetInfoInstance.MyDate(year, month, day);
                     modifyBean.dateFormat_birthday = tmpDateFormatBirthday;
+                    PetInfoInstance.getInstance().packBean.dateFormat_birthday= modifyBean.dateFormat_birthday;
                     modifyBean.birthday = tmpDateFormatBirthday.toString();
                     txt_birthday.setText(modifyBean.birthday);
+                    DecimalFormat df = new DecimalFormat("0.00");//格式化
+                    PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
+                    modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
                 }
             }, null);
         }
@@ -383,7 +387,12 @@ public class AddPetInfoActivity extends BaseActivity {
             case REQ_CODE_WEIGHT:// ModifyWeightDialog
                 if (data != null) {
                     modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
+                    PetInfoInstance.getInstance().packBean.weight= modifyBean.weight;
+                    DecimalFormat df = new DecimalFormat("0.00");//格式化
+                    PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
+                    modifyBean.target_energy =df.format(PetUtil.getInstance().calculateEnergy());
                     txt_weight.setText(modifyBean.weight + "kg");
+
                 }
                 break;
             case REQ_CODE_VARIETY:

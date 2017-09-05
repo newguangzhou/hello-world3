@@ -10,6 +10,7 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.PetAppLike;
 import com.xiaomaoqiu.now.base.BaseBean;
+import com.xiaomaoqiu.now.bussiness.bean.NetPetBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
@@ -237,13 +238,13 @@ public class PetInfoInstance {
 
 
     //添加宠物信息
-    public void addPetInfo(PetInfoBean petInfoBean) {
+    public void addPetInfo(final PetInfoBean petInfoBean) {
         ApiUtils.getApiService().addPetInfo(UserInstance.getInstance().getUid(), UserInstance.getInstance().getToken(),
                 petInfoBean.description, petInfoBean.weight, petInfoBean.sex, petInfoBean.nick,
                 petInfoBean.birthday, petInfoBean.pet_type_id, petInfoBean.target_energy, getSuggest_energy(), petInfoBean.logo_url, DeviceInfoInstance.getInstance().packBean.imei
-        ).enqueue(new XMQCallback<PetInfoBean>() {
+        ).enqueue(new XMQCallback<NetPetBean>() {
             @Override
-            public void onSuccess(Response<PetInfoBean> response, PetInfoBean message) {
+            public void onSuccess(Response<NetPetBean> response, NetPetBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
@@ -251,7 +252,19 @@ public class PetInfoInstance {
 //                            DeviceInfoInstance.getInstance().online = true;
 //                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
 //                        }
-                        savePetInfo(message);
+                        savePetInfo(petInfoBean);
+                        if (message.pet_id > 0) {
+                            packBean.pet_id = message.pet_id;
+                            SPUtil.putPetId(packBean.pet_id);
+                            UserInstance.getInstance().pet_id = packBean.pet_id;
+                        }
+                        if (!TextUtils.isEmpty(message.recommend_energy_android)) {
+                            packBean.recommend_energy = message.recommend_energy_android;
+                            SPUtil.putSuggestEnergy(message.recommend_energy_android);
+                            setSuggest_energy(message.recommend_energy_android);
+                            packBean.target_energy=message.recommend_energy_android;
+                            SPUtil.putEnergyType(packBean.target_energy);
+                        }
                         EventBus.getDefault().post(new EventManage.addPetInfoSuccess());
 
 
@@ -270,7 +283,7 @@ public class PetInfoInstance {
             }
 
             @Override
-            public void onFail(Call<PetInfoBean> call, Throwable t) {
+            public void onFail(Call<NetPetBean> call, Throwable t) {
 
             }
         });
@@ -315,9 +328,9 @@ public class PetInfoInstance {
                 petInfoBean.pet_id, petInfoBean.description,
                 petInfoBean.weight, petInfoBean.sex, petInfoBean.nick, petInfoBean.birthday,
                 petInfoBean.logo_url, petInfoBean.pet_type_id, petInfoBean.target_energy, getSuggest_energy(), DeviceInfoInstance.getInstance().packBean.imei
-        ).enqueue(new XMQCallback<BaseBean>() {
+        ).enqueue(new XMQCallback<NetPetBean>() {
             @Override
-            public void onSuccess(Response<BaseBean> response, BaseBean message) {
+            public void onSuccess(Response<NetPetBean> response, NetPetBean message) {
                 HttpCode ret = HttpCode.valueOf(message.status);
                 switch (ret) {
                     case EC_SUCCESS:
@@ -327,6 +340,13 @@ public class PetInfoInstance {
 //                            EventBus.getDefault().post(new PushEventManage.deviceOnline());
 //                        }
                         savePetInfo(petInfoBean);
+                        if (!TextUtils.isEmpty(message.recommend_energy_android)) {
+                            packBean.recommend_energy = message.recommend_energy_android;
+                            SPUtil.putSuggestEnergy(message.recommend_energy_android);
+                            setSuggest_energy(message.recommend_energy_android);
+                            packBean.target_energy=message.recommend_energy_android;
+                            SPUtil.putEnergyType(packBean.target_energy);
+                        }
                         EventBus.getDefault().post(event);
 
                         EventManage.targetSportData event = new EventManage.targetSportData();
@@ -344,7 +364,7 @@ public class PetInfoInstance {
             }
 
             @Override
-            public void onFail(Call<BaseBean> call, Throwable t) {
+            public void onFail(Call<NetPetBean> call, Throwable t) {
             }
         });
 

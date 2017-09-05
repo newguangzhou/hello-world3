@@ -203,6 +203,8 @@ public class PetInfoActivity extends BaseActivity {
                     DeviceInfoInstance.getInstance().lastGetTime);
         }
         initPetInfo();
+        EventBus.getDefault().register(this);
+
     }
 
     private void initPetInfo() {
@@ -413,8 +415,10 @@ public class PetInfoActivity extends BaseActivity {
                     PetInfoInstance.MyDate tmpDateFormatBirthday = new PetInfoInstance.MyDate(year, month, day);
                     modifyBean.dateFormat_birthday = tmpDateFormatBirthday;
                     modifyBean.birthday = tmpDateFormatBirthday.toString();
+                    PetInfoInstance.getInstance().packBean.dateFormat_birthday= modifyBean.dateFormat_birthday;
                     txt_birthday.setText(modifyBean.birthday);
                     DecimalFormat df = new DecimalFormat("0.00");//格式化
+                    PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
                     modifyBean.target_energy = df.format(PetUtil.getInstance().calculateEnergy());
                 }
             }, null);
@@ -471,6 +475,8 @@ public class PetInfoActivity extends BaseActivity {
                     modifyBean.weight = data.getStringExtra(InputDialog.TAG_VALUE);
                     txt_weight.setText(modifyBean.weight + "kg");
                     DecimalFormat df = new DecimalFormat("0.00");//格式化
+                    PetInfoInstance.getInstance().packBean.weight= modifyBean.weight;
+                    PetInfoInstance.getInstance().setSuggest_energy(df.format(PetUtil.getInstance().calculateEnergy()));
                     modifyBean.target_energy = df.format(PetUtil.getInstance().calculateEnergy());
                 }
                 break;

@@ -7,6 +7,7 @@ import com.xiaomaoqiu.now.bussiness.bean.AlreadyBindDeviceBean;
 import com.xiaomaoqiu.now.bussiness.bean.DeviceInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.LoginBean;
 import com.xiaomaoqiu.now.bussiness.bean.MessageBean;
+import com.xiaomaoqiu.now.bussiness.bean.NetPetBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetInfoBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetLocationBean;
 import com.xiaomaoqiu.now.bussiness.bean.PetSportBean;
@@ -88,7 +89,7 @@ public interface ApiService {
 
     //增加宠物信息
     @GET(Constants.Url.Pet.add_pet_info)
-    Call<PetInfoBean> addPetInfo(
+    Call<NetPetBean> addPetInfo(
             @Query("uid") long uid,
             @Query("token") String token,
             @Query("description") String description,
@@ -374,7 +375,7 @@ public interface ApiService {
 
     //更新宠物信息
     @GET(Constants.Url.Pet.update_pet_info)
-    Call<BaseBean> updatePetInfo(
+    Call<NetPetBean> updatePetInfo(
             @Query("uid") long uid,
             @Query("token") String token,
             @Query("pet_id") long pet_id,

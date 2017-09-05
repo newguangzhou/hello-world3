@@ -22,8 +22,8 @@ android {
         applicationId 'com.xiaomaoqiu.pet'
         minSdkVersion 18
         targetSdkVersion 22
-        versionCode 83
-        versionName '0.1.4.3'
+        versionCode 84
+        versionName '0.1.4.4'
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'com.xmq.MyEventBusIndex']
