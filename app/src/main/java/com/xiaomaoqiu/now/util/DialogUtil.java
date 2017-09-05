@@ -1,7 +1,9 @@
 package com.xiaomaoqiu.now.util;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,6 +14,8 @@ import com.xiaomaoqiu.now.Constants;
 import com.xiaomaoqiu.now.EventManage;
 import com.xiaomaoqiu.now.base.BaseActivity;
 import com.xiaomaoqiu.now.bussiness.Device.DeviceInfoInstance;
+import com.xiaomaoqiu.now.bussiness.InitMapLocationActivity;
+import com.xiaomaoqiu.now.bussiness.MainActivity;
 import com.xiaomaoqiu.now.bussiness.ThreadUtil;
 import com.xiaomaoqiu.now.bussiness.bean.PetStatusBean;
 import com.xiaomaoqiu.now.bussiness.pet.PetInfoInstance;
@@ -938,7 +942,7 @@ public class DialogUtil {
     public static Dialog completeDialog;
 
     //绑定成功，正在初始化数据，请稍候……
-    public static void showComplete(final Context context) {
+    public static void showComplete(final Activity context) {
         if (!canShowDialog(context)) return;
         completeDialog=new AppDialog(context,R.layout.dialog_complete, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.style.mystyle, Gravity.CENTER);
         completeDialog.getWindow().setWindowAnimations(0);
@@ -952,6 +956,9 @@ public class DialogUtil {
                         Thread.sleep(2000);
                         if(completeDialog!=null&&completeDialog.isShowing()){
                             completeDialog.dismiss();
+                            Intent intent = new Intent(context, MainActivity.class);
+                            context.startActivity(intent);
+                            context.finish();
                         }
                     } catch (Exception e) {
 

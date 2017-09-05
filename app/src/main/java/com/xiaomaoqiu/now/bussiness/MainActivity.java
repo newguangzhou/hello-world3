@@ -419,9 +419,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        if(!SPUtil.getHomePage()){
-            DialogUtil.showComplete(MainActivity.this);
-        }
         //进入主页
         SPUtil.putHome(true);
         initView();

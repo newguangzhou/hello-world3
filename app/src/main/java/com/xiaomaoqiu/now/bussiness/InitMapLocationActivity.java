@@ -149,9 +149,9 @@ public class InitMapLocationActivity extends Activity {
 //                            finish();
 //                            return;
 //                        }
-                        Intent intent = new Intent(InitMapLocationActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+
+                            DialogUtil.showComplete(InitMapLocationActivity.this);
+
                     }
 
                     @Override
