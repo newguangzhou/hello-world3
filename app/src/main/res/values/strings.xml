@@ -231,6 +231,8 @@
 
     <!--用户协议-->
     <string name="user_book"><u>《用户协议与隐私政策》</u></string>
+    <!--使用帮助-->
+    <string name="user_help"><u>追踪器使用帮助</u></string>
 
     <string name="number">400-930-6166</string>
 </resources>

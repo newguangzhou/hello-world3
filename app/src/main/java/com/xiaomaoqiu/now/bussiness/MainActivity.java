@@ -746,6 +746,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 MapInstance.getInstance().startLoc();
             }
             PetInfoInstance.getInstance().getPetLocation();
+        EventBus.getDefault().post(new EventManage.notifyPetInfoChange());
+
 //        }
     }
 

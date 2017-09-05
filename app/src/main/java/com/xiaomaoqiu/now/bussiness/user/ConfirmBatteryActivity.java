@@ -61,6 +61,8 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
 
     TextView tv_userbook_provicy;
 
+    View tv_help;
+
 
     LoginPresenter loginPresenter;
 
@@ -276,6 +278,20 @@ public class ConfirmBatteryActivity extends BaseActivity implements LogoutView {
             }
         });
         tv_provicy_1= (TextView) this.findViewById(R.id.tv_provicy_1);
+
+
+
+        tv_help=this.findViewById(R.id.tv_help);
+        tv_help.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ConfirmBatteryActivity.this,BaseWebViewActivity.class);
+                intent.putExtra("title","使用帮助");
+                intent.putExtra("web_url", "https://www.xiaomaoqiu.com/support.html?nav=2");
+                startActivity(intent);
+            }
+        });
     }
 
     public void success() {
